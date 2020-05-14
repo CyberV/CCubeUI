@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
       console.log('userInfo',userData);
 
     }).catch((error)=>{
-      console.log('error',error);
+      console.log('erro',error);
     });
 
 
