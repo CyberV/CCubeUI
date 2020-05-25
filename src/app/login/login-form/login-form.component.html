@@ -1,0 +1,26 @@
+
+<heading text="Sign In / Sign Up"></heading>
+
+<subheading 
+  size="16"
+  text="Sign up or Sign in to access your orders, best deal, offers, Health tips and more!"
+></subheading>
+
+<mobile-input [(number)]="yo"></mobile-input>
+
+<cta text="Use Password" [loading]="loading" (click)="beginAuth()"></cta>
+
+<subheading text="OR" align="center"></subheading>
+
+<cta text="Log In" outline="true"></cta>
+
+<div class="ion-text-center social-login" >
+    <ion-button fill="outline" (click)="loginFacebook()">
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>
+        facebook
+    </ion-button>
+    <ion-button fill="outline" color="danger" (click)="loginGoogle()">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+         google
+    </ion-button>
+  </div>

@@ -49,3 +49,19 @@ For Backend (`/backend/`)
 2) Branches to be merged to `develop` branch via PR's. No PR to be merged without Revier's approval.
 3) Commits to follow pattern: `[COMMIT_TYPE]: [TICKED_ID] Description`
     *[COMMIT_TYPE] = SETUP / FIX / MERGE / IMPROV 
+
+EXACT STEPS:
+
+1. Switch to develop branch 
+    - git checkout develop
+2. Take latet Pull from develop
+    - git pull origin develop
+3. Create Feature branch under developer name with reference to JIRA ticket:
+    - git checkout -b feature/fname/SS-TicketNumber 
+4. Make changes and commit to feature branch.
+    - git commit -am "SS-TicketNumber | Commit message"
+5. Push feature branch to origin    
+    - git push origin feature/fname/SS-TicketNumber
+6. Create PR from feature branch into develop. Add reviewers.
+7. Wait for PR Review comments and Incorporate Review Comments (if any) in the feature branch
+8. Once approved, Approver will merge PR into develop

@@ -1,0 +1,17 @@
+
+$primary-color: #39cfb2;
+$secondary-color: #22d0f3;
+
+.cta {
+    margin-top: 1em;
+    text-transform: uppercase;
+}
+
+.cta.btn-primary {
+    background: $primary-color;
+}
+
+.cta.btn-outline-secondary {
+    border: 1px solid $primary-color;
+    color: $primary-color;
+}

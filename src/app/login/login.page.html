@@ -1,62 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
 
-  <div class="ion-text-center">
-    <p><strong>Welcome, to smartsewa</strong></p>
-    <ion-item class="input">
-      <ion-label position="floating">Email Address</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item class="input">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-button expand="full" shape="round" fill="solid">Login</ion-button>
-    <div class="ion-text-center" *ngIf="!this.isLoggedIn">
-      <ion-button fill="outline" (click)="loginFacebook()">
-          <ion-icon slot="start" name="logo-facebook"></ion-icon>
-          Login with facebook
-      </ion-button>
-      <ion-button fill="outline" color="danger" (click)="loginGoogle()">
-          <ion-icon slot="start" name="logo-google"></ion-icon>
-          Login with google
-      </ion-button>
-    </div>
-    <hr>
-
-  </div>
-  <div>
-      <ion-button fill="outline" color="secondary" (click)="logout()" *ngIf="this.isLoggedIn">
-          <ion-icon name="log-out-outline"></ion-icon>
-                    Logout
-      </ion-button>
-  </div>
-  <ion-list *ngIf="this.isLoggedIn">
-      <ion-item>
-          <ion-avatar>
-              <img src="{{this.user.photoUrl}}">
-            </ion-avatar>
-      </ion-item>
-      <ion-item>
-        <ion-label>Auth token: {{this.user.authToken}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Name: {{this.user.name}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Email: {{this.user.email}}</ion-label>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label>Id: {{this.user.id}}</ion-label>
-      </ion-item>
-    </ion-list>
-    
-
-
+    <div class="container-fluid">
+        <app-navbar></app-navbar>
+      <div class="row">
+        <div class="offset-md-2 col-md-8">
+          <app-login></app-login>
+        </div>
+      </div>
+      </div>
 </ion-content>

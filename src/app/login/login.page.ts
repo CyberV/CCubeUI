@@ -8,7 +8,7 @@ const {GoogleAuth} = Plugins;
 
 
 @Component({
-  selector: 'app-login',
+  selector: 'page-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })

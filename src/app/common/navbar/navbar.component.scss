@@ -1,0 +1,31 @@
+$border-radius: 25px;
+
+$primary-color: #39cfb2;
+$secondary-color: #22d0f3;
+
+.navbar {
+    background: $primary-color;
+    height: 60px;
+    width: 100%;
+    color: white;
+
+    .app-logo {
+        width: 150px;
+        min-width: 150px;
+    }
+
+    .search-box {
+        input {
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+        }
+        .input-group-text {
+            border-top-right-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+        }
+    }
+
+    .cart-icon {
+        margin-left: 2em;
+    }
+}

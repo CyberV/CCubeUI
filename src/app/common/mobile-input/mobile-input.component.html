@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-12 mobile-input">
+      <label for="mobileNumber">Mobile Number</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3"> + 91 | </span>
+        </div>
+        <input type="text" required #phoneInput class="form-control" (input)="onPhoneChange(phoneInput.value)"
+        placeholder="Enter your Mobile Number" id="mobileNumber" 
+        aria-describedby="basic-addon3">
+      </div>
+  </div>
+</div>
+

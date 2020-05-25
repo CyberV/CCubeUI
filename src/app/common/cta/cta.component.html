@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-12">
+    <button type="button"
+        [disabled]="disabled" 
+        [ngClass]="{
+          'btn cta btn-lg btn-block': true ,
+        'btn-primary' : !outline,
+          'btn-outline-secondary': outline}"
+        (click)="onCtaClick()">
+      <span *ngIf="!loading">
+        {{text}}
+      </span>
+      <span *ngIf="loading">
+        <spinner></spinner>
+      </span>
+    </button>
+  </div>
+</div>

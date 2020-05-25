@@ -1,0 +1,25 @@
+.mobile-input {
+    margin-top: 1em;
+    label {
+        color: #39cfb2;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    input {
+        border: none;
+        border-bottom: 1px solid #bcbcbc;
+        background: transparent;
+        color:#bcbcbc;
+    }
+
+    span {
+        border: none;
+        border-bottom: 1px solid #bcbcbc;
+        background: transparent;
+        font-weight: bold;
+        border-radius: 0;
+        color: black;
+        padding-left: 0;
+    }
+}
