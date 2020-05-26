@@ -1,5 +1,7 @@
+@import 'src/variables.scss';
+
 .container {
-    background: #f6f6f6;
+    background: $bg-white;
     border-radius: 25px;
     padding: 25px;
     margin-top: 2em;

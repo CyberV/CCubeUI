@@ -12,6 +12,9 @@ export class CtaComponent implements OnInit {
   @Input() loading: boolean;
   @Input() outline: boolean;
 
+  @Input() subtext: string;
+  @Input() secondaryCta:string;
+
   @Output() click = new EventEmitter();
 
   constructor() {

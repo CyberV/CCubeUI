@@ -1,6 +1,4 @@
-
-$primary-color: #39cfb2;
-$secondary-color: #22d0f3;
+@import "src/variables.scss";
 
 .cta {
     margin-top: 1em;
@@ -14,4 +12,14 @@ $secondary-color: #22d0f3;
 .cta.btn-outline-secondary {
     border: 1px solid $primary-color;
     color: $primary-color;
+}
+
+.subtext {
+    text-align: center;
+    margin-top:0.5em;
+    .secondary-cta {
+        color: $primary-color;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }

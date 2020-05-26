@@ -1,3 +1,5 @@
+@import 'src/variables.scss';
+
 div{
 align-content: center;
 align-self: center;
@@ -10,4 +12,9 @@ align-self: center;
 }
 p{
     align-self: center;
+}
+
+.login-content {
+    background: $bg-gray;
+    height: 90vh;
 }
