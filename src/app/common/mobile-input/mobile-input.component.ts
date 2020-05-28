@@ -7,16 +7,27 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MobileInputComponent implements OnInit {
 
-  @Output() numberChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter();
 
 
   @Input()
-  number: number;
-  constructor() { }
+  value: any;
 
-  onPhoneChange(number) {
-    this.number = number;
-    this.numberChange.emit(this.number);
+  @Input()
+  type: string;
+
+  @Input() name:string;
+  @Input() placeholder:string;
+
+  constructor() {
+    this.name="Input";
+    this.placeholder="";
+    this.type = "number";
+   }
+
+  onPhoneChange(value) {
+    this.value = value;
+    this.valueChange.emit(this.value);
   }
 
   ngOnInit() {}

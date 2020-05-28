@@ -7,6 +7,8 @@ import { SubheadingComponent } from './subheading/subheading.component';
 import { MobileInputComponent } from './mobile-input/mobile-input.component';
 import { CtaComponent } from './cta/cta.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { HighlightDirective } from './highlight.directive';
+import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 
 
 
@@ -18,7 +20,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
     SubheadingComponent,
     MobileInputComponent,
     CtaComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    HighlightDirective,
+    VerifyOtpComponent
   ],
   imports: [
     CommonModule
@@ -30,7 +34,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
     SubheadingComponent,
     MobileInputComponent,
     CtaComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    HighlightDirective,
+    VerifyOtpComponent
   ]
 })
 export class CommonComponentsModule { }

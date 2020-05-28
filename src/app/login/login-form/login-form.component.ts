@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'angularx-social-login';
 import { Platform } from '@ionic/angular';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
@@ -18,8 +18,15 @@ export class LoginFormComponent implements OnInit {
 
   public user: any;
   public isLoggedIn: boolean;
+  public newUser:any;
+
+  @Input() page:string;   // home, login, signup
 
   constructor(private socialAuthService: AuthService, public plateform: Platform) {
+
+    this.page = 'signup';
+    this.newUser = {};
+
     if (this.plateform.is('android') || this.plateform.is('ios')) {
       GoogleAuth.addListener('userChange', (googleUser: any) => {
         console.log('userChange:', googleUser);
@@ -92,6 +99,9 @@ export class LoginFormComponent implements OnInit {
 
   beginAuth() {
     this.loading = true;
+    setTimeout(()=> {
+      this.page = 'signup';
+    }, 2000);
   }
 
 

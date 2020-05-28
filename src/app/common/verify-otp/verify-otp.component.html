@@ -1,0 +1,15 @@
+<subheading text="Verifying Number" color="black"></subheading>
+
+<div>
+  <span>We have sent {{length}} digit OTP on</span><span highlight> +91 {{mobile}}</span>
+</div>
+
+<div class="otp-input">
+  <input *ngFor="let i of arr; let indx = index" 
+    [class]="'otp-'+indx" 
+    type="number" maxlength="1"
+    (click)="onClick($event)"
+    (keyup)="onChange($event)"
+    >
+</div>
+

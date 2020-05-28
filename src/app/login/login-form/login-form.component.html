@@ -1,32 +1,40 @@
+<div *ngIf="page=='home'">
+  <heading text="Sign In / Sign Up"></heading>
 
-<heading text="Sign In / Sign Up"></heading>
+  <subheading size="16" text="Sign up or Sign in to access your orders, best deal, offers, Health tips and more!">
+  </subheading>
 
-<subheading 
-  size="16"
-  text="Sign up or Sign in to access your orders, best deal, offers, Health tips and more!"
-></subheading>
+  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="yo"></mobile-input>
 
-<mobile-input [(number)]="yo"></mobile-input>
+  <cta text="Use Password / OTP" [loading]="loading" (click)="beginAuth()" subtext="Already have an account?"
+    secondaryCta="Sign In">
+  </cta>
 
-<cta text="Use Password" 
-  [loading]="loading" 
-  (click)="beginAuth()" 
-  subtext="Already have an account?"
-  secondaryCta="Sign In"
-  >
-</cta>
+  <!-- <subheading text="OR" align="center"></subheading>
+    
+    <cta text="Log In" outline="true"></cta> -->
 
-<!-- <subheading text="OR" align="center"></subheading>
-
-<cta text="Log In" outline="true"></cta> -->
-
-<div class="ion-text-center social-login" >
+  <div class="ion-text-center social-login">
     <ion-button class="login-fb" fill="outline" (click)="loginFacebook()">
-        <ion-icon slot="start" name="logo-facebook"></ion-icon>
-        facebook
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>
+      facebook
     </ion-button>
     <ion-button class="login-gl" fill="outline" color="danger" (click)="loginGoogle()">
-        <ion-icon slot="start" name="logo-google"></ion-icon>
-         google
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      google
     </ion-button>
   </div>
+</div>
+
+<div *ngIf="page=='signup'">
+  <heading text="Create Account"></heading>
+
+  <mobile-input type="email" name="Email Id" [value]="newUser.email" ></mobile-input>
+  <mobile-input type="text" name="First Name" [value]="newUser.fname" ></mobile-input>
+  <mobile-input type="text" name="Last Name" [value]="newUser.lname" ></mobile-input>
+  <mobile-input type="password" name="Password" [value]="newUser.password" ></mobile-input>
+  <mobile-input type="password" name="Confirm Password" [value]="newUser.confirmPassword" ></mobile-input>
+
+  <verify-otp [mobile]="yo" length="6" (otpSubmitted)="yo=$event" ></verify-otp> 
+  {{yo}}
+</div>

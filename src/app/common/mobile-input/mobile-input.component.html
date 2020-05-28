@@ -1,13 +1,16 @@
 <div class="row">
   <div class="col-12 mobile-input">
-      <label for="mobileNumber">Mobile Number</label>
+      <label for="mobileNumber">{{name}}</label>
       <div class="input-group">
-        <div class="input-group-prepend">
+        <div class="input-group-prepend" *ngIf="name === 'Mobile Number'">
           <span class="input-group-text" id="basic-addon3"> + 91 | </span>
         </div>
-        <input type="text" required #phoneInput class="form-control" (input)="onPhoneChange(phoneInput.value)"
-        placeholder="Enter your Mobile Number" id="mobileNumber" 
-        aria-describedby="basic-addon3">
+        <input [attr.type]="type" required #phoneInput 
+          class="form-control" 
+          [class.not-mobile]="name !== 'Mobile Number'"
+          (input)="onPhoneChange(phoneInput.value)"
+          [placeholder]="placeholder" 
+          aria-describedby="basic-addon3">
       </div>
   </div>
 </div>
