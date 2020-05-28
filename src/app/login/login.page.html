@@ -2,7 +2,7 @@
 <ion-content>
 
     <div class="container-fluid">
-        <app-navbar></app-navbar>
+        <app-navbar *ngIf="!isMobile"></app-navbar>
       <div class="row login-content">
         <div class="offset-md-2 col-md-8">
           <app-login></app-login>

@@ -20,14 +20,18 @@ export class LoginFormComponent implements OnInit {
   public isLoggedIn: boolean;
   public newUser:any;
 
+  get isMobile() {
+    return !this.platform.is('desktop');
+  }
+
   @Input() page:string;   // home, login, signup
 
-  constructor(private socialAuthService: AuthService, public plateform: Platform) {
+  constructor(private socialAuthService: AuthService, public platform: Platform) {
 
-    this.page = 'signup';
+    this.page = 'home';
     this.newUser = {};
 
-    if (this.plateform.is('android') || this.plateform.is('ios')) {
+    if (this.platform.is('android') || this.platform.is('ios')) {
       GoogleAuth.addListener('userChange', (googleUser: any) => {
         console.log('userChange:', googleUser);
       });
@@ -53,7 +57,7 @@ export class LoginFormComponent implements OnInit {
   }
   async loginGoogle() {
     console.log('signing in with google');
-    if (this.plateform.is('desktop') || this.plateform.is('mobileweb')) {
+    if (this.platform.is('desktop') || this.platform.is('mobileweb')) {
       let socialPlatformProvider: string;
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
       this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
@@ -63,7 +67,7 @@ export class LoginFormComponent implements OnInit {
         console.log('error', error);
       });
     }
-    else if (this.plateform.is('android') || this.plateform.is('ios')) {
+    else if (this.platform.is('android') || this.platform.is('ios')) {
       const googleUser = await GoogleAuth.signIn();
       console.log('signIn:', googleUser);
       this.user = googleUser;
@@ -88,7 +92,7 @@ export class LoginFormComponent implements OnInit {
 
   }
   async logout() {
-    if (this.plateform.is('desktop')) {
+    if (this.platform.is('desktop')) {
       this.socialAuthService.signOut();
     }
     else {
