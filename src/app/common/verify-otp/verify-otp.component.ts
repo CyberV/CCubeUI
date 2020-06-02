@@ -9,13 +9,16 @@ export class VerifyOtpComponent implements OnInit {
 
   @Input() mobile:number;
   @Input() length:number;
+  @Input() mismatch:boolean;
 
   @Output() otpSubmitted = new EventEmitter();
+  @Output() changeNumber = new EventEmitter();
 
   arr:any;
   private otp;
 
   constructor(public el: ElementRef) {
+    this.mismatch = false;
    }
 
   ngOnInit() {
@@ -25,6 +28,10 @@ export class VerifyOtpComponent implements OnInit {
 
   onClick(e) {
     e.target.select();
+  }
+
+  numberClicked() {
+    this.changeNumber.emit();
   }
 
   onChange(e) {

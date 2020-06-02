@@ -1,15 +1,13 @@
-Mobile {{isMobile.toString()}}
-
 <div *ngIf="page=='home'">
   <heading text="Sign In / Sign Up"></heading>
 
   <subheading size="16" text="Sign up or Sign in to access your orders, best deal, offers, Health tips and more!">
   </subheading>
 
-  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="yo"></mobile-input>
+  {{customerMobile}}
+  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="customerMobile"></mobile-input>
 
-  <cta text="Use Password / OTP" [loading]="loading" (click)="beginAuth()" subtext="Already have an account?"
-    secondaryCta="Sign In">
+  <cta text="Use Password / OTP" [loading]="loading" (click)="beginAuth()">
   </cta>
 
   <!-- <subheading text="OR" align="center"></subheading>
@@ -28,15 +26,22 @@ Mobile {{isMobile.toString()}}
   </div>
 </div>
 
-<div *ngIf="page=='signup'">
+<div *ngIf="page=='signup'" class="animate__animated animate__fadeInLeft">
   <heading text="Create Account"></heading>
 
-  <mobile-input type="email" name="Email Id" [value]="newUser.email" ></mobile-input>
-  <mobile-input type="text" name="First Name" [value]="newUser.fname" ></mobile-input>
-  <mobile-input type="text" name="Last Name" [value]="newUser.lname" ></mobile-input>
-  <mobile-input type="password" name="Password" [value]="newUser.password" ></mobile-input>
-  <mobile-input type="password" name="Confirm Password" [value]="newUser.confirmPassword" ></mobile-input>
+  <mobile-input type="email" name="Email Id" [(value)]="newUser.email" ></mobile-input>
+  <mobile-input type="text" name="First Name" [(value)]="newUser.fname" ></mobile-input>
+  <mobile-input type="text" name="Last Name" [(value)]="newUser.lname" ></mobile-input>
+  <mobile-input type="password" name="Password" [(value)]="newUser.password" ></mobile-input>
+  <mobile-input type="password" name="Confirm Password" [(value)]="newUser.confirmPassword" ></mobile-input>
 
-  <verify-otp [mobile]="yo" length="6" (otpSubmitted)="yo=$event" ></verify-otp> 
-  {{yo}}
+
+  <verify-otp
+     [mobile]="customerMobile" length="6" 
+     (otpSubmitted)="customerOtp=$event" 
+     [mismatch]="otpMismatch"
+     (changeNumber)="page='home'"></verify-otp> 
+
+
+  <cta text="Verify" [loading]="loading" (click)="verifyOtp(customerOtp)" ></cta>
 </div>

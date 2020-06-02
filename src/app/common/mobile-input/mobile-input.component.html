@@ -10,6 +10,7 @@
           [class.not-mobile]="name !== 'Mobile Number'"
           (input)="onPhoneChange(phoneInput.value)"
           [placeholder]="placeholder" 
+          [value]="value ? value : ''"
           aria-describedby="basic-addon3">
       </div>
   </div>

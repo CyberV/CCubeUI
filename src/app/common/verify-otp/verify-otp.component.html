@@ -1,7 +1,7 @@
 <subheading text="Verifying Number" color="black"></subheading>
 
 <div>
-  <span>We have sent {{length}} digit OTP on</span><span highlight> +91 {{mobile}}</span>
+  <span>We have sent {{length}} digit OTP on</span><span highlight (click)="numberClicked()"> +91 {{mobile}}</span>
 </div>
 
 <div class="otp-input">
@@ -12,4 +12,6 @@
     (keyup)="onChange($event)"
     >
 </div>
+
+<p *ngIf="mismatch"> OTP does not match. Try Again!</p>
 

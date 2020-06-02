@@ -30,6 +30,8 @@ export class MobileInputComponent implements OnInit {
     this.valueChange.emit(this.value);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
 }
