@@ -1,0 +1,13 @@
+@import 'src/variables.scss';
+
+.duration-controls {
+    ion-button {
+        border-top: 2px solid $primary-color;
+    }
+}
+
+.view-container {
+    > .row {
+        margin-top: 20px;
+    }
+}

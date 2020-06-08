@@ -1,0 +1,17 @@
+
+
+<div class="flex center" [ngStyle]="{'width': canvasW + 'px', 'height':canvasH + 'px'}">
+    <div class="flex-item">
+      <div style="display: block;">
+      <canvas baseChart [attr.width]="canvasW" [attr.height]="canvasH"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+  </div>

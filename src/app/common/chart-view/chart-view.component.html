@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-xs-12 offset-md-3 col-md-6 view-container">
+    <div class="row duration-controls">
+      <div class="col-4">
+        <ion-button color="light" expand="block">Week</ion-button>
+
+      </div>
+      <div class="col-4">
+
+        <ion-button color="light" expand="block">Month</ion-button>
+      </div>
+      <div class="col-4">
+
+        <ion-button color="light" expand="block">Year</ion-button>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="center">
+          <indicator title="16" symbol="BMI"></indicator>
+        </div>
+
+      </div>
+      <div class="col-4">
+        <indicator title="1560" symbol="BMR"></indicator>
+
+      </div>
+      <div class="col-4">
+        <indicator title="100" symbol="BMX"></indicator>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+          <ion-item>
+             {{selectedVital}}
+              <ion-select [(value)]="selectedVital" (ionChange)="chart.randomize()" interface="popover">
+                <ion-select-option value="spo2">SPO2</ion-select-option>
+                <ion-select-option value="bp">BP</ion-select-option>
+                <ion-select-option value="temp">Body Temperature</ion-select-option>
+                <ion-select-option value="pulse">Pulse Rate</ion-select-option>
+                <ion-select-option value="glucose">Glucose</ion-select-option>
+                <ion-select-option value="hb">Haemoglobin</ion-select-option>
+              </ion-select>
+            </ion-item>
+      </div>
+      <div class="col-4">
+        <span>Last Tested on </span> <span>Date</span>
+      </div>
+      <div class="col-4">
+          <ion-item>
+              <ion-label position="floating">Custom Range</ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09" value="2002-09-23T15:03:46.789"></ion-datetime>
+            </ion-item>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <chart #chart></chart>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

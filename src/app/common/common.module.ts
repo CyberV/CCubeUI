@@ -1,3 +1,4 @@
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -9,8 +10,14 @@ import { CtaComponent } from './cta/cta.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { HighlightDirective } from './highlight.directive';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
+import { ChartComponent } from './chart/chart.component';
 
-
+import { ChartsModule } from 'ng2-charts';
+import { ChartViewComponent } from './chart-view/chart-view.component';
+import { IndicatorComponent } from './indicator/indicator.component';
+import { DemoComponent } from './demo/demo.component';
+import { SlideComponent } from './slide/slide.component';
+import { TipsViewComponent } from './tips-view/tips-view.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +29,19 @@ import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
     CtaComponent,
     SpinnerComponent,
     HighlightDirective,
-    VerifyOtpComponent
+    VerifyOtpComponent,
+    ChartComponent,
+    IndicatorComponent,
+    ChartViewComponent,
+    DemoComponent,
+    SlideComponent,
+    TipsViewComponent
+
   ],
   imports: [
-    CommonModule
+    IonicModule,
+    CommonModule,
+    ChartsModule
   ],
   exports: [
     NavbarComponent,
@@ -36,7 +52,14 @@ import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
     CtaComponent,
     SpinnerComponent,
     HighlightDirective,
-    VerifyOtpComponent
+    VerifyOtpComponent,
+    ChartComponent,
+    IndicatorComponent,
+    ChartViewComponent,
+    DemoComponent,
+    SlideComponent,
+    TipsViewComponent
+
   ]
 })
 export class CommonComponentsModule { }

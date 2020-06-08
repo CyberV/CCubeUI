@@ -3,17 +3,20 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { CommonComponentsModule } from '../common/common.module';
+import { VitalSliderComponent } from './vital-slider/vital-slider.component';
 
 @NgModule({
   imports: [
-    IonicModule,
+    IonicModule.forRoot(),
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab1Page }])
+    CommonComponentsModule,
+    RouterModule.forChild([{ path: '', component: HomePage }])
   ],
-  declarations: [Tab1Page]
+  declarations: [HomePage, VitalSliderComponent]
 })
-export class Tab1PageModule {}
+export class HomePageModule {}

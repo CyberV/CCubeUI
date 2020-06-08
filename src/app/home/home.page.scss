@@ -1,0 +1,15 @@
+
+@import "src/variables.scss";
+
+ion-content ion-toolbar {
+  --background: translucent;
+}
+
+
+.title {
+  text-align: center;
+}
+
+ion-menu {
+  --background: $primary-color;
+}

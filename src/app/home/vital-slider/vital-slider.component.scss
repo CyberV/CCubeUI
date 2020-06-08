@@ -1,0 +1,20 @@
+ion-slides {
+    height: auto;
+    ion-slide {
+        height: 250px;
+    }
+}
+
+ion-content {
+    height: 280px;
+}
+
+.heading {
+    margin-left: 5px;
+}
+
+:host {
+    top: 2em;
+    position: relative;
+}
+

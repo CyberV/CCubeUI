@@ -1,0 +1,43 @@
+<ion-content>
+  <div class="row">
+    <div class="col-12">
+      <strong class="heading">Latest Vitals</strong>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+          <app-slide title="Blood Pressure" value="120/67" unit="MMHG"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="Body Temperature" value="97" unit="* F"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="Height" value="141" unit="CM"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="Weight" value="66" unit="KG"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="SP02" value="94" unit="%"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="Pulse Rate" value="86" unit="BPM"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="Glucose" value="155" unit="MG/DL"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="Haemoglobin" value="18" unit="POINTS"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="PEF (Lungs Capacity)" value="292/1.8" unit="LTR"></app-slide>
+        </ion-slide>
+        <ion-slide>
+          <app-slide title="EV1 (Lungs Capacity)" value="100/1.5" unit="LTR"></app-slide>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,43 @@
+
+
+<ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Smart Sewa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>Home</ion-item>
+      <ion-item>E-Store</ion-item>
+      <ion-item>Health Tips</ion-item>
+      <ion-item>Locate an HTM</ion-item>
+      <ion-item>Contact Us</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main"></ion-router-outlet>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">
+      Dashboard
+    </ion-title>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+ <chart-view>
+   </chart-view>
+
+   <vital-slider></vital-slider>
+
+   <tips-view></tips-view>
+
+  <!-- <app-explore-container name="Smart Sewa Home - Landing Page"></app-explore-container> -->
+</ion-content>

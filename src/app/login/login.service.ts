@@ -6,12 +6,16 @@ import { map, catchError } from 'rxjs/operators';
 
 import { Observable, throwError } from 'rxjs';
 
-let crypto = require('crypto-js');
+// let crypto = require('crypto-js');
 
-let HASH = crypto.MD5;
+// let HASH = crypto.MD5;
 
-import {md5} from 'crypto-js/md5';
-var CryptoJS = require("crypto-js");
+//import {md5} from 'crypto-js/md5';
+
+import { MD5 } from 'crypto-js';
+//var CryptoJS = require("crypto-js");
+
+//import * as CryptoJS from 'crypto-js';
 
 // import { crypto } from 'crypto-js';
 
@@ -74,7 +78,7 @@ export class LoginService {
       let payload = {
         mobile,
         name: fname + ' ' + lname,
-        password: HASH(password).toString(),
+        password:  MD5(password).toString(),
         email,
         loginType: 'MOBILE',
         role: 'PATIENT',

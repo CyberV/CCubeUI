@@ -1,0 +1,56 @@
+@import 'src/variables.scss';
+
+.slide-container {
+    width: 385px;
+    height: 200px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 1em 1em 0 1em;
+
+    .circle {
+        width: 40px;
+        height: 40px;
+        border: 1px solid gray;
+        background: gray;
+        border-radius: 1000px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3490196);
+    }
+
+    .info {
+        > .row {
+            margin-top: 1em;
+        }
+
+        > .row:first-of-type {
+            margin-top: 0;
+        }
+
+        .value {
+            font-size: 24px;
+            color: black;
+            font-weight: bolder;
+            text-align: left;
+        }
+
+        .title,.symbol {
+            color: $primary-color;
+            font-weight: bold;
+            text-align: left;
+            font-size: 24px;
+        }
+        .unit {
+            color: gray;
+            text-align: right;
+        }
+    }
+}
+
+.heading {
+    margin-left: 5px;
+}
+
+:host {
+    top: 2em;
+    position: relative;
+}

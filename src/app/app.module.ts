@@ -10,6 +10,8 @@ import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/tokenInterceptor';
+import { CommonComponentsModule } from './common/common.module';
+
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
