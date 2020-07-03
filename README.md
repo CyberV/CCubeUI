@@ -1,4 +1,4 @@
-# SS Initial Repo
+# CCube Initial Repo
 
 Initial Repository for SSewa App. 
 
@@ -36,12 +36,6 @@ For FrontEnd (`/`)
 4) Run on the web: `ionic serve`.
 5) Run on iOS or Android: See [here](https://ionicframework.com/docs/building/running).
 
-For Backend (`/backend/`)
-0) Install all packages: `npm install`.
-1) Install Nodemon: `npm -i -g nodemon`
-6) Run server.js in backend : `nodemon server.js`
-
-> Note: You will need to whitelist your IP in MongoDB Atlas Instance. Contact author for creds
 
 ## Contribution Guidelines
 
@@ -57,11 +51,11 @@ EXACT STEPS:
 2. Take latet Pull from develop
     - git pull origin develop
 3. Create Feature branch under developer name with reference to JIRA ticket:
-    - git checkout -b feature/fname/SS-TicketNumber 
+    - git checkout -b feature/fname/CC-TicketNumber 
 4. Make changes and commit to feature branch.
-    - git commit -am "SS-TicketNumber | Commit message"
+    - git commit -am "CC-TicketNumber | Commit message"
 5. Push feature branch to origin    
-    - git push origin feature/fname/SS-TicketNumber
+    - git push origin feature/fname/CC-TicketNumber
 6. Create PR from feature branch into develop. Add reviewers.
 7. Wait for PR Review comments and Incorporate Review Comments (if any) in the feature branch
 8. Once approved, Approver will merge PR into develop
