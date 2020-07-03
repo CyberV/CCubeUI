@@ -1,3 +1,7 @@
-<p>
-  text-input works!
-</p>
+<h2>Yoshiko</h2>
+<span [ngClass]="inputClass">
+  <input #field [class]="'input__field input__field' + styleSuffix" type="text" id="10" />
+  <label [class]="'input__label input__label' + styleSuffix" for="10">
+    <span [class]="'input__label-content input__label-content' + styleSuffix" data-content="Bird's Color">Bird's Color</span>
+  </label>
+</span>

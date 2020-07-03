@@ -18,6 +18,9 @@ import { IndicatorComponent } from './indicator/indicator.component';
 import { DemoComponent } from './demo/demo.component';
 import { SlideComponent } from './slide/slide.component';
 import { TipsViewComponent } from './tips-view/tips-view.component';
+import { TypeawayComponent } from './typeaway/typeaway.component'
+import { DropBombComponent } from './drop-bomb/drop-bomb.component';
+import { TextInputComponent } from './text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { TipsViewComponent } from './tips-view/tips-view.component';
     ChartViewComponent,
     DemoComponent,
     SlideComponent,
-    TipsViewComponent
+    TipsViewComponent,
+    TypeawayComponent,
+    DropBombComponent,
+    TextInputComponent
 
   ],
   imports: [
@@ -58,8 +64,10 @@ import { TipsViewComponent } from './tips-view/tips-view.component';
     ChartViewComponent,
     DemoComponent,
     SlideComponent,
-    TipsViewComponent
-
+    TipsViewComponent,
+    TypeawayComponent,
+    DropBombComponent,
+    TextInputComponent
   ]
 })
 export class CommonComponentsModule { }

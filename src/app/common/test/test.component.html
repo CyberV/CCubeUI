@@ -1,0 +1,27 @@
+<div class="center">
+	<div class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<typeaway [text]="'At this moment, I pledge'" (finished)="drop=true;"> </typeaway>
+			</div>
+		</div>
+		<div class="row" style="margin-top:2em;">
+			<div class="col-xs-4">
+				<drop-bomb *ngIf="drop" [text]="'TO DO'" (finished)="good=true;"></drop-bomb>
+			</div>
+			<div class="col-xs-4" style="margin-top:-14px">
+				<typeaway *ngIf="good" [text]="'good'" (finished)="great = true;" ></typeaway><br/>
+				<typeaway *ngIf="great" [text]="'great'" (finished)="because = true;" ></typeaway>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<typeaway *ngIf="because" [text]="'BECAUSE'" (finished)="ican = true;" ></typeaway>
+				<typeaway *ngIf="ican && !iwant" [text]="'I can'" (finished)="iwant = true;" ></typeaway>
+				<typeaway *ngIf="iwant && !ineed" [text]="'I want to.'" (finished)="ineed = true;" ></typeaway>
+				<typeaway *ngIf="ineed" [text]="'I need to.'" (finished)="ineed = true;" ></typeaway>
+			</div>
+
+		</div>
+	</div>
+</div>

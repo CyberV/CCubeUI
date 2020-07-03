@@ -1,0 +1,83 @@
+
+<ion-content fullscreen="true">
+  <div class="container-fluid hidden-xs desktop-container">
+     <div class="row">
+      <div class="offset-md-2 col-md-8 col-xs-12 header">
+        <span  *ngIf="startShow" [style.display]="startShow ? 'visible': 'none'" class="logo-container"><img class="logo animate__animated animate__slideInDown" src="./assets/blueLogo.png" alt="CCubeLogo" border="0" />
+        </span><br />
+        <typeaway class="title1" *ngIf="startShow" text="Complete Car Care" (finished)="doorstep = true;" ></typeaway><br/>
+        <typeaway class="title2" *ngIf="doorstep" text="At your doorstep" (finished)="daily = true;" ></typeaway><br/>
+        <!-- <span class="title1"><strong>Complete Car Care</strong></span><br />
+        <span class="title2"><span>At your doorstep</span><br /> -->
+        <typeaway class="title2" *ngIf="daily" text="Daily" (finished)="loadMore()" ></typeaway><br/>
+      </div>
+    </div>
+
+    <div *ngIf="knowmore" class="row ctaRow">
+      <div class="col-12">
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <div><button class="btn btn-block animate__animated animate__flipInX"
+              onclick="window.open('https://www.scribd.com/document/467126069/Brochure?secret_password=ju7mnzT3xh8RQGoAbjMj#fullscreen&from_embed','_blank')">KNOW
+              MORE</button></div>
+        </div>
+        <span></span>
+      </div>
+    </div>
+ 
+ <div class="row demoRow ">
+      <div *ngIf="demo" #attention class="col-sm-6 col-xs-12 animate__animated animate__backInLeft">
+        <h2>Demos Have Started!!</h2>
+            <h3> <a target="_blank" href="http://www.tinyurl.com/ccubecodemo">Register Now! </a> </h3>
+           
+      </div>
+      <div *ngIf="contact" class="col-sm-6 col-xs-12 animate__animated animate__backInRight">
+          <h4>For Queries & Suggestions</h4>
+          <h3> <img class="whatsapp"
+              src="./assets/whatsapp.png" />
+            <a href="tel:+917827852332">78278-52332</a></h3>
+      </div>
+    </div>
+
+    </div>
+  </ion-content>
+
+<!-- 
+  <div class="container visible-xs mobile-container">
+    <div class="row">
+      <div class="offset-md-2 col-md-8 col-xs-12 header">
+        <span><img class="logo" src="https://i.ibb.co/6XkMzgp/blueLogo.png" alt="blueLogo" border="0" />
+        </span><br />
+        <span class="title1"><strong>Complete Car Care</strong></span><br />
+        <span class="title2"><span>At your doorstep</span><br />
+          <span>Daily</span></span>
+      </div>
+    </div>
+
+    <div class="row ctaRow">
+      <div class="col-12">
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <div><button class="btn btn-block"
+              onclick="window.open('https://www.scribd.com/document/467126069/Brochure?secret_password=ju7mnzT3xh8RQGoAbjMj#fullscreen&from_embed','_blank')">KNOW
+              MORE</button></div>
+        </div>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="row demoRow">
+      <div class="col-12">
+        <h2>Demos Have Started!!<h2>
+            <h3> <a target="_blank" href="http://www.tinyurl.com/ccubecodemo">Register Now! </a> </h3>
+      </div>
+    </div>
+
+    <div class="row contactRow">
+      <div class="col-12">
+        <h4>For Queries & Suggestions<h4>
+            <h3> <img class="whatsapp"
+                src="https://pluspng.com/img-png/whatsapp-png-wazapp-logo-whats-whatsapp-logo-whatsapp-icon-2050.png" />
+              <a href="tel:+917827852332">78278-52332</a></h3>
+      </div>
+    </div>
+  </div> 
+</div> --> 

@@ -11,6 +11,8 @@ import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-logi
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/tokenInterceptor';
 import { CommonComponentsModule } from './common/common.module';
+import { HomeComponent } from './home/home.component';
+import { CommonModule } from '@angular/common';
 
 
 export function socialConfigs() {
@@ -30,14 +32,14 @@ export function socialConfigs() {
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, SocialLoginModule, HttpClientModule],
+  declarations: [AppComponent, HomeComponent],
+  entryComponents: [HomeComponent],
+  imports: [BrowserModule, CommonComponentsModule, IonicModule, IonicModule.forRoot(), AppRoutingModule, SocialLoginModule, HttpClientModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: AuthServiceConfig, useFactory: socialConfigs },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,HomeComponent]
 })
 export class AppModule { }

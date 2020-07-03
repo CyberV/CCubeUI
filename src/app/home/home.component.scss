@@ -1,0 +1,63 @@
+.container-fluid {
+    text-align: center;
+    background: #00a4a7;
+    color: white;
+    height: 100%;
+}
+
+.logo {
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        width: 70%
+    }
+}
+
+a {
+    color: #a6eef5;
+    transition: all 0.2s ease-in-out;
+    font-size: 20px;
+    border-bottom: 3px solid orange;
+}
+
+a:hover {
+    color: yellow;
+    font-size: 24px;
+    text-decoration: none;
+    border-bottom: 3px solid orange;
+}
+
+
+.title1 {
+    position: relative;
+    margin-top: 2em;
+    font-size: 40px;
+}
+
+.title2 {
+    font-size: 30px;
+}
+
+.whatsapp {
+    height: 50px;
+    width: 50px;
+}
+
+.btn {
+    background: white;
+    width: 150%;
+    font-weight: bold;
+    margin-left: -20%;
+    color: #00a4a7;
+}
+
+.btn:hover {
+    color: white;
+    background: orange;
+}
+
+.ctaRow,
+.demoRow,
+.contactRow {
+    margin-top: 2em;
+}
