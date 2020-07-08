@@ -19,26 +19,26 @@ export class LoginFormComponent implements OnInit {
 
   public user: any;
   public isLoggedIn: boolean;
-  public newUser:any;
-  public customerMobile:string;
-  public customerOtp:number;
-  public otpMismatch:boolean;
+  public newUser: any;
+  public customerMobile: string;
+  public customerOtp: number;
+  public otpMismatch: boolean;
 
   get isMobile() {
     return !this.platform.is('desktop');
   }
 
-  @Input() page:string;   // home, login, signup
+  @Input() page: string;   // home, login, signup
 
   constructor(
-    private socialAuthService: AuthService, 
+    private socialAuthService: AuthService,
     public platform: Platform,
     private srvcLogin: LoginService) {
 
     this.page = 'home';
     this.otpMismatch = false;
     this.newUser = {};
-    
+
 
     if (this.platform.is('android') || this.platform.is('ios')) {
       GoogleAuth.addListener('userChange', (googleUser: any) => {
@@ -113,46 +113,34 @@ export class LoginFormComponent implements OnInit {
   beginAuth() {
     if (!this.loading) {
       this.loading = true;
-
-      this.srvcLogin.checkStatus(this.customerMobile)
-        .subscribe( (res:any) => {
-          console.log('Status Response', res);
-          if (!res.success) {
-            this.srvcLogin.sendOtp(this.customerMobile)
-              .subscribe( (res:any) => {
-                console.log('Send OTP Response', res);
-                if (res.type="success") {
-                  this.loading=false;
-                  this.page="signup";
-                }
-              });
+      this.srvcLogin.sendOtp(this.customerMobile)
+        .subscribe((res: any) => {
+          console.log('Send OTP Response', res);
+          if (res.success) {
+            this.loading = false;
+            this.page = "signup";
           }
         });
-      
     }
+
+
   }
 
-  verifyOtp(otp) {
-    if(!this.loading) {
-      this.loading=true;
 
-    
+  verifyOtp(otp) {
+    if (!this.loading) {
+      console.log('otp', otp);
+      this.loading = true;
       this.srvcLogin.verifyOtp(this.customerMobile, this.customerOtp)
-        .subscribe( (res:any) => {
+        .subscribe((res: any) => {
           console.log('Verify OTP REsponse', res);
-          debugger;
-          if (res.success || res.message == "Mobile no. already verified") {
-            this.srvcLogin.createUser(this.customerMobile, this.newUser.fname, this.newUser.lname, this.newUser.password, this.newUser.email)
-              .subscribe( (res:any) => {
-                console.log('Sign up RESPONSE', res);
-  
-                if (res.success) {
-                  alert('User Created Successfully : ' + res.identity);
-                }
-              });
+          this.loading = false;
+          if (res.success) {
+            alert('Mobile Number Verified');
+            
+            this.otpMismatch = false;
           } else {
             this.otpMismatch = true;
-            this.loading=false;
           }
         })
     }

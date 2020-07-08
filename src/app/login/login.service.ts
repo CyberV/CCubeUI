@@ -25,23 +25,9 @@ import { MD5 } from 'crypto-js';
 })
 export class LoginService {
     
-    private url: string = 'http://3.7.90.134/api/';
+    private url: string = 'https://ccubetest.azurewebsites.net/api/';
     
     constructor(private http: HttpClient) { }
-
-     
-    checkStatus(mobile:string, email:string=null) {
-      let payload = {
-        mobile
-      };
-
-      if (email) {
-        payload['email']=email;
-      }
-      return this.http.post(this.url + 'checkUserStatusByMobileOrEmail', payload).pipe(
-        catchError(this.handleError)
-      );
-    }
 
     sendOtp(mobile:string, email:string=null) {
       let payload = {
@@ -51,7 +37,7 @@ export class LoginService {
       if (email) {
         payload['email']=email;
       }
-      return this.http.post(this.url + 'sendOtp', payload).pipe(
+      return this.http.get(this.url + 'otp/send/' + mobile).pipe(
         catchError(this.handleError)
       );
     }
@@ -60,7 +46,7 @@ export class LoginService {
       let payload = {
         mobile
       };
-      return this.http.post(this.url + 'resendOtp', payload).pipe(
+      return this.http.get(this.url + 'otp/resend/' + mobile).pipe(
       catchError(this.handleError));
     }
 
@@ -69,7 +55,7 @@ export class LoginService {
         mobile,
         otp
       };
-      return this.http.post(this.url + 'verifyOtp', payload).pipe(
+      return this.http.get(this.url + 'otp/verify/' + mobile + "/" + otp).pipe(
       catchError(this.handleError));
     }
 

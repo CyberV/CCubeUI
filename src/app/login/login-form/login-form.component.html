@@ -1,22 +1,19 @@
-<div *ngIf="page=='home'">
-  <heading text="Sign In / Sign Up"></heading>
+<div *ngIf="page=='home'" class="animate__animated">
+  <heading text="Sign Up"></heading>
 
-  <text-input></text-input>
-
-  <subheading size="16" text="Sign up or Sign in to access your orders, best deal, offers, Health tips and more!">
+  <subheading size="16" text="Sign up now to experience the revolutionary Complete Car Care Experience">
   </subheading>
 
-  {{customerMobile}}
   <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="customerMobile"></mobile-input>
 
-  <cta text="Use Password / OTP" [loading]="loading" (click)="beginAuth()">
+  <cta text="Send OTP" [loading]="loading" (click)="beginAuth()">
   </cta>
 
   <!-- <subheading text="OR" align="center"></subheading>
     
     <cta text="Log In" outline="true"></cta> -->
 
-  <div class="ion-text-center social-login">
+  <!-- <div class="ion-text-center social-login">
     <ion-button class="login-fb" fill="outline" (click)="loginFacebook()">
       <ion-icon slot="start" name="logo-facebook"></ion-icon>
       facebook
@@ -25,7 +22,7 @@
       <ion-icon slot="start" name="logo-google"></ion-icon>
       google
     </ion-button>
-  </div>
+  </div> -->
 </div>
 
 <div *ngIf="page=='signup'" class="animate__animated animate__fadeInLeft">
@@ -39,10 +36,12 @@
 
 
   <verify-otp
-     [mobile]="customerMobile" length="6" 
+     [mobile]="customerMobile" length="4" 
      (otpSubmitted)="customerOtp=$event" 
      [mismatch]="otpMismatch"
      (changeNumber)="page='home'"></verify-otp> 
+
+     {{customerOtp}}
 
 
   <cta text="Verify" [loading]="loading" (click)="verifyOtp(customerOtp)" ></cta>

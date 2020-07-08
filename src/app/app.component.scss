@@ -1,4 +1,12 @@
 ion-app {
-    background: #00a4a7;
+    background: #f6f6f6;
     color: white;
+}
+
+ion-router-outlet {
+    margin-top: 60px;
+
+    @media screen and (max-width: 768px){
+        margin-top: 0;
+    }
 }
