@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
-
+import featureList from 'assets/featurelist.json';
+import contributionsList from 'assets/contributionslist.json';
+import onePageScroll from 'assets/scripts/one-page-scroll.min';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,22 +11,39 @@ export class HomeComponent implements OnInit {
 
   startShow:boolean = false;
   doorstep:boolean = false;
-  knowmore:boolean = false;
+  knowmore:boolean = true;
   daily:boolean = false;
   demo:boolean = false;
   contact: boolean = false;
 
+  features: any;
+
   interval:any;
+
+  featureList:any;
+  contributions: any;
+  appScroll:any;
 
 
   @ViewChildren('attention') attention : QueryList<ElementRef>;
 
-  constructor() { }
+  constructor() {
+    this.featureList = featureList;
+    this.contributions = contributionsList;
+   }
 
   ngOnInit() {
-    setTimeout(()=> {
-      this.startShow=true;
-    }, 1000);
+    this.startShow=true;
+    // setTimeout(()=> {
+    //   this.startShow=true;
+    // }, 1000);
+  }
+
+  ngAfterViewInit() {
+    // var el = document.querySelectorAll('section');
+    // this.appScroll = new onePageScroll({
+    //     el: el
+    // });
   }
 
   loadMore() {
@@ -35,7 +54,7 @@ export class HomeComponent implements OnInit {
 
       setTimeout(()=> {
         this.contact = true;
-        this.grabAttention();
+        //this.grabAttention();
       }, 1000)
     }, 1000)
   }

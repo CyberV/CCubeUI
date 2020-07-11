@@ -21,6 +21,9 @@ import { TipsViewComponent } from './tips-view/tips-view.component';
 import { TypeawayComponent } from './typeaway/typeaway.component'
 import { DropBombComponent } from './drop-bomb/drop-bomb.component';
 import { TextInputComponent } from './text-input/text-input.component';
+import { FeatureCardComponent } from './feature-card/feature-card.component';
+import { FeatureAvail } from './feature-avail/feature-avail.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -41,13 +44,16 @@ import { TextInputComponent } from './text-input/text-input.component';
     TipsViewComponent,
     TypeawayComponent,
     DropBombComponent,
-    TextInputComponent
+    TextInputComponent,
+    FeatureCardComponent,
+    FeatureAvail
 
   ],
   imports: [
     IonicModule,
     CommonModule,
-    ChartsModule
+    ChartsModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,
@@ -67,7 +73,9 @@ import { TextInputComponent } from './text-input/text-input.component';
     TipsViewComponent,
     TypeawayComponent,
     DropBombComponent,
-    TextInputComponent
+    TextInputComponent,
+    FeatureCardComponent,
+    FeatureAvail
   ]
 })
 export class CommonComponentsModule { }

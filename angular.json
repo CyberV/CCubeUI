@@ -37,10 +37,16 @@
                 "input": "src/theme/variables.scss"
               },
               {
+                "input": "./node_modules/fullpage.js/dist/fullpage.css"
+              },
+              {
                 "input": "src/global.scss"
               }
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/fullpage.js/dist/fullpage.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -139,7 +145,9 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {

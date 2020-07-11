@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="offset-md-2 col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="heading"> Our Monthly Plans </p>
+                    <table class="table-bordered table-hover">
+                        <thead>
+                            <th *ngFor="let column of planNames; index as i2" [class]="'heading-col-' + i2">
+                                {{column | uppercase}}</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let feature of featureList; index as i">
+                                <td [class.feature-cell]="indx === 0" *ngFor="let  plan of planNames; index as indx">
+                                    <span *ngIf="indx == 0" [tooltip]="featureList[i].description" placement="top"
+                                        show-delay="500">{{ indx == 0 ? featureList[i].name : ''}} </span>
+                                    <feature-avail *ngIf="indx > 0"
+                                        [available]="planList[indx-1].features.includes(featureList[i].code)">
+                                    </feature-avail>
+                                </td>
+                                <!-- <td *ngFor="let  plan of planNames; index as indx"  >{{ indx == 0 ? featureList[i].name : featureList[i].code }}</td> -->
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row price-row">
+                <div class="col-12" style="text-align: center;">
+                    <p class="heading">High On Quality. Low on Prices!</p>
+                    <span> <img src="./assets/priceTable.JPG" /></span>
+
+                </div>
+            </div>
+
+            <div class="row savings-row">
+                <div class="col-12" style="text-align: center;">
+                    <p class="heading">Your Savings!</p>
+                    <monthly-savings></monthly-savings>
+                </div>
+            </div>
+
+            <div class="row demoRow">
+                <div class="col-12">
+                    <h2>Demos Have Started!!</h2>
+                            <h3> <a target="_blank" href="http://www.tinyurl.com/ccubecodemo">Register Now! </a> </h3>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

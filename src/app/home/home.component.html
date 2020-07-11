@@ -1,19 +1,67 @@
-
-<ion-content fullscreen="true">
+<ion-content fullscreen="true" mnFullpage>
   <div class="container-fluid hidden-xs desktop-container">
-     <div class="row">
-      <div class="offset-md-2 col-md-8 col-xs-12 header">
-        <span  *ngIf="startShow" [style.display]="startShow ? 'visible': 'none'" class="logo-container"><img class="logo animate__animated animate__slideInDown" src="./assets/blueLogo.png" alt="CCubeLogo" border="0" />
-        </span><br />
-        <typeaway class="title1" *ngIf="startShow" text="Complete Car Care" (finished)="doorstep = true;" ></typeaway><br/>
-        <typeaway class="title2" *ngIf="doorstep" text="At your doorstep" (finished)="daily = true;" ></typeaway><br/>
-        <!-- <span class="title1"><strong>Complete Car Care</strong></span><br />
-        <span class="title2"><span>At your doorstep</span><br /> -->
-        <typeaway class="title2" *ngIf="daily" text="Daily" (finished)="loadMore()" ></typeaway><br/>
+    <div class="row">
+      <div class="offset-md-2 col-md-8 col-xs-12 header" >
+        <div  class="section" id="s1" name="page1">
+          <span *ngIf="startShow" [style.display]="startShow ? 'visible': 'none'" class="logo-container"><img
+              class="logo " src="./assets/blueLogo.png" alt="CCubeLogo" border="0" />
+          </span><br />
+
+          <typeaway skipAnimation="true" class="title1" *ngIf="startShow" text="Complete Car Care"
+            (finished)="doorstep = true;"></typeaway>
+          <br />
+          <typeaway skipAnimation="true" class="title2" *ngIf="startShow" text="At your doorstep."
+            (finished)="daily = true;"></typeaway><br />
+          <div *ngIf="knowmore" class="row ctaRow ">
+              <p>
+                Welcome to the new world and enjoy the ultimate car cleaning experience.
+              </p>
+
+              <p>
+                As the whole world is going through a really difficult time, cleanliness, hygiene and disinfection has
+                taken a new form of importance. We CCUBE: Complete Car Care Company are trying to do our part to
+                restrict the spread of Covid-19 by disinfecting our second homes regularly i.e. our CAR.
+              </p>
+
+              <p>
+                We have revolutionized the Daily Doorstep Car cleaning services by working hand in hand with Mother
+                Nature and saving a lot of water during the process.
+              </p>
+
+            </div>
+          </div>
+
+        <div  class="section" id="s2" name="page2">
+          <p class="section-heading"><strong>KEY FEATURES</strong></p>
+          <feature-card class="" *ngFor="let feature of featureList; let i = index" [title]="feature.title"
+            [points]="feature.points" [solution]="feature.solution" [direction]="i%2 == 0 ? 'right' : 'left'"
+            [icon]="feature.icon">
+          </feature-card>
+
+        </div>
+
+
+
+        <div  class="section" id="s3" name="page3">
+          <p class="section-heading"><strong>OUR CONTRIBUTIONS TO SOCIETY</strong></p>
+
+          <feature-card class="col-xs-12 col-md-6" *ngFor="let contribution of contributions;"
+            [title]="contribution.title" [points]="contribution.points" [solution]="contribution.solution"
+            direction="left" [icon]="contribution.icon"></feature-card>
+
+        </div>
+
+        <div style="display:flex;justify-content:center;align-items:center; margin-bottom: 2em; ">
+            <div><a class="btn btn-block" [routerLink]="['/plans']"
+                >Show Monthly Plans</a></div>
+          </div>
+
       </div>
     </div>
+  </div>
+</ion-content>
 
-    <div *ngIf="knowmore" class="row ctaRow">
+  <!-- <div *ngIf="knowmore" class="row ctaRow">
       <div class="col-12">
         <div style="display:flex;justify-content:center;align-items:center;">
           <div><button class="btn btn-block animate__animated animate__flipInX"
@@ -23,23 +71,20 @@
         <span></span>
       </div>
     </div>
- 
- <div class="row demoRow ">
+
+    <div class="row demoRow ">
       <div *ngIf="demo" #attention class="col-sm-6 col-xs-12 animate__animated animate__backInLeft">
         <h2>Demos Have Started!!</h2>
-            <h3> <a target="_blank" href="http://www.tinyurl.com/ccubecodemo">Register Now! </a> </h3>
-           
+        <h3> <a target="_blank" href="http://www.tinyurl.com/ccubecodemo">Register Now! </a> </h3>
+
       </div>
       <div *ngIf="contact" class="col-sm-6 col-xs-12 animate__animated animate__backInRight">
-          <h4>For Queries & Suggestions</h4>
-          <h3> <img class="whatsapp"
-              src="./assets/whatsapp.png" />
-            <a href="tel:+917827852332">78278-52332</a></h3>
+        <h4>For Queries & Suggestions</h4>
+        <h3> <img class="whatsapp" src="./assets/whatsapp.png" />
+          <a href="tel:+917827852332">78278-52332</a></h3>
       </div>
-    </div>
+    </div> -->
 
-    </div>
-  </ion-content>
 
 <!-- 
   <div class="container visible-xs mobile-container">
@@ -73,11 +118,11 @@
 
     <div class="row contactRow">
       <div class="col-12">
-        <h4>For Queries & Suggestions<h4>
+        <h4>For Queries & Suggestions</h4>
             <h3> <img class="whatsapp"
                 src="https://pluspng.com/img-png/whatsapp-png-wazapp-logo-whats-whatsapp-logo-whatsapp-icon-2050.png" />
               <a href="tel:+917827852332">78278-52332</a></h3>
       </div>
     </div>
   </div> 
-</div> --> 
+</div> -->

@@ -17,7 +17,6 @@ export class AppComponent {
 
     this.route.url.subscribe( (d)=> {
       console.log('route', this.route.snapshot['_routerState'].url);
-      debugger;
     })
   }
 

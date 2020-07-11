@@ -1,0 +1,26 @@
+<div class="row card-container" [ngClass]="{
+  'card-left' : direction == 'left',
+  'card-right': direction == 'right'
+}">
+  <div *ngIf="direction === 'left' || isMobile" class="col-md-4 col-xs-12">
+    <img [src]="'./assets/icons/' + icon + '.png'">
+  </div>
+  <div class="col-md-8 col-xs-12 col-info" #infoContainer>
+    <div class="row">
+      <div class="col-md-12 col-title">
+        <strong>{{title}}</strong>
+      </div>
+      <div class="col-md-12 col-points">
+        <ng-container *ngFor="let point of points">
+          <span class="point"> {{point}}</span>
+        </ng-container>
+      </div>
+      <div class="col-md-12 col-solution">
+        {{solution}}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="direction === 'right' && !isMobile" class="col-md-4 col-xs-12">
+    <img src="./assets/banner1.JPG">
+  </div>
+</div>

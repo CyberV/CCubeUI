@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TypeawayComponent implements OnInit {
 @Input() text:string;
+@Input() skipAnimation:boolean;
 @Output() finished = new EventEmitter();
 label:string;
 
@@ -15,15 +16,21 @@ private exitInterval:number= 1000;
 private typeInterval:number = 70;
 
   constructor() {
-  	this.text = "At this moment, I pledge";
+		this.text = "At this moment, I pledge";
+		this.skipAnimation = false;
   }
 
   ngOnInit() {
 	this.label = "";
-	
-	setTimeout(()=>{
-		this.showNextChar();
-	}, this.startInterval);
+	if (this.skipAnimation) {
+		this.label = this.text;
+		this.finished.emit();
+	}
+	else {
+		setTimeout(()=>{
+			this.showNextChar();
+		}, this.startInterval);
+	}
 	
   }
  

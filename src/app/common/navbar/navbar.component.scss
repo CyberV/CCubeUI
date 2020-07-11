@@ -20,6 +20,23 @@ $secondary-color: #ec6b1e;
         margin-top: -6px;
     }
 
+    .contact{
+        
+    margin: 0;
+    float: right;
+
+    a {
+    color: white;
+    }
+
+
+
+    .whatsapp {
+        height: 50px;
+        width: 50px;
+    }
+}
+
     .search-box {
         input {
             border-top-left-radius: $border-radius;

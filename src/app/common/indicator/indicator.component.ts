@@ -9,11 +9,13 @@ export class IndicatorComponent implements OnInit {
 
   @Input() title:string;
   @Input() symbol:string;
+  @Input() size: number;
 
   constructor() { 
 
     this.title="Title";
     this.symbol="T";
+    this.size = 70;
   }
 
   ngOnInit() {}
