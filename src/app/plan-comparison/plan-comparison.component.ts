@@ -19,15 +19,15 @@ export class PlanComparisonComponent implements OnInit {
     this.planList = [
       {
         name: 'Standard',
-        features:[ "DISINFECT_INT", "WASH_WATER", "WASH_WATERLESS", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK", "OIL_CHECK", "CLEAN_BOOT",  ]
+        features:[ "DISINFECT_INT", "WASH_WATER", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK",  "CLEAN_BOOT"  ]
       },
       {
         name: 'Deluxe',
-        features:[ "DISINFECT_INT", "WASH_WATER", "WASH_WATERLESS", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK", "OIL_CHECK", "CLEAN_BOOT", "WNDSHLD_INT", "POLISH_TYRE", "CLEAN_DOOR", "NEW_FRAG" ]
+        features:[ "DISINFECT_INT", "WASH_WATER", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK", "OIL_CHECK", "CLEAN_BOOT", "WASH_DEEP" ]
       },
       {
         name: 'Elite',
-        features:[ "DISINFECT_INT", "WASH_WATER", "WASH_WATERLESS", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK", "OIL_CHECK", "CLEAN_BOOT", "WNDSHLD_INT", "POLISH_TYRE", "CLEAN_DOOR", "NEW_FRAG", "WASH_DEEP", "BATTERY_CHECK" ]
+        features:[ "DISINFECT_INT", "WASH_WATER", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK", "OIL_CHECK", "CLEAN_BOOT", "WNDSHLD_INT", "POLISH_TYRE", "CLEAN_DOOR", "NEW_FRAG", "WASH_DEEP", "BATTERY_CHECK" ]
       }
     ];
 
@@ -39,25 +39,19 @@ export class PlanComparisonComponent implements OnInit {
           code: "DISINFECT_INT"
       },
       {
-          name: "Water wash",
+          name: "Water Efficient Washing",
           description: "proper upper body wash, tyres, headlights and rubber mats with water to make it shine like a star",
-          frequency: "Once a week",
+          frequency: "Twice a week",
           code: "WASH_WATER"
       },
       {
-          name: "Waterless wash",
-          description: "using special chemical to clean upper body to maintain the body strength to make your car strong",
-          frequency: "Once a week",
-          code: "WASH_WATERLESS"
-      },
-      {
-          name: "Upper body microfibre cloth cleaning",
+          name: "Upper body Microfibre Cloth Cleaning",
           description: "complete upper body cleaning with a microfibre cloth so dust wont settle on your car even for 1 day",
           frequency: "Daily",
           code: "CLEAN_OUT"
       },
       {
-          name: "Rust protection application upper body",
+          name: "Rust Protection",
           description: "application of a chemical layer to help reducing rust occurance so your car never gets old",
           frequency: "Twice a week",
           code: "RUST_OUT"
@@ -69,63 +63,64 @@ export class PlanComparisonComponent implements OnInit {
           code: "CLEAN_INT"
       },
       {
-          name: "Windshield cleaning outside",
+          name: "Windshield Cleaning - Outside",
           description: "Proper upper body wash, tyres, headlights and rubber mats with water to make it shine like a star",
           frequency: "Daily",
           code: "WINDSHLD_OUT"
       },
       {
-          name: "Air pressure monitoring and refilling",
+          name: "Air Pressure Monitoring and Refilling",
           description: "checking and refilling of air pressure for your tension free safe journey along with long happy running tyres",
           frequency: "Once a week",
           code: "AIR_CHECK"
       },
       {
-          name: "Engine oil and coolant checking",
+        name: "Boot Cleaning",
+        description: "cleaning the boot space so even your luggage feel the cleanliness and luxury",
+        frequency: "Twice a week",
+        code: "CLEAN_BOOT"
+    },
+    {
+        name: "Deep Wash in a Shop",
+        description: "get a much required deep wash in a washing centre with complete internal and external cleaning with internal polish",
+        frequency: "Once a month",
+        code: "WASH_DEEP"
+    },
+      {
+          name: "Engine Oil and Coolant checking",
           description: "checking engine oil and coolant once in 15 days to let know that you are good to go",
-          frequency: "Once in 15 days",
+          frequency: "Twice a month",
           code: "OIL_CHECK"
       },
+
       {
-          name: "Boot cleaning",
-          description: "cleaning the boot space so even your luggage feel the cleanliness and luxury",
-          frequency: "Twice a week",
-          code: "CLEAN_BOOT"
-      },
-      {
-          name: "Windshield care",
+          name: "Windshield Care - Inside",
           description: "using special chemicals to clean your windshield inside out for a spotless view  and long life of the special glass",
           frequency: "Once a week",
           code: "WNDSHLD_INT"
       },
       {
-          name: "Tyre polish",
+          name: "Tyre Polish",
           description: "polishing the black beauties so it compliments your chariot along with those shining alloys",
           frequency: "Once a week",
           code: "POLISH_TYRE"
       },
       {
-          name: "Door rubber cleaning",
+          name: "Door Rubber Cleaning",
           description: "cleaning of those tight rubber gullys on doors for a less noisy cabin with a premium feel",
           frequency: "Once a week",
           code: "CLEAN_DOOR"
       },
       {
-          name: "New fragrance every week",
+          name: "New Fragrance",
           description: "Select a new fragrance every week from a wide range of our special scents",
-          frequency: "Once a week",
+          frequency: "Twice a month",
           code: "NEW_FRAG"
       },
       {
-          name: "Deep wash in a shop",
-          description: "get a much required deep wash in a washing centre with complete internal and external cleaning with internal polish",
-          frequency: "Once a month",
-          code: "WASH_DEEP"
-      },
-      {
-          name: "Battery check",
+          name: "Battery Check",
           description: "Checking that current giving source for its health through an ammeter so it sparks whenever you need",
-          frequency: "Once in 15 days",
+          frequency: "Twice a month",
           code: "BATTERY_CHECK"
       }
   ];

@@ -11,9 +11,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let feature of featureList; index as i">
-                                <td [class.feature-cell]="indx === 0" *ngFor="let  plan of planNames; index as indx">
-                                    <span *ngIf="indx == 0" [tooltip]="featureList[i].description" placement="top"
-                                        show-delay="500">{{ indx == 0 ? featureList[i].name : ''}} </span>
+                                <td [class.feature-cell]="indx === 0" *ngFor="let  plan of planNames; index as indx" [tooltip]="featureList[i].description + '<br/>' + featureList[i].frequency" placement="bottom"
+                                show-delay="200" [display]="indx === 0">
+                                    <span *ngIf="indx == 0" >{{ indx == 0 ? featureList[i].name : ''}} </span>
                                     <feature-avail *ngIf="indx > 0"
                                         [available]="planList[indx-1].features.includes(featureList[i].code)">
                                     </feature-avail>
@@ -23,6 +23,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <p class="float-right">Click on the Feature Name to know more..</p>
                 </div>
             </div>
             <div class="row price-row">

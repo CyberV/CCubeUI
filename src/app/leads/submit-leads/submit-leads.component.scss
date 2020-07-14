@@ -1,0 +1,27 @@
+:host {
+    margin: 2em;
+    color: black;
+}
+
+.col-md-1 {
+    max-width: 5%;
+    width: 33px;
+
+
+}
+
+form {
+    padding: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .col-md-1 {
+        left: 30px;
+        top: 6px;
+        margin-left: -56px;
+    }
+
+    .btn-submit {
+        margin-right: 6em;
+    }   
+}

@@ -1,8 +1,8 @@
 {
-  "name": "htmapp",
+  "name": "ccubeapp",
   "version": "0.1.0",
-  "author": "SSewa",
-  "homepage": "http://www.smartsewa.com",
+  "author": "CCube",
+  "homepage": "http://www.ccubeco.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
