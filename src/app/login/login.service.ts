@@ -26,6 +26,7 @@ import { MD5 } from 'crypto-js';
 export class LoginService {
     
     private url: string = 'https://ccubetest.azurewebsites.net/api/';
+    private carUrl :string = 'https://autom8.herokuapp.com/carDetails/';
     
     constructor(private http: HttpClient) { }
 
@@ -83,6 +84,12 @@ export class LoginService {
         console.error(error);
         return throwError(error); 
         //return Observable.throw(error || 'Server error');
+    }
+
+    getCarDetails(regNo) {
+      return this.http.get(this.carUrl + regNo).pipe (
+        catchError(this.handleError)
+      );
     }
     
 }

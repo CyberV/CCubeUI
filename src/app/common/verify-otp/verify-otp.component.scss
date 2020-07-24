@@ -1,7 +1,12 @@
+@import 'src/variables.scss';
+
 input {
     width: 25px;
     text-align: center;
     margin-right: 1em;
+    border: none;
+    border-bottom: 1px solid $primary-color;
+
 }
 
 .otp-input {

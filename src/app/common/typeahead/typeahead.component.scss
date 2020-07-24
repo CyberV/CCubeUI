@@ -1,0 +1,34 @@
+@import 'src/variables.scss';
+
+.mobile-input {
+    margin-top: 1em;
+    label {
+        color: $primary-color;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom:0;
+    }
+
+    input {
+        border: none;
+        border-bottom: 1px solid #bcbcbc;
+        border-radius: 0;
+        background: transparent;
+        color: $bg-black;
+    }
+
+    .not-mobile {
+        padding:0;
+        height:25px;
+    }
+
+    span {
+        border: none;
+        border-bottom: 1px solid #bcbcbc;
+        background: transparent;
+        font-weight: bold;
+        border-radius: 0;
+        color: black;
+        padding-left: 0;
+    }
+}

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-12">
+        <p *ngIf="!isBodyTypePresent" class="heading"> Our Monthly Plans </p>
+        <p *ngIf="isBodyTypePresent" class="heading"> Showing Monthly Plans for <span class="bodyType">{{bodyType}}</span> </p>
+        <table class="table-bordered table-hover">
+            <thead>
+                <th *ngFor="let column of planNames; index as i2" [class]="'heading-col-' + i2">
+                    {{column | uppercase}}</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let feature of featureList; index as i">
+                    <td [class.feature-cell]="indx === 0" *ngFor="let  plan of planNames; index as indx" [tooltip]="featureList[i].description + '<br/>' + featureList[i].frequency" placement="bottom"
+                    show-delay="200" [display]="indx === 0">
+                        <span *ngIf="indx == 0" >{{ indx == 0 ? featureList[i].name : ''}} </span>
+                        <feature-avail *ngIf="indx > 0"
+                            [available]="planList[indx-1].features.includes(featureList[i].code)">
+                        </feature-avail>
+                    </td>
+                    <!-- <td *ngFor="let  plan of planNames; index as indx"  >{{ indx == 0 ? featureList[i].name : featureList[i].code }}</td> -->
+
+                </tr>
+                <tr *ngIf="isBodyTypePresent" class="price-row">
+                  <td class="empty"></td>
+                  <td *ngFor="let plan of planList">
+                    <span class="price"><span>&#8377;</span>{{plan.pricing[bodyType]}}</span>
+                    <br/>
+                    <div class="cta">
+                        <cta text="Buy Now" (action)="buyNowHandler(plan.name,plan.pricing[bodyType] )"></cta>
+                    </div>
+                   
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="float-right">Click on the Feature Name to know more..</p>
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class TypeawayComponent implements OnInit {
 @Input() text:string;
 @Input() skipAnimation:boolean;
+@Input() delay:number;
 @Output() finished = new EventEmitter();
 label:string;
 
@@ -18,6 +19,7 @@ private typeInterval:number = 70;
   constructor() {
 		this.text = "At this moment, I pledge";
 		this.skipAnimation = false;
+		this.delay = 0;
   }
 
   ngOnInit() {
@@ -44,7 +46,10 @@ private typeInterval:number = 70;
 	  }, this.label[this.label.length-1] == ',' ? 8 * this.typeInterval : this.typeInterval);
 	  }
 	  else{
-		this.finished.emit();
+			setTimeout(() => {
+				this.finished.emit();
+			}, this.delay);
+
 	  }
 	  
 

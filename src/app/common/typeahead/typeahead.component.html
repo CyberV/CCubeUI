@@ -8,11 +8,10 @@
         <input [attr.type]="type" required #phoneInput 
           class="form-control" 
           [class.not-mobile]="name !== 'Mobile Number'"
+          
           (input)="onPhoneChange(phoneInput.value)"
           [placeholder]="placeholder" 
           [value]="value ? value : ''"
-          (blur)="sendBlur(value)"
-          [style.text-transform]="uppercase? 'uppercase': 'none'"
           aria-describedby="basic-addon3">
       </div>
   </div>

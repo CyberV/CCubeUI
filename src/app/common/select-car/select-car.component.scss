@@ -1,0 +1,29 @@
+@import 'src/variables.scss';
+
+.panel-makers {
+    display: inline-flex;
+    padding-left: 15px;
+}
+
+
+
+.maker {
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    min-width: 160px;
+
+    .card-body {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .card-img-top {
+        height: 100px;
+        width: 150px;
+    }
+
+    &:hover {
+        background: $secondary-color;
+    }
+}

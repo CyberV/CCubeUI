@@ -1,0 +1,86 @@
+@import 'src/variables.scss';
+
+
+
+    .heading {
+        margin-top: 1em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+        color: $secondary-color;
+    }
+
+    .bodyType {
+        text-transform: capitalize;
+    }
+
+    .price-row {
+        margin-bottom: 2em;
+
+        &:hover, td:hover {
+            background: white;
+        }
+
+        .empty {
+            border-bottom: 1px solid white;
+            border-left: 1px solid white;
+        }
+
+        .cta {
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+    }
+
+    .savings-row {
+        padding: 5px;
+        > .col-12 {
+            border-radius: 40px;
+            box-shadow: 2px 3px 5px 2px #ccc;
+
+        }
+    }
+
+
+
+    .heading-col-1 ,.heading-col-2, .heading-col-3  {
+        width: 20%;
+        color: $primary-color;
+        text-align: center;
+    }
+
+    .demoRow {
+        text-align: center;
+        margin-bottom: 2em;
+    }
+
+    table {
+        width: 100%;
+        margin: 2em 0 1em;
+
+        td {
+            text-align: center;
+        }
+
+        th {
+            padding: 8px;
+        }
+
+        .price-row {
+            .price {
+                color: $primary-color;
+                font-size: 24px;
+                font-weight: bold;
+
+                span {
+                    color: $secondary-color;
+                }
+            }
+        }
+
+        .feature-cell {
+            text-align: left !important;
+            padding: 8px;
+        }
+    }

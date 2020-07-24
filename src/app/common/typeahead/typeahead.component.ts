@@ -1,31 +1,35 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'mobile-input',
-  templateUrl: './mobile-input.component.html',
-  styleUrls: ['./mobile-input.component.scss'],
+  selector: 'typeahead',
+  templateUrl: './typeahead.component.html',
+  styleUrls: ['./typeahead.component.scss'],
 })
-export class MobileInputComponent implements OnInit {
+export class TypeaheadComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter();
-  @Output() blur = new EventEmitter();
 
 
-  @Input()
-  value: any;
+  @Input() value: any;
 
-  @Input()
-  type: string;
+  @Input() type: string;
+
+  @Input() choices: any;
 
   @Input() name:string;
   @Input() placeholder:string;
-  @Input() uppercase:boolean;
 
   constructor() {
     this.name="Input";
     this.placeholder="";
     this.type = "number";
-    this.uppercase = false;
+    this.choices = [
+      {
+        label: 'Choice 1',
+        logo: 'logo1'
+      }
+    ];
+
    }
 
   onPhoneChange(value) {
@@ -35,10 +39,6 @@ export class MobileInputComponent implements OnInit {
 
   ngOnInit() {
     
-  }
-
-  sendBlur(value){
-    this.blur.emit(value);
   }
 
 }

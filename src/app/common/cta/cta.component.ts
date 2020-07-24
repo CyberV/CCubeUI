@@ -15,7 +15,7 @@ export class CtaComponent implements OnInit {
   @Input() subtext: string;
   @Input() secondaryCta:string;
 
-  @Output() click = new EventEmitter();
+  @Output() action = new EventEmitter();
 
   constructor() {
     this.text = "CTA";
@@ -25,7 +25,7 @@ export class CtaComponent implements OnInit {
   }
 
   onCtaClick() {
-    this.click.emit();
+    this.action.emit();
   }
 
   ngOnInit() {}

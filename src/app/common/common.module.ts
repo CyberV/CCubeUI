@@ -11,6 +11,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { HighlightDirective } from './highlight.directive';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { ChartComponent } from './chart/chart.component';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 import { ChartsModule } from 'ng2-charts';
 import { ChartViewComponent } from './chart-view/chart-view.component';
@@ -24,6 +25,11 @@ import { TextInputComponent } from './text-input/text-input.component';
 import { FeatureCardComponent } from './feature-card/feature-card.component';
 import { FeatureAvail } from './feature-avail/feature-avail.component';
 import { RouterModule } from '@angular/router';
+import { TypeaheadComponent } from './typeahead/typeahead.component';
+import { SelectCarComponent } from './select-car/select-car.component';
+import { CarDisplayComponent } from './car-display/car-display.component';
+import { PlanTableComponent } from './plan-table/plan-table.component';
+
 
 @NgModule({
   declarations: [
@@ -46,13 +52,18 @@ import { RouterModule } from '@angular/router';
     DropBombComponent,
     TextInputComponent,
     FeatureCardComponent,
-    FeatureAvail
+    FeatureAvail,
+    TypeaheadComponent,
+    SelectCarComponent,
+    CarDisplayComponent,
+    PlanTableComponent
 
   ],
   imports: [
     IonicModule,
     CommonModule,
     ChartsModule,
+    TooltipModule,
     RouterModule
   ],
   exports: [
@@ -75,7 +86,11 @@ import { RouterModule } from '@angular/router';
     DropBombComponent,
     TextInputComponent,
     FeatureCardComponent,
-    FeatureAvail
+    FeatureAvail,
+    TypeaheadComponent,
+    SelectCarComponent,
+    CarDisplayComponent,
+    PlanTableComponent
   ]
 })
 export class CommonComponentsModule { }

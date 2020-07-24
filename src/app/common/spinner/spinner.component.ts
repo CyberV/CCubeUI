@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'spinner',
@@ -7,8 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  constructor() { }
+  @Input() color:string;
 
-  ngOnInit() {}
+  classMap:any;
+
+  constructor() {
+    this.color = '';
+
+
+   }
+
+  ngOnInit() {
+
+  }
+
+  ngOnChanges() {
+    const { color } = this;
+    this.classMap = {
+      'text-light': color == '',
+      'text-primary': color == 'blue'
+    };
+  }
 
 }

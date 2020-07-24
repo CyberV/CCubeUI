@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular
 import featureList from 'assets/featurelist.json';
 import contributionsList from 'assets/contributionslist.json';
 import onePageScroll from 'assets/scripts/one-page-scroll.min';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChildren('attention') attention : QueryList<ElementRef>;
 
-  constructor() {
+  constructor(private router: Router) {
     this.featureList = featureList;
     this.contributions = contributionsList;
    }
@@ -44,6 +45,11 @@ export class HomeComponent implements OnInit {
     // this.appScroll = new onePageScroll({
     //     el: el
     // });
+  }
+
+  goToPlans() {
+    sessionStorage.removeItem('currentCar');
+    this.router.navigate(['plans']);
   }
 
   loadMore() {

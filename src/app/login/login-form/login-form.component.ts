@@ -5,6 +5,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-logi
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 const { GoogleAuth } = Plugins;
 
 @Component({
@@ -23,6 +24,11 @@ export class LoginFormComponent implements OnInit {
   public customerMobile: string;
   public customerOtp: number;
   public otpMismatch: boolean;
+  public isCarReady: boolean;
+  public showCarSelector:boolean;
+  public findingCar:boolean;
+
+  loadingDetails: boolean;
 
   get isMobile() {
     return !this.platform.is('desktop');
@@ -30,14 +36,50 @@ export class LoginFormComponent implements OnInit {
 
   @Input() page: string;   // home, login, signup
 
+  get isTypingRegNo() {
+    return this.newUser.car.regNo && this.newUser.car.regNo.length > 2;
+  }
+
+  get isRegNoValid() {
+    let valid = false;
+    let reg = this.newUser.car.regNo;
+
+    if (!reg ) {
+      return valid;
+    } 
+    if (reg.length < 8) {
+      return valid;
+    }
+
+    if (isNaN(reg[0]) && isNaN(reg[1]) ) {    // HR
+      if (!isNaN(reg[2]) && !isNaN(reg[3])) {    // 51
+        if(isNaN(reg[4])) {
+          if (!isNaN(reg[reg.length - 1]) && !isNaN(reg[reg.length - 2]) ) {
+            valid = true;
+          }
+        }
+      }
+    }
+    return valid;
+  }
+
   constructor(
     private socialAuthService: AuthService,
     public platform: Platform,
-    private srvcLogin: LoginService) {
+    private srvcLogin: LoginService,
+    private router: Router) {
 
-    this.page = 'home';
+    this.page = 'car';
     this.otpMismatch = false;
-    this.newUser = {};
+    this.showCarSelector = false;
+    this.isCarReady = false;
+    this.loadingDetails = false;
+    this.loading = false;
+    this.findingCar = false;
+
+    this.newUser = {
+      car: {}
+    };
 
 
     if (this.platform.is('android') || this.platform.is('ios')) {
@@ -63,7 +105,22 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isCarReady = false;
+
   }
+
+  goToPlans(carDetails) {
+
+
+    sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+
+    this.router.navigate(['plans'], { state: carDetails});
+  }
+
+  reset() {
+    
+  }
+
   async loginGoogle() {
     console.log('signing in with google');
     if (this.platform.is('desktop') || this.platform.is('mobileweb')) {
@@ -137,7 +194,7 @@ export class LoginFormComponent implements OnInit {
           this.loading = false;
           if (res.success) {
             alert('Mobile Number Verified');
-            
+
             this.otpMismatch = false;
           } else {
             this.otpMismatch = true;
