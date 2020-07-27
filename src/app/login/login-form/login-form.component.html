@@ -5,7 +5,7 @@
   <subheading size="16" text="Sign up now to experience the revolutionary Complete Car Care Experience">
   </subheading>
 
-  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="customerMobile"></mobile-input>
+  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="newUser.mobile"></mobile-input>
 
   <cta text="Send OTP" [loading]="loading" (action)="beginAuth()">
   </cta>
@@ -31,13 +31,12 @@
 
   <mobile-input type="text" name="Full Name" [(value)]="newUser.name" ></mobile-input>
   <mobile-input type="email" name="Email Id" [(value)]="newUser.email" ></mobile-input>
-  <mobile-input type="text" name="Last Name" [(value)]="newUser.lname" ></mobile-input>
   <mobile-input type="password" name="Password" [(value)]="newUser.password" ></mobile-input>
   <mobile-input type="password" name="Confirm Password" [(value)]="newUser.confirmPassword" ></mobile-input>
 
 
   <verify-otp
-     [mobile]="customerMobile" length="4" 
+     [mobile]="newUser.mobile" length="4" 
      (otpSubmitted)="customerOtp=$event" 
      [mismatch]="otpMismatch"
      (changeNumber)="page='home'"></verify-otp> 
@@ -45,6 +44,8 @@
 
   <cta text="Create Account" [loading]="loading" (action)="verifyOtp(customerOtp)" ></cta>
 </div>
+
+<div></div>
 
 <div *ngIf="page=='car'" class="animate__animated animate__fadeInLeft">
   <heading text="Your Car Details"></heading>

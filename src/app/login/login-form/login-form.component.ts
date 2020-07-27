@@ -6,6 +6,7 @@ import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
+import { UserService } from 'app/services/user.service';
 const { GoogleAuth } = Plugins;
 
 @Component({
@@ -67,6 +68,7 @@ export class LoginFormComponent implements OnInit {
     private socialAuthService: AuthService,
     public platform: Platform,
     private srvcLogin: LoginService,
+    private srvcUser: UserService,
     private router: Router) {
 
     this.page = 'car';
@@ -170,7 +172,7 @@ export class LoginFormComponent implements OnInit {
   beginAuth() {
     if (!this.loading) {
       this.loading = true;
-      this.srvcLogin.sendOtp(this.customerMobile)
+      this.srvcLogin.sendOtp(this.newUser.mobile)
         .subscribe((res: any) => {
           console.log('Send OTP Response', res);
           if (res.success) {
@@ -188,12 +190,28 @@ export class LoginFormComponent implements OnInit {
     if (!this.loading) {
       console.log('otp', otp);
       this.loading = true;
-      this.srvcLogin.verifyOtp(this.customerMobile, this.customerOtp)
+      this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
         .subscribe((res: any) => {
           console.log('Verify OTP REsponse', res);
           this.loading = false;
           if (res.success) {
-            alert('Mobile Number Verified');
+            
+            this.srvcLogin.createUser(this.newUser.mobile,this.newUser.name, this.newUser.password, this.newUser.email)
+              .subscribe( (res:any) => {
+                if (res.success) {
+
+                  alert('Account Created');
+
+                  this.srvcUser.setCurrentUser(res.data);
+
+                  this.page = 'car';
+                  
+
+                } else {
+                  alert('There was en error creating account. Please try again in some time.');
+                }
+
+              });
 
             this.otpMismatch = false;
           } else {

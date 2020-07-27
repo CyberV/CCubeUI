@@ -27,7 +27,7 @@ export class SelectCarComponent implements OnInit {
         return mkr.name.indexOf(this.maker.toLowerCase()) > -1
       });
     } else  {
-      return [];
+      return this.lstMakers;
     }
 
   }

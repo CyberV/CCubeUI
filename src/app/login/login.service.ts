@@ -25,7 +25,8 @@ import { MD5 } from 'crypto-js';
 })
 export class LoginService {
     
-    private url: string = 'https://ccubetest.azurewebsites.net/api/';
+    //private url: string = 'https://ccubetest.azurewebsites.net/api/';
+    private url: string = 'http://localhost:4000/api/';
     private carUrl :string = 'https://autom8.herokuapp.com/carDetails/';
     
     constructor(private http: HttpClient) { }
@@ -60,21 +61,19 @@ export class LoginService {
       catchError(this.handleError));
     }
 
-    createUser(mobile, fname, lname, password, email) {
+    createUser(mobile, name, password, email) {
 
       let payload = {
-        mobile,
-        name: fname + ' ' + lname,
+        phone: mobile,
+        name: name,
         password:  MD5(password).toString(),
         email,
-        loginType: 'MOBILE',
-        role: 'PATIENT',
-        status:'NONE' // s0 or empty // recieved from API 1 // to decide if user creation is needed for existing system or not
+        city: "faridabad"
         };
 
         console.log(payload);
 
-        return this.http.post(this.url + 'signUp', payload).pipe (
+        return this.http.post(this.url + 'user/create', payload).pipe (
           catchError(this.handleError)
         );
 
