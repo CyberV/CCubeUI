@@ -5,6 +5,8 @@ import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-logi
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
+import { UserService } from 'app/services/user.service';
 const { GoogleAuth } = Plugins;
 
 @Component({
@@ -19,26 +21,68 @@ export class LoginFormComponent implements OnInit {
 
   public user: any;
   public isLoggedIn: boolean;
-  public newUser:any;
-  public customerMobile:string;
-  public customerOtp:number;
-  public otpMismatch:boolean;
+  public newUser: any;
+  public customerMobile: string;
+  public customerOtp: number;
+  public otpMismatch: boolean;
+  public isCarReady: boolean;
+  public showCarSelector:boolean;
+  public findingCar:boolean;
+
+  loadingDetails: boolean;
 
   get isMobile() {
     return !this.platform.is('desktop');
   }
 
-  @Input() page:string;   // home, login, signup
+  @Input() page: string;   // home, login, signup
+
+  get isTypingRegNo() {
+    return this.newUser.car.regNo && this.newUser.car.regNo.length > 2;
+  }
+
+  get isRegNoValid() {
+    let valid = false;
+    let reg = this.newUser.car.regNo;
+
+    if (!reg ) {
+      return valid;
+    } 
+    if (reg.length < 8) {
+      return valid;
+    }
+
+    if (isNaN(reg[0]) && isNaN(reg[1]) ) {    // HR
+      if (!isNaN(reg[2]) && !isNaN(reg[3])) {    // 51
+        if(isNaN(reg[4])) {
+          if (!isNaN(reg[reg.length - 1]) && !isNaN(reg[reg.length - 2]) ) {
+            valid = true;
+          }
+        }
+      }
+    }
+    return valid;
+  }
 
   constructor(
-    private socialAuthService: AuthService, 
+    private socialAuthService: AuthService,
     public platform: Platform,
-    private srvcLogin: LoginService) {
+    private srvcLogin: LoginService,
+    private srvcUser: UserService,
+    private router: Router) {
 
-    this.page = 'home';
+    this.page = 'car';
     this.otpMismatch = false;
-    this.newUser = {};
-    
+    this.showCarSelector = false;
+    this.isCarReady = false;
+    this.loadingDetails = false;
+    this.loading = false;
+    this.findingCar = false;
+
+    this.newUser = {
+      car: {}
+    };
+
 
     if (this.platform.is('android') || this.platform.is('ios')) {
       GoogleAuth.addListener('userChange', (googleUser: any) => {
@@ -63,7 +107,22 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isCarReady = false;
+
   }
+
+  goToPlans(carDetails) {
+
+
+    sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+
+    this.router.navigate(['plans'], { state: carDetails});
+  }
+
+  reset() {
+    
+  }
+
   async loginGoogle() {
     console.log('signing in with google');
     if (this.platform.is('desktop') || this.platform.is('mobileweb')) {
@@ -113,46 +172,50 @@ export class LoginFormComponent implements OnInit {
   beginAuth() {
     if (!this.loading) {
       this.loading = true;
-
-      this.srvcLogin.checkStatus(this.customerMobile)
-        .subscribe( (res:any) => {
-          console.log('Status Response', res);
-          if (!res.success) {
-            this.srvcLogin.sendOtp(this.customerMobile)
-              .subscribe( (res:any) => {
-                console.log('Send OTP Response', res);
-                if (res.type="success") {
-                  this.loading=false;
-                  this.page="signup";
-                }
-              });
+      this.srvcLogin.sendOtp(this.newUser.mobile)
+        .subscribe((res: any) => {
+          console.log('Send OTP Response', res);
+          if (res.success) {
+            this.loading = false;
+            this.page = "signup";
           }
         });
-      
     }
+
+
   }
 
-  verifyOtp(otp) {
-    if(!this.loading) {
-      this.loading=true;
 
-    
-      this.srvcLogin.verifyOtp(this.customerMobile, this.customerOtp)
-        .subscribe( (res:any) => {
+  verifyOtp(otp) {
+    if (!this.loading) {
+      console.log('otp', otp);
+      this.loading = true;
+      this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
+        .subscribe((res: any) => {
           console.log('Verify OTP REsponse', res);
-          debugger;
-          if (res.success || res.message == "Mobile no. already verified") {
-            this.srvcLogin.createUser(this.customerMobile, this.newUser.fname, this.newUser.lname, this.newUser.password, this.newUser.email)
+          this.loading = false;
+          if (res.success) {
+            
+            this.srvcLogin.createUser(this.newUser.mobile,this.newUser.name, this.newUser.password, this.newUser.email)
               .subscribe( (res:any) => {
-                console.log('Sign up RESPONSE', res);
-  
                 if (res.success) {
-                  alert('User Created Successfully : ' + res.identity);
+
+                  alert('Account Created');
+
+                  this.srvcUser.setCurrentUser(res.data);
+
+                  this.page = 'car';
+                  
+
+                } else {
+                  alert('There was en error creating account. Please try again in some time.');
                 }
+
               });
+
+            this.otpMismatch = false;
           } else {
             this.otpMismatch = true;
-            this.loading=false;
           }
         })
     }

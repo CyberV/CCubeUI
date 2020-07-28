@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12">
+    <span *ngIf="noCar">Car Registration Number Empty</span>
+    <div *ngIf="!noCar">
+      <div *ngIf="loading">
+        <spinner color="blue"></spinner>
+        <br/>
+        <typeaway *ngIf="entry.begin" text="Contacting Parivahan Department...." delay="2000" (finished)="entry.fetch = true;"></typeaway>
+        <br/>
+        <typeaway *ngIf="entry.fetch" text="Fetching details from server...."></typeaway>
+
+      </div>
+      <ng-container  *ngIf="isCarReady"> 
+          <div class="card animate__animated animate__bounceInDown">
+              <img class="card-img-top" src="assets/banner1.JPG" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">  {{carDetails.name}} </h5>
+                <p class="card-text"> 
+                  <span>You're driving a {{carDetails.year}} {{carDetails.model}}</span>
+                  <br/>
+                  <span></span>
+                </p>
+              </div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Maker : {{carDetails.maker}}</li>
+                  <li class="list-group-item">Fuel  : {{carDetails.fuelType}}</li>
+                  <li class="list-group-item">Registeration Date: {{carDetails.registeredOn}} </li>
+                </ul>
+                <div class="card-body">
+                  <span  class="card-link">Show More</span>
+                  <span  class="card-link float-right">Not your Car?</span>
+                </div>
+                <div class="card-body">
+                    <cta text="Show me my Plans" (action)="sendAction()"></cta>
+                </div>
+            </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

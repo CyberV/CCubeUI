@@ -1,0 +1,57 @@
+[
+    {
+        "title": "Biweekly Car Sanitization",
+        "points": ["We believe that you are sanitizing yourself, your home and even your office",
+            "But what about your car?",
+            "Don't worry, CCUBE got you covered!"
+        ],
+        "solution": "We will be disinfecting your car twice a week. <br/> So you and your loved ones are safe in your private moving living room.",
+        "icon": "sanitize"
+
+    },
+     {
+        "title": "Separate Cleaning Kit for Each Car Daily",
+        "points": [
+            "Our current daily car cleaners are using the same cloth on all cars they attend.",
+            "Now this increases the risk of getting any contagious disease by 70% for car users."
+        ],
+        "solution": "CCUBE has solved this problem by using separate cleaning kits for each car daily.",
+        "icon": "separateKit"
+    },
+     {
+        "title": "Trained professionals with PPE",
+        "points": [
+            "Coming onto your car without proper technique and cloth damages the paint and body of the car."
+        ],
+        "solution": "CCUBE employees go through rigorous training of techniques to clean your car without damaging its paint and shine with high quality microfiber cloth. Our safety regime includes face masks and hand sanitization before start of every service.",
+        "icon": "ppe"
+    },
+     {
+        "title": "Regular Health Screening of Staff",
+        "points": [
+            "With the increasing spread of Covid, it is difficult to identify infected people"
+        ],
+        "solution": "Daily temperature check of the whole staff is done before they are deployed to your area for car cleaning.",
+        "icon": "screening"
+    },
+     {
+        "title": "Water Efficient Cleaning",
+        "points": [],
+        "solution": "CCUBE works on no spillage no wastage water saving policy. With our specially formulated solution we just use 500 mL of water to clean a mid size car (hatchback), saving atleast 20 liters of water with each wash.",
+        "icon": "water"
+    },
+     {
+        "title": "Special Rust Resistant and UV protection Cleaning Agent",
+        "points": [
+            "Rust is the biggest enemy of our car's body."
+        ],
+        "solution": "Our solution creates a shiny, slippery layer on your car that protects it against rust and helps protect the expensive paint against UV rays thus providing a long lasting shine and upper body life, its like applying wax every time we clean.",
+        "icon": "solution"
+    },
+     {
+        "title": "Daily Doorstep Services",
+        "points": [],
+        "solution": "All the services we provide are not just for 1 day. CCUBE creates a weekly schedule for your car, cleaning it 6 days a week. We work daily to provide you the best doorstep car cleaning services.",
+        "icon": "doorstep"
+    }
+]

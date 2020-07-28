@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class MobileInputComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter();
+  @Output() blur = new EventEmitter();
 
 
   @Input()
@@ -18,11 +19,13 @@ export class MobileInputComponent implements OnInit {
 
   @Input() name:string;
   @Input() placeholder:string;
+  @Input() uppercase:boolean;
 
   constructor() {
     this.name="Input";
     this.placeholder="";
     this.type = "number";
+    this.uppercase = false;
    }
 
   onPhoneChange(value) {
@@ -32,6 +35,10 @@ export class MobileInputComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  sendBlur(value){
+    this.blur.emit(value);
   }
 
 }

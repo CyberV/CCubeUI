@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const userToken = 'pikarhealthtech@123';
+    const userToken = '100000000';
     const modifiedReq = req.clone({ 
       headers: req.headers.set('authkey', `${userToken}`),
     });

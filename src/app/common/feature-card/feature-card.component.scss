@@ -1,0 +1,46 @@
+@import 'src/variables.scss';
+
+.card-container {
+    margin-bottom: 2em;
+    text-align: justify;
+    background: white;
+    color: $primary-color;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 8px 6px -6px black;
+
+    img {
+        display: block;
+        margin: 0 auto;
+        width: 50%;
+    }
+
+    .point {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .col-title {
+        color: $secondary-color;
+        margin: 1em 0;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    
+
+    @media screen and (min-width: 768px) {
+
+        img {
+            width: 100%;
+        }
+        
+    &.card-left {
+        text-align: left;
+    }
+
+    &.card-right {
+        text-align: right;
+    }
+    }
+}

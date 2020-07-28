@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './services/tokenInterceptor';
+
 import { CommonComponentsModule } from './common/common.module';
 import { HomeComponent } from './home/home.component';
-import { CommonModule } from '@angular/common';
 
+import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
+import { TooltipModule } from 'ng2-tooltip-directive';
+import { MonthlySavingsComponent } from './monthly-savings/monthly-savings.component';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -32,14 +34,15 @@ export function socialConfigs() {
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent ],
   entryComponents: [HomeComponent],
-  imports: [BrowserModule, CommonComponentsModule, IonicModule, IonicModule.forRoot(), AppRoutingModule, SocialLoginModule, HttpClientModule],
+  imports: [BrowserModule, CommonComponentsModule, IonicModule, IonicModule.forRoot(), AppRoutingModule, SocialLoginModule, HttpClientModule, TooltipModule],
   providers: [
+    { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: AuthServiceConfig, useFactory: socialConfigs },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent,HomeComponent]
+  bootstrap: [AppComponent,HomeComponent, PlanComparisonComponent, MonthlySavingsComponent]
 })
 export class AppModule { }

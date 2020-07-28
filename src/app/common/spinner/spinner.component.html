@@ -1,1 +1,7 @@
-<div class="spinner-border text-light"></div>
+<div [ngClass]="{
+
+    'spinner-border spinner': true,
+    'text-light': color == '',
+    'text-primary': color == 'blue'
+  }
+  " ></div>

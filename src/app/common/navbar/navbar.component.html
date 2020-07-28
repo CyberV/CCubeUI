@@ -1,28 +1,33 @@
-<div class="row">
-    <div class="navbar col-sm-12">
+<div class="row navbar">
+    <div class="col-sm-12">
         <div class="row full-width">
-          <div class="col-md-3 col-sm-2">
-            <a routerLink="/login">
-              <img class="app-logo" src="./assets/SSLogo.jpg"/>
-            </a>
+          <div class="col-md-3 col-xs-2">
+            <a [routerLink]="['/home']">
+              <img class="app-logo" src="./assets/blueLogo.png"/></a>
+              
           </div>
-          <div class="col-md-5 col-sm-4">
-              <div class="input-group search-box">
+          <div class="col-md-5 col-xs-4">
+              <!-- <div class="input-group search-box">
                   <input type="text" class="form-control" placeholder="Search Here..." aria-label="Search in SmartSewa" aria-describedby="basic-addon2">
                   <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2">
                       <app-icon name="search"></app-icon>
                     </span>
                   </div>
-                </div>
+                </div> ss--> 
+                <!-- <typeaway class="title1"  text="Complete Car Care" (finished)="doorstep = true;" ></typeaway>
+                <typeaway class="title2" *ngIf="doorstep" text="At your doorstep" (finished)="daily = true;" ></typeaway><br/>
+                <typeaway class="title2" *ngIf="daily" text="Daily"  ></typeaway><br/> -->
+
           </div>
-          <div class="col-md-4 col-sm-4">
-            <div class="row">
+          <div class="col-md-4 col-xs-6">
+            <div class="row nav-actions">
+              <div class="col-3"> <a [routerLink]="['\signup']">Signup</a></div>
+              <div class="col-3"> <a [routerLink]="['\login']">Login</a></div>
               <div class="col-6">
-                  <app-icon class="cart-icon" name="cart-plus" size="2"></app-icon>
-              </div>
-              <div class="col-6">
-                
+                  <h3 class="contact"> <img class="whatsapp"
+                    src="https://pluspng.com/img-png/whatsapp-png-wazapp-logo-whats-whatsapp-logo-whatsapp-icon-2050.png" />
+                  <a href="tel:+917827852332">78278-52332</a></h3>
               </div>
             </div>
           </div>

@@ -11,6 +11,8 @@
           (input)="onPhoneChange(phoneInput.value)"
           [placeholder]="placeholder" 
           [value]="value ? value : ''"
+          (blur)="sendBlur(value)"
+          [style.text-transform]="uppercase? 'uppercase': 'none'"
           aria-describedby="basic-addon3">
       </div>
   </div>

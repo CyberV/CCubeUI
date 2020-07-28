@@ -1,0 +1,19 @@
+[
+    {
+        "title": "Massive water saving",
+        "points": [
+            "With our specially formulated solution we just use 500 mL of water to clean a mid size car (hatchback).",
+            "Saving atleast 20 liters of water with each wash"
+        ],
+        "solution": "Calculating it weekly CCUBE saved 40 liters of water and if annually 2080 liters of water is saved per car.",
+        "icon": "water"
+    },
+     {
+        "title": "Helping the unorganized sector",
+        "points": [
+            "We at CCUBE want to help those who need it most."
+        ],
+        "solution": "We will be providing our employees with benefits like EPF and Mediclaim, so even the unorganized sector too could have a safe future and can experience better medical facilities.",
+        "icon": "doorstep"
+    }
+]

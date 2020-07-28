@@ -1,22 +1,20 @@
-<div *ngIf="page=='home'">
-  <heading text="Sign In / Sign Up"></heading>
+<div *ngIf="page=='home'" class="animate__animated">
 
-  <text-input></text-input>
+  <heading text="Sign Up"></heading>
 
-  <subheading size="16" text="Sign up or Sign in to access your orders, best deal, offers, Health tips and more!">
+  <subheading size="16" text="Sign up now to experience the revolutionary Complete Car Care Experience">
   </subheading>
 
-  {{customerMobile}}
-  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="customerMobile"></mobile-input>
+  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="newUser.mobile"></mobile-input>
 
-  <cta text="Use Password / OTP" [loading]="loading" (click)="beginAuth()">
+  <cta text="Send OTP" [loading]="loading" (action)="beginAuth()">
   </cta>
 
   <!-- <subheading text="OR" align="center"></subheading>
     
     <cta text="Log In" outline="true"></cta> -->
 
-  <div class="ion-text-center social-login">
+  <!-- <div class="ion-text-center social-login">
     <ion-button class="login-fb" fill="outline" (click)="loginFacebook()">
       <ion-icon slot="start" name="logo-facebook"></ion-icon>
       facebook
@@ -25,25 +23,59 @@
       <ion-icon slot="start" name="logo-google"></ion-icon>
       google
     </ion-button>
-  </div>
+  </div> -->
 </div>
 
 <div *ngIf="page=='signup'" class="animate__animated animate__fadeInLeft">
-  <heading text="Create Account"></heading>
+  <heading text="Your Personal Details"></heading>
 
+  <mobile-input type="text" name="Full Name" [(value)]="newUser.name" ></mobile-input>
   <mobile-input type="email" name="Email Id" [(value)]="newUser.email" ></mobile-input>
-  <mobile-input type="text" name="First Name" [(value)]="newUser.fname" ></mobile-input>
-  <mobile-input type="text" name="Last Name" [(value)]="newUser.lname" ></mobile-input>
   <mobile-input type="password" name="Password" [(value)]="newUser.password" ></mobile-input>
   <mobile-input type="password" name="Confirm Password" [(value)]="newUser.confirmPassword" ></mobile-input>
 
 
   <verify-otp
-     [mobile]="customerMobile" length="6" 
+     [mobile]="newUser.mobile" length="4" 
      (otpSubmitted)="customerOtp=$event" 
      [mismatch]="otpMismatch"
      (changeNumber)="page='home'"></verify-otp> 
 
 
-  <cta text="Verify" [loading]="loading" (click)="verifyOtp(customerOtp)" ></cta>
+  <cta text="Create Account" [loading]="loading" (action)="verifyOtp(customerOtp)" ></cta>
+</div>
+
+<div></div>
+
+<div *ngIf="page=='car'" class="animate__animated animate__fadeInLeft">
+  <heading text="Your Car Details"></heading>
+
+  <ng-container *ngIf="!showCarSelector">
+    <mobile-input type="text" uppercase="true" name="Registration Number" placeholder="HR51XX1122" [(value)]="newUser.car.regNo" ></mobile-input>
+    <div class="animate__animated" [class.animate__fadeOutUp]="isTypingRegNo">
+        <heading  text="OR" align="center"></heading>
+  
+        <cta *ngIf="!isTypingRegNo" text="Select your car" (action)="showCarSelector = true;"></cta>
+    
+    </div>
+
+    <cta *ngIf="isRegNoValid && !findingCar" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
+    <car-display *ngIf="findingCar" [carNo]="newUser.car.regNo" (letsgo)="goToPlans($event)"></car-display>
+  
+  </ng-container>
+  
+  <select-car *ngIf="showCarSelector" (letsgo)="goToPlans($event)"></select-car>
+
+  <!-- <typeahead type="text" name="Car Maker" [(value)]="newUser.car.maker"></typeahead>
+
+  <mobile-input type="text" name="Car Model" [(value)]="newUser.car.model"></mobile-input> -->
+
+  <!-- <ng-container *ngIf="isCarReady">
+    
+
+      <cta text="Choose Your Plan" [loading]="loading" (action)="goToPlans()" ></cta>
+
+  </ng-container> -->
+  
+  
 </div>

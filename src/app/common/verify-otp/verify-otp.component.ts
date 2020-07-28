@@ -38,12 +38,14 @@ export class VerifyOtpComponent implements OnInit {
     let indx = +(e.target.className.split(' ')[0].split('-')[1]) + 1;
     this.otp[indx-1] = e.target.value;
     if (indx === +this.length) {
-      let otp = this.otp.toString().replace(/,/g, "");
-      this.otpSubmitted.emit(otp);
+      
     } else {
       let emt = document.getElementsByClassName('otp-' + indx)[0];
       ( emt as HTMLElement).click();
     }
+
+    let otp = this.otp.toString().replace(/,/g, "");
+    this.otpSubmitted.emit(otp);
 
   }
 

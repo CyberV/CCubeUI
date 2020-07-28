@@ -1,0 +1,14 @@
+@import "src/variables.scss";
+
+.container-fluid {
+    margin-bottom: 2em;
+
+    .add-symbol {
+        font-weight: bold;
+        font-size: 90px;
+        color: $secondary-color;
+        left: -30px;
+        top: -18px;
+        position: relative;
+    }
+}

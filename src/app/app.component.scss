@@ -1,4 +1,19 @@
+@import 'src/variables.scss';
+
 ion-app {
-    background: #00a4a7;
+    background: $primary-color;
     color: white;
+}
+
+ion-router-outlet {
+    
+    margin-top: 0;
+
+    &.push-down {
+        margin-top: 60px;
+    }
+
+    @media screen and (max-width: 768px){
+        margin-top: 0;
+    }
 }

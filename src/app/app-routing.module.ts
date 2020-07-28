@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'signup',
     loadChildren: () => import ('./login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'leads',
+    loadChildren: () => import ('./leads/leads.module').then(m => m.LeadsModule)
   },
   {
     path: 'pages',
@@ -14,6 +19,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'plans',
+  component: PlanComparisonComponent
   },
   {
     path: '',

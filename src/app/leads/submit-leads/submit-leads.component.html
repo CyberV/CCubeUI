@@ -1,0 +1,33 @@
+<form class="container" (ngSubmit)="submit('as')">
+  <div class="row">
+    <div class="col-12">
+        <heading text="Submit New Leads"></heading>
+    </div>
+    
+  </div>
+  <div *ngFor="let lead of leads; let i = index" class="row">
+    <div class="col-md-1 col-xs-12">
+        <span>{{i+1}}</span>
+    </div>
+    <div class="col-md-3 col-xs-12 form-group">
+      
+      <input type="text" name="name" class="form-control" placeholder="Full Name" required [(ngModel)]="lead.name">
+    </div>
+    <div class="col-md-4 col-xs-12 form-group">
+      <input type="text" name="phone" class="form-control" placeholder="Phone Number" [(ngModel)]="lead.phone">
+    </div>
+    <div class="col-md-4 col-xs-12 form-group">
+      <input type="text" name="remarks" class="form-control" placeholder="Remarks" [(ngModel)]="lead.remarks">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <button type="button" class="btn btn-secondary" (click)="addEmptyLeads()">Add 5 rows</button>
+    </div>
+    <div class="col-6">
+      <button type="submit" class="btn btn-submit btn-primary float-right">Submit</button>
+    </div>
+  </div>
+</form>
+
+{{leads[0].name}}

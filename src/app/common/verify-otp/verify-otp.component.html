@@ -10,7 +10,11 @@
     type="number" maxlength="1"
     (click)="onClick($event)"
     (keyup)="onChange($event)"
+    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    maxlength="1"
     >
+
+    
 </div>
 
 <p *ngIf="mismatch"> OTP does not match. Try Again!</p>

@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { CommonComponentsModule } from '../common/common.module';
 import { VitalSliderComponent } from './vital-slider/vital-slider.component';
+import { MnFullpageModule } from 'ngx-fullpage';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { VitalSliderComponent } from './vital-slider/vital-slider.component';
     FormsModule,
     ExploreContainerComponentModule,
     CommonComponentsModule,
-    RouterModule.forChild([{ path: '', component: HomePage }])
+    RouterModule.forChild([{ path: '', component: HomePage }]),
+    MnFullpageModule.forRoot()
   ],
   declarations: [HomePage, VitalSliderComponent]
 })

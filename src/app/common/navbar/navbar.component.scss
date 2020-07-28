@@ -1,18 +1,52 @@
 $border-radius: 25px;
 
-$primary-color: #39cfb2;
-$secondary-color: #22d0f3;
+$primary-color: #00a4a7;
+$secondary-color: #ec6b1e;
 
 .navbar {
     background: $primary-color;
     height: 60px;
     width: 100%;
     color: white;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+
 
     .app-logo {
-        width: 150px;
-        min-width: 150px;
+        width: 108px;
+        min-width: 108px;
+        margin-top: -6px;
     }
+
+    .nav-actions {
+        a {
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            line-height: 3em;
+
+        }
+    }
+
+    .contact{
+    font-size: 18px;
+    margin: 0;
+    float: right;
+
+    a {
+    color: white;
+    line-height: 2em;
+    }
+
+
+
+    .whatsapp {
+        height: 50px;
+        width: 50px;
+    }
+}
 
     .search-box {
         input {
