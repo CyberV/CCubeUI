@@ -33,14 +33,13 @@ export class SelectCarComponent implements OnInit {
   }
 
   get filteredModels() {
+    let  mkr = this.selected.maker;
     if (this.model.length) {
-      let mkr = this.selected.maker;
-
       return mkr.cars.filter( (car) => {
         return  car.model.toLowerCase().indexOf(this.model.toLowerCase()) > -1
       })
     } else  {
-      return [];
+      return mkr.cars;
     }
   }
 

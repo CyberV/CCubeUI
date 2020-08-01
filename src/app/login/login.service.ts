@@ -13,6 +13,8 @@ import { Observable, throwError } from 'rxjs';
 //import {md5} from 'crypto-js/md5';
 
 import { MD5 } from 'crypto-js';
+import { UserService } from 'app/services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
 //var CryptoJS = require("crypto-js");
 
 //import * as CryptoJS from 'crypto-js';
@@ -25,58 +27,83 @@ import { MD5 } from 'crypto-js';
 })
 export class LoginService {
     
-    //private url: string = 'https://ccubetest.azurewebsites.net/api/';
-    private url: string = 'http://localhost:4000/api/';
+    private url: string = 'https://ccubetest.azurewebsites.net/api/';
+    //private url: string = 'http://localhost:4000/api/';
     private carUrl :string = 'https://autom8.herokuapp.com/carDetails/';
     
-    constructor(private http: HttpClient) { }
+    constructor(
+      private http: HttpClient, 
+      private srvcUser: UserService,
+      private router:Router,
+      private activatedRoute: ActivatedRoute
+      ) { }
 
-    sendOtp(mobile:string, email:string=null) {
+
+    sendOtp(phone:string, email:string=null) {
       let payload = {
-        mobile,
+        phone,
       };
 
       if (email) {
         payload['email']=email;
       }
-      return this.http.get(this.url + 'otp/send/' + mobile).pipe(
+      return this.http.post(this.url + 'otp/send/', payload).pipe(
         catchError(this.handleError)
       );
     }
 
-    resendOtp(mobile:string) {
+    resendOtp(phone:string) {
       let payload = {
-        mobile
+        phone
       };
-      return this.http.get(this.url + 'otp/resend/' + mobile).pipe(
+      return this.http.post(this.url + 'otp/resend/', payload).pipe(
       catchError(this.handleError));
     }
 
-    verifyOtp(mobile, otp) {
+    verifyOtp(phone, otp) {
       let payload = {
-        mobile,
+        phone,
         otp
       };
-      return this.http.get(this.url + 'otp/verify/' + mobile + "/" + otp).pipe(
+      return this.http.post(this.url + 'otp/verify/', payload).pipe(
       catchError(this.handleError));
     }
 
-    createUser(mobile, name, password, email) {
+    createUser(phone, name, password, email) {
 
       let payload = {
-        phone: mobile,
+        phone: phone,
         name: name,
-        password:  MD5(password).toString(),
+        password:  password,
         email,
         city: "faridabad"
         };
 
-        console.log(payload);
 
         return this.http.post(this.url + 'user/create', payload).pipe (
           catchError(this.handleError)
         );
 
+    }
+
+    logout() {
+      this.srvcUser.setCurrentUser(null);
+      this.srvcUser.setUserToken(null);
+      this.router.navigate(['/home']);
+    }
+
+    login(phone, password) {
+
+      
+      let payload = {
+        phone: phone,
+        password: password
+        };
+
+
+        return this.http.post(this.url + 'login', payload).pipe (
+          catchError(this.handleError)
+        );
     }
     
     handleError(error: any) {

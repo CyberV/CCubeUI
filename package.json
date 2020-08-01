@@ -32,6 +32,7 @@
     "crypto-js": "^4.0.0",
     "ng2-charts": "^2.3.2",
     "ng2-tooltip-directive": "^2.9.20",
+    "ngx-cookie-service": "^10.0.1",
     "ngx-fullpage": "^5.1.0",
     "ngx-typeahead": "^9.1.0",
     "razorpay": "^2.0.6",

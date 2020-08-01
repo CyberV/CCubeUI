@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  showLogin:boolean;
 
-  ngOnInit() {}
+  constructor(
+    private activatedRoute: ActivatedRoute
+  ) { 
+
+    this.showLogin = false;
+  }
+
+  ionViewWillEnter() {
+   
+  }
+
+  ngOnInit() {
+
+    console.log('url', this.activatedRoute.url, 'onject ', this.activatedRoute);
+    this.showLogin = this.activatedRoute.snapshot.routeConfig.path === 'login';
+  }
 
 }

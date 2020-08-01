@@ -1,0 +1,17 @@
+<div>
+  <heading text="Sign In"></heading>
+
+<subheading size="16" text="Sign In to the revolutionary Complete Car Care Experience">
+</subheading>
+
+<mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="user.mobile"></mobile-input>
+
+<mobile-input name="Password" type="password" placeholder="" [(value)]="user.password"></mobile-input>
+
+<cta text="Log In" [loading]="loading" [disabled]="!isPhoneValid" (action)="tryLogin()"></cta>
+<subheading *ngIf="showError" [text]="errorMsg" color="red"></subheading>
+<heading  text="Forgot Password ?" (click)="sendOTP()" align="right"></heading>
+
+<!-- <cta [disabled]="!isPhoneValid" [loading]="loading" text="Use OTP" (action)="sendOTP()"></cta> -->
+
+</div>

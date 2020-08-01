@@ -4,7 +4,8 @@ import { Platform } from '@ionic/angular';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-const {GoogleAuth} = Plugins;
+import { ActivatedRoute } from '@angular/router';
+const { GoogleAuth } = Plugins;
 
 
 @Component({
@@ -13,78 +14,82 @@ const {GoogleAuth} = Plugins;
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  public user:any;
-  public isLoggedIn:boolean;
+  public user: any;
+  public isLoggedIn: boolean;
+
 
   get isMobile() {
     return !this.platform.is('desktop');
   }
 
 
-  constructor(private socialAuthService:AuthService,public platform:Platform) {
-    if(this.platform.is('android') || this.platform.is('ios')){
+  constructor(private socialAuthService: AuthService, public platform: Platform, private activatedRoute: ActivatedRoute) {
+    if (this.platform.is('android') || this.platform.is('ios')) {
       GoogleAuth.addListener('userChange', (googleUser: any) => {
         console.log('userChange:', googleUser);
       });
     }
-    else{
-    this.socialAuthService.authState.subscribe((user)=>{
-      console.log('user',user);
-      if(user!=null){
-        this.user=user;
-        this.isLoggedIn=true;
-      }
-      else{
-        this.isLoggedIn=false;
-      }
-    });
+    else {
+      this.socialAuthService.authState.subscribe((user) => {
+        console.log('user', user);
+        if (user != null) {
+          this.user = user;
+          this.isLoggedIn = true;
+        }
+        else {
+          this.isLoggedIn = false;
+        }
+      });
+    }
   }
-   }
 
   ngOnInit() {
+   
+    //console.log('ads', this.activatedRoute.snapshot.url[0].path);
   }
-  async loginGoogle(){
-    console.log('signing in with google');
-    if(this.platform.is('desktop')||this.platform.is('mobileweb')){
-    let socialPlatformProvider: string;
-    socialPlatformProvider=GoogleLoginProvider.PROVIDER_ID;
-    this.socialAuthService.signIn(socialPlatformProvider).then((userData)=>{
-      console.log('userInfo',userData);
 
-    }).catch((error)=>{
-      console.log('error',error);
-    });
-  }
-  else if(this.platform.is('android')|| this.platform.is('ios')){
-    const googleUser = await GoogleAuth.signIn();
-    console.log('signIn:', googleUser);
-    this.user=googleUser;
-  }
+  async loginGoogle() {
+    console.log('signing in with google');
+    if (this.platform.is('desktop') || this.platform.is('mobileweb')) {
+      let socialPlatformProvider: string;
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+      this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
+        console.log('userInfo', userData);
+
+      }).catch((error) => {
+        console.log('error', error);
+      });
+    }
+    else if (this.platform.is('android') || this.platform.is('ios')) {
+      const googleUser = await GoogleAuth.signIn();
+      console.log('signIn:', googleUser);
+      this.user = googleUser;
+    }
 
   }
   async refreshToken() {
     const response = await GoogleAuth.refresh();
     console.log('refresh:', response);
   }
-  async loginFacebook(){
+  async loginFacebook() {
     console.log('signing in with facebook');
     let socialPlatformProvider: string;
-    socialPlatformProvider=FacebookLoginProvider.PROVIDER_ID;
-    this.socialAuthService.signIn(socialPlatformProvider).then((userData)=>{
-      console.log('userInfo',userData);
+    socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    this.socialAuthService.signIn(socialPlatformProvider).then((userData) => {
+      console.log('userInfo', userData);
 
-    }).catch((error)=>{
-      console.log('erro',error);
+    }).catch((error) => {
+      console.log('erro', error);
     });
 
 
   }
-  async logout(){
-    if(this.platform.is('desktop')){
-    this.socialAuthService.signOut();
+  async logout() {
+    if (this.platform.is('desktop')) {
+      this.socialAuthService.signOut();
     }
-    else{
-    await GoogleAuth.signOut();
+    else {
+      await GoogleAuth.signOut();
     }
 
   }

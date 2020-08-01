@@ -7,7 +7,7 @@
 
   <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="newUser.mobile"></mobile-input>
 
-  <cta text="Send OTP" [loading]="loading" (action)="beginAuth()">
+  <cta text="Send OTP" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
   </cta>
 
   <!-- <subheading text="OR" align="center"></subheading>

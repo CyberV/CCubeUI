@@ -28,6 +28,27 @@ $secondary-color: #ec6b1e;
             line-height: 3em;
 
         }
+
+        .btn-group {
+            text-align: right;
+
+            .btn-user {
+                border: none;
+            
+                top: -5px;
+                right: 15px;
+                position: relative;
+                padding-top: 0;
+                padding-bottom: 10px;
+                
+                .icon-user {
+                    position: relative;
+                    top: 10px;
+                    font-size: 200%;
+                }
+            }
+
+        }
     }
 
     .contact{

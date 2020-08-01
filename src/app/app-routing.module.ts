@@ -25,6 +25,10 @@ const routes: Routes = [
   component: PlanComparisonComponent
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
