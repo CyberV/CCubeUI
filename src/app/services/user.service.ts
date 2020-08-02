@@ -19,8 +19,6 @@ const api_secret = "caFrU097wpTYMi0xQgcCfonJ"
 })
 export class UserService {
 
-
-
   private _userSubject = new Subject();
 
   private _currentUser;
