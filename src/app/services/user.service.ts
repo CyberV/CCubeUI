@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
 import { map, catchError } from 'rxjs/operators';
 
-import { Observable, throwError } from 'rxjs';
+import { Subject, Observable, throwError } from 'rxjs';
 
 import { hash } from 'app/services/crypto.service';
 import { WindowRefService } from 'app/window-ref.service';
@@ -20,7 +19,10 @@ const api_secret = "caFrU097wpTYMi0xQgcCfonJ"
 })
 export class UserService {
 
-  private url: string = 'http://localhost:4000/api/checkout';
+
+
+  private _userSubject = new Subject();
+
   private _currentUser;
 
   constructor(
@@ -29,17 +31,55 @@ export class UserService {
 
       this._currentUser = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')): null; 
 
+      if (this._currentUser) {
+        this.setCurrentUser(this._currentUser);
+      }
+
+  }
+
+  
+  checkUserLogin() {
+      
+  }
+
+  isLoggedIn() {
+    return !!this._currentUser;
   }
 
   getCurrentUser() {
     return this._currentUser;
   }
 
+  listner() {
+    return this._userSubject;
+  }
+
+  setUserToken(token) {
+    localStorage.setItem('userToken', token);
+  }
+
   setCurrentUser(user: IUser) {
     console.log('user', user);
-    this._currentUser = user;
-    localStorage.setItem('currentUser', JSON.stringify(user));
 
+    this._currentUser = user;
+
+    let evt = {
+      event: '',
+      user: user
+    }
+
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      evt.event = 'LOGGED_IN';
+
+    } else {
+      localStorage.setItem('currentUser', null);
+      evt.event = 'LOGGED_OUT';
+    }
+
+    // Send Log In/Out Notification
+    this._userSubject.next(evt);
+  
   }
 
   promisify = async function promisify(leadData) {
@@ -49,64 +89,64 @@ export class UserService {
   }
 
 
-  createOrder(amount: number) {
+  // createOrder(amount: number) {
 
-    let payload = {
-      amount: amount
-    };
+  //   let payload = {
+  //     amount: amount
+  //   };
 
-    console.log(payload);
+  //   console.log(payload);
 
-    return this.http.post(this.url, payload).pipe(
-      catchError(this.handleError)
-    );
-  }
+  //   return this.http.post(this.url, payload).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
 
-  tryPayment(orderId, amount) {
-    var options = {
-      "key": api_key, // Enter the Key ID generated from the Dashboard
-      "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-      "currency": "INR",
-      "name": "CCube",
-      "description": "Test Transaction",
-      "image": "https://example.com/your_logo",
-      "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "handler": (response, error) => {
-        if (error) {
-          console.log('error in payment', error);
-          return;
-        }
+  // tryPayment(orderId, amount) {
+  //   var options = {
+  //     "key": api_key, // Enter the Key ID generated from the Dashboard
+  //     "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  //     "currency": "INR",
+  //     "name": "CCube",
+  //     "description": "Test Transaction",
+  //     "image": "https://example.com/your_logo",
+  //     "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  //     "handler": (response, error) => {
+  //       if (error) {
+  //         console.log('error in payment', error);
+  //         return;
+  //       }
          
-        console.log('Payment Success', response)
+  //       console.log('Payment Success', response)
 
-        let verified = this.verifyOrder(orderId,response.razorpay_payment_id, response.razorpay_signature);
+  //       let verified = this.verifyOrder(orderId,response.razorpay_payment_id, response.razorpay_signature);
 
-        console.log('Payment verified', verified);
-        // alert(response.razorpay_payment_id);
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature)
-      },
-      "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9999999999"
-      },
-      "notes": {
-        "address": "Razorpay Corporate Office"
-      },
-      "theme": {
-        "color": "#00a5a8"
-      }
-    };
-    var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
-    rzp1.open();
-  }
+  //       console.log('Payment verified', verified);
+  //       // alert(response.razorpay_payment_id);
+  //       // alert(response.razorpay_order_id);
+  //       // alert(response.razorpay_signature)
+  //     },
+  //     "prefill": {
+  //       "name": "Gaurav Kumar",
+  //       "email": "gaurav.kumar@example.com",
+  //       "contact": "9999999999"
+  //     },
+  //     "notes": {
+  //       "address": "Razorpay Corporate Office"
+  //     },
+  //     "theme": {
+  //       "color": "#00a5a8"
+  //     }
+  //   };
+  //   var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
+  //   rzp1.open();
+  // }
 
-  verifyOrder(orderId, paymentId, signature) {
+  // verifyOrder(orderId, paymentId, signature) {
 
-    return hash(orderId + "|" + paymentId, api_secret) == signature;
+  //   return hash(orderId + "|" + paymentId, api_secret) == signature;
 
-  }
+  // }
 
   // sendOtp(mobile:string, email:string=null) {
   //   let payload = {

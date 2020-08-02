@@ -1,0 +1,43 @@
+<!-- 
+ <ion-content>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <h1>Slide 1</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content> -->
+
+<div class="container">
+    <div  *ngIf="isCarSelected && currentCar" class="alert alert-primary" role="alert">
+        <strong>{{currentCar.maker}}</strong>  |  <strong>{{currentCar.model}}</strong> | <strong>{{currentCar.fuelType}}</strong>  <span class="alert-link float-right" (click)="resetCar()">Change Car</span>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6 col-xs-12" *ngIf="!isCarSelected">
+          <img class="logo animate__animated animate__flipInX" src="./assets/car-care.PNG" alt="CCubeLogo" border="0" />
+      </div>
+      <div class="col-md-6 col-xs-12" [class.col-md-12]="isCarSelected">
+
+        <ng-container *ngIf="!isCarSelected">
+            <heading text="Welcome to CCube."></heading>
+
+            <heading text="Let's get to know your Car!"></heading>
+    
+            <car-form (carReady)="showPlans($event)"></car-form>
+        </ng-container>
+
+        <ng-container *ngIf="isCarSelected">
+
+           
+            <plan-table [bodyType]="currentCar.bodyType" (buyPlan)="buyPlan($event)" ></plan-table>
+          </ng-container>
+       
+      </div>
+    </div>
+  </div>

@@ -14,19 +14,24 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 
+    @media screen and (max-width:768px){
+        min-height: 100px;
+        .card-img-top {
+            margin: 15px;
+        }
+    }
+
     .card-body {
         padding: 10px;
         text-align: center;
+        font-size: 80%;
     }
 
-    // .card-img-top {
-    //     height: 100px;
-    //     width: 150px;
-    // }
+    .card-img-top {
+            min-height: 50px;
+    }
 
     &:hover {
-        width: 102%;
-        left: -2%;
         .card-body {
             font-weight: bold;
         }

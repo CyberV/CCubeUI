@@ -10,6 +10,7 @@ import { LoginPage } from './login.page';
 import { LoginComponent } from './login/login.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { CommonComponentsModule } from '../common/common.module';
+import { SigninFormComponent } from './signin-form/signin-form.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { CommonComponentsModule } from '../common/common.module';
   declarations: [
     LoginPage,
     LoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    SigninFormComponent
   ]
 })
 export class LoginModule {}

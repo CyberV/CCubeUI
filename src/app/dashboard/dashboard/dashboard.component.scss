@@ -1,0 +1,12 @@
+@import 'src/variables.scss';
+
+.container {
+    background: $bg-white;
+    border-radius: 25px;
+    padding: 25px;
+    margin-top: 2em;
+}
+
+ion-slides {
+    height: 100%;
+  }

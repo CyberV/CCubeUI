@@ -5,8 +5,9 @@ import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-logi
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 import { LoginService } from '../login.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'app/services/user.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 const { GoogleAuth } = Plugins;
 
 @Component({
@@ -41,6 +42,10 @@ export class LoginFormComponent implements OnInit {
     return this.newUser.car.regNo && this.newUser.car.regNo.length > 2;
   }
 
+  get isPhoneValid() {
+    return this.newUser.mobile && (this.newUser.mobile.length>=9);
+  }
+
   get isRegNoValid() {
     let valid = false;
     let reg = this.newUser.car.regNo;
@@ -67,11 +72,12 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private socialAuthService: AuthService,
     public platform: Platform,
+    private activatedRoute: ActivatedRoute,
     private srvcLogin: LoginService,
     private srvcUser: UserService,
     private router: Router) {
 
-    this.page = 'car';
+    this.page = 'home';
     this.otpMismatch = false;
     this.showCarSelector = false;
     this.isCarReady = false;
@@ -200,10 +206,12 @@ export class LoginFormComponent implements OnInit {
               .subscribe( (res:any) => {
                 if (res.success) {
 
-                  alert('Account Created');
+                  alert('Account Created Successfully');
 
                   this.srvcUser.setCurrentUser(res.data);
 
+                  //this.router.navigate(['/root/dashboard']);
+                  this.router.navigate(['../dashboard'], {relativeTo: this.activatedRoute});
                   this.page = 'car';
                   
 
