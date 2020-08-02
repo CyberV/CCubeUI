@@ -16,6 +16,9 @@ import { HomeComponent } from './home/home.component';
 import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { MonthlySavingsComponent } from './monthly-savings/monthly-savings.component';
+import { RegisterUserComponent } from './pages/initial-screens/register-user/register-user.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -34,15 +37,25 @@ export function socialConfigs() {
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent ],
-  entryComponents: [HomeComponent],
-  imports: [BrowserModule, CommonComponentsModule, IonicModule, IonicModule.forRoot(), AppRoutingModule, SocialLoginModule, HttpClientModule, TooltipModule],
+  declarations: [AppComponent, RegisterUserComponent, HeaderComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent],
+  entryComponents: [RegisterUserComponent],
+  imports: [BrowserModule,
+    CommonComponentsModule,
+    IonicModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    SocialLoginModule,
+    HttpClientModule,
+    TooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: AuthServiceConfig, useFactory: socialConfigs },
     // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent,HomeComponent, PlanComparisonComponent, MonthlySavingsComponent]
+  bootstrap: [AppComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent]
 })
 export class AppModule { }
