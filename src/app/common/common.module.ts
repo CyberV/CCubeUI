@@ -29,6 +29,10 @@ import { TypeaheadComponent } from './typeahead/typeahead.component';
 import { SelectCarComponent } from './select-car/select-car.component';
 import { CarDisplayComponent } from './car-display/car-display.component';
 import { PlanTableComponent } from './plan-table/plan-table.component';
+import { MobileNavComponent } from './mobile-nav/mobile-nav.component';
+import { PlanCardComponent } from './plan-card/plan-card.component';
+import { PlanDetailsComponent } from './plan-details/plan-details.component';
+import { PlanSliderComponent } from './plan-slider/plan-slider.component';
 
 
 @NgModule({
@@ -56,7 +60,11 @@ import { PlanTableComponent } from './plan-table/plan-table.component';
     TypeaheadComponent,
     SelectCarComponent,
     CarDisplayComponent,
-    PlanTableComponent
+    PlanTableComponent,
+    MobileNavComponent,
+    PlanCardComponent,
+    PlanDetailsComponent,
+    PlanSliderComponent
 
   ],
   imports: [
@@ -90,7 +98,11 @@ import { PlanTableComponent } from './plan-table/plan-table.component';
     TypeaheadComponent,
     SelectCarComponent,
     CarDisplayComponent,
-    PlanTableComponent
+    PlanTableComponent,
+    MobileNavComponent,
+    PlanCardComponent,
+    PlanDetailsComponent,
+    PlanSliderComponent
   ]
 })
 export class CommonComponentsModule { }

@@ -34,9 +34,23 @@ export function socialConfigs() {
 }
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent ],
+  declarations: [
+    AppComponent, 
+    HomeComponent, 
+    PlanComparisonComponent, 
+    MonthlySavingsComponent 
+  ],
   entryComponents: [HomeComponent],
-  imports: [BrowserModule, CommonComponentsModule, IonicModule, IonicModule.forRoot(), AppRoutingModule, SocialLoginModule, HttpClientModule, TooltipModule],
+  imports: [
+    BrowserModule, 
+    CommonComponentsModule, 
+    IonicModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    SocialLoginModule, 
+    HttpClientModule, 
+    TooltipModule
+  ],
   providers: [
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -12,6 +12,9 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { CommonComponentsModule } from '../common/common.module';
 import { SigninFormComponent } from './signin-form/signin-form.component';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -25,6 +28,10 @@ import { SigninFormComponent } from './signin-form/signin-form.component';
     LoginComponent,
     LoginFormComponent,
     SigninFormComponent
+  ],
+  providers: [
+    Geolocation,
+    NativeGeocoder
   ]
 })
 export class LoginModule {}

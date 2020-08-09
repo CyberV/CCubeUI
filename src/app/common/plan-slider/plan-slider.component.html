@@ -1,0 +1,7 @@
+<ion-content>
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let plan of plans">
+        <plan-card [plan]="plan"></plan-card>
+      </ion-slide>
+    </ion-slides>
+  </ion-content>

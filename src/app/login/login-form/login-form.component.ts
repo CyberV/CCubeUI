@@ -10,6 +10,10 @@ import { UserService } from 'app/services/user.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 const { GoogleAuth } = Plugins;
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -69,12 +73,20 @@ export class LoginFormComponent implements OnInit {
     return valid;
   }
 
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
+
   constructor(
     private socialAuthService: AuthService,
     public platform: Platform,
     private activatedRoute: ActivatedRoute,
     private srvcLogin: LoginService,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder,
     private srvcUser: UserService,
+
     private router: Router) {
 
     this.page = 'home';
@@ -115,6 +127,45 @@ export class LoginFormComponent implements OnInit {
   ngOnInit() {
     this.isCarReady = false;
 
+    this.geolocation.getCurrentPosition().then((resp) => {
+
+
+      console.log(resp.coords.latitude, resp.coords.longitude, resp.coords.accuracy);
+
+      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
+
+    }).catch((error) => {
+      alert('Error getting location' + JSON.stringify(error));
+    });
+
+
+
+  }
+
+  //geocoder method to fetch address from coordinates passed as arguments
+  getGeoencoder(latitude, longitude) {
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+      .then((result: NativeGeocoderResult[]) => {
+        console.log(this.generateAddress(result[0]));
+      })
+      .catch((error: any) => {
+        alert('Error getting location' + JSON.stringify(error));
+      });
+  }
+
+  //Return Comma saperated address
+  generateAddress(addressObj) {
+    let obj = [];
+    let address = "";
+    for (let key in addressObj) {
+      obj.push(addressObj[key]);
+    }
+    obj.reverse();
+    for (let val in obj) {
+      if (obj[val].length)
+        address += obj[val] + ', ';
+    }
+    return address.slice(0, -2);
   }
 
   goToPlans(carDetails) {
