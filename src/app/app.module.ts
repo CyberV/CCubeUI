@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { MonthlySavingsComponent } from './monthly-savings/monthly-savings.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -52,6 +53,7 @@ export function socialConfigs() {
     TooltipModule
   ],
   providers: [
+    InAppBrowser,
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: AuthServiceConfig, useFactory: socialConfigs },

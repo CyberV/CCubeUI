@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { Platform } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
@@ -11,7 +12,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor(private platform:Platform, private route: ActivatedRoute) {
+  constructor(private platform:Platform, private route: ActivatedRoute,
+    private iab: InAppBrowser
+    ) {
     this.initializeApp();
     this.route.outlet
 
@@ -36,6 +39,19 @@ export class AppComponent {
         
         https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
     */
-    SplashScreen.hide();
+    // SplashScreen.hide();
+
+
+    //const browser = this.iab.create('https://ccubeco.com/');
+    window.open('https://www.ccubeco.com/signup', '_self');
+
+    // const browser = this.iab.create('https://ccubeco.com/signup','_self',{location:'no',hidden : 'no'});//3
+    // SplashScreen.hide();
+
+    //     browser.on('loadstop').subscribe((e)=>{ // 4
+            
+    //         browser.show();
+    //     });
+
   }
 }

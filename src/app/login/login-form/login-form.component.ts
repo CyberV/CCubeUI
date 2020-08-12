@@ -11,7 +11,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 const { GoogleAuth } = Plugins;
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+//import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 
 
 @Component({
@@ -73,10 +73,10 @@ export class LoginFormComponent implements OnInit {
     return valid;
   }
 
-  geoencoderOptions: NativeGeocoderOptions = {
-    useLocale: true,
-    maxResults: 5
-  };
+  // geoencoderOptions: NativeGeocoderOptions = {
+  //   useLocale: true,
+  //   maxResults: 5
+  // };
 
   constructor(
     private socialAuthService: AuthService,
@@ -84,7 +84,7 @@ export class LoginFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private srvcLogin: LoginService,
     private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder,
+    //private nativeGeocoder: NativeGeocoder,
     private srvcUser: UserService,
 
     private router: Router) {
@@ -144,13 +144,13 @@ export class LoginFormComponent implements OnInit {
 
   //geocoder method to fetch address from coordinates passed as arguments
   getGeoencoder(latitude, longitude) {
-    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
-      .then((result: NativeGeocoderResult[]) => {
-        console.log(this.generateAddress(result[0]));
-      })
-      .catch((error: any) => {
-        alert('Error getting location' + JSON.stringify(error));
-      });
+    // this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+    //   .then((result: NativeGeocoderResult[]) => {
+    //     console.log(this.generateAddress(result[0]));
+    //   })
+    //   .catch((error: any) => {
+    //     alert('Error getting location' + JSON.stringify(error));
+    //   });
   }
 
   //Return Comma saperated address
