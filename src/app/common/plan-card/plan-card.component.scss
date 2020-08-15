@@ -1,0 +1,39 @@
+@import 'src/variables.scss';
+
+.card {
+    .card-img-top {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .card-title {
+        color: $secondary-color;
+        font-size: 24px;
+    }
+
+    .price {
+        color: $primary-color;
+        font-size: 22px;
+
+        .rs {
+            color: $secondary-color;
+        }
+    }
+
+    .feature-list {
+        text-align: left;
+        font-size: 20px;
+
+        .frequency {
+            color: gray;
+            position: relative;
+            font-size: 11px;
+            top: -14px;
+
+        }
+    }
+
+    .gray {
+        color: gray;
+    }
+}

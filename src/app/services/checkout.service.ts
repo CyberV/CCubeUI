@@ -20,7 +20,8 @@ const api_secret = "caFrU097wpTYMi0xQgcCfonJ"
 export class CheckoutService {
 
   //private url: string = 'http://localhost:4000/api/checkout';
-  private url: string = 'https://ccubetest.azurewebsites.net/api/checkout';
+  private domain: string = 'api-ccube.herokuapp.com';
+  private url: string ='https://' + this.domain + '/api/checkout';
 
   constructor(
     private http: HttpClient,

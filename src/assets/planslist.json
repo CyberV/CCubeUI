@@ -1,7 +1,7 @@
 {
   "features" : [
     {
-      "name": "Internal Disinfectation",
+      "name": "Internal Disinfection",
       "description": "Disinfectation of seats, dashboard, steering wheel, gear stick, hand break, door sides, handles and roof for the safety of your loved ones",
       "frequency": "Twice a week",
       "code": "DISINFECT_INT"

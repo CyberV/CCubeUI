@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   ) {
     this.currentCar={};
     this.isCarSelected = false;
-    this.currentPlans = plansList.plans;
+    this.currentPlans = plansList;
 
     console.log('M', M);
 
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
     }
 
     if(this.isCarSelected) {
-      await this.presentModal();
+      //await this.presentModal();
     }
   }
 

@@ -5,7 +5,12 @@
     border-radius: 25px;
     padding: 25px;
     margin-top: 2em;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 5em;
+    }
 }
+
 
 ion-slides {
     height: 100%;

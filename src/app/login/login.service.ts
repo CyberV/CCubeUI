@@ -27,7 +27,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginService {
     
-    private url: string = 'https://ccubetest.azurewebsites.net/api/';
+    private domain: string = 'api-ccube.herokuapp.com';
+    private url: string = 'https://' + this.domain + '/api/';
+    
     //private url: string = 'http://localhost:4000/api/';
     private carUrl :string = 'https://autom8.herokuapp.com/carDetails/';
     

@@ -8,19 +8,30 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PlanSliderComponent implements OnInit {
 
   @Input() plans;
+  @Input() bodyType;
+
+  planList;
 
   slideOpts:any;
 
   constructor() {
 
     this.plans = [];
+    this.planList = [];
+    this.bodyType = "sedan";
     
     this.slideOpts = {
-      initialSlide: 1,
+      initialSlide: 0,
       speed: 400
     };
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    if (this.plans) {
+      this.planList = this.plans.plans;
+    }
+
+  }
 
 }
