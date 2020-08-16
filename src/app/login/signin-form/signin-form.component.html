@@ -10,7 +10,10 @@
 
 <cta text="Log In" [loading]="loading" [disabled]="!isPhoneValid" (action)="tryLogin()"></cta>
 <subheading *ngIf="showError" [text]="errorMsg" color="red"></subheading>
-<heading  text="Forgot Password ?" (click)="sendOTP()" align="right"></heading>
+
+<heading  text="Forgot Password ?"  align="right"></heading>
+
+Not a Member? <a class="link" [routerLink]="['/signup']" >Create an Account</a>
 
 <!-- <cta [disabled]="!isPhoneValid" [loading]="loading" text="Use OTP" (action)="sendOTP()"></cta> -->
 

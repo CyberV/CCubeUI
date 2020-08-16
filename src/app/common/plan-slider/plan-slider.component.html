@@ -1,6 +1,12 @@
 
     <ion-slides [options]="slideOpts">
       <ion-slide *ngFor="let plan of planList">
-        <plan-card [plan]="plan" [features]="plans.features" [bodyType]="bodyType"></plan-card>
+        <plan-card 
+            [plan]="plan" 
+            [features]="plans.features" 
+            [bodyType]="bodyType"
+            (buyNow)="onBuy($event)"
+            (showDetails)="onShowDetails($event)"
+            ></plan-card>
       </ion-slide>
     </ion-slides>

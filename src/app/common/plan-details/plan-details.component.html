@@ -1,3 +1,27 @@
-<p>
-  plan-details works!
-</p>
+<div>
+  <h2 #pageTop>Showing Details for <span class="plan-name">{{plan.name}}</span> Plan <span class="float-right" (click)="sendChangePlan()">Change?</span></h2>
+  <heading [text]="plan.price"></heading>
+  <div class="accordion" id="accordionExample">
+    <div class="card" *ngFor="let feature of currentFeatures">
+      <div class="card-header" [id]="'heading' + feature.code">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#' + feature.code"
+            aria-expanded="true" [attr.aria-controls]="feature.code">
+            {{feature.name}}
+          </button>
+        </h2>
+      </div>
+
+      <div [id]="feature.code" class="collapse show" [attr.aria-labelledby]="'heading' + feature.code" data-parent="#accordionExample">
+        <div class="card-body">
+         {{feature.description}} <br/> <br/>
+         <span class="float-right">{{feature.frequency}}</span>
+         <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <cta text="Checkout" (action)="sendCheckout()"></cta>
+
+</div>

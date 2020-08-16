@@ -1,4 +1,4 @@
-
+@import 'src/variables.scss';
 
 .social-login {
     margin-top: 1em;
@@ -6,4 +6,9 @@
     .login-fb {
         margin-right: 1em;
     }
+}
+
+
+.link {
+    color: $primary-color;
 }

@@ -36,13 +36,13 @@
   <div class="card-body">
     <div class="row">
       <div class="col-12">
-        <cta text="See Plan Details" [outline]="true"></cta>
+        <cta text="See Plan Details" (action)="onShowDetails()" [outline]="true"></cta>
     </div>
   </div>
 
   <div class="row">
       <div class="col-12">
-        <cta text="Buy Now"></cta>
+        <cta text="Buy Now" (action)="onBuy()"></cta>
     </div>
   </div>
 </div>

@@ -8,9 +8,15 @@ import { Observable, throwError } from 'rxjs';
 
 import { hash } from 'app/services/crypto.service';
 import { WindowRefService } from 'app/window-ref.service';
+import { UserService } from './user.service';
 
-const api_key = "rzp_test_lzrrcON3EuW3nI";
-const api_secret = "caFrU097wpTYMi0xQgcCfonJ"
+// Test
+// const api_key = "rzp_test_lzrrcON3EuW3nI";
+// const api_secret = "caFrU097wpTYMi0xQgcCfonJ"
+
+// Live
+const api_key = "rzp_live_TuRL1kcjKl8uWp";
+const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
 
 
 
@@ -23,16 +29,23 @@ export class CheckoutService {
   private domain: string = 'api-ccube.herokuapp.com';
   private url: string ='https://' + this.domain + '/api/checkout';
 
+  private user:any;
+
   constructor(
     private http: HttpClient,
+    private userService: UserService,
     private winRef: WindowRefService) {
-
+      this.refreshUser();
   }
 
   promisify = async function promisify(leadData) {
     return new Promise(async (resolve, reject) => {
 
     });
+  }
+
+  private refreshUser() {
+    this.user = this.userService.getCurrentUser();
   }
 
 
@@ -50,6 +63,7 @@ export class CheckoutService {
   }
 
   tryPayment(orderId, amount) {
+    this.refreshUser();
     var options = {
       "key": api_key, // Enter the Key ID generated from the Dashboard
       "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -74,9 +88,9 @@ export class CheckoutService {
         // alert(response.razorpay_signature)
       },
       "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9999999999"
+        "name": this.user.name,
+        "email": this.user.email,
+        "contact": this.user.phone
       },
       "notes": {
         "address": "Razorpay Corporate Office"

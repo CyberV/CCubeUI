@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 
 @Component({
@@ -7,6 +7,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./car-form.component.scss'],
 })
 export class CarFormComponent implements OnInit {
+
+  @Input() verifyOnly : boolean;
 
   @Output() carReady = new EventEmitter();
 
@@ -23,6 +25,7 @@ export class CarFormComponent implements OnInit {
     this.showCarSelector = false;
     this.findingCar = false;
     this.loading = false;
+    this.verifyOnly = false;
   }
 
   
@@ -58,7 +61,10 @@ export class CarFormComponent implements OnInit {
   goToPlans(carDetails) {
 
 
-    sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+    if (!this.verifyOnly) {
+      sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+    }
+    
 
     this.carReady.emit(carDetails);
 

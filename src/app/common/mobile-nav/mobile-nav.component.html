@@ -6,15 +6,20 @@
         
       </ion-tab-button>
   
-      <ion-tab-button tab="speakers">
-        <ion-icon name="person-circle"></ion-icon>
-        <ion-label>Shop</ion-label>
+      <ion-tab-button *ngIf="isLoggedIn" tab="dashboard">
+        <ion-icon name="car"></ion-icon>
+        <ion-label>Dashboard</ion-label>
       </ion-tab-button>
 
   
-      <ion-tab-button tab="signup">
+      <ion-tab-button *ngIf="isLoggedIn" tab="signup">
           <ion-icon name="person-circle"></ion-icon>
         <ion-label>Profile</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button *ngIf="!isLoggedIn" tab="signup">
+          <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Signup</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

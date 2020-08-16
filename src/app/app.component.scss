@@ -5,6 +5,13 @@ ion-app {
     color: white;
 }
 
+ion-title {
+    text-align: center;
+    img {
+        width: 10%;
+    }
+}
+
 ion-router-outlet {
     
     margin-top: 0;

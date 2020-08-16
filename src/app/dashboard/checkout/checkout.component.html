@@ -1,0 +1,134 @@
+
+<ion-content>
+    <div class="container-fluid">
+      <div class="row checkout-content">
+        <div class="offset-md-2 col-md-8">
+          <div class="container">
+
+            <heading text="CHECKOUT" align="center"></heading>
+
+            <div class="alert alert-primary" role="alert">
+              <div class="row">
+                <div class="col-8">
+                   Your Selected Car
+                </div>
+                <div class="col-4">
+                    <span class="alert-link float-right" (click)="changeCar()" >Change ?</span>
+                </div>
+              </div>
+                
+
+                <div class="row info-row">
+                    <div class="col-5">
+                      <span class="heading">Maker</span>
+                      <br/>
+                      <span> {{selectedCar.maker}}</span>
+                    </div>
+                    <div class="col-7">
+                        <span class="heading">Model</span>
+                        <br/>
+                        <span>{{selectedCar.model}}</span>
+                      </div>
+                      
+                  </div>
+                   
+              </div>
+
+              <div class="alert alert-secondary" role="alert">
+
+                      <div class="row">
+                        <div class="col-8">
+                           Your Selected Plan
+                        </div>
+                      
+                        <div class="col-4">
+                            <span class="alert-link float-right" (click)="changePlan()">Change ?</span>
+                        </div>
+                      </div>
+                      
+                  <div class="row info-row">
+                    <div class="col-4">
+                      <span class="heading">Plan</span>
+                      <br/>
+                      <span>{{selectedPlan.name}}</span>
+                    </div>
+                    <div class="col-4">
+                        <span class="heading">Body Type</span>
+                        <br/>
+                        <span class="capitalize">{{selectedCar.bodyType}}</span>
+                      </div>
+                      <div class="col-4">
+                          <span class="heading">Amount</span>
+                          <br/>
+                          <span class="rs" >&#8377;</span> <span>{{selectedPlan.price}}</span>
+                        </div>
+                  </div>
+              </div>
+
+              <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Verify Your Car
+                        </button>
+                      </h2>
+                    </div>
+                
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+                        <car-form [verifyOnly]="true" (carReady)="verifyCar($event)"></car-form>
+
+                     <br/>
+                          <div *ngIf="carMismatch && carIdentified" class="alert alert-danger" role="alert">
+                              Selected Car doesn't match with Registration Number!
+                            </div>
+                            <div *ngIf="!carMismatch && carIdentified" class="alert alert-success" role="alert">
+                                Car Details Verified Succesfully!
+                              </div>
+
+                        
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Location
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                      <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Timings
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                      <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <cta text="Procced to Payment" (action)="payNow()"></cta>
+
+            
+            
+
+          </div>
+        </div>
+      </div>
+      </div>
+</ion-content>

@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 
 import M from 'materialize-css';
 import { PlanTableComponent } from 'app/common/plan-table/plan-table.component';
+import { Router } from '@angular/router';
 
 declare var $:any;
 
@@ -16,7 +17,10 @@ declare var $:any;
 export class DashboardComponent implements OnInit {
 
   currentCar:any;
-  isCarSelected:boolean;
+  selectedPlan: any;
+
+  isCarSelected: boolean;
+  isPlanSelected: boolean;
   
   currentPlans;
   
@@ -24,11 +28,14 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private platform: Platform,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router: Router
   ) {
     this.currentCar={};
     this.isCarSelected = false;
     this.currentPlans = plansList;
+    this.isPlanSelected = false;
+    this.selectedPlan = {};
 
     console.log('M', M);
 
@@ -81,10 +88,26 @@ export class DashboardComponent implements OnInit {
     sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
 
     this.isCarSelected = true;
+    this.isPlanSelected = false;
   }
 
-  buyPlan(a) {
-    console.log(a);
+  buyPlan(payload) {
+    console.log(payload);
+    this.isPlanSelected = true;
+    this.selectedPlan = payload.plan;
+    this.goToCheckout();
+
+  }
+
+  onShowDetails(payload) {
+    this.isPlanSelected = true;
+    this.selectedPlan = payload.plan;
+
+  }
+
+  goToCheckout() {
+    sessionStorage.setItem('selectedPlan',JSON.stringify(this.selectedPlan));
+    this.router.navigate(['/dashboard/checkout']);
   }
 
 }

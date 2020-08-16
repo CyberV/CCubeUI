@@ -2,14 +2,19 @@
     <mobile-input type="text" uppercase="true" name="Registration Number" placeholder="HR51XX1122" [(value)]="regNo" ></mobile-input>
     <div *ngIf="!isTypingRegNo" class="animate__animated" [class.animate__fadeOutUp]="isTypingRegNo">
       
-        <heading text="OR"></heading>
+        <ng-container *ngIf="!verifyOnly">
+            <heading text="OR"></heading>
 
-        <select-car (letsgo)="goToPlans($event)"></select-car>
+            <select-car (letsgo)="goToPlans($event)"></select-car>
+        </ng-container>
+       
     
     </div>
 
     <cta *ngIf="isRegNoValid && !findingCar" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
-    <car-display *ngIf="findingCar" [carNo]="regNo" (letsgo)="goToPlans($event)"></car-display>
+
+    
+    <car-display *ngIf="findingCar" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)"></car-display>
   
 
 

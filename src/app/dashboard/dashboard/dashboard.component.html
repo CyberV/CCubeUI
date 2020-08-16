@@ -20,9 +20,29 @@
 
       <ng-container *ngIf="isCarSelected">
 
-        <plan-slider [plans]="currentPlans" [bodyType]="currentCar.bodyType"></plan-slider>
+        <ng-container *ngIf="!isPlanSelected">
+            <plan-slider 
+            
+            [plans]="currentPlans" 
+            [bodyType]="currentCar.bodyType"
+            (showDetails)="onShowDetails($event)"
+            (buyNow)="buyPlan($event)"
+            
+            ></plan-slider>
 
-        <h2>Add Ons Section here</h2>
+            <h2>Add Ons Section here</h2>
+
+        </ng-container>
+        
+
+            <plan-details *ngIf="isPlanSelected" 
+                [plan]="selectedPlan" 
+                [features]="currentPlans.features"
+                (changePlan)="isPlanSelected = false"
+                (checkout)="goToCheckout()"
+                ></plan-details>
+
+        
 
         <!-- <div *ngIf="!isMobile" class="card-deck row">
           <plan-card class="col-4" *ngFor="let plan of currentPlans" [plan]="plan"></plan-card>
@@ -35,3 +55,5 @@
     </div>
   </div>
 </div>
+
+<router-outlet></router-outlet>

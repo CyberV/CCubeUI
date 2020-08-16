@@ -9,6 +9,8 @@ import { LoginService } from 'app/login/login.service';
 export class CarDisplayComponent implements OnInit {
 
   @Input() carNo: string;
+  @Input() verifyOnly: boolean;
+
   @Output() letsgo = new EventEmitter();
 
   noCar:boolean;
@@ -23,6 +25,7 @@ export class CarDisplayComponent implements OnInit {
     this.loading = true;
     this.isCarReady = false;
     this.noCar = false;
+    this.verifyOnly = false;
 
     this.carDetails = {
       maker: '',
@@ -86,6 +89,9 @@ export class CarDisplayComponent implements OnInit {
 
           this.carDetails.name = this.carDetails.model.split(' ').slice(1).toString().replace(',','');
           
+          if(this.verifyOnly) {
+            this.letsgo.emit(this.carDetails);
+          }
 
           // this.page = "signup";
         } else {

@@ -7,7 +7,8 @@ import { CommonComponentsModule } from 'app/common/common.module';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CarFormComponent } from './car-form/car-form.component';
-
+import { CheckoutComponent } from './checkout/checkout.component';
+import { AccordionModule } from 'ngx-accordion';
 
 
 
@@ -15,12 +16,14 @@ import { CarFormComponent } from './car-form/car-form.component';
   declarations: [ 
     DashboardPageComponent, 
     DashboardComponent,
-    CarFormComponent
+    CarFormComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AccordionModule,
 
     CommonComponentsModule,
     DashboardPageRoutingModule,

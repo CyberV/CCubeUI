@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'plan-slider',
@@ -9,6 +10,10 @@ export class PlanSliderComponent implements OnInit {
 
   @Input() plans;
   @Input() bodyType;
+
+  
+  @Output() buyNow = new EventEmitter();
+  @Output() showDetails = new EventEmitter();
 
   planList;
 
@@ -32,6 +37,14 @@ export class PlanSliderComponent implements OnInit {
       this.planList = this.plans.plans;
     }
 
+  }
+
+  onBuy(payload) {
+    this.buyNow.emit(payload);
+  }
+
+  onShowDetails(payload) {
+    this.showDetails.emit(payload);
   }
 
 }
