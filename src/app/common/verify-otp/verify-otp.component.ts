@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 
+declare var $;
 @Component({
   selector: 'verify-otp',
   templateUrl: './verify-otp.component.html',
@@ -32,6 +33,11 @@ export class VerifyOtpComponent implements OnInit {
 
   numberClicked() {
     this.changeNumber.emit();
+  }
+
+  ngAfterViewInit() {
+    console.log('after view init');
+    $('.otp-0').focus();
   }
 
   onChange(e) {

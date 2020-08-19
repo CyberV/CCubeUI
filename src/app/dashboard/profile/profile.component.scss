@@ -1,0 +1,33 @@
+@import 'src/variables.scss';
+
+
+
+.input{
+    border-color: '#eee';
+    border-radius: 10px;
+    border-width: 1px;
+}
+p{
+    align-self: center;
+}
+
+.profile-content {
+    background: $bg-gray;
+    color: black;
+    height: 100%;
+    padding-bottom: 30px;
+    min-height: 90vh;
+
+}
+.container {
+    background: $bg-white;
+    border-radius: 25px;
+    padding: 25px;
+    margin-top: 2em;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 5em;
+    }
+}
+
+

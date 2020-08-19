@@ -24,7 +24,7 @@
         <mobile-input type="text" name="Select Model" [(value)]="model" (valueChange)="modelSelected = false"></mobile-input>
         <div *ngIf="!modelSelected" class="panel-models row">
           <div *ngFor="let mdl of filteredModels" (click)="selectModel(mdl)" class="card col-12 col-md-4 maker animate__animated animate__fadeInLeft">
-            <img class="card-img-top" [src]="mdl.logo" [alt]="mdl.name">
+            <img class="card-img-top" [src]="mdl.image" [alt]="mdl.name">
             <div class="card-body">
               <h5 class="card-title"> {{mdl.model | uppercase}} </h5>
             </div>

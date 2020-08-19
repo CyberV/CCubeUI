@@ -34,6 +34,7 @@ export class LoginFormComponent implements OnInit {
   public findingCar:boolean;
 
   loadingDetails: boolean;
+  otpSent:boolean;
 
   get isMobile() {
     return !this.platform.is('desktop');
@@ -91,6 +92,7 @@ export class LoginFormComponent implements OnInit {
     this.loadingDetails = false;
     this.loading = false;
     this.findingCar = false;
+    this.otpSent = false;
 
     this.newUser = {
       car: {}
@@ -222,8 +224,9 @@ export class LoginFormComponent implements OnInit {
         .subscribe((res: any) => {
           console.log('Send OTP Response', res);
           if (res.success) {
+            this.otpSent = true;
             this.loading = false;
-            this.page = "signup";
+            //this.page = "signup";
           }
         });
     }
@@ -231,41 +234,54 @@ export class LoginFormComponent implements OnInit {
 
   }
 
+  createUser() {
+    this.srvcLogin.createUser(this.newUser.mobile,this.newUser.name, this.newUser.password, this.newUser.email)
+    .subscribe( (res:any) => {
+      if (res.success) {
 
-  verifyOtp(otp) {
+        alert('Account Created Successfully');
+
+        this.srvcUser.setCurrentUser(res.data);
+
+        //this.router.navigate(['/root/dashboard']);
+        this.router.navigate(['../dashboard'], {relativeTo: this.activatedRoute});
+        this.page = 'car';
+        
+
+      } else {
+        alert('There was en error creating account. Please try again in some time.');
+      }
+
+    });
+
+  }
+
+
+  async verifyOtp(otp) {
     if (!this.loading) {
       console.log('otp', otp);
       this.loading = true;
-      this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
+      let verified = await new Promise( (resolve,reject) => {
+        this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
         .subscribe((res: any) => {
           console.log('Verify OTP REsponse', res);
           this.loading = false;
           if (res.success) {
-            
-            this.srvcLogin.createUser(this.newUser.mobile,this.newUser.name, this.newUser.password, this.newUser.email)
-              .subscribe( (res:any) => {
-                if (res.success) {
-
-                  alert('Account Created Successfully');
-
-                  this.srvcUser.setCurrentUser(res.data);
-
-                  //this.router.navigate(['/root/dashboard']);
-                  this.router.navigate(['../dashboard'], {relativeTo: this.activatedRoute});
-                  this.page = 'car';
-                  
-
-                } else {
-                  alert('There was en error creating account. Please try again in some time.');
-                }
-
-              });
-
             this.otpMismatch = false;
+            resolve(true);
           } else {
             this.otpMismatch = true;
+            resolve(false);
           }
         })
+      });
+
+      console.log('Verified', verified);
+
+      if (verified) {
+        this.page = 'signup';
+      }
+   
     }
 
   }

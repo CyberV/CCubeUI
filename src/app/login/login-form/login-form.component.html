@@ -6,16 +6,25 @@
   </subheading>
 
   <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="newUser.mobile"></mobile-input>
-
-  <cta text="Send OTP" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
-
-  
+  asdasd {{otpSent.toString()}}
+  <cta *ngIf="!otpSent" text="Send OTP" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
   </cta>
 
   <br/>
 
-  <span class="float-right">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
+  <span  *ngIf="!otpSent" class="float-right">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
 
+
+  
+
+  <verify-otp
+  *ngIf="otpSent"
+ [mobile]="newUser.mobile" length="4" 
+ (otpSubmitted)="customerOtp=$event" 
+ [mismatch]="otpMismatch"
+ (changeNumber)="page='home'"></verify-otp> 
+
+ <cta *ngIf="otpSent" [loading]="loading" (action)="verifyOtp(customerOtp)" [disabled]="!customerOtp || customerOtp.toString().length < 4" text="Verify"></cta>
   <!-- <subheading text="OR" align="center"></subheading>
     
     <cta text="Log In" outline="true"></cta> -->
@@ -41,11 +50,7 @@
   <mobile-input type="password" name="Confirm Password" [(value)]="newUser.confirmPassword" ></mobile-input>
 
 
-  <verify-otp
-     [mobile]="newUser.mobile" length="4" 
-     (otpSubmitted)="customerOtp=$event" 
-     [mismatch]="otpMismatch"
-     (changeNumber)="page='home'"></verify-otp> 
+
 
 
   <cta text="Create Account" [loading]="loading" (action)="verifyOtp(customerOtp)" ></cta>

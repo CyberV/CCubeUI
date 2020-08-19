@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CarFormComponent } from './car-form/car-form.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AccordionModule } from 'ngx-accordion';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -17,7 +18,8 @@ import { AccordionModule } from 'ngx-accordion';
     DashboardPageComponent, 
     DashboardComponent,
     CarFormComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

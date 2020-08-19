@@ -1,1388 +1,1580 @@
 [
-    {
-      "maker": "Maruti Suzuki",
-      "logo": "https://freepikpsd.com/wp-content/uploads/2020/01/maruti-suzuki-logo-design-india-PNG-Transparent-Images.png",
-      "cars": [
-        {
-          "model": "Swift",
-          "price": "Rs. 5.19 Lakh",
-          "details": "1197 cc | 21 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Baleno",
-          "price": "Rs. 5.63 Lakh",
-          "details": "1197 cc | 24 kmpl | Petrol",
-          "bodyType": "phatchback"
-        },
-        {
-          "model": "Vitara Brezza",
-          "price": "Rs. 7.34 Lakh",
-          "details": "1462 cc | 19 kmpl | Petrol",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "Alto",
-          "price": "Rs. 2.94 Lakh",
-          "details": "796 cc | 22 kmpl | Petrol | CNG",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Dzire",
-          "price": "Rs. 5.89 Lakh",
-          "details": "1197 cc | 24 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Wagon R",
-          "price": "Rs. 4.45 Lakh",
-          "details": "998 cc | 21 kmpl | Petrol | CNG",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Ertiga",
-          "price": "Rs. 7.59 Lakh",
-          "details": "998 cc | 21 kmpl | Petrol | CNG",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Celerio",
-          "price": "Rs. 4.41 Lakh",
-          "details": "1462 cc | 19 kmpl | Petrol | CNG",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "S-Presso",
-          "price": "Rs. 3.7 Lakh",
-          "details": "2998 cc | 22 kmpl | Petrol | CNG",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Ignis",
-          "price": "Rs. 4.89 Lakh",
-          "details": "1197 cc | 21 kmpl | Petrol",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Eeco",
-          "price": "Rs. 3.8 Lakh",
-          "details": "1197 cc | 21 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "XL6",
-          "price": "Rs. 9.84 Lakh",
-          "details": "1462 cc | 19 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Ciaz",
-          "price": "Rs. 8.31 Lakh",
-          "details": "1462 cc | 21 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "S-Cross",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "Celerio X",
-          "price": "Rs. 4.9 Lakh",
-          "details": "998 cc | 22 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "BMW",
-      "logo": "https://www.carlogos.org/car-logos/bmw-logo.png",
-      "cars": [
-        {
-          "model": "X1",
-          "price": "Rs. 35.9 Lakh",
-          "details": "1998 cc | 20 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "3 Series",
-          "price": "Rs. 41.7 Lakh",
-          "details": "1995 cc | 20 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "7 Series",
-          "price": "Rs. 1.35 Crore",
-          "details": "2993 cc | 40 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "X5",
-          "price": "Rs. 74.9 Lakh",
-          "details": "2993 cc | 13 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "5 Series",
-          "price": "Rs. 55.4 Lakh",
-          "details": "1998 cc | 22 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "X6",
-          "price": "Rs. 95 Lakh",
-          "details": "2998 cc | Petrol",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "X3",
-          "price": "Rs. 60.5 Lakh",
-          "details": "1998 cc | 19 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Z4",
-          "price": "Rs. 66 Lakh",
-          "details": "2998 cc | 14 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "X7",
-          "price": "Rs. 92.5 Lakh",
-          "details": "2998 cc | 13 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "3 Series GT",
-          "price": "Rs. 50.7 Lakh",
-          "details": "1998 cc | 15 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "8 Series",
-          "price": "Rs. 1.29 Crore",
-          "details": "2998 cc | 11 kmpl | Petrol",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "M Series",
-          "price": "Rs. 1.54 Crore",
-          "details": "4395 cc | 10 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "6 Series",
-          "price": "Rs. 64.9 Lakh",
-          "details": "2993 cc | 17 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "X4",
-          "price": "Rs. 62.4 Lakh",
-          "details": "1998 cc | 17 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "M2",
-          "price": "Rs. 83.4 Lakh",
-          "details": "2979 cc | 11 kmpl | Petrol",
-          "bodyType": "luxury"
-        }
-      ]
-    },
-    {
-      "maker": "Mercedes Benz",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mercedes_benz_logo1989.png/800px-Mercedes_benz_logo1989.png",
-      "cars": [
-        {
-          "model": "G-Class",
-          "price": "Rs. 1.5 Crore",
-          "details": "3998 cc | 8 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "GLS",
-          "price": "Rs. 99.9 Lakh",
-          "details": "2925 cc | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "C-Class",
-          "price": "Rs. 40.9 Lakh",
-          "details": "1950 cc | 12 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "E-Class",
-          "price": "Rs. 59.07 Lakh",
-          "details": "1950 cc | 18 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "GLC",
-          "price": "Rs. 52.75 Lakh",
-          "details": "1991 cc | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "S-Class",
-          "price": "Rs. 1.38 Crore",
-          "details": "2996 cc | 14 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "A-Class",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "GLA Class",
-          "price": "Rs. 32.33 Lakh",
-          "details": "1991 cc | 18 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "GLE",
-          "price": "Rs. 73.7 Lakh",
-          "details": "1950 cc | 10 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "AMG GT 4-Door Coupe",
-          "price": "Rs. 2.42 Crore",
-          "details": "3998 cc | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "CLS",
-          "price": "Rs. 86.39 Lakh",
-          "details": "1950 cc | 19 kmpl | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "AMG GT",
-          "price": "Rs. 2.27 Crore",
-          "details": "3982 cc | 13 kmpl | Petrol",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "E-Class All-Terrain",
-          "price": "Rs. 77.25 Lakh",
-          "details": "1950 cc | 13 kmpl | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "V-Class",
-          "price": "Rs. 71.1 Lakh",
-          "details": "2143 cc | 16 kmpl | Diesel",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "GLC Coupe",
-          "price": "Rs. 62.7 Lakh",
-          "details": "1950 cc | 16 kmpl | Petrol | Diesel",
-          "bodyType": "luxury"
-        }
-      ]
-    },
-    {
-      "maker": "Mahindra",
-      "logo": "https://www.carlogos.org/car-logos/mahindra-logo.png",
-      "cars": [
-        {
-          "model": "Scorpio",
-          "price": "Rs. 12.39 Lakh",
-          "details": "2179 cc | 16 kmpl | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Thar",
-          "price": "Rs. 9.59 Lakh",
-          "details": "2498 cc | 17 kmpl | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "XUV500",
-          "price": "Rs. 13.19 Lakh",
-          "details": "2179 cc | 15 kmpl | Diesel",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "XUV300",
-          "price": "Rs. 8.3 Lakh",
-          "details": "1197 cc | 20 kmpl | Petrol | Diesel",
-          "bodyType": "phatchback"
-        },
-        {
-          "model": "Bolero",
-          "price": "Rs. 7.98 Lakh",
-          "details": "1498 cc | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Bolero Pik-Up",
-          "price": "Rs. 7.84 Lakh",
-          "details": "2523 cc | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "TUV300",
-          "price": "Rs. 8.54 Lakh",
-          "details": "1493 cc | 18 kmpl | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Marazzo",
-          "price": "Rs. 9.99 Lakh",
-          "details": "1497 cc | 17 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Alturas G4",
-          "price": "Rs. 28.69 Lakh",
-          "details": "2157 cc | 12 kmpl | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Bolero Power Plus",
-          "price": "Rs. 7.61 Lakh",
-          "details": "1493 cc | 17 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "TUV 300 Plus",
-          "price": "Rs. 9.92 Lakh",
-          "details": "2179 cc | 18 kmpl | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "KUV100 NXT",
-          "price": "Rs. 5.54 Lakh",
-          "details": "1198 cc | 18 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "E Verito",
-          "price": "Rs. 9.12 Lakh",
-          "details": "Electric(Battery)",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Hyundai",
-      "logo": "https://www.carlogos.org/car-logos/hyundai-logo.png",
-      "cars": [
-        {
-          "model": "Creta",
-          "price": "Rs. 9.99 Lakh",
-          "details": "1497 cc | 21 kmpl | Petrol | Diesel",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "Elite i20",
-          "price": "Rs. 6.49 Lakh",
-          "details": "1197 cc | 19 kmpl | Petrol",
-          "bodyType": "phatchback"
-        },
-        {
-          "model": "Venue",
-          "price": "Rs. 6.7 Lakh",
-          "details": "998 cc | 24 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Verna",
-          "price": "Rs. 9.3 Lakh",
-          "details": "1497 cc | 25 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Grand i10",
-          "price": "Rs. 5.89 Lakh",
-          "details": "1197 cc | 19 kmpl | Petrol",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Aura",
-          "price": "Rs. 5.79 Lakh",
-          "details": "1197 cc | Petrol | Diesel | CNG",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Grand i10 Nios",
-          "price": "Rs. 5.06 Lakh",
-          "details": "1197 cc | 26 kmpl | Petrol | Diesel | CNG",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Santro",
-          "price": "Rs. 4.57 Lakh",
-          "details": "1086 cc | 20 kmpl | Petrol | CNG",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Xcent",
-          "price": "Rs. 5.81 Lakh",
-          "details": "1197 cc | 25 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Elantra",
-          "price": "Rs. 17.6 Lakh",
-          "details": "1498 cc | 15 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Tucson",
-          "price": "Rs. 18.76 Lakh",
-          "details": "1999 cc | 18 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Kona Electric",
-          "price": "Rs. 23.75 Lakh",
-          "details": "Electric(Battery)",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Toyota",
-      "logo": "https://www.carlogos.org/car-logos/toyota-logo.png",
-      "cars": [
-        {
-          "model": "Fortuner",
-          "price": "Rs. 28.66 Lakh",
-          "details": "2694 cc | 15 kmpl | Petrol | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Innova Crysta",
-          "price": "Rs. 15.66 Lakh",
-          "details": "2393 cc | 14 kmpl | Petrol | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Glanza",
-          "price": "Rs. 7.01 Lakh",
-          "details": "1197 cc | 24 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Vellfire",
-          "price": "Rs. 79.5 Lakh",
-          "details": "2494 cc | Petrol",
-          "bodyType": "luxury"
-        },
-        {
-          "model": "Yaris",
-          "price": "Rs. 8.86 Lakh",
-          "details": "1496 cc | 18 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Land Cruiser",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Camry 2019",
-          "price": "Rs. 37.88 Lakh",
-          "details": "2487 cc | 19 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Land Cruiser Prado",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Prius",
-          "price": "Rs. 45.09 Lakh",
-          "details": "26 kmpl | Petrol |",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Tata",
-      "logo": "https://www.carlogos.org/car-logos/tata-logo.png",
-      "cars": [
-        {
-          "model": "Nexon",
-          "price": "Rs. 6.95 Lakh",
-          "details": "1199 cc | 22 kmpl | Petrol | Diesel",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "Altroz",
-          "price": "Rs. 5.29 Lakh",
-          "details": "1199 cc | Petrol | Diesel",
-          "bodyType": "phatchback"
-        },
-        {
-          "model": "Tiago",
-          "price": "Rs. 4.6 Lakh",
-          "details": "1199 cc | 24 kmpl | Petrol",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Harrier",
-          "price": "Rs. 13.69 Lakh",
-          "details": "1956 cc | 17 kmpl | Diesel",
-          "bodyType": "suv"
-        },
-        {
-          "model": "Tigor",
-          "price": "Rs. 5.75 Lakh",
-          "details": "1199 cc | 20 kmpl | Petrol",
-          "bodyType": "hatchback"
-        },
-        {
-          "model": "Nexon EV",
-          "price": "Rs. 13.99 Lakh",
-          "details": "Electric(Battery)",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "Yodha Pickup",
-          "price": "Rs. 6.94 Lakh",
-          "details": "2956 cc | Diesel",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "Tigor EV",
-          "price": "Rs. 9.54 Lakh",
-          "details": "Electric(Battery)",
-          "bodyType": "hatchback"
-        }
-      ]
-    },
-    {
-      "maker": "Honda",
-      "logo": "https://www.carlogos.org/car-logos/honda-logo.png",
-      "cars": [
-        {
-          "model": "Amaze",
-          "price": "Rs. 6.09 Lakh",
-          "details": "1498 cc | 27 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "City",
-          "price": "Rs. 9.91 Lakh",
-          "details": "1497 cc | 17 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Civic",
-          "price": "Rs. 17.93 Lakh",
-          "details": "1799 cc | 17 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Accord",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "CR-V",
-          "price": "Rs. 28.27 Lakh",
-          "details": "1997 cc | 14 kmpl | Petrol",
-          "bodyType": "csuv"
-        },
-        {
-          "model": "Jazz",
-          "price": "Rs. 7.45 Lakh",
-          "details": "1199 cc | 27 kmpl | Petrol | Diesel",
-          "bodyType": "phatchback"
-        },
-        {
-          "model": "WR-V",
-          "price": "Rs. 8.49 Lakh",
-          "details": "1498 cc | Petrol | Diesel",
-          "bodyType": "csuv"
-        }
-      ]
-    },
-    {
-      "maker": "Volvo",
-      "logo": "https://www.carlogos.org/car-logos/volvo-logo.png",
-      "cars": [
-        {
-          "model": "XC90",
-          "price": "Rs. 80.9 Lakh",
-          "details": "1969 cc | 42 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "XC40",
-          "price": "Rs. 39.9 Lakh",
-          "details": "1969 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "S60",
-          "price": "Rs. 38.5 Lakh",
-          "details": "1969 cc | 27 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "S90",
-          "price": "Rs. 58.9 Lakh",
-          "details": "1969 cc | 18 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "XC60",
-          "price": "Rs. 59.9 Lakh",
-          "details": "1969 cc | 11 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "S60 Cross Country",
-          "price": "Rs. 44.26 Lakh",
-          "details": "2400 cc | 20 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "V90 Cross Country",
-          "price": "Rs. 65.31 Lakh",
-          "details": "1969 cc | 13 kmpl | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Land Rover",
-      "logo": "https://pngimg.com/uploads/land_rover/land_rover_PNG1.png",
-      "cars": [
-        {
-          "model": "Range Rover Evoque",
-          "price": "Rs. 58 Lakh",
-          "details": "1997 cc | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Range Rover Velar",
-          "price": "Rs. 73.3 Lakh",
-          "details": "1997 cc | 16 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Range Rover Sport",
-          "price": "Rs. 87.02 Lakh",
-          "details": "1997 cc | 13 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Discovery Sport",
-          "price": "Rs. 59.91 Lakh",
-          "details": "1997 cc | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Range Rover",
-          "price": "Rs. 1.96 Crore",
-          "details": "2993 cc | 13 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Defender",
-          "price": "Rs. 69.99 Lakh",
-          "details": "1997 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Discovery",
-          "price": "Rs. 75.59 Lakh",
-          "details": "1999 cc | 18 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Ford",
-      "logo": "https://www.carlogos.org/car-logos/ford-logo.png",
-      "cars": [
-        {
-          "model": "EcoSport",
-          "price": "Rs. 8.04 Lakh",
-          "details": "1498 cc | 22 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Endeavour",
-          "price": "Rs. 29.55 Lakh",
-          "details": "1996 cc | 14 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Mustang",
-          "price": "Rs. 74.62 Lakh",
-          "details": "4951 cc | 13 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Figo",
-          "price": "Rs. 5.39 Lakh",
-          "details": "1194 cc | 24 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Freestyle",
-          "price": "Rs. 5.89 Lakh",
-          "details": "1195 cc | 24 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Aspire",
-          "price": "Rs. 5.99 Lakh",
-          "details": "1196 cc | 24 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Porsche",
-      "logo": "https://www.carlogos.org/car-logos/porsche-logo.png",
-      "cars": [
-        {
-          "model": "Cayenne",
-          "price": "Rs. 1.19 Crore",
-          "details": "2995 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Panamera",
-          "price": "Rs. 1.48 Crore",
-          "details": "3996 cc | 18 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "718",
-          "price": "Rs. 85.95 Lakh",
-          "details": "1988 cc | 9 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Macan",
-          "price": "Rs. 69.98 Lakh",
-          "details": "1984 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "911",
-          "price": "Rs. 1.62 Crore",
-          "details": "2981 cc | 9 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Cayenne Coupe",
-          "price": "Rs. 1.31 Crore",
-          "details": "2995 cc | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Lexus",
-      "logo": "https://www.carlogos.org/car-logos/lexus-logo.png",
-      "cars": [
-        {
-          "model": "LC 500h",
-          "price": "Rs. 1.96 Crore",
-          "details": "3456 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "ES",
-          "price": "Rs. 51.9 Lakh",
-          "details": "2487 cc | 22 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "LX",
-          "price": "Rs. 2.32 Crore",
-          "details": "5663 cc | 7 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "RX",
-          "price": "Rs. 99 Lakh",
-          "details": "3456 cc | 19 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "NX",
-          "price": "Rs. 54.9 Lakh",
-          "details": "2499 cc | 18 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "LS",
-          "price": "Rs. 1.82 Crore",
-          "details": "3456 cc | 15 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Audi",
-      "logo": "https://www.carlogos.org/car-logos/audi-logo.png",
-      "cars": [
-        {
-          "model": "A6",
-          "price": "Rs. 54.42 Lakh",
-          "details": "1984 cc | 15 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "GTI",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "A8",
-          "price": "Rs. 1.56 Crore",
-          "details": "2995 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Q8",
-          "price": "Rs. 1.33 Crore",
-          "details": "2996 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "R8",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Ferrari",
-      "logo": "https://www.carlogos.org/car-logos/ferrari-logo.png",
-      "cars": [
-        {
-          "model": "GTC4Lusso",
-          "price": "Rs. 4.26 Crore",
-          "details": "3855 cc | 4 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Portofino",
-          "price": "Rs. 3.5 Crore",
-          "details": "3855 cc | 9 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Roma",
-          "price": "Rs. 4 Crore",
-          "details": "3855 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "SF90 Stradale",
-          "price": "Rs. 7.5 Crore",
-          "details": "4998 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "812",
-          "price": "Rs. 5.75 Crore",
-          "details": "6496 cc | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Rolls Royce",
-      "logo": "https://www.carlogos.org/logo/Rolls-Royce-logo-2048x2048.png",
-      "cars": [
-        {
-          "model": "Wraith",
-          "price": "Rs. 6.22 Crore",
-          "details": "6592 cc | 10 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Phantom",
-          "price": "Rs. 8.99 Crore",
-          "details": "6749 cc | 10 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Ghost",
-          "price": "Rs. 5.25 Crore",
-          "details": "6592 cc | 10 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Dawn",
-          "price": "Rs. 7.3 Crore",
-          "details": "6598 cc | 10 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Cullinan",
-          "price": "Rs. 6.95 Crore",
-          "details": "6750 cc | 10 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Maserati",
-      "logo": "https://www.carlogos.org/car-logos/maserati-logo.png",
-      "cars": [
-        {
-          "model": "Quattroporte",
-          "price": "Rs. 1.71 Crore",
-          "details": "2999 cc | 12 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Ghibli",
-          "price": "Rs. 1.35 Crore",
-          "details": "2979 cc | 17 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Gran Turismo",
-          "price": "Rs. 2.25 Crore",
-          "details": "4224 cc | 10 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Gran Cabrio",
-          "price": "Rs. 2.46 Crore",
-          "details": "4691 cc | 10 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Levante",
-          "price": "Rs. 1.49 Crore",
-          "details": "2979 cc | 12 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Renault",
-      "logo": "https://www.carlogos.org/car-logos/renault-logo.png",
-      "cars": [
-        {
-          "model": "KWID",
-          "price": "Rs. 2.92 Lakh",
-          "details": "799 cc | 25 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Triber",
-          "price": "Rs. 4.99 Lakh",
-          "details": "999 cc | 20 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Duster",
-          "price": "Rs. 8.49 Lakh",
-          "details": "1498 cc | 20 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Captur",
-          "price": "Rs. 9.49 Lakh",
-          "details": "1498 cc | 20 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Skoda",
-      "logo": "https://www.carlogos.org/car-logos/skoda-logo.png",
-      "cars": [
-        {
-          "model": "Rapid",
-          "price": "Rs. 7.49 Lakh",
-          "details": "999 cc | 22 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Karoq",
-          "price": "Rs. 24.99 Lakh",
-          "details": "1498 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Octavia",
-          "price": "Rs. 35.99 Lakh",
-          "details": "1968 cc | 15 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Superb",
-          "price": "Rs. 29.99 Lakh",
-          "details": "1798 cc | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Volkswagen",
-      "logo": "https://www.carlogos.org/car-logos/volkswagen-logo.png",
-      "cars": [
-        {
-          "model": "Polo",
-          "price": "Rs. 5.82 Lakh",
-          "details": "999 cc | 18 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Vento",
-          "price": "Rs. 8.86 Lakh",
-          "details": "998 cc | 18 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "T-Roc",
-          "price": "Rs. 19.99 Lakh",
-          "details": "1498 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Tiguan Allspace",
-          "price": "Rs. 33.12 Lakh",
-          "details": "1984 cc | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Jeep",
-      "logo": "https://www.carlogos.org/car-logos/jeep-logo.png",
-      "cars": [
-        {
-          "model": "Compass",
-          "price": "Rs. 16.49 Lakh",
-          "details": "1368 cc | 17 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Wrangler",
-          "price": "Rs. 63.94 Lakh",
-          "details": "1998 cc | 12 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Compass Trailhawk",
-          "price": "Rs. 26.8 Lakh",
-          "details": "1956 cc | 16 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Grand Cherokee",
-          "price": "Rs. 78.88 Lakh",
-          "details": "2998 cc | 13 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Jaguar",
-      "logo": "https://www.carlogos.org/car-logos/jaguar-logo.png",
-      "cars": [
-        {
-          "model": "F-TYPE",
-          "price": "Rs. 95.12 Lakh",
-          "details": "5000 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "XF",
-          "price": "Rs. 55.67 Lakh",
-          "details": "1997 cc | 11 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "F-Pace",
-          "price": "Rs. 66.07 Lakh",
-          "details": "1997 cc | 14 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "XE",
-          "price": "Rs. 46.64 Lakh",
-          "details": "1997 cc | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Lamborghini",
-      "logo": "https://www.carlogos.org/car-logos/lamborghini-logo.png",
-      "cars": [
-        {
-          "model": "Huracan",
-          "price": "Rs. 2.99 Crore",
-          "details": "5204 cc | 11 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Urus",
-          "price": "Rs. 3.1 Crore",
-          "details": "3996 cc | 8 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Aventador",
-          "price": "Rs. 5.01 Crore",
-          "details": "6498 cc | 8 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Huracan EVO",
-          "price": "Rs. 3.22 Crore",
-          "details": "5204 cc | 7 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Bentley",
-      "logo": "https://www.carlogos.org/car-logos/bentley-logo.png",
-      "cars": [
-        {
-          "model": "Mulsanne",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Flying Spur",
-          "price": "Rs. 3.21 Crore",
-          "details": "3993 cc | 13 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Continental",
-          "price": "Rs. 3.29 Crore",
-          "details": "13 kmpl | Petrol |",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Bentayga",
-          "price": "Rs. 3.78 Crore",
-          "details": "3998 cc | 11 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Datsun",
-      "logo": "https://www.carlogos.org/car-logos/datsun-logo.png",
-      "cars": [
-        {
-          "model": "redi-GO",
-          "price": "Rs. 2.86 Lakh",
-          "details": "799 cc | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "GO",
-          "price": "Rs. 3.99 Lakh",
-          "details": "1198 cc | 20 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "GO Plus",
-          "price": "Rs. 4.19 Lakh",
-          "details": "1199 cc | 20 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "MINI",
-      "logo": "https://www.carlogos.org/car-logos/mini-logo.png",
-      "cars": [
-        {
-          "model": "Cooper Convertible",
-          "price": "Rs. 38.9 Lakh",
-          "details": "1998 cc | 17 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Countryman",
-          "price": "Rs. 38.5 Lakh",
-          "details": "1995 cc | 19 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Cooper 3 DOOR",
-          "price": "Rs. 34.5 Lakh",
-          "details": "1998 cc | 17 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Kia",
-      "logo": "https://www.carlogos.org/car-logos/kia-logo.png",
-      "cars": [
-        {
-          "model": "Seltos",
-          "price": "Rs. 9.89 Lakh",
-          "details": "1353 cc | 21 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Carnival",
-          "price": "Rs. 24.95 Lakh",
-          "details": "2199 cc | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Nissan",
-      "logo": "https://www.carlogos.org/car-logos/nissan-logo.png",
-      "cars": [
-        {
-          "model": "Kicks",
-          "price": "Rs. 9.49 Lakh",
-          "details": "1498 cc | 14 kmpl | Petrol",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "GT-R",
-          "price": "Rs 2.12 Crore",
-          "details": "3798 cc | 9 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "MG Motor",
-      "logo": "https://upload.wikimedia.org/wikipedia/en/6/66/New_mg_logo.png",
-      "cars": [
-        {
-          "model": "Hector",
-          "price": "Rs. 12.73 Lakh",
-          "details": "1451 cc | 17 kmpl | Petrol | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "ZS EV",
-          "price": "Rs. 20.88 Lakh",
-          "details": "Electric(Battery)",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Mitsubishi",
-      "logo": "https://www.carlogos.org/car-logos/mitsubishi-logo.png",
-      "cars": [
-        {
-          "model": "Pajero Sport",
-          "price": "Rs. 27.42 Lakh",
-          "details": "2477 cc | 14 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "Outlander",
-          "price": "Rs. 26.93 Lakh",
-          "details": "2360 cc | 10 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "ISUZU",
-      "logo": "https://www.carlogos.org/car-logos/isuzu-logo.png",
-      "cars": [
-        {
-          "model": "D-Max V-Cross",
-          "price": "Rs. 16.54 Lakh",
-          "details": "2499 cc | 12 kmpl | Diesel",
-          "bodyType": "sedan"
-        },
-        {
-          "model": "MUX",
-          "price": "Rs. 27.34 Lakh",
-          "details": "2999 cc | 14 kmpl | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Aston Martin",
-      "logo": "http://www.pngmart.com/files/10/Aston-Martin-Logo-PNG-Image.png",
-      "cars": [
-        {
-          "model": "DB11",
-          "price": "Rs. 3.97 Crore",
-          "details": "5204 cc | 6 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Bugatti",
-      "logo": "https://www.carlogos.org/car-logos/bugatti-logo.png",
-      "cars": [
-        {
-          "model": "Chiron",
-          "price": "Rs. 19.21 Crore",
-          "details": "7993 cc | 6 kmpl | Petrol",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Force Motors",
-      "logo": "https://www.carlogos.org/logo/Force-Motors-logo-1920x1080.png",
-      "cars": [
-        {
-          "model": "Gurkha",
-          "price": "Rs. 9.75 Lakh",
-          "details": "2596 cc | 17 kmpl | Diesel",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "Bajaj",
-      "logo": "https://lh3.googleusercontent.com/proxy/x3uceOhHJqGDA7ljEkiIb39c-4O0Hq2esZ_Fb5S3HI6h9hzxbM9wxd6ROy7w96MfvKi5lPqbmKBXoIFXaMFGeOFLwUXXEopqGAScWushNJa5rR0mHEah2GJ7Hu8F_g",
-      "cars": [
-        {
-          "model": "Qute (RE60)",
-          "price": "Rs. 2.48 Lakh",
-          "details": "216 cc | 35 kmpl | Petrol | CNG",
-          "bodyType": "sedan"
-        }
-      ]
-    },
-    {
-      "maker": "DC",
-      "logo": "https://images.carandbike.com/car-images/big/dc/dc.png",
-      "cars": [
-        {
-          "model": "Avanti",
-          "price": "TBA",
-          "details": "",
-          "bodyType": "sedan"
-        }
-      ]
-    }
-  ]
+  {
+    "maker": "Maruti Suzuki",
+    "logo": "https://freepikpsd.com/wp-content/uploads/2020/01/maruti-suzuki-logo-design-india-PNG-Transparent-Images.png",
+    "cars": [
+      {
+        "model": "Swift",
+        "price": "Rs. 5.19 Lakh",
+        "details": "1197 cc | 21 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/swift_360x240.jpg"
+      },
+      {
+        "model": "Baleno",
+        "price": "Rs. 5.63 Lakh",
+        "details": "1197 cc | 24 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/swift_360x240.jpg"
+      },
+      {
+        "model": "Vitara Brezza",
+        "price": "Rs. 7.34 Lakh",
+        "details": "1462 cc | 19 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/maruti-suzuki-vitara-brezza-new_360x240.jpg"
+      },
+      {
+        "model": "Alto",
+        "price": "Rs. 2.94 Lakh",
+        "details": "796 cc | 22 kmpl | Petrol | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/maruti-alto-800_360x240.jpg"
+      },
+      {
+        "model": "Dzire",
+        "price": "Rs. 5.89 Lakh",
+        "details": "1197 cc | 24 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/maruti-dzire-2020-1_360x240.jpg"
+      },
+      {
+        "model": "Wagon R",
+        "price": "Rs. 4.45 Lakh",
+        "details": "998 cc | 21 kmpl | Petrol | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/maruti-suzuki-wagon-r-new_360x240.jpg"
+      },
+      {
+        "model": "Ertiga",
+        "price": "Rs. 7.59 Lakh",
+        "details": "998 cc | 21 kmpl | Petrol | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/maruti-suzuki-ertiga-new_360x240.jpg"
+      },
+      {
+        "model": "Celerio",
+        "price": "Rs. 4.41 Lakh",
+        "details": "1462 cc | 19 kmpl | Petrol | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/maruti-celerio_360x240.jpg"
+      },
+      {
+        "model": "S-Presso",
+        "price": "Rs. 3.7 Lakh",
+        "details": "2998 cc | 22 kmpl | Petrol | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/maruti_s_presso_930x620_360x240.jpg"
+      },
+      {
+        "model": "Ignis",
+        "price": "Rs. 4.89 Lakh",
+        "details": "1197 cc | 21 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/suzuki-ignis_930x620_360x240.jpg"
+      },
+      {
+        "model": "Eeco",
+        "price": "Rs. 3.8 Lakh",
+        "details": "1197 cc | 21 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/maruti-eeco_360x240.jpg"
+      },
+      {
+        "model": "XL6",
+        "price": "Rs. 9.84 Lakh",
+        "details": "1462 cc | 19 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/maruti-xl6_600x400_360x240.jpg"
+      },
+      {
+        "model": "Ciaz",
+        "price": "Rs. 8.31 Lakh",
+        "details": "1462 cc | 21 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/ciaz_360x240.jpg"
+      },
+      {
+        "model": "S-Cross",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jul/s-cross-1_360x240.jpg"
+      },
+      {
+        "model": "Celerio X",
+        "price": "Rs. 4.9 Lakh",
+        "details": "998 cc | 22 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/maruti-celerio-x_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "BMW",
+    "logo": "https://www.carlogos.org/car-logos/bmw-logo.png",
+    "cars": [
+      {
+        "model": "X1",
+        "price": "Rs. 35.9 Lakh",
+        "details": "1998 cc | 20 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Mar/bmw_x1_2020_360x240.jpg"
+      },
+      {
+        "model": "3 Series",
+        "price": "Rs. 41.7 Lakh",
+        "details": "1995 cc | 20 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jul/bmw-3-series_360x240.jpg"
+      },
+      {
+        "model": "7 Series",
+        "price": "Rs. 1.35 Crore",
+        "details": "2993 cc | 40 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_7_series_360x240.jpg"
+      },
+      {
+        "model": "X5",
+        "price": "Rs. 74.9 Lakh",
+        "details": "2993 cc | 13 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_x5_360x240.jpg"
+      },
+      {
+        "model": "5 Series",
+        "price": "Rs. 55.4 Lakh",
+        "details": "1998 cc | 22 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_5_series_360x240.jpg"
+      },
+      {
+        "model": "X6",
+        "price": "Rs. 95 Lakh",
+        "details": "2998 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/x6-2020_360x240.jpg"
+      },
+      {
+        "model": "X3",
+        "price": "Rs. 60.5 Lakh",
+        "details": "1998 cc | 19 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_x3_360x240.jpg"
+      },
+      {
+        "model": "Z4",
+        "price": "Rs. 66 Lakh",
+        "details": "2998 cc | 14 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_z4_360x240.jpg"
+      },
+      {
+        "model": "X7",
+        "price": "Rs. 92.5 Lakh",
+        "details": "2998 cc | 13 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_x7_360x240.jpg"
+      },
+      {
+        "model": "3 Series GT",
+        "price": "Rs. 50.7 Lakh",
+        "details": "1998 cc | 15 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_3_series_gt_360x240.jpg"
+      },
+      {
+        "model": "8 Series",
+        "price": "Rs. 1.29 Crore",
+        "details": "2998 cc | 11 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_8_series_360x240.jpg"
+      },
+      {
+        "model": "M Series",
+        "price": "Rs. 1.54 Crore",
+        "details": "4395 cc | 10 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Oct/bmw_m_series_360x240.jpg"
+      },
+      {
+        "model": "6 Series",
+        "price": "Rs. 64.9 Lakh",
+        "details": "2993 cc | 17 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_6_series_360x240.jpg"
+      },
+      {
+        "model": "X4",
+        "price": "Rs. 62.4 Lakh",
+        "details": "1998 cc | 17 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bmw_x4_360x240.jpg"
+      },
+      {
+        "model": "M2",
+        "price": "Rs. 83.4 Lakh",
+        "details": "2979 cc | 11 kmpl | Petrol",
+        "bodyType": "sedan"
+      }
+    ]
+  },
+  {
+    "maker": "Mercedes Benz",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mercedes_benz_logo1989.png/800px-Mercedes_benz_logo1989.png",
+    "cars": [
+      {
+        "model": "G-Class",
+        "price": "Rs. 1.5 Crore",
+        "details": "3998 cc | 8 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mercedes-benz-g-class_360x240.jpg"
+      },
+      {
+        "model": "GLS",
+        "price": "Rs. 99.9 Lakh",
+        "details": "2925 cc | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/gls-1_360x240.jpg"
+      },
+      {
+        "model": "C-Class",
+        "price": "Rs. 40.9 Lakh",
+        "details": "1950 cc | 12 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/royal-enfield-classic-350_360x240.jpg"
+      },
+      {
+        "model": "E-Class",
+        "price": "Rs. 59.07 Lakh",
+        "details": "1950 cc | 18 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/royal-enfield-classic-350_360x240.jpg"
+      },
+      {
+        "model": "GLC",
+        "price": "Rs. 52.75 Lakh",
+        "details": "1991 cc | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Dec/mercedes_benz_glc_360x240.jpg"
+      },
+      {
+        "model": "S-Class",
+        "price": "Rs. 1.38 Crore",
+        "details": "2996 cc | 14 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mercedes-benz-s-class_360x240.jpg"
+      },
+      {
+        "model": "A-Class",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mercedes-benz-a-class_360x240.jpg"
+      },
+      {
+        "model": "GLA Class",
+        "price": "Rs. 32.33 Lakh",
+        "details": "1991 cc | 18 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mercedes-benz-gla-class_360x240.jpg"
+      },
+      {
+        "model": "GLE",
+        "price": "Rs. 73.7 Lakh",
+        "details": "1950 cc | 10 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jan/gle_360x240.jpg"
+      },
+      {
+        "model": "AMG GT 4-Door Coupe",
+        "price": "Rs. 2.42 Crore",
+        "details": "3998 cc | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Feb/4-door_360x240.jpg"
+      },
+      {
+        "model": "CLS",
+        "price": "Rs. 86.39 Lakh",
+        "details": "1950 cc | 19 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mercedes-benz-cls_360x240.jpg"
+      },
+      {
+        "model": "AMG GT",
+        "price": "Rs. 2.27 Crore",
+        "details": "3982 cc | 13 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/May/gt-2020_360x240.jpg"
+      },
+      {
+        "model": "E-Class All-Terrain",
+        "price": "Rs. 77.25 Lakh",
+        "details": "1950 cc | 13 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mercedes-benz-e-class-all-terrain_360x240.jpg"
+      },
+      {
+        "model": "V-Class",
+        "price": "Rs. 71.1 Lakh",
+        "details": "2143 cc | 16 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mercedes-benz-v-class_360x240.jpg"
+      },
+      {
+        "model": "GLC Coupe",
+        "price": "Rs. 62.7 Lakh",
+        "details": "1950 cc | 16 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Mar/glc_coupe_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Mahindra",
+    "logo": "https://www.carlogos.org/car-logos/mahindra-logo.png",
+    "cars": [
+      {
+        "model": "Scorpio",
+        "price": "Rs. 12.39 Lakh",
+        "details": "2179 cc | 16 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/scorpio_360x240.jpg"
+      },
+      {
+        "model": "Thar",
+        "price": "Rs. 9.59 Lakh",
+        "details": "2498 cc | 17 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Aug/thar-3_360x240.jpg"
+      },
+      {
+        "model": "XUV500",
+        "price": "Rs. 13.19 Lakh",
+        "details": "2179 cc | 15 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/mahindra-xuv-500_360x240.jpg"
+      },
+      {
+        "model": "XUV300",
+        "price": "Rs. 8.3 Lakh",
+        "details": "1197 cc | 20 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/xuv-300-1_360x240.jpg"
+      },
+      {
+        "model": "Bolero",
+        "price": "Rs. 7.98 Lakh",
+        "details": "1498 cc | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/bolero-1_360x240.jpg"
+      },
+      {
+        "model": "Bolero Pik-Up",
+        "price": "Rs. 7.84 Lakh",
+        "details": "2523 cc | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Nov/mahindra_bolero_pik_up_360x240.jpg"
+      },
+      {
+        "model": "TUV300",
+        "price": "Rs. 8.54 Lakh",
+        "details": "1493 cc | 18 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mahindra-tuv-300_360x240.jpg"
+      },
+      {
+        "model": "Marazzo",
+        "price": "Rs. 9.99 Lakh",
+        "details": "1497 cc | 17 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Aug/marazzo-2_360x240.jpg"
+      },
+      {
+        "model": "Alturas G4",
+        "price": "Rs. 28.69 Lakh",
+        "details": "2157 cc | 12 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mahindra-alturas-g4_360x240.jpg"
+      },
+      {
+        "model": "Bolero Power Plus",
+        "price": "Rs. 7.61 Lakh",
+        "details": "1493 cc | 17 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mahindra-bolero-power-plus_360x240.jpg"
+      },
+      {
+        "model": "TUV 300 Plus",
+        "price": "Rs. 9.92 Lakh",
+        "details": "2179 cc | 18 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mahindra-tuv-300-plus_360x240.jpg"
+      },
+      {
+        "model": "KUV100 NXT",
+        "price": "Rs. 5.54 Lakh",
+        "details": "1198 cc | 18 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mahindra-kuv100-nxt_360x240.jpg"
+      },
+      {
+        "model": "E Verito",
+        "price": "Rs. 9.12 Lakh",
+        "details": "Electric(Battery)",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/verito_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Hyundai",
+    "logo": "https://www.carlogos.org/car-logos/hyundai-logo.png",
+    "cars": [
+      {
+        "model": "Creta",
+        "price": "Rs. 9.99 Lakh",
+        "details": "1497 cc | 21 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/xcent_360x240.jpg"
+      },
+      {
+        "model": "Elite i20",
+        "price": "Rs. 6.49 Lakh",
+        "details": "1197 cc | 19 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/elite-i20-1_360x240.jpg"
+      },
+      {
+        "model": "Venue",
+        "price": "Rs. 6.7 Lakh",
+        "details": "998 cc | 24 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/hyundai-venue-new_360x240.jpg"
+      },
+      {
+        "model": "Verna",
+        "price": "Rs. 9.3 Lakh",
+        "details": "1497 cc | 25 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/verna_360x240.jpg"
+      },
+      {
+        "model": "Grand i10",
+        "price": "Rs. 5.89 Lakh",
+        "details": "1197 cc | 19 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/grand-i10_360x240.jpg"
+      },
+      {
+        "model": "Aura",
+        "price": "Rs. 5.79 Lakh",
+        "details": "1197 cc | Petrol | Diesel | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/hyundai-aura-rgt_360x240.jpg"
+      },
+      {
+        "model": "Grand i10 Nios",
+        "price": "Rs. 5.06 Lakh",
+        "details": "1197 cc | 26 kmpl | Petrol | Diesel | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/grand-i10-nios_360x240.jpg"
+      },
+      {
+        "model": "Santro",
+        "price": "Rs. 4.57 Lakh",
+        "details": "1086 cc | 20 kmpl | Petrol | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/santro_360x240.jpg"
+      },
+      {
+        "model": "Xcent",
+        "price": "Rs. 5.81 Lakh",
+        "details": "1197 cc | 25 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/xcent_360x240.jpg"
+      },
+      {
+        "model": "Elantra",
+        "price": "Rs. 17.6 Lakh",
+        "details": "1498 cc | 15 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/elantra_360x240.jpg"
+      },
+      {
+        "model": "Tucson",
+        "price": "Rs. 18.76 Lakh",
+        "details": "1999 cc | 18 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jul/tucson-1_360x240.jpg"
+      },
+      {
+        "model": "Kona Electric",
+        "price": "Rs. 23.75 Lakh",
+        "details": "Electric(Battery)",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/hyundai-kona_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Toyota",
+    "logo": "https://www.carlogos.org/car-logos/toyota-logo.png",
+    "cars": [
+      {
+        "model": "Fortuner",
+        "price": "Rs. 28.66 Lakh",
+        "details": "2694 cc | 15 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/toyota-fortuner_360x240.jpg"
+      },
+      {
+        "model": "Innova Crysta",
+        "price": "Rs. 15.66 Lakh",
+        "details": "2393 cc | 14 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/crysta_360x240.jpg"
+      },
+      {
+        "model": "Glanza",
+        "price": "Rs. 7.01 Lakh",
+        "details": "1197 cc | 24 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/toyota-glanza-rgt_360x240.jpg"
+      },
+      {
+        "model": "Vellfire",
+        "price": "Rs. 79.5 Lakh",
+        "details": "2494 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/toyota-vellfire_360x240.jpg"
+      },
+      {
+        "model": "Yaris",
+        "price": "Rs. 8.86 Lakh",
+        "details": "1496 cc | 18 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/toyota-yaris-rgt_360x240.jpg"
+      },
+      {
+        "model": "Land Cruiser",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/content/2020/Jan/land_m8_560x420_140x105.jpg"
+      },
+      {
+        "model": "Camry 2019",
+        "price": "Rs. 37.88 Lakh",
+        "details": "2487 cc | 19 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/toyota-camry-new_360x240.jpg"
+      },
+      {
+        "model": "Land Cruiser Prado",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/content/2018/Mar/2018-toyota-land-cruiser-prado-launched-india-1_140x105.jpg"
+      },
+      {
+        "model": "Prius",
+        "price": "Rs. 45.09 Lakh",
+        "details": "26 kmpl | Petrol |",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/toyota-prius_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Tata",
+    "logo": "https://www.carlogos.org/car-logos/tata-logo.png",
+    "cars": [
+      {
+        "model": "Nexon",
+        "price": "Rs. 6.95 Lakh",
+        "details": "1199 cc | 22 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tata-nexon-new_360x240.jpg"
+      },
+      {
+        "model": "Altroz",
+        "price": "Rs. 5.29 Lakh",
+        "details": "1199 cc | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tata-altroz_360x240.jpg"
+      },
+      {
+        "model": "Tiago",
+        "price": "Rs. 4.6 Lakh",
+        "details": "1199 cc | 24 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tata_tiago_930x620_360x240.jpg"
+      },
+      {
+        "model": "Harrier",
+        "price": "Rs. 13.69 Lakh",
+        "details": "1956 cc | 17 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tata-harrier-new_360x240.jpg"
+      },
+      {
+        "model": "Tigor",
+        "price": "Rs. 5.75 Lakh",
+        "details": "1199 cc | 20 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tata_tigor_930x620_360x240.jpg"
+      },
+      {
+        "model": "Nexon EV",
+        "price": "Rs. 13.99 Lakh",
+        "details": "Electric(Battery)",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tata_nexon_ev_right_930x620_360x240.jpg"
+      },
+      {
+        "model": "Yodha Pickup",
+        "price": "Rs. 6.94 Lakh",
+        "details": "2956 cc | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Feb/tata_yodha_pickup_360x240.jpg"
+      },
+      {
+        "model": "Tigor EV",
+        "price": "Rs. 9.54 Lakh",
+        "details": "Electric(Battery)",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tigor-ev_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Honda",
+    "logo": "https://www.carlogos.org/car-logos/honda-logo.png",
+    "cars": [
+      {
+        "model": "Amaze",
+        "price": "Rs. 6.09 Lakh",
+        "details": "1498 cc | 27 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/amaze_360x240.jpg"
+      },
+      {
+        "model": "City",
+        "price": "Rs. 9.91 Lakh",
+        "details": "1497 cc | 17 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jul/city-202-1_360x240.jpg"
+      },
+      {
+        "model": "Civic",
+        "price": "Rs. 17.93 Lakh",
+        "details": "1799 cc | 17 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/honda-civic_930x620_360x240.jpg"
+      },
+      {
+        "model": "Accord",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/honda-accord_360x240.jpg"
+      },
+      {
+        "model": "CR-V",
+        "price": "Rs. 28.27 Lakh",
+        "details": "1997 cc | 14 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/crv_360x240.jpg"
+      },
+      {
+        "model": "Jazz",
+        "price": "Rs. 7.45 Lakh",
+        "details": "1199 cc | 27 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/jazz_360x240.jpg"
+      },
+      {
+        "model": "WR-V",
+        "price": "Rs. 8.49 Lakh",
+        "details": "1498 cc | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jul/wrv-202_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Volvo",
+    "logo": "https://www.carlogos.org/car-logos/volvo-logo.png",
+    "cars": [
+      {
+        "model": "XC90",
+        "price": "Rs. 80.9 Lakh",
+        "details": "1969 cc | 42 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/volvo-xc90_360x240.jpg"
+      },
+      {
+        "model": "XC40",
+        "price": "Rs. 39.9 Lakh",
+        "details": "1969 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/volvo-xc40_360x240.jpg"
+      },
+      {
+        "model": "S60",
+        "price": "Rs. 38.5 Lakh",
+        "details": "1969 cc | 27 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/volvo-s60-2019_360x240.jpg"
+      },
+      {
+        "model": "S90",
+        "price": "Rs. 58.9 Lakh",
+        "details": "1969 cc | 18 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/volvo-s90_360x240.jpg"
+      },
+      {
+        "model": "XC60",
+        "price": "Rs. 59.9 Lakh",
+        "details": "1969 cc | 11 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/volvo-xc60_360x240.jpg"
+      },
+      {
+        "model": "S60 Cross Country",
+        "price": "Rs. 44.26 Lakh",
+        "details": "2400 cc | 20 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/content/2016/Mar/volvo-s60-cross-country-bmw-320d-m-sport-comparo-t_140x105.jpg"
+      },
+      {
+        "model": "V90 Cross Country",
+        "price": "Rs. 65.31 Lakh",
+        "details": "1969 cc | 13 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/volvo-v90-cross-country_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Land Rover",
+    "logo": "https://pngimg.com/uploads/land_rover/land_rover_PNG1.png",
+    "cars": [
+      {
+        "model": "Range Rover Evoque",
+        "price": "Rs. 58 Lakh",
+        "details": "1997 cc | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jan/land-rover-range-rover-evoque_360x240.jpg"
+      },
+      {
+        "model": "Range Rover Velar",
+        "price": "Rs. 73.3 Lakh",
+        "details": "1997 cc | 16 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/land-rover-range-rover-velar_360x240.jpg"
+      },
+      {
+        "model": "Range Rover Sport",
+        "price": "Rs. 87.02 Lakh",
+        "details": "1997 cc | 13 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/land-rover-range-rover-sport_360x240.jpg"
+      },
+      {
+        "model": "Discovery Sport",
+        "price": "Rs. 59.91 Lakh",
+        "details": "1997 cc | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Feb/discovery_360x240.jpg"
+      },
+      {
+        "model": "Range Rover",
+        "price": "Rs. 1.96 Crore",
+        "details": "2993 cc | 13 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/land-rover-range-rover_360x240.jpg"
+      },
+      {
+        "model": "Defender",
+        "price": "Rs. 69.99 Lakh",
+        "details": "1997 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Feb/defender_360x240.jpg"
+      },
+      {
+        "model": "Discovery",
+        "price": "Rs. 75.59 Lakh",
+        "details": "1999 cc | 18 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/discovery-1_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Ford",
+    "logo": "https://www.carlogos.org/car-logos/ford-logo.png",
+    "cars": [
+      {
+        "model": "EcoSport",
+        "price": "Rs. 8.04 Lakh",
+        "details": "1498 cc | 22 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/ecosport_360x240.jpg"
+      },
+      {
+        "model": "Endeavour",
+        "price": "Rs. 29.55 Lakh",
+        "details": "1996 cc | 14 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Feb/ford_endeavour_360x240.jpg"
+      },
+      {
+        "model": "Mustang",
+        "price": "Rs. 74.62 Lakh",
+        "details": "4951 cc | 13 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jul/ford-mustang_360x240.jpg"
+      },
+      {
+        "model": "Figo",
+        "price": "Rs. 5.39 Lakh",
+        "details": "1194 cc | 24 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/figo_360x240.jpg"
+      },
+      {
+        "model": "Freestyle",
+        "price": "Rs. 5.89 Lakh",
+        "details": "1195 cc | 24 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/freestyle_360x240.jpg"
+      },
+      {
+        "model": "Aspire",
+        "price": "Rs. 5.99 Lakh",
+        "details": "1196 cc | 24 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/aspire_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Porsche",
+    "logo": "https://www.carlogos.org/car-logos/porsche-logo.png",
+    "cars": [
+      {
+        "model": "Cayenne",
+        "price": "Rs. 1.19 Crore",
+        "details": "2995 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/porsche-cayenne_360x240.jpg"
+      },
+      {
+        "model": "Panamera",
+        "price": "Rs. 1.48 Crore",
+        "details": "3996 cc | 18 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jan/porsche-panamera_360x240.jpg"
+      },
+      {
+        "model": "718",
+        "price": "Rs. 85.95 Lakh",
+        "details": "1988 cc | 9 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jan/porsche-718_360x240.jpg"
+      },
+      {
+        "model": "Macan",
+        "price": "Rs. 69.98 Lakh",
+        "details": "1984 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jan/porsche_macan_360x240.jpg"
+      },
+      {
+        "model": "911",
+        "price": "Rs. 1.62 Crore",
+        "details": "2981 cc | 9 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jan/porsche-911_360x240.jpg"
+      },
+      {
+        "model": "Cayenne Coupe",
+        "price": "Rs. 1.31 Crore",
+        "details": "2995 cc | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Dec/cayenne-coupe_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Lexus",
+    "logo": "https://www.carlogos.org/car-logos/lexus-logo.png",
+    "cars": [
+      {
+        "model": "LC 500h",
+        "price": "Rs. 1.96 Crore",
+        "details": "3456 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jan/lexus_lc500h_360x240.jpg"
+      },
+      {
+        "model": "ES",
+        "price": "Rs. 51.9 Lakh",
+        "details": "2487 cc | 22 kmpl | Petrol",
+        "bodyType": "sedan"
+      },
+      {
+        "model": "LX",
+        "price": "Rs. 2.32 Crore",
+        "details": "5663 cc | 7 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/May/vespa-lx-bsvi_360x240.jpg"
+      },
+      {
+        "model": "RX",
+        "price": "Rs. 99 Lakh",
+        "details": "3456 cc | 19 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/lexus-rx_360x240.jpg"
+      },
+      {
+        "model": "NX",
+        "price": "Rs. 54.9 Lakh",
+        "details": "2499 cc | 18 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mahindra-kuv100-nxt_360x240.jpg"
+      },
+      {
+        "model": "LS",
+        "price": "Rs. 1.82 Crore",
+        "details": "3456 cc | 15 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/lexus-ls_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Audi",
+    "logo": "https://www.carlogos.org/car-logos/audi-logo.png",
+    "cars": [
+      {
+        "model": "A6",
+        "price": "Rs. 54.42 Lakh",
+        "details": "1984 cc | 15 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Oct/audi_a6_2019_360x240.jpg"
+      },
+      {
+        "model": "GTI",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/car_360x240.png"
+      },
+      {
+        "model": "A8",
+        "price": "Rs. 1.56 Crore",
+        "details": "2995 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/audi_a8_2019_360x240.jpg"
+      },
+      {
+        "model": "Q8",
+        "price": "Rs. 1.33 Crore",
+        "details": "2996 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Mar/audi_q8_1_360x240.jpg"
+      },
+      {
+        "model": "R8",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/audi_r8_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Ferrari",
+    "logo": "https://www.carlogos.org/car-logos/ferrari-logo.png",
+    "cars": [
+      {
+        "model": "GTC4Lusso",
+        "price": "Rs. 4.26 Crore",
+        "details": "3855 cc | 4 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/ferrari-gtc4lusso_360x240.jpg"
+      },
+      {
+        "model": "Portofino",
+        "price": "Rs. 3.5 Crore",
+        "details": "3855 cc | 9 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/ferrari-portofino_360x240.jpg"
+      },
+      {
+        "model": "Roma",
+        "price": "Rs. 4 Crore",
+        "details": "3855 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/roma_360x240.jpg"
+      },
+      {
+        "model": "SF90 Stradale",
+        "price": "Rs. 7.5 Crore",
+        "details": "4998 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/sf90_360x240.jpg"
+      },
+      {
+        "model": "812",
+        "price": "Rs. 5.75 Crore",
+        "details": "6496 cc | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/812_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Rolls Royce",
+    "logo": "https://www.carlogos.org/logo/Rolls-Royce-logo-2048x2048.png",
+    "cars": [
+      {
+        "model": "Wraith",
+        "price": "Rs. 6.22 Crore",
+        "details": "6592 cc | 10 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jul/wraith-1_360x240.jpg"
+      },
+      {
+        "model": "Phantom",
+        "price": "Rs. 8.99 Crore",
+        "details": "6749 cc | 10 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/phantom-1_360x240.jpg"
+      },
+      {
+        "model": "Ghost",
+        "price": "Rs. 5.25 Crore",
+        "details": "6592 cc | 10 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/rolls-royce-ghost_360x240.jpg"
+      },
+      {
+        "model": "Dawn",
+        "price": "Rs. 7.3 Crore",
+        "details": "6598 cc | 10 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/rolls-royce-dawn_360x240.jpg"
+      },
+      {
+        "model": "Cullinan",
+        "price": "Rs. 6.95 Crore",
+        "details": "6750 cc | 10 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/rolls-royce-cullinan_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Maserati",
+    "logo": "https://www.carlogos.org/car-logos/maserati-logo.png",
+    "cars": [
+      {
+        "model": "Quattroporte",
+        "price": "Rs. 1.71 Crore",
+        "details": "2999 cc | 12 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/maserati-quattroporte_360x240.jpg"
+      },
+      {
+        "model": "Ghibli",
+        "price": "Rs. 1.35 Crore",
+        "details": "2979 cc | 17 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/maserati-ghibli_360x240.jpg"
+      },
+      {
+        "model": "Gran Turismo",
+        "price": "Rs. 2.25 Crore",
+        "details": "4224 cc | 10 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/maserati-gran-turismo_360x240.jpg"
+      },
+      {
+        "model": "Gran Cabrio",
+        "price": "Rs. 2.46 Crore",
+        "details": "4691 cc | 10 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Oct/maserati-grancabrio_360x240.jpg"
+      },
+      {
+        "model": "Levante",
+        "price": "Rs. 1.49 Crore",
+        "details": "2979 cc | 12 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/maserati-levante_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Renault",
+    "logo": "https://www.carlogos.org/car-logos/renault-logo.png",
+    "cars": [
+      {
+        "model": "KWID",
+        "price": "Rs. 2.92 Lakh",
+        "details": "799 cc | 25 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/kwid_360x240.jpg"
+      },
+      {
+        "model": "Triber",
+        "price": "Rs. 4.99 Lakh",
+        "details": "999 cc | 20 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/triber_360x240.jpg"
+      },
+      {
+        "model": "Duster",
+        "price": "Rs. 8.49 Lakh",
+        "details": "1498 cc | 20 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/duster_360x240.jpg"
+      },
+      {
+        "model": "Captur",
+        "price": "Rs. 9.49 Lakh",
+        "details": "1498 cc | 20 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/content/2020/Jun/sucoll_140x105.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Skoda",
+    "logo": "https://www.carlogos.org/car-logos/skoda-logo.png",
+    "cars": [
+      {
+        "model": "Rapid",
+        "price": "Rs. 7.49 Lakh",
+        "details": "999 cc | 22 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/May/new_360x240.jpg"
+      },
+      {
+        "model": "Karoq",
+        "price": "Rs. 24.99 Lakh",
+        "details": "1498 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/May/skoda-karoq-2020_360x240.jpg"
+      },
+      {
+        "model": "Octavia",
+        "price": "Rs. 35.99 Lakh",
+        "details": "1968 cc | 15 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/octavia_360x240.jpg"
+      },
+      {
+        "model": "Superb",
+        "price": "Rs. 29.99 Lakh",
+        "details": "1798 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/skoda-new-superb-new_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Volkswagen",
+    "logo": "https://www.carlogos.org/car-logos/volkswagen-logo.png",
+    "cars": [
+      {
+        "model": "Polo",
+        "price": "Rs. 5.82 Lakh",
+        "details": "999 cc | 18 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/volkswagen-polo_930x620_360x240.jpg"
+      },
+      {
+        "model": "Vento",
+        "price": "Rs. 8.86 Lakh",
+        "details": "998 cc | 18 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/vento_360x240.jpg"
+      },
+      {
+        "model": "T-Roc",
+        "price": "Rs. 19.99 Lakh",
+        "details": "1498 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Mar/t-roc_360x240.jpg"
+      },
+      {
+        "model": "Tiguan Allspace",
+        "price": "Rs. 33.12 Lakh",
+        "details": "1984 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/tiguan-allspace_930x620_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Jeep",
+    "logo": "https://www.carlogos.org/car-logos/jeep-logo.png",
+    "cars": [
+      {
+        "model": "Compass",
+        "price": "Rs. 16.49 Lakh",
+        "details": "1368 cc | 17 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/compass_360x240.jpg"
+      },
+      {
+        "model": "Wrangler",
+        "price": "Rs. 63.94 Lakh",
+        "details": "1998 cc | 12 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/jeep-wrangler_360x240.jpg"
+      },
+      {
+        "model": "Compass Trailhawk",
+        "price": "Rs. 26.8 Lakh",
+        "details": "1956 cc | 16 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/jeep-compass-trailhawk_360x240.jpg"
+      },
+      {
+        "model": "Grand Cherokee",
+        "price": "Rs. 78.88 Lakh",
+        "details": "2998 cc | 13 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/jeep-grand-cherokee_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Jaguar",
+    "logo": "https://www.carlogos.org/car-logos/jaguar-logo.png",
+    "cars": [
+      {
+        "model": "F-TYPE",
+        "price": "Rs. 95.12 Lakh",
+        "details": "5000 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/May/jagur_f-type_360x240.jpg"
+      },
+      {
+        "model": "XF",
+        "price": "Rs. 55.67 Lakh",
+        "details": "1997 cc | 11 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/xf3r-right-side-view_360x240.jpg"
+      },
+      {
+        "model": "F-Pace",
+        "price": "Rs. 66.07 Lakh",
+        "details": "1997 cc | 14 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/f-pace-1_360x240.jpg"
+      },
+      {
+        "model": "XE",
+        "price": "Rs. 46.64 Lakh",
+        "details": "1997 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Dec/jaguar-xe-zw-cover_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Lamborghini",
+    "logo": "https://www.carlogos.org/car-logos/lamborghini-logo.png",
+    "cars": [
+      {
+        "model": "Huracan",
+        "price": "Rs. 2.99 Crore",
+        "details": "5204 cc | 11 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Oct/lamborghini-huracan-evo_360x240.jpg"
+      },
+      {
+        "model": "Urus",
+        "price": "Rs. 3.1 Crore",
+        "details": "3996 cc | 8 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/lamborghini-urus_360x240.jpg"
+      },
+      {
+        "model": "Aventador",
+        "price": "Rs. 5.01 Crore",
+        "details": "6498 cc | 8 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/lamborghini-aventador_360x240.jpg"
+      },
+      {
+        "model": "Huracan EVO",
+        "price": "Rs. 3.22 Crore",
+        "details": "5204 cc | 7 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Oct/lamborghini-huracan-evo_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Bentley",
+    "logo": "https://www.carlogos.org/car-logos/bentley-logo.png",
+    "cars": [
+      {
+        "model": "Mulsanne",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Apr/mulsanne_360x240.jpg"
+      },
+      {
+        "model": "Flying Spur",
+        "price": "Rs. 3.21 Crore",
+        "details": "3993 cc | 13 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Apr/047_360x240.jpg"
+      },
+      {
+        "model": "Continental",
+        "price": "Rs. 3.29 Crore",
+        "details": "13 kmpl | Petrol |",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/continental-gt-650-right-side-view_360x240.jpg"
+      },
+      {
+        "model": "Bentayga",
+        "price": "Rs. 3.78 Crore",
+        "details": "3998 cc | 11 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Apr/bentayga-1_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Datsun",
+    "logo": "https://www.carlogos.org/car-logos/datsun-logo.png",
+    "cars": [
+      {
+        "model": "redi-GO",
+        "price": "Rs. 2.86 Lakh",
+        "details": "799 cc | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/redi-go_600x400_360x240.jpg"
+      },
+      {
+        "model": "GO",
+        "price": "Rs. 3.99 Lakh",
+        "details": "1198 cc | 20 kmpl | Petrol",
+        "bodyType": "sedan"
+      },
+      {
+        "model": "GO Plus",
+        "price": "Rs. 4.19 Lakh",
+        "details": "1199 cc | 20 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/datsun-go-plus_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "MINI",
+    "logo": "https://www.carlogos.org/car-logos/mini-logo.png",
+    "cars": [
+      {
+        "model": "Cooper Convertible",
+        "price": "Rs. 38.9 Lakh",
+        "details": "1998 cc | 17 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mini-cooper-convertible_360x240.jpg"
+      },
+      {
+        "model": "Countryman",
+        "price": "Rs. 38.5 Lakh",
+        "details": "1995 cc | 19 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mini-countryman_360x240.jpg"
+      },
+      {
+        "model": "Cooper 3 DOOR",
+        "price": "Rs. 34.5 Lakh",
+        "details": "1998 cc | 17 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mini-cooper-3-door_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Kia",
+    "logo": "https://www.carlogos.org/car-logos/kia-logo.png",
+    "cars": [
+      {
+        "model": "Seltos",
+        "price": "Rs. 9.89 Lakh",
+        "details": "1353 cc | 21 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/kia-seltos-new_360x240.jpg"
+      },
+      {
+        "model": "Carnival",
+        "price": "Rs. 24.95 Lakh",
+        "details": "2199 cc | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/kia-carnival-2020_600x400_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Nissan",
+    "logo": "https://www.carlogos.org/car-logos/nissan-logo.png",
+    "cars": [
+      {
+        "model": "Kicks",
+        "price": "Rs. 9.49 Lakh",
+        "details": "1498 cc | 14 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/kicks_360x240.jpg"
+      },
+      {
+        "model": "GT-R",
+        "price": "Rs 2.12 Crore",
+        "details": "3798 cc | 9 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/continental-gt-650-right-side-view_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "MG Motor",
+    "logo": "https://upload.wikimedia.org/wikipedia/en/6/66/New_mg_logo.png",
+    "cars": [
+      {
+        "model": "Hector",
+        "price": "Rs. 12.73 Lakh",
+        "details": "1451 cc | 17 kmpl | Petrol | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/mg-hector-plus-1_360x240.jpg"
+      },
+      {
+        "model": "ZS EV",
+        "price": "Rs. 20.88 Lakh",
+        "details": "Electric(Battery)",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/mg-zs-ev_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Mitsubishi",
+    "logo": "https://www.carlogos.org/car-logos/mitsubishi-logo.png",
+    "cars": [
+      {
+        "model": "Pajero Sport",
+        "price": "Rs. 27.42 Lakh",
+        "details": "2477 cc | 14 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2020/Jun/pajero-sport_360x240.jpg"
+      },
+      {
+        "model": "Outlander",
+        "price": "Rs. 26.93 Lakh",
+        "details": "2360 cc | 10 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/mitsubishi-outlander_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "ISUZU",
+    "logo": "https://www.carlogos.org/car-logos/isuzu-logo.png",
+    "cars": [
+      {
+        "model": "D-Max V-Cross",
+        "price": "Rs. 16.54 Lakh",
+        "details": "2499 cc | 12 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/isuzu-d-max-v-cross_360x240.jpg"
+      },
+      {
+        "model": "MUX",
+        "price": "Rs. 27.34 Lakh",
+        "details": "2999 cc | 14 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/isuzu-mux_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Aston Martin",
+    "logo": "http://www.pngmart.com/files/10/Aston-Martin-Logo-PNG-Image.png",
+    "cars": [
+      {
+        "model": "DB11",
+        "price": "Rs. 3.97 Crore",
+        "details": "5204 cc | 6 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/aston-martin-db11_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Bugatti",
+    "logo": "https://www.carlogos.org/car-logos/bugatti-logo.png",
+    "cars": [
+      {
+        "model": "Chiron",
+        "price": "Rs. 19.21 Crore",
+        "details": "7993 cc | 6 kmpl | Petrol",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/bugatti-chiron_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Force Motors",
+    "logo": "https://www.carlogos.org/logo/Force-Motors-logo-1920x1080.png",
+    "cars": [
+      {
+        "model": "Gurkha",
+        "price": "Rs. 9.75 Lakh",
+        "details": "2596 cc | 17 kmpl | Diesel",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/model/2019/Sep/force-gurkha_360x240.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "Bajaj",
+    "logo": "https://lh3.googleusercontent.com/proxy/x3uceOhHJqGDA7ljEkiIb39c-4O0Hq2esZ_Fb5S3HI6h9hzxbM9wxd6ROy7w96MfvKi5lPqbmKBXoIFXaMFGeOFLwUXXEopqGAScWushNJa5rR0mHEah2GJ7Hu8F_g",
+    "cars": [
+      {
+        "model": "Qute (RE60)",
+        "price": "Rs. 2.48 Lakh",
+        "details": "216 cc | 35 kmpl | Petrol | CNG",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/content/2020/Jun/city2020reviewtitle_140x105.jpg"
+      }
+    ]
+  },
+  {
+    "maker": "DC",
+    "logo": "https://images.carandbike.com/car-images/big/dc/dc.png",
+    "cars": [
+      {
+        "model": "Avanti",
+        "price": "TBA",
+        "details": "",
+        "bodyType": "sedan",
+        "image": "https://media.zigcdn.com/media/video/2018/Feb/dc-tca-sportscar-auto-expo-2018-zigwheels-india-t1_140x105.png"
+      }
+    ]
+  }
+]
