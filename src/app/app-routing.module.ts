@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterUserComponent } from './pages/initial-screens/register-user/register-user.component';
 
 const routes: Routes = [
   {
@@ -32,8 +33,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-  },
-  {
+  }, {
+    path: 'register',
+    component: RegisterUserComponent
+  },{
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

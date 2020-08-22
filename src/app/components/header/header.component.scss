@@ -1,0 +1,91 @@
+
+  
+// ************************   Header  *****************************
+
+
+.toolbar-background-md {
+    --background : var(--primary-appheader-color);
+  }
+
+  //  .header-ios .damco-subheader.toolbar-ios, 
+  //  .damco-subheader{
+  //     background-color: inherit !important;
+  //   }
+  .bar-button-md[icon-only] {
+    padding: 0;
+    color: white;
+
+  }
+
+//   .imagelogo {
+//     height: 35px;
+//     width: 60px;
+//     padding-top: 1px;
+//   }
+
+  .nab-header ion-navbar,
+  .nab-header {
+    // --background : var(---primary-color3) !important;
+    text-align: center;
+  }
+
+  .toolbar-background-ios {
+    background: inherit !important;
+  }
+
+  .nab-header{
+    // --background : var(---primary-color3);
+    --background: var(--primary-appheader-color) !important;
+  }
+
+  .toolbar-ios {
+    margin-top: 7px;
+  }
+
+  .platform-ios {
+    position: relative;
+    margin-top: 15px;
+    // margin-top: 142px;
+  }
+
+  .back-button.show-back-button {
+    color: white !important;
+    background: inherit !important;
+  }
+
+  .damco-subheader.toolbar-md {
+    min-height: 45px !important;
+    // text-align: left;
+  }
+
+  .subhead-title .toolbar-title {
+    color: white !important;
+  }
+  ion-title{
+    position: absolute;
+    width: 100%;
+    // z-index: 222;
+    top: 0px;
+    height: 100%;
+    left: 0px;
+    right: 0px;
+    --color:var(--primary-headerText-color);
+  }
+  ion-toolbar{
+    --background : var(--primary-appheader-color);
+  }
+  ion-header button{
+    z-index: 333 !important;
+  }
+  ion-back-button{
+    --color:var(--primary-headerText-color);
+  }
+  ion-menu-button{
+    --color:var(--primary-headerText-color);
+  }
+  ion-header{
+  --background: var(--primary-appheader-color) !important;
+  }
+//   ion-header ion-menu-button{
+//     z-index: 333 !important;
+//   }

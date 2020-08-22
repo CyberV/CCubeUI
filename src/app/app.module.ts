@@ -17,6 +17,9 @@ import { PlanComparisonComponent } from './plan-comparison/plan-comparison.compo
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { MonthlySavingsComponent } from './monthly-savings/monthly-savings.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterUserComponent } from './pages/initial-screens/register-user/register-user.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -35,14 +38,16 @@ export function socialConfigs() {
 }
 
 @NgModule({
+
   declarations: [
     AppComponent, 
     HomeComponent, 
     PlanComparisonComponent, 
     MonthlySavingsComponent,
+    RegisterUserComponent,
     ProfileComponent
   ],
-  entryComponents: [HomeComponent],
+  entryComponents: [HomeComponent, RegisterUserComponent],
   imports: [
     BrowserModule, 
     CommonComponentsModule, 
@@ -51,7 +56,10 @@ export function socialConfigs() {
     AppRoutingModule, 
     SocialLoginModule, 
     HttpClientModule, 
-    TooltipModule
+    TooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ],
   providers: [
     { provide: Window, useValue: window },
@@ -59,6 +67,6 @@ export function socialConfigs() {
     { provide: AuthServiceConfig, useFactory: socialConfigs },
     // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent,HomeComponent, PlanComparisonComponent, MonthlySavingsComponent]
+  bootstrap: [AppComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent]
 })
 export class AppModule { }
