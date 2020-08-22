@@ -20,12 +20,14 @@ export class MobileInputComponent implements OnInit {
   @Input() name:string;
   @Input() placeholder:string;
   @Input() uppercase:boolean;
+  @Input() readonly: boolean;
 
   constructor() {
     this.name="Input";
     this.placeholder="";
     this.type = "number";
     this.uppercase = false;
+    this.readonly = false;
    }
 
   onPhoneChange(value) {

@@ -5,7 +5,8 @@
         <div class="input-group-prepend" *ngIf="name === 'Mobile Number'">
           <span class="input-group-text" id="basic-addon3"> + 91 | </span>
         </div>
-        <input [attr.type]="type" required #phoneInput 
+        <span *ngIf="readonly"> {{value}}</span>
+        <input *ngIf="!readonly" [attr.type]="type" required #phoneInput 
           class="form-control" 
           [class.not-mobile]="name !== 'Mobile Number'"
           (input)="onPhoneChange(phoneInput.value)"

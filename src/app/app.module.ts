@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { MonthlySavingsComponent } from './monthly-savings/monthly-savings.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -38,7 +39,8 @@ export function socialConfigs() {
     AppComponent, 
     HomeComponent, 
     PlanComparisonComponent, 
-    MonthlySavingsComponent 
+    MonthlySavingsComponent,
+    ProfileComponent
   ],
   entryComponents: [HomeComponent],
   imports: [

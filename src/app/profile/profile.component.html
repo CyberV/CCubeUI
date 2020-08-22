@@ -1,0 +1,50 @@
+<ion-content>
+  <div class="container-fluid">
+    <div class="row profile-content">
+      <div class="offset-md-2 col-md-8">
+        <div class="container">
+
+          <div class="card animate__animated animate__bounceInDown">
+            <img class="card-img-top" src="assets/banner1.JPG" alt="User Image">
+            <div class="card-body">
+              <h5 class="card-title"> Your Profile </h5>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <mobile-input [readonly]="true" name="Name" value="Vikrant Siwach"> </mobile-input>
+                  </li>
+                  <li class="list-group-item">
+                        Name : Vikrant Siwach
+
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-3">
+                        Phone
+                      </div>
+                      <div class="col-9">
+                        9560879722
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-3">
+                        Email
+                      </div>
+                      <div class="col-9">
+                        vikrant.siwach@gmail.com
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+
+            </div>
+            <div class="card-body">
+              <cta text="Log Out" (action)="logOutUser()"></cta>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

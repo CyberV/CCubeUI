@@ -8,17 +8,17 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class CarFormComponent implements OnInit {
 
-  @Input() verifyOnly : boolean;
+  @Input() verifyOnly: boolean;
 
   @Output() carReady = new EventEmitter();
 
-  showCarSelector:boolean;
-  findingCar:boolean;
+  showCarSelector: boolean;
+  findingCar: boolean;
   loading: boolean;
 
-  regNo:any;
-  maker:string;
-  model:string;
+  regNo: any;
+  maker: string;
+  model: string;
 
 
   constructor() {
@@ -28,7 +28,7 @@ export class CarFormComponent implements OnInit {
     this.verifyOnly = false;
   }
 
-  
+
   get isTypingRegNo() {
     return this.regNo && this.regNo.length > 2;
   }
@@ -37,26 +37,26 @@ export class CarFormComponent implements OnInit {
     let valid = false;
     let reg = this.regNo && this.regNo.toString();
 
-    if (!reg ) {
+    if (!reg) {
       return valid;
-    } 
+    }
     if (reg.length < 8) {
       return valid;
     }
 
-    if (isNaN(reg[0]) && isNaN(reg[1]) ) {    // HR
+    if (isNaN(reg[0]) && isNaN(reg[1])) {    // HR
       if (!isNaN(reg[2]) && !isNaN(reg[3])) {    // 51
-        if(isNaN(reg[4])) {
-          if (!isNaN(reg[reg.length - 1]) && !isNaN(reg[reg.length - 2]) ) {
-            valid = true;
-          }
+
+        if (!isNaN(reg[reg.length - 1]) && !isNaN(reg[reg.length - 2])) {
+          valid = true;
         }
+
       }
     }
     return valid;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   goToPlans(carDetails) {
 
@@ -64,7 +64,7 @@ export class CarFormComponent implements OnInit {
     if (!this.verifyOnly) {
       sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
     }
-    
+
 
     this.carReady.emit(carDetails);
 

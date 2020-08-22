@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -13,10 +12,6 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent
   }
 
 ];
