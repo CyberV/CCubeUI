@@ -3,3 +3,86 @@
 .plan-name {
     color: $secondary-color;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ion-content {
+    ion-card {
+  
+      
+      
+      box-shadow: 100px;
+      border-radius: 30px;
+      margin: 29px 0;
+  
+      ion-col {
+        ion-img {
+          position: relative;
+          bottom: 36px;
+          width: 120px;
+        }
+  
+        
+        
+      }
+  
+      .drop{
+        
+        background-color:#00A4A7
+        
+      }
+  
+     
+      
+  
+  
+  
+      .mask {
+        img {
+          width: 240px;
+          position: absolute;
+          top: 20px;
+          bottom: 0px;
+          left: 40px;
+          mask-image: linear-gradient(to top, rgba(0,0,0,.1), rgba(0,0,0,0));
+      
+        }
+      }
+  
+      ion-badge {
+        margin-top: 50px;
+        background: rgba(0,0,0,.08);
+      }
+  
+      ion-card-title {
+        font-weight: 800;
+        font-size: .8rem;
+      }
+      .font
+      {size: 8rem;}
+  
+      .no {
+        color: rgba(0,0,0,.66);
+        font-weight: normal;
+        font-size: 12px;
+      }
+    }
+  }
+  

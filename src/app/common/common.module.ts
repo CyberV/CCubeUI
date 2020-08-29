@@ -34,6 +34,7 @@ import { PlanCardComponent } from './plan-card/plan-card.component';
 import { PlanDetailsComponent } from './plan-details/plan-details.component';
 import { PlanSliderComponent } from './plan-slider/plan-slider.component';
 
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { PlanSliderComponent } from './plan-slider/plan-slider.component';
     IconComponent,
     HeadingComponent,
     SubheadingComponent,
+    
     MobileInputComponent,
     CtaComponent,
     SpinnerComponent,
@@ -71,6 +73,8 @@ import { PlanSliderComponent } from './plan-slider/plan-slider.component';
     IonicModule,
     CommonModule,
     ChartsModule,
+    MatExpansionModule,
+    
     TooltipModule,
     RouterModule
   ],

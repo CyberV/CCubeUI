@@ -30,7 +30,92 @@
             
             ></plan-slider>
 
-            <h2>Add Ons Section here</h2>
+            <h2>
+              <ion-slides [options]="options">
+        
+                <ion-slide>
+                  
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="7" class="poster-col">
+                        <img class="poster" src="https://www.komar.de/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" alt="">
+                      </ion-col>
+                      <ion-col size="7">
+                        <h5 class="ion-no-margin">Title</h5>
+                        <p class="ion-no-margin rate">
+                          <ion-icon name="star"></ion-icon> 8.5<br>
+                          <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light" >Add to  Cart</ion-button>
+                        </p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  
+                  
+                </ion-slide>
+                
+                <ion-slide>
+                  
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="7" class="poster-col">
+                        <img class="poster" src="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/black-panther-web.jpg" alt="">
+                      </ion-col>
+                      <ion-col size="7">
+                        <h5 class="ion-no-margin"> Title</h5>
+                        <p class="ion-no-margin rate">
+                          <ion-icon name="star"></ion-icon> 8.5<br>
+                          <span class = "cart">
+                          <ion-button size="small" type="submit" color="light" >Add to  Cart</ion-button>
+                          </span>
+                        </p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  
+                  
+                </ion-slide>
+                
+                <ion-slide>
+                  
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="7" class="poster-col">
+                        <img class="poster" src="https://www.komar.de/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" alt="">
+                      </ion-col>
+                      <ion-col size="7">
+                        <h5 class="ion-no-margin">Title</h5>
+                        <p class="ion-no-margin rate">
+                          <ion-icon name="star"></ion-icon> 8.5<br>
+                          <ion-button size="small" type="submit" color="light" >Add to  Cart</ion-button>
+                        </p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  
+                  
+                </ion-slide>
+                
+                <ion-slide>
+                  
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="7" class="poster-col">
+                        <img class="poster" src="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/black-panther-web.jpg" alt="">
+                      </ion-col>
+                      <ion-col size="7">
+                        <h5 class="ion-no-margin">Title</h5>
+                        <p class="ion-no-margin rate">
+                          <ion-icon name="star"></ion-icon> 8.5<br>
+                          <ion-button size="small" type="submit" color="light" >Add to  Cart</ion-button>
+                        </p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  
+                  
+                </ion-slide>
+                
+              </ion-slides></h2>
 
         </ng-container>
         
@@ -47,8 +132,7 @@
         <!-- <div *ngIf="!isMobile" class="card-deck row">
           <plan-card class="col-4" *ngFor="let plan of currentPlans" [plan]="plan"></plan-card>
         </div> -->
-
-
+        <ion-button (click)="openModal()" shape="round" color="warning"size="small" class="ion-text-capitalize">Add</ion-button>
 
       </ng-container>
 

@@ -15,3 +15,20 @@
 ion-slides {
     height: 100%;
   }
+
+  ion-badge {
+    padding: 28px 0;
+    border-radius: 18px;
+    color: #8c8c8c;
+    border: 1px solid #8c8c8c;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .poster-col {
+    padding-top: 30px;
+    height: 100px;
+    img {
+      border-radius: 10px;
+    }
+  }

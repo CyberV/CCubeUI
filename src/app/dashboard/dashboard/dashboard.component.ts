@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import M from 'materialize-css';
 import { PlanTableComponent } from 'app/common/plan-table/plan-table.component';
 import { Router } from '@angular/router';
+import { ModalPage } from 'app/modal/modal.page';
 
 declare var $:any;
 
@@ -27,8 +28,9 @@ export class DashboardComponent implements OnInit {
   slideOpts:any;
 
   constructor(
+    
     private platform: Platform,
-    private modalController: ModalController,
+    public modalController: ModalController,
     private router: Router
   ) {
     this.currentCar={};
@@ -44,6 +46,14 @@ export class DashboardComponent implements OnInit {
       speed: 400
     };
    }
+
+   async openModal() {
+    const modal = await this.modalController.create({
+      component: ModalPage,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
 
    get isMobile() {
     return !this.platform.is('desktop');
@@ -110,4 +120,20 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/dashboard/checkout']);
   }
 
+
+
+  options = {
+    centeredSlides: true,
+    slidesPerView: 1.5,
+    spaceBetween: 0,
+  };
+
+  categories = {
+    slidesPerView: 2,
+  };
+
+
 }
+
+
+

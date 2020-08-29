@@ -20,6 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterUserComponent } from './pages/initial-screens/register-user/register-user.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalPageModule } from './modal/modal.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -58,7 +60,9 @@ export function socialConfigs() {
     HttpClientModule, 
     TooltipModule,
     FormsModule,
+    ModalPageModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
 
   ],
   providers: [

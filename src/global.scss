@@ -25,6 +25,15 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+
+.my-custom-class .modal-wrapper{
+  height: 60%;
+  top: 40%;
+  position: absolute;
+  display: block;
+  border-radius: 30px;
+}
+
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors
