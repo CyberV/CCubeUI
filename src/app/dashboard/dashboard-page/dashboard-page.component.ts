@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { ModalPage } from 'app/modal/modal.page';
-
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',

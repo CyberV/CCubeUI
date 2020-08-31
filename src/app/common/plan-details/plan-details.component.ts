@@ -18,6 +18,8 @@ export class PlanDetailsComponent implements OnInit {
 
   currentFeatures: any;
 
+  isActive: boolean = true;
+
   constructor() {
     this.currentFeatures = [];
 
