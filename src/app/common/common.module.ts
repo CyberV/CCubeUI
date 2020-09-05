@@ -35,6 +35,8 @@ import { PlanDetailsComponent } from './plan-details/plan-details.component';
 import { PlanSliderComponent } from './plan-slider/plan-slider.component';
 
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ListComponent } from './list/list.component';
+import { RsDirective } from './rs.directive';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MobileNavComponent,
     PlanCardComponent,
     PlanDetailsComponent,
-    PlanSliderComponent
+    PlanSliderComponent,
+    ListComponent,
+    RsDirective
 
   ],
   imports: [
@@ -106,7 +110,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MobileNavComponent,
     PlanCardComponent,
     PlanDetailsComponent,
-    PlanSliderComponent
+    PlanSliderComponent,
+    ListComponent,
+
+    RsDirective
   ]
 })
 export class CommonComponentsModule { }

@@ -6,10 +6,20 @@ ion-app {
 }
 
 ion-title {
+    height: 56px;
+}
+
+ion-toolbar, ion-header, ion-title {
     text-align: center;
     img {
-        width: 10%;
+        width: 18%;
     }
+
+    color: white;
+    background: $primary-color;
+
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
 }
 
 ion-router-outlet {
@@ -24,3 +34,8 @@ ion-router-outlet {
         margin-top: 0;
     }
 }
+
+.header-md::after {
+    display: none;
+}
+

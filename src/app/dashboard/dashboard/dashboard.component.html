@@ -1,4 +1,8 @@
 <div class="container">
+
+  <img class="page-logo" src="assets/whitell.png"/>
+
+
   <div *ngIf="isCarSelected && currentCar" class="alert alert-primary" role="alert">
     <strong>{{currentCar.maker}}</strong> | <strong>{{currentCar.model}}</strong> |
     <strong>{{currentCar.bodyType}}</strong> <span class="alert-link float-right" (click)="resetCar()">Change Car</span>
@@ -21,6 +25,8 @@
       <ng-container *ngIf="isCarSelected">
 
         <ng-container *ngIf="!isPlanSelected">
+
+          <heading text="Our Monthly Plans" align="center" outline="true"></heading>
             <plan-slider 
             
             [plans]="currentPlans" 
@@ -30,90 +36,27 @@
             
             ></plan-slider>
 
+            <heading text="Add Ons" align="center"></heading>
             <h2>
               <ion-slides [options]="options">
         
-                <ion-slide>
-                  
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col size="7" class="poster-col">
-                        <img class="poster" src="https://www.komar.de/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" alt="">
-                      </ion-col>
-                      <ion-col size="7">
-                        <h5 class="ion-no-margin">Title</h5>
-                        <p class="ion-no-margin rate">
-                          <ion-icon name="star"></ion-icon> 8.5<br>
-                          <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light" >Add to  Cart</ion-button>
-                        </p>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
+                <ion-slide *ngFor="let addon of addOns">
+                    <div class="card addon-card animate__animated animate__flipInX">
+                        <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
+                        <div class="card-body">
+                            <span class="card-text">{{addon.title}}</span>
+                            <p class="ion-no-margin rate">
+                            <ion-icon name="star"></ion-icon> {{addon.rating}}
+                            </p>
+                            <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light" >Buy</ion-button>
+                          </div>
+                        </div>
+
                   
                   
                 </ion-slide>
                 
-                <ion-slide>
-                  
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col size="7" class="poster-col">
-                        <img class="poster" src="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/black-panther-web.jpg" alt="">
-                      </ion-col>
-                      <ion-col size="7">
-                        <h5 class="ion-no-margin"> Title</h5>
-                        <p class="ion-no-margin rate">
-                          <ion-icon name="star"></ion-icon> 8.5<br>
-                          <span class = "cart">
-                          <ion-button size="small" type="submit" color="light" >Add to  Cart</ion-button>
-                          </span>
-                        </p>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                  
-                  
-                </ion-slide>
-                
-                <ion-slide>
-                  
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col size="7" class="poster-col">
-                        <img class="poster" src="https://www.komar.de/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/v/d/vd-046-star-wars-official-poster-ep7.jpg" alt="">
-                      </ion-col>
-                      <ion-col size="7">
-                        <h5 class="ion-no-margin">Title</h5>
-                        <p class="ion-no-margin rate">
-                          <ion-icon name="star"></ion-icon> 8.5<br>
-                          <ion-button size="small" type="submit" color="light" >Add to  Cart</ion-button>
-                        </p>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                  
-                  
-                </ion-slide>
-                
-                <ion-slide>
-                  
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col size="7" class="poster-col">
-                        <img class="poster" src="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/black-panther-web.jpg" alt="">
-                      </ion-col>
-                      <ion-col size="7">
-                        <h5 class="ion-no-margin">Title</h5>
-                        <p class="ion-no-margin rate">
-                          <ion-icon name="star"></ion-icon> 8.5<br>
-                          <ion-button size="small" type="submit" color="light" >Add to  Cart</ion-button>
-                        </p>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                  
-                  
-                </ion-slide>
+               
                 
               </ion-slides></h2>
 

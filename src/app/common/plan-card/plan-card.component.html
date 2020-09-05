@@ -1,42 +1,32 @@
-<div class="card animate__animated animate__bounceInDown">
+<div class="card animate__animated animate__headShake">
   <img class="card-img-top" src="assets/banner1.JPG" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title"> {{plan.name}} </h5>
+    <h5 class="card-title" [style.color]="color"> {{plan.name}} </h5>
     <p class="card-text">
-      <span class="price"> <span class="rs" >&#8377;</span> {{ plan.pricing[bodyType] }}</span>
+      <span class="price" Rs>{{ plan.pricing[bodyType] }}</span>
       <br />
       <span></span>
     </p>
   </div>
   <div class="card-body feature-list">
-
-      <div class="row" *ngFor="let ftr of currentFeatures">
-        <div class="col-10">
-            {{ftr.name}} <br/> <span class="frequency"> {{ftr.frequency}}</span>
+    <list limit="6">
+      <div class="row feature-row" *ngFor="let ftr of currentFeatures">
+        <div class="col-1 text">
+            <ion-icon slot="start"  [style.color]="colors[ftr.weight - 1]"  class="ion-color-yellow" name="star"></ion-icon>
         </div>
-        <div class="col-2">
-            <feature-avail available="true"></feature-avail>  
-         
+        <div class="col-10" >
+            {{ftr.name}}
         </div>
+        
 
       </div>
-
-      <div class="row" *ngFor="let ftr of missingFeatures">
-          <div class="col-10 gray">
-              {{ftr.name}} <br/>
-          </div>
-          <div class="col-2">
-              <feature-avail [available]="false"></feature-avail>  
-           
-          </div>
-  
-        </div>
+    </list>
   </div>
 
   <div class="card-body">
     <div class="row">
       <div class="col-12">
-        <cta text="See Plan Details" (action)="onShowDetails()" [outline]="true"></cta>
+        <cta text="Plan Details" (action)="onShowDetails()" [outline]="true"></cta>
     </div>
   </div>
 

@@ -1,8 +1,9 @@
 
     <ion-slides [options]="slideOpts">
-      <ion-slide *ngFor="let plan of planList">
+      <ion-slide *ngFor="let plan of planList; let i = index;">
         <plan-card 
             [plan]="plan" 
+            [color]="colors[i]"
             [features]="plans.features" 
             [bodyType]="bodyType"
             (buyNow)="onBuy($event)"

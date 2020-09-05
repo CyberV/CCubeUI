@@ -8,7 +8,7 @@ import { PlanTableComponent } from 'app/common/plan-table/plan-table.component';
 import { Router } from '@angular/router';
 import { ModalPage } from 'app/modal/modal.page';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -17,23 +17,24 @@ declare var $:any;
 })
 export class DashboardComponent implements OnInit {
 
-  currentCar:any;
+  currentCar: any;
   selectedPlan: any;
 
   isCarSelected: boolean;
   isPlanSelected: boolean;
-  
+  addOns: any;
+
   currentPlans;
-  
-  slideOpts:any;
+
+  slideOpts: any;
 
   constructor(
-    
+
     private platform: Platform,
     public modalController: ModalController,
     private router: Router
   ) {
-    this.currentCar={};
+    this.currentCar = {};
     this.isCarSelected = false;
     this.currentPlans = plansList;
     this.isPlanSelected = false;
@@ -45,9 +46,42 @@ export class DashboardComponent implements OnInit {
       initialSlide: 1,
       speed: 400
     };
-   }
 
-   async openModal() {
+    this.addOns = [
+      {
+        title:'Dry Cleaning',
+        rating: 4.5,
+        icon: 'ppe'
+      },
+      {
+        title:'Polishing',
+        rating: 4.5,
+        icon: 'sanitize'
+      },
+      {
+        title:'Waxing',
+        rating: 4.5,
+        icon: 'screening'
+      },
+      {
+        title:'Paint Protection',
+        rating: 4.5,
+        icon: 'solution'
+      },
+      {
+        title:'Rust Protection',
+        rating: 4.5,
+        icon: 'doorstep'
+      },
+        {
+        title:'Dry Cleaning',
+        rating: 4.5,
+        icon: 'notification'
+      }
+    ]
+  }
+
+  async openModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
       cssClass: 'my-custom-class'
@@ -55,19 +89,19 @@ export class DashboardComponent implements OnInit {
     return await modal.present();
   }
 
-   get isMobile() {
+  get isMobile() {
     return !this.platform.is('desktop');
   }
 
   async ngOnInit() {
 
     let car = sessionStorage.getItem('currentCar');
-    if (car && car !="null") {
+    if (car && car != "null") {
       this.currentCar = JSON.parse(car);
       this.isCarSelected = true;
     }
 
-    if(this.isCarSelected) {
+    if (this.isCarSelected) {
       //await this.presentModal();
     }
   }
@@ -113,19 +147,20 @@ export class DashboardComponent implements OnInit {
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
 
+
   }
 
   goToCheckout() {
-    sessionStorage.setItem('selectedPlan',JSON.stringify(this.selectedPlan));
+    sessionStorage.setItem('selectedPlan', JSON.stringify(this.selectedPlan));
     this.router.navigate(['/dashboard/checkout']);
   }
 
 
 
   options = {
-    centeredSlides: true,
-    slidesPerView: 1.5,
-    spaceBetween: 0,
+    centeredSlides: false,
+    slidesPerView: 2.5,
+    spaceBetween: 15,
   };
 
   categories = {

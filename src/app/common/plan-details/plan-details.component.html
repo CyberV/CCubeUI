@@ -1,7 +1,27 @@
 <div>
-  <h2 #pageTop>Showing Details for <span class="plan-name">{{plan.name}}</span> Plan <span class="float-right" (click)="sendChangePlan()">Change?</span></h2>
-  <heading [text]="plan.price"></heading>
-  <div class="accordion" id="accordionExample">
+  <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan <span class="float-right" (click)="sendChangePlan()">Change?</span></h2>
+  <p>
+    <span class="price" Rs> {{plan.price}}</span> for 4 Weeks.
+  </p>
+  <mat-accordion >
+      <mat-expansion-panel class = "drop"  *ngFor="let feature of currentFeatures"  >
+        <mat-expansion-panel-header class = "drop">
+          <mat-panel-title>
+              {{feature.name}}
+          </mat-panel-title>
+          <mat-panel-description class = "drop">
+              
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p class="frequency">{{feature.frequency}}</p>
+
+        {{feature.description}} 
+       
+        
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  <!-- <div class="accordion" id="accordionExample">
     <div class="card" *ngFor="let feature of currentFeatures">
       <div class="card-header" [id]="'heading' + feature.code">
         <h2 class="mb-0">
@@ -15,12 +35,12 @@
       <div [id]="feature.code" class="collapse show" [attr.aria-labelledby]="'heading' + feature.code" data-parent="#accordionExample">
         <div class="card-body">
          {{feature.description}} <br/> <br/>
-         <span class="float-right">{{feature.frequency}}</span>
+         <span class="float-right"></span>
          <br/>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <cta text="Checkout" (action)="sendCheckout()"></cta>
 
@@ -47,7 +67,7 @@
 
 
 
-<ion-content fullscreen="true">
+<!-- <ion-content fullscreen="true">
   
   <div class="ion-padding">
     <div   [class.mat-elevation-z12]="isActive">
@@ -100,5 +120,5 @@
 
     </div>
   </div>
-</ion-content>
+</ion-content> -->
 

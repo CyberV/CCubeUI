@@ -22,18 +22,32 @@
 
     .feature-list {
         text-align: left;
-        font-size: 20px;
+        font-size: 16px;
+
+        .list-container {
+            height: 150px;
+            overflow-y: auto;
+        }
+
+        .feature-row {
+            margin-bottom: 10px;
+
+            ion-icon {
+
+                color: $secondary-color;
+            }
+        }
 
         .frequency {
             color: gray;
             position: relative;
-            font-size: 11px;
-            top: -14px;
-
+            font-size: 14px;
+            text-align: right;
         }
     }
 
     .gray {
         color: gray;
+        line-height: 40px;
     }
 }

@@ -9,7 +9,33 @@
     @media screen and (max-width: 768px) {
         margin-top: 5em;
     }
+
+    .page-logo {
+      width: 40%;
+      margin-bottom: 10px;
+    }
 }
+
+.addon-card {
+
+  box-shadow: 0 8px 6px -6px black;
+
+  .card-body {
+    padding-top: 0;
+  }
+
+  .card-text {
+    min-height: 65px;
+    display: block;
+    max-height: 65px;
+    width: 88px;
+  }
+
+  .rate {
+    color: $secondary-color;
+  }
+}
+
 
 
 ion-slides {

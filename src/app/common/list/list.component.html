@@ -1,0 +1,10 @@
+
+<div class="list-container animate__animated"    [ngClass]="{ 'expanded ': isExpanded}">
+  <ng-content></ng-content>
+</div>
+<div class="row limiter-row" *ngIf="!isExpanded" (click)="isExpanded = true;">
+  <div class="col-12">
+    <span class="limiter" [class.larger]="remainingCount>=10"> +{{remainingCount}} </span>
+  </div>
+
+</div>

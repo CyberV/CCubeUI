@@ -16,6 +16,7 @@ export class PlanSliderComponent implements OnInit {
   @Output() showDetails = new EventEmitter();
 
   planList;
+  colors;
 
   slideOpts:any;
 
@@ -24,9 +25,18 @@ export class PlanSliderComponent implements OnInit {
     this.plans = [];
     this.planList = [];
     this.bodyType = "sedan";
+
+    this.colors = [
+      '#ec6b1e',
+      '#009688',
+      '#FFEB3B'
+    ]
     
     this.slideOpts = {
       initialSlide: 0,
+      centeredSlides: true,
+    slidesPerView: 1.3,
+    spaceBetween: 20,
       speed: 400
     };
    }

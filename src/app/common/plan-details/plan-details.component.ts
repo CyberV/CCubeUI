@@ -34,7 +34,11 @@ export class PlanDetailsComponent implements OnInit {
       });
     }
 
-    this.content.scrollToTop();
+    window.scroll(0,0);
+  }
+
+  ngAfterViewInit() {
+   
   }
 
   sendChangePlan() {

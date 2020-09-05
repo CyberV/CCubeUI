@@ -10,12 +10,14 @@ export class PlanCardComponent implements OnInit {
   @Input() plan: any;
   @Input() features: any;
   @Input() bodyType: string;
+  @Input() color:string;
 
   @Output() buyNow = new EventEmitter();
   @Output() showDetails = new EventEmitter();
 
   currentFeatures: any;
   missingFeatures: any;
+  colors: any;
 
   constructor() {
     this.plan = {
@@ -26,6 +28,14 @@ export class PlanCardComponent implements OnInit {
     this.missingFeatures = [];
 
     this.bodyType="";
+    this.color = "inherit";
+
+    
+    this.colors = [
+      '#ec6b1e',
+      '#009688',
+      '#FFEB3B'
+    ]
    }
 
   ngOnInit() {

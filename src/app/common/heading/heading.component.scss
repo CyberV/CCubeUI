@@ -1,3 +1,9 @@
 // h1 {
 //     margin-top:0;
 // }
+@import "src/variables.scss";
+
+.outline {
+    background: $bg-light-blue;
+    border-radius: 25px;
+}
