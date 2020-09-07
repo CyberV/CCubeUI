@@ -21,6 +21,8 @@ export class SelectCarComponent implements OnInit {
 
   selected:any;
 
+  options:any;
+
   get filteredMakers() {
     if (this.maker.length) {
       return this.lstMakers.filter( (mkr) => {
@@ -53,6 +55,14 @@ export class SelectCarComponent implements OnInit {
       this.lstMakers = carsList.map((brand) => {
         return { name: brand.maker.toLowerCase(), logo: brand.logo };
       });
+
+      this.options = {
+        initialSlide: 0,
+        centeredSlides: true,
+      slidesPerView: 1,
+        
+        
+      }
 
    }
 

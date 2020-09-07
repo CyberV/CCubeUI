@@ -60,6 +60,7 @@ export class CarFormComponent implements OnInit {
 
   goToPlans(carDetails) {
 
+    
 
     if (!this.verifyOnly) {
       sessionStorage.setItem('currentCar', JSON.stringify(carDetails));

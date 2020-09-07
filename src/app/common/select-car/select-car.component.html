@@ -1,24 +1,29 @@
 <div class="row">
   <div class="col-12">
     <mobile-input type="text" placeholder="e.x. Maruti / Honda" name="Select Maker" [(value)]="maker" (valueChange)="makerSelected = false"></mobile-input>
-    <div *ngIf="!makerSelected" class="panel-makers row">
-      <div *ngFor="let mkr of filteredMakers" (click)="selectMaker(mkr)" class="col-12 col-md-4">
-        <div class="card maker animate__animated animate__fadeInLeft">
-          <div class="row">
-            <div class="col-5 col-md-12">
-                <img class="card-img-top" [src]="mkr.logo" [alt]="mkr.name">
-            </div>
-            <div class="col-7 col-md-12">
-                <div class="card-body">
-                    <h5 class="card-title"> {{mkr.name | uppercase}} </h5>
+    <div *ngIf="!makerSelected" class="panel-makers row" >
+      <ion-slides [options]="options">
+        <ion-slide *ngFor="let mkr of filteredMakers" (click)="selectMaker(mkr)" [style.width.px]="300">
+            <div class="">
+                <div class="card maker animate__animated animate__fadeInLeft">
+                  <div class="row">
+                    <div class="col-5 col-md-12">
+                        <img class="card-img-top" [src]="mkr.logo" [alt]="mkr.name">
+                    </div>
+                    <div class="col-7 col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{mkr.name | uppercase}} </h5>
+                          </div>
+                    </div>
                   </div>
-            </div>
-          </div>
-           
-          
-        </div>
+                   
+                  
+                </div>
+        
+              </div>
+        </ion-slide>
+      </ion-slides>
 
-      </div>
     </div>
     <div *ngIf="makerSelected">
         <mobile-input type="text" name="Select Model" [(value)]="model" (valueChange)="modelSelected = false"></mobile-input>

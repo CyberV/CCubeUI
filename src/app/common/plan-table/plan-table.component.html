@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-md-12">
-        <p *ngIf="!isBodyTypePresent" class="heading"> Our Monthly Plans </p>
-        <p *ngIf="isBodyTypePresent" class="heading"> Showing Monthly Plans for <span class="bodyType">{{bodyType}}</span> </p>
+    <div class="col-md-12 table-container">
+        <p *ngIf="!isBodyTypePresent" class="heading"> Our Monthly Plans  <span *ngIf="showClose" class="float-right" (click)="closeModal()">X</span> </p>
+        <p *ngIf="isBodyTypePresent" class="heading"> Our Monthly Plans for <span class="bodyType">{{bodyType}}</span>  <span *ngIf="showClose" class="float-right" (click)="closeModal()">X</span></p>
         <table class="table-bordered table-hover">
             <thead>
                 <th *ngFor="let column of planNames; index as i2" [class]="'heading-col-' + i2">
@@ -25,7 +25,9 @@
                     <span class="price"><span>&#8377;</span>{{plan.pricing[bodyType]}}</span>
                     <br/>
                     <div class="cta">
-                        <cta text="Buy Now" (action)="buyNowHandler(plan.name,plan.pricing[bodyType] )"></cta>
+                        <cta *ngIf="showClose" text="Buy" (action)="buyNowHandler(plan.name,plan.pricing[bodyType] )" size="14"></cta>
+                        <cta *ngIf="!showClose" text="Buy Now" (action)="buyNowHandler(plan.name,plan.pricing[bodyType] )"></cta>
+
                     </div>
                    
                   </td>

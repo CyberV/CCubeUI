@@ -6,6 +6,8 @@
           'btn cta btn-lg btn-block': true ,
         'btn-primary' : !outline,
           'btn-outline-secondary': outline}"
+
+        [style.fontSize.px]="size"
         (click)="onCtaClick()">
       <span *ngIf="!loading">
         {{text}}

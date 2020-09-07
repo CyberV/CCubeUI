@@ -27,11 +27,15 @@
 
 
 .my-custom-class .modal-wrapper{
-  height: 60%;
-  top: 40%;
+  height:75%;
+  top: 25%;
   position: absolute;
   display: block;
-  border-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  overflow-y:auto;
+  overflow-x: hidden;
+  color: black;
 }
 
 

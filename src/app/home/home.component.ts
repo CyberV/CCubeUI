@@ -25,12 +25,26 @@ export class HomeComponent implements OnInit {
   contributions: any;
   appScroll:any;
 
+  slideOpts;
 
   @ViewChildren('attention') attention : QueryList<ElementRef>;
 
   constructor(private router: Router) {
     this.featureList = featureList;
     this.contributions = contributionsList;
+
+        
+    this.slideOpts = {
+      initialSlide: 0,
+      centeredSlides: true,
+    slidesPerView: 1,
+
+
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+      },
+    };
    }
 
   ngOnInit() {

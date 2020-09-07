@@ -1,12 +1,27 @@
 <div class="container">
 
-  <img class="page-logo" src="assets/whitell.png"/>
+  <div class="row">
+      <div class="col-6">
+          <!-- <img class="page-logo" src="assets/whitell.png" /> -->
+          <img class="page-logo" [src]="currentCar.image">
+        </div>
+      <div class="col-6">
+
+          <div class="row">
+              <div *ngIf="isCarSelected && currentCar" class="car-info" role="alert">
+                  <strong>{{currentCar.maker}}</strong> | <strong>{{currentCar.model}}</strong>
+                  <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
+                </div>
+          </div>
+          
+        </div>
+   
 
 
-  <div *ngIf="isCarSelected && currentCar" class="alert alert-primary" role="alert">
-    <strong>{{currentCar.maker}}</strong> | <strong>{{currentCar.model}}</strong> |
-    <strong>{{currentCar.bodyType}}</strong> <span class="alert-link float-right" (click)="resetCar()">Change Car</span>
   </div>
+
+
+
 
   <div class="row">
     <div class="col-md-6 col-xs-12" *ngIf="!isCarSelected">
@@ -26,56 +41,47 @@
 
         <ng-container *ngIf="!isPlanSelected">
 
-          <heading text="Our Monthly Plans" align="center" outline="true"></heading>
-            <plan-slider 
-            
-            [plans]="currentPlans" 
-            [bodyType]="currentCar.bodyType"
-            (showDetails)="onShowDetails($event)"
-            (buyNow)="buyPlan($event)"
-            
-            ></plan-slider>
+          <heading text="Our Monthly Plans" align="center" outline="true" (click)="openModal()"></heading>
+          <plan-slider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
+            (buyNow)="buyPlan($event)"></plan-slider>
 
-            <heading text="Add Ons" align="center"></heading>
-            <h2>
-              <ion-slides [options]="options">
-        
-                <ion-slide *ngFor="let addon of addOns">
-                    <div class="card addon-card animate__animated animate__flipInX">
-                        <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
-                        <div class="card-body">
-                            <span class="card-text">{{addon.title}}</span>
-                            <p class="ion-no-margin rate">
-                            <ion-icon name="star"></ion-icon> {{addon.rating}}
-                            </p>
-                            <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light" >Buy</ion-button>
-                          </div>
-                        </div>
+          <heading text="Add Ons" align="center"></heading>
+          <h2>
+            <ion-slides [options]="options">
 
-                  
-                  
-                </ion-slide>
-                
-               
-                
-              </ion-slides></h2>
+              <ion-slide *ngFor="let addon of addOns">
+                <div class="card addon-card animate__animated animate__flipInX">
+                  <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
+                  <div class="card-body">
+                    <span class="card-text">{{addon.title}}</span>
+                    <p class="ion-no-margin rate">
+                      <ion-icon name="star"></ion-icon> {{addon.rating}}
+                    </p>
+                    <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light">Buy
+                    </ion-button>
+                  </div>
+                </div>
+
+
+
+              </ion-slide>
+
+
+
+            </ion-slides>
+          </h2>
 
         </ng-container>
-        
 
-            <plan-details *ngIf="isPlanSelected" 
-                [plan]="selectedPlan" 
-                [features]="currentPlans.features"
-                (changePlan)="isPlanSelected = false"
-                (checkout)="goToCheckout()"
-                ></plan-details>
 
-        
+        <plan-details *ngIf="isPlanSelected" [plan]="selectedPlan" [features]="currentPlans.features"
+          (changePlan)="isPlanSelected = false" (checkout)="goToCheckout()"></plan-details>
+
+
 
         <!-- <div *ngIf="!isMobile" class="card-deck row">
           <plan-card class="col-4" *ngFor="let plan of currentPlans" [plan]="plan"></plan-card>
         </div> -->
-        <ion-button (click)="openModal()" shape="round" color="warning"size="small" class="ion-text-capitalize">Add</ion-button>
 
       </ng-container>
 

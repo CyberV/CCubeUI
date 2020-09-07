@@ -1,6 +1,13 @@
 @import 'src/variables.scss';
 
+.table-container {
+    height: 52%;
+    overflow-y: auto;
 
+    .float-right {
+        right: 20px;
+    }
+}
 
     .heading {
         margin-top: 1em;
@@ -16,6 +23,7 @@
 
     .price-row {
         margin-bottom: 2em;
+
 
         &:hover, td:hover {
             background: white;
@@ -71,7 +79,9 @@
             .price {
                 color: $primary-color;
                 font-size: 24px;
-                font-weight: bold;
+                font-weight: 400;
+                top: 10px;
+                position: relative;
 
                 span {
                     color: $secondary-color;

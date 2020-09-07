@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ViewController } from '@ionic/core';
+import { ModalController } from '@ionic/angular';
+
 
 
 @Component({
@@ -13,13 +16,15 @@ export class PlanTableComponent implements OnInit {
   featureList: any;
 
   @Input() bodyType: string;
+  @Input() showClose: boolean;
 
   @Output() buyPlan = new EventEmitter();
 
-  public isBodyTypePresent: boolean;
-
-  constructor() {
+  constructor(
+    private modalController: ModalController
+  ) {
     this.bodyType = "";
+    this.showClose = false;
 
 
     this.planNames = ['What you get', 'Standard', 'Deluxe', 'Elite'];
@@ -34,7 +39,7 @@ export class PlanTableComponent implements OnInit {
           sedan: 700,
           csuv: 800,
           suv: 900,
-          luxury: 1100 
+          luxury: 1100
         }
       },
       {
@@ -46,7 +51,7 @@ export class PlanTableComponent implements OnInit {
           sedan: 950,
           csuv: 1075,
           suv: 1250,
-          luxury: 1600 
+          luxury: 1600
         }
       },
       {
@@ -58,7 +63,7 @@ export class PlanTableComponent implements OnInit {
           sedan: 1100,
           csuv: 1225,
           suv: 1450,
-          luxury: 1900 
+          luxury: 1900
         }
       }
     ];
@@ -158,8 +163,12 @@ export class PlanTableComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
+  dismiss() {
 
+  }
+
+  ngOnInit() {
+    console.log(this.bodyType, this.showClose);
   }
 
   buyNowHandler(planName, amount) {
@@ -168,10 +177,22 @@ export class PlanTableComponent implements OnInit {
       planName: planName,
       amount: amount
     });
+
+    this.modalController.dismiss({
+      planName: planName,
+      amount: amount
+    })
+  }
+
+  get isBodyTypePresent() {
+    return !!(this.bodyType && this.bodyType.length);
+  }
+
+  closeModal() {
+    this.modalController.dismiss();
   }
 
   ngOnChanges() {
-    this.isBodyTypePresent = !!(this.bodyType && this.bodyType.length);
 
   }
 

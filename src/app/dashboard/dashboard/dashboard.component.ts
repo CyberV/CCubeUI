@@ -7,6 +7,7 @@ import M from 'materialize-css';
 import { PlanTableComponent } from 'app/common/plan-table/plan-table.component';
 import { Router } from '@angular/router';
 import { ModalPage } from 'app/modal/modal.page';
+import { CarService } from 'app/services/car.service';
 
 declare var $: any;
 
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
   slideOpts: any;
 
   constructor(
-
+    private carService: CarService,
     private platform: Platform,
     public modalController: ModalController,
     private router: Router
@@ -83,26 +84,49 @@ export class DashboardComponent implements OnInit {
 
   async openModal() {
     const modal = await this.modalController.create({
-      component: ModalPage,
-      cssClass: 'my-custom-class'
+      component: PlanTableComponent,
+      cssClass: 'my-custom-class',
+      componentProps: { 
+        bodyType: 'sedan',
+        showClose: true
+      }
     });
-    return await modal.present();
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+
+      if (data && data.data) {
+        let fltrdPlans = this.currentPlans.plans.filter( (plan) => plan.name.toLowerCase() == data.data.planName.toLowerCase());
+
+        if (fltrdPlans && fltrdPlans.length) {
+          this.buyPlan( {
+            plan: fltrdPlans[0]
+          });
+        }
+      }
+
+    });
   }
 
   get isMobile() {
     return !this.platform.is('desktop');
   }
 
+
   async ngOnInit() {
 
-    let car = sessionStorage.getItem('currentCar');
-    if (car && car != "null") {
-      this.currentCar = JSON.parse(car);
+    let car = this.carService.getCurrentCar();
+    
+    
+    if (car) {
+      this.currentCar = car;
       this.isCarSelected = true;
     }
 
+    
+
     if (this.isCarSelected) {
-      //await this.presentModal();
+      await this.openModal();
     }
   }
 
@@ -119,13 +143,7 @@ export class DashboardComponent implements OnInit {
     console.log('in view enter');
   }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: PlanTableComponent,
-      cssClass: 'my-custom-class'
-    });
-    return await modal.present();
-  }
+
 
   showPlans(carDetails) {
     this.currentCar = carDetails;
@@ -133,6 +151,8 @@ export class DashboardComponent implements OnInit {
 
     this.isCarSelected = true;
     this.isPlanSelected = false;
+
+    this.ngOnInit();
   }
 
   buyPlan(payload) {
