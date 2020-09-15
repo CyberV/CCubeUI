@@ -21,6 +21,9 @@ export class MobileInputComponent implements OnInit {
   @Input() placeholder:string;
   @Input() uppercase:boolean;
   @Input() readonly: boolean;
+  @Input() error:string;
+
+  hasError:boolean;
 
   constructor() {
     this.name="Input";
@@ -28,6 +31,8 @@ export class MobileInputComponent implements OnInit {
     this.type = "number";
     this.uppercase = false;
     this.readonly = false;
+
+    this.hasError = false;
    }
 
   onPhoneChange(value) {
@@ -37,6 +42,14 @@ export class MobileInputComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  ngOnChanges(changes) {
+    if (changes.error && this.error.length) {
+      this.hasError = true;
+    } else {
+      this.hasError = false;
+    }
   }
 
   sendBlur(value){

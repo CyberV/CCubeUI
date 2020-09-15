@@ -8,6 +8,7 @@
             [class.outline]="outline"
             > 
             {{text}} 
+            <span *ngIf="showClose" class="close" (click)="dismiss()">X</span>
         </h1>          
     </div>
   </div>

@@ -6,7 +6,7 @@
 
 <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="user.mobile"></mobile-input>
 
-<mobile-input name="Password" type="password" placeholder="" [(value)]="user.password"></mobile-input>
+<mobile-input name="Password" type="password" placeholder="Your Password" [(value)]="user.password"></mobile-input>
 
 <cta text="Log In" [loading]="loading" [disabled]="!isPhoneValid" (action)="tryLogin()"></cta>
 <subheading *ngIf="showError" [text]="errorMsg" color="red"></subheading>

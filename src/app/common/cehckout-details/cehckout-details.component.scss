@@ -1,0 +1,38 @@
+@import 'src/variables.scss';
+
+.header-row {
+    color: $primary-color;
+    font-size: 140%;
+}
+
+.content-row {
+    margin-top: 10px;
+    color: gray;
+    font-size: 120%;
+}
+
+.card-container{
+    background: $primary-color;
+    padding: 0;
+    margin-bottom: 1em;
+    border-radius: 25px;
+    border: 2px solid $primary-color;
+
+    .top{
+        background: white;
+        padding: 15px;
+        border-radius: 25px;
+        padding-bottom: 0;
+    }
+
+    .bottom {
+        background: $primary-color;
+        color:white;
+        padding: 15px;
+        padding-top: 0;
+        font-size: 16px;
+        
+        border-bottom-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+    }
+}

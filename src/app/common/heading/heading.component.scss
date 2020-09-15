@@ -7,3 +7,10 @@
     background: $bg-light-blue;
     border-radius: 25px;
 }
+
+.close {
+    color: $secondary-color;
+    float: right;
+    cursor: pointer;
+    position: relative;
+}

@@ -35,9 +35,20 @@ import { PlanDetailsComponent } from './plan-details/plan-details.component';
 import { PlanSliderComponent } from './plan-slider/plan-slider.component';
 
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatStepperModule} from '@angular/material/stepper'
+import {  MatCardModule,} from '@angular/material/card';
+
 import { ListComponent } from './list/list.component';
 import { RsDirective } from './rs.directive';
+import { CarouselComponent } from './carousel/carousel.component';
+import { CheckoutDetailsComponent } from './cehckout-details/cehckout-details.component';
+import { AccordionComponent } from './accordion/accordion.component';
+import { AddonSliderComponent } from './addon-slider/addon-slider.component';
+import { SelectedCarComponent } from './selected-car/selected-car.component';
 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { CheckoutConfirmationComponent } from './checkout-confirmation/checkout-confirmation.component';
+import { ThanksPageComponent } from './thanks-page/thanks-page.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -70,7 +81,17 @@ import { RsDirective } from './rs.directive';
     PlanDetailsComponent,
     PlanSliderComponent,
     ListComponent,
-    RsDirective
+    CarouselComponent,
+    CheckoutDetailsComponent,
+    AccordionComponent,
+    AddonSliderComponent,
+    SelectedCarComponent,
+    CheckoutConfirmationComponent,
+    ThanksPageComponent,
+
+    // Directives
+    RsDirective,
+    
 
   ],
   imports: [
@@ -78,6 +99,9 @@ import { RsDirective } from './rs.directive';
     CommonModule,
     ChartsModule,
     MatExpansionModule,
+    MatCardModule,
+    MatStepperModule,
+    NgxMaterialTimepickerModule,
     
     TooltipModule,
     RouterModule
@@ -112,6 +136,15 @@ import { RsDirective } from './rs.directive';
     PlanDetailsComponent,
     PlanSliderComponent,
     ListComponent,
+    CarouselComponent,
+    CheckoutDetailsComponent,
+    AccordionComponent,
+    AddonSliderComponent,
+    SelectedCarComponent,
+    CheckoutConfirmationComponent,
+    ThanksPageComponent,
+
+    //Directives
 
     RsDirective
   ]

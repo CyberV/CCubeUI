@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ThanksPageComponent } from 'app/common/thanks-page/thanks-page.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
+  },
+  {
+    path: 'thanks',
+    component: ThanksPageComponent
   }
 
 ];

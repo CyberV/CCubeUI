@@ -2,9 +2,9 @@
   <div class="col-12">
     <mobile-input type="text" placeholder="e.x. Maruti / Honda" name="Select Maker" [(value)]="maker" (valueChange)="makerSelected = false"></mobile-input>
     <div *ngIf="!makerSelected" class="panel-makers row" >
-      <ion-slides [options]="options">
-        <ion-slide *ngFor="let mkr of filteredMakers" (click)="selectMaker(mkr)" [style.width.px]="300">
-            <div class="">
+      <!-- <ion-slides [options]="options"> -->
+        <div *ngFor="let mkr of filteredMakers" class="col-12 col-md-4" (click)="selectMaker(mkr)" >
+            <div >
                 <div class="card maker animate__animated animate__fadeInLeft">
                   <div class="row">
                     <div class="col-5 col-md-12">
@@ -21,8 +21,8 @@
                 </div>
         
               </div>
-        </ion-slide>
-      </ion-slides>
+            </div>
+
 
     </div>
     <div *ngIf="makerSelected">

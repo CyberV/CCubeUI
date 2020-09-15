@@ -47,45 +47,12 @@ export class DashboardComponent implements OnInit {
       initialSlide: 1,
       speed: 400
     };
-
-    this.addOns = [
-      {
-        title:'Dry Cleaning',
-        rating: 4.5,
-        icon: 'ppe'
-      },
-      {
-        title:'Polishing',
-        rating: 4.5,
-        icon: 'sanitize'
-      },
-      {
-        title:'Waxing',
-        rating: 4.5,
-        icon: 'screening'
-      },
-      {
-        title:'Paint Protection',
-        rating: 4.5,
-        icon: 'solution'
-      },
-      {
-        title:'Rust Protection',
-        rating: 4.5,
-        icon: 'doorstep'
-      },
-        {
-        title:'Dry Cleaning',
-        rating: 4.5,
-        icon: 'notification'
-      }
-    ]
   }
 
   async openModal() {
     const modal = await this.modalController.create({
       component: PlanTableComponent,
-      cssClass: 'my-custom-class',
+      cssClass: 'plans-table-modal',
       componentProps: { 
         bodyType: 'sedan',
         showClose: true
@@ -177,11 +144,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  options = {
-    centeredSlides: false,
-    slidesPerView: 2.5,
-    spaceBetween: 15,
-  };
+  
 
   categories = {
     slidesPerView: 2,

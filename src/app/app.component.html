@@ -1,11 +1,15 @@
-<ion-app >
-    <ion-header  *ngIf="isMobile">
-        <ion-toolbar>
-          <ion-title><span> <img src="assets/blueLogo.png"></span></ion-title>
-        </ion-toolbar>
-      </ion-header>
-      
-  <app-navbar  *ngIf="!isMobile"></app-navbar>
-  <ion-router-outlet [class.push-down] = "!isMobile" ></ion-router-outlet>
-  <app-mobile-nav *ngIf="isMobile"></app-mobile-nav>
+<ion-app>
+  <ion-header *ngIf="isMobile">
+    <ion-toolbar>
+      <ion-title><span> <img src="assets/blueLogo.png"></span></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-navbar *ngIf="!isMobile"></app-navbar>
+
+  <ion-router-outlet [class.push-down]="!isMobile"></ion-router-outlet>
+
+
+
+  <!-- <app-mobile-nav *ngIf="isMobile"></app-mobile-nav> -->
 </ion-app>

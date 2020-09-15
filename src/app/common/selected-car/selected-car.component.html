@@ -1,0 +1,16 @@
+<div class="row" id="top">
+    <div class="col-6">
+      <!-- <img class="page-logo" src="assets/whitell.png" /> -->
+      <img class="page-logo" [src]="car.image">
+    </div>
+    <div class="col-6">
+
+      <div class="row">
+        <div *ngIf="car" class="car-info" role="alert">
+          <strong class="maker">{{car.maker}}</strong> <br/> <strong class="model">{{car.model}}</strong>
+          <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
+        </div>
+      </div>
+
+    </div>
+  </div>

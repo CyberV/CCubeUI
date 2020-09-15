@@ -26,7 +26,12 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-.my-custom-class .modal-wrapper{
+
+html {
+  scroll-behavior: smooth;
+}
+
+.plans-table-modal .modal-wrapper{
   height:75%;
   top: 25%;
   position: absolute;
@@ -38,10 +43,19 @@
   color: black;
 }
 
-
-html {
-  scroll-behavior: smooth;
+.checkout-confirmation-modal .modal-wrapper{
+  height: 75%;
+  top: 12%;
+  width: 90%;
+  border-radius: 10px;
+  position: absolute;
+  display: block;
+  overflow-y:auto;
+  overflow-x: hidden;
+  color: black;
 }
+
+
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors

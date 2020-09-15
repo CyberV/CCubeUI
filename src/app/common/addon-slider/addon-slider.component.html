@@ -1,0 +1,27 @@
+<div>
+    <heading text="Add Ons" align="center" outline="true"></heading>
+
+    <ion-slides [options]="options">
+    
+        <ion-slide *ngFor="let addon of addOns">
+
+          <mat-card class="card addon-card animate__animated animate__flipInX">
+            <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
+            <div class="">
+              <span class="card-text">{{addon.title}}</span>
+              <p class="ion-no-margin rate">
+                <ion-icon name="star"></ion-icon> {{addon.rating}}
+              </p>
+              <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light">Buy
+              </ion-button>
+            </div>
+          </mat-card>
+    
+    
+    
+        </ion-slide>
+    
+    
+    
+      </ion-slides>
+</div>

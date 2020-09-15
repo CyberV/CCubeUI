@@ -6,7 +6,6 @@
   </subheading>
 
   <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="newUser.mobile"></mobile-input>
-  asdasd {{otpSent.toString()}}
   <cta *ngIf="!otpSent" text="Send OTP" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
   </cta>
 
@@ -53,7 +52,7 @@
 
 
 
-  <cta text="Create Account" [loading]="loading" (action)="verifyOtp(customerOtp)" ></cta>
+  <cta text="Create Account" [loading]="loading" (action)="createUser()" ></cta>
 </div>
 
 <div></div>

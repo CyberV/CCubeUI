@@ -17,6 +17,14 @@
         color: $bg-black;
     }
 
+    .error-field {
+        border: 1px solid red;
+    }
+
+    .error-msg {
+        color: red;
+    }
+
     .not-mobile {
         padding:0;
         height:25px;

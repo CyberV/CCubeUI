@@ -6,20 +6,20 @@
     overflow-x: hidden;
     transition: all 1s ease-in-out();
 
-    max-height: 200px;
+    max-height: 220px;
 
     &.expanded {
         overflow-y: auto;
         overflow-x: hidden;
-        height: 200px;
+        height: 220px;
     }
 }
 
 .limiter-row {
     text-align: center;
-    width: 35%;
-    position: absolute;
-    right: 40%;
+
+    position: relative;
+
     margin-top: -18px;
     background-image: linear-gradient(to bottom, transparent, 10%, white);
 
@@ -34,6 +34,7 @@
         font-size: 130%;
         text-align: center;
         line-height: 34px;
+        margin: 0 auto;
 
         &.larger {
             height: 45px;

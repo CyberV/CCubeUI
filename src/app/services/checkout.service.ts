@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { map, catchError } from 'rxjs/operators';
 
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 
 import { hash } from 'app/services/crypto.service';
 import { WindowRefService } from 'app/window-ref.service';
@@ -17,7 +17,7 @@ import { UserService } from './user.service';
 // Live
 const api_key = "rzp_live_TuRL1kcjKl8uWp";
 const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
-
+const BYPASS_PAYMENT = true;
 
 
 @Injectable({
@@ -31,11 +31,19 @@ export class CheckoutService {
 
   private user:any;
 
+  
+
+  private checkoutEmitter = new Subject();
+
   constructor(
     private http: HttpClient,
     private userService: UserService,
     private winRef: WindowRefService) {
       this.refreshUser();
+  }
+
+  events  = function() {
+    return this.checkoutEmitter;
   }
 
   promisify = async function promisify(leadData) {
@@ -62,8 +70,20 @@ export class CheckoutService {
     );
   }
 
-  tryPayment(orderId, amount) {
+  tryPayment(order, amount) {
+    let orderId = order.id;
     this.refreshUser();
+
+    if (BYPASS_PAYMENT) {
+      this.checkoutEmitter.next ({
+        success: true,
+        order: order,
+        user: this.user
+      })
+
+      return;
+    }
+
     var options = {
       "key": api_key, // Enter the Key ID generated from the Dashboard
       "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -75,6 +95,7 @@ export class CheckoutService {
       "handler": (response, error) => {
         if (error) {
           console.log('error in payment', error);
+          this.checkoutEmitter.error(error);
           return;
         }
          
@@ -83,6 +104,11 @@ export class CheckoutService {
         let verified = this.verifyOrder(orderId,response.razorpay_payment_id, response.razorpay_signature);
 
         console.log('Payment verified', verified);
+
+        this.checkoutEmitter.next ({
+          success: true,
+          order: order
+        })
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);
         // alert(response.razorpay_signature)

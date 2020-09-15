@@ -1,27 +1,6 @@
 <div class="container">
 
-  <div class="row">
-      <div class="col-6">
-          <!-- <img class="page-logo" src="assets/whitell.png" /> -->
-          <img class="page-logo" [src]="currentCar.image">
-        </div>
-      <div class="col-6">
-
-          <div class="row">
-              <div *ngIf="isCarSelected && currentCar" class="car-info" role="alert">
-                  <strong>{{currentCar.maker}}</strong> | <strong>{{currentCar.model}}</strong>
-                  <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
-                </div>
-          </div>
-          
-        </div>
-   
-
-
-  </div>
-
-
-
+<selected-car *ngIf="currentCar" [car]="currentCar"></selected-car>
 
   <div class="row">
     <div class="col-md-6 col-xs-12" *ngIf="!isCarSelected">
@@ -45,39 +24,22 @@
           <plan-slider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
             (buyNow)="buyPlan($event)"></plan-slider>
 
-          <heading text="Add Ons" align="center"></heading>
-          <h2>
-            <ion-slides [options]="options">
 
-              <ion-slide *ngFor="let addon of addOns">
-                <div class="card addon-card animate__animated animate__flipInX">
-                  <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
-                  <div class="card-body">
-                    <span class="card-text">{{addon.title}}</span>
-                    <p class="ion-no-margin rate">
-                      <ion-icon name="star"></ion-icon> {{addon.rating}}
-                    </p>
-                    <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light">Buy
-                    </ion-button>
-                  </div>
-                </div>
+          <addon-slider></addon-slider>
 
-
-
-              </ion-slide>
-
-
-
-            </ion-slides>
-          </h2>
 
         </ng-container>
 
+        <ng-container *ngIf="isPlanSelected">
+          <plan-details [hideCta]="true" [plan]="selectedPlan" [features]="currentPlans.features" (changePlan)="isPlanSelected = false">
 
-        <plan-details *ngIf="isPlanSelected" [plan]="selectedPlan" [features]="currentPlans.features"
-          (changePlan)="isPlanSelected = false" (checkout)="goToCheckout()"></plan-details>
+          </plan-details>
 
 
+          <addon-slider></addon-slider>
+
+          <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
+        </ng-container>
 
         <!-- <div *ngIf="!isMobile" class="card-deck row">
           <plan-card class="col-4" *ngFor="let plan of currentPlans" [plan]="plan"></plan-card>

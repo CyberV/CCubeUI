@@ -10,6 +10,7 @@ import { CarFormComponent } from './car-form/car-form.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AccordionModule } from 'ngx-accordion';
 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [ 
@@ -23,6 +24,7 @@ import { AccordionModule } from 'ngx-accordion';
     FormsModule,
     IonicModule,
     AccordionModule,
+    NgxMaterialTimepickerModule,
 
     CommonComponentsModule,
     DashboardPageRoutingModule,

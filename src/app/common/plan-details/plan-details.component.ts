@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 
+import plansList from 'assets/planslist.json';
+
 @Component({
   selector: 'plan-details',
   templateUrl: './plan-details.component.html',
@@ -11,8 +13,13 @@ export class PlanDetailsComponent implements OnInit {
   @Input() plan: any;
   @Input() features: any;
 
+  @Input() compact:boolean;
+  @Input() hideCta:boolean;
+
   @Output() changePlan = new EventEmitter();
   @Output() checkout = new EventEmitter();
+
+
 
   @ViewChild(IonContent, {static: true}) content: IonContent;
 
@@ -22,10 +29,16 @@ export class PlanDetailsComponent implements OnInit {
 
   constructor() {
     this.currentFeatures = [];
+    this.compact = false;
+    this.hideCta = false;
 
   }
 
   ngOnInit() {
+
+    if (!(this.features && this.features.length > 0)) {
+      this.features = plansList.features;
+    }
 
     if (this.plan && this.features) {
       this.currentFeatures = [];
@@ -34,12 +47,18 @@ export class PlanDetailsComponent implements OnInit {
       });
     }
 
-    window.scroll(0,0);
   }
 
   ngAfterViewInit() {
-   
+    console.log('after view init');
+    document.getElementById('top').scrollIntoView();
   }
+
+  ionViewWillEnter() {
+  document.getElementById('top').scrollIntoView();
+  }
+
+
 
   sendChangePlan() {
     this.changePlan.emit();

@@ -235,6 +235,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   createUser() {
+    if (!(this.newUser.mobile && this.newUser.mobile.length>=10 && this.newUser.name && this.newUser.name.length && this.newUser.password && this.newUser.password.length && this.newUser.email && this.newUser.email.length)) {
+      return;
+    }
+    
     this.srvcLogin.createUser(this.newUser.mobile,this.newUser.name, this.newUser.password, this.newUser.email)
     .subscribe( (res:any) => {
       if (res.success) {

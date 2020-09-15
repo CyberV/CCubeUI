@@ -1,9 +1,22 @@
-<div>
-  <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan <span class="float-right" (click)="sendChangePlan()">Change?</span></h2>
+<div class="plan-container">
+  <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan <span *ngIf="!compact" class="float-right" (click)="sendChangePlan()">Change?</span></h2>
   <p>
-    <span class="price" Rs> {{plan.price}}</span> for 4 Weeks.
+    <span class="price" Rs> {{plan.price}}</span> for 1 month.
   </p>
-  <mat-accordion >
+  <div *ngIf="compact" class="">
+    <mat-panel-title *ngFor="let feature of currentFeatures">
+      <div class="feature row">
+        <div class="col-7">
+            {{feature.name}}
+        </div>
+        <div class="col-5">
+            <span class="float-right frequency"> {{feature.frequency}}</span>
+        </div>
+        
+      </div>
+  </mat-panel-title>
+  </div>
+  <mat-accordion *ngIf="!compact">
       <mat-expansion-panel class = "drop"  *ngFor="let feature of currentFeatures"  >
         <mat-expansion-panel-header class = "drop">
           <mat-panel-title>
@@ -42,7 +55,7 @@
     </div>
   </div> -->
 
-  <cta text="Checkout" (action)="sendCheckout()"></cta>
+  <cta  *ngIf="!hideCta && !compact" text="Checkout" [sticky]="true"  (action)="sendCheckout()"></cta>
 
 </div>
 

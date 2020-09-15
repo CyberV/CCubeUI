@@ -1,0 +1,26 @@
+@import "src/variables.scss";
+
+ion-slides {
+  height: 270px;
+}
+
+ion-slides, ion-button {
+  margin-bottom: 1em;
+}
+.addon-card {
+  
+    .card-body {
+      padding-top: 0;
+    }
+  
+    .card-text {
+      min-height: 40px;
+      display: block;
+      max-height: 40px;
+    }
+  
+    .rate {
+      margin-top: 10px;
+      color: $secondary-color;
+    }
+  }

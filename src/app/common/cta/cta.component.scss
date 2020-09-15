@@ -24,3 +24,10 @@
         cursor: pointer;
     }
 }
+
+.btn-main {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    left: 0;
+}

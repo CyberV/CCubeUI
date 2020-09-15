@@ -1,0 +1,44 @@
+.panel-container {
+    border-radius: 10px !important;
+    
+}
+
+.panel-content {
+    padding-top:15px;
+}
+
+.panel-header {
+    background: white !important;
+
+}
+
+.step {
+    display: inline-block;
+    border-radius: 13px;
+    width: 25px;
+    height: 25px;
+    padding-left: 5px;
+    border: 3px solid green;
+    margin-right: 5px;
+}
+
+.title {
+    position: relative;
+    top: 3px;
+}
+
+.accordion-container {
+    margin: 10px 0;
+    display:block;
+}
+
+.compact {
+    .panel-container {
+        box-shadow: none;
+    }
+
+    .panel-header {
+        padding-left: 0;
+        padding-right: 10px;
+    }
+}

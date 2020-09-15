@@ -1,0 +1,43 @@
+<mat-card class="card-container">
+  <div class="top">
+    <div>
+      <div class="row header-row">
+        <div class="col-4">
+          Plan
+        </div>
+        <div class="col-4">
+          Type
+        </div>
+        <div class="col-4">
+          Amount
+        </div>
+      </div>
+      <div class="row content-row">
+        <div class="col-4">
+          {{plan.name}}
+        </div>
+        <div class="col-4">
+          Type
+        </div>
+        <div class="col-4">
+          <span Rs>{{plan.price}} </span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <cc-accordion title="Plan Details" [compact]="true">
+        <plan-details [plan]="plan" [compact]="true"></plan-details>
+      </cc-accordion>
+    </div>
+  </div>
+  <div class="bottom container">
+    <div class="row">
+      <div class="col-8"> Tax 18% GST </div>
+      <div class="col-4"> <span> &#8377; 114</span></div>
+    </div>
+    <div class="row">
+        <div class="col-8">Net Payable</div>
+        <div class="col-4"> <span> &#8377; 1000</span></div>
+      </div>
+  </div>
+</mat-card>

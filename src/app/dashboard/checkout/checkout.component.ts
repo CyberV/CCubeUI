@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CheckoutService } from 'app/services/checkout.service';
+import { CarService } from 'app/services/car.service';
+import { ModalController } from '@ionic/angular';
+import { CheckoutConfirmationComponent } from 'app/common/checkout-confirmation/checkout-confirmation.component';
 
 @Component({
   selector: 'app-checkout',
@@ -17,13 +20,18 @@ export class CheckoutComponent implements OnInit {
 
   errors: any;
 
+  page: string;
+
   constructor(
     private router: Router,
+    private carService: CarService,
+    private modalController: ModalController,
     private checkoutService: CheckoutService
   ) {
 
     this.carMismatch = false;
     this.carIdentified = false;
+    this.page = '1';
 
     this.errors = {
       car: false,
@@ -35,17 +43,54 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     this.refreshCarAndPlans();
 
+
+
+  }
+
+  async showConfirmation() {
+    const modal = await this.modalController.create({
+      component: CheckoutConfirmationComponent,
+      cssClass: 'checkout-confirmation-modal',
+      componentProps: { 
+        bodyType: 'sedan',
+        showClose: true
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data:any)=> {
+
+      if (data && data.data &&  data.data.amount) {
+        this.payNow();
+      }
+
+      // if (data && data.data) {
+      //   let fltrdPlans = this.currentPlans.plans.filter( (plan) => plan.name.toLowerCase() == data.data.planName.toLowerCase());
+
+      //   if (fltrdPlans && fltrdPlans.length) {
+      //     this.buyPlan( {
+      //       plan: fltrdPlans[0]
+      //     });
+      //   }
+      // }
+
+    });
+    
   }
 
   refreshCarAndPlans() {
-    let car = sessionStorage.getItem('currentCar'),
-      plan = sessionStorage.getItem('selectedPlan');
 
-    if (!car || car == "null" || !car.length) {
-      this.errors.car = true;
+
+    let car = this.carService.getCurrentCar();
+    
+    
+    if (car) {
+      this.selectedCar = car;
     } else {
-      this.selectedCar = JSON.parse(car);
+      this.errors.car = true;
     }
+
+    let plan = sessionStorage.getItem('selectedPlan');
 
     if (!plan || plan == "null" || !plan.length) {
       this.errors.plan = true;
@@ -69,15 +114,24 @@ export class CheckoutComponent implements OnInit {
   ionViewWillEnter() {
     console.log('Entered Checkout View');
     this.refreshCarAndPlans();
+
+    this.checkoutService.events().subscribe( (evt) => {
+      if (evt.success) {
+        // alert('Payment Successful');
+        console.log(evt);
+        this.router.navigate(['/dashboard/thanks']);
+      }
+    })
   }
 
   payNow() {
     this.checkoutService.createOrder(this.selectedPlan.price).subscribe((res: any) => {
       if (res.success) {
         let orderId = res.data.id;
+        let order = res.data;
 
         console.log('Order Created', orderId, res.data);
-        this.checkoutService.tryPayment(orderId, res.data.amount);
+        this.checkoutService.tryPayment(order, res.data.amount);
 
       } else {
         console.log('Error creating order', res.errorMsg, res.error);

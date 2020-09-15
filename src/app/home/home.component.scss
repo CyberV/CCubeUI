@@ -1,9 +1,9 @@
 .container-fluid {
     text-align: justify;
-    background: #00a4a7;
-    color: white;
+    background: white;
+    color: black;
     padding: 0 32px;
-    margin-top: 2em;
+    margin-top: 1em;
 
     @media screen and (max-width: 768px) {
         margin-top: 5em;
@@ -61,9 +61,9 @@ a:hover {
     color: #00a4a7;
 }
 
-.row {
-    background: #00a4a7;
-}
+// .row {
+//     background: #00a4a7;
+// }
 
 .btn:hover {
     color: white;

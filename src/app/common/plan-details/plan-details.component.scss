@@ -4,6 +4,10 @@
     color: $secondary-color;
 }
 
+.feature {
+  width: 120%;
+margin-bottom: 5px;
+}
 
 .frequency {
   color: $secondary-color;
@@ -12,6 +16,10 @@
 .price {
   color: $primary-color;
   font-size: 120%;
+}
+
+.plan-container {
+  margin-bottom: 1em;
 }
 
 

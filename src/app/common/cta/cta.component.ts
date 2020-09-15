@@ -16,6 +16,8 @@ export class CtaComponent implements OnInit {
   @Input() subtext: string;
   @Input() secondaryCta:string;
 
+  @Input() sticky: boolean;
+
   @Output() action = new EventEmitter();
 
   constructor() {
@@ -24,12 +26,15 @@ export class CtaComponent implements OnInit {
     this.loading = false;
     this.outline = false;
     this.size = 18;
+    this.sticky = false;
   }
 
   onCtaClick() {
     this.action.emit();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('CTA Sticky', this.sticky);
+  }
 
 }

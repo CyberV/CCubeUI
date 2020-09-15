@@ -1,45 +1,18 @@
 @import 'src/variables.scss';
 
 .container {
-    background: $bg-white;
-    border-radius: 25px;
-    padding: 25px;
-    margin-top: 2em;
+  background: $bg-white;
+  border-radius: 25px;
+  padding: 25px;
+  padding-top: 5em;
+  overflow-x: hidden;
+  width: calc(100% + 30px);
+  left: -15px;
+  position: relative;
 
-    @media screen and (max-width: 768px) {
-        margin-top: 5em;
-    }
-
-    .page-logo {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    .car-info {
-      top: 42px;
-      position: relative;
-    }
 }
 
-.addon-card {
 
-  box-shadow: 0 8px 6px -6px black;
-
-  .card-body {
-    padding-top: 0;
-  }
-
-  .card-text {
-    min-height: 65px;
-    display: block;
-    max-height: 65px;
-    width: 88px;
-  }
-
-  .rate {
-    color: $secondary-color;
-  }
-}
 
 
 

@@ -7,7 +7,7 @@
         </div>
         <span *ngIf="readonly"> {{value}}</span>
         <input *ngIf="!readonly" [attr.type]="type" required #phoneInput 
-          class="form-control" 
+          [ngClass]="{'form-control' : true, 'error-field': hasError}" 
           [class.not-mobile]="name !== 'Mobile Number'"
           (input)="onPhoneChange(phoneInput.value)"
           [placeholder]="placeholder" 
@@ -15,6 +15,8 @@
           (blur)="sendBlur(value)"
           [style.text-transform]="uppercase? 'uppercase': 'none'"
           aria-describedby="basic-addon3">
+
+          <span *ngIf="hasError" class="error-msg"> {{error}}</span>
       </div>
   </div>
 </div>

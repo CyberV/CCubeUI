@@ -1,0 +1,18 @@
+@import 'src/variables.scss';
+
+
+#carouselExampleIndicators {
+    min-height: 480px;
+    height: 480px;
+    max-height: 480px;
+}
+.carousel-indicators {
+    li {
+        background-color: $primary-color;
+    }
+}
+
+.carousel-control-prev, .carousel-control-next {
+    color: $secondary-color;
+    font-size: 40px;
+}
