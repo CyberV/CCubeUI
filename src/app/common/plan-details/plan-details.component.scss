@@ -20,6 +20,10 @@ margin-bottom: 5px;
 
 .plan-container {
   margin-bottom: 1em;
+
+  &.compact {
+    width: 110%;
+  }
 }
 
 

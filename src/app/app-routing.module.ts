@@ -33,17 +33,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-  }, {
-    path: 'register',
-    component: RegisterUserComponent
   },{
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
-    path: 'modal',
-    loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
-  }
+  },
 
 
 ];

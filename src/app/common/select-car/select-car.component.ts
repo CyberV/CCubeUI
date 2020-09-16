@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import carsList from 'assets/carslist.json';
+import { AccordionComponent } from '../accordion/accordion.component';
 
 
 @Component({
@@ -10,6 +11,8 @@ import carsList from 'assets/carslist.json';
 export class SelectCarComponent implements OnInit {
 
   @Output() letsgo = new EventEmitter();
+
+  @Output() carSelected = new EventEmitter();
 
   maker: string;
   model: string;
@@ -22,6 +25,14 @@ export class SelectCarComponent implements OnInit {
   selected:any;
 
   options:any;
+
+  get makerLabel() {
+    return this.maker === '' ? 'Select Maker' : 'Maker : ' + this.maker; 
+  }
+  
+  get modelLabel() {
+    return this.model === '' ? 'Select Model' : 'Model : ' + this.model; 
+  }
 
   get filteredMakers() {
     if (this.maker.length) {
@@ -44,6 +55,9 @@ export class SelectCarComponent implements OnInit {
       return mkr.cars;
     }
   }
+
+  @ViewChild('modelDrawer') modelDrawer : AccordionComponent;
+  @ViewChild('makerDrawer') makerDrawer : AccordionComponent;
 
   constructor() {
       this.maker="";
@@ -72,6 +86,18 @@ export class SelectCarComponent implements OnInit {
     this.selected.maker = carsList.filter( (maker) => {
       return maker.maker.toLowerCase() == this.maker.toLowerCase()
     })[0];
+
+
+    setTimeout( ()=> {
+      this.makerDrawer.toggle();
+      setTimeout( ()=> {
+        this.modelDrawer.toggle();
+        this.modelDrawer.drawerToggle.nativeElement.scrollIntoView();
+      }, 500)
+    }, 500);
+
+
+  
    }
 
    selectModel(mdl) {
@@ -80,6 +106,18 @@ export class SelectCarComponent implements OnInit {
     this.selected.model = this.selected.maker.cars.filter( (car) => {
       return car.model.toLowerCase() == this.model.toLowerCase()
     })[0];
+
+    this.carSelected.emit( {
+      maker: this.maker,
+      model: this.model,
+      bodyType: this.selected.model.bodyType
+    });
+
+
+    setTimeout( ()=> {
+      this.modelDrawer.toggle();
+    }, 500);
+
    }
 
    submit() {

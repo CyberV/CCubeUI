@@ -1,7 +1,7 @@
 <mat-accordion class="accordion-container" [class.compact]="compact">
   <mat-expansion-panel class = "drop panel-container">
     <mat-expansion-panel-header class = "drop panel-header">
-      <mat-panel-title>
+      <mat-panel-title #drawerToggle>
           <span *ngIf="hasStep" class="step"> {{step}}  </span> <span class="title">{{title}}</span>
       </mat-panel-title>
       <mat-panel-description class = "drop">

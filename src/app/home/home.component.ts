@@ -3,6 +3,7 @@ import featureList from 'assets/featurelist.json';
 import contributionsList from 'assets/contributionslist.json';
 import onePageScroll from 'assets/scripts/one-page-scroll.min';
 import { Router } from '@angular/router';
+import { UserService } from 'app/services/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -27,11 +28,16 @@ export class HomeComponent implements OnInit {
 
   slideOpts;
 
+  context:string = 'landing';
+
+  isLoggedIn:boolean;
+
   @ViewChildren('attention') attention : QueryList<ElementRef>;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService:UserService) {
     this.featureList = featureList;
     this.contributions = contributionsList;
+    this.isLoggedIn = false;
 
         
     this.slideOpts = {
@@ -45,6 +51,9 @@ export class HomeComponent implements OnInit {
         type: 'bullets',
       },
     };
+
+    this.isLoggedIn = this.userService.isLoggedIn();
+
    }
 
   ngOnInit() {
@@ -62,8 +71,14 @@ export class HomeComponent implements OnInit {
   }
 
   goToPlans() {
-    sessionStorage.removeItem('currentCar');
-    this.router.navigate(['plans']);
+    //sessionStorage.removeItem('currentCar');
+
+    if (this.isLoggedIn) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.router.navigate(['plans']);
+    }
+   
   }
 
   loadMore() {

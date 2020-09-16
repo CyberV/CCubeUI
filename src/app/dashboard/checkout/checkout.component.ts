@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CheckoutService } from 'app/services/checkout.service';
 import { CarService } from 'app/services/car.service';
 import { ModalController } from '@ionic/angular';
@@ -19,11 +19,13 @@ export class CheckoutComponent implements OnInit {
   carIdentified: boolean;
 
   errors: any;
+  context:string;
 
   page: string;
 
   constructor(
     private router: Router,
+    private route:ActivatedRoute,
     private carService: CarService,
     private modalController: ModalController,
     private checkoutService: CheckoutService
@@ -43,8 +45,15 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     this.refreshCarAndPlans();
 
+    this.route.params.subscribe((rdata) => {
+      this.context = this.route.snapshot.routeConfig.path.toString().replace("checkout/","") ;
+    })
 
 
+  }
+
+  confirmCheckout() {
+    this.router.navigate(['/dashboard/checkout/confirm']);
   }
 
   async showConfirmation() {

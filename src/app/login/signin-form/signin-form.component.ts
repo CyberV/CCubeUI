@@ -53,7 +53,7 @@ export class SigninFormComponent implements OnInit {
           this.srvcUser.setCurrentUser(res.data.user);
           this.srvcUser.setUserToken(res.data.token);
           alert(res.data.msg);
-          this.router.navigate(['../../dashboard'], {relativeTo: this.activatedRoute});
+          this.router.navigate(['/dashboard/select-car']);
           
 
         } else {

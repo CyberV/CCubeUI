@@ -1,24 +1,12 @@
-<div class="container">
-
-<selected-car *ngIf="currentCar" [car]="currentCar"></selected-car>
+<selected-car *ngIf="currentCar && isCarSelected" [car]="currentCar"></selected-car>
 
   <div class="row">
-    <div class="col-md-6 col-xs-12" *ngIf="!isCarSelected">
-      <img class="logo animate__animated animate__flipInX" src="./assets/car-care.PNG" alt="CCubeLogo" border="0" />
-    </div>
     <div class="col-md-6 col-xs-12" [class.col-md-12]="isCarSelected">
 
-      <ng-container *ngIf="!isCarSelected">
-        <heading text="Welcome to CCube."></heading>
-
-        <heading text="Let's get to know your Car!"></heading>
-
-        <car-form (carReady)="showPlans($event)"></car-form>
-      </ng-container>
 
       <ng-container *ngIf="isCarSelected">
 
-        <ng-container *ngIf="!isPlanSelected">
+        <ng-container>
 
           <heading text="Our Monthly Plans" align="center" outline="true" (click)="openModal()"></heading>
           <plan-slider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
@@ -30,25 +18,10 @@
 
         </ng-container>
 
-        <ng-container *ngIf="isPlanSelected">
-          <plan-details [hideCta]="true" [plan]="selectedPlan" [features]="currentPlans.features" (changePlan)="isPlanSelected = false">
-
-          </plan-details>
-
-
-          <addon-slider></addon-slider>
-
-          <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
-        </ng-container>
-
-        <!-- <div *ngIf="!isMobile" class="card-deck row">
-          <plan-card class="col-4" *ngFor="let plan of currentPlans" [plan]="plan"></plan-card>
-        </div> -->
 
       </ng-container>
 
     </div>
   </div>
-</div>
 
 <router-outlet></router-outlet>

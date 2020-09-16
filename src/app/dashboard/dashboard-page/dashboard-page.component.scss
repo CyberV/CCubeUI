@@ -15,6 +15,19 @@ p{
     background: $bg-gray;
     height: 100%;
     padding-bottom: 30px;
-    min-height: 90vh;
+    min-height: 100vh;
 
 }
+
+
+.container {
+    background: $bg-white;
+    border-radius: 25px;
+    padding: 25px;
+    padding-top: 5em;
+    overflow-x: hidden;
+    width: calc(100% + 30px);
+    left: -15px;
+    position: relative;
+  
+  }

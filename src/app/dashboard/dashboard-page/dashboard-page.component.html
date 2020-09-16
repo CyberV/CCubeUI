@@ -3,7 +3,21 @@
     <div class="container-fluid">
       <div class="row dashboard-content">
         <div class="offset-md-2 col-md-8">
-          <app-dashboard></app-dashboard>
+          <div class="container">
+            <ng-container *ngIf="ready">
+              <app-dashboard *ngIf="context==='dashboard'"></app-dashboard>
+              <car-form *ngIf="context==='select-car'" (carReady)="goToDashboard($event)"></car-form>
+              <div  *ngIf="context==='plan' && selectedPlan">
+                  <selected-car [car]="selectedCar"></selected-car>
+                  <plan-details  [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
+                  </plan-details>
+                  <addon-slider></addon-slider>
+                  <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
+              </div>
+            </ng-container>
+              
+          </div>
+
         </div>
       </div>
       </div>

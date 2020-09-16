@@ -248,7 +248,7 @@ export class LoginFormComponent implements OnInit {
         this.srvcUser.setCurrentUser(res.data);
 
         //this.router.navigate(['/root/dashboard']);
-        this.router.navigate(['../dashboard'], {relativeTo: this.activatedRoute});
+        this.router.navigate(['/dashboard/select-car'] );
         this.page = 'car';
         
 

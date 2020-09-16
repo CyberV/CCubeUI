@@ -15,8 +15,19 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
+    path: 'checkout/confirm',
+    component: CheckoutComponent
+  },
+  {
     path: 'thanks',
     component: ThanksPageComponent
+  },
+  {
+    path: 'plan',
+    component: DashboardPageComponent
+  }, {
+    path: 'select-car',
+    component: DashboardPageComponent
   }
 
 ];

@@ -1,45 +1,59 @@
 <div class="row">
   <div class="col-12">
-    <mobile-input type="text" placeholder="e.x. Maruti / Honda" name="Select Maker" [(value)]="maker" (valueChange)="makerSelected = false"></mobile-input>
-    <div *ngIf="!makerSelected" class="panel-makers row" >
-      <!-- <ion-slides [options]="options"> -->
-        <div *ngFor="let mkr of filteredMakers" class="col-12 col-md-4" (click)="selectMaker(mkr)" >
-            <div >
-                <div class="card maker animate__animated animate__fadeInLeft">
-                  <div class="row">
-                    <div class="col-5 col-md-12">
-                        <img class="card-img-top" [src]="mkr.logo" [alt]="mkr.name">
-                    </div>
-                    <div class="col-7 col-md-12">
-                        <div class="card-body">
-                            <h5 class="card-title"> {{mkr.name | uppercase}} </h5>
-                          </div>
-                    </div>
-                  </div>
-                   
-                  
+    <mobile-input [labelOnly]="true" name="Select Your Car"></mobile-input>
+    <cc-accordion #makerDrawer [title]="makerLabel">
+      <mobile-input class="maker-search" [inputOnly]="true" type="text" placeholder="Search..." [(value)]="maker"
+        (valueChange)="makerSelected = false; model=''; modelSelected = false; "></mobile-input>
+      <div class="panel-makers row">
+        <!-- <ion-slides [options]="options"> -->
+        <div *ngFor="let mkr of filteredMakers" class="col-12 col-md-4" (click)="selectMaker(mkr)">
+          <div>
+            <mat-card class="card maker animate__animated animate__fadeInDown">
+              <div class="row">
+                <div class="col-5 col-md-12">
+                  <img class="card-img-top" [src]="mkr.logo" [alt]="mkr.name">
                 </div>
-        
+                <div class="col-7 col-md-12">
+                  <div class="card-body">
+                    <h5 class="card-title"> {{mkr.name | uppercase}} </h5>
+                  </div>
+                </div>
               </div>
-            </div>
 
 
-    </div>
-    <div *ngIf="makerSelected">
-        <mobile-input type="text" name="Select Model" [(value)]="model" (valueChange)="modelSelected = false"></mobile-input>
-        <div *ngIf="!modelSelected" class="panel-models row">
-          <div *ngFor="let mdl of filteredModels" (click)="selectModel(mdl)" class="card col-12 col-md-4 maker animate__animated animate__fadeInLeft">
-            <img class="card-img-top" [src]="mdl.image" [alt]="mdl.name">
-            <div class="card-body">
-              <h5 class="card-title"> {{mdl.model | uppercase}} </h5>
-            </div>
+            </mat-card>
+
           </div>
         </div>
-    </div>
 
-    <div *ngIf="modelSelected">
-      <cta text="Show me my Plans" (action)="submit()"></cta>
 
-    </div>
+      </div>
+    </cc-accordion>
+
+    <cc-accordion #modelDrawer *ngIf="makerSelected" [title]="modelLabel">
+      <mobile-input class="model-search" [inputOnly]="true" type="text" placeholder="Search..." [(value)]="model"
+        (valueChange)="modelSelected = false"></mobile-input>
+
+        <div class="panel-models row">
+          <mat-card *ngFor="let mdl of filteredModels" (click)="selectModel(mdl)"
+            class="card col-12 col-md-4 model animate__animated animate__fadeInLeft">
+            <div class="row">
+              <div class="col-5 col-md-12">
+                <img class="card-img-top" [src]="mdl.image" [alt]="mdl.name">
+              </div>
+              <div class="col-7 col-md-12">
+                <div class="card-body">
+                  <h5 class="card-title"> {{mdl.model | uppercase}} </h5>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+    </cc-accordion>
+  </div>
+
+  <div *ngIf="modelSelected">
+    <cta text="Show me my Plans" [sticky]="true" (action)="submit()"></cta>
+
   </div>
 </div>

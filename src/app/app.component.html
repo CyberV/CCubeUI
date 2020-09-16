@@ -1,4 +1,8 @@
 <ion-app>
+  <span id="top" name="topOfPage" style="display:none;">
+     
+  </span>
+  <p><a id="trigger-to-top" href="#top">Jump to Top</a></p>
   <ion-header *ngIf="isMobile">
     <ion-toolbar>
       <ion-title><span> <img src="assets/blueLogo.png"></span></ion-title>
@@ -7,7 +11,11 @@
 
   <app-navbar *ngIf="!isMobile"></app-navbar>
 
-  <ion-router-outlet [class.push-down]="!isMobile"></ion-router-outlet>
+  <ion-fab *ngIf="!hideBackButton" slot="fixed">
+      <ion-fab-button (click)="goBack()"><ion-icon name="arrow-back-outline"></ion-icon></ion-fab-button>
+    </ion-fab>
+  <ion-router-outlet [class.push-down]="!isMobile" (activate)='onActivate($event)'
+  (deactivate)='onDeactivate($event)'></ion-router-outlet>
 
 
 

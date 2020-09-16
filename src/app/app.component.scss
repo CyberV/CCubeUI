@@ -35,10 +35,24 @@ ion-router-outlet {
     }
 }
 
+ion-fab {
+bottom: 15%;
+left: 5%;
+ion-fab-button {
+    --background: #ec6b1e;
+}
+}
+
+
 .header-md::after {
     display: none;
 }
 
+#top-of-page {
+    position: absolute;
+    top:0;
+    left:0;
+}
 
 
 

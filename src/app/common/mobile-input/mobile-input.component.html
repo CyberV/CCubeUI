@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-12 mobile-input">
-      <label for="mobileNumber">{{name}}</label>
+      <label *ngIf="!inputOnly" for="mobileNumber">{{name}}</label>
       <div class="input-group">
         <div class="input-group-prepend" *ngIf="name === 'Mobile Number'">
           <span class="input-group-text" id="basic-addon3"> + 91 | </span>
         </div>
         <span *ngIf="readonly"> {{value}}</span>
-        <input *ngIf="!readonly" [attr.type]="type" required #phoneInput 
+        <ion-icon *ngIf="inputOnly" name="search-outline"></ion-icon>
+        <input *ngIf="!readonly && !labelOnly" [attr.type]="type" required #phoneInput 
           [ngClass]="{'form-control' : true, 'error-field': hasError}" 
           [class.not-mobile]="name !== 'Mobile Number'"
           (input)="onPhoneChange(phoneInput.value)"

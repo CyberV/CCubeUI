@@ -4,7 +4,7 @@
       <div class="offset-md-2 col-md-8">
         <div class="container">
 
-          <div *ngIf="page==='1'">
+          <div *ngIf="context=='checkout'">
 
             <heading text="CHECKOUT" align="center"></heading>
 
@@ -14,10 +14,10 @@
 
             <addon-slider></addon-slider>
 
-            <cta text="Confirm" [sticky]="true" (action)="page = '2'"></cta>
+            <cta text="Confirm" [sticky]="true" (action)="confirmCheckout()"></cta>
           </div>
 
-          <div *ngIf="page==='2'">
+          <div *ngIf="context=='confirm'">
             <selected-car *ngIf="selectedCar" [car]="selectedCar"></selected-car>
 
             <cc-accordion title="Verify Your Car" [step]="'1'">

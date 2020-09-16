@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { CarService } from 'app/services/car.service';
 
 
 @Component({
@@ -15,13 +16,16 @@ export class CarFormComponent implements OnInit {
   showCarSelector: boolean;
   findingCar: boolean;
   loading: boolean;
+  currentCar:any;
 
   regNo: any;
   maker: string;
   model: string;
 
 
-  constructor() {
+  constructor(
+    private carService:CarService
+  ) {
     this.showCarSelector = false;
     this.findingCar = false;
     this.loading = false;
@@ -57,6 +61,14 @@ export class CarFormComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  saveCar(carData) {
+    if (!this.verifyOnly) {
+      sessionStorage.setItem('currentCar', JSON.stringify(carData));
+    };
+
+    this.currentCar = this.carService.getCurrentCar()
+  }
 
   goToPlans(carDetails) {
 

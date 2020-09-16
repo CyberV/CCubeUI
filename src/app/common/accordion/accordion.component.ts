@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'cc-accordion',
@@ -11,6 +11,8 @@ export class AccordionComponent implements OnInit {
   @Input() step:string;
 
   @Input() compact: boolean;
+
+  @ViewChild('drawerToggle') drawerToggle: ElementRef;
 
   hasStep:boolean;
 
@@ -25,6 +27,10 @@ export class AccordionComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  toggle() {
+    this.drawerToggle.nativeElement.click();
+  } 
 
   ngOnChanges() {
     this.hasStep = !! (this.step && this.step.length)

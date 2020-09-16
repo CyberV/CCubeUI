@@ -34,7 +34,6 @@ export class CtaComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('CTA Sticky', this.sticky);
   }
 
 }

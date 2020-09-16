@@ -3,7 +3,7 @@ import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
 
 import { Platform } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +11,32 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor(private platform:Platform, private route: ActivatedRoute) {
+
+  noBackNavigation:any;
+  
+  hideBackButton:boolean;
+
+  constructor(
+     private platform:Platform,
+     private route: ActivatedRoute,
+     private router:Router
+     ) {
     this.initializeApp();
-    this.route.outlet
+    this.hideBackButton = false;
+    
+    this.noBackNavigation = [
+      'select-car',
+      'thanks',
+      'landing'
+    ];
 
     this.route.url.subscribe( (d)=> {
-      console.log('route', this.route.snapshot['_routerState'].url);
+      // console.log('route', this.route.snapshot['_routerState'].url);
     })
+  }
+
+  goBack(){
+    window.history.back();
   }
 
   get pathname() {
@@ -26,6 +45,35 @@ export class AppComponent {
 
   get isMobile() {
     return !this.platform.is('desktop');
+  }
+
+  ngAfterViewInit() {
+    
+  }
+
+  onDeactivate(comp){
+    //console.log('Deactivated', data);
+  }
+
+  onActivate(comp) {
+    //console.log('Activated', data);
+    this.hideBackButton = this.checkContext(comp);
+    setTimeout( ()=> {
+      //document.getElementById('trigger-to-top').click();
+    }, 200);
+
+  }
+
+  checkContext(comp) {
+    let hideBackButton = false;
+    if (!comp) {
+    } else if (!comp.context) {
+    } else {
+      hideBackButton = this.noBackNavigation.filter( (path) => path == comp.context).length > 0;
+    }
+     
+    return hideBackButton;
+     
   }
   
 

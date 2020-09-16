@@ -41,8 +41,6 @@ export class DashboardComponent implements OnInit {
     this.isPlanSelected = false;
     this.selectedPlan = {};
 
-    console.log('M', M);
-
     this.slideOpts = {
       initialSlide: 1,
       speed: 400
@@ -81,6 +79,13 @@ export class DashboardComponent implements OnInit {
 
 
   async ngOnInit() {
+  }
+
+  async ngAfterViewInit() {
+
+    sessionStorage.setItem('selectedPlan', null);
+
+    this.isPlanSelected = false;
 
     let car = this.carService.getCurrentCar();
     
@@ -90,15 +95,11 @@ export class DashboardComponent implements OnInit {
       this.isCarSelected = true;
     }
 
-    
-
     if (this.isCarSelected) {
       await this.openModal();
     }
-  }
+    
 
-  ngAfterViewInit() {
-    $('.carousel').carousel();
   }
 
   resetCar() {
@@ -107,23 +108,22 @@ export class DashboardComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    console.log('in view enter');
+    console.log('Entering View in Dashboard Component');
   }
 
 
 
   showPlans(carDetails) {
-    this.currentCar = carDetails;
-    sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+    // this.currentCar = carDetails;
 
-    this.isCarSelected = true;
-    this.isPlanSelected = false;
 
-    this.ngOnInit();
+    // this.isCarSelected = true;
+
+
+    // this.ngOnInit();
   }
 
   buyPlan(payload) {
-    console.log(payload);
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
     this.goToCheckout();
@@ -133,12 +133,13 @@ export class DashboardComponent implements OnInit {
   onShowDetails(payload) {
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
-
+    sessionStorage.setItem('selectedPlan', JSON.stringify(this.selectedPlan));
+    this.router.navigate(['/dashboard/plan']);
 
   }
 
   goToCheckout() {
-    sessionStorage.setItem('selectedPlan', JSON.stringify(this.selectedPlan));
+    
     this.router.navigate(['/dashboard/checkout']);
   }
 

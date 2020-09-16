@@ -49,16 +49,6 @@ export class PlanDetailsComponent implements OnInit {
 
   }
 
-  ngAfterViewInit() {
-    console.log('after view init');
-    document.getElementById('top').scrollIntoView();
-  }
-
-  ionViewWillEnter() {
-  document.getElementById('top').scrollIntoView();
-  }
-
-
 
   sendChangePlan() {
     this.changePlan.emit();

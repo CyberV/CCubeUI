@@ -19,9 +19,13 @@ export class MobileInputComponent implements OnInit {
 
   @Input() name:string;
   @Input() placeholder:string;
+  @Input() error:string;
+
+  @Input() labelOnly:boolean;
+  @Input() inputOnly:boolean;
+
   @Input() uppercase:boolean;
   @Input() readonly: boolean;
-  @Input() error:string;
 
   hasError:boolean;
 
@@ -31,6 +35,8 @@ export class MobileInputComponent implements OnInit {
     this.type = "number";
     this.uppercase = false;
     this.readonly = false;
+    this.labelOnly = false;
+    this.inputOnly = false;
 
     this.hasError = false;
    }
