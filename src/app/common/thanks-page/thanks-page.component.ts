@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from 'app/header.service';
 
 @Component({
   selector: 'app-thanks-page',
@@ -7,8 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThanksPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private headerService:HeaderService) { }
 
-  ngOnInit() {}
+  public context: string;
 
+  ngOnInit() {
+
+    this.context = "thanks";
+  }
+
+  ionViewWillEnter() {
+    this.headerService.setText('Plan Purchased!');
+  }
+
+
+  goToDashboard() {
+    
+  }
 }

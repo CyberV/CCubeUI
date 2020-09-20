@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../login.service';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./signin-form.component.scss'],
 })
 export class SigninFormComponent implements OnInit {
+
+  @Input() context:string;
 
   user:any;
   loading:boolean;

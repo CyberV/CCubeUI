@@ -11,8 +11,8 @@
             (finished)="doorstep = true;"></typeaway>
           <br />
           <typeaway skipAnimation="true" class="title2" *ngIf="startShow" text="At your doorstep."
-            (finished)="daily = true;"></typeaway><br />
-          <div *ngIf="knowmore" class="row ctaRow ">
+            (finished)="daily = true;"></typeaway><br /><br/><br/>
+          <!-- <div   *ngIf="knowmore" class="row ctaRow ">
               <p>
                 Welcome to the new world and enjoy the ultimate car cleaning experience.
               </p>
@@ -28,7 +28,7 @@
                 Nature and saving a lot of water during the process.
               </p>
 
-            </div>
+            </div> -->
           </div>
 
         <div  class="section" id="s2" name="page2">
@@ -51,18 +51,18 @@
 
 
 
-        <div  class="section" id="s3" name="page3">
+        <!-- <div  class="section" id="s3" name="page3">
           <p class="section-heading"><strong>OUR CONTRIBUTIONS TO SOCIETY</strong></p>
 
           <feature-card class="col-xs-12 col-md-6" *ngFor="let contribution of contributions;"
             [title]="contribution.title" [points]="contribution.points" [solution]="contribution.solution"
             direction="left" [icon]="contribution.icon"></feature-card>
 
-        </div>
+        </div> -->
 
         <div style="display:flex;justify-content:center;align-items:center; margin-bottom: 2em; ">
             <div><span class="btn btn-block" (click)="goToPlans()"
-                >Show Monthly Plans</span></div>
+                >Sign Up Today</span></div>
           </div>
 
       </div>

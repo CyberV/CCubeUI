@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12 mobile-input">
+  <div class="col-12 mobile-input" [class.--no-padding]="inputOnly">
       <label *ngIf="!inputOnly" for="mobileNumber">{{name}}</label>
       <div class="input-group">
         <div class="input-group-prepend" *ngIf="name === 'Mobile Number'">

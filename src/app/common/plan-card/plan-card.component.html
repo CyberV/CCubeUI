@@ -1,9 +1,10 @@
 <mat-card class="card animate__animated animate__headShake">
-  <img class="card-img-top" src="assets/banner1.JPG" alt="Card image cap">
+  <img class="card-img-top" src="assets/banner1.JPG" alt="Card image cap" (click)="onShowDetails()">
   <div class="card-body">
-    <h5 class="card-title" [style.color]="color"> {{plan.name}} </h5>
+    <h5 class="card-title" [style.color]="color"  (click)="onShowDetails()"> {{plan.name}} </h5>
+    <h6 class="monthly-label">MONTHLY PLAN</h6>
     <p class="card-text">
-      <span class="price" Rs>{{ plan.pricing[bodyType] }}</span>
+      <span class="price" Rs  (click)="onShowDetails()">{{ plan.pricing[bodyType] }}</span>
       <br />
       <span></span>
     </p>

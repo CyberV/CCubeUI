@@ -16,8 +16,8 @@
         <div class="col-4">
           {{plan.name}}
         </div>
-        <div class="col-4">
-          Type
+        <div class="col-4 body-type">
+          {{car.bodyType}}
         </div>
         <div class="col-4">
           <span Rs>{{plan.price}} </span>
@@ -32,12 +32,9 @@
   </div>
   <div class="bottom container">
     <div class="row">
-      <div class="col-8"> Tax 18% GST </div>
-      <div class="col-4"> <span> &#8377; 114</span></div>
-    </div>
-    <div class="row">
         <div class="col-8">Net Payable</div>
-        <div class="col-4"> <span> &#8377; 1000</span></div>
+        <div class="col-4"> <span> &#8377; {{plan.price}}</span></div>
+        <div class="col-8">(Inclusive of all taxes)</div>
       </div>
   </div>
 </mat-card>

@@ -9,6 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 const { GoogleAuth } = Plugins;
+import { ToastController } from '@ionic/angular';
+
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
@@ -23,6 +25,8 @@ export class LoginFormComponent implements OnInit {
   yo: any;
   loading: boolean;
 
+  @Input() context:string;
+
   public user: any;
   public isLoggedIn: boolean;
   public newUser: any;
@@ -32,6 +36,8 @@ export class LoginFormComponent implements OnInit {
   public isCarReady: boolean;
   public showCarSelector:boolean;
   public findingCar:boolean;
+  public userExists:boolean;
+
 
   loadingDetails: boolean;
   otpSent:boolean;
@@ -82,6 +88,7 @@ export class LoginFormComponent implements OnInit {
     private srvcLogin: LoginService,
     private geolocation: Geolocation,
     private srvcUser: UserService,
+    public toastController: ToastController,
 
     private router: Router) {
 
@@ -93,6 +100,7 @@ export class LoginFormComponent implements OnInit {
     this.loading = false;
     this.findingCar = false;
     this.otpSent = false;
+    this.userExists = false;
 
     this.newUser = {
       car: {}
@@ -121,8 +129,23 @@ export class LoginFormComponent implements OnInit {
     this.yo = '';
   }
 
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   ngOnInit() {
     this.isCarReady = false;
+
+    let savedMobile = sessionStorage.getItem('currentMobile');
+
+    if (savedMobile && savedMobile != 'null') {
+      this.newUser.mobile = savedMobile;
+
+    }
 
     this.geolocation.getCurrentPosition().then((resp) => {
 
@@ -132,7 +155,7 @@ export class LoginFormComponent implements OnInit {
       this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
 
     }).catch((error) => {
-      alert('Error getting location' + JSON.stringify(error));
+      this.presentToast('Error getting location');
     });
 
 
@@ -243,7 +266,7 @@ export class LoginFormComponent implements OnInit {
     .subscribe( (res:any) => {
       if (res.success) {
 
-        alert('Account Created Successfully');
+        this.presentToast('Account Created Successfully');
 
         this.srvcUser.setCurrentUser(res.data);
 
@@ -253,7 +276,13 @@ export class LoginFormComponent implements OnInit {
         
 
       } else {
-        alert('There was en error creating account. Please try again in some time.');
+
+        if (res.errorMsg == "User Exists for Mobile Number") {
+          this.userExists = true;
+        } else {
+          alert('There was en error creating account. Please try again in some time.');
+        }
+        
       }
 
     });
@@ -283,7 +312,8 @@ export class LoginFormComponent implements OnInit {
       console.log('Verified', verified);
 
       if (verified) {
-        this.page = 'signup';
+        sessionStorage.setItem('currentMobile', this.newUser.mobile);
+        this.router.navigate(['/signup/details'])
       }
    
     }

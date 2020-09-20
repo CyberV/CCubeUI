@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row login-content">
         <div class="offset-md-2 col-md-8">
-          <app-login></app-login>
+          <app-login *ngIf="ready"  [context]="context"></app-login>
         </div>
       </div>
       </div>

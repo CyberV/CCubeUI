@@ -6,13 +6,11 @@
 
           <div *ngIf="context=='checkout'">
 
-            <heading text="CHECKOUT" align="center"></heading>
-
-            <checkout-details [plan]="selectedPlan">
+            <checkout-details [plan]="selectedPlan" [car]="selectedCar">
 
             </checkout-details>
 
-            <addon-slider></addon-slider>
+            <addon-slider *ngIf="retryAddon"></addon-slider>
 
             <cta text="Confirm" [sticky]="true" (action)="confirmCheckout()"></cta>
           </div>

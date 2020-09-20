@@ -14,7 +14,6 @@ p{
 .dashboard-content {
     background: $bg-gray;
     height: 100%;
-    padding-bottom: 30px;
     min-height: 100vh;
 
 }
@@ -22,12 +21,13 @@ p{
 
 .container {
     background: $bg-white;
-    border-radius: 25px;
     padding: 25px;
     padding-top: 5em;
+    padding-bottom: 4em;
     overflow-x: hidden;
     width: calc(100% + 30px);
     left: -15px;
     position: relative;
+    height: 100vh;
   
   }

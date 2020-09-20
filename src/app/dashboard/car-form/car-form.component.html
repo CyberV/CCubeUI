@@ -1,5 +1,5 @@
 <div class="car-form">
-    <img *ngIf="currentCar" [src]="currentCar.image" class="animate__animated animate__tada"/>
+    <img *ngIf="currentCar" [src]="currentCar.image" class="center animate__animated animate__tada"/>
         <mobile-input type="text" uppercase="true" name="Enter Your Car Number" placeholder="HR51XX1122" [(value)]="regNo" ></mobile-input>
         <div *ngIf="!isTypingRegNo" class="animate__animated" [class.animate__fadeOutUp]="isTypingRegNo">
           
@@ -15,7 +15,7 @@
         <cta *ngIf="isRegNoValid && !findingCar" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
     
         
-        <car-display *ngIf="findingCar" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)"></car-display>
+        <car-display *ngIf="findingCar" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)" (carReady)="saveCar($event)"></car-display>
       
     
     

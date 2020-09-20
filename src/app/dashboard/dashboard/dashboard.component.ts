@@ -126,6 +126,7 @@ export class DashboardComponent implements OnInit {
   buyPlan(payload) {
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
+    sessionStorage.setItem('selectedPlan', JSON.stringify(this.selectedPlan));
     this.goToCheckout();
 
   }

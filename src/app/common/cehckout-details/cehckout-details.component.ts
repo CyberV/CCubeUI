@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CheckoutDetailsComponent implements OnInit {
 
   @Input() plan:any;
+  @Input() car:any;
 
   constructor() { }
 

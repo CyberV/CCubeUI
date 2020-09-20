@@ -8,7 +8,6 @@
 
         <ng-container>
 
-          <heading text="Our Monthly Plans" align="center" outline="true" (click)="openModal()"></heading>
           <plan-slider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
             (buyNow)="buyPlan($event)"></plan-slider>
 

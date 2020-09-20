@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
     if (this.isLoggedIn) {
       this.router.navigate(['/dashboard']);
     } else {
-      this.router.navigate(['plans']);
+      this.router.navigate(['signup']);
     }
    
   }

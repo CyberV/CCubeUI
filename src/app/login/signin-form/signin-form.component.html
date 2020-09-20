@@ -8,10 +8,10 @@
 
 <mobile-input name="Password" type="password" placeholder="Your Password" [(value)]="user.password"></mobile-input>
 
-<cta text="Log In" [loading]="loading" [disabled]="!isPhoneValid" (action)="tryLogin()"></cta>
+<cta text="Log In" sticky="true" [loading]="loading" [disabled]="!isPhoneValid" (action)="tryLogin()"></cta>
 <subheading *ngIf="showError" [text]="errorMsg" color="red"></subheading>
 
-<heading  text="Forgot Password ?"  align="right"></heading>
+<heading  text="Forgot Password ?"  align="right" size="16"></heading>
 
 Not a Member? <a class="link" [routerLink]="['/signup']" >Create an Account</a>
 

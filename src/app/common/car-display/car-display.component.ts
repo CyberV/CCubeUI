@@ -12,6 +12,7 @@ export class CarDisplayComponent implements OnInit {
   @Input() verifyOnly: boolean;
 
   @Output() letsgo = new EventEmitter();
+  @Output() carReady = new EventEmitter();
 
   noCar:boolean;
   loading: boolean;
@@ -75,7 +76,7 @@ export class CarDisplayComponent implements OnInit {
           mm = mm.split('/');
 
           this.carDetails = {
-            maker : mm [0],
+            maker : mm [0].replace("PVT LTD",""),
             model : mm [1],
             fuelType : res.raw["Fuel Type"],
             registeredOn: new Date(res.raw["Registration Date"]).toDateString(),
@@ -87,7 +88,13 @@ export class CarDisplayComponent implements OnInit {
             bodyType: 'sedan'
           }
 
-          this.carDetails.name = this.carDetails.model.split(' ').slice(1).toString().replace(',','');
+          let makerStr = this.carDetails.maker.split(' ')[0].toLowerCase();
+          let modelStr = this.carDetails.model.toLowerCase().replace(makerStr,"").trim();
+          
+
+          this.carDetails.name = modelStr;
+
+          this.carReady.emit(this.carDetails);
           
           if(this.verifyOnly) {
             this.letsgo.emit(this.carDetails);

@@ -6,15 +6,15 @@
         (valueChange)="makerSelected = false; model=''; modelSelected = false; "></mobile-input>
       <div class="panel-makers row">
         <!-- <ion-slides [options]="options"> -->
-        <div *ngFor="let mkr of filteredMakers" class="col-12 col-md-4" (click)="selectMaker(mkr)">
+        <div *ngFor="let mkr of filteredMakers" class="col-12 col-md-4 maker-row" (click)="selectMaker(mkr)">
           <div>
-            <mat-card class="card maker animate__animated animate__fadeInDown">
+            <mat-card class="card maker animate__animated animate__fadeInDown --no-padding-top">
               <div class="row">
-                <div class="col-5 col-md-12">
+                <div class="col-5 col-md-12 image-row">
                   <img class="card-img-top" [src]="mkr.logo" [alt]="mkr.name">
                 </div>
                 <div class="col-7 col-md-12">
-                  <div class="card-body">
+                  <div class="card-body --no-padding">
                     <h5 class="card-title"> {{mkr.name | uppercase}} </h5>
                   </div>
                 </div>
@@ -36,14 +36,14 @@
 
         <div class="panel-models row">
           <mat-card *ngFor="let mdl of filteredModels" (click)="selectModel(mdl)"
-            class="card col-12 col-md-4 model animate__animated animate__fadeInLeft">
+            class="card col-12 col-md-4 model animate__animated animate__fadeInLeft --no-padding-top">
             <div class="row">
-              <div class="col-5 col-md-12">
+              <div class="col-5 col-md-12 image-row">
                 <img class="card-img-top" [src]="mdl.image" [alt]="mdl.name">
               </div>
               <div class="col-7 col-md-12">
-                <div class="card-body">
-                  <h5 class="card-title"> {{mdl.model | uppercase}} </h5>
+                <div class="card-body --no-padding">
+                  <h5 class="card-title --no-padding"> {{mdl.model | uppercase}} </h5>
                 </div>
               </div>
             </div>

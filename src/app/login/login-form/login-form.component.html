@@ -1,48 +1,34 @@
-<div *ngIf="page=='home'" class="animate__animated">
+<div *ngIf="context=='signup'" class="form-container " [class.expand]="otpSent">
 
-  <heading text="Sign Up"></heading>
+  <div class="row">
+    <div class="offset-1 col-10">
+        <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="newUser.mobile" (valueChange)="otpSent = false;"></mobile-input>
+        <cta *ngIf="!otpSent" sticky="true" text="Get Verification Code" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
+        </cta>
+      
+        <br/>
+      
+        
+        
+      
+        <verify-otp
+        *ngIf="otpSent"
+       [mobile]="newUser.mobile" length="4" 
+       (otpSubmitted)="customerOtp=$event" 
+       [mismatch]="otpMismatch"
+      ></verify-otp> 
+      
+       <cta *ngIf="otpSent" [loading]="loading" sticky="true" (action)="verifyOtp(customerOtp)" [disabled]="!customerOtp || customerOtp.toString().length < 4" text="Verify"></cta>
+        
+    </div>
+  </div>
 
-  <subheading size="16" text="Sign up now to experience the revolutionary Complete Car Care Experience">
-  </subheading>
-
-  <mobile-input name="Mobile Number" placeholder="Enter your Mobile Number" [(value)]="newUser.mobile"></mobile-input>
-  <cta *ngIf="!otpSent" text="Send OTP" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
-  </cta>
-
-  <br/>
-
-  <span  *ngIf="!otpSent" class="float-right">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
-
-
-  
-
-  <verify-otp
-  *ngIf="otpSent"
- [mobile]="newUser.mobile" length="4" 
- (otpSubmitted)="customerOtp=$event" 
- [mismatch]="otpMismatch"
- (changeNumber)="page='home'"></verify-otp> 
-
- <cta *ngIf="otpSent" [loading]="loading" (action)="verifyOtp(customerOtp)" [disabled]="!customerOtp || customerOtp.toString().length < 4" text="Verify"></cta>
-  <!-- <subheading text="OR" align="center"></subheading>
-    
-    <cta text="Log In" outline="true"></cta> -->
-
-  <!-- <div class="ion-text-center social-login">
-    <ion-button class="login-fb" fill="outline" (click)="loginFacebook()">
-      <ion-icon slot="start" name="logo-facebook"></ion-icon>
-      facebook
-    </ion-button>
-    <ion-button class="login-gl" fill="outline" color="danger" (click)="loginGoogle()">
-      <ion-icon slot="start" name="logo-google"></ion-icon>
-      google
-    </ion-button>
-  </div> -->
+  <span  class="float-right login-banner">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
+      
+      
 </div>
 
-<div *ngIf="page=='signup'" class="animate__animated animate__fadeInLeft">
-  <heading text="Your Personal Details"></heading>
-
+<div *ngIf="context=='details'" class="animate__animated animate__fadeInLeft details-container">
   <mobile-input type="text" name="Full Name" [(value)]="newUser.name" ></mobile-input>
   <mobile-input type="email" name="Email Id" [(value)]="newUser.email" ></mobile-input>
   <mobile-input type="password" name="Password" [(value)]="newUser.password" ></mobile-input>
@@ -52,12 +38,16 @@
 
 
 
-  <cta text="Create Account" [loading]="loading" (action)="createUser()" ></cta>
+  <cta *ngIf="!userExists" sticky="true" text="Create Account" [loading]="loading" (action)="createUser()" ></cta>
+
+  <span  *ngIf="userExists" class="existingUser">Looks like you are already registered with us. <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
+
+
 </div>
 
 <div></div>
 
-<div *ngIf="page=='car'" class="animate__animated animate__fadeInLeft">
+<!-- <div *ngIf="page=='car'" class="animate__animated animate__fadeInLeft">
   <heading text="Your Car Details"></heading>
 
   <ng-container *ngIf="!showCarSelector">
@@ -85,7 +75,7 @@
 
       <cta text="Choose Your Plan" [loading]="loading" (action)="goToPlans()" ></cta>
 
-  </ng-container> -->
+  </ng-container> 
   
   
-</div>
+</div> -->

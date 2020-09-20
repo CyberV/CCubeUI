@@ -4,7 +4,8 @@ import { Platform } from '@ionic/angular';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderService } from 'app/header.service';
 const { GoogleAuth } = Plugins;
 
 
@@ -16,6 +17,8 @@ const { GoogleAuth } = Plugins;
 export class LoginPage implements OnInit {
   public user: any;
   public isLoggedIn: boolean;
+  public context:string;
+  public ready:boolean;
 
 
   get isMobile() {
@@ -23,7 +26,12 @@ export class LoginPage implements OnInit {
   }
 
 
-  constructor(private socialAuthService: AuthService, public platform: Platform, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private socialAuthService: AuthService, 
+    public platform: Platform, 
+    private headerService: HeaderService,
+    private router:Router,
+    private route: ActivatedRoute) {
     if (this.platform.is('android') || this.platform.is('ios')) {
       GoogleAuth.addListener('userChange', (googleUser: any) => {
         console.log('userChange:', googleUser);
@@ -41,11 +49,46 @@ export class LoginPage implements OnInit {
         }
       });
     }
+
+    this.route.params.subscribe((rdata) => {
+      this.context = this.route.snapshot.routeConfig.path || 'signup';
+    });
+
+    this.ready = false;
   }
 
   ngOnInit() {
    
     //console.log('ads', this.activatedRoute.snapshot.url[0].path);
+  }
+
+  ionViewWillEnter () {
+
+    let mobile = sessionStorage.getItem('currentMobile');
+
+    if (!mobile && this.context=='details') {
+      this.router.navigate(['/signup']);
+      return;
+    }
+    
+    switch(this.context) {
+      case 'signup': {
+        this.headerService.setText('Sign Up ');
+        break;
+      }
+      case 'details': {
+        this.headerService.setText('Personal Details');
+        break;
+      }
+      case 'login': {
+        this.headerService.setText('Sign In');
+        break;
+      }
+      default: this.router.navigate(['/signup']);
+
+    }
+
+    this.ready = true;
   }
 
   async loginGoogle() {

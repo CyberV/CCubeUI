@@ -38,6 +38,12 @@
         box-shadow: none;
     }
 
+    .panel-content {
+        width: 108%;
+        left: -25px;
+        position: relative;
+    }
+
     .panel-header {
         padding-left: 0;
         padding-right: 10px;

@@ -13,7 +13,6 @@
       </div>
       <ng-container *ngIf="isCarReady">
         <div *ngIf="!verifyOnly" class="card animate__animated animate__bounceInDown">
-          <img class="card-img-top" src="assets/banner1.JPG" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"> {{carDetails.name}} </h5>
             <p class="card-text">
@@ -27,10 +26,6 @@
             <li class="list-group-item">Fuel : {{carDetails.fuelType}}</li>
             <li class="list-group-item">Registeration Date: {{carDetails.registeredOn}} </li>
           </ul>
-          <div class="card-body">
-            <span class="card-link">Show More</span>
-            <span class="card-link float-right">Not your Car?</span>
-          </div>
           <div class="card-body">
             <cta text="Show me my Plans" (action)="sendAction()"></cta>
           </div>

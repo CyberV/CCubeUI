@@ -49,6 +49,7 @@ import { SelectedCarComponent } from './selected-car/selected-car.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { CheckoutConfirmationComponent } from './checkout-confirmation/checkout-confirmation.component';
 import { ThanksPageComponent } from './thanks-page/thanks-page.component';
+import { MenuComponent } from './menu/menu.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -88,6 +89,7 @@ import { ThanksPageComponent } from './thanks-page/thanks-page.component';
     SelectedCarComponent,
     CheckoutConfirmationComponent,
     ThanksPageComponent,
+    MenuComponent,
 
     // Directives
     RsDirective,
@@ -143,6 +145,7 @@ import { ThanksPageComponent } from './thanks-page/thanks-page.component';
     SelectedCarComponent,
     CheckoutConfirmationComponent,
     ThanksPageComponent,
+    MenuComponent,
 
     //Directives
 

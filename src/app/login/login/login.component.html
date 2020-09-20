@@ -1,12 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-xs-12">
-        <img class="logo animate__animated animate__flipInX" src="./assets/banner1.JPG" alt="CCubeLogo" border="0" />
-    </div>
-    <div class="col-md-6 col-xs-12">
-      <app-login-form *ngIf="!showLogin"></app-login-form>
+    <div class="col-12">
+      <app-login-form *ngIf="!showLogin" [context]="context"></app-login-form>
 
-      <app-signin-form *ngIf="showLogin"></app-signin-form>
+      <app-signin-form *ngIf="showLogin"  [context]="context"></app-signin-form>
     </div>
   </div>
 </div>

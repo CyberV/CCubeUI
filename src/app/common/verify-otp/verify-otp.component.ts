@@ -14,6 +14,7 @@ export class VerifyOtpComponent implements OnInit {
 
   @Output() otpSubmitted = new EventEmitter();
   @Output() changeNumber = new EventEmitter();
+  @Output() resend = new EventEmitter();
 
   arr:any;
   private otp;
@@ -53,6 +54,10 @@ export class VerifyOtpComponent implements OnInit {
     let otp = this.otp.toString().replace(/,/g, "");
     this.otpSubmitted.emit(otp);
 
+  }
+
+  resendOtp() {
+    this.resend.emit();
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,9 +8,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class CheckoutConfirmationComponent implements OnInit {
 
+  @Input() details:any;
+
   constructor(
     private modalController: ModalController
-  ) { }
+  ) {
+
+    this.details = {};
+   }
 
   ngOnInit() {}
 

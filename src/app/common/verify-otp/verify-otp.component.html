@@ -1,21 +1,30 @@
-<subheading text="Verifying Number" color="black"></subheading>
 
 <div>
-  <span>We have sent {{length}} digit OTP on</span><span highlight (click)="numberClicked()"> +91 {{mobile}}</span>
+  <span>Please enter your <span highlight>{{length}} digit Verification Code </span> sent to your Mobile Number</span>
 </div>
 
-<div class="otp-input">
-  <input *ngFor="let i of arr; let indx = index" 
-    [class]="'otp-'+indx" 
-    type="number" maxlength="1"
-    (click)="onClick($event)"
-    (keyup)="onChange($event)"
-    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    maxlength="1"
-    >
-
-    
+<div class="row">
+  <div class="col-8">
+      <div class="otp-input">
+          <input *ngFor="let i of arr; let indx = index" 
+            [class]="'otp-'+indx" 
+            type="number" maxlength="1"
+            (click)="onClick($event)"
+            (keyup)="onChange($event)"
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            maxlength="1"
+            >
+        
+            
+        </div>
+  </div>
+  <div class="col-4">
+     <span class="resend" (click)="resendOtp()">Resend OTP</span> 
+  </div>
 </div>
 
-<p *ngIf="mismatch"> OTP does not match. Try Again!</p>
+
+<p *ngIf="mismatch" class="mismatch"> OTP does not match. Try Again!</p>
+
+
 

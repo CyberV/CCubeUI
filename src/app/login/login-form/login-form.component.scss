@@ -1,5 +1,15 @@
 @import 'src/variables.scss';
 
+.form-container {
+    margin-top: 8em;
+    transition: all 0.5s ease-in;
+
+    &.expand {
+        margin-top: 5em;
+    }
+
+}
+
 .social-login {
     margin-top: 1em;
 
@@ -8,6 +18,21 @@
     }
 }
 
+.login-banner {
+    position: fixed;
+    bottom: 5em;
+    right: 2em;
+}
+
+.details-container {
+    height: 82vh;
+}
+
+
+.existingUser {
+    position: relative;
+    top: 10px;
+}
 
 .link {
     color: $primary-color;

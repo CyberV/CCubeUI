@@ -1,5 +1,5 @@
 <div class="plan-container" [class.compact]="compact">
-  <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan <span *ngIf="!compact" class="float-right" (click)="sendChangePlan()">Change?</span></h2>
+  <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan </h2>
   <p>
     <span class="price" Rs> {{plan.price}}</span> for 1 month.
   </p>
@@ -9,7 +9,7 @@
         <div class="col-7">
             {{feature.name}}
         </div>
-        <div class="col-5">
+        <div class="col-5 --no-padding">
             <span class="float-right frequency"> {{feature.frequency}}</span>
         </div>
         

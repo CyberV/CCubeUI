@@ -2,11 +2,12 @@
 
 .container {
     background: $bg-white;
-    border-radius: 25px;
     padding: 25px;
-    margin-top: 2em;
+    padding-top: 5em;
+    overflow-x: hidden;
+    width: calc(100% + 30px);
+    left: -15px;
+    position: relative;
+    height: 100vh;
 
-    @media screen and (max-width: 768px) {
-        margin-top: 5em;
-    }
 }

@@ -4,6 +4,8 @@ import { CheckoutService } from 'app/services/checkout.service';
 import { CarService } from 'app/services/car.service';
 import { ModalController } from '@ionic/angular';
 import { CheckoutConfirmationComponent } from 'app/common/checkout-confirmation/checkout-confirmation.component';
+import { HeaderService } from 'app/header.service';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -20,6 +22,9 @@ export class CheckoutComponent implements OnInit {
 
   errors: any;
   context:string;
+  ready: boolean;
+  retryAddon:boolean;
+
 
   page: string;
 
@@ -27,19 +32,23 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private route:ActivatedRoute,
     private carService: CarService,
+    private userService:UserService,
     private modalController: ModalController,
+    private headerService:HeaderService,
     private checkoutService: CheckoutService
   ) {
 
     this.carMismatch = false;
     this.carIdentified = false;
     this.page = '1';
+    this.retryAddon = false;
 
     this.errors = {
       car: false,
       plan: false
     };
 
+    this.ready = false;
   }
 
   ngOnInit() {
@@ -49,6 +58,7 @@ export class CheckoutComponent implements OnInit {
       this.context = this.route.snapshot.routeConfig.path.toString().replace("checkout/","") ;
     })
 
+    this.retryAddon = false;
 
   }
 
@@ -57,10 +67,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   async showConfirmation() {
+    let payload = {
+      userName: this.userService.getCurrentUser().name,
+      car: this.selectedCar,
+      plan: this.selectedPlan    
+    };
     const modal = await this.modalController.create({
       component: CheckoutConfirmationComponent,
       cssClass: 'checkout-confirmation-modal',
       componentProps: { 
+        details: payload,
         bodyType: 'sedan',
         showClose: true
       }
@@ -121,7 +137,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    console.log('Entered Checkout View');
+
     this.refreshCarAndPlans();
 
     this.checkoutService.events().subscribe( (evt) => {
@@ -130,7 +146,26 @@ export class CheckoutComponent implements OnInit {
         console.log(evt);
         this.router.navigate(['/dashboard/thanks']);
       }
-    })
+    });
+
+    switch(this.context) {
+      case 'checkout': {
+        this.headerService.setText('Your Selected Plan');
+        break;
+      }
+      case 'confirm': {
+        this.headerService.setView('checkout', { amount: this.selectedPlan.price });
+        break;
+      }
+      default: this.router.navigate(['/dashboard']);
+
+    }
+
+    this.ready = true;
+
+    setTimeout(()=> {
+      this.retryAddon = true;
+    }, 200);
   }
 
   payNow() {

@@ -1,15 +1,71 @@
-
-
 <div class="card animate__animated animate__fadeIn">
-    <heading text="Please Confirm your details" showClose="true"></heading>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Customer Name : </li>
-      <li class="list-group-item">Car Registration Number : </li>
-      <li class="list-group-item">Maker / Model :  </li>
-      <li class="list-group-item">Selected Plan : </li>
-      <li class="list-group-item">Final Price :  <span Rs>1000</span> </li>
-
-    </ul>
-    <cta text="Pay" (action)="dismissAndPay()"></cta>
+  <heading text="Please Confirm your details" showClose="true"></heading>
+  <br/>
+  <div class="">
+      <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                Customer Name :
+              </div>
+              <div class="col-6">
+                {{details.userName}}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                  Car Registration Number : 
+              </div>
+              <div class="col-6">
+                  {{details.car.carNo}}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                Maker :
+              </div>
+              <div class="col-6">
+                  {{details.car.maker}} 
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                  Model : 
+              </div>
+              <div class="col-6">
+                {{details.car.model}}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                  Selected Plan :
+              </div>
+              <div class="col-6">
+                  {{details.plan.name}}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                  Final Price :
+              </div>
+              <div class="col-6">
+                  <span Rs>{{details.plan.price}}</span>
+              </div>
+            </div>
+          </li>
+      
+        </ul>
   </div>
 
+  <cta text="Pay" sticky="true" (action)="dismissAndPay()"></cta>
+</div>

@@ -7,6 +7,10 @@
     overflow-y: scroll;
 }
 
+.maker-row {
+    padding-left:0;
+    padding-right:0;
+}
 .panel-models {
     padding-left: 30px;
     padding-right: 30px;
@@ -40,8 +44,10 @@
         font-size: 80%;
     }
 
-    .card-img-top {
-            min-height: 50px;
+    .image-row {
+        padding-right: 0;
+        padding-left: 10px;
+        top: 12px;
     }
 
     &:hover {
@@ -51,14 +57,9 @@
     }
 
     .card-title {
-        margin-top: 3em !important;
-        font: 500 calc(19px * 0.83)/20px Roboto, "Helvetica Neue", sans-serif !important;
+        margin-top: 2em !important;
+        font: 500 calc(18px * 0.83)/20px Roboto, "Helvetica Neue", sans-serif !important;
     }
 }
 
-.model {
-    .card-title {
-        margin-top: 2em !important;
-    }
-}
 
