@@ -1,4 +1,4 @@
-<selected-car *ngIf="currentCar && isCarSelected" [car]="currentCar"></selected-car>
+<selected-car *ngIf="currentCar && isCarSelected" [car]="currentCar" (compare)="openModal()"></selected-car>
 
   <div class="row">
     <div class="col-md-6 col-xs-12" [class.col-md-12]="isCarSelected">
@@ -8,6 +8,7 @@
 
         <ng-container>
 
+          
           <plan-slider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
             (buyNow)="buyPlan($event)"></plan-slider>
 

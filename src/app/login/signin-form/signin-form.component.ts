@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../login.service';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signin-form',
@@ -26,7 +27,8 @@ export class SigninFormComponent implements OnInit {
     private router:Router,
     private activatedRoute: ActivatedRoute,
     private srvcLogin:LoginService,
-    private srvcUser: UserService
+    private srvcUser: UserService,
+    private toastController: ToastController
   ) {
     this.user = {
       mobile:'',
@@ -44,6 +46,18 @@ export class SigninFormComponent implements OnInit {
 
   }
 
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  onForgotPassword() {
+    
+  }
+
   
 
   tryLogin() {
@@ -54,7 +68,9 @@ export class SigninFormComponent implements OnInit {
         if (res.success) {
           this.srvcUser.setCurrentUser(res.data.user);
           this.srvcUser.setUserToken(res.data.token);
-          alert(res.data.msg);
+
+          this.presentToast(res.data.msg);
+          //alert(res.data.msg);
           this.router.navigate(['/dashboard/select-car']);
           
 

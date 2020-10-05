@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CompileMetadataResolver } from '@angular/compiler';
 
 @Component({
   selector: 'selected-car',
@@ -8,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SelectedCarComponent implements OnInit {
 
   @Input() car:any;
+  @Output() compare = new EventEmitter();
 
   constructor() { }
 
+  onCompare() {
+    this.compare.emit();
+  }
   ngOnInit() {}
 
 }

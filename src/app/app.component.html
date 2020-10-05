@@ -2,10 +2,12 @@
   <ion-header *ngIf="isMobile">
     <ion-toolbar>
 
-      <ion-title>    
+      <ion-title>
+        <ion-icon *ngIf="isLoggedIn" name="menu-outline" class="menu-btn float-left" (click)="openFirst()"></ion-icon>
+
         <span *ngIf="headerType=='text'" class="header-text">{{headerText}}</span>
         <div *ngIf="headerType=='view'">
-          <div class="row" *ngIf="viewData.viewName == 'checkout'">
+          <div class="row" *ngIf="viewData.viewName=='checkout'">
             <div class="col-5">
               Checkout
             </div>
@@ -13,12 +15,65 @@
               Net Payable: <span Rs>{{viewData.viewOptions.amount}}</span>
             </div>
           </div>
+          <div class="row" *ngIf="viewData.viewName=='home'">
+              <div class="offset-6 col-3">
+                <span class="link" (click)="goTo('signup')">Signup</span>
+              </div>
+              <div class="col-3">
+                <span class="link" (click)="goTo('login')">Login</span>
+              </div>
+            </div>
         </div>
         <span *ngIf="headerType==''"><img src="assets/blueLogo.png"></span>
-      
+
       </ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-menu side="start" menuId="first" contentId="my-content">
+    <ion-header class="menu-header">
+      <ion-toolbar color="primary">
+        <ion-title>
+          <div class="row">
+            <div class="col-3">
+                <ion-icon name="person-outline"></ion-icon>
+            </div>
+            <div class="col-9 ">
+              <div class="row user-row">
+                <div class="col-12">
+                  {{currentUser && currentUser.name}}
+                </div>
+                <div class="col-12">
+                  {{currentUser && currentUser.phone}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list class="menu-items">
+
+        <ion-item style="color:orange;" (click)="goTo('dashboard')">
+          <ion-icon name="home-outline" style="color:orange;"></ion-icon> Dashboard
+        </ion-item>
+        <ion-item (click)="goTo('my-cars')">
+          <ion-icon name="car-sport-outline"></ion-icon> My Cars
+        </ion-item>
+        <ion-item (click)="goTo('profile')">
+          <ion-icon name="person-circle-outline"></ion-icon>Profile
+        </ion-item>
+        <ion-item (click)="goTo('about-us')">
+          <ion-icon name="people-circle-outline"></ion-icon>About Us
+        </ion-item>
+        <ion-item (click)="goTo('contact-us')">
+          <ion-icon name="mail-outline"></ion-icon>Contact Us
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
 
   <!-- <ion-menu side="start" menuId="first" contentId="main">
       <ion-header>
@@ -74,10 +129,12 @@
   <app-navbar *ngIf="!isMobile"></app-navbar>
 
   <ion-fab *ngIf="!hideBackButton" slot="fixed">
-      <ion-fab-button (click)="goBack()"><ion-icon name="arrow-back-outline"></ion-icon></ion-fab-button>
-    </ion-fab>
-  <ion-router-outlet [class.push-down]="!isMobile" (activate)='onActivate($event)'
-  (deactivate)='onDeactivate($event)'></ion-router-outlet>
+    <ion-fab-button (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-router-outlet id="my-content" [class.push-down]="!isMobile" (activate)='onActivate($event)'
+    (deactivate)='onDeactivate($event)'></ion-router-outlet>
 
 
 

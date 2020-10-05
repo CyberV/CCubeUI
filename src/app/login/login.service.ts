@@ -94,6 +94,18 @@ export class LoginService {
       this.router.navigate(['/home']);
     }
 
+    loginWithOtp(phone, otp) {
+      let payload = {
+        phone: phone,
+        otp: this.resendOtp
+        };
+
+
+        return this.http.post(this.url + 'login/otp', payload).pipe (
+          catchError(this.handleError)
+        );
+    }
+
     login(phone, password) {
 
       

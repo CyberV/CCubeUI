@@ -2,7 +2,14 @@
 
 
 
+.plan-comparison-link {
+  position: relative;
+  top: -20px;
 
+  span {
+    color: $secondary-color;
+  }
+}
 
 
 ion-slides {

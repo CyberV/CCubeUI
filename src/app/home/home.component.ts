@@ -4,6 +4,7 @@ import contributionsList from 'assets/contributionslist.json';
 import onePageScroll from 'assets/scripts/one-page-scroll.min';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
+import { HeaderService } from 'app/header.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -34,7 +35,11 @@ export class HomeComponent implements OnInit {
 
   @ViewChildren('attention') attention : QueryList<ElementRef>;
 
-  constructor(private router: Router, private userService:UserService) {
+  constructor(
+    private router: Router, 
+    private userService:UserService,
+    private headerService:HeaderService
+    ) {
     this.featureList = featureList;
     this.contributions = contributionsList;
     this.isLoggedIn = false;
@@ -74,11 +79,15 @@ export class HomeComponent implements OnInit {
     //sessionStorage.removeItem('currentCar');
 
     if (this.isLoggedIn) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/signup']);
     } else {
       this.router.navigate(['signup']);
     }
    
+  }
+
+  ionViewWillEnter() {
+    this.headerService.setView('home',{});
   }
 
   loadMore() {

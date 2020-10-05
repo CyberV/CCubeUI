@@ -1,24 +1,25 @@
 <mat-card class="card animate__animated animate__headShake">
-  <img class="card-img-top" src="assets/banner1.JPG" alt="Card image cap" (click)="onShowDetails()">
-  <div class="card-body">
-    <h5 class="card-title" [style.color]="color"  (click)="onShowDetails()"> {{plan.name}} </h5>
+  <div class="card-body card-top">
+    <h5 class="card-title" [style.color]="color" (click)="onShowDetails()"> {{plan.name}} </h5>
     <h6 class="monthly-label">MONTHLY PLAN</h6>
-    <p class="card-text">
-      <span class="price" Rs  (click)="onShowDetails()">{{ plan.pricing[bodyType] }}</span>
+
+  </div>
+  <p class="card-text">
+      <span class="price" Rs (click)="onShowDetails()">{{ plan.pricing[bodyType] }}</span>
       <br />
       <span></span>
     </p>
-  </div>
   <div class="card-body feature-list">
+   
     <list limit="6">
       <div class="row feature-row" *ngFor="let ftr of currentFeatures">
         <div class="col-1 text">
-            <ion-icon slot="start"  [style.color]="colors[ftr.weight - 1]"  class="ion-color-yellow" name="star"></ion-icon>
+          <ion-icon slot="start" [style.color]="colors[ftr.weight - 1]" class="ion-color-yellow" name="star"></ion-icon>
         </div>
-        <div class="col-10" >
-            {{ftr.name}}
+        <div class="col-10">
+          {{ftr.name}}
         </div>
-        
+
 
       </div>
     </list>
@@ -28,13 +29,13 @@
     <div class="row">
       <div class="col-12">
         <cta text="Plan Details" (action)="onShowDetails()" [outline]="true"></cta>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
+    <div class="row">
       <div class="col-12">
         <cta text="Buy Now" (action)="onBuy()"></cta>
+      </div>
     </div>
   </div>
-</div>
 </mat-card>

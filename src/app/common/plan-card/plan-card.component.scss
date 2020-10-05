@@ -1,6 +1,15 @@
 @import 'src/variables.scss';
 
 .card {
+    border-radius: 30px;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+    .card-top {
+        background: $primary-color;
+    }
+
     .card-img-top {
         width: 50%;
         margin: 0 auto;
@@ -37,6 +46,7 @@
     .feature-list {
         text-align: left;
         font-size: 16px;
+        padding: 0 15px;
 
         .list-container {
             height: 150px;

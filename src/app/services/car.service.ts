@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import carsList from 'assets/carslist.json';
-import { filter } from 'minimatch';
-
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +7,13 @@ import { filter } from 'minimatch';
 export class CarService {
 
   constructor() { }
+
+  changeCar(carDetails) {
+    if (carDetails) {
+      sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+    }
+      
+  }
 
   getCurrentCar() {
     let car:any = sessionStorage.getItem('currentCar');

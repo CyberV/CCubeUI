@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import plansList from 'assets/planslist.json';
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
 import M from 'materialize-css';
@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
     private carService: CarService,
     private platform: Platform,
     public modalController: ModalController,
+    private menu: MenuController,
     private router: Router
   ) {
     this.currentCar = {};
@@ -45,6 +46,11 @@ export class DashboardComponent implements OnInit {
       initialSlide: 1,
       speed: 400
     };
+  }
+
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
   }
 
   async openModal() {
@@ -95,9 +101,9 @@ export class DashboardComponent implements OnInit {
       this.isCarSelected = true;
     }
 
-    if (this.isCarSelected) {
-      await this.openModal();
-    }
+    // if (this.isCarSelected) {
+    //   await this.openModal();
+    // }
     
 
   }

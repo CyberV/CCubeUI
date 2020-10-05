@@ -8,6 +8,9 @@
       <div class="row">
         <div *ngIf="car" class="car-info" role="alert">
           <span class="maker">{{car.maker}}</span> <br/> <span class="model">{{car.model}}</span>
+          <div class="plan-comparison-link">
+              <span class="float-left" (click)="onCompare()">Compare Plans</span>
+          </div>
           <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
         </div>
       </div>

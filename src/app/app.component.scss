@@ -9,8 +9,20 @@ ion-title {
     height: 56px;
 
     .header-text {
-        height: 25px;
         display: block;
+        top: 5px;
+        position: relative;
+    }
+}
+
+.menu-btn {
+    font-size: 30px;
+}
+
+.menu-items {
+    ion-icon {
+        position: relative;
+        margin-right: 1em;
     }
 }
 
@@ -25,6 +37,22 @@ ion-toolbar, ion-header, ion-title {
 
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
+
+    &.menu-header {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        padding: 2em;
+
+        ion-icon {
+            font-size: 30px;
+        }
+
+        .user-row {
+            text-align:left;
+            font-weight: 400;
+        }
+    }
 }
 
 ion-router-outlet {
@@ -48,6 +76,11 @@ ion-fab-button {
 }
 }
 
+.link {
+    font-weight: 300;
+    font-size: 18px;
+
+}
 
 .header-md::after {
     display: none;

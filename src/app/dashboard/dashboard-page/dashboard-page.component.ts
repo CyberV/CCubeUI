@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from 'app/services/car.service';
 import { HeaderService } from 'app/header.service';
+import { UserService } from 'app/services/user.service';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
@@ -13,7 +14,8 @@ export class DashboardPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private carService: CarService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private userService:UserService
   ) {
 
     this.ready = false;
@@ -40,6 +42,12 @@ export class DashboardPageComponent implements OnInit {
 
     this.selectedPlan = sessionStorage.getItem('selectedPlan') ? JSON.parse(sessionStorage.getItem('selectedPlan')) : null;
     this.selectedCar = this.carService.getCurrentCar();
+
+    let isLoggedIn = this.userService.isLoggedIn();
+
+    if (!isLoggedIn) {
+      this.router.navigate(['/signup/login']);
+    }
 
     if (!this.selectedPlan && this.context === 'plan') {
       this.router.navigate(['/dashboard']);

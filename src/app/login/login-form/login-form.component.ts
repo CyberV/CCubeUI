@@ -37,6 +37,7 @@ export class LoginFormComponent implements OnInit {
   public showCarSelector:boolean;
   public findingCar:boolean;
   public userExists:boolean;
+  public forgotPassword:boolean;
 
 
   loadingDetails: boolean;
@@ -97,6 +98,7 @@ export class LoginFormComponent implements OnInit {
     this.showCarSelector = false;
     this.isCarReady = false;
     this.loadingDetails = false;
+    this.forgotPassword = false;
     this.loading = false;
     this.findingCar = false;
     this.otpSent = false;
@@ -255,6 +257,10 @@ export class LoginFormComponent implements OnInit {
     }
 
 
+  }
+
+  onForgotPassword() {
+    this.forgotPassword = true;
   }
 
   createUser() {

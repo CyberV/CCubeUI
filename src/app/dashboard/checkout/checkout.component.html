@@ -19,10 +19,18 @@
             <selected-car *ngIf="selectedCar" [car]="selectedCar"></selected-car>
 
             <cc-accordion title="Verify Your Car" [step]="'1'">
-              <car-form [verifyOnly]="true" (carReady)="verifyCar($event)"></car-form>
+              <car-form *ngIf="resetCarForm" [verifyOnly]="true" (carReady)="verifyCar($event)"></car-form>
               <div *ngIf="carMismatch && carIdentified" class="alert alert-danger" role="alert">
                 Selected Car doesn't match with Registration Number!
+                <br/>
+                
               </div>
+
+              <p *ngIf="carMismatch">
+                  <span (click)="updatePlan()">Review Plan </span>
+                  <span class="float-right" (click)="resetCarForm = false; resetCarForm = true;">Change Car No</span>  
+              </p>
+              
               <div *ngIf="!carMismatch && carIdentified" class="alert alert-success" role="alert">
                 Car Details Verified Succesfully!
               </div>

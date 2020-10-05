@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { CheckoutConfirmationComponent } from 'app/common/checkout-confirmation/checkout-confirmation.component';
 import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-checkout',
@@ -24,6 +25,8 @@ export class CheckoutComponent implements OnInit {
   context:string;
   ready: boolean;
   retryAddon:boolean;
+  updatedCarDetails:any;
+  resetCarForm:boolean;
 
 
   page: string;
@@ -42,6 +45,8 @@ export class CheckoutComponent implements OnInit {
     this.carIdentified = false;
     this.page = '1';
     this.retryAddon = false;
+    this.updatedCarDetails = {};
+    this.resetCarForm = true;
 
     this.errors = {
       car: false,
@@ -59,6 +64,13 @@ export class CheckoutComponent implements OnInit {
     })
 
     this.retryAddon = false;
+
+  }
+
+  updatePlan() {
+
+    this.carService.changeCar(this.updatedCarDetails);
+    this.router.navigate(["/dashboard/plan"]);
 
   }
 
@@ -186,6 +198,7 @@ export class CheckoutComponent implements OnInit {
   verifyCar(carDetails) {
     this.carIdentified = true;
     this.carMismatch = carDetails.maker.toLowerCase().indexOf(this.selectedCar.maker.toLowerCase()) < 0 || carDetails.model.toLowerCase().indexOf(this.selectedCar.model.toLowerCase()) < 0;
+    this.updatedCarDetails = carDetails;
   }
 
 }
