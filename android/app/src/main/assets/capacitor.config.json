@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.demo.pg.cap.ng",
-  "appName": "Photo Gallery Cap Ng",
+  "appId": "com.ccube.ccube",
+  "appName": "CCube",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
