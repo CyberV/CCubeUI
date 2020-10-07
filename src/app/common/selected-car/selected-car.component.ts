@@ -10,12 +10,20 @@ export class SelectedCarComponent implements OnInit {
 
   @Input() car:any;
   @Output() compare = new EventEmitter();
+  @Output() changeCar = new EventEmitter();
+
+  showLink: boolean = false;
 
   constructor() { }
 
   onCompare() {
-    this.compare.emit();
+    this.changeCar.emit();
   }
+
+  onChangeCar() {
+    this.changeCar.emit();
+  }
+
   ngOnInit() {}
 
 }

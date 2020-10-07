@@ -2,17 +2,21 @@
 
     <ion-slides [options]="options">
     
-        <ion-slide *ngFor="let addon of addOns">
+        <ion-slide *ngFor="let addon of addOns; let i = index;">
 
           <mat-card class="card addon-card animate__animated animate__flipInX">
             <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
             <div class="">
-              <span class="card-text">{{addon.title}}</span>
-              <p class="ion-no-margin rate">
-                <ion-icon name="star"></ion-icon> {{addon.rating}}
-              </p>
-              <ion-button a [routerLink]="['/selectedplan']" size="small" type="submit" color="light">Buy
-              </ion-button>
+              <div>
+                  <span class="card-text" [class.contrast]="i%2!=0">{{addon.title}}</span>
+              </div>
+              <div class="bottom">
+                  <div class="ion-no-margin rate">
+                      <span Rs>{{addon.price}}</span>
+                  </div>
+                    <cta text="Buy" outline="true" small="true"></cta>
+              </div>
+              
             </div>
           </mat-card>
     

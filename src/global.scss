@@ -258,3 +258,9 @@ padding:0 !important;
 .--no-padding-right {
   padding-right:0 !important;
 }
+
+.vertical-center-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}

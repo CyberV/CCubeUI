@@ -66,7 +66,7 @@ export class DashboardPageComponent implements OnInit {
 
     switch(this.context) {
       case 'dashboard': {
-        this.headerService.setText('Dashboard');
+        this.headerService.setText('Choose Your Plan');
         break;
       }
       case 'select-car': {

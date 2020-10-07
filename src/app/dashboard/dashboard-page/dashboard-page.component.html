@@ -5,7 +5,7 @@
         <div class="offset-md-2 col-md-8">
           <div class="container">
             <ng-container *ngIf="ready">
-              <app-dashboard *ngIf="context==='dashboard'"></app-dashboard>
+              <app-dashboard *ngIf="context==='dashboard'" [currentCar]="selectedCar"></app-dashboard>
               <car-form *ngIf="context==='select-car'" (carReady)="goToDashboard($event)"></car-form>
               <div  *ngIf="context==='plan' && selectedPlan">
                   <selected-car [car]="selectedCar"></selected-car>

@@ -5,13 +5,22 @@
     margin-bottom: 10px;
   }
 
+  .change-car-link {
+    top: -10%;
+    position: relative;
+    font-weight: 500;
+    left: 40%;
+    color: $secondary-color;
+  }
+
   .car-info {
-    top: 25px;
+    top: 70px;
     position: relative;
     font-size: 16px;
 
     .plan-comparison-link {
       color: $secondary-color;
+      font-size: 80%;
     }
 
 

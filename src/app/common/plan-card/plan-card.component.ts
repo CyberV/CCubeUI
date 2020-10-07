@@ -33,7 +33,7 @@ export class PlanCardComponent implements OnInit {
     
     this.colors = [
       '#ec6b1e',
-      '#009688',
+      '#59EFE8',
       '#FFEB3B'
     ]
    }

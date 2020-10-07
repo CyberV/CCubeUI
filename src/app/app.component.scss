@@ -7,11 +7,21 @@ ion-app {
 
 ion-title {
     height: 56px;
+    font-size: 125%;
 
     .header-text {
-        display: block;
-        top: 5px;
-        position: relative;
+
+    }
+}
+
+
+.view-checkout {
+    .payable {
+        text-align: right;
+    }
+
+    .text {
+        text-align: left;
     }
 }
 

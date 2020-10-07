@@ -1,8 +1,10 @@
 <div class="plan-container" [class.compact]="compact">
-  <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan </h2>
-  <p>
-    <span class="price" Rs> {{plan.price}}</span> for 1 month.
-  </p>
+  <div class="plan-info">
+    <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan </h2>
+    <p>
+      <span class="price" Rs> {{plan.price}}</span> for 1 month.
+    </p>
+  </div>
   <div *ngIf="compact" class="">
     <mat-panel-title *ngFor="let feature of currentFeatures">
       <div class="feature row">

@@ -4,6 +4,10 @@
     color: $secondary-color;
 }
 
+.plan-info {
+  text-align: center;
+}
+
 .feature {
   width: 120%;
 margin-bottom: 5px;
@@ -15,7 +19,7 @@ margin-bottom: 5px;
 
 .price {
   color: $primary-color;
-  font-size: 120%;
+  font-size: 150%;
 }
 
 .plan-container {

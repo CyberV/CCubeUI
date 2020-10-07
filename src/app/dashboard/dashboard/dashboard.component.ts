@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import plansList from 'assets/planslist.json';
 import { Platform, MenuController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
@@ -18,7 +18,8 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
 
-  currentCar: any;
+  @Input() currentCar: any;
+
   selectedPlan: any;
 
   isCarSelected: boolean;
@@ -93,13 +94,6 @@ export class DashboardComponent implements OnInit {
 
     this.isPlanSelected = false;
 
-    let car = this.carService.getCurrentCar();
-    
-    
-    if (car) {
-      this.currentCar = car;
-      this.isCarSelected = true;
-    }
 
     // if (this.isCarSelected) {
     //   await this.openModal();
@@ -108,16 +102,26 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes) {
+
+    let car = this.carService.getCurrentCar();
+    
+    
+    if (car) {
+      this.currentCar = car;
+      this.isCarSelected = true;
+    }
+  }
+
   resetCar() {
     sessionStorage.setItem('currentCar', null);
-    this.isCarSelected = false;
+    //this.isCarSelected = false;
+    this.goToCarSelector();
   }
 
-  ionViewWillEnter() {
-    console.log('Entering View in Dashboard Component');
+  goToCarSelector() {
+    this.router.navigate(['/dashboard/select-car']);
   }
-
-
 
   showPlans(carDetails) {
     // this.currentCar = carDetails;

@@ -12,6 +12,7 @@ export class CtaComponent implements OnInit {
   @Input() loading: boolean;
   @Input() outline: boolean;
   @Input() size: number;
+  @Input() small:boolean;
 
   @Input() subtext: string;
   @Input() secondaryCta:string;
@@ -27,6 +28,8 @@ export class CtaComponent implements OnInit {
     this.outline = false;
     this.size = 18;
     this.sticky = false;
+
+    this.small = false;
   }
 
   onCtaClick() {

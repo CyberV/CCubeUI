@@ -9,19 +9,45 @@ ion-slides, ion-button {
   margin-bottom: 1em;
 }
 .addon-card {
+
+  border-radius: 10px;
+  padding: 16px 0;
   
     .card-body {
       padding-top: 0;
     }
+
+    .bottom {
+ 
+    }
   
     .card-text {
-      min-height: 40px;
+      min-height: 45px;
       display: block;
       max-height: 40px;
+
+      background: #01a3a68c;
+    color: white;
+    position: relative;
+    margin-top: -31px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    width: 100%;
+
+    &.contrast {
+      background: $secondary-light-color;
     }
+    }
+
+    
   
     .rate {
       margin-top: 10px;
-      color: $secondary-color;
+      font-size: 20px;
+      font-weight: 500;
     }
   }

@@ -22,32 +22,32 @@ export class AddonSliderComponent implements OnInit {
       {
         title:'Dry Cleaning',
         rating: 4.5,
+        price: 200,
         icon: 'ppe'
       },
       {
         title:'Polishing',
         rating: 4.5,
+        price: 400,
         icon: 'sanitize'
       },
       {
         title:'Waxing',
         rating: 4.5,
+        price: 500,
         icon: 'screening'
       },
       {
         title:'Paint Protection',
         rating: 4.5,
+        price: 600,
         icon: 'solution'
       },
       {
         title:'Rust Protection',
         rating: 4.5,
+        price: 400,
         icon: 'doorstep'
-      },
-        {
-        title:'Dry Cleaning',
-        rating: 4.5,
-        icon: 'notification'
       }
     ]
    }
