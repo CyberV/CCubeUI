@@ -117,7 +117,8 @@ export class AppComponent {
   goTo(context) {
     switch(context) {
       case 'dashboard': {
-        this.router.navigate(['/dashboard']);
+        sessionStorage.setItem('currentCar', 'null');
+        this.router.navigate(['/dashboard/select-car']);
         break;
       }
       case 'signup': {
@@ -130,6 +131,10 @@ export class AppComponent {
       }
       case 'profile': {
         this.router.navigate(['/profile']);
+        break;
+      }
+      case 'service': {
+        this.router.navigate(['/dashboard/service']);
         break;
       }
       default: break;

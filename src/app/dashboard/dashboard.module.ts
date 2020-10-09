@@ -11,13 +11,15 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AccordionModule } from 'ngx-accordion';
 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { ServicePageComponent } from './service-page/service-page.component';
 
 @NgModule({
   declarations: [ 
     DashboardPageComponent, 
     DashboardComponent,
     CarFormComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ServicePageComponent
   ],
   imports: [
     CommonModule,

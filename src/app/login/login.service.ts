@@ -71,14 +71,14 @@ export class LoginService {
       catchError(this.handleError));
     }
 
-    createUser(phone, name, password, email) {
+    createUser(phone, name, password, email, city) {
 
       let payload = {
         phone: phone,
         name: name,
         password:  password,
         email,
-        city: "faridabad"
+        city: city || "fbd"
         };
 
 
@@ -118,6 +118,18 @@ export class LoginService {
         return this.http.post(this.url + 'login', payload).pipe (
           catchError(this.handleError)
         );
+    }
+
+    addPayment(payment) {
+      return this.http.post(this.url + 'user/addpayment', payment).pipe (
+        catchError(this.handleError)
+      );
+    }
+
+    getPayments(phone) {
+      return this.http.post(this.url + 'user/getpayments', {phone}).pipe (
+        catchError(this.handleError)
+      );
     }
     
     handleError(error: any) {

@@ -79,7 +79,7 @@ export class CarFormComponent implements OnInit {
     }
 
 
-    this.carReady.emit(carDetails);
+    this.carReady.emit({...carDetails, regNo:this.regNo});
 
     //this.router.navigate(['plans'], { state: carDetails});
   }

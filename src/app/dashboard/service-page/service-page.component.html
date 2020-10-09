@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="offset-3 col-6">
+      <span class="logo-container"><img
+        class="logo " src="./assets/whitell.png" alt="CCubeLogo" border="0" />
+    </span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+      <purchased-plan *ngIf="payments[0]" [car]="payments[0].car" [plan]="payments[0].plan"></purchased-plan>
+
+  </div>
+  <div class="col-6">
+      <document-uploader class="vertical-center doc-upload">
+
+      </document-uploader>
+  </div>
+</div>
+
+      <weekly-schedule></weekly-schedule>
+

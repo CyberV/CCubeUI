@@ -1,0 +1,9 @@
+<p>All fields are Mandatory</p>
+
+<mobile-input name="House No / Flat No" type="text" [(value)]="location.houseNo"></mobile-input>
+
+<mobile-input  name="Street / Block Name" type="text" [(value)]="location.block"></mobile-input>
+
+<select-city [(city)]="location.city" [(state)]="location.state" [showState]="true" [disabled]="true"></select-city>
+
+<cta text="Confirm" [disabled]="!allFieldsReady" (action)="sendConfirmation()"></cta>

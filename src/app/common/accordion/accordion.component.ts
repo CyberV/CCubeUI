@@ -9,8 +9,11 @@ export class AccordionComponent implements OnInit {
 
   @Input() title:string;
   @Input() step:string;
+  @Input() error:boolean;
 
   @Input() compact: boolean;
+  @Input() disabled:boolean;
+  @Input() locked:boolean;
 
   @ViewChild('drawerToggle') drawerToggle: ElementRef;
 
@@ -22,6 +25,9 @@ export class AccordionComponent implements OnInit {
     this.step = '';
     this.compact = false;
     this.hasStep = false;
+    this.disabled = false;
+    this.error = false;
+    this.locked = false;
   }
 
   ngOnInit() {
@@ -32,8 +38,9 @@ export class AccordionComponent implements OnInit {
     this.drawerToggle.nativeElement.click();
   } 
 
-  ngOnChanges() {
-    this.hasStep = !! (this.step && this.step.length)
+  ngOnChanges(changes) {
+    this.hasStep = !! (this.step && this.step.length);
+    console.log('disabled', this.disabled);
   }
 
 }

@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   slideOpts;
 
   context:string = 'landing';
+  currentUser:any;
 
   isLoggedIn:boolean;
 
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
     this.featureList = featureList;
     this.contributions = contributionsList;
     this.isLoggedIn = false;
+    this.currentUser={};
 
         
     this.slideOpts = {
@@ -88,6 +90,17 @@ export class HomeComponent implements OnInit {
 
   ionViewWillEnter() {
     this.headerService.setView('home',{});
+    this.currentUser = this.userService.getCurrentUser();
+
+    if (this.isLoggedIn) {
+
+      if (this.currentUser.payments && this.currentUser.payments.length) {
+        this.router.navigate(['/dashboard/service']);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
+      
+    }
   }
 
   loadMore() {

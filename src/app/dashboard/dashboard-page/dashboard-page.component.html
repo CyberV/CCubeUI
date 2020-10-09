@@ -14,6 +14,9 @@
                   <addon-slider></addon-slider>
                   <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
               </div>
+              <app-service-page *ngIf="context==='service'" [payments]="payments" >
+                
+              </app-service-page>
             </ng-container>
               
           </div>

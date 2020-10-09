@@ -24,6 +24,10 @@ export class CarService {
       let makerStr = car.maker.split(' ')[0].toLowerCase();
       let modelStr = car.model.toLowerCase().replace(makerStr,"").trim();
 
+      if (modelStr.split(' ').length) {
+        modelStr = modelStr.split(' ')[0];
+      }
+
       let filtered = carsList.filter( (maker) =>  maker.maker.toLowerCase().includes(makerStr));
 
       if (filtered && filtered.length) {

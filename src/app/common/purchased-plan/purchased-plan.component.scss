@@ -1,5 +1,9 @@
 @import "src/variables.scss";
 
+#top {
+  min-height: 250px;
+}
+
 .page-logo {
     width: 100%;
     margin-bottom: 10px;
@@ -14,13 +18,19 @@
   }
 
   .car-info {
-    top: 45px;
-    position: relative;
     font-size: 16px;
+    padding-left: 30px;
 
-    .plan-comparison-link {
+
+
+    span {
+      display: block;
+    }
+    .plan-comparison-link, .plan-name {
       color: $secondary-color;
-      font-size: 80%;
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 120%;
     }
 
 

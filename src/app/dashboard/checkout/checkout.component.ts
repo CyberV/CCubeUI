@@ -7,6 +7,7 @@ import { CheckoutConfirmationComponent } from 'app/common/checkout-confirmation/
 import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { LoginService } from 'app/login/login.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,22 +23,30 @@ export class CheckoutComponent implements OnInit {
   carIdentified: boolean;
 
   errors: any;
-  context:string;
+  context: string;
   ready: boolean;
-  retryAddon:boolean;
-  updatedCarDetails:any;
-  resetCarForm:boolean;
+  retryAddon: boolean;
+  updatedCarDetails: any;
+  resetCarForm: boolean;
+  step2Ready: boolean;
+  step3Ready: boolean;
+  verificationComplete: boolean;
+
+  currentUser:any;
+  currentLocation: any;
+  officeTime:string;
 
 
   page: string;
 
   constructor(
     private router: Router,
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private carService: CarService,
-    private userService:UserService,
+    private userService: UserService,
     private modalController: ModalController,
-    private headerService:HeaderService,
+    private loginService: LoginService,
+    private headerService: HeaderService,
     private checkoutService: CheckoutService
   ) {
 
@@ -47,20 +56,28 @@ export class CheckoutComponent implements OnInit {
     this.retryAddon = false;
     this.updatedCarDetails = {};
     this.resetCarForm = true;
+    this.verificationComplete = false;
 
     this.errors = {
       car: false,
       plan: false
     };
 
+    this.currentUser = {};
+    this.currentLocation = {};
+    this.officeTime = "";
+
     this.ready = false;
+
+    this.step2Ready = false;
+    this.step3Ready = false;
   }
 
   ngOnInit() {
     this.refreshCarAndPlans();
 
     this.route.params.subscribe((rdata) => {
-      this.context = this.route.snapshot.routeConfig.path.toString().replace("checkout/","") ;
+      this.context = this.route.snapshot.routeConfig.path.toString().replace("checkout/", "");
     })
 
     this.retryAddon = false;
@@ -70,6 +87,7 @@ export class CheckoutComponent implements OnInit {
   updatePlan() {
 
     this.carService.changeCar(this.updatedCarDetails);
+    this.selectedCar = this.carService.getCurrentCar();
     this.router.navigate(["/dashboard/plan"]);
 
   }
@@ -79,15 +97,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   async showConfirmation() {
+    this.currentUser = this.userService.getCurrentUser();
     let payload = {
-      userName: this.userService.getCurrentUser().name,
+      userName: this.currentUser.name,
       car: this.selectedCar,
-      plan: this.selectedPlan    
+      plan: this.selectedPlan
     };
     const modal = await this.modalController.create({
       component: CheckoutConfirmationComponent,
       cssClass: 'checkout-confirmation-modal',
-      componentProps: { 
+      componentProps: {
         details: payload,
         bodyType: 'sedan',
         showClose: true
@@ -95,9 +114,9 @@ export class CheckoutComponent implements OnInit {
     });
     await modal.present();
 
-    modal.onDidDismiss().then((data:any)=> {
+    modal.onDidDismiss().then((data: any) => {
 
-      if (data && data.data &&  data.data.amount) {
+      if (data && data.data && data.data.amount) {
         this.payNow();
       }
 
@@ -112,19 +131,22 @@ export class CheckoutComponent implements OnInit {
       // }
 
     });
-    
+
   }
 
   refreshCarAndPlans() {
-
-
     let car = this.carService.getCurrentCar();
-    
-    
+
     if (car) {
       this.selectedCar = car;
+      if (this.selectedCar.regNo) {
+        this.carIdentified = true;
+        this.carMismatch = false;
+        this.step2Ready = true;
+      }
     } else {
       this.errors.car = true;
+      this.router.navigate(['/dashboard/select-car']);
     }
 
     let plan = sessionStorage.getItem('selectedPlan');
@@ -142,6 +164,30 @@ export class CheckoutComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
+  resetCarNumber() {
+    this.carIdentified = false;
+    this.carMismatch = false;
+
+    this.resetCarForm = false;
+
+    setTimeout(() => {
+      this.resetCarForm = true;
+    }, 500);
+  }
+
+  saveLocation(locationData) {
+    
+    if (locationData) {
+      this.currentLocation = locationData;
+      sessionStorage.setItem('userLocation', JSON.stringify(locationData));
+    }
+
+    setTimeout(() => {
+      this.step3Ready = true;
+    }, 1000);
+
+  }
+
   changePlan() {
 
     sessionStorage.setItem('selectedPlan', null);
@@ -152,15 +198,26 @@ export class CheckoutComponent implements OnInit {
 
     this.refreshCarAndPlans();
 
-    this.checkoutService.events().subscribe( (evt) => {
+    this.checkoutService.events().subscribe((evt) => {
       if (evt.success) {
         // alert('Payment Successful');
         console.log(evt);
-        this.router.navigate(['/dashboard/thanks']);
+        this.loginService.addPayment({
+          phone: this.currentUser.phone,
+          plan: this.selectedPlan,
+          car: this.selectedCar,
+          location: this.currentLocation,
+          officeTime: this.officeTime,
+          startDate: +(new Date())
+        }).subscribe( (d) => {
+          console.log('add payment response', d);
+          this.router.navigate(['/dashboard/thanks']);
+        })
+        
       }
     });
 
-    switch(this.context) {
+    switch (this.context) {
       case 'checkout': {
         this.headerService.setText('Your Selected Plan');
         break;
@@ -175,7 +232,7 @@ export class CheckoutComponent implements OnInit {
 
     this.ready = true;
 
-    setTimeout(()=> {
+    setTimeout(() => {
       this.retryAddon = true;
     }, 200);
   }
@@ -198,7 +255,17 @@ export class CheckoutComponent implements OnInit {
   verifyCar(carDetails) {
     this.carIdentified = true;
     this.carMismatch = carDetails.maker.toLowerCase().indexOf(this.selectedCar.maker.toLowerCase()) < 0 || carDetails.model.toLowerCase().indexOf(this.selectedCar.model.toLowerCase()) < 0;
+
+    setTimeout(() => {
+      this.step2Ready = !this.carMismatch;
+    }, 3000);
+
     this.updatedCarDetails = carDetails;
+
+    if (!this.carMismatch) {
+      this.carService.changeCar(this.updatedCarDetails);
+      this.selectedCar = this.carService.getCurrentCar();
+    }
   }
 
 }

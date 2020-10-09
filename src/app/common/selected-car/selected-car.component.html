@@ -1,7 +1,7 @@
 <div class="row" id="top">
     <div class="col-7 --no-padding">
       <!-- <img class="page-logo" src="assets/whitell.png" /> -->
-      <img class="page-logo --no-padding" [src]="car.image" (click)="showLink = !showLink"><br/>
+      <img *ngIf="car" class="page-logo --no-padding" [src]="car.image" (click)="showLink = !showLink"><br/>
       <span *ngIf="showLink" (click)="onChangeCar()" [ngClass]="{'change-car-link float-left animate__animated':true, 'animate__fadeInDown' : showLink}" >Change Car</span>
     </div>
     <div class="col-5">

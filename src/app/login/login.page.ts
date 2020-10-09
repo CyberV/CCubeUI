@@ -6,6 +6,7 @@ import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'app/header.service';
+import { UserService } from 'app/services/user.service';
 const { GoogleAuth } = Plugins;
 
 
@@ -30,6 +31,7 @@ export class LoginPage implements OnInit {
     private socialAuthService: AuthService, 
     public platform: Platform, 
     private headerService: HeaderService,
+    private userService:UserService,
     private router:Router,
     private route: ActivatedRoute) {
     if (this.platform.is('android') || this.platform.is('ios')) {
@@ -65,6 +67,10 @@ export class LoginPage implements OnInit {
   ionViewWillEnter () {
 
     let mobile = sessionStorage.getItem('currentMobile');
+
+    if (this.userService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
 
     if (!mobile && this.context=='details') {
       this.router.navigate(['/signup']);

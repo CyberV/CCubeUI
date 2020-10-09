@@ -37,6 +37,8 @@ import { PlanSliderComponent } from './plan-slider/plan-slider.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper'
 import {  MatCardModule,} from '@angular/material/card';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { ListComponent } from './list/list.component';
 import { RsDirective } from './rs.directive';
@@ -50,6 +52,12 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { CheckoutConfirmationComponent } from './checkout-confirmation/checkout-confirmation.component';
 import { ThanksPageComponent } from './thanks-page/thanks-page.component';
 import { MenuComponent } from './menu/menu.component';
+import { ConfirmLocationComponent } from './confirm-location/confirm-location.component';
+import { SelectCityComponent } from './select-city/select-city.component';
+import { FormsModule } from '@angular/forms';
+import { PurchasedPlanComponent } from './purchased-plan/purchased-plan.component';
+import { WeeklyScheduleComponent } from './weekly-schedule/weekly-schedule.component';
+import { DocumentUploaderComponent } from './document-uploader/document-uploader.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -90,6 +98,11 @@ import { MenuComponent } from './menu/menu.component';
     CheckoutConfirmationComponent,
     ThanksPageComponent,
     MenuComponent,
+    ConfirmLocationComponent,
+    SelectCityComponent,
+    PurchasedPlanComponent,
+    WeeklyScheduleComponent,
+    DocumentUploaderComponent,
 
     // Directives
     RsDirective,
@@ -103,7 +116,10 @@ import { MenuComponent } from './menu/menu.component';
     MatExpansionModule,
     MatCardModule,
     MatStepperModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
     NgxMaterialTimepickerModule,
+    FormsModule,
     
     TooltipModule,
     RouterModule
@@ -146,6 +162,11 @@ import { MenuComponent } from './menu/menu.component';
     CheckoutConfirmationComponent,
     ThanksPageComponent,
     MenuComponent,
+    ConfirmLocationComponent,
+    SelectCityComponent,
+    PurchasedPlanComponent,
+    WeeklyScheduleComponent,
+    DocumentUploaderComponent,
 
     //Directives
 

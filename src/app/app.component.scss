@@ -16,13 +16,19 @@ ion-title {
 
 
 .view-checkout {
-    .payable {
-        text-align: right;
-    }
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    width: 100%;
+    text-align: center;
 
-    .text {
-        text-align: left;
-    }
+    // .payable {
+    //     text-align: right;
+    // }
+
+    // .text {
+    //     text-align: left;
+    // }
 }
 
 .menu-btn {

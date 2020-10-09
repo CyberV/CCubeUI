@@ -1,0 +1,17 @@
+.day, .task {
+    padding-right: 0;
+}
+.rows {
+    .row {
+    margin: 0 10px;
+    padding-left: 0;
+
+    &:last-of-type {
+        border-bottom: none
+    }
+}
+}
+
+mat-card {
+    padding-top: 0;
+}

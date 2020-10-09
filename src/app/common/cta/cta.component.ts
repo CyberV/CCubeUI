@@ -13,6 +13,7 @@ export class CtaComponent implements OnInit {
   @Input() outline: boolean;
   @Input() size: number;
   @Input() small:boolean;
+  @Input() icon:string;
 
   @Input() subtext: string;
   @Input() secondaryCta:string;
@@ -20,6 +21,10 @@ export class CtaComponent implements OnInit {
   @Input() sticky: boolean;
 
   @Output() action = new EventEmitter();
+
+  get hasIcon() {
+    return this.icon.length;
+  }
 
   constructor() {
     this.text = "CTA";
@@ -30,6 +35,7 @@ export class CtaComponent implements OnInit {
     this.sticky = false;
 
     this.small = false;
+    this.icon="";
   }
 
   onCtaClick() {

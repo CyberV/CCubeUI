@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-12 mobile-input">
+    <label for="mobileNumber">City</label>
+    <div class="input-group">
+      <ng-container *ngIf="!disabled">
+        <input class="form-control --no-padding"  type="text" aria-label="City" matInput name="city"
+        [(ngModel)]="city" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption="true">
+        <mat-option *ngFor="let option of filteredCities" [value]="option" (click)="selectCity(option)">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+      </ng-container>
+      <span class="form-control disabled" *ngIf="disabled"> {{city}}</span>
+      
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="showState">
+    <div class="col-12 mobile-input">
+      <label for="mobileNumber">State</label>
+      <div class="input-group">
+        <ng-container *ngIf="!disabled">
+          <input class="form-control --no-padding"  type="text" aria-label="State" matInput name="state"
+          [(ngModel)]="state" [matAutocomplete]="autoState">
+        <mat-autocomplete #autoState="matAutocomplete" autoActiveFirstOption="true">
+          <mat-option *ngFor="let option of filteredStates" [value]="option" (click)="selectState(option)">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        </ng-container>
+        <span class="form-control disabled" *ngIf="disabled"> {{state}}</span>
+        
+      </div>
+    </div>
+  </div>

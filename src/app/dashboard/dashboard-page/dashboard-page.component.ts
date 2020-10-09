@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from 'app/services/car.service';
 import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
+import { LoginService } from 'app/login/login.service';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
@@ -15,18 +16,23 @@ export class DashboardPageComponent implements OnInit {
     private router: Router,
     private carService: CarService,
     private headerService: HeaderService,
+    private loginService:LoginService,
     private userService:UserService
   ) {
 
     this.ready = false;
+    this.payments = [];
    }
 
   context: string;
 
   selectedPlan: any;
   selectedCar: any;
+  currentUser:any;
 
   ready:boolean;
+
+  payments:any;
 
   ngOnInit() {
     this.route.params.subscribe((rdata) => {
@@ -39,6 +45,7 @@ export class DashboardPageComponent implements OnInit {
   ionViewWillEnter() {
     //console.log('Entering View in Dashboard Page');
 
+    this.currentUser = this.userService.getCurrentUser();
 
     this.selectedPlan = sessionStorage.getItem('selectedPlan') ? JSON.parse(sessionStorage.getItem('selectedPlan')) : null;
     this.selectedCar = this.carService.getCurrentCar();
@@ -50,6 +57,11 @@ export class DashboardPageComponent implements OnInit {
     }
 
     if (!this.selectedPlan && this.context === 'plan') {
+      this.router.navigate(['/dashboard']);
+      return;
+    }
+
+    if (this.selectedCar && this.context === 'select-car') {
       this.router.navigate(['/dashboard']);
       return;
     }
@@ -75,6 +87,20 @@ export class DashboardPageComponent implements OnInit {
       }
       case 'plan': {
         this.headerService.setText(this.selectedPlan.name);
+        break;
+      }
+      case 'service': {
+        this.headerService.setText('Dashboard');
+
+        this.loginService.getPayments(this.currentUser.phone).subscribe((res:any) => {
+          if (res.success) {
+            this.payments = res.data;
+
+            if (this.payments.length > 1) {
+              this.payments = [this.payments[this.payments.length-1]];
+            }
+          }
+        })
         break;
       }
       default: this.router.navigate(['/dashboard']);

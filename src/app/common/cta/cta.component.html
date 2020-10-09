@@ -12,6 +12,7 @@
 
         [style.fontSize.px]="size"
         (click)="onCtaClick()">
+        <ion-icon *ngIf="hasIcon" [name]="icon"></ion-icon>
       <span *ngIf="!loading">
         {{text}}
       </span>

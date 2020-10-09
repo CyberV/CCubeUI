@@ -31,9 +31,11 @@
 <div *ngIf="context=='details'" class="animate__animated animate__fadeInLeft details-container">
   <mobile-input type="text" name="Full Name" [(value)]="newUser.name" ></mobile-input>
   <mobile-input type="email" name="Email Id" [(value)]="newUser.email" ></mobile-input>
+  <select-city [(city)]="newUser.city"></select-city>
+{{newUser.city}}
   <mobile-input type="password" name="Password" [(value)]="newUser.password" ></mobile-input>
   <mobile-input type="password" name="Confirm Password" [(value)]="newUser.confirmPassword" ></mobile-input>
-
+  
 
 
 

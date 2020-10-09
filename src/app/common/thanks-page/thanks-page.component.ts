@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderService } from 'app/header.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-thanks-page',
@@ -8,7 +9,7 @@ import { HeaderService } from 'app/header.service';
 })
 export class ThanksPageComponent implements OnInit {
 
-  constructor(private headerService:HeaderService) { }
+  constructor(private headerService:HeaderService, private router:Router) { }
 
   public context: string;
 
@@ -23,6 +24,6 @@ export class ThanksPageComponent implements OnInit {
 
 
   goToDashboard() {
-    
+    this.router.navigate(['/dashboard/service']);
   }
 }

@@ -1,0 +1,27 @@
+<div class="row" id="top">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12 --no-padding">
+            <img *ngIf="car" class="page-logo --no-padding" [src]="car.image" (click)="showLink = !showLink">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+            <div *ngIf="car" class="car-info" role="alert">
+                <span class="model">{{car.model}}</span>
+                <span>
+                  <span class="plan-name">{{plan.name}}</span> Plan
+                </span>
+                <span>Expires On {{expiryDate}}</span>
+
+                <div class="plan-comparison-link" >
+                    
+                </div>
+                <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
+              </div>
+              <spinner *ngIf="!car"></spinner>
+        </div>
+      </div>
+
+    </div>
+  </div>
