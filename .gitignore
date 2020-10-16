@@ -32,6 +32,8 @@ npm-debug.log*
 /plugins
 /www
 /node_modulesa
+/android
+/ios
 
 
 /backend/package-lock.json
