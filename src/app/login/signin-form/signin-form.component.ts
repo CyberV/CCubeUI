@@ -71,7 +71,7 @@ export class SigninFormComponent implements OnInit {
 
           this.presentToast(res.data.msg);
           //alert(res.data.msg);
-          this.router.navigate(['/dashboard/select-car']);
+          this.router.navigate(['/dashboard/service']);
           
 
         } else {

@@ -1,18 +1,18 @@
 <mat-accordion class="accordion-container" [class.compact]="compact" [attr.disabled]="disabled">
-    <mat-expansion-panel *ngIf="disabled || locked" class = "drop panel-container" disabled>
+    <mat-expansion-panel *ngIf="disabled" class = "drop panel-container" disabled>
         <mat-expansion-panel-header class = "drop panel-header">
             <mat-panel-title #drawerToggle>
-                <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled && !locked, 'error': error}"> {{step}}  </span> <span class="title">{{title}}</span> <feature-avail *ngIf="locked" class="locked-icon" available="true"></feature-avail>
+                <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled , 'error': error, 'locked ': locked}"> {{step}}  </span> <span class="title">{{title}}</span> 
             </mat-panel-title>
             <mat-panel-description class = "drop">
                 
             </mat-panel-description>
           </mat-expansion-panel-header>
     </mat-expansion-panel>
-  <mat-expansion-panel *ngIf="!disabled && !locked" class = "drop panel-container">
+  <mat-expansion-panel *ngIf="!disabled" class = "drop panel-container">
     <mat-expansion-panel-header class = "drop panel-header">
       <mat-panel-title #drawerToggle>
-          <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled && !locked, 'error': error}" > {{step}}  </span> <span class="title">{{title}}</span>
+          <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled, 'error': error, 'locked ': locked}" > {{step}}  </span> <span class="title">{{title}}</span> 
       </mat-panel-title>
       <mat-panel-description class = "drop">
           

@@ -27,11 +27,11 @@ export class CheckoutService {
 
   //private url: string = 'http://localhost:4000/api/checkout';
   private domain: string = 'api-ccube.herokuapp.com';
-  private url: string ='https://' + this.domain + '/api/checkout';
+  private url: string = 'https://' + this.domain + '/api/checkout';
 
-  private user:any;
+  private user: any;
 
-  
+
 
   private checkoutEmitter = new Subject();
 
@@ -39,10 +39,10 @@ export class CheckoutService {
     private http: HttpClient,
     private userService: UserService,
     private winRef: WindowRefService) {
-      this.refreshUser();
+    this.refreshUser();
   }
 
-  events  = function() {
+  events = function () {
     return this.checkoutEmitter;
   }
 
@@ -59,6 +59,20 @@ export class CheckoutService {
 
   createOrder(amount: number) {
 
+    if (BYPASS_PAYMENT) {
+      return new Observable((obs) => {
+        obs.next({
+          success: true,
+          data: {
+            id: -1,
+          },
+        });
+        obs.complete();
+
+        return {unsubscribe() {}};
+      });
+    }
+
     let payload = {
       amount: amount
     };
@@ -71,11 +85,8 @@ export class CheckoutService {
   }
 
   tryPayment(order, amount) {
-    let orderId = order.id;
-    this.refreshUser();
-
     if (BYPASS_PAYMENT) {
-      this.checkoutEmitter.next ({
+      this.checkoutEmitter.next({
         success: true,
         order: order,
         user: this.user
@@ -83,6 +94,9 @@ export class CheckoutService {
 
       return;
     }
+
+    let orderId = order.id;
+    this.refreshUser();
 
     var options = {
       "key": api_key, // Enter the Key ID generated from the Dashboard
@@ -98,14 +112,14 @@ export class CheckoutService {
           this.checkoutEmitter.error(error);
           return;
         }
-         
+
         console.log('Payment Success', response)
 
-        let verified = this.verifyOrder(orderId,response.razorpay_payment_id, response.razorpay_signature);
+        let verified = this.verifyOrder(orderId, response.razorpay_payment_id, response.razorpay_signature);
 
         console.log('Payment verified', verified);
 
-        this.checkoutEmitter.next ({
+        this.checkoutEmitter.next({
           success: true,
           order: order
         })

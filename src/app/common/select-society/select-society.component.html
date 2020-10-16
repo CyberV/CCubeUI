@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-12 mobile-input">
+    <label for="mobileNumber">Society <span *ngIf="mandatory" class="mandatory-link"><sup>*</sup></span></label>
+    <div class="input-group">
+      <ng-container *ngIf="!disabled">
+        <input class="form-control --no-padding"  type="text" aria-label="society" matInput name="society"
+        [(ngModel)]="society" (input)="demo($event)" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption="true">
+        <mat-option *ngFor="let option of filteredSocieties" [value]="option" (click)="selectSociety(option)">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+      </ng-container>
+      <span class="form-control disabled" *ngIf="disabled"> {{society}}</span>
+      
+    </div>
+  </div>
+</div>

@@ -8,17 +8,18 @@ import { CitiesService } from 'app/cities.service';
 })
 export class SelectCityComponent implements OnInit {
 
-  @Input() city:string;
-  @Input() state:string;
+  @Input() city: string;
+  @Input() state: string;
+  @Input() mandatory:boolean;
 
   @Output() cityChange = new EventEmitter();
   @Output() stateChange = new EventEmitter();
 
-  @Input() disabled:boolean;
-  @Input() showState:boolean;
+  @Input() disabled: boolean;
+  @Input() showState: boolean;
 
-  options:any;
-  states:any;
+  options: any;
+  states: any;
 
 
   get filteredCities() {
@@ -40,7 +41,7 @@ export class SelectCityComponent implements OnInit {
 
 
   constructor(
-    private citiesService:CitiesService
+    private citiesService: CitiesService
   ) {
 
     this.city = "";
@@ -48,7 +49,8 @@ export class SelectCityComponent implements OnInit {
     this.showState = false;
     this.options = citiesService.getAllCities();
     this.states = citiesService.states;
-   }
+    this.mandatory = false;
+  }
 
   ngOnInit() {
     this.selectCity(this.city);
@@ -56,11 +58,14 @@ export class SelectCityComponent implements OnInit {
 
   selectCity(city) {
     this.cityChange.emit(city);
-    let found = this.citiesService.findStateForCity(city);
+    if (this.showState) {
+      let found = this.citiesService.findStateForCity(city);
 
-    if (found) {
-      this.selectState(found);
+      if (found) {
+        this.selectState(found);
+      }
     }
+
   }
 
   selectState(state) {

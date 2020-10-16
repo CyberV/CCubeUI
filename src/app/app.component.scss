@@ -33,12 +33,23 @@ ion-title {
 
 .menu-btn {
     font-size: 30px;
+    top: 13px;
+    float: left!important;
+    left: 15px;
+    position: absolute;
 }
 
 .menu-items {
     ion-icon {
         position: relative;
         margin-right: 1em;
+    }
+
+    .selected {
+        color: $secondary-color;
+        ion-icon {
+            color: $secondary-color;
+        }
     }
 }
 
@@ -57,6 +68,20 @@ ion-toolbar, ion-header, ion-title {
     &.menu-header {
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
+
+        .close {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            color: white;
+            z-index: 10;
+        }
+
+        .top {
+            left: 0;
+            top: 0;
+            position: absolute;
+        }
 
         padding: 2em;
 

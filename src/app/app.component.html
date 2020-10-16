@@ -3,7 +3,7 @@
     <ion-toolbar>
 
       <ion-title>
-        <!-- <ion-icon *ngIf="isLoggedIn" name="menu-outline" class="menu-btn float-left" (click)="openFirst()"></ion-icon> -->
+        <ion-icon *ngIf="isLoggedIn && ['checkout','confirm', 'thanks'].indexOf(context) < 0" name="menu-outline" class="menu-btn float-left" (click)="toggleMenu()"></ion-icon>
 
         <span *ngIf="headerType=='text'" class="header-text">{{headerText}}</span>
         <div *ngIf="headerType=='view'">
@@ -34,7 +34,7 @@
     <ion-header class="menu-header">
       <ion-toolbar color="primary">
         <ion-title>
-          <div class="row">
+          <div class="row top">
             <div class="col-3">
                 <ion-icon name="person-outline"></ion-icon>
             </div>
@@ -48,20 +48,23 @@
                 </div>
               </div>
             </div>
+            
           </div>
+         
         </ion-title>
       </ion-toolbar>
+      <ion-icon class="close" name="close-outline" (click)="toggleMenu()" ></ion-icon>
     </ion-header>
     <ion-content>
       <ion-list class="menu-items">
 
-        <ion-item style="color:orange;" (click)="goTo('service')">
-          <ion-icon name="home-outline" style="color:orange;"></ion-icon> Dashboard
+        <ion-item [class.selected]="context==='service'"  (click)="goTo('service')">
+          <ion-icon name="home-outline" ></ion-icon> Dashboard
         </ion-item>
-        <ion-item (click)="goTo('dashboard')">
+        <ion-item [class.selected]="['select-car', 'plan', 'dashboard', 'checkout', 'confirm'].indexOf(context)>-1"  (click)="goTo('dashboard')">
           <ion-icon name="car-sport-outline"></ion-icon> Add New Car
         </ion-item>
-        <ion-item (click)="goTo('profile')">
+        <ion-item [class.selected]="context==='profile'" (click)="goTo('profile')">
           <ion-icon name="person-circle-outline"></ion-icon>Profile
         </ion-item>
         <ion-item (click)="goTo('about-us')">
@@ -134,7 +137,7 @@
     </ion-fab-button>
   </ion-fab> -->
   <ion-router-outlet id="my-content" [class.push-down]="!isMobile" (activate)='onActivate($event)'
-    (deactivate)='onDeactivate($event)'></ion-router-outlet>
+    (deactivate)='onDeactivate($event)'  animated="true"></ion-router-outlet>
 
 
 

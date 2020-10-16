@@ -31,6 +31,10 @@
     bottom: 0;
     z-index: 10;
     left: 0;
+
+    &.disabled {
+        background: $cta-disabled-color;
+    }
 }
 
 .btn-small {

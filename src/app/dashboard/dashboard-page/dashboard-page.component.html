@@ -8,7 +8,7 @@
               <app-dashboard *ngIf="context==='dashboard'" [currentCar]="selectedCar"></app-dashboard>
               <car-form *ngIf="context==='select-car'" (carReady)="goToDashboard($event)"></car-form>
               <div  *ngIf="context==='plan' && selectedPlan">
-                  <selected-car [car]="selectedCar"></selected-car>
+                  <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
                   <plan-details  [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
                   </plan-details>
                   <addon-slider></addon-slider>
@@ -18,6 +18,7 @@
                 
               </app-service-page>
             </ng-container>
+            <spinner *ngIf="!ready" color="blue"></spinner>
               
           </div>
 

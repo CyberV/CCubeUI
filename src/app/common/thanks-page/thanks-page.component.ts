@@ -13,13 +13,28 @@ export class ThanksPageComponent implements OnInit {
 
   public context: string;
 
+  payment:any;
+
+  get startDate()  {
+
+    return this.payment ? new Date(this.payment.startDate).toLocaleString() : null;
+  }
+
   ngOnInit() {
 
     this.context = "thanks";
+    this.payment = {};
   }
 
   ionViewWillEnter() {
+    this.payment = JSON.parse(sessionStorage.getItem('currentPayment'));
     this.headerService.setText('Plan Purchased!');
+
+    sessionStorage.removeItem('currentCar');
+
+    setTimeout( () => {
+      this.goToDashboard();
+    }, 5000); 
   }
 
 

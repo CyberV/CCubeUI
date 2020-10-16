@@ -26,6 +26,8 @@ export class AppComponent {
   headerType:string;      // text, view
   viewData:any;
 
+  context:string;
+
   constructor(
      private platform:Platform,
      private route: ActivatedRoute,
@@ -43,6 +45,8 @@ export class AppComponent {
       'thanks',
       'landing'
     ];
+
+    this.context = '';
 
     this.route.url.subscribe( (d)=> {
       // console.log('route', this.route.snapshot['_routerState'].url);
@@ -84,7 +88,7 @@ export class AppComponent {
   }
 
   ngAfterViewInit() {
-    
+    this.menu.enable(true, 'first');
   }
 
   onDeactivate(comp){
@@ -93,7 +97,24 @@ export class AppComponent {
 
   onActivate(comp) {
 
+    this.context = comp.context;
+
     this.isLoggedIn = this.userService.isLoggedIn();
+
+    this.userService.listner().subscribe((evt:any) => {
+      switch (evt.event) {
+        case 'LOGGED_OUT': {
+          this.menu.enable(false, 'first');
+          break;
+
+        }
+        case 'LOGGED_IN': {
+          this.menu.enable(true, 'first');
+          break;
+        }
+        default: break;
+      }
+    });
 
     let usr = this.userService.getCurrentUser();
     if (usr) {
@@ -109,12 +130,13 @@ export class AppComponent {
 
   }
 
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
+  toggleMenu() {
+    
+    this.menu.toggle('first');
   }
 
   goTo(context) {
+    this.menu.close();
     switch(context) {
       case 'dashboard': {
         sessionStorage.setItem('currentCar', 'null');
@@ -140,7 +162,7 @@ export class AppComponent {
       default: break;
     }
 
-    this.menu.toggle('first');
+
 
   }
 

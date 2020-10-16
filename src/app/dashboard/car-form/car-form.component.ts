@@ -17,8 +17,9 @@ export class CarFormComponent implements OnInit {
   findingCar: boolean;
   loading: boolean;
   currentCar:any;
+  showFileUploader:boolean;
 
-  regNo: any;
+  @Input() regNo: any;
   maker: string;
   model: string;
 
@@ -30,6 +31,8 @@ export class CarFormComponent implements OnInit {
     this.findingCar = false;
     this.loading = false;
     this.verifyOnly = false;
+    this.showFileUploader = false;
+    this.regNo="";
   }
 
 
@@ -68,6 +71,10 @@ export class CarFormComponent implements OnInit {
     };
 
     this.currentCar = this.carService.getCurrentCar()
+  }
+
+  onError(d) {
+    this.showFileUploader = true;
   }
 
   goToPlans(carDetails) {

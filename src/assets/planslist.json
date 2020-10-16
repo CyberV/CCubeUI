@@ -37,7 +37,7 @@
     },
     {
       "name": "Windshield Cleaning - Outside",
-      "description": "Proper upper body wash, tyres, headlights and rubber mats with water to make it shine like a star",
+      "description": "Using special chemicals to clean your windshield from outside for a spotless view  and long life of the special glass",
       "frequency": "Daily",
       "code": "WINDSHLD_OUT",
       "weight": 1
@@ -73,7 +73,7 @@
 
     {
       "name": "Windshield Care - Inside",
-      "description": "using special chemicals to clean your windshield inside out for a spotless view  and long life of the special glass",
+      "description": "Using special chemicals to clean your windshield inside out for a spotless view  and long life of the special glass",
       "frequency": "Once a week",
       "code": "WNDSHLD_INT",
       "weight": 3

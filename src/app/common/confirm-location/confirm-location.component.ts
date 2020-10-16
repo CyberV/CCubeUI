@@ -13,7 +13,7 @@ export class ConfirmLocationComponent implements OnInit {
   location:any;
 
   get allFieldsReady() {
-    return this.location.houseNo.length && this.location.block.length && this.location.city.length && this.location.state.length;
+    return this.location.houseNo.length && this.location.city.length && this.location.state.length && this.location.society && this.location.society.length;
   }
 
   @Output() confirm = new EventEmitter();
@@ -24,6 +24,7 @@ export class ConfirmLocationComponent implements OnInit {
     this.location = {
       houseNo: '',
       block: '',
+      society:'',
       city: '',
       state: ''
     };

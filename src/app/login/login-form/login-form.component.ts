@@ -39,9 +39,12 @@ export class LoginFormComponent implements OnInit {
   public userExists:boolean;
   public forgotPassword:boolean;
 
+  errors:any;
+
 
   loadingDetails: boolean;
   otpSent:boolean;
+
 
   get isMobile() {
     return !this.platform.is('desktop');
@@ -54,7 +57,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   get isPhoneValid() {
-    return this.newUser.mobile && (this.newUser.mobile.length>=9);
+    return this.newUser.mobile && (this.newUser.mobile.length>9);
   }
 
   get isRegNoValid() {
@@ -108,6 +111,8 @@ export class LoginFormComponent implements OnInit {
       car: {}
     };
 
+    this.errors=null;
+
 
     if (this.platform.is('android') || this.platform.is('ios')) {
       GoogleAuth.addListener('userChange', (googleUser: any) => {
@@ -149,16 +154,16 @@ export class LoginFormComponent implements OnInit {
 
     }
 
-    this.geolocation.getCurrentPosition().then((resp) => {
+    // this.geolocation.getCurrentPosition().then((resp) => {
 
 
-      console.log(resp.coords.latitude, resp.coords.longitude, resp.coords.accuracy);
+    //   console.log(resp.coords.latitude, resp.coords.longitude, resp.coords.accuracy);
 
-      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
+    //   this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
 
-    }).catch((error) => {
-      this.presentToast('Error getting location');
-    });
+    // }).catch((error) => {
+    //   this.presentToast('Error getting location');
+    // });
 
 
 
@@ -263,8 +268,56 @@ export class LoginFormComponent implements OnInit {
     this.forgotPassword = true;
   }
 
+  validateData(data) {
+    let valid:any = {
+      phone: false,
+      email: false,
+      name: false,
+      password: false
+    };
+
+    this.errors = {};
+
+    if (data.mobile && this.newUser.mobile.length>=10) {
+      valid.phone = true;
+    } else {
+      this.errors['phone'] = 'Please enter a valid Phone Number.'
+    }
+
+    if (this.newUser.name && this.newUser.name.length ) {
+      valid.name = true;
+    } else {
+      this.errors['name'] = 'Please enter a valid User Name.'
+    }
+
+    if (this.newUser.password && this.newUser.password.length && this.newUser.password.length >=4 && this.newUser.password == this.newUser.confirmPassword) {
+      valid.password = true;
+    } else {
+      this.errors['password'] = 'Please enter a valid Password.';
+
+      if (this.newUser.password.length < 4) {
+        this.errors['password'] += " Atleast 4 characters required."
+      }
+
+      if (this.newUser.password != this.newUser.confirmPassword) {
+        this.errors['password'] += " Passwords don't match."
+      }
+    }
+    
+    if (this.newUser.email && this.newUser.email.length) {
+      valid.email= true;
+    } else {
+      this.errors['email'] = 'Please enter a valid Email.'
+    }
+    
+   
+    this.errors = valid.name && valid.phone && valid.password && valid.email ? null: this.errors;
+
+    return !this.errors;
+  }
+
   createUser() {
-    if (!(this.newUser.mobile && this.newUser.mobile.length>=10 && this.newUser.name && this.newUser.name.length && this.newUser.password && this.newUser.password.length && this.newUser.email && this.newUser.email.length)) {
+    if (!this.validateData(this.newUser)) {
       return;
     }
     
@@ -282,14 +335,24 @@ export class LoginFormComponent implements OnInit {
         
 
       } else {
-
+        // Error from Server
         if (res.errorMsg == "User Exists for Mobile Number") {
           this.userExists = true;
-        } else {
-          alert('There was en error creating account. Please try again in some time.');
-        }
+        } else if (res.error && res.error.errmsg.indexOf('duplicate key error') > -1 && res.error.errmsg.indexOf('email') > -1) {
+          if (!this.errors) {
+            this.errors = {};
+          } 
+
+          this.errors['email']= 'An account exists with this email Id. Please use another one.';
+
+          } else {
+            alert('There was en error creating account. Please try again in some time.');
+          }
+
+
+        } 
         
-      }
+      
 
     });
 

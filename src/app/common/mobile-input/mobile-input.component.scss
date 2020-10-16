@@ -17,16 +17,32 @@
     }
 
     .error-field {
-        border: 1px solid red;
+        border-bottom: 1px solid red;
+        width: 100%;
+    }
+
+    .readonly {
+        border: none;
+    }
+
+    .red {
+        color: red;
     }
 
     .error-msg {
-        color: red;
+        color: #6f6666;
+        margin-top: 8px;
+        border-bottom: none;
+        font-weight: 300;
     }
 
     .not-mobile {
         padding:0;
         height:25px;
+    }
+
+    .mandatory-link {
+        color: $secondary-color;
     }
 
     span {

@@ -1,3 +1,5 @@
+@import "src/variables.scss";
+
 .logo {
     width: 100%;
 
@@ -9,4 +11,52 @@
 .doc-upload {
     padding-right: 20px;
     right: 0px;
+}
+
+.car-slider-container {
+  
+
+      ion-slides {
+        border-bottom: 1px solid gray;
+      }
+
+      .add-car-slide {
+          ion-icon {
+              font-size: 40px;
+              color: $secondary-color;
+              margin-top: 10px;
+          }
+      }
+
+        .car-box {
+
+            &.active {
+                border-bottom: 5px solid $secondary-color;
+            }
+
+            ion-badge {
+                position: absolute;
+                right: 20px;
+                top: 0;
+            }
+
+            .maker-text {
+                font-size: 10px;
+                display: block;
+                height: 0;
+            }
+
+        }
+        .swiper-slide img {
+            width: 80%;
+        }
+    }
+
+    .car-image {
+        width: 50px;
+        height: 50px;
+    }
+
+.car-info-container {
+    position: relative;
 }

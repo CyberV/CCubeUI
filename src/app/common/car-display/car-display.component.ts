@@ -10,6 +10,7 @@ export class CarDisplayComponent implements OnInit {
 
   @Input() carNo: string;
   @Input() verifyOnly: boolean;
+  @Output() error = new EventEmitter();
 
   @Output() letsgo = new EventEmitter();
   @Output() carReady = new EventEmitter();
@@ -72,21 +73,7 @@ export class CarDisplayComponent implements OnInit {
 
           this.isCarReady = true;
 
-          let mm = res.raw['Maker / Model'];
-          mm = mm.split('/');
-
-          this.carDetails = {
-            maker : mm [0].replace("PVT LTD",""),
-            model : mm [1],
-            fuelType : res.raw["Fuel Type"],
-            registeredOn: new Date(res.raw["Registration Date"]).toDateString(),
-            year: new Date(res.raw["Registration Date"]).getFullYear(),
-            ownerName: res.raw["Owner Name"],
-            fuelNorms: res.raw["Fuel Norms"],
-            insuranceUpto: res.raw["Insurance Upto"],
-            fitness: res.raw["Insurance Upto"],
-            bodyType: 'sedan'
-          }
+          this.carDetails = res.data;
 
           let makerStr = this.carDetails.maker.split(' ')[0].toLowerCase();
           let modelStr = this.carDetails.model.toLowerCase().replace(makerStr,"").trim();
@@ -104,13 +91,18 @@ export class CarDisplayComponent implements OnInit {
         } else {
           alert ('There was an issue in getting your car details. Please try again or enter Make/Model manually.');
           this.loading = false;
-
+          this.error.next({
+            error: res.error
+          });
         }
       }, (res) => {
         this.loading = false;
         if (res.success) {
         } else {
-          alert ('There was an issue in getting your car details. Please try again or enter Make/Model manually.');
+          alert ('There was an issue in getting your car details.');
+          this.error.next({
+            error: res.error
+          });
           console.error('Error in loading details', res.errorMsg);
         }
       });

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { fileURLToPath } from 'url';
 
 @Component({
   selector: 'document-uploader',
@@ -7,8 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentUploaderComponent implements OnInit {
 
-  constructor() { }
+  @Input() text:string;
+  @Output() file = new EventEmitter();
 
-  ngOnInit() {}
+  constructor() {
+    this.text = "Upload your Insurance Documents";
+   }
+
+  ngOnInit() {
+
+  }
+
+  sendFile() {
+    this.file.emit();
+  }
 
 }

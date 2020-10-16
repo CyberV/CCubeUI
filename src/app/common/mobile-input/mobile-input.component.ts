@@ -23,6 +23,7 @@ export class MobileInputComponent implements OnInit {
 
   @Input() labelOnly:boolean;
   @Input() inputOnly:boolean;
+  @Input() mandatory:boolean;
 
   @Input() uppercase:boolean;
   @Input() readonly: boolean;
@@ -37,6 +38,7 @@ export class MobileInputComponent implements OnInit {
     this.readonly = false;
     this.labelOnly = false;
     this.inputOnly = false;
+    this.mandatory = false;
 
     this.hasError = false;
    }
@@ -51,7 +53,7 @@ export class MobileInputComponent implements OnInit {
   }
 
   ngOnChanges(changes) {
-    if (changes.error && this.error.length) {
+    if (changes.error && this.error && this.error.length) {
       this.hasError = true;
     } else {
       this.hasError = false;

@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Photo Gallery Ng Cap</string>
-    <string name="title_activity_main">Photo Gallery Ng Cap</string>
-    <string name="package_name">io.ionic.pg.ng.cap</string>
-    <string name="custom_url_scheme">io.ionic.pg.ng.cap</string>
-    <string name="server_client_id">779064664497-fksbum0fbig4shevjq3sl62ep2t10vdh.apps.googleusercontent.com</string>
-
+    <string name="app_name">CCube</string>
+    <string name="title_activity_main">CCube</string>
+    <string name="package_name">io.ionic.demo.pg.cap.ng</string>
+    <string name="custom_url_scheme">io.ionic.demo.pg.cap.ng</string>
 </resources>

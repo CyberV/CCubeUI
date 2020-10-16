@@ -35,12 +35,19 @@ export class AccordionComponent implements OnInit {
   }
 
   toggle() {
-    this.drawerToggle.nativeElement.click();
+    if (this.drawerToggle && this.drawerToggle.nativeElement) {
+      this.drawerToggle.nativeElement.click();
+    }
   } 
 
   ngOnChanges(changes) {
     this.hasStep = !! (this.step && this.step.length);
-    console.log('disabled', this.disabled);
+    
+    if (changes.locked) {
+      if (this.locked) {
+        this.toggle();
+      }
+    }
   }
 
 }

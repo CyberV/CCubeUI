@@ -1,5 +1,5 @@
 <mat-card>
-  <h3>Upload your Insurance Documents</h3>
+  <h3>{{text}}</h3>
 
-  <cta text="Upload" outline="true" small="true" icon="document-attach-outline"></cta>
+  <cta text="Upload" outline="true" small="true" icon="document-attach-outline" (action)="sendFile()"></cta>
 </mat-card>

@@ -74,11 +74,11 @@
               <span></span>
 
             </div>
-
-            <div class="row">
+            <ng-container *ngIf="startDate">
+              <div class="row">
               <div class="col-12">
                 <span>Date</span><br />
-                <span>Some Date</span>
+                <span>{{startDate}}</span>
               </div>
             </div>
 
@@ -86,14 +86,14 @@
             <div class="row">
               <div class="col-12">
                 <span>Receipt</span><br />
-                <span>Receipt No</span>
+                <span>{{'CCUBE_VVSH'}}</span>
               </div>
             </div>
             <hr />
             <div class="row">
               <div class="col-12">
                 <span>Net Payment</span><br />
-                <span>Amount</span>
+                <span Rs >{{payment.plan ? payment.plan.price :  '600'}}</span>
               </div>
             </div>
             <hr />
@@ -104,6 +104,8 @@
             </div>
 
             <cta text="Go To Dashboard" (action)="goToDashboard()"></cta>
+            </ng-container>
+            
           </div>
 
         </div>

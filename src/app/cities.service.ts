@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +7,27 @@ export class CitiesService {
 
   cities = new Array();
 
+  filteredStates = [];
+
+  filter = [1, 5, 9, 12, 16, 19, 20, 27, 30, 32];
+
+
+  societies = [{
+    city: "faridabad",
+    societies: [{
+      name: 'Puri Pratham Sector 84',
+    },
+    {
+      name: 'SRS Residency Sector 85'
+    }]
+  }
+  ]
+
+
+
   allCities: any;
+
+  allSocieties:any;
 
   constructor() {
     this.cities[0] = "";
@@ -50,11 +69,16 @@ export class CitiesService {
 
     let cities = [];
 
-    for(let i=1;i<this.cities.length;i++) {
-      cities.push.apply(cities, this.cities[i].split(' | '));
+    for (let i = 0; i < this.filter.length; i++) {
+      cities.push.apply(cities, this.cities[this.filter[i] + 1].split(' | '));
     }
 
     this.allCities = cities;
+    this.allSocieties = [];
+
+    this.societies.forEach((city) => {
+      this.allSocieties.push.apply(this.allCities, city.societies);
+    })
   }
 
   findMatchingCities(str) {
@@ -66,6 +90,23 @@ export class CitiesService {
 
     return found;
   }
+
+  findMatchingSocieties(str, city=null) {
+    let found = [];
+
+    let societies = this.allSocieties;
+
+    if (city) {
+      societies = this.getSocietiesForCity(city.toLowerCase());
+    }
+
+    found = societies.filter((society: any) => {
+      return society.name.toLowerCase().indexOf(str.toLowerCase()) > -1;
+    });
+
+    return found;
+  }
+
 
   public findMatchingStates(str) {
     let found = [];
@@ -79,8 +120,8 @@ export class CitiesService {
 
   findStateForCity(city) {
     let index = -1;
-    for (let i=1;i<this.cities.length;i++) {
-      let found = this.cities[i].split(' | ').filter( (c) => {
+    for (let i = 1; i < this.cities.length; i++) {
+      let found = this.cities[i].split(' | ').filter((c) => {
         return c.toLowerCase() == city.toLowerCase();
       });
 
@@ -95,7 +136,22 @@ export class CitiesService {
     } else {
       return this.states[index - 1];
     }
-    
+
+  }
+
+  getSocietiesForCity(city) {
+    let record = this.societies.filter( (_city) =>  _city.city === city.toLowerCase());
+
+    if (record && record.length) {
+      return record[0].societies;
+    } else {
+      return [];
+    }
+
+  }
+
+  getAllSocieties() {
+    return this.allSocieties;
   }
 
   getAllCities() {

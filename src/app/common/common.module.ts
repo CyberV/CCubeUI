@@ -58,6 +58,7 @@ import { FormsModule } from '@angular/forms';
 import { PurchasedPlanComponent } from './purchased-plan/purchased-plan.component';
 import { WeeklyScheduleComponent } from './weekly-schedule/weekly-schedule.component';
 import { DocumentUploaderComponent } from './document-uploader/document-uploader.component';
+import { SelectSocietyComponent } from './select-society/select-society.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -103,6 +104,7 @@ import { DocumentUploaderComponent } from './document-uploader/document-uploader
     PurchasedPlanComponent,
     WeeklyScheduleComponent,
     DocumentUploaderComponent,
+    SelectSocietyComponent,
 
     // Directives
     RsDirective,
@@ -167,6 +169,7 @@ import { DocumentUploaderComponent } from './document-uploader/document-uploader
     PurchasedPlanComponent,
     WeeklyScheduleComponent,
     DocumentUploaderComponent,
+    SelectSocietyComponent,
 
     //Directives
 

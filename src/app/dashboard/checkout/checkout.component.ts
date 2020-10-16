@@ -35,6 +35,7 @@ export class CheckoutComponent implements OnInit {
   currentUser:any;
   currentLocation: any;
   officeTime:string;
+  loading:boolean;
 
 
   page: string;
@@ -54,6 +55,7 @@ export class CheckoutComponent implements OnInit {
     this.carIdentified = false;
     this.page = '1';
     this.retryAddon = false;
+    this.loading = false;
     this.updatedCarDetails = {};
     this.resetCarForm = true;
     this.verificationComplete = false;
@@ -139,7 +141,7 @@ export class CheckoutComponent implements OnInit {
 
     if (car) {
       this.selectedCar = car;
-      if (this.selectedCar.regNo) {
+      if (this.selectedCar.fuelType) {
         this.carIdentified = true;
         this.carMismatch = false;
         this.step2Ready = true;
@@ -200,20 +202,30 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutService.events().subscribe((evt) => {
       if (evt.success) {
-        // alert('Payment Successful');
-        console.log(evt);
-        this.loginService.addPayment({
+        let payload = {
           phone: this.currentUser.phone,
           plan: this.selectedPlan,
           car: this.selectedCar,
           location: this.currentLocation,
           officeTime: this.officeTime,
           startDate: +(new Date())
-        }).subscribe( (d) => {
+        };
+
+        this.loginService.addPayment(payload).subscribe( (d:any) => {
           console.log('add payment response', d);
-          this.router.navigate(['/dashboard/thanks']);
+          if (d.success) {
+            sessionStorage.setItem('currentPayment', JSON.stringify(payload));
+            this.router.navigate(['/dashboard/thanks']);
+          } else {
+
+          }
+          
         })
         
+      } else {
+          alert(
+            'Please try again!'
+          );
       }
     });
 
@@ -238,6 +250,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   payNow() {
+    this.loading = true;
     this.checkoutService.createOrder(this.selectedPlan.price).subscribe((res: any) => {
       if (res.success) {
         let orderId = res.data.id;
@@ -247,12 +260,35 @@ export class CheckoutComponent implements OnInit {
         this.checkoutService.tryPayment(order, res.data.amount);
 
       } else {
+        this.loading = false;
         console.log('Error creating order', res.errorMsg, res.error);
       }
     })
   }
 
   verifyCar(carDetails) {
+
+    if (!carDetails.maker) {
+      // Car API Failed. fallback to RC document
+      this.carIdentified = true;
+      this.carMismatch = false;
+      let regNo = carDetails.regNo;
+      let xx = {
+        ...this.selectedCar,
+        regNo
+      }
+      
+      this.carService.changeCar(xx);
+      this.selectedCar = this.carService.getCurrentCar();
+
+
+      setTimeout(() => {
+        this.step2Ready = !this.carMismatch;
+      }, 1000);
+
+      return;
+
+    }
     this.carIdentified = true;
     this.carMismatch = carDetails.maker.toLowerCase().indexOf(this.selectedCar.maker.toLowerCase()) < 0 || carDetails.model.toLowerCase().indexOf(this.selectedCar.model.toLowerCase()) < 0;
 

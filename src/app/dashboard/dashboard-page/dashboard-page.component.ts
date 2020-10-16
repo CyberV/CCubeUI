@@ -94,14 +94,22 @@ export class DashboardPageComponent implements OnInit {
 
         this.loginService.getPayments(this.currentUser.phone).subscribe((res:any) => {
           if (res.success) {
-            this.payments = res.data;
 
-            if (this.payments.length > 1) {
-              this.payments = [this.payments[this.payments.length-1]];
+            if (res.data.length) {
+              this.payments = res.data;
+            this.ready = true;
+            } else {
+              this.router.navigate(['/dashboard/select-car']);
+              return;
             }
+
+            // if (this.payments.length > 1) {
+            //   this.payments = [this.payments[this.payments.length-1]];
+            // }
           }
         })
-        break;
+
+        return;
       }
       default: this.router.navigate(['/dashboard']);
 
@@ -112,6 +120,13 @@ export class DashboardPageComponent implements OnInit {
 
   goToCheckout() {
     this.router.navigate(['/dashboard/checkout']);
+  }
+
+  resetCar() {
+    sessionStorage.setItem('currentCar', null);
+
+    this.router.navigate(['/dashboard/select-car']);
+
   }
 
   goToDashboard(carData?) {

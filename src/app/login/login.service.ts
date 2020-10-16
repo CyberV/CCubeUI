@@ -15,6 +15,7 @@ import { Observable, throwError } from 'rxjs';
 import { MD5 } from 'crypto-js';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+
 //var CryptoJS = require("crypto-js");
 
 //import * as CryptoJS from 'crypto-js';
@@ -31,7 +32,7 @@ export class LoginService {
     private url: string = 'https://' + this.domain + '/api/';
     
     //private url: string = 'http://localhost:4000/api/';
-    private carUrl :string = 'https://autom8.herokuapp.com/carDetails/';
+    private carUrl :string = this.url + "car/details/";
     
     constructor(
       private http: HttpClient, 
