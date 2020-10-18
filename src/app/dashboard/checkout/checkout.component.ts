@@ -162,7 +162,7 @@ export class CheckoutComponent implements OnInit {
 
   changeCar() {
 
-    sessionStorage.setItem('currentCar', null);
+    this.carService.clear();
     this.router.navigate(['/dashboard']);
   }
 

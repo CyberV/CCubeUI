@@ -12,11 +12,14 @@ export class SubheadingComponent implements OnInit {
   @Input() size:number;
   @Input() align:string;
 
+  @Input() slim:boolean
+
   constructor() {
     this.text="";
     this.color="#bcbcbc";
     this.align ="left";
     this.size = 16;
+    this.slim = false;
   }
 
   ngOnInit() {}

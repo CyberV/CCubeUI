@@ -9,6 +9,8 @@
             > 
             {{text}} 
             <span *ngIf="showClose" class="close" (click)="dismiss()">X</span>
-        </h1>          
+        </h1>   
+        
+        <ng-content ></ng-content>
     </div>
   </div>

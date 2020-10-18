@@ -14,7 +14,13 @@
       <ng-container *ngIf="isCarReady">
         <div *ngIf="!verifyOnly" class="card animate__animated animate__bounceInDown">
           <div class="card-body">
-            <h5 class="card-title"> {{carDetails.name}} </h5>
+            <ng-container *ngIf="vehicleTypeMismatch">
+              <heading text="Uh Oh! This isn't a Car." color="red">
+                  <subheading text="Vehicle Class : {{carDetails.vehicleType}}" slim="true" color="black"></subheading>
+              </heading>
+             
+            </ng-container>
+
             <p class="card-text">
               <span>You're driving a {{carDetails.year}} {{carDetails.model}}</span>
               <br />
@@ -27,7 +33,10 @@
             <li class="list-group-item">Registeration Date: {{carDetails.registeredOn}} </li>
           </ul>
           <div class="card-body">
-            <cta text="Show me my Plans" (action)="sendAction()"></cta>
+            <cta *ngIf="!vehicleTypeMismatch" text="Show me my Plans" (action)="sendAction()"></cta>
+            <p *ngIf="vehicleTypeMismatch" class="card-text">
+                <span>Please Try Again with a valid Car Registration Number!</span>
+            </p>
           </div>
         </div>
 
@@ -37,7 +46,12 @@
             <li class="list-group-item">Model : {{carDetails.model}}</li>
             <li class="list-group-item">Body Type: {{carDetails.bodyType}} </li>
           </ul>
+          <p *ngIf="vehicleTypeMismatch" class="card-body">
+              <span>The Registration Number doesn't belong to a Car. Please Try Again with a valid Car Registration Number!</span>
+          </p>
         </div>
+
+
       </ng-container>
     </div>
   </div>

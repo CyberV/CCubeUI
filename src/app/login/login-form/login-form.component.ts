@@ -13,6 +13,7 @@ import { ToastController } from '@ionic/angular';
 
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { CarService } from 'app/services/car.service';
 
 
 @Component({
@@ -92,6 +93,7 @@ export class LoginFormComponent implements OnInit {
     private srvcLogin: LoginService,
     private geolocation: Geolocation,
     private srvcUser: UserService,
+    private carService:CarService,
     public toastController: ToastController,
 
     private router: Router) {
@@ -192,7 +194,7 @@ export class LoginFormComponent implements OnInit {
   goToPlans(carDetails) {
 
 
-    sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+    this.carService.changeCar(carDetails);
 
     this.router.navigate(['plans'], { state: carDetails});
   }

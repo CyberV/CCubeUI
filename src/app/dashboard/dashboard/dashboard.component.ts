@@ -114,7 +114,7 @@ export class DashboardComponent implements OnInit {
   }
 
   resetCar() {
-    sessionStorage.setItem('currentCar', null);
+    this.carService.clear();
     //this.isCarSelected = false;
     this.goToCarSelector();
   }

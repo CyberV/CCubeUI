@@ -6,7 +6,7 @@
           <div class="container">
             <ng-container *ngIf="ready">
               <app-dashboard *ngIf="context==='dashboard'" [currentCar]="selectedCar"></app-dashboard>
-              <car-form *ngIf="context==='select-car'" (carReady)="goToDashboard($event)"></car-form>
+              <car-form *ngIf="context==='select-car'" [regNo]="selectedCar ? selectedCar.regNo :'' " (carReady)="goToDashboard($event)"></car-form>
               <div  *ngIf="context==='plan' && selectedPlan">
                   <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
                   <plan-details  [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">

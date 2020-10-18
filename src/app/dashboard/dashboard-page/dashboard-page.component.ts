@@ -62,7 +62,7 @@ export class DashboardPageComponent implements OnInit {
     }
 
     if (this.selectedCar && this.context === 'select-car') {
-      this.router.navigate(['/dashboard']);
+
       return;
     }
 
@@ -123,7 +123,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   resetCar() {
-    sessionStorage.setItem('currentCar', null);
+    this.carService.clear();
 
     this.router.navigate(['/dashboard/select-car']);
 
@@ -132,7 +132,7 @@ export class DashboardPageComponent implements OnInit {
   goToDashboard(carData?) {
 
     if (carData) {
-      sessionStorage.setItem('currentCar', JSON.stringify(carData));
+      this.carService.changeCar(carData);
     }
     this.router.navigate(['/dashboard']);
   }

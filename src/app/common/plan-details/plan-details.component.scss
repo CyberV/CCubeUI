@@ -11,6 +11,12 @@
 .feature {
   width: 120%;
 margin-bottom: 5px;
+
+
+.name,.frequency {
+  display: inline-block;
+}
+
 }
 
 .frequency {
@@ -27,6 +33,17 @@ margin-bottom: 5px;
 
   &.compact {
     width: 110%;
+
+    mat-panel-title:last-of-type {
+      .feature {
+        border-bottom: none;
+      }
+      
+    }
+
+    .feature {
+      border-bottom: 1px solid #e6d6d6;
+    }
   }
 }
 

@@ -140,7 +140,8 @@ export class LoginService {
     }
 
     getCarDetails(regNo) {
-      return this.http.get(this.carUrl + regNo).pipe (
+      
+      return this.http.post(this.carUrl + regNo, {"phone": this.srvcUser.getCurrentUser().phone}).pipe (
         catchError(this.handleError)
       );
     }

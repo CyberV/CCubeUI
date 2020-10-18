@@ -1,3 +1,7 @@
 .subheading {
     margin: 1em 0 0 0;
+
+    &.slim {
+        margin:0;
+    }
 }

@@ -12,15 +12,18 @@ export class CarDisplayComponent implements OnInit {
   @Input() verifyOnly: boolean;
   @Output() error = new EventEmitter();
 
+
+
   @Output() letsgo = new EventEmitter();
   @Output() carReady = new EventEmitter();
 
-  noCar:boolean;
+  noCar: boolean;
   loading: boolean;
-  isCarReady:boolean;
+  isCarReady: boolean;
   carDetails: any;
+  vehicleTypeMismatch: boolean;
 
-  entry:any;
+  entry: any;
 
   constructor(private srvcLogin: LoginService) {
     this.carNo = "";
@@ -28,6 +31,7 @@ export class CarDisplayComponent implements OnInit {
     this.isCarReady = false;
     this.noCar = false;
     this.verifyOnly = false;
+    this.vehicleTypeMismatch = false;
 
     this.carDetails = {
       maker: '',
@@ -40,17 +44,17 @@ export class CarDisplayComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.noCar = !(this.carNo && this.carNo.length);
+    this.noCar = !(this.carNo && this.carNo.length);
 
-      if (this.noCar) {
-        return;
-      } else {
-        this.loading = true;
-        this.getCarDetails(this.carNo);
-        setTimeout( ()=> {
-          this.beginDisplay();
-        }, 1000);
-      }
+    if (this.noCar) {
+      return;
+    } else {
+      this.loading = true;
+      this.getCarDetails(this.carNo);
+      setTimeout(() => {
+        this.beginDisplay();
+      }, 1000);
+    }
   }
 
   beginDisplay() {
@@ -73,23 +77,30 @@ export class CarDisplayComponent implements OnInit {
 
           this.isCarReady = true;
 
+          res.data.registeredOn = new Date(res.data.registeredOn).toLocaleDateString();
+
           this.carDetails = res.data;
 
           let makerStr = this.carDetails.maker.split(' ')[0].toLowerCase();
-          let modelStr = this.carDetails.model.toLowerCase().replace(makerStr,"").trim();
-          
+          let modelStr = this.carDetails.model.toLowerCase().replace(makerStr, "").trim();
+
 
           this.carDetails.name = modelStr;
+          this.vehicleTypeMismatch = !(this.carDetails.vehicleType && this.carDetails.vehicleType.indexOf('(LMV)') > 0);
 
-          this.carReady.emit(this.carDetails);
-          
-          if(this.verifyOnly) {
-            this.letsgo.emit(this.carDetails);
+          if (!this.vehicleTypeMismatch) {
+            this.carReady.emit(this.carDetails);
+
+            if (this.verifyOnly) {
+              this.letsgo.emit(this.carDetails);
+            }
           }
+
+
 
           // this.page = "signup";
         } else {
-          alert ('There was an issue in getting your car details. Please try again or enter Make/Model manually.');
+          alert('There was an issue in getting your car details. Please try again or enter Make/Model manually.');
           this.loading = false;
           this.error.next({
             error: res.error
@@ -99,7 +110,7 @@ export class CarDisplayComponent implements OnInit {
         this.loading = false;
         if (res.success) {
         } else {
-          alert ('There was an issue in getting your car details.');
+          alert('There was an issue in getting your car details.');
           this.error.next({
             error: res.error
           });

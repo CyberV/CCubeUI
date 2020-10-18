@@ -6,6 +6,7 @@ import { Platform, MenuController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from './header.service';
 import { UserService } from './services/user.service';
+import { CarService } from './services/car.service';
 
 declare var $;
 @Component({
@@ -34,7 +35,8 @@ export class AppComponent {
      private headerService:HeaderService,
      private router:Router,
      private menu:MenuController,
-     private userService:UserService
+     private userService:UserService,
+     private carService:CarService
      ) {
     this.initializeApp();
     this.hideBackButton = false;
@@ -139,7 +141,7 @@ export class AppComponent {
     this.menu.close();
     switch(context) {
       case 'dashboard': {
-        sessionStorage.setItem('currentCar', 'null');
+        this.carService.clear();
         this.router.navigate(['/dashboard/select-car']);
         break;
       }

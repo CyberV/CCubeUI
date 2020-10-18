@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { CarService } from 'app/services/car.service';
 
 @Component({
   selector: 'app-service-page',
@@ -23,7 +24,8 @@ export class ServicePageComponent implements OnInit {
 
 
   constructor(
-    private router:Router
+    private router:Router,
+    private carService:CarService
   ) { 
     this.payments = [];
     this.selectedCar=null;
@@ -61,6 +63,7 @@ export class ServicePageComponent implements OnInit {
   }
 
   addCar() {
+    this.carService.clear();
     this.router.navigate(['/dashboard/select-car'])
   }
 

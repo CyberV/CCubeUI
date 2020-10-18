@@ -67,14 +67,19 @@ export class CarFormComponent implements OnInit {
 
   saveCar(carData) {
     if (!this.verifyOnly) {
-      sessionStorage.setItem('currentCar', JSON.stringify(carData));
+      this.carService.changeCar(carData);
     };
 
     this.currentCar = this.carService.getCurrentCar()
   }
 
-  onError(d) {
-    this.showFileUploader = true;
+  onError(error) {
+    if (error.vehicleTypeMismatch) {
+
+    } else {
+      this.showFileUploader = true;
+    }
+    
   }
 
   goToPlans(carDetails) {
@@ -82,7 +87,7 @@ export class CarFormComponent implements OnInit {
     
 
     if (!this.verifyOnly) {
-      sessionStorage.setItem('currentCar', JSON.stringify(carDetails));
+      this.carService.changeCar(carDetails);
     }
 
 

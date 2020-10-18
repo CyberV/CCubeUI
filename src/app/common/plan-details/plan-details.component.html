@@ -7,12 +7,12 @@
   </div>
   <div *ngIf="compact" class="">
     <mat-panel-title *ngFor="let feature of currentFeatures">
-      <div class="feature row">
-        <div class="col-7">
+      <div class="feature">
+        <div class="name">
             {{feature.name}}
         </div>
-        <div class="col-5 --no-padding">
-            <span class="float-right frequency"> {{feature.frequency}}</span>
+        <div class="float-right --no-padding frequency">
+            <span class="float-right "> {{feature.frequency}}</span>
         </div>
         
       </div>

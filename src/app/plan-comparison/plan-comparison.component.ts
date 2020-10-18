@@ -31,7 +31,6 @@ export class PlanComparisonComponent implements OnInit {
     }
 
     if (state) {
-      sessionStorage.setItem('currentCar', JSON.stringify(state));
     } else if (sessionStorage.getItem('currentCar')) {
       state = JSON.parse(sessionStorage.getItem('currentCar'));
     }

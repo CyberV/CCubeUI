@@ -1,11 +1,11 @@
 @import 'src/variables.scss';
 
 .form-container {
-    margin-top: 8em;
+    margin-top: 5em;
     transition: all 0.5s ease-in;
 
     &.expand {
-        margin-top: 5em;
+        margin-top: 2em;
     }
 
 }

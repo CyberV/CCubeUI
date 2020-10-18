@@ -16,7 +16,7 @@
     
         
         <car-display *ngIf="findingCar" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)" (error)="onError($event)" (carReady)="saveCar($event)"></car-display>
-        <document-uploader *ngIf="showFileUploader" (file)="goToPlans($event)" text="Upload your Car's RC Document."></document-uploader>
+        <document-uploader *ngIf="showFileUploader && verifyOnly" (file)="goToPlans($event)" text="Upload your Car's RC Document."></document-uploader>
       
     
     
