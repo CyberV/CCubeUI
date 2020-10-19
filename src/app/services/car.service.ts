@@ -21,7 +21,8 @@ let findMatchingCar = function (car) {
         found = {
           ...cars[0],
           ...car,
-          maker: car.maker
+          maker: car.maker,
+          model: car.model
         };
       } else {
         found = {

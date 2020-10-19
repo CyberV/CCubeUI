@@ -59,6 +59,7 @@ import { PurchasedPlanComponent } from './purchased-plan/purchased-plan.componen
 import { WeeklyScheduleComponent } from './weekly-schedule/weekly-schedule.component';
 import { DocumentUploaderComponent } from './document-uploader/document-uploader.component';
 import { SelectSocietyComponent } from './select-society/select-society.component';
+import { DragListComponent } from './drag-list/drag-list.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -105,6 +106,7 @@ import { SelectSocietyComponent } from './select-society/select-society.componen
     WeeklyScheduleComponent,
     DocumentUploaderComponent,
     SelectSocietyComponent,
+    DragListComponent,
 
     // Directives
     RsDirective,
@@ -170,6 +172,7 @@ import { SelectSocietyComponent } from './select-society/select-society.componen
     WeeklyScheduleComponent,
     DocumentUploaderComponent,
     SelectSocietyComponent,
+    DragListComponent,
 
     //Directives
 

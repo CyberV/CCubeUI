@@ -16,7 +16,6 @@
           <div class="car-box" [class.active]="selectedIndex == i" (click)="selectCar(i)">
 
             <ion-label class="car-image"><img [src]="payment.car.image" /></ion-label>
-            <ion-label class="maker-text">{{payment.car.model}}</ion-label>
             <ion-badge>{{i}}</ion-badge>
           </div>
           <!-- <mat-card class="card addon-card animate__animated animate__flipInX">
@@ -40,14 +39,15 @@
   </div>
 
   <div class="row car-info-container">
-    <div class="col-6">
+    <div class="col-12">
       <purchased-plan *ngIf="selectedPayment" [car]="selectedCar" [plan]="selectedPayment.plan"></purchased-plan>
 
     </div>
     <div class="col-6">
-      <document-uploader class="vertical-center doc-upload">
+      <!-- <drag-list> </drag-list> -->
+      <!-- <document-uploader class="vertical-center doc-upload">
 
-      </document-uploader>
+      </document-uploader> -->
     </div>
   </div>
 
@@ -57,6 +57,6 @@
   <spinner></spinner>
 </ng-container>
 
-<weekly-schedule></weekly-schedule>
+
 
 <addon-slider></addon-slider>

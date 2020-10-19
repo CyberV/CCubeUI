@@ -1,26 +1,99 @@
 <div class="row" id="top">
-    <div class="col-12">
-      <div class="row">
-        <div class="col-12 --no-padding">
-            <img *ngIf="car" class="page-logo --no-padding" [src]="car.image" (click)="showLink = !showLink">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-            <div *ngIf="car" class="car-info" role="alert">
-                <span class="model">{{car.model}}</span>
-                <span>
-                  <span class="plan-name">{{plan.name}}</span> Plan
-                </span>
-                <span>Expires On {{expiryDate}}</span>
+  <div class="col-12">
+    <div class="row">
 
-                <div class="plan-comparison-link" >
-                    
-                </div>
-                <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
-              </div>
-        </div>
+
+      <div class="col-6 --no-padding">
+        <img *ngIf="car" class="page-logo vertical-center --no-padding" [src]="car.image"
+          (click)="showLink = !showLink">
       </div>
 
+      <div class="col-6">
+        <div *ngIf="car" class="car-info" role="alert">
+          <span class="model">{{car.model}}</span>
+          <span class="regNo">{{car.regNo}}</span>
+          <span>
+            <span class="plan-name">{{plan.name}}</span> Plan
+          </span>
+          <span>Expires On {{expiryDate}}</span>
+
+          <div class="plan-comparison-link">
+
+          </div>
+          <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
+<div class="">
+  <div class="row">
+    <div class="col-12 tabs-container">
+        <mat-accordion >
+            <mat-expansion-panel  class = "drop">
+              <mat-expansion-panel-header class = "drop">
+                <mat-panel-title>
+                    <ion-icon [style.color]="'#ffa169'" name="calendar-outline"></ion-icon> <span class="header-text">Schedule</span> 
+                </mat-panel-title>
+                <mat-panel-description class = "drop">
+                    
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <weekly-schedule></weekly-schedule>
+             
+              
+            </mat-expansion-panel>
+            <mat-expansion-panel  class = "drop">
+            <mat-expansion-panel-header class = "drop">
+                <mat-panel-title>
+                    <ion-icon name="document-text-outline"></ion-icon><span class="header-text"> Documents</span>
+                </mat-panel-title>
+                <mat-panel-description class = "drop">
+                    
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <document-uploader></document-uploader>
+             
+              
+            </mat-expansion-panel>
+            <mat-expansion-panel  class = "drop">
+            <mat-expansion-panel-header class = "drop">
+                <mat-panel-title>
+                    <ion-icon [style.color]="'#26de77'" name="save-outline"></ion-icon><span class="header-text"> History</span>
+                </mat-panel-title>
+                <mat-panel-description class = "drop">
+                    
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p class="frequency">Service History Here</p>
+      
+              
+             
+              
+            </mat-expansion-panel>
+          </mat-accordion>
+    </div>
+    <!-- <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+        aria-controls="v-pills-home" aria-selected="true">Schedule</a>
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+        aria-controls="v-pills-profile" aria-selected="false">Documents</a>
+      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+        aria-controls="v-pills-messages" aria-selected="false">History</a>
+      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+        aria-controls="v-pills-settings" aria-selected="false">Upgrade</a>
+    </div>
+    <div class="tab-content col-9" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <weekly-schedule></weekly-schedule>
+      </div>
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+        <document-uploader></document-uploader>
+      </div>
+      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+    </div> -->
+  </div>
+
+</div>

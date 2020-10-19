@@ -12,7 +12,7 @@ export class DocumentUploaderComponent implements OnInit {
   @Output() file = new EventEmitter();
 
   constructor() {
-    this.text = "Upload your Insurance Documents";
+    this.text = "Upload your Car Documents to your Vault for future use and Safe Keeping.";
    }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 @import "src/variables.scss";
 
 #top {
-  min-height: 250px;
+
 }
 
 .page-logo {
@@ -17,9 +17,33 @@
     color: $secondary-color;
   }
 
+  .nav-link.active {
+    background-color: $primary-color;
+  }
+  
+
+  .tabs-container {
+    mat-expansion-panel-header {
+
+      ion-icon{
+        font-size: 25px;
+      }
+
+      .header-text {
+        margin-top: 5px;
+        margin-left: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      &:hover {
+        background-color: inherit !important;
+      }
+    }
+  }
   .car-info {
     font-size: 16px;
-    padding-left: 30px;
+    padding: 20px 0 0 0;
 
 
 
@@ -33,9 +57,21 @@
       font-size: 120%;
     }
 
+    .plan-name {
+      margin-top: 1em;
+      font-weight: 500;
+    }
+
+    .regNo {
+     
+      text-transform: uppercase;
+    }
+
 
     .model {
-      letter-spacing: 3px;
+      letter-spacing: 2px;
+      color: $primary-color;
       text-transform: uppercase;
+      font-weight: 500;
     }
   }
