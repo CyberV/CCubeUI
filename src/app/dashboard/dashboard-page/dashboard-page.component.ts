@@ -90,7 +90,7 @@ export class DashboardPageComponent implements OnInit {
         break;
       }
       case 'service': {
-        this.headerService.setText('Dashboard');
+        this.headerService.setView('service', {});
 
         this.loginService.getPayments(this.currentUser.phone).subscribe((res:any) => {
           if (res.success) {

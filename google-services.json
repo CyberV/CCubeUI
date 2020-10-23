@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "361742674659",
+    "firebase_url": "https://ccube-test.firebaseio.com",
+    "project_id": "ccube-test",
+    "storage_bucket": "ccube-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361742674659:android:e4db2d16aba189c35ef3d6",
+        "android_client_info": {
+          "package_name": "com.ccube.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361742674659-oh3c9orahe76ukfnktud0atn0tllqj3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM2lxwLApo0YbylnHRHci2wq41SMane1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361742674659-oh3c9orahe76ukfnktud0atn0tllqj3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

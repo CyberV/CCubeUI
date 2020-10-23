@@ -22,6 +22,14 @@ ion-title {
     width: 100%;
     text-align: center;
 
+    .notif {
+        ion-icon {
+            font-size: 25px;
+            margin-top: -5px;
+            margin-right: 14px;
+        }
+    }
+
     // .payable {
     //     text-align: right;
     // }

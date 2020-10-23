@@ -13,6 +13,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonComponentsModule } from './common/common.module';
 import { HomeComponent } from './home/home.component';
 
+
+import { FCM } from '@ionic-native/fcm/ngx'
 import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { MonthlySavingsComponent } from './monthly-savings/monthly-savings.component';
@@ -22,6 +24,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalPageModule } from './modal/modal.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SplashScreen } from '@capacitor/core';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -69,6 +72,7 @@ export function socialConfigs() {
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: AuthServiceConfig, useFactory: socialConfigs },
+    FCM,
     // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent]

@@ -3,7 +3,8 @@
     <ion-toolbar>
 
       <ion-title>
-        <ion-icon *ngIf="isLoggedIn && ['checkout','confirm', 'thanks'].indexOf(context) < 0" name="menu-outline" class="menu-btn float-left" (click)="toggleMenu()"></ion-icon>
+        <ion-icon *ngIf="isLoggedIn && ['checkout','confirm', 'thanks'].indexOf(context) < 0" name="menu-outline"
+          class="menu-btn float-left" (click)="toggleMenu()"></ion-icon>
 
         <span *ngIf="headerType=='text'" class="header-text">{{headerText}}</span>
         <div *ngIf="headerType=='view'">
@@ -16,14 +17,23 @@
             </div>
           </div>
           <div class="row" *ngIf="viewData.viewName=='home'">
-              <div class="offset-6 col-3">
-                <span class="link" (click)="goTo('signup')">Signup</span>
-              </div>
-              <div class="col-3">
-                <span class="link" (click)="goTo('login')">Login</span>
-              </div>
+            <div class="offset-6 col-3">
+              <span class="link" (click)="goTo('signup')">Signup</span>
             </div>
+            <div class="col-3">
+              <span class="link" (click)="goTo('login')">Login</span>
+            </div>
+          </div>
+          <div class="row view-checkout" *ngIf="viewData.viewName=='service'">
+              <div class="col-10 text">
+                  Dashboard
+                </div>
+                <div class="col-2 notif">
+                    <ion-icon name="notifications-outline"></ion-icon>
+                </div>
+          </div>
         </div>
+
         <span *ngIf="headerType==''"><img src="assets/blueLogo.png"></span>
 
       </ion-title>
@@ -36,7 +46,7 @@
         <ion-title>
           <div class="row top">
             <div class="col-3">
-                <ion-icon name="person-outline"></ion-icon>
+              <ion-icon name="person-outline"></ion-icon>
             </div>
             <div class="col-9 ">
               <div class="row user-row">
@@ -48,20 +58,21 @@
                 </div>
               </div>
             </div>
-            
+
           </div>
-         
+
         </ion-title>
       </ion-toolbar>
-      <ion-icon class="close" name="close-outline" (click)="toggleMenu()" ></ion-icon>
+      <ion-icon class="close" name="close-outline" (click)="toggleMenu()"></ion-icon>
     </ion-header>
     <ion-content>
       <ion-list class="menu-items">
 
-        <ion-item [class.selected]="context==='service'"  (click)="goTo('service')">
-          <ion-icon name="home-outline" ></ion-icon> Dashboard
+        <ion-item [class.selected]="context==='service'" (click)="goTo('service')">
+          <ion-icon name="home-outline"></ion-icon> Dashboard
         </ion-item>
-        <ion-item [class.selected]="['select-car', 'plan', 'dashboard', 'checkout', 'confirm'].indexOf(context)>-1"  (click)="goTo('dashboard')">
+        <ion-item [class.selected]="['select-car', 'plan', 'dashboard', 'checkout', 'confirm'].indexOf(context)>-1"
+          (click)="goTo('dashboard')">
           <ion-icon name="car-sport-outline"></ion-icon> Add New Car
         </ion-item>
         <ion-item [class.selected]="context==='profile'" (click)="goTo('profile')">
@@ -137,7 +148,7 @@
     </ion-fab-button>
   </ion-fab> -->
   <ion-router-outlet id="my-content" [class.push-down]="!isMobile" (activate)='onActivate($event)'
-    (deactivate)='onDeactivate($event)'  animated="true"></ion-router-outlet>
+    (deactivate)='onDeactivate($event)' animated="true"></ion-router-outlet>
 
 
 

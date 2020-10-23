@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.demo.pg.cap.ng",
+  "appId": "com.ccube.customer",
   "appName": "CCube",
   "bundledWebRuntime": false,
   "npmClient": "npm",
