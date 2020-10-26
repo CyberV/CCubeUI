@@ -38,7 +38,11 @@ export class PlanCardComponent implements OnInit {
     ]
    }
 
-  ngOnInit() {
+   ngOnInit(){
+
+   }
+
+  ngOnChanges(changes) {
 
     if (this.plan && this.features && this.bodyType) {
         this.missingFeatures = JSON.parse(JSON.stringify(this.features));

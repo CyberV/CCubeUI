@@ -4,7 +4,7 @@
 </div>
 
 <div class="row">
-  <div class="col-8">
+  <div class="col-8 --no-padding-right">
       <div class="otp-input">
           <input *ngFor="let i of arr; let indx = index" 
             [class]="'otp-'+indx" 
@@ -18,7 +18,7 @@
             
         </div>
   </div>
-  <div class="col-4">
+  <div class="col-4 --no-padding">
      <span class="resend" (click)="resendOtp()">Resend OTP</span> 
   </div>
 </div>

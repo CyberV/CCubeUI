@@ -6,7 +6,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-6">
-                Customer Name :
+                Customer Name
               </div>
               <div class="col-6">
                 {{details.userName}}
@@ -16,7 +16,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-6">
-                  Car Registration Number : 
+                  Car Registration Number
               </div>
               <div class="col-6">
                   {{details.car.regNo | uppercase}}
@@ -26,7 +26,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-6">
-                Maker :
+                Maker
               </div>
               <div class="col-6">
                   {{details.car.maker}} 
@@ -36,7 +36,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-6">
-                  Model : 
+                  Model
               </div>
               <div class="col-6">
                 {{details.car.model}}
@@ -46,13 +46,23 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-6">
-                  Selected Plan :
+                  Selected Plan
               </div>
               <div class="col-6">
                   {{details.plan.name}}
               </div>
             </div>
           </li>
+          <li *ngIf="details.plan.forRenew" class="list-group-item">
+              <div class="row">
+                <div class="col-6">
+                    Period
+                </div>
+                <div class="col-6">
+                    {{details.plan.period}}
+                </div>
+              </div>
+            </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-6">

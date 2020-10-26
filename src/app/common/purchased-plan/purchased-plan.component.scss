@@ -21,6 +21,9 @@
     background-color: $primary-color;
   }
   
+  .car-details-container {
+    height: 160px;
+  }
 
   .tabs-container {
     mat-expansion-panel-header {
@@ -50,7 +53,11 @@
     span {
       display: block;
     }
-    .plan-comparison-link, .plan-name {
+
+    .renew-link {
+      margin-bottom: 1em;
+    }
+    .plan-comparison-link,.renew-link, .plan-name {
       color: $secondary-color;
       display: inline-block;
       text-transform: uppercase;

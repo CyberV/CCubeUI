@@ -7,11 +7,11 @@
               class="logo " src="./assets/whitell.png" alt="CCubeLogo" border="0" />
           </span><br />
 
-          <typeaway skipAnimation="true" class="title1" *ngIf="startShow" text="Complete Car Care"
+          <heading text="Complete Car Care" align="center" size="30" color="#00a4a7" capitalize="true"></heading>
+          <heading text="At your Doorstep!" align="center" color="#ec6b1e" slim="true"></heading>
+          <!-- <typeaway skipAnimation="true" class="title1" *ngIf="startShow" text="Complete Car Care"
             (finished)="doorstep = true;"></typeaway>
-          <br />
-          <typeaway skipAnimation="true" class="title2" *ngIf="startShow" text="At your doorstep."
-            (finished)="daily = true;"></typeaway><br /><br/><br/>
+          <br /> -->
           <!-- <div   *ngIf="knowmore" class="row ctaRow ">
               <p>
                 Welcome to the new world and enjoy the ultimate car cleaning experience.
@@ -32,7 +32,6 @@
           </div>
 
         <div  class="section" id="s2" name="page2">
-          <p class="section-heading"><strong>KEY FEATURES</strong></p>
           <carousel></carousel>
           <!-- <ion-slides [options]="slideOpts">
             <ion-slide *ngFor="let feature of featureList; let i = index">

@@ -3,11 +3,11 @@ import plansList from 'assets/planslist.json';
 import { Platform, MenuController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
-import M from 'materialize-css';
 import { PlanTableComponent } from 'app/common/plan-table/plan-table.component';
 import { Router } from '@angular/router';
 import { ModalPage } from 'app/modal/modal.page';
 import { CarService } from 'app/services/car.service';
+import { PlanService } from 'app/services/plan.service';
 
 declare var $: any;
 
@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
     private platform: Platform,
     public modalController: ModalController,
     private menu: MenuController,
+    private planService:PlanService,
     private router: Router
   ) {
     this.currentCar = {};
@@ -90,14 +91,9 @@ export class DashboardComponent implements OnInit {
 
   async ngAfterViewInit() {
 
-    sessionStorage.setItem('selectedPlan', null);
+    this.planService.clear();
 
     this.isPlanSelected = false;
-
-
-    // if (this.isCarSelected) {
-    //   await this.openModal();
-    // }
     
 
   }
@@ -136,7 +132,7 @@ export class DashboardComponent implements OnInit {
   buyPlan(payload) {
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
-    sessionStorage.setItem('selectedPlan', JSON.stringify(this.selectedPlan));
+    this.planService.changePlan(this.selectedPlan);
     this.goToCheckout();
 
   }
@@ -144,7 +140,7 @@ export class DashboardComponent implements OnInit {
   onShowDetails(payload) {
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
-    sessionStorage.setItem('selectedPlan', JSON.stringify(this.selectedPlan));
+    this.planService.changePlan(this.selectedPlan);
     this.router.navigate(['/dashboard/plan']);
 
   }

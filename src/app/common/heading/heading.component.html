@@ -6,8 +6,18 @@
             [style.fontSize]="size + 'px'"
             [style.textAlign]="align"
             [class.outline]="outline"
+            [class.slim]="slim"
             > 
-            {{text}} 
+            <span *ngIf="formattedText" class="capitalized">
+                <span *ngFor="let word of formattedText" class="word">
+                    <span *ngFor="let char of word" class="char">
+                        {{char}}
+                    </span>
+                </span>
+            </span>
+            <span *ngIf="!formattedText">
+                {{text}} 
+            </span>
             <span *ngIf="showClose" class="close" (click)="dismiss()">X</span>
         </h1>   
         

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
 
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform, MenuController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from './header.service';
 import { UserService } from './services/user.service';
@@ -10,7 +10,8 @@ import { CarService } from './services/car.service';
 //import { FCM } from '@ionic-native/fcm/ngx';
 //import {FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic'
 //import { FCM } from '../../plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
-import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic';
+
+import { LoginService } from './login/login.service';
 
 declare var $;
 @Component({
@@ -41,8 +42,12 @@ export class AppComponent {
      private menu:MenuController,
      private userService:UserService,
      private carService:CarService,
+     public toastController: ToastController,
+     private loginService:LoginService
      ) {
+
     this.initializeApp();
+
     this.hideBackButton = false;
     this.headerType = '';
     
@@ -56,22 +61,6 @@ export class AppComponent {
 
     this.route.url.subscribe( (d)=> {
       // console.log('route', this.route.snapshot['_routerState'].url);
-    })
-
-    this.platform.ready().then( (data) => {
-      FCM.getToken().then((res:any) => {
-        console.log('token', res);
-        //alert('My token'+ JSON.stringify(res));
-      });
-  
-      FCM.onNotification().subscribe(data => {
-        console.log('Notif Received', data);
-        if (data.wasTapped) {
-          //alert('Received in background ' +  JSON.stringify(data));
-        } else {
-          //alert('Received in foreground' + JSON.stringify(data));
-        }
-      });
     })
 
     
@@ -97,6 +86,14 @@ export class AppComponent {
     })
   }
 
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   goBack(){
     window.history.back();
   }
@@ -119,23 +116,6 @@ export class AppComponent {
   }
 
   onActivate(comp) {
-
-    
-    this.platform.ready().then( (data) => {
-      FCM.getToken().then((res:any) => {
-        console.log('Token', res);
-        //alert('My token'+ JSON.stringify(res));
-      });
-  
-      FCM.onNotification().subscribe(data => {
-        console.log(data);
-        if (data.wasTapped) {
-          //alert('Received in background ' +  JSON.stringify(data));
-        } else {
-          //alert('Received in foreground' + JSON.stringify(data));
-        }
-      });
-    })
 
     this.context = comp.context;
 

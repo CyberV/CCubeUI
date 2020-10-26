@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarService } from 'app/services/car.service';
+import { Platform, ToastController } from '@ionic/angular';
+import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic';
+import { LoginService } from 'app/login/login.service';
+import { PlanService } from 'app/services/plan.service';
 
 @Component({
   selector: 'app-service-page',
@@ -25,6 +29,10 @@ export class ServicePageComponent implements OnInit {
 
   constructor(
     private router:Router,
+    private platform:Platform,
+    private loginService: LoginService,
+    private planService:PlanService,
+    public toastController:ToastController,
     private carService:CarService
   ) { 
     this.payments = [];
@@ -60,6 +68,38 @@ export class ServicePageComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.platform.ready().then( (data) => {
+      if (FCM &&  FCM.getToken()) {
+        FCM.getToken().then((res:any) => {
+          this.loginService.updateToken(res).subscribe((response:any) => {
+            if (!response.success) {
+              this.presentToast(response.errorMsg || JSON.stringify(response.error));
+            }
+          });
+        });
+
+        FCM.onTokenRefresh().subscribe((res:any) => {
+          this.loginService.updateToken(res).subscribe((response:any) => {
+            if (!response.success) {
+              this.presentToast(response.errorMsg || JSON.stringify(response.error));
+            }
+          });
+        })
+    
+        FCM.onNotification().subscribe(data => {
+          this.presentToast(JSON.stringify(data));
+        });
+      }
+
+    })
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
   addCar() {
@@ -67,6 +107,15 @@ export class ServicePageComponent implements OnInit {
     this.router.navigate(['/dashboard/select-car'])
   }
 
+  handleRenewPlan(data) {
+    let {plan,car, lastDate, payment} = data;
+
+    sessionStorage.setItem('currentPayment', JSON.stringify(payment));
+    this.carService.changeCar(car);
+    this.planService.renewPlan(plan, lastDate);
+
+    this.router.navigate(['/dashboard/checkout']);
+  }
 
 
 }

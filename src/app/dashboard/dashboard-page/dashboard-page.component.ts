@@ -4,6 +4,7 @@ import { CarService } from 'app/services/car.service';
 import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
+import { PlanService } from 'app/services/plan.service';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
@@ -15,24 +16,25 @@ export class DashboardPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private carService: CarService,
+    private planService: PlanService,
     private headerService: HeaderService,
-    private loginService:LoginService,
-    private userService:UserService
+    private loginService: LoginService,
+    private userService: UserService
   ) {
 
     this.ready = false;
     this.payments = [];
-   }
+  }
 
   context: string;
 
   selectedPlan: any;
   selectedCar: any;
-  currentUser:any;
+  currentUser: any;
 
-  ready:boolean;
+  ready: boolean;
 
-  payments:any;
+  payments: any;
 
   ngOnInit() {
     this.route.params.subscribe((rdata) => {
@@ -47,7 +49,7 @@ export class DashboardPageComponent implements OnInit {
 
     this.currentUser = this.userService.getCurrentUser();
 
-    this.selectedPlan = sessionStorage.getItem('selectedPlan') ? JSON.parse(sessionStorage.getItem('selectedPlan')) : null;
+    this.selectedPlan = this.planService.getSelectedPlan();
     this.selectedCar = this.carService.getCurrentCar();
 
     let isLoggedIn = this.userService.isLoggedIn();
@@ -76,7 +78,7 @@ export class DashboardPageComponent implements OnInit {
       return;
     }
 
-    switch(this.context) {
+    switch (this.context) {
       case 'dashboard': {
         this.headerService.setText('Choose Your Plan');
         break;
@@ -92,23 +94,27 @@ export class DashboardPageComponent implements OnInit {
       case 'service': {
         this.headerService.setView('service', {});
 
-        this.loginService.getPayments(this.currentUser.phone).subscribe((res:any) => {
+        let payment = sessionStorage.getItem('currentPayments');
+
+        // if (payment && payment != "null" && payment != "[]") {
+        //   payment = JSON.parse(payment);
+        //   this.payments = payment;
+        //   this.ready = true;
+        // } else {
+        this.loginService.getPayments(this.currentUser.phone).subscribe((res: any) => {
           if (res.success) {
+            this.payments = res.data ? res.data : [];
 
-            if (res.data.length) {
-              this.payments = res.data;
-            this.ready = true;
-            } else {
-              this.router.navigate(['/dashboard/select-car']);
-              return;
+            if (this.payments.length) {
+              sessionStorage.setItem('allPayments', JSON.stringify(this.payments));
+              this.payments = this.parsePayments(this.payments);
             }
+            sessionStorage.setItem('currentPayments', JSON.stringify(this.payments));
+            this.ready = true;
 
-            // if (this.payments.length > 1) {
-            //   this.payments = [this.payments[this.payments.length-1]];
-            // }
           }
         })
-
+        //}
         return;
       }
       default: this.router.navigate(['/dashboard']);
@@ -116,6 +122,62 @@ export class DashboardPageComponent implements OnInit {
     }
 
     this.ready = true;
+  }
+
+  parsePayments(payments) {
+    let data = [];
+    let p, f;
+    for (let i = 0; i < payments.length; i++) {
+      p = payments[i];
+      f = data.filter((m) => m.regNo == p.car.regNo);
+      if (f.length) {
+        data[data.indexOf(f[0])].plans.push({
+          startDate: p.startDate,
+          expiresOn: p.expiresOn,
+          planName: p.plan.name
+        });
+      } else {
+        data.push({
+          regNo: p.car.regNo,
+          plans: [{
+            startDate: p.startDate,
+            expiresOn: p.expiresOn,
+            planName: p.plan.name
+          }]
+        });
+      }
+    }
+
+    let finalData = [];
+
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].plans.length > 1) {
+
+        let first,second, primary;
+        primary = payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[0].startDate == d.startDate)[0];
+         
+        for (let j=0;j< data[i].plans.length -1 ;j++) {
+
+          first = payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[j].startDate == d.startDate)[0];
+          second = payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[j+1].startDate == d.startDate)[0];
+  
+          if (first.plan.name == second.plan.name) {
+            primary.expiresOn = second.expiresOn;
+          } else {
+            primary.nextPlan = {
+              ...second
+            };
+          }
+        }
+
+        finalData.push(primary);
+
+      } else {
+        finalData.push(payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[0].startDate == d.startDate)[0]);
+      }
+    }
+
+    return finalData;
   }
 
   goToCheckout() {

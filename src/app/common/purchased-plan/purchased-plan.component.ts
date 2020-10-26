@@ -10,13 +10,16 @@ export class PurchasedPlanComponent implements OnInit {
 
   @Input() car:any;
   @Input() plan:any;
+  @Input() payment:any;
 
   @Output() compare = new EventEmitter();
   @Output() changeCar = new EventEmitter();
+  @Output() renewPlan = new EventEmitter();
 
   showLink: boolean = false;
 
   expiryDate:string;
+  nextPlanStartDate:string;
 
   constructor() { }
 
@@ -28,11 +31,33 @@ export class PurchasedPlanComponent implements OnInit {
     this.changeCar.emit();
   }
 
+  sendRenewPlan() {
+    this.renewPlan.emit({
+      plan: this.plan,
+      car: this.car,
+      payment: this.payment,
+      lastDate: new Date(this.payment.expiresOn)
+    });
+
+  }
+
   ngOnInit() {
-    this.expiryDate = new Date(+(new Date()) + 2592000000).toString().split(' ').slice(1,3).join(' ');
+    this.expiryDate = new Date(this.payment.expiresOn).toString().split(' ').slice(1,3).join(' ');
 
     let d = new Date();
-    d.getMonth
+  }
+
+  ngOnChanges(changes) {
+
+    if (changes.payment && this.payment) {
+      this.expiryDate = new Date(this.payment.expiresOn).toString().split(' ').slice(1,3).join(' ');
+
+      if (this.payment.nextPlan) {
+        this.nextPlanStartDate = new Date(this.payment.nextPlan.startDate).toString().split(' ').slice(1,3).join(' ');
+
+      }
+    }
+
   }
 
 }

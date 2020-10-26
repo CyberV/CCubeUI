@@ -8,6 +8,7 @@ import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { LoginService } from 'app/login/login.service';
+import { PlanService } from 'app/services/plan.service';
 
 @Component({
   selector: 'app-checkout',
@@ -32,10 +33,11 @@ export class CheckoutComponent implements OnInit {
   step3Ready: boolean;
   verificationComplete: boolean;
 
-  currentUser:any;
+  currentUser: any;
   currentLocation: any;
-  officeTime:string;
-  loading:boolean;
+  officeTime: string;
+  loading: boolean;
+  forRenew: boolean;
 
 
   page: string;
@@ -46,6 +48,7 @@ export class CheckoutComponent implements OnInit {
     private carService: CarService,
     private userService: UserService,
     private modalController: ModalController,
+    private planService: PlanService,
     private loginService: LoginService,
     private headerService: HeaderService,
     private checkoutService: CheckoutService
@@ -59,6 +62,7 @@ export class CheckoutComponent implements OnInit {
     this.updatedCarDetails = {};
     this.resetCarForm = true;
     this.verificationComplete = false;
+    this.forRenew = false;
 
     this.errors = {
       car: false,
@@ -95,7 +99,13 @@ export class CheckoutComponent implements OnInit {
   }
 
   confirmCheckout() {
-    this.router.navigate(['/dashboard/checkout/confirm']);
+
+    if (this.forRenew) {
+      this.showConfirmation();
+    } else {
+      this.router.navigate(['/dashboard/checkout/confirm']);
+
+    }
   }
 
   async showConfirmation() {
@@ -103,14 +113,14 @@ export class CheckoutComponent implements OnInit {
     let payload = {
       userName: this.currentUser.name,
       car: this.selectedCar,
-      plan: this.selectedPlan
+      plan: this.planService.getSelectedPlan()
     };
     const modal = await this.modalController.create({
       component: CheckoutConfirmationComponent,
       cssClass: 'checkout-confirmation-modal',
       componentProps: {
         details: payload,
-        bodyType: 'sedan',
+        bodyType: payload.car.bodyType,
         showClose: true
       }
     });
@@ -137,6 +147,13 @@ export class CheckoutComponent implements OnInit {
   }
 
   refreshCarAndPlans() {
+    this.currentUser = this.userService.getCurrentUser();
+    let loc = sessionStorage.getItem('userLocation');
+
+    if (loc && loc!= 'null') {
+      this.currentLocation = loc;
+    }
+
     let car = this.carService.getCurrentCar();
 
     if (car) {
@@ -151,13 +168,17 @@ export class CheckoutComponent implements OnInit {
       this.router.navigate(['/dashboard/select-car']);
     }
 
-    let plan = sessionStorage.getItem('selectedPlan');
+    let plan = this.planService.getSelectedPlan();
 
-    if (!plan || plan == "null" || !plan.length) {
+    if (!plan) {
       this.errors.plan = true;
     } else {
-      this.selectedPlan = JSON.parse(plan);
+      this.selectedPlan = plan;
+
+      this.forRenew = !!this.selectedPlan.forRenew;
     }
+
+
   }
 
   changeCar() {
@@ -178,7 +199,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   saveLocation(locationData) {
-    
+
     if (locationData) {
       this.currentLocation = locationData;
       sessionStorage.setItem('userLocation', JSON.stringify(locationData));
@@ -192,8 +213,12 @@ export class CheckoutComponent implements OnInit {
 
   changePlan() {
 
-    sessionStorage.setItem('selectedPlan', null);
+    this.planService.clear();
     this.router.navigate(['/dashboard']);
+  }
+
+  ionViewWillLeave() {
+    this.checkoutService.events().unsubscribe();
   }
 
   ionViewWillEnter() {
@@ -202,30 +227,54 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutService.events().subscribe((evt) => {
       if (evt.success) {
-        let payload = {
+        let updatedPlan = this.planService.getSelectedPlan();
+        let payload :any = {
           phone: this.currentUser.phone,
-          plan: this.selectedPlan,
+          plan: updatedPlan,
           car: this.selectedCar,
           location: this.currentLocation,
           officeTime: this.officeTime,
-          startDate: +(new Date())
+          startDate: +(new Date()),
+          lastDate: updatedPlan.lastDate
         };
 
-        this.loginService.addPayment(payload).subscribe( (d:any) => {
+        if (this.forRenew) {
+          payload.forRenew = true;
+          payload.lastDate = updatedPlan.lastDate;
+          this.loginService.renewPayment(payload).subscribe((d: any) => {
+            console.log('Renew payment response', d);
+            if (d.success) {
+              sessionStorage.setItem('currentPayment', JSON.stringify(payload));
+              this.router.navigate(['/dashboard/thanks']);
+            } else {
+              alert(
+                'Please try again!'
+              );
+            }
+  
+          })
+
+        } else {
+          this.loginService.addPayment(payload).subscribe((d: any) => {
           console.log('add payment response', d);
           if (d.success) {
             sessionStorage.setItem('currentPayment', JSON.stringify(payload));
             this.router.navigate(['/dashboard/thanks']);
           } else {
-
+            alert(
+              'Please try again!'
+            );
           }
-          
+
         })
+        }
+
         
+
       } else {
-          alert(
-            'Please try again!'
-          );
+        alert(
+          'Please try again!'
+        );
       }
     });
 
@@ -277,7 +326,7 @@ export class CheckoutComponent implements OnInit {
         ...this.selectedCar,
         regNo
       }
-      
+
       this.carService.changeCar(xx);
       this.selectedCar = this.carService.getCurrentCar();
 

@@ -8,6 +8,7 @@ ion-app {
 ion-title {
     height: 56px;
     font-size: 125%;
+    padding: 0 10px 10px;
 
     .header-text {
 
@@ -44,6 +45,7 @@ ion-title {
     top: 13px;
     float: left!important;
     left: 15px;
+    z-index: 1;
     position: absolute;
 }
 

@@ -8,11 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SpinnerComponent implements OnInit {
 
   @Input() color:string;
+  @Input() slim:boolean;
 
   classMap:any;
 
   constructor() {
     this.color = '';
+    this.slim = false;
 
 
    }

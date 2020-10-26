@@ -37,6 +37,8 @@ import { PlanSliderComponent } from './plan-slider/plan-slider.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper'
 import {  MatCardModule,} from '@angular/material/card';
+
+import {MatCheckboxModule} from '@angular/material/checkbox'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
@@ -124,6 +126,7 @@ import { DragListComponent } from './drag-list/drag-list.component';
     MatAutocompleteModule,
     NgxMaterialTimepickerModule,
     FormsModule,
+    MatCheckboxModule,
     
     TooltipModule,
     RouterModule

@@ -17,9 +17,19 @@
           </span>
           <span>Expires On {{expiryDate}}</span>
 
-          <div class="plan-comparison-link">
+          <ng-container *ngIf="payment.nextPlan">
+              <span>
+                  <span class="plan-name">{{payment.nextPlan.plan.name}}</span> Plan
+                  <span>Starting On {{nextPlanStartDate}}</span>
+                </span>
+                
+          </ng-container>
 
+          <br/>
+          <div (click)="sendRenewPlan()" class="renew-link">
+            <span>Renew Plan</span>
           </div>
+          <br/>
           <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
         </div>
       </div>

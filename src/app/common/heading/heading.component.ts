@@ -13,8 +13,22 @@ export class HeadingComponent implements OnInit {
   @Input() size:number;
   @Input() align:string;
   
+  
   @Input() outline:boolean;
-@Input() showClose: boolean;
+  @Input() showClose: boolean;
+  @Input() slim:boolean
+  @Input() capitalize:boolean;
+
+  get formattedText() {
+    if (this.capitalize) {
+      let words:any =  this.text.split(' ');
+      for (let i=0;i<words.length;i++) {
+        words[i] = words[i].toString().split('');
+      }
+      return words;
+    }
+    return null;
+  }
 
 
   constructor(
@@ -26,6 +40,8 @@ export class HeadingComponent implements OnInit {
     this.size= 20;
     this.outline = false;
     this.showClose = false;
+    this.capitalize = false;
+    this.slim = false;
    }
 
   ngOnInit() {}

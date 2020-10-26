@@ -40,7 +40,11 @@
 
   <div class="row car-info-container">
     <div class="col-12">
-      <purchased-plan *ngIf="selectedPayment" [car]="selectedCar" [plan]="selectedPayment.plan"></purchased-plan>
+      <ng-container *ngIf="!loading &&  payments.length == 0">
+        <heading text="Looks like you haven't registered a car yet." align="center"></heading>
+        <cta text="Add Car" (action)="addCar()"></cta>
+      </ng-container>
+      <purchased-plan *ngIf="selectedPayment" (renewPlan)="handleRenewPlan($event)" [payment]="selectedPayment" [car]="selectedCar" [plan]="selectedPayment.plan"></purchased-plan>
 
     </div>
     <div class="col-6">
@@ -59,4 +63,4 @@
 
 
 
-<addon-slider></addon-slider>
+<addon-slider *ngIf="!loading && payments.length > 0"></addon-slider>

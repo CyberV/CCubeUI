@@ -23,6 +23,28 @@
           <span Rs>{{plan.price}} </span>
         </div>
       </div>
+      <ng-container *ngIf="plan.forRenew">
+        <br/>
+        <div  class="row content-row">
+          <div class="col-6">
+              <ion-icon name="calendar-outline" class="vertical-center-text"></ion-icon> <span  class="vertical-center-text"> {{plan.period}}</span> 
+          </div>
+          <div class="col-6">
+              <ion-icon name="car-sport-outline" class="vertical-center-text"></ion-icon> <span  class="vertical-center-text">{{car.regNo | uppercase}} </span> 
+          </div>
+        </div>
+        <br/>
+        <div class="row" *ngIf="upgradePrice > 0">
+          <div class="col-12">
+              <mat-checkbox 
+                [checked]="upgradeSelected"
+                (change)="toggleUpgrade()">
+                Upgrade your Plan to Elite for just  <span Rs> {{upgradePrice}}</span>!
+              </mat-checkbox>
+          </div>
+        </div>
+      </ng-container>
+
     </div>
     <div>
       <cc-accordion title="Plan Details" [compact]="true">
@@ -32,9 +54,9 @@
   </div>
   <div class="bottom container">
     <div class="row">
-        <div class="col-8">Net Payable</div>
-        <div class="col-4"> <span> &#8377; {{plan.price}}</span></div>
-        <div class="col-8 tax-row">(Inclusive of all taxes)</div>
-      </div>
+      <div class="col-8">Net Payable</div>
+      <div class="col-4"> <span> &#8377; {{plan.price}}</span></div>
+      <div class="col-8 tax-row">(Inclusive of all taxes)</div>
+    </div>
   </div>
 </mat-card>

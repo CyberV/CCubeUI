@@ -43,6 +43,11 @@ export class CheckoutService {
   }
 
   events = function () {
+
+    if (this.checkoutEmitter.closed) {
+      this.checkoutEmitter = new Subject();
+    }
+    debugger;
     return this.checkoutEmitter;
   }
 

@@ -8,6 +8,27 @@
     border-radius: 25px;
 }
 
+.slim {
+    margin: 0;
+}
+
+.capitalized {
+
+    .char {
+
+                display: inline-block;  
+                &:first-of-type {
+                    color: $secondary-color;
+                }
+            }  
+    .word {
+        padding-right: 5px;
+        
+    }
+    
+    
+}
+
 .close {
     color: $secondary-color;
     float: right;
