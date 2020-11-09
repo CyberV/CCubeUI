@@ -7,10 +7,17 @@ import plansList from 'assets/planslist.json';
 })
 export class PlanService {
 
-  public AllPlans = plansList.plans;
-  public AllFeatures = plansList.features;
+  public get AllPlans() { 
+    return JSON.parse(JSON.stringify(plansList.plans));
+  }
+  
+  public get AllFeatures() { 
+    return JSON.parse(JSON.stringify(plansList.features));
+  }
 
-  private UpgradePlan = this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0];
+  get UpgradePlan() {
+    return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0]));
+  } 
 
 
   constructor(
@@ -19,6 +26,44 @@ export class PlanService {
 
   clear() {
     sessionStorage.setItem('selectedPlan', null);
+  }
+
+  private generateComparisonPlan(currentPlan, targetPlan) {
+    let features = JSON.parse(JSON.stringify(this.AllFeatures));
+    let index=-1;
+    currentPlan.features.forEach(featureCode => {
+      index = targetPlan.features.indexOf(featureCode);
+      if (index > -1) {
+        targetPlan.features.splice(index, 1);
+      }
+    });
+
+    targetPlan.price = this.getUpdatePrice(currentPlan.name, targetPlan.name);
+
+    return targetPlan;
+
+  }
+
+  getUpgradePlans(planName) {
+    let currentPlan = this.getPlanByName(planName);
+    let targetPlan = this.UpgradePlan;
+
+    switch (currentPlan.name) {
+      case 'Standard': {
+        return [
+          this.generateComparisonPlan(currentPlan, targetPlan),
+          this.generateComparisonPlan(currentPlan, this.getPlanByName('Deluxe'))
+        ];
+
+      }
+      case 'Deluxe': {
+        return [this.generateComparisonPlan(currentPlan, targetPlan)];
+      }
+      case 'Elite': {
+        return [];
+      }
+      default: return [];
+    }
   }
 
   getAllPlans() {

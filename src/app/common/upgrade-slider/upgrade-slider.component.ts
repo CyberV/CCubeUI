@@ -9,9 +9,8 @@ import { PlanService } from 'app/services/plan.service';
 })
 export class UpgradeSliderComponent implements OnInit {
 
-  plans;
-  @Input() purchasedPlan;
-  @Input() bodyType;
+
+  @Input() plans;
 
   
   @Output() upgradeNow = new EventEmitter();
@@ -31,13 +30,12 @@ export class UpgradeSliderComponent implements OnInit {
 
     this.plans = [];
     this.planList = [];
-    this.bodyType = "sedan";
-    this.purchasedPlan = {};
-    this.allFeatures = 
+    //this.allFeatures = 
 
     this.colors = [
       '#59EFE8',
-      '#FFEB3B'
+      '#FFEB3B',
+      'yo'
     ]
     
     this.slideOpts = {
@@ -51,20 +49,14 @@ export class UpgradeSliderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.plans = this.planService.getAllPlans();
     this.allFeatures = this.planService.AllFeatures;
-    if (this.plans) {
-      this.planList = this.plans;
-      this.planList.pop();
-    } 
-
   }
 
   ngOnChanges(changes) {
 
-    if (changes.purchasedPlan) {
-      
-    }
+    if (changes.plans && this.plans) {
+      this.planList = this.plans;
+    } 
   }
 
   onBuy(payload) {

@@ -18,6 +18,26 @@
     right: 0px;
 }
 
+.tabs-container {
+    mat-expansion-panel-header {
+
+      ion-icon{
+        font-size: 25px;
+      }
+
+      .header-text {
+        margin-top: 5px;
+        margin-left: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      &:hover {
+        background-color: inherit !important;
+      }
+    }
+  }
+
 .car-slider-container {
   
 

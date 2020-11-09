@@ -103,7 +103,12 @@ export class SelectSocietyComponent implements OnInit {
       this.society = soc.name;
     }
     
-    this.enterKey.emit();
+    if (this.society != "") {
+      this.enterKey.emit();
+    } else {
+      this.showUnlisted();
+    }
+    
   }
 
 

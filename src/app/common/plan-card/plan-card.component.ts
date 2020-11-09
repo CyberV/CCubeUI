@@ -53,32 +53,24 @@ export class PlanCardComponent implements OnInit {
 
   ngOnChanges(changes) {
 
-    if (this.plan && this.features && this.bodyType) {
-        this.missingFeatures = JSON.parse(JSON.stringify(this.features));
-        this.plan.features.forEach(feature => {
-          this.currentFeatures.push(this.features.filter( (ftr) => ftr.code === feature)[0]);
-          let last = this.currentFeatures[this.currentFeatures.length - 1];
-          this.missingFeatures = this.missingFeatures.filter ( (ftr) => ftr.code !== last.code);
-        });
-        this.plan.price = this.plan.pricing[this.bodyType];
-
-        
+    if (!this.features) {
+      this.features = this.planService.AllFeatures
     }
 
-    if (this.forUpgrade) {
-      switch(this.plan.name) {
-        case 'Standard': {
-          this.plan.name = 'Elite';
-          this.upgradePrice = this.planService.getUpdatePrice(this.purchasedPlan.name, 'Elite');
-          break;
+    if (this.plan && this.plan.features) {
+        //this.missingFeatures = JSON.parse(JSON.stringify(this.features));
+        this.plan.features.forEach(feature => {
+          this.currentFeatures.push(this.features.filter( (ftr) => ftr.code === feature)[0]);
+          //let last = this.currentFeatures[this.currentFeatures.length - 1];
+          //this.missingFeatures = this.missingFeatures.filter ( (ftr) => ftr.code !== last.code);
+        });
+
+        if (this.bodyType && !this.forUpgrade) {
+          this.plan.price = this.plan.pricing[this.bodyType];
         }
-        case 'Deluxe': {
-          this.upgradePrice = this.planService.getUpdatePrice(this.purchasedPlan.name, 'Deluxe');
-          break;
-        }
-        default: break;
-      }
-      
+        
+
+        
     }
 
   }

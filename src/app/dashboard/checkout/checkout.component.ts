@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CheckoutService } from 'app/services/checkout.service';
 import { CarService } from 'app/services/car.service';
@@ -8,6 +8,7 @@ import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
+import { AccordionComponent } from 'app/common/accordion/accordion.component';
 
 @Component({
   selector: 'app-checkout',
@@ -41,6 +42,10 @@ export class CheckoutComponent implements OnInit {
 
   page: string;
 
+  @ViewChildren('drawerCar') drawerCar: QueryList<AccordionComponent>;
+  @ViewChildren('drawerLocation') drawerLocation: QueryList<AccordionComponent>;
+  @ViewChildren('drawerTime') drawerTime: QueryList<AccordionComponent>;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -62,6 +67,7 @@ export class CheckoutComponent implements OnInit {
     this.resetCarForm = true;
     this.verificationComplete = false;
     this.forRenew = false;
+    this.selectedCar = null;
 
 
     this.errors = {
@@ -71,7 +77,7 @@ export class CheckoutComponent implements OnInit {
 
     this.currentUser = {};
     this.currentLocation = {};
-    this.officeTime = "";
+    this.officeTime = "10:00 AM";
 
     this.ready = false;
 
@@ -80,7 +86,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refreshCarAndPlans();
+    //this.refreshCarAndPlans();
 
     this.route.params.subscribe((rdata) => {
       this.context = this.route.snapshot.routeConfig.path.toString().replace("checkout/", "");
@@ -167,6 +173,14 @@ export class CheckoutComponent implements OnInit {
         this.carIdentified = true;
         this.carMismatch = false;
         this.step2Ready = true;
+        setTimeout(()=>{
+          this.drawerLocation.first.toggle();
+        },1000);
+      } else {
+        setTimeout(()=>{
+          this.drawerCar.first.toggle();
+        },1000);
+        
       }
     } else {
       this.errors.car = true;
@@ -206,7 +220,12 @@ export class CheckoutComponent implements OnInit {
 
     setTimeout(() => {
       this.step3Ready = true;
-    }, 1000);
+      this.drawerLocation.first.toggle();
+
+      setTimeout(()=>{
+        this.drawerTime.first.toggle();
+      }, 500);
+    }, 200);
 
   }
 
@@ -220,9 +239,21 @@ export class CheckoutComponent implements OnInit {
     this.checkoutService.events().unsubscribe();
   }
 
-  ionViewWillEnter() {
-
+  ngAfterViewInit() {
     this.refreshCarAndPlans();
+  }
+
+  completeVerification() {
+    
+    this.verificationComplete = true;
+    this.drawerTime.first.toggle();
+
+    // setTimeout(()=>{
+    //   //this.showConfirmation();
+    // }, 1000);
+  }
+
+  ionViewWillEnter() {
 
     this.checkoutService.events().subscribe((evt) => {
       if (evt.success) {

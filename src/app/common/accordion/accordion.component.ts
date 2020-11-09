@@ -54,19 +54,19 @@ export class AccordionComponent implements OnInit {
   ngOnChanges(changes) {
     this.hasStep = !! (this.step && this.step.length);
     
-    if (changes.locked) {
+    // if (changes.locked) {
 
-      if (this.defaultOpen && !this.initDone) {
-        return;
-      }      
+    //   if (this.defaultOpen && !this.initDone) {
+    //     return;
+    //   }      
 
-      setTimeout(()=> {
-        this.toggle();
-      }, 200); 
+    //   setTimeout(()=> {
+    //     this.toggle();
+    //   }, 200); 
 
         
       
-    }
+    // }
   }
 
 }

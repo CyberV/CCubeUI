@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CarFormComponent } from './car-form/car-form.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AccordionModule } from 'ngx-accordion';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -25,6 +26,7 @@ import { ServicePageComponent } from './service-page/service-page.component';
   imports: [
     CommonModule,
     FormsModule,
+    MatExpansionModule,
     DragDropModule,
     IonicModule,
     AccordionModule,

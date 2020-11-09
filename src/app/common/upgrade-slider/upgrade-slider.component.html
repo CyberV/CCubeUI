@@ -3,12 +3,9 @@
     <ion-slides [options]="slideOpts">
         <ion-slide *ngFor="let plan of planList; let i = index;">
           <plan-card 
-              forUpgrade="true"
-              [purchasedPlan]="purchasedPlan"
               [plan]="plan" 
+              forUpgrade="true" 
               [color]="colors[i]"
-              [features]="allFeatures" 
-              [bodyType]="bodyType"
               (buyNow)="onBuy($event)"
               (showDetails)="onShowDetails($event)"
               ></plan-card>

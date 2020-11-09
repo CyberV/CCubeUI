@@ -7,7 +7,7 @@
 
 <ng-container *ngIf="!loading">
   <div class="row">
-    <div class="col-12 car-slider-container">
+    <div class="col-12 car-slider-container --no-padding">
 
 
       <ion-slides [options]="carSliderOptions">
@@ -44,8 +44,59 @@
         <heading text="Looks like you haven't registered a car yet." align="center"></heading>
         <cta text="Add Car" (action)="addCar()"></cta>
       </ng-container>
-      <purchased-plan *ngIf="selectedPayment" (renewPlan)="handleRenewPlan($event)" [payment]="selectedPayment" [car]="selectedCar" [plan]="selectedPayment.plan"></purchased-plan>
+      <ng-container  *ngIf="payments.length">
+          <ion-slides #planSlider [options]="planSliderOptions">
 
+              <ion-slide *ngFor="let payment of payments; let i = index" (mouseup)="demoEvent($event)">
+                <purchased-plan [style.width.%]="100" (renewPlan)="handleRenewPlan($event)" [payment]="payment.payments[0]" [car]="payment.payments[0].car" [plan]="payment.payments[0].plan"></purchased-plan>
+              </ion-slide>
+      
+            </ion-slides>
+      </ng-container>
+            <div class="row">
+              <div class="col-12 tabs-container">
+                  <mat-accordion >
+                      <mat-expansion-panel  class = "drop">
+                        <mat-expansion-panel-header class = "drop">
+                          <mat-panel-title>
+                              <ion-icon [style.color]="'#ffa169'" name="calendar-outline"></ion-icon> <span class="header-text">Schedule</span> 
+                          </mat-panel-title>
+                          <mat-panel-description class = "drop">
+                              
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <weekly-schedule></weekly-schedule>
+                       
+                        
+                      </mat-expansion-panel>
+                      <mat-expansion-panel  class = "drop">
+                      <mat-expansion-panel-header class = "drop">
+                          <mat-panel-title>
+                              <ion-icon name="document-text-outline"></ion-icon><span class="header-text"> Documents</span>
+                          </mat-panel-title>
+                          <mat-panel-description class = "drop">
+                              
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <document-uploader></document-uploader>
+                       
+                        
+                      </mat-expansion-panel>
+                      <mat-expansion-panel  class = "drop">
+                      <mat-expansion-panel-header class = "drop">
+                          <mat-panel-title>
+                              <ion-icon [style.color]="'#26de77'" name="save-outline"></ion-icon><span class="header-text"> History</span>
+                          </mat-panel-title>
+                          <mat-panel-description class = "drop">
+                              
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <p class="frequency">Service History Here</p>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+              </div>
+              </div>
+      
     </div>
     <div class="col-6">
       <!-- <drag-list> </drag-list> -->
@@ -62,12 +113,13 @@
 </ng-container>
 
 <ng-container *ngIf="!loading && payments.length > 0">
-  <upgrade-slider *ngIf="showUpgradeSlider()"
-    [purchasedPlan]="selectedPayment.plan" 
-    [bodyType]="selectedPayment.car.bodyType"
+  <upgrade-slider *ngIf="upgradePlans.length"
+    [plans]="upgradePlans"
     (upgradeNow)="handleUpgradePlan($event)"
     (showDetails)="showPlanDetails($event)"
     ></upgrade-slider>
+
+    <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
 
 <addon-slider ></addon-slider>
 </ng-container>

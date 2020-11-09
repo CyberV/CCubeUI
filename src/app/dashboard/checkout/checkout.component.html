@@ -8,7 +8,7 @@
 
             <!-- <selected-car *ngIf="selectedCar" [car]="selectedCar" slim></selected-car> -->
 
-            <checkout-details [plan]="selectedPlan" [car]="selectedCar">
+            <checkout-details *ngIf="selectedPlan && selectedCar" [plan]="selectedPlan" [car]="selectedCar">
 
             </checkout-details>
 
@@ -17,10 +17,10 @@
             <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
           </div>
 
-          <div *ngIf="context=='confirm'">
+          <div *ngIf="context=='confirm' && selectedCar">
             <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="changeCar()"></selected-car>
 
-            <cc-accordion title="Verify Your Car" [step]="'1'" [defaultOpen]="!step2Ready" [error]="carMismatch" [locked]="step2Ready">
+            <cc-accordion #drawerCar title="Verify Your Car" [step]="'1'" [error]="carMismatch" [locked]="step2Ready">
               <car-form [regNo]="selectedCar.regNo" *ngIf="resetCarForm" [verifyOnly]="true" (carReady)="verifyCar($event)"></car-form>
               <div *ngIf="carMismatch && carIdentified" class="alert alert-danger" role="alert">
                 Selected Car doesn't match with Registration Number!
@@ -44,17 +44,16 @@
               </div>
             </cc-accordion>
 
-            <cc-accordion title="Confirm Your Location" [step]="'2'" [disabled]="!step2Ready" [locked]="step3Ready">
+            <cc-accordion #drawerLocation title="Confirm Your Location" [step]="'2'" [disabled]="!step2Ready" [locked]="step3Ready">
               <confirm-location (confirm)="saveLocation($event)"></confirm-location>
             </cc-accordion>
 
             
-            <cc-accordion title="Confirm Your Timings" [step]="'3'" [disabled]="!step3Ready" [locked]="verificationComplete">
+            <cc-accordion #drawerTime title="Confirm Your Timings" [step]="'3'" [disabled]="!step3Ready" [locked]="verificationComplete">
               <heading text="What time do you leave for office ?"></heading>
-                <input name="officeTime" [(ngModel)]="officeTime" [ngxTimepicker]="picker" minutesGap="15" placeholder="ex. 08:00 AM">
+                <input name="officeTime" [(ngModel)]="officeTime" [ngxTimepicker]="picker" minutesGap="15" placeholder="ex. 10:00 AM">
                 <ngx-material-timepicker #picker  minutesGap="15"></ngx-material-timepicker>
-              {{officeTime}}
-              <cta text="Confirm" (action)="verificationComplete = true;"></cta>
+              <cta text="Confirm" (action)="completeVerification()"></cta>
             </cc-accordion>
   
 

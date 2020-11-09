@@ -44,7 +44,7 @@ export class PlanSliderComponent implements OnInit {
   ngOnInit() {
 
     if (this.plans) {
-      this.planList = this.plans.plans;
+      this.planList = this.plans.plans || this.plans;
     }
 
   }
