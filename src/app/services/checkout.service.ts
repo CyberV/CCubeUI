@@ -47,7 +47,6 @@ export class CheckoutService {
     if (this.checkoutEmitter.closed) {
       this.checkoutEmitter = new Subject();
     }
-    debugger;
     return this.checkoutEmitter;
   }
 

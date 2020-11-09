@@ -10,15 +10,25 @@ export class PlanService {
   public AllPlans = plansList.plans;
   public AllFeatures = plansList.features;
 
-  private UpgradePlan = this.AllPlans.filter( (plan) => plan.name.toLowerCase() == 'elite')[0];
+  private UpgradePlan = this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0];
 
 
   constructor(
-    private carService:CarService
+    private carService: CarService
   ) { }
 
   clear() {
     sessionStorage.setItem('selectedPlan', null);
+  }
+
+  getAllPlans() {
+    return JSON.parse(JSON.stringify(this.AllPlans));
+  }
+
+  getPlanByName(planName) {
+    let found: any = this.AllPlans.filter((plan) => plan.name.toLowerCase() == planName.toLowerCase());
+
+    return found.length ? found[0] : null;
   }
 
   getSelectedPlan() {
@@ -26,19 +36,22 @@ export class PlanService {
     return plan && plan != "null" ? JSON.parse(plan) : null;
   }
 
-  getUpdatePrice(planName) {
+  //planName : string => current plan name
+  //upgradeToPlan : string => planName of upgradePlan
+  getUpdatePrice(planName, upgradeToPlan = null) {
     let currentPlan;
 
     let car = this.carService.getCurrentCar();
+    let upgradePlan = upgradeToPlan ? this.getPlanByName(upgradeToPlan) || this.UpgradePlan : this.UpgradePlan;
 
-    let found :any = this.AllPlans.filter( (plan) => plan.name.toLowerCase() == planName.toLowerCase());
+    let found: any = this.AllPlans.filter((plan) => plan.name.toLowerCase() == planName.toLowerCase());
 
     if (found && found.length) {
       currentPlan = found[0];
 
       if (car) {
         currentPlan.price = +currentPlan.pricing[car.bodyType];
-        let upgradePrice = +this.UpgradePlan.pricing[car.bodyType];
+        let upgradePrice = +upgradePlan.pricing[car.bodyType];
 
         if (upgradePrice && currentPlan.price) {
           return upgradePrice - currentPlan.price;
@@ -50,7 +63,7 @@ export class PlanService {
 
   }
 
-  changePlanForCar(planName, car=null) {
+  changePlanForCar(planName, car = null) {
 
     let plan = this.getSelectedPlan();
 
@@ -58,11 +71,11 @@ export class PlanService {
       car = this.carService.getCurrentCar();
     }
 
-    if(!planName) {
+    if (!planName) {
       return;
     }
 
-    let found :any = this.AllPlans.filter( (plan) => plan.name.toLowerCase() == planName.toLowerCase());
+    let found: any = this.AllPlans.filter((plan) => plan.name.toLowerCase() == planName.toLowerCase());
 
     if (found && found.length) {
 
@@ -79,11 +92,11 @@ export class PlanService {
   }
 
   renewPlan(plan, lastDate) {
-    
+
     plan.forRenew = true;
     plan.lastDate = lastDate;
-  
-    plan.period = lastDate.toString().split(' ').slice(1,2).join(' ') + " - " + new Date(+(lastDate) + 2592000000).toString().split(' ').slice(1,2).join(' ') +" " + new Date(+(lastDate) + 2592000000).getFullYear();
+
+    plan.period = lastDate.toString().split(' ').slice(1, 2).join(' ') + " - " + new Date(+(lastDate) + 2592000000).toString().split(' ').slice(1, 2).join(' ') + " " + new Date(+(lastDate) + 2592000000).getFullYear();
 
     this.changePlan(plan);
 
@@ -91,5 +104,5 @@ export class PlanService {
 
   changePlan(plan) {
     sessionStorage.setItem('selectedPlan', JSON.stringify(plan));
-}
+  }
 }

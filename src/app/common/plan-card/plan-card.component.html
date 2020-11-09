@@ -5,14 +5,18 @@
 
   </div>
   <p class="card-text">
-      <span class="price" Rs (click)="onShowDetails()">{{ plan.pricing[bodyType] }}</span>
+      <span *ngIf="!forUpgrade"class="price" Rs (click)="onShowDetails()">{{ plan.pricing[bodyType] }}</span>
+      <span *ngIf="forUpgrade">
+        <span> Extra </span>
+        <span class="price" Rs > {{ upgradePrice }} <span class="permonth"> /month </span></span> 
+      </span>
       <br />
       <span></span>
     </p>
   <div class="card-body feature-list">
    
     <list limit="6">
-      <div class="row feature-row" *ngFor="let ftr of currentFeatures">
+      <div class="row feature-row" *ngFor="let ftr of forUpgrade ? missingFeatures: currentFeatures">
         <div class="col-1 text">
           <ion-icon slot="start" [style.color]="colors[ftr.weight - 1]" class="ion-color-yellow" name="star"></ion-icon>
         </div>
@@ -34,7 +38,7 @@
 
     <div class="row">
       <div class="col-12">
-        <cta text="Buy Now" (action)="onBuy()"></cta>
+        <cta [text]="forUpgrade ? 'Upgrade Now' : 'Buy Now'" (action)="onBuy()"></cta>
       </div>
     </div>
   </div>

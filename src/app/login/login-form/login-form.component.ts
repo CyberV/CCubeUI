@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { AuthService } from 'angularx-social-login';
 import { Platform } from '@ionic/angular';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
@@ -26,7 +26,7 @@ export class LoginFormComponent implements OnInit {
   yo: any;
   loading: boolean;
 
-  @Input() context:string;
+  @Input() context: string;
 
   public user: any;
   public isLoggedIn: boolean;
@@ -35,16 +35,23 @@ export class LoginFormComponent implements OnInit {
   public customerOtp: number;
   public otpMismatch: boolean;
   public isCarReady: boolean;
-  public showCarSelector:boolean;
-  public findingCar:boolean;
-  public userExists:boolean;
-  public forgotPassword:boolean;
+  public showCarSelector: boolean;
+  public findingCar: boolean;
+  public userExists: boolean;
+  public forgotPassword: boolean;
 
-  errors:any;
+  @ViewChildren('inpEmail') inpEmail: QueryList<HTMLElement>;
+  @ViewChildren('inpCity') inpCity: QueryList<HTMLElement>;
+  @ViewChildren('inpPass') inpPass: QueryList<HTMLElement>;
+  @ViewChildren('inpConfirmPass') inpConfirmPass: QueryList<HTMLElement>;
+  @ViewChildren('ctaSignup') ctaSignup: QueryList<HTMLElement>;
+  @ViewChildren('ctaOtp') ctaOtp: QueryList<HTMLElement>;
+
+  errors: any;
 
 
   loadingDetails: boolean;
-  otpSent:boolean;
+  otpSent: boolean;
 
 
   get isMobile() {
@@ -58,24 +65,24 @@ export class LoginFormComponent implements OnInit {
   }
 
   get isPhoneValid() {
-    return this.newUser.mobile && (this.newUser.mobile.length>9);
+    return this.newUser.mobile && (this.newUser.mobile.length > 9);
   }
 
   get isRegNoValid() {
     let valid = false;
     let reg = this.newUser.car.regNo;
 
-    if (!reg ) {
+    if (!reg) {
       return valid;
-    } 
+    }
     if (reg.length < 8) {
       return valid;
     }
 
-    if (isNaN(reg[0]) && isNaN(reg[1]) ) {    // HR
+    if (isNaN(reg[0]) && isNaN(reg[1])) {    // HR
       if (!isNaN(reg[2]) && !isNaN(reg[3])) {    // 51
-        if(isNaN(reg[4])) {
-          if (!isNaN(reg[reg.length - 1]) && !isNaN(reg[reg.length - 2]) ) {
+        if (isNaN(reg[4])) {
+          if (!isNaN(reg[reg.length - 1]) && !isNaN(reg[reg.length - 2])) {
             valid = true;
           }
         }
@@ -83,7 +90,8 @@ export class LoginFormComponent implements OnInit {
     }
     return valid;
   }
-
+  
+  allInputs;
 
 
   constructor(
@@ -93,7 +101,7 @@ export class LoginFormComponent implements OnInit {
     private srvcLogin: LoginService,
     private geolocation: Geolocation,
     private srvcUser: UserService,
-    private carService:CarService,
+    private carService: CarService,
     public toastController: ToastController,
 
     private router: Router) {
@@ -108,12 +116,13 @@ export class LoginFormComponent implements OnInit {
     this.findingCar = false;
     this.otpSent = false;
     this.userExists = false;
+    this.allInputs = {};
 
     this.newUser = {
       car: {}
     };
 
-    this.errors=null;
+    this.errors = null;
 
 
     if (this.platform.is('android') || this.platform.is('ios')) {
@@ -196,11 +205,38 @@ export class LoginFormComponent implements OnInit {
 
     this.carService.changeCar(carDetails);
 
-    this.router.navigate(['plans'], { state: carDetails});
+    this.router.navigate(['plans'], { state: carDetails });
   }
 
   reset() {
-    
+
+  }
+
+  focusTo(emt) {
+
+    this.allInputs = {
+      inpEmail: this.inpEmail.first,
+      inpCity: this.inpCity.first,
+      inpPass: this.inpPass.first,
+      inpConfirmPass: this.inpConfirmPass.first,
+      ctaSignup: this.ctaSignup.first,
+      ctaOtp: this.ctaOtp.first
+    }
+
+    let e = this.allInputs[emt];
+
+    if (e) {
+      e.focus();
+    }
+  }
+
+  handleOtp(otp) {
+    this.customerOtp = otp;
+
+    if (otp.toString().length == 4) {
+      this.verifyOtp(this.customerOtp);
+    }
+
   }
 
   async loginGoogle() {
@@ -271,7 +307,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   validateData(data) {
-    let valid:any = {
+    let valid: any = {
       phone: false,
       email: false,
       name: false,
@@ -280,19 +316,19 @@ export class LoginFormComponent implements OnInit {
 
     this.errors = {};
 
-    if (data.mobile && this.newUser.mobile.length>=10) {
+    if (data.mobile && this.newUser.mobile.length >= 10) {
       valid.phone = true;
     } else {
       this.errors['phone'] = 'Please enter a valid Phone Number.'
     }
 
-    if (this.newUser.name && this.newUser.name.length ) {
+    if (this.newUser.name && this.newUser.name.length) {
       valid.name = true;
     } else {
       this.errors['name'] = 'Please enter a valid User Name.'
     }
 
-    if (this.newUser.password && this.newUser.password.length && this.newUser.password.length >=4 && this.newUser.password == this.newUser.confirmPassword) {
+    if (this.newUser.password && this.newUser.password.length && this.newUser.password.length >= 4 && this.newUser.password == this.newUser.confirmPassword) {
       valid.password = true;
     } else {
       this.errors['password'] = 'Please enter a valid Password.';
@@ -305,15 +341,15 @@ export class LoginFormComponent implements OnInit {
         this.errors['password'] += " Passwords don't match."
       }
     }
-    
+
     if (this.newUser.email && this.newUser.email.length) {
-      valid.email= true;
+      valid.email = true;
     } else {
       this.errors['email'] = 'Please enter a valid Email.'
     }
-    
-   
-    this.errors = valid.name && valid.phone && valid.password && valid.email ? null: this.errors;
+
+
+    this.errors = valid.name && valid.phone && valid.password && valid.email ? null : this.errors;
 
     return !this.errors;
   }
@@ -322,41 +358,41 @@ export class LoginFormComponent implements OnInit {
     if (!this.validateData(this.newUser)) {
       return;
     }
-    
-    this.srvcLogin.createUser(this.newUser.mobile,this.newUser.name, this.newUser.password, this.newUser.email, this.newUser.city)
-    .subscribe( (res:any) => {
-      if (res.success) {
 
-        this.presentToast('Account Created Successfully');
+    this.srvcLogin.createUser(this.newUser.mobile, this.newUser.name, this.newUser.password, this.newUser.email, this.newUser.city)
+      .subscribe((res: any) => {
+        if (res.success) {
 
-        this.srvcUser.setCurrentUser(res.data);
+          this.presentToast('Account Created Successfully');
 
-        //this.router.navigate(['/root/dashboard']);
-        this.router.navigate(['/dashboard/select-car'] );
-        this.page = 'car';
-        
+          this.srvcUser.setCurrentUser(res.data);
 
-      } else {
-        // Error from Server
-        if (res.errorMsg == "User Exists for Mobile Number") {
-          this.userExists = true;
-        } else if (res.error && res.error.errmsg.indexOf('duplicate key error') > -1 && res.error.errmsg.indexOf('email') > -1) {
-          if (!this.errors) {
-            this.errors = {};
-          } 
+          //this.router.navigate(['/root/dashboard']);
+          this.router.navigate(['/dashboard/select-car']);
+          this.page = 'car';
 
-          this.errors['email']= 'An account exists with this email Id. Please use another one.';
+
+        } else {
+          // Error from Server
+          if (res.errorMsg == "User Exists for Mobile Number") {
+            this.userExists = true;
+          } else if (res.error && res.error.errmsg.indexOf('duplicate key error') > -1 && res.error.errmsg.indexOf('email') > -1) {
+            if (!this.errors) {
+              this.errors = {};
+            }
+
+            this.errors['email'] = 'An account exists with this email Id. Please use another one.';
 
           } else {
             alert('There was en error creating account. Please try again in some time.');
           }
 
 
-        } 
-        
-      
+        }
 
-    });
+
+
+      });
 
   }
 
@@ -365,19 +401,19 @@ export class LoginFormComponent implements OnInit {
     if (!this.loading) {
       console.log('otp', otp);
       this.loading = true;
-      let verified = await new Promise( (resolve,reject) => {
+      let verified = await new Promise((resolve, reject) => {
         this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
-        .subscribe((res: any) => {
-          console.log('Verify OTP REsponse', res);
-          this.loading = false;
-          if (res.success) {
-            this.otpMismatch = false;
-            resolve(true);
-          } else {
-            this.otpMismatch = true;
-            resolve(false);
-          }
-        })
+          .subscribe((res: any) => {
+            console.log('Verify OTP REsponse', res);
+            this.loading = false;
+            if (res.success) {
+              this.otpMismatch = false;
+              resolve(true);
+            } else {
+              this.otpMismatch = true;
+              resolve(false);
+            }
+          })
       });
 
       console.log('Verified', verified);
@@ -386,7 +422,7 @@ export class LoginFormComponent implements OnInit {
         sessionStorage.setItem('currentMobile', this.newUser.mobile);
         this.router.navigate(['/signup/details'])
       }
-   
+
     }
 
   }

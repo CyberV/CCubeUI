@@ -8,6 +8,7 @@ import { Subject, Observable, throwError } from 'rxjs';
 import { hash } from 'app/services/crypto.service';
 import { WindowRefService } from 'app/window-ref.service';
 import { IUser } from './IUser';
+import { AlertController, Platform } from '@ionic/angular';
 
 const api_key = "rzp_test_lzrrcON3EuW3nI";
 const api_secret = "caFrU097wpTYMi0xQgcCfonJ"
@@ -25,6 +26,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
+    private alertController: AlertController,
+    private platform:Platform,
     private winRef: WindowRefService) {
 
       this._currentUser = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')): null; 
@@ -49,6 +52,9 @@ export class UserService {
   }
 
   listner() {
+    if (this._userSubject.closed) {
+      this._userSubject = new Subject();
+    }
     return this._userSubject;
   }
 
@@ -70,6 +76,8 @@ export class UserService {
       localStorage.setItem('currentUser', JSON.stringify(user));
       evt.event = 'LOGGED_IN';
 
+
+
     } else {
       localStorage.setItem('currentUser', null);
       evt.event = 'LOGGED_OUT';
@@ -79,6 +87,9 @@ export class UserService {
     this._userSubject.next(evt);
   
   }
+
+
+
 
   promisify = async function promisify(leadData) {
     return new Promise(async (resolve, reject) => {

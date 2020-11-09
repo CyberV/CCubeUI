@@ -39,7 +39,14 @@ export class CtaComponent implements OnInit {
   }
 
   onCtaClick() {
-    this.action.emit();
+    if (!this.loading) {
+      this.action.emit();
+    }
+      
+  }
+
+  focus() {
+    this.onCtaClick();
   }
 
   ngOnInit() {

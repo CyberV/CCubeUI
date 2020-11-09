@@ -37,6 +37,7 @@ import { PlanSliderComponent } from './plan-slider/plan-slider.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper'
 import {  MatCardModule,} from '@angular/material/card';
+import { MatSelectModule} from '@angular/material/select';
 
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -62,6 +63,7 @@ import { WeeklyScheduleComponent } from './weekly-schedule/weekly-schedule.compo
 import { DocumentUploaderComponent } from './document-uploader/document-uploader.component';
 import { SelectSocietyComponent } from './select-society/select-society.component';
 import { DragListComponent } from './drag-list/drag-list.component';
+import { UpgradeSliderComponent } from './upgrade-slider/upgrade-slider.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -109,6 +111,7 @@ import { DragListComponent } from './drag-list/drag-list.component';
     DocumentUploaderComponent,
     SelectSocietyComponent,
     DragListComponent,
+    UpgradeSliderComponent,
 
     // Directives
     RsDirective,
@@ -121,6 +124,7 @@ import { DragListComponent } from './drag-list/drag-list.component';
     ChartsModule,
     MatExpansionModule,
     MatCardModule,
+    MatSelectModule,
     MatStepperModule,
     MatFormFieldModule,
     MatAutocompleteModule,
@@ -175,6 +179,7 @@ import { DragListComponent } from './drag-list/drag-list.component';
     WeeklyScheduleComponent,
     DocumentUploaderComponent,
     SelectSocietyComponent,
+    UpgradeSliderComponent,
     DragListComponent,
 
     //Directives

@@ -1,6 +1,6 @@
 <div class="car-form">
     <img *ngIf="currentCar && !verifyOnly" [src]="currentCar.image" class="center animate__animated animate__tada"/>
-        <mobile-input type="text" uppercase="true" name="Enter Your Car Number" placeholder="HR51XX1122" [(value)]="regNo" (valueChange)="findingCar = false;" ></mobile-input>
+        <mobile-input type="text" uppercase="true" name="Enter Your Car Number" (enterKey)="focusTo('ctaCar')" placeholder="HR51XX1122" [(value)]="regNo" (valueChange)="findingCar = false;" ></mobile-input>
         <div *ngIf="!isTypingRegNo" class="animate__animated" [class.animate__fadeOutUp]="isTypingRegNo">
           
             <ng-container *ngIf="!verifyOnly">
@@ -12,7 +12,7 @@
         
         </div>
     
-        <cta *ngIf="isRegNoValid && !findingCar" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
+        <cta #ctaCar *ngIf="isRegNoValid && !findingCar" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
     
         
         <car-display *ngIf="findingCar" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)" (error)="onError($event)" (carReady)="saveCar($event)"></car-display>

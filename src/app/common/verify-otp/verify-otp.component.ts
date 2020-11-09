@@ -52,7 +52,10 @@ export class VerifyOtpComponent implements OnInit {
     }
 
     let otp = this.otp.toString().replace(/,/g, "");
-    this.otpSubmitted.emit(otp);
+
+    if (indx==4) {
+      this.otpSubmitted.emit(otp);
+    }
 
   }
 

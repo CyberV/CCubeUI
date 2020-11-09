@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PlanService } from 'app/services/plan.service';
 
 @Component({
   selector: 'plan-card',
@@ -12,20 +13,28 @@ export class PlanCardComponent implements OnInit {
   @Input() bodyType: string;
   @Input() color:string;
 
+  @Input() forUpgrade:boolean;
+  @Input() purchasedPlan:any;
+
   @Output() buyNow = new EventEmitter();
   @Output() showDetails = new EventEmitter();
 
   currentFeatures: any;
   missingFeatures: any;
+  upgradePrice:any;
   colors: any;
 
-  constructor() {
+  constructor(
+    private planService:PlanService
+  ) {
     this.plan = {
       name: 'Standard',
       price: 500
     }
     this.currentFeatures = [];
     this.missingFeatures = [];
+    this.forUpgrade = false;
+    this.purchasedPlan = {};
 
     this.bodyType="";
     this.color = "inherit";
@@ -54,6 +63,22 @@ export class PlanCardComponent implements OnInit {
         this.plan.price = this.plan.pricing[this.bodyType];
 
         
+    }
+
+    if (this.forUpgrade) {
+      switch(this.plan.name) {
+        case 'Standard': {
+          this.plan.name = 'Elite';
+          this.upgradePrice = this.planService.getUpdatePrice(this.purchasedPlan.name, 'Elite');
+          break;
+        }
+        case 'Deluxe': {
+          this.upgradePrice = this.planService.getUpdatePrice(this.purchasedPlan.name, 'Deluxe');
+          break;
+        }
+        default: break;
+      }
+      
     }
 
   }

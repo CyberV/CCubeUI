@@ -1,8 +1,44 @@
 @import 'src/variables.scss';
 
+.headers-top {
+
+    display: block;
+    height: 50px;
+    background-color:$primary-color;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    position: relative;
+    top: 18px;
+    color: white;
+    left: 0;
+    padding: 10px;
+
+    .text-right {
+        margin-left: 25px;
+    }
+
+    .col-1 {
+        font-size: 22px;
+        margin-top: -2px;
+    }
+
+}
+
 .header-row {
     color: $primary-color;
     font-size: 140%;
+}
+
+.upgrade-options {
+    position: relative;
+    top: -4px;
+    margin-left: 4px;
+}
+
+.upgrade-price {
+    float: right;
+    position: relative;
+    top: 4px;
 }
 
 .content-row {
@@ -15,6 +51,11 @@
         color: $primary-color;
         margin-right: 10px;
     }
+}
+
+mat-select {
+    width: 65px;
+    border-bottom: dashed $secondary-color;
 }
 
 .body-type {

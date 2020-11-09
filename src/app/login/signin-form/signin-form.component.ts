@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { LoginService } from '../login.service';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,6 +17,9 @@ export class SigninFormComponent implements OnInit {
   loading:boolean;
   showError: boolean;
   errorMsg: string;
+
+  @ViewChildren('inpPass') inpPass : QueryList<HTMLElement>;
+  @ViewChildren('ctaLogin') ctaLogin : QueryList<HTMLElement>;
 
 
   get isPhoneValid() {
@@ -46,6 +49,13 @@ export class SigninFormComponent implements OnInit {
 
   }
 
+  focusTo(emt) {
+    if (emt == 'inpPass') {
+      this.inpPass.first.focus();
+    } else {
+      this.ctaLogin.first.focus();
+    }
+  }
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,

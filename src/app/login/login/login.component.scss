@@ -2,13 +2,13 @@
 
 .container {
     background: $bg-white;
-    padding: 25px;
-    padding-top: 5em;
+    padding: 5em 25px;
+    scroll-behavior: smooth;
     overflow-x: hidden;
     width: calc(100% + 30px);
     left: -15px;
     position: relative;
-    height: 100vh;
+    height: 92vh;
 
 }
 

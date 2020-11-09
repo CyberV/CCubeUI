@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, QueryList } from '@angular/core';
+import {scrollElementToTop} from 'app/util/util';
 
+declare var $;
 @Component({
   selector: 'mobile-input',
   templateUrl: './mobile-input.component.html',
@@ -9,6 +11,7 @@ export class MobileInputComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter();
   @Output() blur = new EventEmitter();
+  @Output() enterKey = new EventEmitter();
 
 
   @Input()
@@ -28,6 +31,8 @@ export class MobileInputComponent implements OnInit {
   @Input() uppercase:boolean;
   @Input() readonly: boolean;
 
+  @ViewChild('phoneInput') phoneInput: QueryList<HTMLElement>;
+
   hasError:boolean;
 
   constructor() {
@@ -46,6 +51,21 @@ export class MobileInputComponent implements OnInit {
   onPhoneChange(value) {
     this.value = value;
     this.valueChange.emit(this.value);
+  }
+
+  onEnterKey(e) {
+    this.enterKey.emit();
+  }
+
+  focus() {
+    let inp:any = this.phoneInput;
+
+    if (inp) {
+      scrollElementToTop(inp.nativeElement);
+    }
+
+    
+
   }
 
   ngOnInit() {

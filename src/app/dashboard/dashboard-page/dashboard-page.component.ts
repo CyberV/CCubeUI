@@ -107,7 +107,7 @@ export class DashboardPageComponent implements OnInit {
 
             if (this.payments.length) {
               sessionStorage.setItem('allPayments', JSON.stringify(this.payments));
-              this.payments = this.parsePayments(this.payments);
+              //this.payments = this.parsePayments(this.payments);
             }
             sessionStorage.setItem('currentPayments', JSON.stringify(this.payments));
             this.ready = true;

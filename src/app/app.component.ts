@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
 
-import { Platform, MenuController, ToastController } from '@ionic/angular';
+import { Platform, MenuController, ToastController, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from './header.service';
 import { UserService } from './services/user.service';
 import { CarService } from './services/car.service';
+import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic';
 //import { FCM } from '@ionic-native/fcm/ngx';
 //import {FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic'
 //import { FCM } from '../../plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
@@ -21,36 +22,39 @@ declare var $;
 })
 export class AppComponent {
 
-  noBackNavigation:any;
-  
-  hideBackButton:boolean;
+  noBackNavigation: any;
 
-  headerText:string;
-  currentUser:any;
-  isLoggedIn:boolean;
+  hideBackButton: boolean;
+  fcmInitialized:boolean;
 
-  headerType:string;      // text, view
-  viewData:any;
+  headerText: string;
+  currentUser: any;
+  isLoggedIn: boolean;
 
-  context:string;
+  headerType: string;      // text, view
+  viewData: any;
+
+  context: string;
 
   constructor(
-     private platform:Platform,
-     private route: ActivatedRoute,
-     private headerService:HeaderService,
-     private router:Router,
-     private menu:MenuController,
-     private userService:UserService,
-     private carService:CarService,
-     public toastController: ToastController,
-     private loginService:LoginService
-     ) {
+    private platform: Platform,
+    private route: ActivatedRoute,
+    private headerService: HeaderService,
+    private router: Router,
+    private menu: MenuController,
+    private userService: UserService,
+    private alertController: AlertController,
+    private carService: CarService,
+    public toastController: ToastController,
+    private loginService: LoginService
+  ) {
 
     this.initializeApp();
 
     this.hideBackButton = false;
     this.headerType = '';
-    
+    this.fcmInitialized = false;
+
     this.noBackNavigation = [
       'select-car',
       'thanks',
@@ -59,17 +63,17 @@ export class AppComponent {
 
     this.context = '';
 
-    this.route.url.subscribe( (d)=> {
+    this.route.url.subscribe((d) => {
       // console.log('route', this.route.snapshot['_routerState'].url);
     })
 
-    
 
-    this.headerService.listner().subscribe( (evt:any)=> {
+
+    this.headerService.listner().subscribe((evt: any) => {
       if (!evt.key) {
         return;
       }
-      switch(evt.key) {
+      switch (evt.key) {
         case 'text': {
           this.headerText = evt.data;
           this.headerType = 'text';
@@ -77,9 +81,9 @@ export class AppComponent {
         }
         case 'view': {
           this.viewData = evt.data;
-          
+
           this.headerType = 'view';
-          
+
           break;
         }
       }
@@ -94,7 +98,30 @@ export class AppComponent {
     toast.present();
   }
 
-  goBack(){
+  async presentAlert(data = null) {
+    let alert;
+    if (data) {
+      alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: data.title || 'Notification',
+        message: data.body || 'This is a demo message.',
+        buttons: ['OK']
+      });
+    } else {
+      alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Alert',
+        subHeader: 'Subtitle',
+        message: 'This is an alert message.',
+        buttons: ['OK']
+      });
+    }
+
+
+    await alert.present();
+  }
+
+  goBack() {
     window.history.back();
   }
 
@@ -108,10 +135,10 @@ export class AppComponent {
 
   ngAfterViewInit() {
     this.menu.enable(true, 'first');
-    
+
   }
 
-  onDeactivate(comp){
+  onDeactivate(comp) {
     //console.log('Deactivated', data);
   }
 
@@ -121,7 +148,7 @@ export class AppComponent {
 
     this.isLoggedIn = this.userService.isLoggedIn();
 
-    this.userService.listner().subscribe((evt:any) => {
+    this.userService.listner().subscribe((evt: any) => {
       switch (evt.event) {
         case 'LOGGED_OUT': {
           this.menu.enable(false, 'first');
@@ -130,6 +157,39 @@ export class AppComponent {
         }
         case 'LOGGED_IN': {
           this.menu.enable(true, 'first');
+
+          if (!this.fcmInitialized) {
+            try {
+              
+              if (FCM &&  FCM.getToken()) {
+                FCM.getToken().then((res:any) => {
+
+                  this.loginService.updateToken(res).subscribe((response:any) => {
+                    if (!response.success) {
+                      this.presentAlert(response.errorMsg || JSON.parse(response.error));
+                    } else {
+                      this.fcmInitialized = true;
+                      // this.presentAlert({
+                      //   title: 'Hi there!',
+                      //   body: 'Hope you\'re doing great.'
+                      // })
+                    }
+                  });
+                });
+
+                FCM.onTokenRefresh().subscribe((res:any) => {
+                  this.loginService.updateToken(res).subscribe((response:any) => {
+                    // if (!response.success) {
+                    //   this.presentAlert(response.errorMsg || JSON.parse(response.error));
+                    // }
+                  });
+                })
+              }
+            } catch(e) {
+              console.log('Error in Notifications', e);
+            }
+          }
+
           break;
         }
         default: break;
@@ -141,23 +201,23 @@ export class AppComponent {
       this.currentUser = usr;
     }
 
-    
+
 
     this.hideBackButton = this.checkContext(comp);
 
 
-    $('.container').toArray().forEach(function(a) {a.scrollTop=0;})
+    $('.container').toArray().forEach(function (a) { a.scrollTop = 0; })
 
   }
 
   toggleMenu() {
-    
+
     this.menu.toggle('first');
   }
 
   goTo(context) {
     this.menu.close();
-    switch(context) {
+    switch (context) {
       case 'dashboard': {
         this.carService.clear();
         this.router.navigate(['/dashboard/select-car']);
@@ -191,13 +251,13 @@ export class AppComponent {
     if (!comp) {
     } else if (!comp.context) {
     } else {
-      hideBackButton = this.noBackNavigation.filter( (path) => path == comp.context).length > 0;
+      hideBackButton = this.noBackNavigation.filter((path) => path == comp.context).length > 0;
     }
-     
+
     return hideBackButton;
-     
+
   }
-  
+
 
   initializeApp() {
     /* To make sure we provide the fastest app loading experience 
@@ -207,5 +267,23 @@ export class AppComponent {
         https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
     */
     SplashScreen.hide();
+
+    this.platform.ready().then((data) => {
+      try {
+        if (FCM && FCM.getToken()) {
+          FCM.onNotification().subscribe((data:any) => {
+            try {
+              this.presentAlert(data);
+            } catch(err) {
+              console.log('Error in Notification', err);
+              alert(data);
+            }
+           
+          });
+        }
+      } catch(err) {
+        
+      }
+    });
   }
 }

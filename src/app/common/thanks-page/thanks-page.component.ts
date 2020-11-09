@@ -34,7 +34,7 @@ export class ThanksPageComponent implements OnInit {
 
     setTimeout( () => {
       this.goToDashboard();
-    }, 5000); 
+    }, 10000); 
   }
 
 

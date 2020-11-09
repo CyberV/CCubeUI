@@ -6,19 +6,21 @@
 
           <div *ngIf="context=='checkout'">
 
+            <!-- <selected-car *ngIf="selectedCar" [car]="selectedCar" slim></selected-car> -->
+
             <checkout-details [plan]="selectedPlan" [car]="selectedCar">
 
             </checkout-details>
 
             <addon-slider *ngIf="retryAddon"></addon-slider>
 
-            <cta text="Confirm" [sticky]="true" (action)="confirmCheckout()"></cta>
+            <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
           </div>
 
           <div *ngIf="context=='confirm'">
-            <selected-car *ngIf="selectedCar" [car]="selectedCar"></selected-car>
+            <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="changeCar()"></selected-car>
 
-            <cc-accordion title="Verify Your Car" [step]="'1'" [error]="carMismatch" [locked]="step2Ready">
+            <cc-accordion title="Verify Your Car" [step]="'1'" [defaultOpen]="!step2Ready" [error]="carMismatch" [locked]="step2Ready">
               <car-form [regNo]="selectedCar.regNo" *ngIf="resetCarForm" [verifyOnly]="true" (carReady)="verifyCar($event)"></car-form>
               <div *ngIf="carMismatch && carIdentified" class="alert alert-danger" role="alert">
                 Selected Car doesn't match with Registration Number!
@@ -115,7 +117,7 @@
                   
    -->
 
-            <cta text="Checkout" [disabled]="!verificationComplete" [sticky]="true" (action)="showConfirmation()"></cta>
+            <cta text="Checkout" [disabled]="!verificationComplete" [sticky]="true" [loading]="loading" (action)="showConfirmation()"></cta>
 
           </div>
 

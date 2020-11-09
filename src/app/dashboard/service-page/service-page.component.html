@@ -15,7 +15,7 @@
         <ion-slide *ngFor="let payment of payments; let i = index">
           <div class="car-box" [class.active]="selectedIndex == i" (click)="selectCar(i)">
 
-            <ion-label class="car-image"><img [src]="payment.car.image" /></ion-label>
+            <ion-label class="car-image"><img [src]="payment.payments[0].car.image" /></ion-label>
             <ion-badge>{{i}}</ion-badge>
           </div>
           <!-- <mat-card class="card addon-card animate__animated animate__flipInX">
@@ -61,6 +61,13 @@
   <spinner></spinner>
 </ng-container>
 
+<ng-container *ngIf="!loading && payments.length > 0">
+  <upgrade-slider *ngIf="showUpgradeSlider()"
+    [purchasedPlan]="selectedPayment.plan" 
+    [bodyType]="selectedPayment.car.bodyType"
+    (upgradeNow)="handleUpgradePlan($event)"
+    (showDetails)="showPlanDetails($event)"
+    ></upgrade-slider>
 
-
-<addon-slider *ngIf="!loading && payments.length > 0"></addon-slider>
+<addon-slider ></addon-slider>
+</ng-container>

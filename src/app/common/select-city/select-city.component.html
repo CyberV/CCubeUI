@@ -3,7 +3,7 @@
     <label for="mobileNumber">City <span *ngIf="mandatory" class="mandatory-link"><sup>*</sup></span></label>
     <div class="input-group">
       <ng-container *ngIf="!disabled">
-        <input class="form-control --no-padding"  type="text" aria-label="City" matInput name="city"
+        <input #inpCity class="form-control --no-padding" (click)="focus()"  (keyup.enter)="onEnterKey($event)" type="text" aria-label="City" matInput name="city"
         [(ngModel)]="city" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption="true">
         <mat-option *ngFor="let option of filteredCities" [value]="option" (click)="selectCity(option)">
@@ -22,7 +22,7 @@
       <label for="mobileNumber">State <span *ngIf="mandatory" class="mandatory-link"><sup>*</sup></span></label>
       <div class="input-group">
         <ng-container *ngIf="!disabled">
-          <input autocomplete="false" class="form-control --no-padding"  type="text" aria-label="State" matInput name="state"
+          <input #inpState autocomplete="false" (click)="focus()" class="form-control --no-padding"  (keyup.enter)="onEnterKey($event)"  type="text" aria-label="State" matInput name="state"
           [(ngModel)]="state" [matAutocomplete]="autoState">
         <mat-autocomplete #autoState="matAutocomplete" autoActiveFirstOption="true">
           <mat-option *ngFor="let option of filteredStates" [value]="option" (click)="selectState(option)">

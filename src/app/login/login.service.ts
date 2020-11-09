@@ -29,7 +29,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginService {
 
   private domain: string = 'api-ccube.herokuapp.com';
-  // url: string = 'https://' + this.domain + '/api/';
+  //private  url: string = 'https://' + this.domain + '/api/';
 
   private url: string = 'http://localhost:4000/api/';
   private carUrl: string = this.url + "car/details/";
@@ -122,13 +122,13 @@ export class LoginService {
   }
 
   addPayment(payment) {
-    return this.http.post(this.url + 'user/addpayment', payment).pipe(
+    return this.http.post(this.url + 'subscription/addpayment', payment).pipe(
       catchError(this.handleError)
     );
   }
 
   renewPayment(payment) {
-    return this.http.post(this.url + 'user/renewpayment', payment).pipe(
+    return this.http.post(this.url + 'subscription/renewpayment', payment).pipe(
       catchError(this.handleError)
     );
 
@@ -142,7 +142,7 @@ export class LoginService {
   }
 
   getPayments(phone) {
-    return this.http.post(this.url + 'user/getpayments', { phone }).pipe(
+    return this.http.post(this.url + 'subscription/getsubscriptions', { phone }).pipe(
       catchError(this.handleError)
     );
   }

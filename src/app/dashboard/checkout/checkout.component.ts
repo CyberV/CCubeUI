@@ -6,7 +6,6 @@ import { ModalController } from '@ionic/angular';
 import { CheckoutConfirmationComponent } from 'app/common/checkout-confirmation/checkout-confirmation.component';
 import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 
@@ -64,6 +63,7 @@ export class CheckoutComponent implements OnInit {
     this.verificationComplete = false;
     this.forRenew = false;
 
+
     this.errors = {
       car: false,
       plan: false
@@ -88,6 +88,11 @@ export class CheckoutComponent implements OnInit {
 
     this.retryAddon = false;
 
+  }
+
+  changeCar() {
+    this.carService.clear();
+    this.router.navigate(['/dashboard/select-car']);
   }
 
   updatePlan() {
@@ -181,12 +186,6 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  changeCar() {
-
-    this.carService.clear();
-    this.router.navigate(['/dashboard']);
-  }
-
   resetCarNumber() {
     this.carIdentified = false;
     this.carMismatch = false;
@@ -243,6 +242,7 @@ export class CheckoutComponent implements OnInit {
           payload.lastDate = updatedPlan.lastDate;
           this.loginService.renewPayment(payload).subscribe((d: any) => {
             console.log('Renew payment response', d);
+            this.loading = false;
             if (d.success) {
               sessionStorage.setItem('currentPayment', JSON.stringify(payload));
               this.router.navigate(['/dashboard/thanks']);
@@ -257,6 +257,7 @@ export class CheckoutComponent implements OnInit {
         } else {
           this.loginService.addPayment(payload).subscribe((d: any) => {
           console.log('add payment response', d);
+          this.loading = false;
           if (d.success) {
             sessionStorage.setItem('currentPayment', JSON.stringify(payload));
             this.router.navigate(['/dashboard/thanks']);

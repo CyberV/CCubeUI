@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Query, QueryList, ViewChildren } from '@angular/core';
 import { CitiesService } from 'app/cities.service';
+import { scrollElementToTop } from 'app/util/util';
 
 @Component({
   selector: 'select-city',
@@ -10,13 +11,17 @@ export class SelectCityComponent implements OnInit {
 
   @Input() city: string;
   @Input() state: string;
-  @Input() mandatory:boolean;
+  @Input() mandatory: boolean;
 
   @Output() cityChange = new EventEmitter();
   @Output() stateChange = new EventEmitter();
+  @Output() enterKey = new EventEmitter();
 
   @Input() disabled: boolean;
   @Input() showState: boolean;
+
+  @ViewChildren('inpState') inpState: QueryList<HTMLElement>;
+  @ViewChildren('inpCity') inpCity: QueryList<HTMLElement>;
 
   options: any;
   states: any;
@@ -54,6 +59,19 @@ export class SelectCityComponent implements OnInit {
 
   ngOnInit() {
     this.selectCity(this.city);
+  }
+
+  focus() {
+    let inp: any = this.inpCity.first;
+
+    if (inp) {
+
+      scrollElementToTop(inp.nativeElement);
+    }
+  }
+
+  onEnterKey(e) {
+    this.enterKey.emit();
   }
 
   selectCity(city) {

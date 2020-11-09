@@ -1,7 +1,10 @@
 
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { CitiesService } from 'app/cities.service';
 
+import {scrollElementToTop} from 'app/util/util';
+
+declare var $;
 @Component({
   selector: 'select-society',
   templateUrl: './select-society.component.html',
@@ -13,8 +16,13 @@ export class SelectSocietyComponent implements OnInit {
   @Input() society: string;
   other: string;
 
-  @Output() societyChange = new EventEmitter();
+  @Output() societyChange = new EventEmitter()
+  @Output() enterKey = new EventEmitter();
 
+  @ViewChildren('inpSociety') inpSociety: QueryList<HTMLElement>;
+
+  @ViewChildren('inpOther') inpOther: QueryList<HTMLElement>;
+  
   @Input() mandatory:boolean;
 
   @Input() disabled: boolean;
@@ -23,16 +31,18 @@ export class SelectSocietyComponent implements OnInit {
   options: any;
   states: any;
 
+  select = 'Select Society';
+
   unlisted:boolean;
 
   get filteredSocieties() {
-    if (!this.society || this.society == "") {
+    if (!this.select || this.select == "" || this.select == 'Select Society' || this.select == 'Other') {
       return this.options;
     } else {
-      let records = this.citiesService.findMatchingSocieties(this.society, this.city);
+      let records = this.citiesService.findMatchingSocieties(this.select, this.city);
 
-      this.unlisted = records.length == 0;
-      return 
+      //this.unlisted = records.length == 0;
+      return records;
     }
   }
 
@@ -58,15 +68,50 @@ export class SelectSocietyComponent implements OnInit {
   }
 
   demo(d) {
-    console.log(d, this.society);
+    //console.log(d, this.society);
   }
 
-  selectSociety(society) {
-    this.society = society.name;
-    this.societyChange.emit(society.name);
-    if (this.showOther) {
-     
+  showUnlisted() {
+    this.select = 'Other';
+    this.unlisted = true;
+    this.focus(true);
+  }
+
+  
+  focus(other=false) {
+    
+    let inp:any = other? this.inpOther.first : this.inpSociety.first;
+    if (inp) {
+
+      if (inp.nativeElement) {
+        setTimeout(()=> {
+          inp.nativeElement.focus();
+        }, 200);
+        
+      } else {
+        setTimeout(()=> {
+          inp.focus();
+        }, 400);
+      }
+
     }
+  }
+
+  onEnterKey(e) {
+    if (typeof this.society === 'object') {
+      let soc:any = this.society;
+      this.society = soc.name;
+    }
+    
+    this.enterKey.emit();
+  }
+
+
+  selectSociety(society ,unlisted = false) {
+    this.society = society;
+    this.unlisted = unlisted;
+    this.societyChange.emit(society);
+
 
   }
 

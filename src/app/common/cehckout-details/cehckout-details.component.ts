@@ -16,11 +16,17 @@ export class CheckoutDetailsComponent implements OnInit {
 
   lastPlan:any;
 
+  upgradToPlan:string;
+  originalPlan:any;
+
 
   constructor(
     private planService:PlanService
   ) {
+
     this.upgradeSelected = false;
+    this.upgradToPlan = 'Elite';
+    this.originalPlan = {};
    }
 
   ngOnInit() {
@@ -28,10 +34,21 @@ export class CheckoutDetailsComponent implements OnInit {
     this.upgradePrice = this.planService.getUpdatePrice(this.plan.name);
   }
 
-  toggleUpgrade() {
-    this.planService.changePlanForCar( this.upgradeSelected ? this.lastPlan.name : 'Elite');
-    this.plan = this.planService.getSelectedPlan();
-    this.upgradeSelected  = !this.upgradeSelected;
+  toggleUpgrade(planName = null) {
+
+    if (planName) {
+      this.upgradeSelected = true;
+      this.upgradToPlan = planName;
+      this.upgradePrice = this.planService.getUpdatePrice(this.lastPlan.name, planName);
+      this.planService.changePlanForCar( this.upgradeSelected ? planName : this.lastPlan.name );
+      this.plan = this.planService.getSelectedPlan();
+    } else {
+      this.planService.changePlanForCar( this.upgradeSelected ? this.lastPlan.name : this.upgradToPlan);
+      this.plan = this.planService.getSelectedPlan();
+      this.upgradeSelected  = !this.upgradeSelected;
+    }
+
+
     
   }
 

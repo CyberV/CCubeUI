@@ -10,10 +10,12 @@
         <input *ngIf="!readonly && !labelOnly" [attr.type]="type" required #phoneInput 
           [ngClass]="{'form-control' : true, 'error-field': hasError}" 
           [class.not-mobile]="name !== 'Mobile Number'"
+          (click)="focus()"
           (input)="onPhoneChange(phoneInput.value)"
           [placeholder]="placeholder" 
           [value]="value ? value : ''"
           (blur)="sendBlur(value)"
+          (keyup.enter)="onEnterKey($event)"
           [style.text-transform]="uppercase? 'uppercase': 'none'"
           aria-describedby="basic-addon3">
 

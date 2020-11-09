@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList } from '@angular/core';
 import { CarService } from 'app/services/car.service';
 
 
@@ -22,6 +22,8 @@ export class CarFormComponent implements OnInit {
   @Input() regNo: any;
   maker: string;
   model: string;
+
+  @ViewChildren('ctaCar') ctaCar : QueryList<HTMLElement>;
 
 
   constructor(
@@ -71,6 +73,18 @@ export class CarFormComponent implements OnInit {
     };
 
     this.currentCar = this.carService.getCurrentCar()
+  }
+
+  focusTo(elem) {
+    if (!elem) {
+      return;
+    }
+
+    this.ctaCar.first.focus();
+
+    console.log('focussing on', elem);
+
+
   }
 
   onError(error) {

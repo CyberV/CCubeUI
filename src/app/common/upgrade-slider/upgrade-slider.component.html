@@ -1,0 +1,17 @@
+
+    <heading text="UPGRADE YOUR PLAN" size="24" capitalize="true" align="center"></heading>
+    <ion-slides [options]="slideOpts">
+        <ion-slide *ngFor="let plan of planList; let i = index;">
+          <plan-card 
+              forUpgrade="true"
+              [purchasedPlan]="purchasedPlan"
+              [plan]="plan" 
+              [color]="colors[i]"
+              [features]="allFeatures" 
+              [bodyType]="bodyType"
+              (buyNow)="onBuy($event)"
+              (showDetails)="onShowDetails($event)"
+              ></plan-card>
+        </ion-slide>
+      </ion-slides>
+  

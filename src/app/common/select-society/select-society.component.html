@@ -2,17 +2,21 @@
   <div class="col-12 mobile-input">
     <label for="mobileNumber">Society <span *ngIf="mandatory" class="mandatory-link"><sup>*</sup></span></label>
     <div class="input-group">
-      <ng-container *ngIf="!disabled">
-        <input class="form-control --no-padding"  type="text" aria-label="society" matInput name="society"
-        [(ngModel)]="society" (input)="demo($event)" [matAutocomplete]="auto">
+      <ng-container *ngIf="!disabled"> 
+        <input #inpSociety class="form-control --no-padding" (keyup.enter)="onEnterKey($event)" (click)="focus()" type="text" aria-label="society" matInput name="society"
+        [(ngModel)]="select" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption="true">
         <mat-option *ngFor="let option of filteredSocieties" [value]="option" (click)="selectSociety(option)">
-          {{option.name}}
+          {{option}}
+        </mat-option>
+        <mat-option (click)="showUnlisted()">
+          Other
         </mat-option>
       </mat-autocomplete>
       </ng-container>
       <span class="form-control disabled" *ngIf="disabled"> {{society}}</span>
       
     </div>
+    <mobile-input #inpOther *ngIf="unlisted" mandatory="true" (click)="focus(true)" class="animate__animated animate__bounceInDown" name="Society Name & Location" [(value)]="society" (valueChange)="selectSociety($event, true)" (keyup.enter)="onEnterKey($event)" type="text"></mobile-input>
   </div>
 </div>

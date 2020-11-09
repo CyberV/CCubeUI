@@ -22,7 +22,8 @@ p{
 .container {
     background: $bg-white;
     border-radius: 25px;
-    padding: 25px;
+    padding: 5em 25px;
+    scroll-behavior: smooth;
     margin-top: 2em;
 
     @media screen and (max-width: 768px) {

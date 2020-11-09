@@ -44,6 +44,10 @@
       }
     }
   }
+
+  .plan-container {
+    min-height: 220px;
+  }
   .car-info {
     font-size: 16px;
     padding: 20px 0 0 0;
@@ -78,6 +82,7 @@
     .model {
       letter-spacing: 2px;
       color: $primary-color;
+      font-size: 120%;
       text-transform: uppercase;
       font-weight: 500;
     }

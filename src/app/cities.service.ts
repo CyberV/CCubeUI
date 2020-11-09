@@ -14,12 +14,7 @@ export class CitiesService {
 
   societies = [{
     city: "faridabad",
-    societies: [{
-      name: 'Puri Pratham Sector 84',
-    },
-    {
-      name: 'SRS Residency Sector 85'
-    }]
+    societies: ['Puri Pratham Sector 84','SRS Residency Sector 85']
   }
   ]
 
@@ -105,7 +100,7 @@ export class CitiesService {
     }
 
     found = societies.filter((society: any) => {
-      return society.name.toLowerCase().indexOf(str.toLowerCase()) > -1;
+      return society.toLowerCase().indexOf(str.toLowerCase()) > -1;
     });
 
     return found;
