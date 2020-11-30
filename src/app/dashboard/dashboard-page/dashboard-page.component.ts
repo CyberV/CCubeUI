@@ -5,6 +5,7 @@ import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
@@ -18,12 +19,19 @@ export class DashboardPageComponent implements OnInit {
     private carService: CarService,
     private planService: PlanService,
     private headerService: HeaderService,
+    private toastController: ToastController,
     private loginService: LoginService,
     private userService: UserService
   ) {
 
     this.ready = false;
     this.payments = [];
+    this.selectedAddon = null;
+    this.selectedPlan = null;
+    this.selectedCar = null;
+    this.includedAdhocs = [];
+    this.includedAddons = [];
+    this.currentSubscription = null;
   }
 
   context: string;
@@ -31,6 +39,11 @@ export class DashboardPageComponent implements OnInit {
   selectedPlan: any;
   selectedCar: any;
   currentUser: any;
+  selectedAddon: any;
+  selectedAdhoc: any;
+  includedAddons: any;
+  includedAdhocs:any;
+  currentSubscription:any;
 
   ready: boolean;
 
@@ -40,6 +53,8 @@ export class DashboardPageComponent implements OnInit {
     this.route.params.subscribe((rdata) => {
       this.context = this.route.snapshot.routeConfig.path || 'dashboard';
     });
+
+
 
     this.ready = false;
   }
@@ -51,6 +66,11 @@ export class DashboardPageComponent implements OnInit {
 
     this.selectedPlan = this.planService.getSelectedPlan();
     this.selectedCar = this.carService.getCurrentCar();
+
+    let adhocs = this.planService.getIncludedAdhocs();
+    this.selectedAdhoc = adhocs[adhocs.length-1];
+
+    this.currentSubscription = this.planService.getCurrentSubscription();
 
     let isLoggedIn = this.userService.isLoggedIn();
 
@@ -64,7 +84,7 @@ export class DashboardPageComponent implements OnInit {
     }
 
     if (this.selectedCar && this.context === 'select-car') {
-
+      this.router.navigate(['/dashboard']);
       return;
     }
 
@@ -78,6 +98,11 @@ export class DashboardPageComponent implements OnInit {
       return;
     }
 
+    this.includedAddons = this.planService.getIncludedAddons();
+    this.includedAdhocs = this.planService.getIncludedAdhocs();
+
+    this.selectedAddon = this.includedAddons[this.includedAddons.length -1];
+
     switch (this.context) {
       case 'dashboard': {
         this.headerService.setText('Choose Your Plan');
@@ -89,6 +114,14 @@ export class DashboardPageComponent implements OnInit {
       }
       case 'plan': {
         this.headerService.setText(this.selectedPlan.name);
+        break;
+      }
+      case 'adhoc': {
+        this.headerService.setText(this.selectedAdhoc.name);
+        break;
+      }
+      case 'addon': {
+        this.headerService.setText(this.selectedAddon.name);
         break;
       }
       case 'service': {
@@ -124,6 +157,29 @@ export class DashboardPageComponent implements OnInit {
     this.ready = true;
   }
 
+  onAddonSelect(addon) {
+    //this.presentToast('Please select a Plan');
+    if (this.includedAddons.some((a) => a.name == addon.name)) {
+      this.planService.excludeAddon(addon);
+      this.includedAddons = this.planService.getIncludedAddons();
+    } else {
+      this.planService.includeAddon(addon);
+      this.includedAddons = this.planService.getIncludedAddons();
+    }
+  }
+
+  setDateForAdhoc(date) {
+    this.selectedAdhoc.startDate = date;
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   parsePayments(payments) {
     let data = [];
     let p, f;
@@ -153,14 +209,14 @@ export class DashboardPageComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       if (data[i].plans.length > 1) {
 
-        let first,second, primary;
+        let first, second, primary;
         primary = payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[0].startDate == d.startDate)[0];
-         
-        for (let j=0;j< data[i].plans.length -1 ;j++) {
+
+        for (let j = 0; j < data[i].plans.length - 1; j++) {
 
           first = payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[j].startDate == d.startDate)[0];
-          second = payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[j+1].startDate == d.startDate)[0];
-  
+          second = payments.filter((d) => data[i].regNo == d.car.regNo && data[i].plans[j + 1].startDate == d.startDate)[0];
+
           if (first.plan.name == second.plan.name) {
             primary.expiresOn = second.expiresOn;
           } else {
@@ -181,6 +237,9 @@ export class DashboardPageComponent implements OnInit {
   }
 
   goToCheckout() {
+    sessionStorage.setItem('currentAdhoc', JSON.stringify(this.selectedAdhoc));
+    sessionStorage.setItem('currentAddon', JSON.stringify(this.selectedAddon));
+
     this.router.navigate(['/dashboard/checkout']);
   }
 
@@ -196,6 +255,10 @@ export class DashboardPageComponent implements OnInit {
     if (carData) {
       this.carService.changeCar(carData);
     }
+
+    this.planService.clear();
+    this.planService.clearAdhocs();
+    this.planService.clearAdhocs();
     this.router.navigate(['/dashboard']);
   }
 

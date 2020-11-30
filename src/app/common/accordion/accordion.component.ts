@@ -15,6 +15,7 @@ export class AccordionComponent implements OnInit {
   @Input() disabled:boolean;
   @Input() locked:boolean;
   @Input() defaultOpen:boolean;
+  @Input() label:string;
 
   @ViewChild('drawerToggle') drawerToggle: ElementRef;
 

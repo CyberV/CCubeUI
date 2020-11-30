@@ -11,17 +11,17 @@ ion-slides {
 }
 
 ion-slide {
-    height: 110%;
     margin-top: -55px;
     top: 0;
     opacity:0.4;
     position: relative;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    padding-top: 50px;
+    
 }
 
 ion-slide.swiper-slide-active {
-    max-height: 100%;
-    height: 100%;
+    padding: 0;
     opacity:1;
     top: 0;
 

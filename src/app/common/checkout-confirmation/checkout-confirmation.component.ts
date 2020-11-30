@@ -10,14 +10,40 @@ export class CheckoutConfirmationComponent implements OnInit {
 
   @Input() details:any;
 
+  hasAddons:boolean;
+  hasAdhocs:boolean;
+  totalAmount:any;
+
+  mode:any;
+
   constructor(
     private modalController: ModalController
   ) {
 
     this.details = {};
+    this.hasAddons = false;
+    this.hasAdhocs = false;
+    this.totalAmount = 0;
+    this.mode = null;
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.details) {
+      this.hasAddons = !!(this.details.addons && this.details.addons.length);
+      this.hasAdhocs = !!(this.details.adhocs && this.details.adhocs.length);
+      this.totalAmount = this.details.total;
+      this.mode = this.details.mode;
+  }
+  }
+
+  ngOnChanges(changes) {
+    if (changes.details && this.details) {
+        this.hasAddons = !!(this.details.addons && this.details.addons.length);
+        this.hasAdhocs = !!(this.details.adhocs && this.details.adhocs.length);
+        this.totalAmount = this.details.total;
+        this.mode = this.details.mode;
+    }
+  }
 
   dismissAndPay() {
     this.modalController.dismiss({

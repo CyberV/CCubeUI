@@ -264,3 +264,15 @@ padding:0 !important;
   vertical-align: middle;
   line-height: normal;
 }
+
+.--padding-x {
+  padding: 0 15px;
+}
+
+.--padding {
+  padding: 15px;
+}
+.--padding-y {
+  padding: 15px 0px;
+  margin:0;
+}

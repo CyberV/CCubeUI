@@ -43,17 +43,37 @@
               </div>
             </div>
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item" *ngIf="mode && mode.plan">
             <div class="row">
               <div class="col-6">
-                  Selected Plan
+                  Selected {{mode.plan ? 'Plan':  (mode.addhoc ? 'Service' :'Addon')}}
               </div>
               <div class="col-6">
-                  {{details.plan.name}}
+                  {{mode.plan ? details.plan.name: (mode.addhoc ? details.info.adhocs : details.info.addons )}}
               </div>
             </div>
           </li>
-          <li *ngIf="details.plan.forRenew" class="list-group-item">
+          <li *ngIf="hasAddons" class="list-group-item">
+              <div class="row">
+                <div class="col-6">
+                    Addons Included
+                </div>
+                <div class="col-6">
+                    {{details.info.addons}}
+                </div>
+              </div>
+            </li>
+            <li *ngIf="hasAdhocs" class="list-group-item">
+                <div class="row">
+                  <div class="col-6">
+                      Services Included
+                  </div>
+                  <div class="col-6">
+                      {{details.info.adhocs}}
+                  </div>
+                </div>
+              </li>
+          <li *ngIf="details.plan && details.plan.forRenew" class="list-group-item">
               <div class="row">
                 <div class="col-6">
                     Period
@@ -69,7 +89,7 @@
                   Final Price :
               </div>
               <div class="col-6">
-                  <span Rs>{{details.plan.price}}</span>
+                  <span Rs>{{totalAmount}}</span>
               </div>
             </div>
           </li>

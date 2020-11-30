@@ -6,8 +6,9 @@
     padding-left: 0;
     padding-right: 0;
 
+
     .card-top {
-        background: $primary-color;
+        background: lighten($primary-color, 5%);
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
         color: white;

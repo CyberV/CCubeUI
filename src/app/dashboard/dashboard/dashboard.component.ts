@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import plansList from 'assets/planslist.json';
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform, MenuController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
 import { PlanTableComponent } from 'app/common/plan-table/plan-table.component';
@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 import { ModalPage } from 'app/modal/modal.page';
 import { CarService } from 'app/services/car.service';
 import { PlanService } from 'app/services/plan.service';
+import { scrollElementToTop } from 'app/util/util';
+import { PlanSliderComponent } from 'app/common/plan-slider/plan-slider.component';
+
 
 declare var $: any;
 
@@ -19,6 +22,8 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
 
   @Input() currentCar: any;
+  @Input() includedAddons:any;
+  @Input() includedAdhocs:any;
 
   selectedPlan: any;
 
@@ -30,12 +35,15 @@ export class DashboardComponent implements OnInit {
 
   slideOpts: any;
 
+  @ViewChildren('planSlider') planSlider: QueryList<HTMLElement>;
+
   constructor(
     private carService: CarService,
     private platform: Platform,
     public modalController: ModalController,
     private menu: MenuController,
     private planService:PlanService,
+    private toastController:ToastController,
     private router: Router
   ) {
     this.currentCar = {};
@@ -43,6 +51,7 @@ export class DashboardComponent implements OnInit {
     this.currentPlans = plansList;
     this.isPlanSelected = false;
     this.selectedPlan = {};
+    this.includedAddons = [];
 
     this.slideOpts = {
       initialSlide: 1,
@@ -87,11 +96,15 @@ export class DashboardComponent implements OnInit {
 
 
   async ngOnInit() {
+    
   }
 
   async ngAfterViewInit() {
 
     this.planService.clear();
+    this.planService.clearAddons();
+    this.planService.clearAdhocs();
+    //this.includedAddons = this.planService.getIncludedAddons();
 
     this.isPlanSelected = false;
     
@@ -107,6 +120,30 @@ export class DashboardComponent implements OnInit {
       this.currentCar = car;
       this.isCarSelected = true;
     }
+  }
+
+  onAddonSelect(addon) {
+
+    this.planService.includeAddon(addon);
+
+    this.presentToast('Please select a Plan');
+
+    $('.container')[0].scrollTop = 0;
+  }
+
+  onAdhocSelect(adhoc) {
+    this.planService.clear();
+    this.planService.includeAdhoc(adhoc);
+    this.router.navigate(['/dashboard/adhoc'])
+
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
   resetCar() {

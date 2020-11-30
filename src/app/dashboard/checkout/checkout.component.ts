@@ -23,6 +23,10 @@ export class CheckoutComponent implements OnInit {
   carMismatch: boolean;
   carIdentified: boolean;
 
+  //current Order
+  order:any;
+
+
   errors: any;
   context: string;
   ready: boolean;
@@ -32,12 +36,17 @@ export class CheckoutComponent implements OnInit {
   step2Ready: boolean;
   step3Ready: boolean;
   verificationComplete: boolean;
+  selectedAddon: any;
+  selectedAdhoc: any;
 
   currentUser: any;
   currentLocation: any;
   officeTime: string;
   loading: boolean;
   forRenew: boolean;
+  includedAddons: any;
+  includedAdhocs: any;
+  mode:any;
 
 
   page: string;
@@ -68,6 +77,12 @@ export class CheckoutComponent implements OnInit {
     this.verificationComplete = false;
     this.forRenew = false;
     this.selectedCar = null;
+    this.selectedAddon = null;
+    this.selectedAdhoc = null;
+    this.order = null;
+    this.includedAddons = [];
+    this.includedAdhocs = [];
+    this.mode = {};
 
 
     this.errors = {
@@ -96,6 +111,10 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  backToDashboard() {
+    this.router.navigate(['/dashboard/service']);
+  }
+
   changeCar() {
     this.carService.clear();
     this.router.navigate(['/dashboard/select-car']);
@@ -111,20 +130,27 @@ export class CheckoutComponent implements OnInit {
 
   confirmCheckout() {
 
-    if (this.forRenew) {
+    this.generateOrder();
+
+    if (this.forRenew || (!this.mode.plan && (this.mode.addon || this.mode.adhoc))) {
       this.showConfirmation();
     } else {
       this.router.navigate(['/dashboard/checkout/confirm']);
-
     }
   }
 
   async showConfirmation() {
     this.currentUser = this.userService.getCurrentUser();
+    let order = this.planService.getCurrentOrder();
     let payload = {
       userName: this.currentUser.name,
-      car: this.selectedCar,
-      plan: this.planService.getSelectedPlan()
+      car: order.car,
+      plan: order.plan,
+      mode: this.mode,
+      addons: order.addons,
+      adhocs: order.adhocs,
+      info: order.info,
+      total: order.total
     };
     const modal = await this.modalController.create({
       component: CheckoutConfirmationComponent,
@@ -140,6 +166,7 @@ export class CheckoutComponent implements OnInit {
     modal.onDidDismiss().then((data: any) => {
 
       if (data && data.data && data.data.amount) {
+        this.generateOrder();
         this.payNow();
       }
 
@@ -156,46 +183,59 @@ export class CheckoutComponent implements OnInit {
     });
 
   }
+  ngOnChanges(changes) {
+
+  }
+
+  onAdhocSelected(adhoc) {
+    this.includedAdhocs = this.includedAdhocs.some((a) => a.name == adhoc.name) ? this.planService.excludeAdhoc(adhoc) : this.planService.includeAdhoc(adhoc);
+    this.refreshCarAndPlans();
+
+  }
+
+  onAddonSelected(addon) {
+    this.includedAddons = this.includedAddons.some((a) => a.name == addon.name) ? this.planService.excludeAddon(addon) : this.planService.includeAddon(addon);
+    this.refreshCarAndPlans();
+  }
 
   refreshCarAndPlans() {
     this.currentUser = this.userService.getCurrentUser();
     let loc = sessionStorage.getItem('userLocation');
 
-    if (loc && loc!= 'null') {
+    if (loc && loc != 'null') {
       this.currentLocation = loc;
     }
 
     let car = this.carService.getCurrentCar();
 
+
+    this.includedAddons = this.planService.getIncludedAddons();
+    this.includedAdhocs = this.planService.getIncludedAdhocs();
+
+    if (this.includedAddons && this.includedAddons.length) {
+      this.selectedAddon = this.includedAddons[this.includedAddons.length -1];
+    }
+
+    if (this.includedAdhocs && this.includedAdhocs.length) {
+      this.selectedAdhoc = this.includedAdhocs[this.includedAdhocs.length -1];
+    }
+
     if (car) {
       this.selectedCar = car;
-      if (this.selectedCar.fuelType) {
-        this.carIdentified = true;
-        this.carMismatch = false;
-        this.step2Ready = true;
-        setTimeout(()=>{
-          this.drawerLocation.first.toggle();
-        },1000);
-      } else {
-        setTimeout(()=>{
-          this.drawerCar.first.toggle();
-        },1000);
-        
-      }
-    } else {
-      this.errors.car = true;
-      this.router.navigate(['/dashboard/select-car']);
     }
 
     let plan = this.planService.getSelectedPlan();
 
     if (!plan) {
       this.errors.plan = true;
+      this.selectedPlan = null;
     } else {
       this.selectedPlan = plan;
 
       this.forRenew = !!this.selectedPlan.forRenew;
     }
+
+    this.generateOrder();
 
 
   }
@@ -222,7 +262,7 @@ export class CheckoutComponent implements OnInit {
       this.step3Ready = true;
       this.drawerLocation.first.toggle();
 
-      setTimeout(()=>{
+      setTimeout(() => {
         this.drawerTime.first.toggle();
       }, 500);
     }, 200);
@@ -244,7 +284,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   completeVerification() {
-    
+
     this.verificationComplete = true;
     this.drawerTime.first.toggle();
 
@@ -255,53 +295,123 @@ export class CheckoutComponent implements OnInit {
 
   ionViewWillEnter() {
 
+    this.refreshCarAndPlans();
+
+    if (this.context === 'confirm') {
+      let car = this.carService.getCurrentCar();
+
+      if (car) {
+        this.selectedCar = car;
+        if (this.selectedCar.fuelType) {
+          this.carIdentified = true;
+          this.carMismatch = false;
+          this.step2Ready = true;
+          setTimeout(() => {
+            this.drawerLocation.first.toggle();
+          }, 1000);
+        } else {
+          setTimeout(() => {
+            this.drawerCar.first.toggle();
+          }, 1000);
+
+        }
+      } else {
+        this.errors.car = true;
+        this.router.navigate(['/dashboard/select-car']);
+      }
+    }
+
     this.checkoutService.events().subscribe((evt) => {
       if (evt.success) {
         let updatedPlan = this.planService.getSelectedPlan();
-        let payload :any = {
+        let payload: any = {
           phone: this.currentUser.phone,
           plan: updatedPlan,
           car: this.selectedCar,
+          addons: this.planService.getIncludedAddons(),
+          adhocs: this.planService.getIncludedAdhocs(),
           location: this.currentLocation,
           officeTime: this.officeTime,
           startDate: +(new Date()),
-          lastDate: updatedPlan.lastDate
+          lastDate: updatedPlan && updatedPlan.lastDate
         };
 
-        if (this.forRenew) {
-          payload.forRenew = true;
-          payload.lastDate = updatedPlan.lastDate;
-          this.loginService.renewPayment(payload).subscribe((d: any) => {
-            console.log('Renew payment response', d);
+        if (this.mode.plan) {
+
+          if (this.forRenew) {
+            payload.forRenew = true;
+            payload.lastDate = updatedPlan.lastDate;
+            this.loginService.renewPayment(payload).subscribe((d: any) => {
+              console.log('Renew payment response', d);
+              this.loading = false;
+              if (d.success) {
+                sessionStorage.setItem('currentPayment', JSON.stringify(payload));
+                this.router.navigate(['/dashboard/thanks']);
+              } else {
+                alert(
+                  'Please try again!'
+                );
+              }
+  
+            });
+
+          } else {
+            this.loginService.addPayment(payload).subscribe((d: any) => {
+              console.log('add payment response', d);
+              this.loading = false;
+              if (d.success) {
+                sessionStorage.setItem('currentPayment', JSON.stringify(d.data));
+                this.router.navigate(['/dashboard/thanks']);
+              } else {
+                alert(
+                  'Please try again!'
+                );
+              }
+  
+            });
+          }
+
+        } else {
+
+          if (this.mode.addon) {
+
+                      // Buy Addon
+          this.loginService.addAddon(payload).subscribe((d: any) => {
+            console.log('add addon response', d);
             this.loading = false;
             if (d.success) {
-              sessionStorage.setItem('currentPayment', JSON.stringify(payload));
+              //this.carService.changeAddon(d.data);
+              sessionStorage.setItem('currentPayment', JSON.stringify(d.data));
               this.router.navigate(['/dashboard/thanks']);
             } else {
               alert(
                 'Please try again!'
               );
             }
-  
-          })
 
-        } else {
-          this.loginService.addPayment(payload).subscribe((d: any) => {
-          console.log('add payment response', d);
-          this.loading = false;
-          if (d.success) {
-            sessionStorage.setItem('currentPayment', JSON.stringify(payload));
-            this.router.navigate(['/dashboard/thanks']);
-          } else {
-            alert(
-              'Please try again!'
-            );
+          });
+
+          } else if (this.mode.adhoc) {
+
+            
+                      // Buy Adhoc
+          this.loginService.addAdhoc(payload).subscribe((d: any) => {
+            console.log('add addon response', d);
+            this.loading = false;
+            if (d.success) {
+              sessionStorage.setItem('currentPayment', JSON.stringify(d.data));
+              this.router.navigate(['/dashboard/thanks']);
+            } else {
+              alert(
+                'Please try again!'
+              );
+            }
+
+          });
           }
 
-        })
         }
 
-        
 
       } else {
         alert(
@@ -312,11 +422,12 @@ export class CheckoutComponent implements OnInit {
 
     switch (this.context) {
       case 'checkout': {
-        this.headerService.setText('Your Selected Plan');
+        this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc?  'Service' : 'Addon')));
         break;
-      }
+      } 
       case 'confirm': {
-        this.headerService.setView('checkout', { amount: this.selectedPlan.price });
+        let order = this.planService.getCurrentOrder();
+        this.headerService.setView('checkout', { amount: order.total });
         break;
       }
       default: this.router.navigate(['/dashboard']);
@@ -330,9 +441,30 @@ export class CheckoutComponent implements OnInit {
     }, 200);
   }
 
+  generateOrder() {
+    let plan = !!this.selectedPlan;
+    let addon = !!(this.includedAddons && this.includedAddons.length);
+    let adhoc = !!(this.includedAdhocs && this.includedAdhocs.length);
+
+    this.mode = {
+      plan,
+      addon,
+      adhoc
+    };
+
+    let order = {
+      addons: this.includedAddons,
+      adhocs: this.includedAdhocs,
+      plan: this.planService.getSelectedPlan(),
+      car: this.selectedCar
+    };
+
+    this.order = this.planService.lockCurrentOrder(order);
+  }
+
   payNow() {
     this.loading = true;
-    this.checkoutService.createOrder(this.selectedPlan.price).subscribe((res: any) => {
+    this.checkoutService.createOrder(this.order.total).subscribe((res: any) => {
       if (res.success) {
         let orderId = res.data.id;
         let order = res.data;
@@ -344,7 +476,7 @@ export class CheckoutComponent implements OnInit {
         this.loading = false;
         console.log('Error creating order', res.errorMsg, res.error);
       }
-    })
+    });
   }
 
   verifyCar(carDetails) {

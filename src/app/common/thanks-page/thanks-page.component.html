@@ -74,7 +74,7 @@
               <span></span>
 
             </div>
-            <ng-container *ngIf="startDate">
+            <ng-container *ngIf="startDate && payment">
               <div class="row">
               <div class="col-12">
                 <span>Date</span><br />
@@ -93,7 +93,7 @@
             <div class="row">
               <div class="col-12">
                 <span>Net Payment</span><br />
-                <span Rs >{{payment.plan ? payment.plan.price :  '600'}}</span>
+                <span Rs >{{order.total}}</span>
               </div>
             </div>
             <hr />

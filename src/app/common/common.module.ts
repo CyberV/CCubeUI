@@ -12,6 +12,7 @@ import { HighlightDirective } from './highlight.directive';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { ChartComponent } from './chart/chart.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { ChartsModule } from 'ng2-charts';
 import { ChartViewComponent } from './chart-view/chart-view.component';
@@ -64,6 +65,14 @@ import { DocumentUploaderComponent } from './document-uploader/document-uploader
 import { SelectSocietyComponent } from './select-society/select-society.component';
 import { DragListComponent } from './drag-list/drag-list.component';
 import { UpgradeSliderComponent } from './upgrade-slider/upgrade-slider.component';
+import { AddonDetailsComponent } from './addon-details/addon-details.component';
+import { NotifMenuComponent } from './notif-menu/notif-menu.component';
+import { AdhocSliderComponent } from './adhoc-slider/adhoc-slider.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatepickerComponent } from './datepicker/datepicker.component';
+
+
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -112,6 +121,10 @@ import { UpgradeSliderComponent } from './upgrade-slider/upgrade-slider.componen
     SelectSocietyComponent,
     DragListComponent,
     UpgradeSliderComponent,
+    AddonDetailsComponent,
+    NotifMenuComponent,
+    AdhocSliderComponent,
+    DatepickerComponent,
 
     // Directives
     RsDirective,
@@ -131,6 +144,8 @@ import { UpgradeSliderComponent } from './upgrade-slider/upgrade-slider.componen
     NgxMaterialTimepickerModule,
     FormsModule,
     MatCheckboxModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     
     TooltipModule,
     RouterModule
@@ -181,7 +196,11 @@ import { UpgradeSliderComponent } from './upgrade-slider/upgrade-slider.componen
     SelectSocietyComponent,
     UpgradeSliderComponent,
     DragListComponent,
-
+    AddonDetailsComponent,
+    NotifMenuComponent,
+    AdhocSliderComponent,
+    DatepickerComponent,
+    
     //Directives
 
     RsDirective

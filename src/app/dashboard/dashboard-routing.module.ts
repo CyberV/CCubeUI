@@ -26,7 +26,16 @@ const routes: Routes = [
   {
     path: 'plan',
     component: DashboardPageComponent
-  }, {
+  },
+  {
+    path: 'adhoc',
+    component: DashboardPageComponent
+  }, 
+  {
+    path: 'addon',
+    component: DashboardPageComponent
+  }, 
+  {
     path: 'select-car',
     component: DashboardPageComponent
   }, {

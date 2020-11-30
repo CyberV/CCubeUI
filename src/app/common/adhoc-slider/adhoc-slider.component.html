@@ -1,0 +1,37 @@
+<div class="--padding-x">
+    <heading text="SERVICES" size="24" capitalize="true" align="center"></heading>
+
+
+    <ion-slides [options]="options">
+    
+        <ion-slide *ngFor="let adhoc of adhocs; let i = index;">
+
+          <mat-card class="card adhoc-card animate__animated animate__flipInX" [class.selected]="isSelected(adhoc)" [class.active]="active && isSelected(adhoc)">
+            <img class="card-img-top" [src]="'assets/icons/' + adhoc.icon +  '.png'" alt="Card image cap">
+            <div class="">
+
+              <div>
+                  <span class="card-text" [class.contrast]="i%2!=0">{{adhoc.name}}</span>
+              </div>
+              <div class="bottom">
+                  <div class="ion-no-margin rate">
+                      <span Rs>{{adhoc.price}}</span>
+                  </div>
+                    <cta *ngIf="!isSelected(adhoc)" (action)="selectAdhoc(adhoc)" text="ADD" outline="true" small="true"></cta>
+                    <span class="animate__animated animate__fadeInUp" *ngIf="isSelected(adhoc)">
+                      <h2 class="--padding-y" >{{active ? 'ACTIVE' : 'Added!'}}</h2>
+                      <span *ngIf="!active" (click)="selectAdhoc(adhoc)"  class="badge badge-light ">Remove</span>
+                    </span>
+              </div>
+              
+            </div>
+          </mat-card>
+    
+    
+    
+        </ion-slide>
+    
+    
+    
+      </ion-slides>
+</div>

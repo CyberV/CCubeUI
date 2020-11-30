@@ -11,12 +11,14 @@ export class LoginComponent implements OnInit {
   @Input() context:string;
 
   showLogin:boolean;
+  loginOnly:boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute
   ) { 
 
     this.showLogin = false;
+    this.loginOnly = false;
   }
 
   ionViewWillEnter() {

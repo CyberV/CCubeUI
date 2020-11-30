@@ -1,7 +1,8 @@
-<div class="headers-top">
+<div class="body">
+  <div class="headers-top">
     <div class="row">
       <div class="col-5 text-right --no-padding-right">
-          {{car.maker | uppercase}} 
+        {{car.maker | uppercase}}
       </div>
       <div class="col-1">
         |
@@ -11,67 +12,68 @@
       </div>
     </div>
   </div>
-<mat-card class="card-container">
+  <mat-card class="card-container" *ngIf="mode && (mode.plan || mode.addon || mode.adhoc)">
 
-  <div class="top">
-    <div>
-      <div class="row header-row">
-        <div class="col-4">
-          Plan
-        </div>
-        <div class="col-4">
-          Type
-        </div>
-        <div class="col-4 --no-padding-left">
-          Amount
-        </div>
-      </div>
-      <div class="row content-row">
-        <div class="col-4">
-          {{plan.name}}
-        </div>
-        <div class="col-4 body-type">
-          {{car.bodyType}}
-        </div>
-        <div class="col-4">
-          <span Rs>{{plan.price}} </span>
-        </div>
-      </div>
-
-      <!-- <div class="row header-row">
-          <div class="col-4">
-            Maker
+    <div class="top">
+      <div>
+        <div class="row header-row">
+          <div class="col-5">
+            {{ productLabel}}
           </div>
-          <div class="col-8">
-            Model
+          <div class="col-3">
+            Type
+          </div>
+          <div class="col-4 --no-padding-left text-center">
+            Amount
           </div>
         </div>
         <div class="row content-row">
-          <div class="col-4">
-            {{car.maker}}
+          <div class="col-5">
+              {{ productName}}
           </div>
-          <div class="col-8 body-type">
-            {{car.model}}
+          <div class="col-3 body-type">
+            {{car.bodyType}}
           </div>
-        </div> -->
-      <div *ngIf="car.regNo" class="row content-row">
-          <div class="col-12">
-              <ion-icon name="car-sport-outline" class="vertical-center-text"></ion-icon> <span
-                class="vertical-center-text">{{car.regNo | uppercase}} </span>
+          <div class="col-4 text-center">
+            <span Rs>{{ productPrice}} </span>
+          </div>
+        </div>
+
+        <!-- <div class="row header-row">
+              <div class="col-4">
+                Maker
+              </div>
+              <div class="col-8">
+                Model
+              </div>
             </div>
-      </div>
-      
-      <ng-container *ngIf="plan.forRenew">
-        <div class="row content-row">
+            <div class="row content-row">
+              <div class="col-4">
+                {{car.maker}}
+              </div>
+              <div class="col-8 body-type">
+                {{car.model}}
+              </div>
+            </div> -->
+
+        <div *ngIf="car.regNo" class="row content-row">
           <div class="col-12">
-            <ion-icon name="calendar-outline" class="vertical-center-text"></ion-icon> <span
-              class="vertical-center-text"> {{plan.period}}</span>
+            <ion-icon name="car-sport-outline" class="vertical-center-text"></ion-icon>
+            <div class="vertical-center-text">{{car.regNo | uppercase}} </div>
           </div>
-         
         </div>
-      </ng-container>
-      <div class="row" [style.marginTop.em]="1" *ngIf="lastPlan.name != 'Elite'">
-        <br/><br/>
+
+        <ng-container *ngIf="plan && plan.period">
+          <div class="row content-row">
+            <div class="col-12">
+              <ion-icon name="calendar-outline" class="vertical-center-text"></ion-icon> <span
+                class="vertical-center-text"> {{plan.period}}</span>
+            </div>
+
+          </div>
+        </ng-container>
+        <div class="row" [style.marginTop.em]="1" *ngIf="plan && lastPlan.name != 'Elite'">
+          <br /><br />
           <div class="col-12">
             <span>
               <mat-checkbox [checked]="upgradeSelected" (change)="toggleUpgrade()">
@@ -95,23 +97,47 @@
               <span *ngIf="lastPlan.name == 'Deluxe'">
                 Elite
               </span>
-              <span class="upgrade-price" Rs> {{upgradePrice}}</span>
+              @ <span class="upgrade-price" Rs> {{upgradePrice}}</span>
             </span>
           </div>
         </div>
 
+      </div>
+      <div>
+        <cc-accordion *ngIf="includedAddons && includedAddons.length" [label]="addonPrice" [title]="'Addons Included'" compact="true">
+          <ion-list>
+            <ion-item *ngFor="let adn of includedAddons">
+              <ion-label>
+                <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
+                <span class="badge badge-light" (click)="sendRemoveAddon(adn)">Remove</span>
+                <span class="addon-price float-right" Rs>{{adn.price}}</span>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </cc-accordion>
+        <cc-accordion *ngIf="includedAdhocs && includedAdhocs.length" [label]="adhocPrice" [title]="'Services Included'" compact="true">
+            <ion-list>
+              <ion-item *ngFor="let adn of includedAdhocs">
+                <ion-label>
+                  <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
+                  <span class="badge badge-light" (click)="sendRemoveAdhoc(adn)">Remove</span>
+                  <span class="addon-price float-right" Rs>{{adn.price}}</span>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </cc-accordion>
+        <cc-accordion [title]="addon? 'Addon Details' : 'Plan Details'" [compact]="true">
+          <plan-details *ngIf="plan" [plan]="plan" [compact]="true"></plan-details>
+          <addon-details *ngIf="addon" [addon]="addon"></addon-details>
+        </cc-accordion>
+      </div>
     </div>
-    <div>
-      <cc-accordion title="Plan Details" [compact]="true">
-        <plan-details [plan]="plan" [compact]="true"></plan-details>
-      </cc-accordion>
+    <div class="bottom container">
+      <div class="row">
+        <div class="col-8">Net Payable</div>
+        <div class="col-4 text-center"> <span> &#8377; {{ getTotalPayable()}}</span></div>
+        <div class="col-8 tax-row">(Inclusive of all taxes)</div>
+      </div>
     </div>
-  </div>
-  <div class="bottom container">
-    <div class="row">
-      <div class="col-8">Net Payable</div>
-      <div class="col-4"> <span> &#8377; {{plan.price}}</span></div>
-      <div class="col-8 tax-row">(Inclusive of all taxes)</div>
-    </div>
-  </div>
-</mat-card>
+  </mat-card>
+</div>

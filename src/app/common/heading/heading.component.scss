@@ -14,11 +14,14 @@
 
 .capitalized {
 
+    letter-spacing: 4px;
+
     .char {
 
                 display: inline-block;  
                 &:first-of-type {
                     color: $secondary-color;
+                    font-size: 32px;
                 }
             }  
     .word {

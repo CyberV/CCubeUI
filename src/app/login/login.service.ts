@@ -15,6 +15,7 @@ import { Observable, throwError } from 'rxjs';
 import { MD5 } from 'crypto-js';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 //var CryptoJS = require("crypto-js");
 
@@ -22,7 +23,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 // import { crypto } from 'crypto-js';
 
-
+declare var _that;
 @Injectable({
   providedIn: 'root'
 })
@@ -34,12 +35,24 @@ export class LoginService {
   private url: string = 'http://localhost:4000/api/';
   private carUrl: string = this.url + "car/details/";
 
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+  
+
   constructor(
     private http: HttpClient,
     private srvcUser: UserService,
+    private toastController: ToastController,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) { 
+    //_that = this;
+  }
 
 
   sendOtp(phone: string, email: string = null) {
@@ -98,8 +111,9 @@ export class LoginService {
   loginWithOtp(phone, otp) {
     let payload = {
       phone: phone,
-      otp: this.resendOtp
+      otp: otp
     };
+    //let xx = _that;
 
 
     return this.http.post(this.url + 'login/otp', payload).pipe(
@@ -123,6 +137,18 @@ export class LoginService {
 
   addPayment(payment) {
     return this.http.post(this.url + 'subscription/addpayment', payment).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addAddon(addon) {
+    return this.http.post(this.url + 'subscription/addaddon', addon).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addAdhoc(adhoc) {
+    return this.http.post(this.url + 'subscription/addadhoc', adhoc).pipe(
       catchError(this.handleError)
     );
   }

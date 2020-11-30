@@ -1,20 +1,27 @@
-<div>
+<div class="--padding-x">
+    <heading text="ADDONS" size="24" capitalize="true" align="center"></heading>
+
 
     <ion-slides [options]="options">
     
         <ion-slide *ngFor="let addon of addOns; let i = index;">
 
-          <mat-card class="card addon-card animate__animated animate__flipInX">
+          <mat-card class="card addon-card animate__animated animate__flipInX"  [class.selected]="isSelected(addon)" [class.active]="active && isSelected(addon)">
             <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
             <div class="">
+
               <div>
-                  <span class="card-text" [class.contrast]="i%2!=0">{{addon.title}}</span>
+                  <span class="card-text" [class.contrast]="i%2!=0">{{addon.name}}</span>
               </div>
               <div class="bottom">
                   <div class="ion-no-margin rate">
                       <span Rs>{{addon.price}}</span>
                   </div>
-                    <cta text="Buy" outline="true" small="true"></cta>
+                    <cta *ngIf="!isSelected(addon)" (action)="selectAddon(addon)" text="ADD" outline="true" small="true"></cta>
+                    <span class="animate__animated animate__fadeInUp" *ngIf="isSelected(addon)">
+                      <h2 class="--padding-y" > {{active ? 'ACTIVE' : 'Added!'}}</h2>
+                      <span *ngIf="!active" (click)="selectAddon(addon)"  class="badge badge-light ">Remove</span>
+                    </span>
               </div>
               
             </div>

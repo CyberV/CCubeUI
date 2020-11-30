@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../login.service';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,11 +12,14 @@ import { ToastController } from '@ionic/angular';
 export class SigninFormComponent implements OnInit {
 
   @Input() context:string;
+  @Output() forgotPassword = new EventEmitter();
 
   user:any;
   loading:boolean;
   showError: boolean;
   errorMsg: string;
+
+  mobileError:string;
 
   @ViewChildren('inpPass') inpPass : QueryList<HTMLElement>;
   @ViewChildren('ctaLogin') ctaLogin : QueryList<HTMLElement>;
@@ -40,6 +43,7 @@ export class SigninFormComponent implements OnInit {
     this.loading = false;
     this.showError= false;
     this.errorMsg= "";
+    this.mobileError = null;
 
    }
 
@@ -65,6 +69,16 @@ export class SigninFormComponent implements OnInit {
   }
 
   onForgotPassword() {
+    //this.srvcLogin.sendOtp()
+
+    console.log('wtf');
+    this.forgotPassword.emit();
+
+      // this.mobileError = !this.user.mobile || this.user.mobile.length < 10 ? 'Please Enter a Valid Phone Number' : null;
+    
+      // if (!this.mobileError) {
+        
+      // }
     
   }
 

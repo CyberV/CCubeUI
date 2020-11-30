@@ -1,28 +1,41 @@
-
 <ion-content>
-    <div class="container-fluid">
-      <div class="row dashboard-content">
-        <div class="offset-md-2 col-md-8">
-          <div class="container">
-            <ng-container *ngIf="ready">
-              <app-dashboard *ngIf="context==='dashboard'" [currentCar]="selectedCar"></app-dashboard>
-              <car-form *ngIf="context==='select-car'" [regNo]="selectedCar ? selectedCar.regNo :'' " (carReady)="goToDashboard($event)"></car-form>
-              <div  *ngIf="context==='plan' && selectedPlan">
-                  <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
-                  <plan-details  [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
-                  </plan-details>
-                  <addon-slider></addon-slider>
-                  <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
-              </div>
-              <app-service-page *ngIf="context==='service'" [payments]="payments" >
-                
-              </app-service-page>
-            </ng-container>
-            <spinner *ngIf="!ready" color="blue"></spinner>
-              
-          </div>
+  <div class="container-fluid">
+    <div class="row dashboard-content">
+      <div class="offset-md-2 col-md-8">
+        <div class="container">
+          <ng-container *ngIf="ready">
+            <app-dashboard *ngIf="context==='dashboard'" [includedAddons]="includedAddons"
+              [includedAdhocs]="includedAdhocs" [currentCar]="selectedCar"></app-dashboard>
+            <car-form *ngIf="context==='select-car'" [regNo]="selectedCar ? selectedCar.regNo :'' "
+              (carReady)="goToDashboard($event)"></car-form>
+            <div *ngIf="context==='plan' && selectedPlan">
+              <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
+              <plan-details [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
+              </plan-details>
+              <addon-slider (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
+              <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
+            </div>
+            <div *ngIf="context==='adhoc' && selectedAdhoc">
+              <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
+              <addon-details [adhoc]="selectedAdhoc" (changeAddon)="goToDashboard()" (sendScheduleLater)="goToCheckout()" (scheduleDate)="setDateForAdhoc($event)">
+              </addon-details>
+              <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
+            </div>
+            <div  *ngIf="context==='addon' && selectedAddon">
+                <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
+                <addon-details  [addon]="selectedAddon" (changeAddon)="goToDashboard()" (sendScheduleLater)="goToCheckout()">
+                </addon-details>
+                <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
+            </div>
+            <app-service-page *ngIf="context==='service'" [payments]="payments">
+
+            </app-service-page>
+          </ng-container>
+          <spinner *ngIf="!ready" color="blue"></spinner>
 
         </div>
+
       </div>
-      </div>
+    </div>
+  </div>
 </ion-content>

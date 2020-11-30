@@ -49,14 +49,37 @@ export class CarService {
   changeCar(carDetails) {
     if (carDetails) {
       let found = findMatchingCar(carDetails);
-      sessionStorage.setItem('currentCar', JSON.stringify(found? found : carDetails));
+      sessionStorage.setItem('currentCar', JSON.stringify(found ? found : carDetails));
     }
   }
 
-  clear() {
-    sessionStorage.setItem('currentCar', null);
+  changeAddon(addonDetails) {
+    if (addonDetails) {
+      //let found = findMatchingCar(carDetails);
+      sessionStorage.setItem('currentAddon', JSON.stringify(addonDetails));
+      return addonDetails;
+    } else {
+      return null;
+    }
   }
 
+  clear(addonOnly = false) {
+    if (!addonOnly) {
+      sessionStorage.setItem('currentCar', null);
+    }
+    sessionStorage.setItem('currentAddon', null);
+  }
+
+  getCurrentAddon() {
+    let addon: any = sessionStorage.getItem('currentAddon');
+
+    if (addon && addon != "null") {
+      addon = JSON.parse(addon);
+      return addon;
+    } else {
+      return null;
+    }
+  }
 
 
   getCurrentCar() {
@@ -67,7 +90,7 @@ export class CarService {
 
       let found = findMatchingCar(car);
 
-      if(found) {
+      if (found) {
         return found;
       } else {
         return car;

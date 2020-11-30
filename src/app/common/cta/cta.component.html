@@ -9,7 +9,9 @@
         'btn-xs btn-small': small,
         'btn-lg btn-block': !small,
         'disabled': disabled,
-          'btn-outline-secondary': outline}"
+          'btn-outline-secondary': outline,
+          'btn-red': color=='red'
+        }"
 
         [style.fontSize.px]="size"
         (click)="onCtaClick()">

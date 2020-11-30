@@ -1,0 +1,62 @@
+@import 'src/variables.scss';
+
+.mobile-date {
+    margin-top: 1em;
+    label {
+        color: $primary-color;
+        font-weight: 500;
+        margin-bottom:0;
+    }
+
+    input {
+        border: none;
+        border-bottom: 1px solid #bcbcbc;
+        border-radius: 0;
+        background: transparent;
+        color: $bg-black;
+    }
+
+    .error-field {
+        border-bottom: 1px solid red;
+        width: 100%;
+    }
+
+    .readonly {
+        border: none;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .error-msg {
+        color: #6f6666;
+        margin-top: 8px;
+        border-bottom: none;
+        font-weight: 300;
+    }
+
+    .not-mobile {
+        padding:0;
+        height:25px;
+    }
+
+    .mandatory-link {
+        color: $secondary-color;
+    }
+
+    span {
+        border: none;
+        border-bottom: 1px solid #bcbcbc;
+        background: transparent;
+        font-weight: bold;
+        border-radius: 0;
+        color: black;
+        padding-left: 0;
+    }
+}
+
+ion-icon {
+    font-size: 24px !important;
+    margin-right: 10px;
+}

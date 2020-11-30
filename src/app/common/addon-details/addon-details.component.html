@@ -1,0 +1,76 @@
+<div class="addon-container">
+  <div class="addon-info">
+    <h2 #pageTop><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+    <p>
+      <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for 1 month.</span>
+    </p>
+    <p>
+        <span  class="startLabel">
+          Starts from <span>{{startDate}}</span>
+        </span>
+      </p>
+  </div>
+  <ion-list>
+    <ion-list-header>
+      <span class="description">{{addon.description}}</span>
+    </ion-list-header>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Details</ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label>
+          <ion-icon class="water" name="water-outline"></ion-icon> Water Efficient
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>
+          <ion-icon class="time" name="timer-outline"></ion-icon> Long Lasting
+        </ion-label>
+      </ion-item>
+
+      <ng-container *ngIf="!isAdhoc">
+        <ion-item-divider>
+          <ion-label>Frequency</ion-label>
+        </ion-item-divider>
+
+        <ion-item lines="none">
+          <ion-label>
+            <ion-icon class="frequency" name="cellular-outline"></ion-icon> Twice A Week
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="isAdhoc">
+          <ion-item-divider>
+            <ion-label>Schedule</ion-label>
+          </ion-item-divider>
+  
+          <ion-item lines="none">
+
+
+            <datepicker [readOnly]="laterSelected" [minDate]="minDate" [maxDate]="maxDate" [(value)]="selectedDate" placeholder="Period: Next 30 days" (valueChange)="selectDate($event)"></datepicker>
+           
+
+            <!-- <ion-label (click)="showDatePicker()">
+              <ion-icon class="calendar" name="cellular-outline"></ion-icon> Select a Date
+            </ion-label> -->
+          </ion-item>
+          <ion-item lines="none">
+              <heading text="OR" align="center"></heading>
+            
+          </ion-item>
+          <ion-item lines="none">
+              
+              <mat-checkbox [checked]="laterSelected" (change)="laterSelected = !laterSelected">
+                  Schedule Later
+  
+                </mat-checkbox>
+          </ion-item>
+          
+        </ng-container>
+    </ion-item-group>
+  </ion-list>
+</div>

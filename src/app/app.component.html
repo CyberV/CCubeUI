@@ -29,7 +29,17 @@
                   Dashboard
                 </div>
                 <div class="col-2 notif">
-                    <ion-icon name="notifications-outline"></ion-icon>
+                  
+
+                    <div class="btn-group">
+                        <ion-icon name="notifications-outline" (click)="presentPopover($event)"></ion-icon>
+
+                        <!-- <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                        </button>
+                        -->
+                      </div>
+                    
                 </div>
           </div>
         </div>

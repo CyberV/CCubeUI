@@ -1,0 +1,74 @@
+@import "src/variables.scss";
+
+ion-slides {
+  height: 333px;
+  border-radius: 15px;
+}
+
+ion-slides, ion-button {
+  margin-bottom: 1em;
+}
+
+ion-slide:nth-of-type(0){
+  margin-left: 15px;
+}
+.adhoc-card {
+
+  min-height: 260px;
+
+  &.selected {
+    
+    border: 3px solid $primary-color;
+  }
+
+  &.active {
+    
+    border: 3px solid green;
+  }
+
+  border-radius: 10px;
+  padding: 16px 0;
+
+  .badge-warning {
+    color:white;
+    font-size: 16px;
+  }
+  
+    .card-body {
+      padding-top: 0;
+    }
+
+    .bottom {
+ 
+    }
+  
+    .card-text {
+      min-height: 45px;
+      display: block;
+      max-height: 40px;
+
+      background: #01a3a68c;
+    color: white;
+    position: relative;
+    margin-top: -31px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    width: 100%;
+
+    &.contrast {
+      background: $secondary-light-color;
+    }
+    }
+
+    
+  
+    .rate {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }

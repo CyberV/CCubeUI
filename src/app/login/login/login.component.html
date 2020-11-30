@@ -7,9 +7,9 @@
       </div>
   <div class="row">
     <div class="col-12">
-      <app-login-form *ngIf="!showLogin" [context]="context"></app-login-form>
+      <app-login-form *ngIf="!showLogin || loginOnly" [context]="context" [loginOnly]="loginOnly"></app-login-form>
 
-      <app-signin-form *ngIf="showLogin"  [context]="context"></app-signin-form>
+      <app-signin-form *ngIf="showLogin && !loginOnly"  [context]="context" (forgotPassword)="loginOnly = true;"></app-signin-form>
     </div>
   </div>
 </div>

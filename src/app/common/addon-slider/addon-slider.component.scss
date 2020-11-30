@@ -8,10 +8,31 @@ ion-slides {
 ion-slides, ion-button {
   margin-bottom: 1em;
 }
+
+ion-slide:nth-of-type(0){
+  margin-left: 15px;
+}
 .addon-card {
+
+  min-height: 260px;
+
+  &.selected {
+    
+    border: 3px solid $primary-color;
+  }
+
+  &.active {
+    
+    border: 3px solid green;
+  }
 
   border-radius: 10px;
   padding: 16px 0;
+
+  .badge-warning {
+    color:white;
+    font-size: 16px;
+  }
   
     .card-body {
       padding-top: 0;

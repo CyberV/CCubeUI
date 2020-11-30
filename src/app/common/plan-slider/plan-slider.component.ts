@@ -37,7 +37,8 @@ export class PlanSliderComponent implements OnInit {
       centeredSlides: true,
     slidesPerView: 1.3,
     spaceBetween: 20,
-      speed: 400
+      speed: 400,
+      autoplay:true
     };
    }
 

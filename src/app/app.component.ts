@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
 
-import { Platform, MenuController, ToastController, AlertController } from '@ionic/angular';
+import { Platform, MenuController, ToastController, AlertController, PopoverController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from './header.service';
 import { UserService } from './services/user.service';
@@ -13,6 +13,8 @@ import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic';
 //import { FCM } from '../../plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
 
 import { LoginService } from './login/login.service';
+import { HeadingComponent } from './common/heading/heading.component';
+import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 
 declare var $;
 @Component({
@@ -46,6 +48,7 @@ export class AppComponent {
     private alertController: AlertController,
     private carService: CarService,
     public toastController: ToastController,
+    private popoverController:PopoverController,
     private loginService: LoginService
   ) {
 
@@ -98,6 +101,20 @@ export class AppComponent {
     toast.present();
   }
 
+  async presentPopover(ev) {
+    const popover = await this.popoverController.create({
+      component: NotifMenuComponent,
+      cssClass: 'my-custom-class',
+      // componentProps: {
+      //   text: 'Some Notif'
+      // },
+      event: ev,
+      showBackdrop: true,
+      translucent: true
+    });
+    return await popover.present();
+  }
+
   async presentAlert(data = null) {
     let alert;
     if (data) {
@@ -135,6 +152,8 @@ export class AppComponent {
 
   ngAfterViewInit() {
     this.menu.enable(true, 'first');
+
+
 
   }
 
@@ -197,6 +216,7 @@ export class AppComponent {
     });
 
     let usr = this.userService.getCurrentUser();
+
     if (usr) {
       this.currentUser = usr;
     }
@@ -206,7 +226,9 @@ export class AppComponent {
     this.hideBackButton = this.checkContext(comp);
 
 
-    $('.container').toArray().forEach(function (a) { a.scrollTop = 0; })
+    $('.container').toArray().forEach(function (a) { a.scrollTop = 0; });
+
+    //this.presentPopover();
 
   }
 

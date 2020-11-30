@@ -19,9 +19,13 @@ export class ServicePageComponent implements OnInit {
   selectedCar: any;
   selectedPayment: any;
 
+  subAddons:any;
+  subAdhocs:any;
+
   loading: boolean;
   sliderInitialized: boolean;
   upgradePlans:any;
+  selectedSubscription:any;
 
   carSliderOptions = {
     centeredSlides: false,
@@ -54,6 +58,9 @@ export class ServicePageComponent implements OnInit {
     this.loading = false;
     this.selectedPayment = null;
     this.sliderInitialized = false;
+    this.selectedSubscription = null;
+    this.subAddons = [];
+    this.subAdhocs = [];
     
 
   }
@@ -63,12 +70,25 @@ export class ServicePageComponent implements OnInit {
   }
 
   selectCar(index) {
-    this.selectedPayment = this.payments[index].payments[0];
+    this.selectedSubscription = this.payments[index];
+    this.selectedPayment = this.selectedSubscription.payments[0];
     this.selectedCar = this.selectedPayment.car;
     this.carService.changeCar(this.selectedCar);
     this.selectedIndex = index;
 
+    this.planService.setCurrentSubscription(this.selectedSubscription);
+
     this.upgradePlans = [];
+
+    if (this.selectedSubscription.addons && this.selectedSubscription.addons.length) {
+      this.subAddons = this.selectedSubscription.addons.map( (adn) => adn.addon);
+    }
+
+    if (this.selectedSubscription.adhocs && this.selectedSubscription.adhocs.length) {
+      this.subAdhocs = this.selectedSubscription.adhocs.map( (adn) => adn.addon);
+    }
+
+
 
     setTimeout(()=> {
       this.upgradePlans = this.planService.getUpgradePlans(this.selectedPayment.plan.name);
@@ -123,6 +143,9 @@ export class ServicePageComponent implements OnInit {
 
   ngAfterViewInit() {
 
+    this.planService.clear();
+    this.carService.clear(true);
+
   }
 
 
@@ -142,9 +165,17 @@ export class ServicePageComponent implements OnInit {
   handleRenewPlan(data) {
     let { plan, car, lastDate, payment } = data;
 
+    // Clear Addon
+    this.carService.clear(true);
+
     sessionStorage.setItem('currentPayment', JSON.stringify(payment));
     this.carService.changeCar(car);
     this.planService.renewPlan(plan, lastDate);
+    this.planService.clearAdhocs();
+
+    if (this.selectedSubscription.addons.length) {
+      sessionStorage.setItem('includedAddons', JSON.stringify(this.selectedSubscription.addons.map((addon)=> addon.addon)));
+    }
 
     this.router.navigate(['/dashboard/checkout']);
   }
@@ -156,6 +187,9 @@ export class ServicePageComponent implements OnInit {
     plan = this.planService.getSelectedPlan();
 
     let { car, payment, expiresOn } = this.selectedPayment;
+
+        // Clear Addon
+        this.carService.clear(true);
 
     sessionStorage.setItem('currentPayment', JSON.stringify(payment));
     this.carService.changeCar(car);
@@ -174,6 +208,22 @@ export class ServicePageComponent implements OnInit {
     this.planService.renewPlan(plan, new Date(+(new Date(this.payments[this.selectedIndex].renewDate)) - 86400000));
 
     this.router.navigate(['/dashboard/plan']);
+  }
+
+  onAdhocSelected(adhoc) {
+    this.planService.clear();
+    this.planService.clearAddons();
+    this.planService.clearAdhocs();
+    this.planService.includeAdhoc(adhoc);
+    this.router.navigate(['/dashboard/adhoc']);
+  }
+
+  onAddonSelected(addon) {
+    this.planService.clear();
+    this.planService.clearAddons();
+    this.planService.clearAdhocs();
+    this.planService.includeAddon(addon);
+    this.router.navigate(['/dashboard/addon']);
   }
 
   showUpgradeSlider() {

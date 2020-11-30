@@ -5,8 +5,8 @@
     display: block;
     height: 50px;
     background-color:$primary-color;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
     position: relative;
     top: 18px;
     color: white;
@@ -29,16 +29,25 @@
     font-size: 140%;
 }
 
+.water {
+    color: green;
+    font-size: 20px;
+    margin-right: 7px;
+    position: relative;
+    top: 4px;
+}
+
 .upgrade-options {
     position: relative;
     top: -4px;
     margin-left: 4px;
 }
 
+.addon-price {
+    top: 5px;
+}
+
 .upgrade-price {
-    float: right;
-    position: relative;
-    top: 4px;
 }
 
 .content-row {
@@ -82,6 +91,7 @@ mat-select {
 
     .bottom {
         background: $primary-color;
+        margin-top: 1em;
         color:white;
         padding: 15px;
         padding-top: 0;

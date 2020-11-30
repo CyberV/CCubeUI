@@ -4,20 +4,42 @@
       <div class="offset-md-2 col-md-8">
         <div class="container">
 
-          <div *ngIf="context=='checkout'">
+
+          <div *ngIf="context=='checkout'" class="--padding-x">
 
             <!-- <selected-car *ngIf="selectedCar" [car]="selectedCar" slim></selected-car> -->
+            <ng-container *ngIf="(mode.plan || mode.addon || mode.adhoc) && selectedCar; else noItemsTemplate">
+                <checkout-details 
+                [includedAddons]="includedAddons" 
+                [includedAdhocs]="includedAdhocs"
+                [addon]="selectedAddon" 
+                [adhoc]="selectedAdhoc"
+                [plan]="selectedPlan" 
+                [car]="selectedCar"
+                [mode]="mode"
+                (removeAddon)="onAddonSelected($event)"
+                (removeAdhoc)="onAdhocSelected($event)"
+                >
+  
+  
+              </checkout-details>
+  
+             
+  
+              <addon-slider *ngIf="retryAddon && (mode.plan || mode.addon)" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)"></addon-slider>
+              <adhoc-slider *ngIf="retryAddon && (mode.plan || mode.adhoc)" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
+              <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
+            </ng-container>
+            <ng-template #noItemsTemplate>
+                <heading text="Looks like your cart is empty."></heading>
+                <cta text="Back To Dashboard" (action)="backToDashboard()"></cta>
+              </ng-template>
 
-            <checkout-details *ngIf="selectedPlan && selectedCar" [plan]="selectedPlan" [car]="selectedCar">
 
-            </checkout-details>
-
-            <addon-slider *ngIf="retryAddon"></addon-slider>
-
-            <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
+           
           </div>
 
-          <div *ngIf="context=='confirm' && selectedCar">
+          <div *ngIf="context=='confirm' && selectedCar" class="--padding-x">
             <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="changeCar()"></selected-car>
 
             <cc-accordion #drawerCar title="Verify Your Car" [step]="'1'" [error]="carMismatch" [locked]="step2Ready">

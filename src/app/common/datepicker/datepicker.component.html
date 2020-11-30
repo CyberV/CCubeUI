@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-12 mobile-date">
+        <label [class.red]="hasError">Pick a Date </label>
+        <div class="input-group">
+          <span *ngIf="readOnly" [ngClass]="{'readonly' : readOnly}"> {{value}}</span>
+          <input [attr.type]="'text'" required #phoneInput 
+            [ngClass]="{'form-control' : true, 'error-field': hasError}" 
+            (click)="picker.open()"
+       
+            [placeholder]="placeholder" 
+            [ngModel]="value"
+            (ngModelChange)="onPhoneChange(phoneInput.value)"
+            matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+            >
+            <mat-datepicker-toggle #dateToggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            
+  
+            <span *ngIf="hasError" class="error-msg"> {{error}}</span>
+        </div>
+    </div>
+  </div>
+  
+  

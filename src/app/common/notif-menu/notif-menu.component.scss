@@ -1,0 +1,13 @@
+@import "src/variables.scss";
+
+.notif-recent {
+    li {
+        
+    }
+}
+
+.notif-new {
+    li {
+        background: lighten($color:$secondary-color, $amount: 50%);
+    }
+}

@@ -11,6 +11,11 @@
     background: $primary-color;
 }
 
+.btn-red {
+    color:red !important;
+    border-color: red !important;
+}
+
 .cta.btn-outline-secondary {
     border: 1px solid $primary-color;
     color: $primary-color;

@@ -27,6 +27,7 @@
     "@capacitor/ios": "^2.0.1",
     "@codetrix-studio/capacitor-google-auth": "^2.1.1",
     "@ionic-native/core": "^5.27.0",
+    "@ionic-native/date-picker": "^5.30.0",
     "@ionic-native/fcm": "^5.29.0",
     "@ionic-native/geolocation": "^5.27.0",
     "@ionic-native/native-geocoder": "^5.27.0",
@@ -72,6 +73,7 @@
     "angular-ide": "^0.9.74",
     "codelyzer": "^5.2.2",
     "cordova-android": "^9.0.0",
+    "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^4.0.0",
@@ -100,7 +102,8 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-datepicker": {}
     },
     "platforms": [
       "ios",

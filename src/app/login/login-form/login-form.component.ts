@@ -27,6 +27,7 @@ export class LoginFormComponent implements OnInit {
   loading: boolean;
 
   @Input() context: string;
+  @Input() loginOnly:boolean;
 
   public user: any;
   public isLoggedIn: boolean;
@@ -39,6 +40,7 @@ export class LoginFormComponent implements OnInit {
   public findingCar: boolean;
   public userExists: boolean;
   public forgotPassword: boolean;
+  existingUser:boolean;
 
   @ViewChildren('inpEmail') inpEmail: QueryList<HTMLElement>;
   @ViewChildren('inpCity') inpCity: QueryList<HTMLElement>;
@@ -92,6 +94,7 @@ export class LoginFormComponent implements OnInit {
   }
   
   allInputs;
+  userNotFound:boolean;
 
 
   constructor(
@@ -117,6 +120,10 @@ export class LoginFormComponent implements OnInit {
     this.otpSent = false;
     this.userExists = false;
     this.allInputs = {};
+    this.userNotFound = false;
+    this.existingUser = false;
+
+    this.loginOnly = false;
 
     this.newUser = {
       car: {}
@@ -292,6 +299,7 @@ export class LoginFormComponent implements OnInit {
         .subscribe((res: any) => {
           console.log('Send OTP Response', res);
           if (res.success) {
+            this.existingUser = res.data.existingUser;
             this.otpSent = true;
             this.loading = false;
             //this.page = "signup";
@@ -398,29 +406,69 @@ export class LoginFormComponent implements OnInit {
 
 
   async verifyOtp(otp) {
+
+    if (this.loginOnly && this.userNotFound) {
+      sessionStorage.setItem('currentMobile', this.newUser.mobile);
+      this.router.navigate(['/signup/details']);
+      return;
+    }
     if (!this.loading) {
       console.log('otp', otp);
+      if (this.loginOnly) {
+        this.existingUser = true;
+      }
       this.loading = true;
-      let verified = await new Promise((resolve, reject) => {
-        this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
+      let verified:any = await new Promise((resolve, reject) => {
+        if (this.existingUser) {
+          this.srvcLogin.loginWithOtp(this.newUser.mobile, this.customerOtp)
           .subscribe((res: any) => {
             console.log('Verify OTP REsponse', res);
             this.loading = false;
             if (res.success) {
               this.otpMismatch = false;
-              resolve(true);
+              this.userNotFound = false;
+              resolve(res);
             } else {
-              this.otpMismatch = true;
-              resolve(false);
+              this.otpMismatch = res.error == "Invalid OTP";
+              this.userNotFound = res.error == "Phone Verified. User Not Found";
+              resolve(res);
             }
           })
+        } else {
+          this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
+          .subscribe((res: any) => {
+            console.log('Verify OTP REsponse', res);
+            this.loading = false;
+            if (res.success) {
+              this.otpMismatch = false;
+              this.userNotFound = false;
+              resolve(res);
+            } else {
+              this.otpMismatch = true;
+              resolve(res);
+            }
+          })
+        }
+        
       });
 
       console.log('Verified', verified);
 
-      if (verified) {
+      if (verified.success) {
+
+        if (this.existingUser) {
+          this.srvcUser.setCurrentUser(verified.data.user);
+          this.srvcUser.setUserToken(verified.data.token);
+
+          this.presentToast(verified.data.msg);
+          //alert(res.data.msg);
+          this.router.navigate(['/dashboard/service']);
+        } else {
+
+
         sessionStorage.setItem('currentMobile', this.newUser.mobile);
-        this.router.navigate(['/signup/details'])
+        this.router.navigate(['/signup/details']);
+        }
       }
 
     }

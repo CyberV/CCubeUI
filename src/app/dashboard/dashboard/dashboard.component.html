@@ -7,12 +7,12 @@
       <ng-container *ngIf="isCarSelected">
 
         <ng-container>
-
           
-          <plan-slider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
+          <plan-slider #planSlider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
             (buyNow)="buyPlan($event)"></plan-slider>
 
-          <addon-slider></addon-slider>
+          <addon-slider [selectedAddons]="includedAddons" (addonSelected)="onAddonSelect($event)"></addon-slider>
+          <adhoc-slider [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelect($event)"></adhoc-slider>
 
 
         </ng-container>

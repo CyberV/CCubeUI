@@ -14,6 +14,7 @@ export class CtaComponent implements OnInit {
   @Input() size: number;
   @Input() small:boolean;
   @Input() icon:string;
+  @Input() color:string;
 
   @Input() subtext: string;
   @Input() secondaryCta:string;
@@ -33,6 +34,7 @@ export class CtaComponent implements OnInit {
     this.outline = false;
     this.size = 18;
     this.sticky = false;
+    this.color="inherit";
 
     this.small = false;
     this.icon="";

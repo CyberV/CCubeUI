@@ -1,4 +1,4 @@
-<div *ngIf="context=='signup'" class="form-container " [class.expand]="otpSent">
+<div *ngIf="context=='signup' || loginOnly" class="form-container " [class.expand]="otpSent">
 
   <div class="row">
     <div class="offset-1 col-10">
@@ -18,13 +18,19 @@
        [mismatch]="otpMismatch"
       ></verify-otp> 
       
-       <cta *ngIf="otpSent" [loading]="loading" sticky="true" (action)="verifyOtp(customerOtp)" [disabled]="!customerOtp || customerOtp.toString().length < 4" text="Verify"></cta>
+       <cta *ngIf="otpSent" [loading]="loading" sticky="true" (action)="verifyOtp(customerOtp)" [disabled]="!customerOtp || customerOtp.toString().length < 4" [text]="existingUser || loginOnly ? userNotFound ? 'Signup' : 'Login' : 'Verify'"></cta>
         
     </div>
   </div>
 
-  <span  class="login-banner">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
-      
+  <ng-container *ngIf="!loginOnly">
+      <span *ngIf="existingUser" class="login-banner">Welcome Back! Login Now with OTP.</span>
+    
+      <span *ngIf="!existingUser" class="login-banner">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>    
+  </ng-container>
+
+  <span *ngIf="userNotFound" class="login-banner">We didn't find an Account with this number. Continue to Signup.</span>
+
       
 </div>
 

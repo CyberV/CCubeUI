@@ -52,7 +52,21 @@
     display:block;
 }
 
+.label {
+    color: black;
+}
+
 .compact {
+    margin:0;
+
+    .mat-expansion-panel-body {
+        padding: 0 10px 16px;
+    }
+
+    .price {
+        flex-direction: row-reverse;
+    }
+
     .panel-container {
         box-shadow: none;
     }
@@ -60,6 +74,7 @@
     .panel-content {
         width: 108%;
         left: -25px;
+        padding: 0 !important;
         position: relative;
     }
 

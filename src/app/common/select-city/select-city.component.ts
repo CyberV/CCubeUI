@@ -66,7 +66,9 @@ export class SelectCityComponent implements OnInit {
 
     if (inp) {
 
-      scrollElementToTop(inp.nativeElement);
+      inp.nativeElement.focus();
+
+      //scrollElementToTop(inp.nativeElement);
     }
   }
 
