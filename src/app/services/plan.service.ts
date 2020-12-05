@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CarService } from './car.service';
 import plansList from 'assets/planslist.json';
+import { planData } from 'app/common/common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanService {
 
-  public get AllPlans() {
-    return JSON.parse(JSON.stringify(plansList.plans));
-  }
+  AllPlans : any;
 
-  public get AllFeatures() {
-    return JSON.parse(JSON.stringify(plansList.features));
-  }
+  AllFeatures : any;
 
   get UpgradePlan() {
     return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0]));
@@ -27,10 +24,19 @@ export class PlanService {
     }
   }
 
+  ngOnInit() {
+  
+  }
+
 
   constructor(
     private carService: CarService
-  ) { }
+  ) {
+    let _p:any = planData;
+    this.AllPlans = JSON.parse(JSON.stringify(_p().plansList.plans));
+    this.AllFeatures = JSON.parse(JSON.stringify(_p().plansList.features));
+
+   }
 
   clear() {
     sessionStorage.setItem('selectedPlan', null);

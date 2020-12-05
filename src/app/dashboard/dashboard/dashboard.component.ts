@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import plansList from 'assets/planslist.json';
+import { planData } from 'app/common/common.service';
+
 import { Platform, MenuController, ToastController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
@@ -48,7 +50,7 @@ export class DashboardComponent implements OnInit {
   ) {
     this.currentCar = {};
     this.isCarSelected = false;
-    this.currentPlans = plansList;
+
     this.isPlanSelected = false;
     this.selectedPlan = {};
     this.includedAddons = [];
@@ -96,7 +98,8 @@ export class DashboardComponent implements OnInit {
 
 
   async ngOnInit() {
-    
+    this.currentPlans = (await planData()).plansList;
+    console.log('Loaded Plans?, ',this.currentPlans);
   }
 
   async ngAfterViewInit() {

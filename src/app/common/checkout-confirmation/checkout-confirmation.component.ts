@@ -51,4 +51,11 @@ export class CheckoutConfirmationComponent implements OnInit {
     });
   }
 
+  dismissOnly() {
+    this.modalController.dismiss({
+      amount:-1,
+      isUnlisted: true
+    });
+  }
+
 }

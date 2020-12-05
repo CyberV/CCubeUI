@@ -10,6 +10,7 @@ import { PlanService } from 'app/services/plan.service';
 })
 export class AddonSliderComponent implements OnInit {
 
+  @Input() bodyType:string;
   @Input() addOns:any;
   @Input() selectedAddons:any;
   @Output() addonSelected = new EventEmitter();
@@ -33,43 +34,7 @@ export class AddonSliderComponent implements OnInit {
     private planService:PlanService
   ) {
     this.active = false;
-    // this.addOns = [
-    //   {
-    //     name:'Dry Cleaning',
-    //     description: 'Try Dry Cleaning today to notice the visible difference.',
-    //     rating: 4.5,
-    //     price: 200,
-    //     icon: 'ppe'
-    //   },
-    //   {
-    //     name:'Polishing',
-    //     description: 'Try Polishing today to notice the visible difference.',
-    //     rating: 4.5,
-    //     price: 400,
-    //     icon: 'sanitize'
-    //   },
-    //   {
-    //     name:'Waxing',
-    //     description: 'Try Waxing today to notice the visible difference.',
-    //     rating: 4.5,
-    //     price: 500,
-    //     icon: 'screening'
-    //   },
-    //   {
-    //     name:'Paint Protection',
-    //     description: 'Try Paint Protection today to notice the visible difference.',
-    //     rating: 4.5,
-    //     price: 600,
-    //     icon: 'solution'
-    //   },
-    //   {
-    //     name:'Rust Protection',
-    //     description: 'Try Rust Protection today to notice the visible difference.',
-    //     rating: 4.5,
-    //     price: 400,
-    //     icon: 'doorstep'
-    //   }
-    // ];
+    this.bodyType = 'sedan';
 
     this.addOns = this.planService.getAddonsForPlan('Standard');
 
@@ -85,6 +50,12 @@ export class AddonSliderComponent implements OnInit {
       this.addonMap = this.selectedAddons.map((addon) => {
         return addon.name;
       });
+    }
+
+    if (changes.bodyType && this.bodyType && this.addOns) {
+      for (let i=0;i< this.addOns.length; i++) {
+        this.addOns[i].price = this.addOns[i].pricing[this.bodyType];
+      }
     }
   }
 

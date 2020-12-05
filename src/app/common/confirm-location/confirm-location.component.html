@@ -2,7 +2,7 @@
 
 <mobile-input #inpStreet name="Street / Block Name" (enterKey)="focusTo('inpSociety')" type="text" [(value)]="location.block"></mobile-input>
 
-<select-society #inpSociety [(society)]="location.society" (enterKey)="focusTo('ctaConfirm')" [city]="location.city" mandatory="true" ></select-society>
+<select-society #inpSociety [society]="location.society" (societyChange)="handleSocietyChange($event)" (enterKey)="focusTo('ctaConfirm')" [city]="location.city" mandatory="true" ></select-society>
 
 <select-city #inpCity [(city)]="location.city" mandatory="true" (enterKey)="focusTo('ctaConfirm')" [(state)]="location.state" [showState]="true" [disabled]="true"></select-city>
 

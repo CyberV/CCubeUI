@@ -2,9 +2,9 @@
   <ion-header *ngIf="isMobile">
     <ion-toolbar>
 
-      <ion-title>
-        <ion-icon class="menu-btn float-left" (click)="toggleMenu()" *ngIf="isLoggedIn && ['checkout','confirm', 'thanks'].indexOf(context) < 0" name="menu-outline"
-          ></ion-icon>
+      <ion-title class="app-header">
+        <ion-icon class="menu-btn float-left" (click)="toggleMenu()"
+          *ngIf="isLoggedIn && ['checkout','confirm', 'thanks'].indexOf(context) < 0" name="menu-outline"></ion-icon>
 
         <span *ngIf="headerType=='text'" class="header-text">{{headerText}}</span>
         <div *ngIf="headerType=='view'">
@@ -24,23 +24,18 @@
               <span class="link" (click)="goTo('login')">Login</span>
             </div>
           </div>
-          <div class="row view-checkout" *ngIf="viewData.viewName=='service'">
-              <div class="offset-2 col-8 text">
-                  Dashboard
-                </div>
-                <div class="col-2 notif">
-                  
+          <div class="row view-dashboard" *ngIf="viewData.viewName=='service'">
+            <div class="offset-2 col-8 text">
+              Dashboard
+            </div>
+            <div class="col-2 notif">
 
-                    <div class="btn-group">
-                        <ion-icon name="notifications-outline" (click)="presentPopover($event)"></ion-icon>
 
-                        <!-- <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            
-                        </button>
-                        -->
-                      </div>
-                    
-                </div>
+              <div class="btn-group">
+                <ion-icon  (click)="presentPopover($event)" name="notifications-outline" [class.active]="notifToggleOpen"></ion-icon>
+              </div>
+
+            </div>
           </div>
         </div>
 
@@ -157,7 +152,7 @@
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab> -->
-  <ion-router-outlet id="my-content" [class.push-down]="!isMobile" (activate)='onActivate($event)'
+  <ion-router-outlet *ngIf="ready" id="my-content" [class.push-down]="!isMobile" (activate)='onActivate($event)'
     (deactivate)='onDeactivate($event)' animated="true"></ion-router-outlet>
 
 

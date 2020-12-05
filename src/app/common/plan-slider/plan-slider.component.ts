@@ -42,9 +42,13 @@ export class PlanSliderComponent implements OnInit {
     };
    }
 
-  ngOnInit() {
+   ngOnInit(){
 
-    if (this.plans) {
+   }
+
+  ngOnChanges(changes) {
+
+    if (changes.plans && this.plans) {
       this.planList = this.plans.plans || this.plans;
     }
 

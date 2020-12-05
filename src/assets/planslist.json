@@ -142,6 +142,7 @@
     {
       "name": "Standard",
       "features": ["DISINFECT_INT", "WASH_WATER", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK", "CLEAN_BOOT"],
+      "uniqueFeatures": ["DISINFECT_INT", "WASH_WATER", "CLEAN_OUT", "RUST_OUT", "CLEAN_INT", "WINDSHLD_OUT", "AIR_CHECK", "CLEAN_BOOT"],
       "pricing": {
         "hatchback": 500,
        "phatchback": 600,

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CheckoutService } from 'app/services/checkout.service';
 import { CarService } from 'app/services/car.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { CheckoutConfirmationComponent } from 'app/common/checkout-confirmation/checkout-confirmation.component';
 import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
@@ -48,6 +48,8 @@ export class CheckoutComponent implements OnInit {
   includedAdhocs: any;
   mode:any;
 
+  isUnlisted:boolean;
+
 
   page: string;
 
@@ -60,6 +62,7 @@ export class CheckoutComponent implements OnInit {
     private route: ActivatedRoute,
     private carService: CarService,
     private userService: UserService,
+    private toastController:ToastController,
     private modalController: ModalController,
     private planService: PlanService,
     private loginService: LoginService,
@@ -83,7 +86,7 @@ export class CheckoutComponent implements OnInit {
     this.includedAddons = [];
     this.includedAdhocs = [];
     this.mode = {};
-
+    this.isUnlisted = false;
 
     this.errors = {
       car: false,
@@ -150,7 +153,8 @@ export class CheckoutComponent implements OnInit {
       addons: order.addons,
       adhocs: order.adhocs,
       info: order.info,
-      total: order.total
+      total: order.total,
+      isUnlisted: this.isUnlisted
     };
     const modal = await this.modalController.create({
       component: CheckoutConfirmationComponent,
@@ -165,24 +169,41 @@ export class CheckoutComponent implements OnInit {
 
     modal.onDidDismiss().then((data: any) => {
 
-      if (data && data.data && data.data.amount) {
-        this.generateOrder();
-        this.payNow();
+      if (data.data.isUnlisted) {
+        this.loginService.addLead({
+          phone: this.currentUser.phone,
+          name: this.currentUser.name,
+          remarks : JSON.stringify({
+            city: this.currentUser.city,
+            plan: this.selectedPlan,
+            adhocs: this.includedAdhocs,
+            addons: this.includedAddons
+          })
+        }).subscribe((data:any) => {
+          if (data._id) {
+            this.presentToast("Interest Received. We will get back to you!")
+          }
+        })
+        return;
+      } else {
+
+        if (data && data.data && data.data.amount) {
+          this.generateOrder();
+          this.payNow();
+        }
       }
 
-      // if (data && data.data) {
-      //   let fltrdPlans = this.currentPlans.plans.filter( (plan) => plan.name.toLowerCase() == data.data.planName.toLowerCase());
-
-      //   if (fltrdPlans && fltrdPlans.length) {
-      //     this.buyPlan( {
-      //       plan: fltrdPlans[0]
-      //     });
-      //   }
-      // }
-
     });
-
   }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   ngOnChanges(changes) {
 
   }
@@ -254,7 +275,8 @@ export class CheckoutComponent implements OnInit {
   saveLocation(locationData) {
 
     if (locationData) {
-      this.currentLocation = locationData;
+      this.currentLocation = locationData.location;
+      this.isUnlisted = locationData.isUnlisted;
       sessionStorage.setItem('userLocation', JSON.stringify(locationData));
     }
 

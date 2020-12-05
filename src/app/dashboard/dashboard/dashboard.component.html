@@ -11,8 +11,8 @@
           <plan-slider #planSlider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
             (buyNow)="buyPlan($event)"></plan-slider>
 
-          <addon-slider [selectedAddons]="includedAddons" (addonSelected)="onAddonSelect($event)"></addon-slider>
-          <adhoc-slider [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelect($event)"></adhoc-slider>
+          <addon-slider  [bodyType]="currentCar.bodyType" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelect($event)"></addon-slider>
+          <adhoc-slider  [bodyType]="currentCar.bodyType" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelect($event)"></adhoc-slider>
 
 
         </ng-container>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
 
+import { planData } from './common/common.service';
+
 import { Platform, MenuController, ToastController, AlertController, PopoverController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from './header.service';
@@ -37,6 +39,9 @@ export class AppComponent {
   viewData: any;
 
   context: string;
+  ready:boolean;
+
+  notifToggleOpen:boolean;
 
   constructor(
     private platform: Platform,
@@ -57,12 +62,15 @@ export class AppComponent {
     this.hideBackButton = false;
     this.headerType = '';
     this.fcmInitialized = false;
+    this.ready = false;
 
     this.noBackNavigation = [
       'select-car',
       'thanks',
       'landing'
     ];
+
+    this.notifToggleOpen = false;
 
     this.context = '';
 
@@ -102,9 +110,11 @@ export class AppComponent {
   }
 
   async presentPopover(ev) {
+
+    this.notifToggleOpen = true;
     const popover = await this.popoverController.create({
       component: NotifMenuComponent,
-      cssClass: 'my-custom-class',
+      cssClass: 'notif-popover',
       // componentProps: {
       //   text: 'Some Notif'
       // },
@@ -112,7 +122,16 @@ export class AppComponent {
       showBackdrop: true,
       translucent: true
     });
-    return await popover.present();
+     await popover.present();
+
+
+     popover.onWillDismiss().then(()=>{
+       this.notifToggleOpen = false;
+     })
+
+     console.log('Presented Or Closed?');
+
+     return;
   }
 
   async presentAlert(data = null) {
@@ -144,17 +163,35 @@ export class AppComponent {
 
   get pathname() {
     return window.location.pathname;
-  }
+  } 
 
   get isMobile() {
     return !this.platform.is('desktop');
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     this.menu.enable(true, 'first');
 
+    this.checkData().then((data) => {
+      this.ready = true;
+      console.log('Data READY', data);
+    })
 
+  }
 
+  async checkData() {
+    let _p:any = planData;
+    console.log('p',_p());
+    if(!_p()) {
+      return await new Promise((resolve) => {
+        setTimeout( ()=> {
+          resolve (this.checkData());
+        }, 500);
+      });
+    } else {
+      return true;
+    }
+    
   }
 
   onDeactivate(comp) {

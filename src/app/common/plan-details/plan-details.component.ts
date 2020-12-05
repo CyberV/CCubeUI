@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { IonContent } from '@ionic/angular';
 
 import plansList from 'assets/planslist.json';
+import { planData } from 'app/common/common.service';
 
 @Component({
   selector: 'plan-details',
@@ -34,10 +35,10 @@ export class PlanDetailsComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     if (!(this.features && this.features.length > 0)) {
-      this.features = plansList.features;
+      this.features = (await planData()).plansList.features;
     }
 
     if (this.plan && this.features) {

@@ -115,9 +115,10 @@ export class SelectSocietyComponent implements OnInit {
   selectSociety(society ,unlisted = false) {
     this.society = society;
     this.unlisted = unlisted;
-    this.societyChange.emit(society);
-
-
+    this.societyChange.emit( {
+      isUnlisted: unlisted, 
+      society: society
+    });
   }
 
 }

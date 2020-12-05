@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AdhocSliderComponent implements OnInit {
 
+  @Input() bodyType:string;
   @Input() adhocs:any;
   @Input() selectedAdhocs:any;
   @Output() adhocSelected = new EventEmitter();
@@ -31,6 +32,7 @@ export class AdhocSliderComponent implements OnInit {
     private router:Router
   ) {
     this.active = false;
+    this.bodyType = 'sedan';
     this.adhocs = [
       {
         name:'Dry Cleaning',

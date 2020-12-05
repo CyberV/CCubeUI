@@ -1,5 +1,5 @@
 <div class="card animate__animated animate__fadeIn">
-  <heading text="Please Confirm your details" showClose="true"></heading>
+  <heading [text]="details.isUnlisted ? '' : 'Please Confirm your details'" showClose="true"></heading>
   <br/>
   <div class="">
       <ul class="list-group list-group-flush">
@@ -97,5 +97,18 @@
         </ul>
   </div>
 
-  <cta text="Pay" sticky="true" (action)="dismissAndPay()"></cta>
+
+  <ng-container *ngIf="details.isUnlisted">
+      <heading text="We are currently not operational in your society." align="center"></heading>
+      <heading text="Our Sales team will soon be in touch to arrange a Demo in your Society." align="center"></heading>
+      <heading text="STAY SAFE" align="center" capitalize="true"></heading>
+      <heading text="BE HAPPY!" align="center" capitalize="true"></heading>
+      
+      <br/>
+      Reach out to us for a Real Time Update: <a  class="email-link" href="mailto:support@ccubeco.com">support@ccubeco.com</a>
+
+      <cta small="true" text="OK" (action)="dismissOnly()"></cta>
+
+  </ng-container>
+  <cta *ngIf="!details.isUnlisted" text="Pay" sticky="true" (action)="dismissAndPay()"></cta>
 </div>

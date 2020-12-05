@@ -11,6 +11,8 @@ export class ConfirmLocationComponent implements OnInit {
 
 
   location:any;
+
+  isUnlisted:boolean;
   allInputs:any;
 
   get allFieldsReady() {
@@ -34,6 +36,7 @@ export class ConfirmLocationComponent implements OnInit {
       city: '',
       state: ''
     };
+    this.isUnlisted = false;
    }
 
    focusTo(emt) {
@@ -52,8 +55,16 @@ export class ConfirmLocationComponent implements OnInit {
     }
   }
 
+  handleSocietyChange(data) {
+    this.isUnlisted = data.isUnlisted;
+    this.location.society = data.society;
+  }
+
    sendConfirmation() {
-     this.confirm.emit(this.location);
+     this.confirm.emit({
+       location: this.location,
+      isUnlisted: this.isUnlisted 
+      });
    }
   ngOnInit() {
     let city = this.userService.getCurrentUser().city;
@@ -61,5 +72,7 @@ export class ConfirmLocationComponent implements OnInit {
       this.location.city = city;
     }
   }
+
+
 
 }

@@ -1,13 +1,27 @@
-<div class="card" style="width: 18rem;">
-    <ul class="list-group list-group-flush notif-new">
-      <li class="list-group-item" >Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
-    <span>Recent</span>
-    <ul class="list-group list-group-flush notif-recent">
-        <li class="list-group-item" >Car Collected</li>
-        <li class="list-group-item">Some somein</li>
-        <li class="list-group-item">Jai Bhole Ki</li>
-      </ul>
-  </div>
+
+  <ion-list class="list-notif">
+      <ion-item-group>
+        <ion-item-divider class="divider">
+          <ion-label>OFFERS</ion-label>
+        </ion-item-divider>
+      
+        <ion-item class="new-item" lines="none" *ngFor="let item of newItems">
+            <ion-label>
+              {{item.label}}
+            </ion-label>
+          </ion-item>
+
+        </ion-item-group>
+        <ion-item-group>
+            <ion-item-divider class="divider">
+              <ion-label>RECENT ACTIVITY</ion-label>
+            </ion-item-divider>
+      
+            <ion-item class="recent-item" lines="none" *ngFor="let item of recentItems">
+                <ion-label>
+                  {{item.label}}
+                </ion-label>
+              </ion-item>
+    
+            </ion-item-group>
+        </ion-list>

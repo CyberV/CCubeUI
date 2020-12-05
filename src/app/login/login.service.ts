@@ -92,7 +92,7 @@ export class LoginService {
       name: name,
       password: password,
       email,
-      city: city || "fbd"
+      city: city || "Faridabad"
     };
 
 
@@ -177,6 +177,18 @@ export class LoginService {
     console.error(error);
     return throwError(error);
     //return Observable.throw(error || 'Server error');
+  }
+
+  addLead(data) {
+    return this.http.post(this.url + 'lead/create', data).pipe (
+      catchError(this.handleError)
+    );
+  }
+
+  getCommonData() {
+    return this.http.get(this.url + 'plan/getCommonData').pipe (
+      catchError(this.handleError)
+    );
   }
 
   getCarDetails(regNo) {

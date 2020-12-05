@@ -113,15 +113,15 @@ export class DashboardPageComponent implements OnInit {
         break;
       }
       case 'plan': {
-        this.headerService.setText(this.selectedPlan.name);
+        this.headerService.setText(this.selectedPlan.name + ' Plan');
         break;
       }
       case 'adhoc': {
-        this.headerService.setText(this.selectedAdhoc.name);
+        this.headerService.setText(this.selectedAdhoc.name + ' Service');
         break;
       }
       case 'addon': {
-        this.headerService.setText(this.selectedAddon.name);
+        this.headerService.setText(this.selectedAddon.name + ' Addon');
         break;
       }
       case 'service': {
