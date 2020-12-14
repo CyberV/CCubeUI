@@ -9,6 +9,19 @@ let url: string = 'http://localhost:4000/api/';
 
 let data = null;
 
+
+let readCommonData = function () {
+    let addons = sessionStorage.getItem('commonData');
+    return addons && addons != "null" ? JSON.parse(addons) : null;
+  }
+
+  let saveCommonData = function(data) {
+    if (data) {
+      sessionStorage.setItem('commonData', JSON.stringify(data));
+    }
+  }
+
+
 let init = async function () {
     return new Promise( (resolve) => {
         console.log('INIT COMMON');
@@ -17,6 +30,7 @@ let init = async function () {
     
             if (res.success) {
                 data = res.data
+                saveCommonData(res.data);
                resolve (res.data);
             } else {
                 resolve (null);
@@ -31,5 +45,9 @@ let init = async function () {
 } )();
 
 export function  planData() {
+
+    if (!data && readCommonData()) {
+        return readCommonData();
+    }
     return data;
 }

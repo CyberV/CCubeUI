@@ -30,9 +30,9 @@ declare var _that;
 export class LoginService {
 
   private domain: string = 'api-ccube.herokuapp.com';
-  private  url: string = 'https://' + this.domain + '/api/';
+  //private  url: string = 'https://' + this.domain + '/api/';
 
-  //private url: string = 'http://localhost:4000/api/';
+  private url: string = 'http://localhost:4000/api/';
   private carUrl: string = this.url + "car/details/";
 
   async presentToast(msg) {

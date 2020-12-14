@@ -51,6 +51,12 @@
               color: $secondary-color;
               margin-top: 15px;
           }
+          ion-label {
+            padding-right: 5px;
+            text-transform: uppercase;
+            color: $secondary-color;
+          }
+
       }
 
         .car-box {

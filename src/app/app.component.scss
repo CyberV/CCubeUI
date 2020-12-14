@@ -7,6 +7,7 @@ ion-app {
 
 .app-header {
 
+    height: 56px;
     padding: 0 10px;
 
     .header-text {
@@ -74,7 +75,7 @@ ion-app {
     }
 }
 
-ion-toolbar, ion-header, ion-title {
+ion-toolbar, .ion-header, .ion-title {
     text-align: center;
     img {
         width: 30%;

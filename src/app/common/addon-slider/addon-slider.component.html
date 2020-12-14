@@ -11,7 +11,7 @@
             <div class="">
 
               <div>
-                  <span class="card-text" [class.contrast]="i%2!=0">{{addon.name}}</span>
+                  <span class="card-text" [class.contrast]="i%2!=0">{{addon.label || addon.name}}</span>
               </div>
               <div class="bottom">
                   <div class="ion-no-margin rate">

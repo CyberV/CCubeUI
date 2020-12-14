@@ -29,6 +29,12 @@
     font-size: 140%;
 }
 
+.addon-title {
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .water {
     color: green;
     font-size: 20px;

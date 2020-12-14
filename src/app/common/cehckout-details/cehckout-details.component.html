@@ -108,9 +108,20 @@
           <ion-list>
             <ion-item *ngFor="let adn of includedAddons">
               <ion-label>
-                <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
-                <span class="badge badge-light" (click)="sendRemoveAddon(adn)">Remove</span>
-                <span class="addon-price float-right" Rs>{{adn.price}}</span>
+                <div class="row --no-padding">
+                  <div class="col-6 addon-title --no-padding-right">
+                    <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
+                  </div>
+                  <div class="col-3 --no-padding">
+                    <span class="badge badge-light" (click)="sendRemoveAddon(adn)">Remove</span>
+                  </div>
+                  <div class="col-3">
+                    <span class="addon-price float-right" Rs>{{adn.price}}</span> 
+                  </div>
+                </div>
+               
+                
+                
               </ion-label>
             </ion-item>
           </ion-list>

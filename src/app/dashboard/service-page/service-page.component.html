@@ -124,7 +124,7 @@
 
   <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
 
-  <addon-slider [selectedAddons]="subAddons" active="true" (addonSelected)="onAddonSelected($event)"></addon-slider>
+  <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons" active="true" (addonSelected)="onAddonSelected($event)"></addon-slider>
 
   <adhoc-slider [selectedAdhocs]="subAdhocs"  active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
   
