@@ -26,8 +26,8 @@
   
              
   
-              <addon-slider *ngIf="retryAddon && (mode.plan || mode.addon)" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)"></addon-slider>
-              <adhoc-slider *ngIf="retryAddon && (mode.plan || mode.adhoc)" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
+              <addon-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)"></addon-slider>
+              <adhoc-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.adhoc)" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
               <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
             </ng-container>
             <ng-template #noItemsTemplate>

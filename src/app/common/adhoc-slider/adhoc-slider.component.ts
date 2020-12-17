@@ -35,39 +35,19 @@ export class AdhocSliderComponent implements OnInit {
     this.bodyType = 'sedan';
     this.adhocs = [
       {
-        name:'Dry Cleaning',
-        description: 'Try Dry Cleaning today to notice the visible difference.',
+        name:'Deep Wash in a shop',
+        label: 'Deep Wash in Shop',
+        description: 'Try Deep Wash today to notice the visible difference.',
         rating: 4.5,
         price: 200,
         icon: 'ppe'
       },
       {
-        name:'Polishing',
-        description: 'Try Polishing today to notice the visible difference.',
+        name:'Full Body Wash',
+        description: 'Try Full Body Wash today to notice the visible difference.',
         rating: 4.5,
         price: 400,
         icon: 'sanitize'
-      },
-      {
-        name:'Waxing',
-        description: 'Try Waxing today to notice the visible difference.',
-        rating: 4.5,
-        price: 500,
-        icon: 'screening'
-      },
-      {
-        name:'Paint Protection',
-        description: 'Try Paint Protection today to notice the visible difference.',
-        rating: 4.5,
-        price: 600,
-        icon: 'solution'
-      },
-      {
-        name:'Rust Protection',
-        description: 'Try Rust Protection today to notice the visible difference.',
-        rating: 4.5,
-        price: 400,
-        icon: 'doorstep'
       }
     ];
 

@@ -388,7 +388,7 @@
                 "model": "Scorpio",
                 "price": "Rs. 12.39 Lakh",
                 "details": "2179 cc | 16 kmpl | Diesel",
-                "bodyType": "sedan",
+                "bodyType": "suv",
                 "image": "./assets/icons/makers/models/46.png",
                 "id": 46
             },
@@ -1310,7 +1310,7 @@
                 "model": "Duster",
                 "price": "Rs. 8.49 Lakh",
                 "details": "1498 cc | 20 kmpl | Petrol",
-                "bodyType": "sedan",
+                "bodyType": "suv",
                 "image": "./assets/icons/makers/models/149.png",
                 "id": 149
             },

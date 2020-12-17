@@ -17,6 +17,7 @@ export class SelectCityComponent implements OnInit {
   @Output() stateChange = new EventEmitter();
   @Output() enterKey = new EventEmitter();
 
+
   @Input() disabled: boolean;
   @Input() showState: boolean;
 

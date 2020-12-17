@@ -18,6 +18,7 @@ export class SelectSocietyComponent implements OnInit {
 
   @Output() societyChange = new EventEmitter()
   @Output() enterKey = new EventEmitter();
+  @Output() unlistedChange = new EventEmitter();
 
   @ViewChildren('inpSociety') inpSociety: QueryList<HTMLElement>;
 

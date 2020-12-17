@@ -16,7 +16,7 @@ export class ConfirmLocationComponent implements OnInit {
   allInputs:any;
 
   get allFieldsReady() {
-    return this.location.houseNo.length && this.location.city.length && this.location.state.length && this.location.society && this.location.society.length;
+    return this.location.houseNo.length > 0 && this.location.city.length > 0 && this.location.state.length > 0 && !!this.location.society && this.location.society.length > 0;
   }
 
   @Output() confirm = new EventEmitter();
@@ -56,6 +56,7 @@ export class ConfirmLocationComponent implements OnInit {
   }
 
   handleSocietyChange(data) {
+    console.log('Confirm location', data);
     this.isUnlisted = data.isUnlisted;
     this.location.society = data.society;
   }
