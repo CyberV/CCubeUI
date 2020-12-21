@@ -73,7 +73,7 @@ export class MobileInputComponent implements OnInit {
   }
 
   ngOnChanges(changes) {
-    if (changes.error && this.error && this.error.length) {
+    if (this.error && this.error.length) {
       this.hasError = true;
     } else {
       this.hasError = false;

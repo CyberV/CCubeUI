@@ -58,8 +58,21 @@ export class VerifyOtpComponent implements OnInit {
     let otp = this.otp.toString().replace(/,/g, "");
 
     if (indx==4) {
+      debugger;
       this.otpSubmitted.emit(otp);
     }
+
+  }
+
+  fillOtp(otp) {
+
+    let _otp = otp.toString();
+
+    for (let i=0;i<_otp.length;i++) {
+      let xx:any = document.getElementsByClassName('otp-' + i)[0];
+      xx.value = _otp[i];
+    }
+
 
   }
 

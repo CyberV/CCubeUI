@@ -28,13 +28,12 @@ export class PlanService {
   
   }
 
-
   constructor(
     private carService: CarService
   ) {
     let _p:any = planData;
-    this.AllPlans = JSON.parse(JSON.stringify(_p().plansList.plans));
-    this.AllFeatures = JSON.parse(JSON.stringify(_p().plansList.features));
+    this.AllPlans = this.getAllPlans();
+    this.AllFeatures = this.getAllFeatures();
 
    }
 
@@ -89,7 +88,11 @@ export class PlanService {
   }
 
   getAllPlans() {
-    return JSON.parse(JSON.stringify(this.AllPlans));
+    return JSON.parse(localStorage.getItem('commonData')).plansList.plans;
+  }
+
+  getAllFeatures() {
+    return JSON.parse(localStorage.getItem('commonData')).plansList.features;
   }
 
   getPlanByName(planName) {

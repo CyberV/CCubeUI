@@ -4,6 +4,8 @@ import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
+import { Initialize } from 'app/common/common.service';
+
 @Component({
   selector: 'app-signin-form',
   templateUrl: './signin-form.component.html',
@@ -93,6 +95,8 @@ export class SigninFormComponent implements OnInit {
           this.srvcUser.setCurrentUser(res.data.user);
           this.srvcUser.setUserToken(res.data.token);
 
+          console.log('USER City found',res.data.user.city );
+          Initialize(res.data.user.city);
           this.presentToast(res.data.msg);
           //alert(res.data.msg);
           this.router.navigate(['/dashboard/service']);

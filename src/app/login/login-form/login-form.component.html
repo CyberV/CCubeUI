@@ -11,7 +11,7 @@
         
         
       
-        <verify-otp
+        <verify-otp #verifyOtpComp
         *ngIf="otpSent"
        [mobile]="newUser.mobile" length="4" 
        (otpSubmitted)="handleOtp($event)" 
@@ -36,7 +36,7 @@
 
 <div *ngIf="context=='details'" class="animate__animated animate__fadeInLeft details-container">
   <mobile-input  [error]="errors ? errors.name : null" (enterKey)="focusTo('inpEmail')" type="text" name="Full Name" [(value)]="newUser.name" ></mobile-input>
-  <mobile-input #inpEmail  (enterKey)="focusTo('inpCity')" [error]="errors ? errors.email : null" type="email" name="Email Id" [(value)]="newUser.email" ></mobile-input>
+  <mobile-input #inpEmail  (enterKey)="focusTo('inpCity')" [error]="errors ? errors.email : null" type="email" name="Email Id" [(value)]="newUser.email" (valueChange)="validateEmail($event)"></mobile-input>
   <select-city  #inpCity  (enterKey)="focusTo('inpPass')"[(city)]="newUser.city"></select-city>
   <mobile-input #inpPass (enterKey)="focusTo('inpConfirmPass')" [error]="errors ? errors.password : null" type="password" name="Password" [(value)]="newUser.password" ></mobile-input>
   <mobile-input #inpConfirmPass (enterKey)="focusTo('ctaSignup')" [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword" ></mobile-input>
@@ -45,7 +45,7 @@
 
 
 
-  <cta #ctaSignup *ngIf="!userExists" class="signup-btn" sticky="true" text="Create Account" [loading]="loading" (action)="createUser()" ></cta>
+  <cta #ctaSignup *ngIf="!userExists" class="signup-btn" text="Create Account" [loading]="loading" (action)="createUser()" ></cta>
 
   <span  *ngIf="userExists" class="existingUser">Looks like you are already registered with us. <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
 

@@ -7,15 +7,16 @@ import { Plugins } from '@capacitor/core';
 import { LoginService } from '../login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'app/services/user.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 const { GoogleAuth } = Plugins;
 import { ToastController } from '@ionic/angular';
-
+import { Initialize } from 'app/common/common.service';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { CarService } from 'app/services/car.service';
+import { VerifyOtpComponent } from 'app/common/verify-otp/verify-otp.component';
 
-
+declare var SMSReceive: any;
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -48,6 +49,8 @@ export class LoginFormComponent implements OnInit {
   @ViewChildren('inpConfirmPass') inpConfirmPass: QueryList<HTMLElement>;
   @ViewChildren('ctaSignup') ctaSignup: QueryList<HTMLElement>;
   @ViewChildren('ctaOtp') ctaOtp: QueryList<HTMLElement>;
+  @ViewChildren('verifyOtpComp') verifyOtpComp : QueryList<VerifyOtpComponent>;
+
 
   errors: any;
 
@@ -95,7 +98,6 @@ export class LoginFormComponent implements OnInit {
   
   allInputs;
   userNotFound:boolean;
-
 
   constructor(
     private socialAuthService: AuthService,
@@ -301,6 +303,7 @@ export class LoginFormComponent implements OnInit {
           if (res.success) {
             this.existingUser = res.data.existingUser;
             this.otpSent = true;
+            this.start();
             this.loading = false;
             //this.page = "signup";
           }
@@ -309,6 +312,17 @@ export class LoginFormComponent implements OnInit {
 
 
   }
+
+  validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let xx =  re.test(String(email).toLowerCase());
+
+    if(xx) {
+      this.errors.email = null;
+    }
+
+    return xx;
+}
 
   onForgotPassword() {
     this.forgotPassword = true;
@@ -350,16 +364,16 @@ export class LoginFormComponent implements OnInit {
       }
     }
 
-    if (this.newUser.email && this.newUser.email.length) {
+    if (this.newUser.email && this.newUser.email.length && this.validateEmail(this.newUser.email)) {
       valid.email = true;
     } else {
+      this.errors['email'] = '';
       this.errors['email'] = 'Please enter a valid Email.'
     }
 
 
-    this.errors = valid.name && valid.phone && valid.password && valid.email ? null : this.errors;
+    return !((valid.name && valid.phone && valid.password && valid.email) ? false : true);
 
-    return !this.errors;
   }
 
   createUser() {
@@ -374,6 +388,9 @@ export class LoginFormComponent implements OnInit {
           this.presentToast('Account Created Successfully');
 
           this.srvcUser.setCurrentUser(res.data);
+
+          console.log('USER City found',res.data.city );
+          Initialize(res.data.city);
 
           //this.router.navigate(['/root/dashboard']);
           this.router.navigate(['/dashboard/select-car']);
@@ -402,6 +419,49 @@ export class LoginFormComponent implements OnInit {
 
       });
 
+  }
+
+  start() {
+    try {
+
+    
+    if (SMSReceive)
+    SMSReceive.startWatch(
+      () => {
+        document.addEventListener('onSMSArrive', (e: any) => {
+          var IncomingSMS = e.data;
+          this.processSMS(IncomingSMS);
+        });
+      },
+      () => { console.log('watch start failed') }
+    );
+    } catch(e) {
+      console.log('Error in SMS', e);
+    }
+  }
+
+  stop() {
+    SMSReceive.stopWatch(
+      () => { console.log('watch stopped') },
+      () => { console.log('watch stop failed') }
+    )
+  }
+
+  processSMS(data) {
+    // Check SMS for a specific string sequence to identify it is you SMS
+    // Design your SMS in a way so you can identify the OTP quickly i.e. first 6 letters
+    // In this case, I am keeping the first 6 letters as OTP
+    const message = data.body;
+
+
+    if (message && message.indexOf('CCube') != -1) {
+      let split = message.split('.')[0].split(' ');
+      this.customerOtp = split[split.length - 1];
+      this.verifyOtpComp.first.fillOtp(this.customerOtp);
+      //this.OTP = data.body.slice(0, 6);
+      //this.OTPmessage = 'OTP received. Proceed to register'
+      this.stop();
+    }
   }
 
 

@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit {
 
   onAddonSelect(addon) {
 
-    this.planService.includeAddon(addon);
+    //this.planService.includeAddon(addon);
 
     this.presentToast('Please select a Plan');
 

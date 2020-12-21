@@ -18,6 +18,8 @@ import { LoginService } from './login/login.service';
 import { HeadingComponent } from './common/heading/heading.component';
 import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 
+import { Initialize } from 'app/common/common.service';
+
 declare var $;
 @Component({
   selector: 'app-root',
@@ -101,6 +103,16 @@ export class AppComponent {
     })
   }
 
+  async ngOnInit() {
+
+    this.ready = false;
+    console.log('Before Init in APP')
+    await Initialize(this.userService.getCurrentUser() ? this.userService.getCurrentUser().city || '' : '');
+    console.log('After Init in APP Ready true')
+
+    this.ready = true;
+  }
+
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -172,10 +184,10 @@ export class AppComponent {
   async ngAfterViewInit() {
     this.menu.enable(true, 'first');
 
-    this.checkData().then((data) => {
-      this.ready = true;
-      console.log('Data READY', data);
-    })
+    // this.checkData().then((data) => {
+    //   this.ready = true;
+    //   console.log('Data READY', data);
+    // })
 
   }
 

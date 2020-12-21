@@ -12,6 +12,7 @@ export class CitiesService {
   filter = [1, 5, 9, 12, 16, 19, 20, 27, 30, 32];
 
 
+
   societies = [{
     city: "faridabad",
     societies: ['Puri Pratham Sector 84','SRS Residency Sector 85']
@@ -73,11 +74,13 @@ export class CitiesService {
     // Bypassing Cities 
     this.allCities = ["Faridabad", "Gurugram", "Noida", "Greater Noida", "Ghaziabad", "Indirapuram", "Chandigarh", "Mumbai", "Bengaluru", "Navi Mumbai", "Hyderabad", "Delhi", "New Delhi", "Pune"]
     
-    this.allSocieties = [];
+    this.allSocieties = JSON.parse(localStorage.getItem('commonData')).societies.map((s) => s.name);
 
-    this.societies.forEach((city) => {
-      this.allSocieties.push.apply(this.allSocieties, city.societies);
-    })
+    console.log('SOcietites for current city', this.allSocieties);
+
+    // this.societies.forEach((city) => {
+    //   this.allSocieties.push.apply(this.allSocieties, city.societies);
+    // })
   }
 
   findMatchingCities(str) {
@@ -95,9 +98,9 @@ export class CitiesService {
 
     let societies = this.allSocieties;
 
-    if (city) {
-      societies = this.getSocietiesForCity(city.toLowerCase());
-    }
+    // if (city) {
+    //   societies = this.getSocietiesForCity(city.toLowerCase());
+    // }
 
     found = societies.filter((society: any) => {
       return society.toLowerCase().indexOf(str.toLowerCase()) > -1;
@@ -139,13 +142,7 @@ export class CitiesService {
   }
 
   getSocietiesForCity(city) {
-    let record = this.societies.filter( (_city) =>  _city.city === city.toLowerCase());
-
-    if (record && record.length) {
-      return record[0].societies;
-    } else {
-      return [];
-    }
+    return this.allSocieties;
 
   }
 

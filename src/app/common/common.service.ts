@@ -3,29 +3,33 @@ import { IonItem } from '@ionic/angular';
 import { async } from 'q';
 
 let domain: string = 'api-ccube.herokuapp.com';
-//let  url: string = 'https://' + this.domain + '/api/';
+let  url: string = 'https://' + domain + '/api/';
 
-let url: string = 'http://localhost:4000/api/';
+//let url: string = 'http://localhost:4000/api/';
 
 let data = null;
 
 
 let readCommonData = function () {
-    let addons = sessionStorage.getItem('commonData');
+    let addons = localStorage.getItem('commonData');
     return addons && addons != "null" ? JSON.parse(addons) : null;
   }
 
   let saveCommonData = function(data) {
     if (data) {
-      sessionStorage.setItem('commonData', JSON.stringify(data));
+        localStorage.setItem('commonData', JSON.stringify(data));
     }
   }
 
 
-let init = async function () {
+let init = async function (city = "faridabad") {
     return new Promise( (resolve) => {
-        console.log('INIT COMMON');
-        fetch(url+"plan/getCommonData").then(response => response.json()).then((res:any) => {
+
+        if (!city || city == '') {
+            city = "faridabad"
+        }
+        console.log('INIT COMMON REquest', city);
+        fetch(url+"plan/getCommonData/"+city).then(response => response.json()).then((res:any) => {
         console.log('INIT COMMON RESPONSE', res);
     
             if (res.success) {
@@ -40,9 +44,13 @@ let init = async function () {
     
 };
 
-(async function asd() {
-    await init();
-} )();
+// (async function asd() {
+//     await init();
+// } )();
+
+export async function Initialize(city) {
+    await init(city);
+}
 
 export function  planData() {
 

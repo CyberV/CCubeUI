@@ -6,6 +6,8 @@ import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 import { ToastController } from '@ionic/angular';
+
+import {Initialize} from 'app/common/common.service';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',

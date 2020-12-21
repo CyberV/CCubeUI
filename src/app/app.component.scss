@@ -54,7 +54,7 @@ ion-app {
 
 .menu-btn {
     font-size: 30px;
-    bottom: 5px;
+    bottom: 12px;
     float: left!important;
     left: 15px;
     z-index: 1;
@@ -62,15 +62,17 @@ ion-app {
 }
 
 .menu-items {
+    padding-top:0;
     ion-icon {
         position: relative;
         margin-right: 1em;
     }
 
     .selected {
-        color: $secondary-color;
+        --background: #ec6b1e;
+        color:white;
         ion-icon {
-            color: $secondary-color;
+            color:white;
         }
     }
 }
@@ -86,35 +88,35 @@ ion-toolbar, .ion-header, .ion-title {
 
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
+}
 
-    &.menu-header {
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
+.menu-header {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background: $primary-color;
 
-        .close {
-            position: absolute;
-            right: 8px;
-            top: 8px;
-            color: white;
-            z-index: 10;
-        }
+    .close {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        color: white;
+        z-index: 10;
+    }
 
-        .top {
-            left: 0;
-            top: 0;
-            position: absolute;
-        }
+    .top {
+        left: 0;
+        top: 0;
+    }
 
-        padding: 2em;
+    padding: 2em;
 
-        ion-icon {
-            font-size: 30px;
-        }
+    ion-icon {
+        font-size: 30px;
+    }
 
-        .user-row {
-            text-align:left;
-            font-weight: 400;
-        }
+    .user-row {
+        text-align:left;
+        font-weight: 400;
     }
 }
 

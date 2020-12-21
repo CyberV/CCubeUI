@@ -7,7 +7,7 @@
         </div>
         <span *ngIf="readonly" [ngClass]="{'readonly' : readonly}"> {{value}}</span>
         <ion-icon *ngIf="inputOnly" name="search-outline"></ion-icon>
-        <input *ngIf="!readonly && !labelOnly" [attr.type]="type" required #phoneInput 
+        <input *ngIf="!readonly && !labelOnly" [attr.type]="type == 'password'? 'password': 'search'" autocomplete="false" required #phoneInput 
           [ngClass]="{'form-control' : true, 'error-field': hasError}" 
           [class.not-mobile]="name !== 'Mobile Number'"
           (click)="focus()"
