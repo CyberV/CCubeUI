@@ -68,7 +68,6 @@
 
             <cc-accordion #drawerLocation title="Confirm Your Location" [step]="'2'" [disabled]="!step2Ready" [locked]="step3Ready">
               <confirm-location (confirm)="saveLocation($event)"></confirm-location>
-              isUnlisted {{isUnlisted}}
             </cc-accordion>
 
             

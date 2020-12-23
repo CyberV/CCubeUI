@@ -50,7 +50,7 @@
         <ion-slides #planSlider [options]="planSliderOptions">
 
           <ion-slide *ngFor="let payment of payments; let i = index" (mouseup)="demoEvent($event)">
-            <purchased-plan [style.width.%]="100" (renewPlan)="handleRenewPlan($event)" [payment]="payment.payments[0]"
+            <purchased-plan [style.width.%]="100" [subscription]="payment" (renewPlan)="handleRenewPlan($event)" [payment]="payment.payments[0]"
               [car]="payment.payments[0].car" [plan]="payment.payments[0].plan"></purchased-plan>
           </ion-slide>
 
@@ -68,8 +68,8 @@
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                <weekly-schedule></weekly-schedule>
-
+                <weekly-schedule *ngIf="selectedSubscription.schedule.length" [schedule]="selectedSubscription.schedule"></weekly-schedule>
+                <heading *ngIf="!selectedSubscription.schedule.length"  text="Schedule is Under Processing. Please wait."></heading>
 
               </mat-expansion-panel>
               <mat-expansion-panel class="drop">
@@ -95,7 +95,8 @@
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                <p class="frequency">Service History Here</p>
+                yo
+                <service-history></service-history>
               </mat-expansion-panel>
             </mat-accordion>
           </div>

@@ -19,6 +19,7 @@ import { HeadingComponent } from './common/heading/heading.component';
 import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 
 import { Initialize } from 'app/common/common.service';
+import { NotificationService } from './services/notification.service';
 
 declare var $;
 @Component({
@@ -56,7 +57,8 @@ export class AppComponent {
     private carService: CarService,
     public toastController: ToastController,
     private popoverController:PopoverController,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private notificationService: NotificationService
   ) {
 
     this.initializeApp();
@@ -110,7 +112,12 @@ export class AppComponent {
     await Initialize(this.userService.getCurrentUser() ? this.userService.getCurrentUser().city || '' : '');
     console.log('After Init in APP Ready true')
 
-    this.ready = true;
+    setTimeout(()=> {
+      this.ready = true;
+
+    }, 1000);
+
+    //this.presentAlert('Demo');
   }
 
   async presentToast(msg) {
@@ -139,9 +146,7 @@ export class AppComponent {
 
      popover.onWillDismiss().then(()=>{
        this.notifToggleOpen = false;
-     })
-
-     console.log('Presented Or Closed?');
+     });
 
      return;
   }
@@ -211,6 +216,8 @@ export class AppComponent {
   }
 
   onActivate(comp) {
+
+    this.notificationService.saveNewNotification({body: 'Sameple ' + comp.context});
 
     this.context = comp.context;
 
@@ -344,6 +351,7 @@ export class AppComponent {
         if (FCM && FCM.getToken()) {
           FCM.onNotification().subscribe((data:any) => {
             try {
+              this.notificationService.saveNewNotification(data);
               this.presentAlert(data);
             } catch(err) {
               console.log('Error in Notification', err);

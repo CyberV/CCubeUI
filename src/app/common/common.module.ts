@@ -70,6 +70,7 @@ import { NotifMenuComponent } from './notif-menu/notif-menu.component';
 import { AdhocSliderComponent } from './adhoc-slider/adhoc-slider.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { ServiceHistoryComponent } from './service-history/service-history.component';
 
 
 
@@ -125,6 +126,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     NotifMenuComponent,
     AdhocSliderComponent,
     DatepickerComponent,
+    ServiceHistoryComponent,
 
     // Directives
     RsDirective,
@@ -200,6 +202,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     NotifMenuComponent,
     AdhocSliderComponent,
     DatepickerComponent,
+    ServiceHistoryComponent,
     
     //Directives
 

@@ -1,21 +1,14 @@
 <div class="schedule-list">
 
-    <div class="alert" [class.alert-light]="i>0" [class.alert-primary]="i==0" role="alert" *ngFor="let service of schedule; let i = index">
+    <div class="alert" [class.alert-light]="i>0" [class.alert-primary]="i==0" role="alert" *ngFor="let service of history; let i = index">
         <div class="row">
             <div class="col-4 ">
-                <span class="day vertical-center-text">{{service.day}}</span><br/>
-                <span *ngIf="i==0" class="badge badge-info ">Today</span>
+                <span class="day vertical-center-text">{{service.date}}</span><br/>
             </div>
             <div class="col-8">
                 <span class="task">
-                    {{service.task}} 
-                </span> <br/>
-                <span *ngFor="let adhoc of service.adhocs" class="badge badge-warning adhoc"> {{adhoc}} </span> 
-                <ng-container *ngFor="let addon of service.addons">
-                    <div class="badge badge-primary addon"> <span class="vertical-center-text"> {{addon}} </span></div> 
-                    <ion-icon *ngIf="addon == 'Sanitization'" class="icon-shield" name="shield-checkmark-outline"></ion-icon> 
-                </ng-container>
-               
+                    {{service.body}} 
+                </span>
             </div>
           </div>
     </div>

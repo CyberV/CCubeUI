@@ -31,9 +31,17 @@
             <div class="col-2 notif">
 
 
-              <div class="btn-group">
-                <ion-icon (click)="presentPopover($event)" name="notifications-outline"
-                  [class.active]="notifToggleOpen"></ion-icon>
+              <div class="btn-group" (click)="presentPopover($event)">
+                <span >
+
+                  <ion-icon [ngClass]="{
+                    'animate__animated': true,
+                     'active': notifToggleOpen,
+                    'animate__swing': ready }"  name="notifications-outline"
+                   ></ion-icon>
+                  <span class="notif-badge" [class.show]="ready">&nbsp;</span>
+                </span>
+
               </div>
 
             </div>

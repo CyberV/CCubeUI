@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NotificationService } from 'app/services/notification.service';
+import { AlertController, PopoverController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'notif-menu',
@@ -10,7 +12,12 @@ export class NotifMenuComponent implements OnInit {
   @Input() newItems: any;
   @Input() recentItems: any;
 
-  constructor() {
+  constructor(
+    private notificationService:NotificationService,
+    private alertController: AlertController,
+    private popoverController:PopoverController,
+    private toastController: ToastController
+    ) {
     this.recentItems = [{
       label: 'Plan Active for 0139'
     },
@@ -35,6 +42,62 @@ export class NotifMenuComponent implements OnInit {
 
   }
 
-  ngOnInit() { }
+  async presentAlert(data = null) {
+    let alert;
+    if (data) {
+      alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: data.title || 'Notification',
+        message: data.body || 'This is a demo message.',
+        buttons: ['OK']
+      });
+    } else {
+      alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Alert',
+        subHeader: 'Subtitle',
+        message: 'This is an alert message.',
+        buttons: ['OK']
+      });
+    }
 
+
+    await alert.present();
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  ngOnInit() {
+    this.refreshNotifications();
+  }
+
+  refreshNotifications() {
+    this.newItems = this.notificationService.getNewNotifications();
+    this.recentItems = this.notificationService.getReadNotifications();
+  }
+
+  clearNotifications() {
+    this.notificationService.moveNotificationsToHistory();
+    this.popoverController.dismiss();
+
+
+    this.presentToast('Read Notifications moved to Service History!');
+  }
+
+  readNotification(item) {
+    this.presentAlert(item);
+    this.popoverController.dismiss();
+
+    setTimeout(()=>{
+      this.notificationService.markNotificationAsRead(item);
+      this.refreshNotifications();
+    }, 1000);
+    
+  }
 }

@@ -1,0 +1,55 @@
+.task {
+    font-size: 16px;
+    color: black;
+}
+
+.day {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.adhoc {
+    font-size: 12px;
+}
+
+    .icon-shield {
+        color: green;
+        font-size: 18px;
+        position: relative;
+        top: 5px;
+        left: 5px;
+    }
+
+
+.alert {
+    margin-bottom: 5px;
+}
+
+.schedule-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 12px;
+}
+
+.badge {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.alert-light {
+    background: #f6fbfa;
+}
+.rows {
+    .row {
+    margin: 0 10px;
+    padding-left: 0;
+
+    &:last-of-type {
+        border-bottom: none
+    }
+}
+}
+
+mat-card {
+    padding-top: 0;
+}

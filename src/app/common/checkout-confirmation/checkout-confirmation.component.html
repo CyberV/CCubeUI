@@ -97,6 +97,16 @@
         </ul>
   </div>
 
+  <ng-container *ngIf="details.carAlreadyActive">
+
+    <heading align="center" text="You have purchased a Monthly Plan for this Car"></heading>
+    <heading align="center" text="Head to the Dashboard now to Upgrade!"></heading>
+
+    <heading align="center" text="Or you can try a different Car."></heading>
+
+    <cta sticky="true" text="OK" (action)="dismissOnly()"></cta>
+
+  </ng-container>
 
   <ng-container *ngIf="details.isUnlisted">
       <heading text="We are currently not operational in your society." align="center"></heading>
@@ -110,5 +120,5 @@
       <cta small="true" text="OK" (action)="dismissOnly()"></cta>
 
   </ng-container>
-  <cta *ngIf="!details.isUnlisted" text="Pay" sticky="true" (action)="dismissAndPay()"></cta>
+  <cta *ngIf="!details.isUnlisted && !details.carAlreadyActive" text="Pay" sticky="true" (action)="dismissAndPay()"></cta>
 </div>

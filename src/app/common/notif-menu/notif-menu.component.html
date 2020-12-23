@@ -1,27 +1,26 @@
 
   <ion-list class="list-notif">
       <ion-item-group>
-        <ion-item-divider class="divider">
-          <ion-label>OFFERS</ion-label>
-        </ion-item-divider>
-      
         <ion-item class="new-item" lines="none" *ngFor="let item of newItems">
-            <ion-label>
-              {{item.label}}
+            <ion-label (click)="readNotification(item)">
+              {{item.body}}
             </ion-label>
           </ion-item>
 
         </ion-item-group>
         <ion-item-group>
-            <ion-item-divider class="divider">
-              <ion-label>RECENT ACTIVITY</ion-label>
-            </ion-item-divider>
-      
-            <ion-item class="recent-item" lines="none" *ngFor="let item of recentItems">
+            <ion-item (click)="clearNotifications()" class="recent-item" lines="none" *ngFor="let item of recentItems">
                 <ion-label>
-                  {{item.label}}
+                  {{item.body}}
                 </ion-label>
               </ion-item>
     
             </ion-item-group>
+
+            <ion-item *ngIf="recentItems.length == 0 && newItems.length == 0" class="recent-item" lines="none" >
+              <ion-label>
+                No New Notifications!
+              </ion-label>
+            </ion-item>
         </ion-list>
+        

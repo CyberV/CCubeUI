@@ -15,6 +15,14 @@
           <span>
             <span class="plan-name">{{plan.name}}</span> Plan
           </span>
+          <div [ngClass]="{
+            'badge status-badge' : true,
+            'badge-primary': subscription.status == 'Active',
+            'badge-light': subscription.status == 'Ready',
+            'badge-warning': subscription.status == 'Expiring',
+            'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
+            'badge-success': subscription.status == 'Payment Received'}">{{subscription.status | uppercase}}</div>
+            <br/>
           <span>Expires On {{expiryDate}}</span>
 
           <ng-container *ngIf="payment.nextPlan">
@@ -26,7 +34,7 @@
           </ng-container>
 
           <br/>
-          <div *ngIf="!payment.nextPlan" (click)="sendRenewPlan()" class="renew-link">
+          <div *ngIf="subscription.showRenew" (click)="sendRenewPlan()" class="renew-link">
             <span>Renew Plan</span>
           </div>
           <br/>

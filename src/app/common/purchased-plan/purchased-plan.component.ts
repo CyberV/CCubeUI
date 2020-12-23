@@ -11,6 +11,7 @@ export class PurchasedPlanComponent implements OnInit {
   @Input() car:any;
   @Input() plan:any;
   @Input() payment:any;
+  @Input() subscription: any;
 
   @Output() compare = new EventEmitter();
   @Output() changeCar = new EventEmitter();
@@ -21,7 +22,9 @@ export class PurchasedPlanComponent implements OnInit {
   expiryDate:string;
   nextPlanStartDate:string;
 
-  constructor() { }
+  constructor() { 
+    this.subscription = {};
+  }
 
   onCompare() {
     this.changeCar.emit();

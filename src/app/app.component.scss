@@ -27,7 +27,7 @@ ion-app {
     .notif {
         ion-icon {
             font-size: 25px;
-            margin-top: -5px;
+            margin-top: -3px;
             margin-right: 14px;
             transition: all 0.2s ease-in;
 
@@ -52,6 +52,23 @@ ion-app {
     top: 2px;
 }
 
+.notif-badge {
+    position: absolute;
+    top: -2px;
+    left: 14px;
+    background: blue;
+    border-radius: 25px;
+    border: 2px solid white;
+    transition: all 2s;
+    pointer-events: none;
+    opacity: 0;
+    height: 12px;
+    width: 12px;
+
+    &.show {
+        opacity: 1;
+    }
+}
 .menu-btn {
     font-size: 30px;
     bottom: 12px;

@@ -154,6 +154,7 @@ export class CheckoutComponent implements OnInit {
       adhocs: order.adhocs,
       info: order.info,
       total: order.total,
+      carAlreadyActive: this.mode.plan ? (order.plan.period ? false : JSON.parse(sessionStorage.getItem('allPayments')).map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1):false,
       isUnlisted: this.isUnlisted
     };
     const modal = await this.modalController.create({
