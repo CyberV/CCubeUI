@@ -1,6 +1,6 @@
 <div class="schedule-list">
 
-    <div class="alert" [class.alert-light]="i>0" [class.alert-primary]="i==0" role="alert" *ngFor="let service of schedule; let i = index">
+    <div class="alert alert-light" role="alert" *ngFor="let service of schedule; let i = index">
         <div class="row">
             <div class="col-4 ">
                 <span class="day vertical-center-text">{{service.day}}</span><br/>

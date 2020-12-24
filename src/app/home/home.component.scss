@@ -10,6 +10,20 @@
     }
 }
 
+#s2 {
+    background: bisque;
+    margin-bottom: 1em;
+}
+#s3 {
+    background: #a9e6a9;
+    margin-bottom: 1em;
+}
+.feature-slide {
+    padding: 37px;
+    background: bisque;
+    min-height: 600px;
+}
+
 .logo {
     width: 100%;
 
@@ -78,5 +92,5 @@ a:hover {
 .demoRow,
 .contactRow {
 
-    padding: 2em 20px 0;
+    padding: 0 35px;
 }

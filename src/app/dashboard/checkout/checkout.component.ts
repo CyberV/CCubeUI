@@ -145,6 +145,20 @@ export class CheckoutComponent implements OnInit {
   async showConfirmation() {
     this.currentUser = this.userService.getCurrentUser();
     let order = this.planService.getCurrentOrder();
+    let carAlreadyActive = false;
+    if (this.mode.plan) {
+      if (order.plan.period) {
+        let allPayments = JSON.parse(sessionStorage.getItem('allPayments'));
+        if (allPayments && allPayments.length) {
+          carAlreadyActive = allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
+        }
+      } else {
+
+      }
+    } else {
+
+    }
+
     let payload = {
       userName: this.currentUser.name,
       car: order.car,
@@ -154,7 +168,7 @@ export class CheckoutComponent implements OnInit {
       adhocs: order.adhocs,
       info: order.info,
       total: order.total,
-      carAlreadyActive: this.mode.plan ? (order.plan.period ? false : JSON.parse(sessionStorage.getItem('allPayments')).map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1):false,
+      carAlreadyActive: carAlreadyActive,
       isUnlisted: this.isUnlisted
     };
     const modal = await this.modalController.create({

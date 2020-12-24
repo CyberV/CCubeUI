@@ -217,7 +217,7 @@ export class AppComponent {
 
   onActivate(comp) {
 
-    this.notificationService.saveNewNotification({body: 'Sameple ' + comp.context});
+    //this.notificationService.saveNewNotification({body: 'Sameple ' + comp.context});
 
     this.context = comp.context;
 

@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
       initialSlide: 0,
       centeredSlides: true,
     slidesPerView: 1,
+    autoplay: true,
 
 
       pagination: {

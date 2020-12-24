@@ -213,6 +213,26 @@ html {
   }
 }
 
+.bg-congrats {
+  transition: all 0.2s;
+    background: url(https://i.gifer.com/6ob.gif) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.bg-collect-keys {
+  transition: all 0.2s;
+    background: url(https://i.gifer.com/72f4.gif) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.bg-reminder {
+  
+  transition: all 0.2s;
+  background: url(https://media.giphy.com/media/xFmuT64Jto3mRO4w3G/giphy.gif) no-repeat 79% center fixed;
+  background-size: cover;
+}
+
+
 .notif-popover {
   --max-width: 300px;
 }
@@ -233,6 +253,10 @@ html {
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .vertical-center {
