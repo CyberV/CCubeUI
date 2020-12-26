@@ -46,6 +46,7 @@ export class DashboardPageComponent implements OnInit {
   includedAddons: any;
   includedAdhocs:any;
   currentSubscription:any;
+  activeFeature:any;
 
   ready: boolean;
 
@@ -115,6 +116,7 @@ export class DashboardPageComponent implements OnInit {
         break;
       }
       case 'plan': {
+        this.activeFeature = this.route.snapshot.paramMap.get('code');
         this.headerService.setText(this.selectedPlan.name + ' Plan');
         break;
       }
@@ -123,7 +125,7 @@ export class DashboardPageComponent implements OnInit {
         break;
       }
       case 'addon': {
-        this.headerService.setText(this.selectedAddon.name + ' Addon');
+        this.headerService.setText(this.selectedAddon.label || this.selectedAddon.name + ' Addon');
         break;
       }
       case 'service': {

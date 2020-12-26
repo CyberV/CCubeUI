@@ -16,6 +16,7 @@ import { MD5 } from 'crypto-js';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { NotificationService } from 'app/services/notification.service';
 
 //var CryptoJS = require("crypto-js");
 
@@ -47,6 +48,7 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private srvcUser: UserService,
+    private notificationService: NotificationService,
     private toastController: ToastController,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -105,6 +107,9 @@ export class LoginService {
   logout() {
     this.srvcUser.setCurrentUser(null);
     this.srvcUser.setUserToken(null);
+
+    sessionStorage.clear();
+
     this.router.navigate(['/home']);
   }
 
@@ -113,8 +118,6 @@ export class LoginService {
       phone: phone,
       otp: otp
     };
-    //let xx = _that;
-
 
     return this.http.post(this.url + 'login/otp', payload).pipe(
       catchError(this.handleError)

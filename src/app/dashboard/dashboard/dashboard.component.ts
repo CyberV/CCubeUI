@@ -156,6 +156,7 @@ export class DashboardComponent implements OnInit {
   }
 
   goToCarSelector() {
+    //this.carService.clear();
     this.router.navigate(['/dashboard/select-car']);
   }
 
@@ -181,7 +182,12 @@ export class DashboardComponent implements OnInit {
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
     this.planService.changePlan(this.selectedPlan);
+    if (payload.feature) {
+    this.router.navigate(['/dashboard/plan', {code: payload.feature.code}]);
+
+    } else {
     this.router.navigate(['/dashboard/plan']);
+    }
 
   }
 

@@ -332,6 +332,7 @@ export class LoginFormComponent implements OnInit {
     let valid: any = {
       phone: false,
       email: false,
+      city: false,
       name: false,
       password: false
     };
@@ -344,23 +345,33 @@ export class LoginFormComponent implements OnInit {
       this.errors['phone'] = 'Please enter a valid Phone Number.'
     }
 
+
+    
     if (this.newUser.name && this.newUser.name.length) {
       valid.name = true;
     } else {
       this.errors['name'] = 'Please enter a valid User Name.'
     }
 
+    if (this.newUser.city && this.newUser.city.length) {
+      valid.city = true;
+    } else {
+      this.errors['city'] = 'Please select a City.';
+    }
+
     if (this.newUser.password && this.newUser.password.length && this.newUser.password.length >= 4 && this.newUser.password == this.newUser.confirmPassword) {
       valid.password = true;
     } else {
-      this.errors['password'] = 'Please enter a valid Password.';
 
-      if (this.newUser.password.length < 4) {
+
+      this.errors['password'] = '';
+
+      if (this.newUser.password && this.newUser.password.length < 4) {
         this.errors['password'] += " Atleast 4 characters required."
-      }
-
-      if (this.newUser.password != this.newUser.confirmPassword) {
+      } else  if (this.newUser.password != this.newUser.confirmPassword) {
         this.errors['password'] += " Passwords don't match."
+      } else {
+        this.errors['password'] = 'Please enter a valid Password.';
       }
     }
 
@@ -372,7 +383,7 @@ export class LoginFormComponent implements OnInit {
     }
 
 
-    return !((valid.name && valid.phone && valid.password && valid.email) ? false : true);
+    return !((valid.name && valid.phone && valid.password && valid.email && valid.city) ? false : true);
 
   }
 

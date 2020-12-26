@@ -15,6 +15,13 @@
   }
 }
 
+.divider {
+  --color: $secondary-color;
+  color: $primary-color;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .description {
   font-weight: normal;
   margin-bottom:1em;

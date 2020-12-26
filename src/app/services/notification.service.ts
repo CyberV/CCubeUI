@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
+  constructor(
+  ) {
+
+  }
+
+  notificationsEmitter = new Subject();
 
   getAllNotifications() {
     return {
@@ -11,6 +18,18 @@ export class NotificationService {
       historical: this.getHistoricalNotifications(),
       read: this.getReadNotifications()
     }
+  }
+
+
+  events() {
+    if (this.notificationsEmitter.closed) {
+      this.notificationsEmitter = new Subject();
+    }
+    return this.notificationsEmitter;
+  }
+
+  sendNotificationUpdate() {
+    this.notificationsEmitter.next( this.getAllNotifications());
   }
 
   getNewNotifications() {
@@ -33,13 +52,15 @@ export class NotificationService {
     notifs.push(notif);
     notif.date =  new Date().toString().split(' ').slice(1,3).join(' ');
     localStorage.setItem('newNotifications', JSON.stringify(notifs));
+
+    this.sendNotificationUpdate();
   }
 
   markNotificationAsRead(notif) {
     let notifsNew = this.getNewNotifications();
     let notifsRead = this.getReadNotifications();
 
-    let start = notifsNew.filter((n) => n.body == notif.body);
+    let start = notifsNew.filter((n) => n.body.msg == notif.body.msg);
 
     if (start && start.length) {
       start = notifsNew.indexOf(start[0]);
@@ -51,6 +72,9 @@ export class NotificationService {
 
         localStorage.setItem('newNotifications', JSON.stringify(notifsNew));
         localStorage.setItem('readNotifications', JSON.stringify(read));
+
+        this.sendNotificationUpdate();
+
       }
     }
   }
@@ -63,7 +87,16 @@ export class NotificationService {
 
     localStorage.setItem('historicalNotifications', JSON.stringify(notifsRead));
     localStorage.setItem('readNotifications', JSON.stringify([]));
+    this.sendNotificationUpdate();
+
   }
 
-  constructor() { }
+  clear() {
+    localStorage.setItem('newNotifications', JSON.stringify([]));
+    localStorage.setItem('historicalNotifications', JSON.stringify([]));
+    localStorage.setItem('readNotifications', JSON.stringify([]));
+    this.sendNotificationUpdate();
+  }
+
+
 }

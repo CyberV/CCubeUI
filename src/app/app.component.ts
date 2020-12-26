@@ -37,6 +37,7 @@ export class AppComponent {
   headerText: string;
   currentUser: any;
   isLoggedIn: boolean;
+  hasNewNotifications:boolean;
 
   headerType: string;      // text, view
   viewData: any;
@@ -66,6 +67,7 @@ export class AppComponent {
     this.hideBackButton = false;
     this.headerType = '';
     this.fcmInitialized = false;
+    this.hasNewNotifications = false;
     this.ready = false;
 
     this.noBackNavigation = [
@@ -174,6 +176,10 @@ export class AppComponent {
     await alert.present();
   }
 
+  logout() {
+    this.loginService.logout();
+  }
+
   goBack() {
     window.history.back();
   }
@@ -188,6 +194,11 @@ export class AppComponent {
 
   async ngAfterViewInit() {
     this.menu.enable(true, 'first');
+    this.hasNewNotifications = this.notificationService.getNewNotifications().length > 0;
+
+    this.notificationService.events().subscribe((notifs:any) => {
+      this.hasNewNotifications = notifs.new.length > 0;
+    })
 
     // this.checkData().then((data) => {
     //   this.ready = true;
@@ -217,7 +228,7 @@ export class AppComponent {
 
   onActivate(comp) {
 
-    //this.notificationService.saveNewNotification({body: 'Sameple ' + comp.context});
+    //this.notificationService.saveNewNotification({title:'Congratulations', body: {msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}}});
 
     this.context = comp.context;
 

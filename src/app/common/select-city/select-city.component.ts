@@ -10,8 +10,10 @@ import { scrollElementToTop } from 'app/util/util';
 export class SelectCityComponent implements OnInit {
 
   @Input() city: string;
+  @Input() error: string;
   @Input() state: string;
   @Input() mandatory: boolean;
+
 
   @Output() cityChange = new EventEmitter();
   @Output() stateChange = new EventEmitter();
@@ -26,6 +28,7 @@ export class SelectCityComponent implements OnInit {
 
   options: any;
   states: any;
+  hasError:boolean;
 
 
   get filteredCities() {
@@ -55,6 +58,7 @@ export class SelectCityComponent implements OnInit {
     this.showState = false;
     this.options = citiesService.getAllCities();
     this.states = citiesService.states;
+    this.hasError = false;
     this.mandatory = false;
   }
 
@@ -75,6 +79,14 @@ export class SelectCityComponent implements OnInit {
 
   onEnterKey(e) {
     this.enterKey.emit();
+  }
+
+  ngOnChanges(changes) {
+    if (this.error && this.error.length) {
+      this.hasError = true;
+    } else {
+      this.hasError = false;
+    }
   }
 
   selectCity(city) {

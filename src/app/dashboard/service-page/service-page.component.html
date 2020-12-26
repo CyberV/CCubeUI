@@ -69,7 +69,7 @@
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <weekly-schedule *ngIf="selectedSubscription.schedule.length" [schedule]="selectedSubscription.schedule"></weekly-schedule>
-                <heading *ngIf="!selectedSubscription.schedule.length"  text="Schedule is Under Processing. Please wait."></heading>
+                <heading *ngIf="!selectedSubscription.schedule.length"  text="Schedule is Under Processing. Please wait for Plan Activation."></heading>
 
               </mat-expansion-panel>
               <mat-expansion-panel class="drop">
@@ -95,7 +95,7 @@
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                <service-history></service-history>
+                <service-history [carRegNo]="selectedCar.regNo"></service-history>
               </mat-expansion-panel>
             </mat-accordion>
           </div>

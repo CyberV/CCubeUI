@@ -10,7 +10,7 @@
               (carReady)="goToDashboard($event)"></car-form>
             <div *ngIf="context==='plan' && selectedPlan">
               <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
-              <plan-details [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
+              <plan-details [activeFeature]="activeFeature" [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
               </plan-details>
               <addon-slider (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
               <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>

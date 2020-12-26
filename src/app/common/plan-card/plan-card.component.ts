@@ -83,11 +83,12 @@ export class PlanCardComponent implements OnInit {
     this.buyNow.emit(payload);
   }
 
-  onShowDetails() {
+  onShowDetails(feature=null) {
     let payload = {
       plan: this.plan,
       bodyType: this.bodyType,
-      features: this.features
+      features: this.features,
+      feature:feature
     }
     this.showDetails.emit(payload);
   }

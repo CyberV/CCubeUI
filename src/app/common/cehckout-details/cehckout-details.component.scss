@@ -74,7 +74,15 @@ mat-select {
 }
 
 .body-type {
-    text-transform: capitalize;
+    text-transform: uppercase;
+    text-align: right;
+    padding-right: 25px;
+}
+
+.addon-info {
+    --padding-start: 0;
+    --padding-end: 0;
+    width: 105%;
 }
 
 .tax-row {

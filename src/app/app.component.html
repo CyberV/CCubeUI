@@ -39,7 +39,7 @@
                      'active': notifToggleOpen,
                     'animate__swing': ready }"  name="notifications-outline"
                    ></ion-icon>
-                  <span class="notif-badge" [class.show]="ready">&nbsp;</span>
+                  <span *ngIf="hasNewNotifications" class="notif-badge" [class.show]="ready">&nbsp;</span>
                 </span>
 
               </div>
@@ -54,7 +54,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-menu side="start" menuId="first" contentId="my-content">
+  <ion-menu class="side-menu" side="start" menuId="first" contentId="my-content">
     <div class="menu-header">
       <div class="top">
         <div class="row ">
@@ -93,6 +93,9 @@
         </ion-item>
         <ion-item (click)="goTo('contact-us')">
           <ion-icon name="mail-outline"></ion-icon>Contact Us
+        </ion-item>
+        <ion-item (click)="logout()" style="color:red;"> 
+          <ion-icon name="power-outline" style="color:red;"></ion-icon> Log Out
         </ion-item>
 
       </ion-list>

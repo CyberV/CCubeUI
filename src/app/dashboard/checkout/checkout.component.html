@@ -7,7 +7,7 @@
 
           <div *ngIf="context=='checkout'" class="--padding-x">
 
-            <!-- <selected-car *ngIf="selectedCar" [car]="selectedCar" slim></selected-car> -->
+            <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
             <ng-container *ngIf="(mode.plan || mode.addon || mode.adhoc) && selectedCar; else noItemsTemplate">
                 <checkout-details 
                 [includedAddons]="includedAddons" 
@@ -26,7 +26,7 @@
   
              
   
-              <addon-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)"></addon-slider>
+              <addon-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)"></addon-slider>
               <adhoc-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.adhoc)" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
               <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
             </ng-container>
@@ -73,7 +73,7 @@
             
             <cc-accordion #drawerTime title="Confirm Your Timings" [step]="'3'" [disabled]="!step3Ready" [locked]="verificationComplete">
               <heading text="What time do you leave for office ?"></heading>
-                <input name="officeTime" [(ngModel)]="officeTime" [ngxTimepicker]="picker" minutesGap="15" placeholder="ex. 10:00 AM">
+                <input class="officeTime" name="officeTime" [(ngModel)]="officeTime" [ngxTimepicker]="picker" minutesGap="15" placeholder="ex. 10:00 AM">
                 <ngx-material-timepicker #picker  minutesGap="15"></ngx-material-timepicker>
               <cta text="Confirm" (action)="completeVerification()"></cta>
             </cc-accordion>

@@ -38,6 +38,8 @@ export class CheckoutComponent implements OnInit {
   verificationComplete: boolean;
   selectedAddon: any;
   selectedAdhoc: any;
+  blockedAddons:any;
+
 
   currentUser: any;
   currentLocation: any;
@@ -85,6 +87,7 @@ export class CheckoutComponent implements OnInit {
     this.order = null;
     this.includedAddons = [];
     this.includedAdhocs = [];
+    this.blockedAddons = [];
     this.mode = {};
     this.isUnlisted = false;
 
@@ -145,10 +148,11 @@ export class CheckoutComponent implements OnInit {
   async showConfirmation() {
     this.currentUser = this.userService.getCurrentUser();
     let order = this.planService.getCurrentOrder();
+    let allPayments = JSON.parse(sessionStorage.getItem('allPayments'));
     let carAlreadyActive = false;
     if (this.mode.plan) {
-      if (order.plan.period) {
-        let allPayments = JSON.parse(sessionStorage.getItem('allPayments'));
+      if (!order.plan.period) {
+       
         if (allPayments && allPayments.length) {
           carAlreadyActive = allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
         }
@@ -184,7 +188,7 @@ export class CheckoutComponent implements OnInit {
 
     modal.onDidDismiss().then((data: any) => {
 
-      if (data.data.isUnlisted) {
+      if (data && data.data && data.data.isUnlisted) {
         this.loginService.addLead({
           phone: this.currentUser.phone,
           name: this.currentUser.name,
@@ -248,6 +252,12 @@ export class CheckoutComponent implements OnInit {
     this.includedAddons = this.planService.getIncludedAddons();
     this.includedAdhocs = this.planService.getIncludedAdhocs();
 
+    let sub = this.planService.getCurrentSubscription();
+
+    if (sub && sub.addons) {
+      this.blockedAddons = sub.addons.map((a) => a.addon);
+    }
+
     if (this.includedAddons && this.includedAddons.length) {
       this.selectedAddon = this.includedAddons[this.includedAddons.length -1];
     }
@@ -274,6 +284,12 @@ export class CheckoutComponent implements OnInit {
     this.generateOrder();
 
 
+  }
+
+  resetCar() {
+    this.carService.clear();
+    //this.isCarSelected = false;
+    this.router.navigate(['/dashboard/select-car']);
   }
 
   resetCarNumber() {
@@ -339,7 +355,7 @@ export class CheckoutComponent implements OnInit {
 
       if (car) {
         this.selectedCar = car;
-        if (this.selectedCar.fuelType) {
+        if (this.selectedCar.regNo.length) {
           this.carIdentified = true;
           this.carMismatch = false;
           this.step2Ready = true;
@@ -347,6 +363,10 @@ export class CheckoutComponent implements OnInit {
             this.drawerLocation.first.toggle();
           }, 1000);
         } else {
+          this.carIdentified = false;
+          this.carMismatch = false;
+          this.step2Ready = false;
+          this.step3Ready = false;
           setTimeout(() => {
             this.drawerCar.first.toggle();
           }, 1000);

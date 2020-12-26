@@ -1,5 +1,5 @@
 <div class="body">
-  <div class="headers-top">
+  <!-- <div class="headers-top">
     <div class="row">
       <div class="col-5 text-right --no-padding-right">
         {{car.maker | uppercase}}
@@ -11,7 +11,7 @@
         {{car.model | uppercase}}
       </div>
     </div>
-  </div>
+  </div> -->
   <mat-card class="card-container" *ngIf="mode && (mode.plan || mode.addon || mode.adhoc)">
 
     <div class="top">
@@ -20,7 +20,7 @@
           <div class="col-5">
             {{ productLabel}}
           </div>
-          <div class="col-3 --no-padding">
+          <div class="col-3 ">
             Type
           </div>
           <div class="col-4 --no-padding-left text-center">
@@ -31,7 +31,7 @@
           <div class="col-5">
               {{ productName}}
           </div>
-          <div class="col-3 body-type">
+          <div class="col-3 body-type --no-padding-left">
             {{car.bodyType}}
           </div>
           <div class="col-4 text-center">
@@ -106,13 +106,13 @@
       <div>
         <cc-accordion *ngIf="includedAddons && includedAddons.length" [label]="addonPrice" [title]="'Addons Included'" compact="true">
           <ion-list>
-            <ion-item *ngFor="let adn of includedAddons">
+            <ion-item *ngFor="let adn of includedAddons" class="addon-info">
               <ion-label>
                 <div class="row --no-padding">
-                  <div class="col-6 addon-title --no-padding-right">
+                  <div class="col-7 addon-title --no-padding-right">
                     <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
                   </div>
-                  <div class="col-3 --no-padding">
+                  <div class="col-2 --no-padding">
                     <span class="badge badge-light" (click)="sendRemoveAddon(adn)">Remove</span>
                   </div>
                   <div class="col-3">
@@ -128,7 +128,7 @@
         </cc-accordion>
         <cc-accordion *ngIf="includedAdhocs && includedAdhocs.length" [label]="adhocPrice" [title]="'Services Included'" compact="true">
             <ion-list>
-              <ion-item *ngFor="let adn of includedAdhocs">
+              <ion-item *ngFor="let adn of includedAdhocs" class="addon-info">
                 <ion-label>
                   <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
                   <span class="badge badge-light" (click)="sendRemoveAdhoc(adn)">Remove</span>
@@ -137,9 +137,9 @@
               </ion-item>
             </ion-list>
           </cc-accordion>
-        <cc-accordion [title]="addon? 'Addon Details' : 'Plan Details'" [compact]="true">
+        <cc-accordion [title]="addon && !plan? 'Addon Details' : 'Plan Details'" [compact]="true">
           <plan-details *ngIf="plan" [plan]="plan" [compact]="true"></plan-details>
-          <addon-details *ngIf="addon" [addon]="addon"></addon-details>
+          <addon-details *ngIf="!plan && addon" [addon]="addon"></addon-details>
         </cc-accordion>
       </div>
     </div>

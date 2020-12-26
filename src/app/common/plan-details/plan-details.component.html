@@ -19,7 +19,7 @@
   </mat-panel-title>
   </div>
   <mat-accordion *ngIf="!compact">
-      <mat-expansion-panel class = "drop"  *ngFor="let feature of currentFeatures"  >
+      <mat-expansion-panel class = "drop" id="{{feature.code}}"  *ngFor="let feature of currentFeatures" [expanded]="feature.code == activeFeature" >
         <mat-expansion-panel-header class = "drop">
           <mat-panel-title>
               {{feature.name}}

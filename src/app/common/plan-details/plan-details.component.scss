@@ -32,7 +32,8 @@ margin-bottom: 5px;
   margin-bottom: 1em;
 
   &.compact {
-    width: 110%;
+    width: 116%;
+    padding: 0;
 
     mat-panel-title:last-of-type {
       .feature {

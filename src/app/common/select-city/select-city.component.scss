@@ -14,15 +14,25 @@
         border-radius: 0;
         background: transparent;
         color: $bg-black;
+        height: 25px;
+        margin-bottom: 10px;
     }
 
     .error-field {
-        border: 1px solid red;
+        border-bottom: 1px solid red;
+    }
+
+    .red {
+        color: red;
     }
 
     .error-msg {
-        color: red;
+        color: #6f6666;
+        margin-top: 8px;
+        border-bottom: none;
+        font-weight: 300;
     }
+
 
     .not-mobile {
         padding:0;

@@ -1,13 +1,17 @@
 <div class="schedule-list">
 
-    <div class="alert" [class.alert-light]="i>0" [class.alert-primary]="i==0" role="alert" *ngFor="let service of history; let i = index">
+    <heading text="Read Notifications can be found here." *ngIf="!history || history.length == 0"></heading>
+    <div class="alert alert-light" role="alert" *ngFor="let service of history; let i = index">
         <div class="row">
-            <div class="col-4 ">
+            <div class="col-2 --no-padding">
                 <span class="day vertical-center-text">{{service.date}}</span><br/>
             </div>
-            <div class="col-8">
+            <div class="col-3 --no-padding">
+              <img [src]="service.body.data.car.image" />
+          </div>
+            <div class="col-7 --no-padding-right">
                 <span class="task">
-                    {{service.body}} 
+                    {{service.body.msg}} 
                 </span>
             </div>
           </div>

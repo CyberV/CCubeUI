@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import carsList from 'assets/carslist.json';
+import { PlanService } from './plan.service';
 
 let findMatchingCar = function (car) {
   let found = null;
@@ -44,7 +45,8 @@ let findMatchingCar = function (car) {
 })
 export class CarService {
 
-  constructor() { }
+  constructor(
+  ) { }
 
   changeCar(carDetails) {
     if (carDetails) {
@@ -68,6 +70,9 @@ export class CarService {
       sessionStorage.setItem('currentCar', null);
     }
     sessionStorage.setItem('currentAddon', null);
+    sessionStorage.setItem('includedAddons', null);
+    sessionStorage.setItem('includedAdhocs', null);
+  
   }
 
   getCurrentAddon() {

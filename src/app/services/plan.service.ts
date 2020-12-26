@@ -37,6 +37,13 @@ export class PlanService {
 
    }
 
+   clearAll() {
+
+    this.clear();
+    this.clearAddons();
+    this.clearAdhocs();
+   }
+
   clear() {
     sessionStorage.setItem('selectedPlan', null);
   }

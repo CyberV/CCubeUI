@@ -1,6 +1,6 @@
 <div class="addon-container">
   <div class="addon-info">
-    <h2 #pageTop><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+    <h2 #pageTop class="--padding-x"><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
     <p>
       <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for 1 month.</span>
     </p>
@@ -17,10 +17,10 @@
 
     <ion-item-group>
       <ion-item-divider>
-        <ion-label>Details</ion-label>
+        <ion-label class="divider">Details</ion-label>
       </ion-item-divider>
 
-      <ion-item>
+      <ion-item lines="none">
         <ion-label>
           <ion-icon class="water" name="water-outline"></ion-icon> Water Efficient
         </ion-label>
@@ -34,7 +34,7 @@
 
       <ng-container *ngIf="!isAdhoc">
         <ion-item-divider>
-          <ion-label>Frequency</ion-label>
+          <ion-label class="divider">Frequency</ion-label>
         </ion-item-divider>
 
         <ion-item lines="none">
