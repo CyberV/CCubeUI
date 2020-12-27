@@ -23,12 +23,12 @@ export class ServiceHistoryComponent implements OnInit {
 
   refresh(entries) {
     console.log('entries', entries);
-    this.history = entries.historical.filter((notif) => notif.body.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
+    this.history = entries.historical.filter((notif) => notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
 
   }
 
   ngOnInit() {
-    this.history = this.notificationService.getHistoricalNotifications().filter((notif) => notif.body.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
+    this.history = this.notificationService.getHistoricalNotifications().filter((notif) => notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
 
   }
 

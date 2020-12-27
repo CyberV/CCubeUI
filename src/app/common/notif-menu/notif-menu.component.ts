@@ -53,7 +53,7 @@ export class NotifMenuComponent implements OnInit {
       let alert = await this.alertController.create({
         cssClass: cls + ' animate__animated  animate__fadeIn ',
         header: data.title || 'Notification',
-        message: data.body.msg || 'This is a demo message.',
+        message: data.body || 'This is a demo message.',
         buttons: ['OK']
       });
 

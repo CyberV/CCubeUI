@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
+import { ModalController } from '@ionic/angular';
 
 
 
@@ -12,6 +13,7 @@ export class AddonDetailsComponent implements OnInit {
 
   @Input() addon:any;
   @Input() adhoc:any;
+  @Input() showClose: any;
 
   @Output() changeAddon = new EventEmitter();
   @Output() scheduleLater = new EventEmitter();
@@ -27,7 +29,8 @@ export class AddonDetailsComponent implements OnInit {
   startDate:any;
   isAdhoc:boolean;
   constructor(
-    private planService:PlanService
+    private planService:PlanService,
+    private modalController: ModalController
   ) {
     this.isAdhoc = false;
     this.laterSelected = true;
@@ -55,6 +58,11 @@ export class AddonDetailsComponent implements OnInit {
       }
     }
     this.scheduleLater.emit(payload);
+  }
+
+  
+  closeModal() {
+    this.modalController.dismiss();
   }
 
   ngOnInit() {

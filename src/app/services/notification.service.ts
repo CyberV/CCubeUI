@@ -60,7 +60,7 @@ export class NotificationService {
     let notifsNew = this.getNewNotifications();
     let notifsRead = this.getReadNotifications();
 
-    let start = notifsNew.filter((n) => n.body.msg == notif.body.msg);
+    let start = notifsNew.filter((n) => n.body == notif.body);
 
     if (start && start.length) {
       start = notifsNew.indexOf(start[0]);

@@ -5,6 +5,7 @@ import { Platform, ToastController, AlertController, IonSlides } from '@ionic/an
 
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
+import { NotificationService } from 'app/services/notification.service';
 
 @Component({
   selector: 'app-service-page',
@@ -19,13 +20,13 @@ export class ServicePageComponent implements OnInit {
   selectedCar: any;
   selectedPayment: any;
 
-  subAddons:any;
-  subAdhocs:any;
+  subAddons: any;
+  subAdhocs: any;
 
   loading: boolean;
   sliderInitialized: boolean;
-  upgradePlans:any;
-  selectedSubscription:any;
+  upgradePlans: any;
+  selectedSubscription: any;
 
   carSliderOptions = {
     centeredSlides: false,
@@ -41,6 +42,17 @@ export class ServicePageComponent implements OnInit {
 
   @ViewChildren('planSlider') planSlider: QueryList<IonSlides>;
 
+  notifications: any;
+
+  getNotificationCount(regNo) {
+    if (this.notifications && this.notifications.length) {
+      let found = this.notifications.filter((notif) => notif.data.car.regNo.toLowerCase() == regNo.toLowerCase());
+      return found && found.length ? found.length : 0;
+    } else {
+      return 0;
+    }
+  }
+
 
   constructor(
     private router: Router,
@@ -49,8 +61,15 @@ export class ServicePageComponent implements OnInit {
     public alertController: AlertController,
     private planService: PlanService,
     public toastController: ToastController,
-    private carService: CarService
+    private carService: CarService,
+    private notificationService: NotificationService
   ) {
+
+    this.notifications = notificationService.getNewNotifications();
+    notificationService.events().subscribe((notifs: any) => {
+      this.notifications = notifs.new;
+    })
+
     this.payments = [];
     this.upgradePlans = [];
     this.selectedCar = null;
@@ -61,7 +80,7 @@ export class ServicePageComponent implements OnInit {
     this.selectedSubscription = null;
     this.subAddons = [];
     this.subAdhocs = [];
-    
+
 
   }
 
@@ -81,40 +100,40 @@ export class ServicePageComponent implements OnInit {
     this.upgradePlans = [];
 
     if (this.selectedSubscription.addons && this.selectedSubscription.addons.length) {
-      this.subAddons = this.selectedSubscription.addons.map( (adn) => adn.addon);
+      this.subAddons = this.selectedSubscription.addons.map((adn) => adn.addon);
     }
 
     if (this.selectedSubscription.adhocs && this.selectedSubscription.adhocs.length) {
-      this.subAdhocs = this.selectedSubscription.adhocs.map( (adn) => adn.addon);
+      this.subAdhocs = this.selectedSubscription.adhocs.map((adn) => adn.addon);
     }
 
 
 
-    setTimeout(()=> {
+    setTimeout(() => {
       this.upgradePlans = this.planService.getUpgradePlans(this.selectedPayment.plan.name);
     }, 100);
-    
-    setTimeout(()=> {
+
+    setTimeout(() => {
       if (this.planSlider && this.planSlider.first) {
         if (!this.sliderInitialized) {
-  
 
-  
+
+
           this.planSlider.first.ionSlideDidChange.subscribe((ev) => {
             console.log('Slider Event', ev);
-            this.planSlider.first.getActiveIndex().then((da)=> {
+            this.planSlider.first.getActiveIndex().then((da) => {
               console.log('Active Index', da);
               this.selectCar(da);
             })
-           
+
           });
           this.sliderInitialized = true;
-        } 
-          
+        }
+
       }
     }, 2000);
 
-    setTimeout(()=> {
+    setTimeout(() => {
       if (this.planSlider && this.planSlider.first) {
         this.planSlider.first.slideTo(this.selectedIndex);
       }
@@ -174,7 +193,7 @@ export class ServicePageComponent implements OnInit {
     this.planService.clearAdhocs();
 
     if (this.selectedSubscription.addons.length) {
-      sessionStorage.setItem('includedAddons', JSON.stringify(this.selectedSubscription.addons.map((addon)=> addon.addon)));
+      sessionStorage.setItem('includedAddons', JSON.stringify(this.selectedSubscription.addons.map((addon) => addon.addon)));
     }
 
     this.router.navigate(['/dashboard/checkout']);
@@ -188,8 +207,8 @@ export class ServicePageComponent implements OnInit {
 
     let { car, payment, expiresOn } = this.selectedPayment;
 
-        // Clear Addon
-        this.carService.clear(true);
+    // Clear Addon
+    this.carService.clear(true);
 
     sessionStorage.setItem('currentPayment', JSON.stringify(payment));
     this.carService.changeCar(car);

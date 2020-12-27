@@ -1,6 +1,8 @@
 <div class="addon-container">
   <div class="addon-info">
+      <span *ngIf="showClose" class="float-right" (click)="closeModal()">X</span>
     <h2 #pageTop class="--padding-x"><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+    
     <p>
       <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for 1 month.</span>
     </p>

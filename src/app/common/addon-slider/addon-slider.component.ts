@@ -15,6 +15,7 @@ export class AddonSliderComponent implements OnInit {
   @Input() selectedAddons:any;
   @Input() blockedAddons:any;
   @Output() addonSelected = new EventEmitter();
+  @Output() showDetails = new EventEmitter();
   @Input() active:boolean;
   @Input() plan:any;
 
@@ -54,6 +55,10 @@ export class AddonSliderComponent implements OnInit {
 
   ngOnInit() {}
 
+  sendShowDetails(addon) {
+    this.showDetails.emit(addon);
+  }
+
   ngOnChanges(changes) {
 
     if (changes.plan && this.plan) {
@@ -69,16 +74,16 @@ export class AddonSliderComponent implements OnInit {
       this.parse();
     }
 
+    if (changes.blockedAddons && this.blockedAddons && this.blockedAddons.length) {
+      console.log('Blocked', this.blockedAddons);
+      this.blockedMap = this.blockedAddons.map((a) => a.code);
+      this.parse();
+    }
+
     if (changes.bodyType && this.bodyType && this.addOns) {
       for (let i=0;i< this.addOns.length; i++) {
         this.addOns[i].price = this.addOns[i].pricing[this.bodyType];
       }
-    }
-
-    if (changes.blockedAddons && this.blockedAddons) {
-      console.log('Blocked', this.blockedAddons);
-      this.blockedMap = this.blockedAddons.map((a) => a.code);
-      this.parse();
     }
   }
 

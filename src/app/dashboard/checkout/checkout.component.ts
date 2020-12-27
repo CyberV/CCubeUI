@@ -9,6 +9,7 @@ import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 import { AccordionComponent } from 'app/common/accordion/accordion.component';
+import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 
 @Component({
   selector: 'app-checkout',
@@ -254,7 +255,7 @@ export class CheckoutComponent implements OnInit {
 
     let sub = this.planService.getCurrentSubscription();
 
-    if (sub && sub.addons) {
+    if (sub && sub.addons && sub.car.regNo.toLowerCase() == car.regNo.toLowerCase()) {
       this.blockedAddons = sub.addons.map((a) => a.addon);
     }
 
@@ -284,6 +285,24 @@ export class CheckoutComponent implements OnInit {
     this.generateOrder();
 
 
+  }
+
+  async openAddon(addon) {
+    const modal = await this.modalController.create({
+      component: AddonDetailsComponent,
+      cssClass: 'plans-table-modal',
+      componentProps: { 
+        addon: addon,
+        showClose: true
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+
+
+
+    });
   }
 
   resetCar() {

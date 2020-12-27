@@ -19,6 +19,7 @@
                 [mode]="mode"
                 (removeAddon)="onAddonSelected($event)"
                 (removeAdhoc)="onAdhocSelected($event)"
+                (showAddonDetails)="openAddon($event)"
                 >
   
   
@@ -26,7 +27,7 @@
   
              
   
-              <addon-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)"></addon-slider>
+              <addon-slider  [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)" (showDetails)="openAddon($event)"></addon-slider>
               <adhoc-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.adhoc)" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
               <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
             </ng-container>

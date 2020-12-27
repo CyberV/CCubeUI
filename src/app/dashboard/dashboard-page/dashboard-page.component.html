@@ -12,7 +12,7 @@
               <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
               <plan-details [activeFeature]="activeFeature" [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
               </plan-details>
-              <addon-slider (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
+              <addon-slider [plan]="selectedPlan" [bodyType]="selectedCar.bodyType" (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
               <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
             </div>
             <div *ngIf="context==='adhoc' && selectedAdhoc">

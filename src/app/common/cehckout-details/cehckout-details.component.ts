@@ -16,6 +16,7 @@ export class CheckoutDetailsComponent implements OnInit {
   @Input() includedAdhocs: any;
   @Input() mode: any;
   
+  @Output() showAddonDetails = new EventEmitter();
   @Output() removeAdhoc = new EventEmitter();
   @Output() removeAddon = new EventEmitter();
 
@@ -44,6 +45,10 @@ export class CheckoutDetailsComponent implements OnInit {
 
   addonPrice: any;
   adhocPrice: any;
+
+  sendShowDetails(addon){
+    this.showAddonDetails.emit(addon);
+  }
 
 
   constructor(

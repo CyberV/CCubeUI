@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CompileMetadataResolver } from '@angular/compiler';
+import { NotificationService } from 'app/services/notification.service';
 
 @Component({
   selector: 'purchased-plan',
@@ -22,8 +23,9 @@ export class PurchasedPlanComponent implements OnInit {
   expiryDate:string;
   nextPlanStartDate:string;
 
-  constructor() { 
-    this.subscription = {};
+
+  constructor(  ) { 
+
   }
 
   onCompare() {

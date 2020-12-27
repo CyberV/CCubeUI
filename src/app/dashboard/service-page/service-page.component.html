@@ -16,7 +16,7 @@
           <div class="car-box" [class.active]="selectedIndex == i" (click)="selectCar(i)">
 
             <ion-label class="car-image"><img [src]="payment.payments[0].car.image" /></ion-label>
-            <ion-badge>{{i}}</ion-badge>
+            <ion-badge *ngIf="getNotificationCount(payment.payments[0].car.regNo) > 0">{{getNotificationCount(payment.payments[0].car.regNo)}}</ion-badge>
           </div>
           <!-- <mat-card class="card addon-card animate__animated animate__flipInX">
             
