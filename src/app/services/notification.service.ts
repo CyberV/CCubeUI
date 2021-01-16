@@ -49,10 +49,18 @@ export class NotificationService {
 
   saveNewNotification(notif) {
     let notifs = this.getNewNotifications();
-    notifs.push(notif);
-    notif.date =  new Date().toString().split(' ').slice(1,3).join(' ');
-    localStorage.setItem('newNotifications', JSON.stringify(notifs));
+    let n = notif;
+    n.data = JSON.parse(n.data);
+    if (n.title.toLowerCase().indexOf('activated') > -1) {
+      n.action = 'refresh';
+    }
 
+    if (n.data.action) {
+      n.action = n.data.action;
+    }
+    n.date =  new Date().toString().split(' ').slice(1,3).join(' ');
+    notifs.push(n);
+    localStorage.setItem('newNotifications', JSON.stringify(notifs));
     this.sendNotificationUpdate();
   }
 
@@ -72,6 +80,8 @@ export class NotificationService {
 
         localStorage.setItem('newNotifications', JSON.stringify(notifsNew));
         localStorage.setItem('readNotifications', JSON.stringify(read));
+
+        this.moveNotificationsToHistory();
 
         this.sendNotificationUpdate();
 

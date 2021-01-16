@@ -1,0 +1,27 @@
+<div class="reschedule-container">
+    <ion-icon class="close-link" name="close-outline" style="color:red;" (click)="dismiss()"></ion-icon>
+  <heading text="Reschedule Full Body Wash" align="center"></heading>
+<br/>
+  <span class="count">Free Reschedules Left: </span>
+  <span class="">
+    {{count}}
+  </span>
+
+  <br/><br/>
+  <ng-container *ngIf="canReschedule">
+      <span >You may Reschedule this service for  <span *ngIf="count>0"> Free </span> <span *ngIf="count<=0">the price of <span Rs> 50 </span></span></span>
+
+      <br/><br/>
+      <span>You can reschedule to any future working day within the same Monthly Cycle.</span>
+    <br/><br/>
+      <span>Service Scheduled On : <span class="today">{{today}}</span></span>
+      
+      <mobile-input type="date" [error]="dateError" name="Reschedule To" [constraints]="constraints" [value]="selectedDate" (valueChange)="checkDate($event)"></mobile-input>
+      
+      <cta text="Reschedule" [disabled]="!!!selectedDate" [loading]="loading" (action)="reschedule()"></cta>
+      
+  </ng-container>
+
+  <subheading *ngIf="!canReschedule" text="You have reached the Max Limit for Rescheduling this service!" align="center"></subheading>
+
+</div>

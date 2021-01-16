@@ -4,15 +4,20 @@
       <div class="offset-md-2 col-md-8">
         <div class="container">
           <ng-container *ngIf="ready">
-            <app-dashboard *ngIf="context==='dashboard'" [includedAddons]="includedAddons"
+            <app-dashboard *ngIf="context==='dashboard' && !forDemo" [includedAddons]="includedAddons"
               [includedAdhocs]="includedAdhocs" [currentCar]="selectedCar"></app-dashboard>
+              <div *ngIf="context==='dashboard' && forDemo">
+              <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
+
+                <book-demo class="--padding-x"></book-demo>
+              </div>
             <car-form *ngIf="context==='select-car'" [regNo]="selectedCar ? selectedCar.regNo :'' "
               (carReady)="goToDashboard($event)"></car-form>
             <div *ngIf="context==='plan' && selectedPlan">
               <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
               <plan-details [activeFeature]="activeFeature" [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
               </plan-details>
-              <addon-slider [plan]="selectedPlan" [bodyType]="selectedCar.bodyType" (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
+              <addon-slider [plan]="selectedPlan" [bodyType]="selectedCar.bodyType" (showDetails)="openAddon($event)" (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
               <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
             </div>
             <div *ngIf="context==='adhoc' && selectedAdhoc">
@@ -23,7 +28,7 @@
             </div>
             <div  *ngIf="context==='addon' && selectedAddon">
                 <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
-                <addon-details  [addon]="selectedAddon" (changeAddon)="goToDashboard()" (sendScheduleLater)="goToCheckout()">
+                <addon-details  [addon]="selectedAddon" (changeAddon)="goToDashboard()" (sendScheduleLater)="goToCheckout()" (scheduleDate)="setDateForAdhoc($event)">
                 </addon-details>
                 <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
             </div>

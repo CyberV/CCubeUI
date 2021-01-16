@@ -35,6 +35,8 @@
     "@ionic/pwa-elements": "^1.5.2",
     "angularx-social-login": "^2.3.1",
     "animate.css": "^4.1.0",
+    "aws-s3": "^2.0.5",
+    "aws-sdk": "^2.819.0",
     "chart.js": "^2.9.3",
     "cordova-ios": "6.1.1",
     "cordova-plugin-fcm-with-dependecy-updated": "^7.3.1",

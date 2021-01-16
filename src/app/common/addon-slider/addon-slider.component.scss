@@ -9,6 +9,10 @@ ion-slides, ion-button {
   margin-bottom: 1em;
 }
 
+.badge-light {
+  margin-top: 1em;
+}
+
 ion-slide:nth-of-type(0){
   margin-left: 15px;
 }
@@ -23,6 +27,26 @@ ion-slide:nth-of-type(0){
 
   &.blocked {
     border: 2px solid green;
+  }
+
+  .active-label {
+    margin-bottom: -25px;
+    color: green;
+  }
+
+  .date-label {
+    margin-top: 1em;
+    position: relative;
+    display: block;
+    color: $secondary-color;
+    font-size: 20px;
+
+    ion-icon {
+      position: relative;
+    top: 5px;
+    left: -2px;
+    font-size: 25px;
+    }
   }
 
   &.active {

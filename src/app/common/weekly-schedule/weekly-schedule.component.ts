@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { RescheduleComponent } from '../reschedule/reschedule.component';
 
 @Component({
   selector: 'weekly-schedule',
@@ -8,9 +10,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class WeeklyScheduleComponent implements OnInit {
 
   @Input() schedule:any;
+  @Input() lastDate:any;
+  @Input() hasAvailedFreeReschedule:boolean;
 
-  constructor() {
+  startDate:any;
+
+  constructor(
+    private modalController:ModalController
+  ) {
     this.schedule = [];
+    this.startDate = "";
 
     this.schedule = [{
       day: 'Monday',
@@ -50,9 +59,39 @@ export class WeeklyScheduleComponent implements OnInit {
       adhocs:[]
     },
   
-  ]
+  ];
+
+  this.hasAvailedFreeReschedule = false;
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.schedule.length) {
+      this.startDate = new Date(this.schedule[0].date).toString().split(' ').slice(1,3).join(' ');
+    }
+    
+  }
+
+
+  async openReschedule(schedule) {
+    const modal = await this.modalController.create({
+      component: RescheduleComponent,
+      cssClass: 'plans-table-modal',
+      componentProps: { 
+        showClose: true,
+        schedule: schedule,
+        count: this.hasAvailedFreeReschedule ? 0 : 1,
+        canReschedule: !schedule.isRescheduled,
+        lastDate: this.lastDate
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+
+
+
+    });
+  }
+
 
 }

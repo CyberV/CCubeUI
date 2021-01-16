@@ -58,6 +58,9 @@ export class NotifMenuComponent implements OnInit {
       });
 
       alert.onWillDismiss().then(()=> {
+        if (data.action && data.action == 'refresh') {
+          window.location.reload();
+        }
         alert.cssClass = 'animate__animated  animate__fadeOut';
       });
 

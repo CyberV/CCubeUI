@@ -32,10 +32,10 @@ export class SelectCityComponent implements OnInit {
 
 
   get filteredCities() {
-    if (!this.city || this.city == "") {
+    if (!this.select || this.select == "") {
       return this.options;
     } else {
-      return this.citiesService.findMatchingCities(this.city);
+      return this.citiesService.findMatchingCities(this.select);
     }
   }
 
@@ -48,6 +48,8 @@ export class SelectCityComponent implements OnInit {
     }
   }
 
+  select:string;
+  isSelected:boolean;
 
   constructor(
     private citiesService: CitiesService
@@ -60,6 +62,8 @@ export class SelectCityComponent implements OnInit {
     this.states = citiesService.states;
     this.hasError = false;
     this.mandatory = false;
+    this.select = "Select City";
+    this.isSelected = false;
   }
 
   ngOnInit() {
@@ -89,7 +93,29 @@ export class SelectCityComponent implements OnInit {
     }
   }
 
+
+  onBlur(e) {
+    console.log(e);
+
+    setTimeout(()=> {
+
+      if (!this.isSelected) {
+        this.selectCity(this.city);
+      }
+    }, 100);
+
+  }
+
+  onChange(key) {
+
+    this.select = key;
+    this.isSelected = false;
+
+  }
   selectCity(city) {
+    this.city = city;
+    this.isSelected = true;
+    this.select = city;
     this.cityChange.emit(city);
     if (this.showState) {
       let found = this.citiesService.findStateForCity(city);

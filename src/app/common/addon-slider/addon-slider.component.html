@@ -14,17 +14,20 @@
                   <span class="card-text" [class.contrast]="i%2!=0">{{addon.label || addon.name}}</span>
               </div>
               <div class="bottom">
-                  <div class="ion-no-margin rate" (click)="sendShowDetails(addon)">
+                  <div class="ion-no-margin rate" *ngIf="!(isSelected(addon) && active)" (click)="sendShowDetails(addon)">
                       <span Rs>{{addon.price}}</span>
                   </div>
                     <cta *ngIf="!isSelected(addon) && !isBlocked(addon)" (action)="selectAddon(addon)" text="ADD" outline="true" small="true"></cta>
                     <span class="animate__animated animate__fadeInUp" *ngIf="isSelected(addon)">
-                      <h2 class="--padding-y" (click)="sendShowDetails(addon)"> {{active ? 'ACTIVE' : 'Added!'}}</h2>
+                      <h2 class="--padding-y active-label" (click)="sendShowDetails(addon)"> {{active ? 'ACTIVE' : 'Added!'}}</h2>
                       <span *ngIf="!active" (click)="selectAddon(addon)"  class="badge badge-light ">Remove</span>
                     </span>
                     <span class="animate__animated animate__fadeInUp" *ngIf="isBlocked(addon)" (click)="sendShowDetails(addon)">
-                        <h2 class="--padding-y" > ACTIVE </h2>
+                        <h2 class="--padding-y" > ACTIVE</h2>
                     </span>
+                    <cta *ngIf="(isSelected(addon) && active) && !isScheduled(addon) && isSchedulable(addon)" small="true" (action)="sendShowDetails(addon)" text="Book"></cta>
+                    <span class="date-label" *ngIf="isScheduled(addon)"> <ion-icon name="calendar-outline"></ion-icon> {{isScheduled(addon)}} </span>
+
               </div>
               
             </div>

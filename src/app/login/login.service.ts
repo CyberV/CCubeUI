@@ -124,6 +124,19 @@ export class LoginService {
     );
   }
 
+
+  rescheduleService(phone, carRegNo, fromDate, toDate) {
+    let payload = {
+      phone,
+      carRegNo,
+      fromDate : new Date(fromDate).toDateString(),
+      toDate: new Date(toDate).toDateString(),
+    };
+
+    return this.http.post(this.url + 'subscription/rescheduleService', payload).pipe(
+      catchError(this.handleError)
+    );
+  }
   login(phone, password) {
 
 
@@ -149,6 +162,14 @@ export class LoginService {
       catchError(this.handleError)
     );
   }
+
+  scheduleAddon(payload) {
+    return this.http.post(this.url + 'subscription/scheduleAddon', payload).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  
 
   addAdhoc(adhoc) {
     return this.http.post(this.url + 'subscription/addadhoc', adhoc).pipe(

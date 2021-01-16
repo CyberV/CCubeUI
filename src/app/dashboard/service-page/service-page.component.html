@@ -16,7 +16,7 @@
           <div class="car-box" [class.active]="selectedIndex == i" (click)="selectCar(i)">
 
             <ion-label class="car-image"><img [src]="payment.payments[0].car.image" /></ion-label>
-            <ion-badge *ngIf="getNotificationCount(payment.payments[0].car.regNo) > 0">{{getNotificationCount(payment.payments[0].car.regNo)}}</ion-badge>
+            <ion-badge *ngIf="getNotificationCount(payment.payments[0].car.regNo) > 0"> <ion-icon name="notifications-outline"></ion-icon> {{getNotificationCount(payment.payments[0].car.regNo)}}</ion-badge>
           </div>
           <!-- <mat-card class="card addon-card animate__animated animate__flipInX">
             
@@ -68,7 +68,7 @@
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                <weekly-schedule *ngIf="selectedSubscription.schedule.length" [schedule]="selectedSubscription.schedule"></weekly-schedule>
+                <weekly-schedule *ngIf="selectedSubscription.schedule.length" [hasAvailedFreeReschedule]="selectedSubscription.hasAvailedFreeReschedule" [lastDate]="selectedPayment.expiresOn" [schedule]="selectedSubscription.schedule"></weekly-schedule>
                 <heading *ngIf="!selectedSubscription.schedule.length"  text="Schedule is Under Processing. Please wait for Plan Activation."></heading>
 
               </mat-expansion-panel>
@@ -124,7 +124,7 @@
 
   <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
 
-  <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons" active="true" (addonSelected)="onAddonSelected($event)"></addon-slider>
+  <addon-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPayment.plan" [selectedAddons]="subAddons" [subscriptionAddons]="selectedSubscription.addons" [active]="true"  (showDetails)="openAddon($event)" (addonSelected)="onAddonSelected($event)"></addon-slider>
 
   <adhoc-slider [selectedAdhocs]="subAdhocs"  active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
   

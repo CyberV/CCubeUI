@@ -25,7 +25,7 @@ export class CheckoutComponent implements OnInit {
   carIdentified: boolean;
 
   //current Order
-  order:any;
+  order: any;
 
 
   errors: any;
@@ -39,7 +39,7 @@ export class CheckoutComponent implements OnInit {
   verificationComplete: boolean;
   selectedAddon: any;
   selectedAdhoc: any;
-  blockedAddons:any;
+  blockedAddons: any;
 
 
   currentUser: any;
@@ -49,12 +49,13 @@ export class CheckoutComponent implements OnInit {
   forRenew: boolean;
   includedAddons: any;
   includedAdhocs: any;
-  mode:any;
+  mode: any;
 
-  isUnlisted:boolean;
+  isUnlisted: boolean;
 
 
   page: string;
+  savedLocation: any;
 
   @ViewChildren('drawerCar') drawerCar: QueryList<AccordionComponent>;
   @ViewChildren('drawerLocation') drawerLocation: QueryList<AccordionComponent>;
@@ -65,7 +66,7 @@ export class CheckoutComponent implements OnInit {
     private route: ActivatedRoute,
     private carService: CarService,
     private userService: UserService,
-    private toastController:ToastController,
+    private toastController: ToastController,
     private modalController: ModalController,
     private planService: PlanService,
     private loginService: LoginService,
@@ -91,6 +92,13 @@ export class CheckoutComponent implements OnInit {
     this.blockedAddons = [];
     this.mode = {};
     this.isUnlisted = false;
+    this.savedLocation = {
+      houseNo: '',
+      block: '',
+      society: '',
+      city: '',
+      state: ''
+    };
 
     this.errors = {
       car: false,
@@ -115,6 +123,12 @@ export class CheckoutComponent implements OnInit {
     })
 
     this.retryAddon = false;
+
+    let allSubs = this.planService.getAllSubscriptions();
+
+    if (allSubs && allSubs.length) {
+      this.savedLocation = allSubs[0].payments[0].location;
+    }
 
   }
 
@@ -153,7 +167,7 @@ export class CheckoutComponent implements OnInit {
     let carAlreadyActive = false;
     if (this.mode.plan) {
       if (!order.plan.period) {
-       
+
         if (allPayments && allPayments.length) {
           carAlreadyActive = allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
         }
@@ -193,14 +207,14 @@ export class CheckoutComponent implements OnInit {
         this.loginService.addLead({
           phone: this.currentUser.phone,
           name: this.currentUser.name,
-          remarks : JSON.stringify({
+          remarks: JSON.stringify({
             city: this.currentUser.city,
             plan: this.selectedPlan,
             adhocs: this.includedAdhocs,
             addons: this.includedAddons
           })
-        }).subscribe((data:any) => {
-          if (data._id) {
+        }).subscribe((data: any) => {
+          if (data.success) {
             this.presentToast("Interest Received. We will get back to you!")
           }
         })
@@ -260,11 +274,11 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.includedAddons && this.includedAddons.length) {
-      this.selectedAddon = this.includedAddons[this.includedAddons.length -1];
+      this.selectedAddon = this.includedAddons[this.includedAddons.length - 1];
     }
 
     if (this.includedAdhocs && this.includedAdhocs.length) {
-      this.selectedAdhoc = this.includedAdhocs[this.includedAdhocs.length -1];
+      this.selectedAdhoc = this.includedAdhocs[this.includedAdhocs.length - 1];
     }
 
     if (car) {
@@ -291,14 +305,14 @@ export class CheckoutComponent implements OnInit {
     const modal = await this.modalController.create({
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
-      componentProps: { 
+      componentProps: {
         addon: addon,
         showClose: true
       }
     });
     await modal.present();
 
-    modal.onDidDismiss().then((data)=> {
+    modal.onDidDismiss().then((data) => {
 
 
 
@@ -330,14 +344,25 @@ export class CheckoutComponent implements OnInit {
       sessionStorage.setItem('userLocation', JSON.stringify(locationData));
     }
 
-    setTimeout(() => {
-      this.step3Ready = true;
-      this.drawerLocation.first.toggle();
-
+    if(this.savedLocation && this.savedLocation.houseNo.length) {
       setTimeout(() => {
-        this.drawerTime.first.toggle();
-      }, 500);
-    }, 200);
+        this.step3Ready = true;
+  
+        setTimeout(() => {
+          this.drawerTime.first.toggle();
+        }, 500);
+      }, 200);
+    } else {
+      setTimeout(() => {
+        this.step3Ready = true;
+        this.drawerLocation.first.toggle();
+  
+        setTimeout(() => {
+          this.drawerTime.first.toggle();
+        }, 500);
+      }, 200);
+    }
+
 
   }
 
@@ -378,9 +403,16 @@ export class CheckoutComponent implements OnInit {
           this.carIdentified = true;
           this.carMismatch = false;
           this.step2Ready = true;
-          setTimeout(() => {
-            this.drawerLocation.first.toggle();
-          }, 1000);
+
+          debugger;
+
+          if (this.savedLocation && this.savedLocation.houseNo.length) {
+            this.completeVerification();
+          } else {
+            setTimeout(() => {
+              this.drawerLocation.first.toggle();
+            }, 1000);
+          }
         } else {
           this.carIdentified = false;
           this.carMismatch = false;
@@ -404,8 +436,8 @@ export class CheckoutComponent implements OnInit {
           phone: this.currentUser.phone,
           plan: updatedPlan,
           car: this.selectedCar,
-          addons: this.planService.getIncludedAddons(),
-          adhocs: this.planService.getIncludedAdhocs(),
+          addons: this.includedAddons,
+          adhocs: this.includedAdhocs,
           location: this.currentLocation,
           officeTime: this.officeTime,
           startDate: +(new Date()),
@@ -428,7 +460,7 @@ export class CheckoutComponent implements OnInit {
                   'Please try again!'
                 );
               }
-  
+
             });
 
           } else {
@@ -443,7 +475,7 @@ export class CheckoutComponent implements OnInit {
                   'Please try again!'
                 );
               }
-  
+
             });
           }
 
@@ -451,39 +483,39 @@ export class CheckoutComponent implements OnInit {
 
           if (this.mode.addon) {
 
-                      // Buy Addon
-          this.loginService.addAddon(payload).subscribe((d: any) => {
-            console.log('add addon response', d);
-            this.loading = false;
-            if (d.success) {
-              //this.carService.changeAddon(d.data);
-              sessionStorage.setItem('currentPayment', JSON.stringify(d.data));
-              this.router.navigate(['/dashboard/thanks']);
-            } else {
-              alert(
-                'Please try again!'
-              );
-            }
+            // Buy Addon
+            this.loginService.addAddon(payload).subscribe((d: any) => {
+              console.log('add addon response', d);
+              this.loading = false;
+              if (d.success) {
+                //this.carService.changeAddon(d.data);
+                sessionStorage.setItem('currentPayment', JSON.stringify(d.data));
+                this.router.navigate(['/dashboard/thanks']);
+              } else {
+                alert(
+                  'Please try again!'
+                );
+              }
 
-          });
+            });
 
           } else if (this.mode.adhoc) {
 
-            
-                      // Buy Adhoc
-          this.loginService.addAdhoc(payload).subscribe((d: any) => {
-            console.log('add addon response', d);
-            this.loading = false;
-            if (d.success) {
-              sessionStorage.setItem('currentPayment', JSON.stringify(d.data));
-              this.router.navigate(['/dashboard/thanks']);
-            } else {
-              alert(
-                'Please try again!'
-              );
-            }
 
-          });
+            // Buy Adhoc
+            this.loginService.addAdhoc(payload).subscribe((d: any) => {
+              console.log('add addon response', d);
+              this.loading = false;
+              if (d.success) {
+                sessionStorage.setItem('currentPayment', JSON.stringify(d.data));
+                this.router.navigate(['/dashboard/thanks']);
+              } else {
+                alert(
+                  'Please try again!'
+                );
+              }
+
+            });
           }
 
         }
@@ -498,9 +530,9 @@ export class CheckoutComponent implements OnInit {
 
     switch (this.context) {
       case 'checkout': {
-        this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc?  'Service' : 'Addon')));
+        this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc ? 'Service' : 'Addon')));
         break;
-      } 
+      }
       case 'confirm': {
         let order = this.planService.getCurrentOrder();
         this.headerService.setView('checkout', { amount: order.total });

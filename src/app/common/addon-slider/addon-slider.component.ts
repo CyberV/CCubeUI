@@ -14,6 +14,8 @@ export class AddonSliderComponent implements OnInit {
   @Input() addOns:any;
   @Input() selectedAddons:any;
   @Input() blockedAddons:any;
+  @Input() subscriptionAddons:any;
+
   @Output() addonSelected = new EventEmitter();
   @Output() showDetails = new EventEmitter();
   @Input() active:boolean;
@@ -27,6 +29,18 @@ export class AddonSliderComponent implements OnInit {
     return this.blockedMap.indexOf(addon.code) > -1;
   }
 
+  isSchedulable(addon) {
+    return addon.code == 'FBW' || addon.code == 'WASH_DEEP';
+  }
+
+  isScheduled (addon) {
+    if (!this.dateMap.length) {
+      return false;
+    }
+    let found = this.dateMap.filter((obj) => obj.code == addon.code);
+    return found.length && found[0].date != "Date" ? found[0].date  : false;
+  }
+
   options = {
     centeredSlides: false,
     slidesPerView: 2.5,
@@ -35,6 +49,7 @@ export class AddonSliderComponent implements OnInit {
 
   addonMap:any;
   blockedMap:any;
+  dateMap:any;
 
   constructor(
     private carService:CarService,
@@ -51,6 +66,8 @@ export class AddonSliderComponent implements OnInit {
     this.selectedAddons = [];
     this.addonMap = [];
     this.blockedMap = [];
+    this.subscriptionAddons = [];
+    this.dateMap = [];
    }
 
   ngOnInit() {}
@@ -61,8 +78,18 @@ export class AddonSliderComponent implements OnInit {
 
   ngOnChanges(changes) {
 
+    if (changes.subscriptionAddons && this.subscriptionAddons) {
+      this.dateMap = this.subscriptionAddons.map((adn) => {
+        return {
+          code: adn.addon.code,
+          date: new Date(adn.scheduledTime).toString().split(' ').slice(1,3).join(' ')
+        };
+      })
+    }
+
     if (changes.plan && this.plan) {
       this.addOns = this.planService.getAddonsForPlan(this.plan.name);
+      this.updatePrice();
     }
 
     if (changes.selectedAddons && this.selectedAddons) {
@@ -78,9 +105,17 @@ export class AddonSliderComponent implements OnInit {
       console.log('Blocked', this.blockedAddons);
       this.blockedMap = this.blockedAddons.map((a) => a.code);
       this.parse();
+
     }
 
     if (changes.bodyType && this.bodyType && this.addOns) {
+      this.updatePrice();
+    }
+  }
+
+  updatePrice() {
+    
+    if (this.bodyType && this.addOns) {
       for (let i=0;i< this.addOns.length; i++) {
         this.addOns[i].price = this.addOns[i].pricing[this.bodyType];
       }
@@ -114,7 +149,6 @@ export class AddonSliderComponent implements OnInit {
 
   selectAddon(addon) {
     this.addonSelected.emit(addon);
-    
   }
 
 }

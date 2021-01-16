@@ -47,19 +47,35 @@ export class VerifyOtpComponent implements OnInit {
 
   onChange(e) {
     let indx = +(e.target.className.split(' ')[0].split('-')[1]) + 1;
+
+    let previous = false;
+
+    if (e.key=="Backspace" && this.otp[indx-1] == "") {
+      previous = true;
+    }
     this.otp[indx-1] = e.target.value;
-    if (indx === +this.length) {
+    
+    let otp = this.otp.toString().replace(/,/g, "");
+    if (e.key=="Backspace") {
+      if (previous && indx > 1) {
+        let emt = document.getElementsByClassName('otp-' + (indx - 2))[0];
+        ( emt as HTMLElement).click();
+      }
+    }
+    else if (indx === +this.length) {
       
     } else {
       let emt = document.getElementsByClassName('otp-' + indx)[0];
       ( emt as HTMLElement).click();
     }
 
-    let otp = this.otp.toString().replace(/,/g, "");
 
     if (indx==4) {
-      debugger;
+    //alert('Filling OTP + ' +  otp);
+    if (otp.length == 4) {
       this.otpSubmitted.emit(otp);
+    }
+    
     }
 
   }
@@ -73,7 +89,8 @@ export class VerifyOtpComponent implements OnInit {
       xx.value = _otp[i];
     }
 
-
+    //alert('Filling OTP + ' +  _otp + 'original ' + otp);
+    this.otpSubmitted.emit(_otp);
   }
 
   async presentToast(msg) {

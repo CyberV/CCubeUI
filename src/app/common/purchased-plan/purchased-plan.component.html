@@ -21,9 +21,9 @@
             'badge-light': subscription.status == 'Ready',
             'badge-warning': subscription.status == 'Expiring',
             'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
-            'badge-success': subscription.status == 'Payment Received'}">{{subscription.status | uppercase}}</div>
+            'badge-success': subscription.status == 'Payment Received'  || subscription.status == 'Service Scheduled'}">{{subscription.status | uppercase}}</div>
             <br/>
-          <span class="expiry">Expires On {{expiryDate}}</span>
+          <span class="expiry">{{expiry}}</span>
 
           <ng-container *ngIf="payment.nextPlan">
               <span>

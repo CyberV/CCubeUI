@@ -23,6 +23,11 @@
 
     .readonly {
         border: none;
+        border-bottom: 1px solid #bcbcbc;
+        background: transparent;
+        font-weight: bold;
+        width: 100%;
+        color: gray;
     }
 
     .red {

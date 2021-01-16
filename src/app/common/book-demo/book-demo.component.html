@@ -1,0 +1,6 @@
+<div class=" demo-container --padding-x">
+  <cc-accordion [title]="booked ? 'Demo Booked' : 'Book A Demo'">
+    <confirm-location *ngIf="!booked" (confirm)="bookDemo($event)"></confirm-location>
+    <heading *ngIf="booked" text="Demo Request Submitted. Our team will be in touch soon."></heading>
+  </cc-accordion>
+</div>

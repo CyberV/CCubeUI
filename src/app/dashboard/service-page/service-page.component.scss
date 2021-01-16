@@ -66,9 +66,18 @@
             }
 
             ion-badge {
-                position: absolute;
-                right: 20px;
-                top: 0;
+              position: absolute;
+              right: 20px;
+              padding: 4px;
+              border-radius: 15px;
+              font-weight: normal;
+              top: 0;
+              background: #3fbabc;
+
+              ion-icon {
+                position: relative;
+                top: 2px;
+              }
             }
 
             .maker-text {

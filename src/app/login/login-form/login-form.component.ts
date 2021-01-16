@@ -305,6 +305,7 @@ export class LoginFormComponent implements OnInit {
             this.otpSent = true;
             this.start();
             this.loading = false;
+
             //this.page = "signup";
           }
         });

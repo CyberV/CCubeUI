@@ -68,7 +68,7 @@
             </cc-accordion>
 
             <cc-accordion #drawerLocation title="Confirm Your Location" [step]="'2'" [disabled]="!step2Ready" [locked]="step3Ready">
-              <confirm-location (confirm)="saveLocation($event)"></confirm-location>
+              <confirm-location [location]="savedLocation" (confirm)="saveLocation($event)"></confirm-location>
             </cc-accordion>
 
             

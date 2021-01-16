@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarService } from 'app/services/car.service';
-import { Platform, ToastController, AlertController, IonSlides } from '@ionic/angular';
+import { Platform, ToastController, AlertController, IonSlides, ModalController } from '@ionic/angular';
 
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services/notification.service';
+import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 
 @Component({
   selector: 'app-service-page',
@@ -15,6 +16,10 @@ import { NotificationService } from 'app/services/notification.service';
 export class ServicePageComponent implements OnInit {
 
   @Input() payments: any;
+
+
+  lastTimeBackPress = 0;
+  timePeriodToExit = 2000;
 
   selectedIndex: number;
   selectedCar: any;
@@ -45,10 +50,17 @@ export class ServicePageComponent implements OnInit {
   notifications: any;
 
   getNotificationCount(regNo) {
-    if (this.notifications && this.notifications.length) {
-      let found = this.notifications.filter((notif) => notif.data.car.regNo.toLowerCase() == regNo.toLowerCase());
-      return found && found.length ? found.length : 0;
-    } else {
+    try {
+
+
+      if (this.notifications && this.notifications.length) {
+        let found = this.notifications.filter((notif) => notif.data.car.regNo.toLowerCase() == regNo.toLowerCase());
+        return found && found.length ? found.length : 0;
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      //alert('Error in nOot' + e);
       return 0;
     }
   }
@@ -60,6 +72,7 @@ export class ServicePageComponent implements OnInit {
     private loginService: LoginService,
     public alertController: AlertController,
     private planService: PlanService,
+    private modalController: ModalController,
     public toastController: ToastController,
     private carService: CarService,
     private notificationService: NotificationService
@@ -81,12 +94,47 @@ export class ServicePageComponent implements OnInit {
     this.subAddons = [];
     this.subAdhocs = [];
 
+    // this.platform.backButton.subscribeWithPriority(1, () => { // to disable hardware back button on whole app
+    // });
+    console.log('subscribing to back');
+    this.platform.backButton.subscribe(async (d) => {
 
+      document.addEventListener('backbutton', this.onBackButton, true);
+    });
   }
 
   demoEvent(evt) {
     console.log('Demo evt', evt);
   }
+
+  async areaCleaned() {
+
+  }
+
+  ngOnDestroy() {
+    console.log('Service Page Destroyed');
+    document.removeEventListener('backbutton', this.onBackButton,true);
+  }
+
+    async onBackButton(event) {
+      event.preventDefault();
+      event.stopPropagation(); 
+
+      if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+        // this.platform.exitApp(); // Exit from app
+        navigator['app'].exitApp(); // work in ionic 4
+
+      } else {
+        const toast = await this.toastController.create({
+          message: 'Press back again to exit App.',
+          duration: 2000,
+          position: 'middle'
+        });
+        toast.present();
+        // console.log(JSON.stringify(toast));
+        this.lastTimeBackPress = new Date().getTime();
+      }
+    }
 
   selectCar(index) {
     this.selectedSubscription = this.payments[index];
@@ -99,13 +147,13 @@ export class ServicePageComponent implements OnInit {
 
     this.upgradePlans = [];
 
-    if (this.selectedSubscription.addons && this.selectedSubscription.addons.length) {
-      this.subAddons = this.selectedSubscription.addons.map((adn) => adn.addon);
-    }
 
-    if (this.selectedSubscription.adhocs && this.selectedSubscription.adhocs.length) {
-      this.subAdhocs = this.selectedSubscription.adhocs.map((adn) => adn.addon);
-    }
+    this.subAddons = this.selectedSubscription.addons.map((adn) => adn.addon);
+    
+
+
+    this.subAdhocs = this.selectedSubscription.adhocs.map((adn) => adn.addon);
+    
 
 
 
@@ -144,6 +192,34 @@ export class ServicePageComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  async openAddon(addon) {
+    debugger;
+    let bookedTime = false;
+    if (this.selectedSubscription.addons.length) {
+      let found = this.selectedSubscription.addons.filter((adn) => adn.addon.code == addon.code);
+
+      if (found.length) {
+        found = found[0];
+        if (found.scheduledTime) {
+          bookedTime = found.scheduledTime;
+        }
+      }
+    }
+    const modal = await this.modalController.create({
+      component: AddonDetailsComponent,
+      cssClass: 'plans-table-modal',
+      componentProps: { 
+        addon: addon,
+        showClose: true,
+        bookedTime
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+    });
   }
 
   ionViewWillEnter() {

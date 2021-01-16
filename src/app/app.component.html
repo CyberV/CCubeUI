@@ -17,7 +17,10 @@
             </div>
           </div>
           <div class="row" *ngIf="viewData.viewName=='home'">
-            <div class="offset-6 col-3">
+              <div class="offset-1 col-5 --uppercase">
+                  <span class="link" (click)="goTo('book')">Book Demo</span>
+                </div>
+            <div class="col-3">
               <span class="link" (click)="goTo('signup')">Signup</span>
             </div>
             <div class="col-3">

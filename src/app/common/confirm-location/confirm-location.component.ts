@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, Input } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 
 @Component({
@@ -10,9 +10,10 @@ export class ConfirmLocationComponent implements OnInit {
 
 
 
-  location:any;
+  @Input() location:any;
 
   isUnlisted:boolean;
+  disableAll:boolean;
   allInputs:any;
 
   get allFieldsReady() {
@@ -29,6 +30,7 @@ export class ConfirmLocationComponent implements OnInit {
   constructor(
     private userService:UserService
   ) {
+    this.disableAll = false;
     this.location = {
       houseNo: '',
       block: '',
@@ -68,10 +70,17 @@ export class ConfirmLocationComponent implements OnInit {
       });
    }
   ngOnInit() {
-    let city = this.userService.getCurrentUser().city;
-    if(city) {
+    let user = this.userService.getCurrentUser();
+    let city = user && user.city;
+    if (city) {
       this.location.city = city;
     }
+
+    if(this.location.houseNo && this.location.houseNo.length) {
+      this.disableAll  = true;
+      this.sendConfirmation();
+    }
+
   }
 
 

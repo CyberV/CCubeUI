@@ -20,6 +20,7 @@ import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 
 import { Initialize } from 'app/common/common.service';
 import { NotificationService } from './services/notification.service';
+import { rebeccapurple } from 'color-name';
 
 declare var $;
 @Component({
@@ -156,8 +157,13 @@ export class AppComponent {
   async presentAlert(data = null) {
     let alert;
     if (data) {
+      let cls = '';
+      cls = data.title.toLowerCase().indexOf('reminder') > -1 ? 'bg-reminder' : cls;
+      cls = data.title.toLowerCase().indexOf('congratulations') > -1 ? 'bg-congrats' : cls;
+      cls = data.title.toLowerCase().indexOf('key') > -1 ? 'bg-collect-keys' : cls;
+  
       alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
+        cssClass: 'my-custom-class ' + cls,
         header: data.title || 'Notification',
         message: data.body || 'This is a demo message.',
         buttons: ['OK']
@@ -174,6 +180,13 @@ export class AppComponent {
 
 
     await alert.present();
+
+    alert.onWillDismiss().then(()=> {
+      if (data.action && data.action == 'refresh') {
+        window.location.reload();
+      }
+      alert.cssClass = 'animate__animated  animate__fadeOut';
+    });
   }
 
   logout() {
@@ -228,7 +241,7 @@ export class AppComponent {
 
   onActivate(comp) {
 
-    //this.notificationService.saveNewNotification({title:'Congratulations', body: {msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}}});
+    //this.notificationService.saveNewNotification({title:'Congratulations', 'body': 'Sample Notif', data: JSON.stringify({car: {"model":"Duster","price":"Rs. 8.49 Lakh","details":"1498 cc | 20 kmpl | Petrol","bodyType":"suv","image":"./assets/icons/makers/models/149.png","id":149,"searchedBy":["9560879722"],"ownedBy":[],"missing":false,"_id":"5f9884d25d45340018b88841","carId":"149","maker":"RENAULT","regNo":"hr51bl0139","fuelType":"DIESEL","registeredOn":"11/23/2016","year":2016,"ownerName":"VIKRANT SIWACH","variant":"RENAULT DUSTER","fuelNorms":"BHARAT STAGE IV","chassisNo":"MEEHSRAWEG90XXXXX","engineNo":"K9KF830E0XXXXX","insuranceUpto":"2020-11-28T00:00:00.000Z","fitness":"2031-11-04T00:00:00.000Z","vehicleType":"MOTOR CAR (LMV)","age":"3 years","__v":0,"name":"duster"}, msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}})});
 
     this.context = comp.context;
 
@@ -310,6 +323,11 @@ export class AppComponent {
       case 'dashboard': {
         this.carService.clear();
         this.router.navigate(['/dashboard/select-car']);
+        break;
+      }
+      case 'book' : {
+        sessionStorage.setItem('forDemo', 'true');
+        this.router.navigate(['/signup']);
         break;
       }
       case 'signup': {

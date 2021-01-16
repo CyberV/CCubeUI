@@ -8,12 +8,12 @@ import { NotificationService } from 'app/services/notification.service';
 })
 export class ServiceHistoryComponent implements OnInit {
 
-  @Input() history:any;
+  @Input() history: any;
   @Input() carRegNo: string;
 
   constructor(
 
-    private notificationService:NotificationService
+    private notificationService: NotificationService
   ) {
 
     notificationService.events().subscribe((data) => {
@@ -22,18 +22,27 @@ export class ServiceHistoryComponent implements OnInit {
   }
 
   refresh(entries) {
-    console.log('entries', entries);
-    this.history = entries.historical.filter((notif) => notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
+    try {
 
+
+      console.log('entries', entries);
+      this.history = entries.historical.filter((notif) => notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
+    } catch (e) {
+      alert('eRror in ser his' + e);
+    }
   }
 
   ngOnInit() {
-    this.history = this.notificationService.getHistoricalNotifications().filter((notif) => notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
-
   }
 
-  ngOnChanges() {
-    
+  ngOnChanges(changes) {
+    if (changes.carRegNo && this.carRegNo) {
+      try {
+        this.history = this.notificationService.getHistoricalNotifications().filter((notif) => notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase());
+      } catch (e) {
+        alert('eRror in ser his' + e);
+      }
+    }
   }
 
 

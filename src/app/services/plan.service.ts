@@ -11,6 +11,7 @@ export class PlanService {
   AllPlans : any;
 
   AllFeatures : any;
+  OnlyAddons: any;
 
   get UpgradePlan() {
     return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0]));
@@ -24,8 +25,10 @@ export class PlanService {
     }
   }
 
+  fixedAdhocs:any;
+
   ngOnInit() {
-  
+    
   }
 
   constructor(
@@ -34,6 +37,20 @@ export class PlanService {
     let _p:any = planData;
     this.AllPlans = this.getAllPlans();
     this.AllFeatures = this.getAllFeatures();
+
+    this.fixedAdhocs = ['WASH_DEEP', 'FBW'];
+    this.OnlyAddons = [];
+    let map = this.AllFeatures.map((ftr) => ftr.code);
+    for(let i=0; i<this.AllFeatures.length;i++) {
+      let remove = false;
+      
+      remove = this.fixedAdhocs.some((adhoc) => adhoc == this.AllFeatures[i].code );
+
+      if (!remove) {
+        this.OnlyAddons.push(JSON.parse(JSON.stringify(this.AllFeatures[i])));
+      }
+    }
+
 
    }
 
@@ -95,11 +112,24 @@ export class PlanService {
   }
 
   getAllPlans() {
-    return JSON.parse(localStorage.getItem('commonData')).plansList.plans;
+    let common =JSON.parse(localStorage.getItem('commonData'));
+    return common && common !="" && common != 'null'? common.plansList.plans : [];
+  }
+
+  getAllSubscriptions() {
+    let common =JSON.parse(sessionStorage.getItem('currentPayments'));
+    return common && common !="" && common != 'null'? common : [];
+  }
+
+  forDemo() {
+    let common =JSON.parse(sessionStorage.getItem('forDemo'));
+    return common && common !="" && common != 'null' ? common : false;
   }
 
   getAllFeatures() {
-    return JSON.parse(localStorage.getItem('commonData')).plansList.features;
+    let common =JSON.parse(localStorage.getItem('commonData'));
+
+    return common && common !="" && common != 'null'? common.plansList.features : [];
   }
 
   getPlanByName(planName) {
@@ -246,16 +276,65 @@ export class PlanService {
     }
   }
 
+
+  getFeaturesForPlan(planName) {
+    let found = this.AllPlans.filter((pln) => pln.name == planName);
+
+        if (found && found.length) {
+          found = found[0];
+          let ff = this.AllFeatures.filter((ftr) => found.features.some((fftr) => fftr == ftr.code));
+          return ff;
+        }
+  }
+
+  
+  getUniqueFeaturesForPlan(planName, ignoreAdhocs = false) {
+        let found = this.AllPlans.filter((pln) => pln.name == planName);
+
+        let src = ignoreAdhocs ?  this.OnlyAddons: this.AllFeatures;
+
+        if (found && found.length) {
+          found = found[0];
+          let ff = src.filter((ftr) => found.uniqueFeatures.some((fftr) => {
+
+            let allowed = fftr == ftr.code;
+            
+            return allowed;
+            
+          }
+            ));
+          return ff;
+        }
+  }
+
   getAddonsForPlan(planName) {
+    let addons = [];
+
+    this.fixedAdhocs.forEach((adhocCode) => {
+      let found = this.AllFeatures.filter((ftr) => ftr.code == adhocCode);
+
+      if (found && found.length) {
+        addons.push(JSON.parse(JSON.stringify(found[0])));
+      }
+
+    })
+
     switch(planName) {
       case 'Standard': {
-        return this.AllFeatures.filter((ftr) => ftr.weight > 1 && !ftr.isAdhoc);
+        Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Deluxe', true));
+        Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
+        break;
       }
       case 'Deluxe': {
-        return this.AllFeatures.filter((ftr) => ftr.weight > 2);
+
+        Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
+
+        break;
       }
-      default: return [];
+      default: return addons;
     }
+
+    return addons;
   }
 
   getCurrentOrder() {
@@ -309,6 +388,10 @@ export class PlanService {
   getIncludedAdhocs() {
     let adhocs = sessionStorage.getItem('includedAdhocs');
     return adhocs && adhocs != "null" ? JSON.parse(adhocs) : [];
+  }
+
+  setIncludedAddons(d) {
+    sessionStorage.setItem('includedAddons', JSON.stringify(d));
   }
 
   excludeAdhoc(adhoc) {

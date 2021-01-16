@@ -51,7 +51,7 @@ export class CarService {
   changeCar(carDetails) {
     if (carDetails) {
       let found = findMatchingCar(carDetails);
-      sessionStorage.setItem('currentCar', JSON.stringify(found ? found : carDetails));
+      localStorage.setItem('currentCar', JSON.stringify(found ? found : carDetails));
     }
   }
 
@@ -66,8 +66,9 @@ export class CarService {
   }
 
   clear(addonOnly = false) {
+    this.backupCar();
     if (!addonOnly) {
-      sessionStorage.setItem('currentCar', null);
+      localStorage.setItem('currentCar', null);
     }
     sessionStorage.setItem('currentAddon', null);
     sessionStorage.setItem('includedAddons', null);
@@ -86,9 +87,23 @@ export class CarService {
     }
   }
 
+  backupCar() {
+    let car = this.getCurrentCar();
+    if (car) {
+      localStorage.setItem('backupCar', JSON.stringify(car));
+    } 
+  }
+
+  restoreBackup() {
+    let car: any = localStorage.getItem('backupCar');
+    if (car && car != "null") {
+      car = JSON.parse(car);
+      this.changeCar(car);
+    }
+  }
 
   getCurrentCar() {
-    let car: any = sessionStorage.getItem('currentCar');
+    let car: any = localStorage.getItem('currentCar');
 
     if (car && car != "null") {
       car = JSON.parse(car);

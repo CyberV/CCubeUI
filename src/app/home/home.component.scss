@@ -1,3 +1,5 @@
+@import "src/variables.scss";
+
 .container-fluid {
     text-align: justify;
     background: white;
@@ -82,6 +84,21 @@ a:hover {
 // .row {
 //     background: #00a4a7;
 // }
+
+.sticky {
+    position: sticky;
+    top: 20em;
+    opacity: 0.85;
+    background-color: $secondary-color;
+    padding: 10px;
+    font-size: 20px;
+    z-index: 3;
+    color: white;
+    width: 45%;
+    box-shadow: 1.1px 1.1px #fddaaf;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
 
 .btn:hover {
     color: white;
