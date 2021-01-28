@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarService } from 'app/services/car.service';
-import { Platform, ToastController, AlertController, IonSlides } from '@ionic/angular';
+import { Platform, ToastController, AlertController, IonSlides, ModalController } from '@ionic/angular';
 
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
+import { NotificationService } from 'app/services/notification.service';
+import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 
 @Component({
   selector: 'app-service-page',
@@ -15,17 +17,21 @@ export class ServicePageComponent implements OnInit {
 
   @Input() payments: any;
 
+
+  lastTimeBackPress = 0;
+  timePeriodToExit = 2000;
+
   selectedIndex: number;
   selectedCar: any;
   selectedPayment: any;
 
-  subAddons:any;
-  subAdhocs:any;
+  subAddons: any;
+  subAdhocs: any;
 
   loading: boolean;
   sliderInitialized: boolean;
-  upgradePlans:any;
-  selectedSubscription:any;
+  upgradePlans: any;
+  selectedSubscription: any;
 
   carSliderOptions = {
     centeredSlides: false,
@@ -41,6 +47,24 @@ export class ServicePageComponent implements OnInit {
 
   @ViewChildren('planSlider') planSlider: QueryList<IonSlides>;
 
+  notifications: any;
+
+  getNotificationCount(regNo) {
+    try {
+
+
+      if (this.notifications && this.notifications.length) {
+        let found = this.notifications.filter((notif) => notif.data.car.regNo.toLowerCase() == regNo.toLowerCase());
+        return found && found.length ? found.length : 0;
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      //alert('Error in nOot' + e);
+      return 0;
+    }
+  }
+
 
   constructor(
     private router: Router,
@@ -48,9 +72,17 @@ export class ServicePageComponent implements OnInit {
     private loginService: LoginService,
     public alertController: AlertController,
     private planService: PlanService,
+    private modalController: ModalController,
     public toastController: ToastController,
-    private carService: CarService
+    private carService: CarService,
+    private notificationService: NotificationService
   ) {
+
+    this.notifications = notificationService.getNewNotifications();
+    notificationService.events().subscribe((notifs: any) => {
+      this.notifications = notifs.new;
+    })
+
     this.payments = [];
     this.upgradePlans = [];
     this.selectedCar = null;
@@ -61,13 +93,48 @@ export class ServicePageComponent implements OnInit {
     this.selectedSubscription = null;
     this.subAddons = [];
     this.subAdhocs = [];
-    
 
+    // this.platform.backButton.subscribeWithPriority(1, () => { // to disable hardware back button on whole app
+    // });
+    console.log('subscribing to back');
+    this.platform.backButton.subscribe(async (d) => {
+
+      document.addEventListener('backbutton', this.onBackButton, true);
+    });
   }
 
   demoEvent(evt) {
     console.log('Demo evt', evt);
   }
+
+  async areaCleaned() {
+
+  }
+
+  ngOnDestroy() {
+    console.log('Service Page Destroyed');
+    document.removeEventListener('backbutton', this.onBackButton,true);
+  }
+
+    async onBackButton(event) {
+      event.preventDefault();
+      event.stopPropagation(); 
+
+      if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+        // this.platform.exitApp(); // Exit from app
+        navigator['app'].exitApp(); // work in ionic 4
+
+      } else {
+        const toast = await this.toastController.create({
+          message: 'Press back again to exit App.',
+          duration: 2000,
+          position: 'middle'
+        });
+        toast.present();
+        // console.log(JSON.stringify(toast));
+        this.lastTimeBackPress = new Date().getTime();
+      }
+    }
 
   selectCar(index) {
     this.selectedSubscription = this.payments[index];
@@ -80,41 +147,41 @@ export class ServicePageComponent implements OnInit {
 
     this.upgradePlans = [];
 
-    if (this.selectedSubscription.addons && this.selectedSubscription.addons.length) {
-      this.subAddons = this.selectedSubscription.addons.map( (adn) => adn.addon);
-    }
 
-    if (this.selectedSubscription.adhocs && this.selectedSubscription.adhocs.length) {
-      this.subAdhocs = this.selectedSubscription.adhocs.map( (adn) => adn.addon);
-    }
+    this.subAddons = this.selectedSubscription.addons.map((adn) => adn.addon);
+    
 
 
+    this.subAdhocs = this.selectedSubscription.adhocs.map((adn) => adn.addon);
+    
 
-    setTimeout(()=> {
+
+
+    setTimeout(() => {
       this.upgradePlans = this.planService.getUpgradePlans(this.selectedPayment.plan.name);
     }, 100);
-    
-    setTimeout(()=> {
+
+    setTimeout(() => {
       if (this.planSlider && this.planSlider.first) {
         if (!this.sliderInitialized) {
-  
 
-  
+
+
           this.planSlider.first.ionSlideDidChange.subscribe((ev) => {
             console.log('Slider Event', ev);
-            this.planSlider.first.getActiveIndex().then((da)=> {
+            this.planSlider.first.getActiveIndex().then((da) => {
               console.log('Active Index', da);
               this.selectCar(da);
             })
-           
+
           });
           this.sliderInitialized = true;
-        } 
-          
+        }
+
       }
     }, 2000);
 
-    setTimeout(()=> {
+    setTimeout(() => {
       if (this.planSlider && this.planSlider.first) {
         this.planSlider.first.slideTo(this.selectedIndex);
       }
@@ -125,6 +192,35 @@ export class ServicePageComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  async openAddon(addon) {
+    debugger;
+    let bookedTime = false;
+    if (this.selectedSubscription.addons.length) {
+      let found = this.selectedSubscription.addons.filter((adn) => adn.addon.code == addon.code);
+
+      if (found.length) {
+        found = found[0];
+        if (found.scheduledTime) {
+          bookedTime = found.scheduledTime;
+        }
+      }
+    }
+    const modal = await this.modalController.create({
+      component: AddonDetailsComponent,
+      cssClass: 'plans-table-modal',
+      componentProps: { 
+        addon: addon,
+        showClose: true,
+        fromDashboard: true,
+        bookedTime
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+    });
   }
 
   ionViewWillEnter() {
@@ -174,7 +270,7 @@ export class ServicePageComponent implements OnInit {
     this.planService.clearAdhocs();
 
     if (this.selectedSubscription.addons.length) {
-      sessionStorage.setItem('includedAddons', JSON.stringify(this.selectedSubscription.addons.map((addon)=> addon.addon)));
+      sessionStorage.setItem('includedAddons', JSON.stringify(this.selectedSubscription.addons.map((addon) => addon.addon)));
     }
 
     this.router.navigate(['/dashboard/checkout']);
@@ -188,8 +284,8 @@ export class ServicePageComponent implements OnInit {
 
     let { car, payment, expiresOn } = this.selectedPayment;
 
-        // Clear Addon
-        this.carService.clear(true);
+    // Clear Addon
+    this.carService.clear(true);
 
     sessionStorage.setItem('currentPayment', JSON.stringify(payment));
     this.carService.changeCar(car);

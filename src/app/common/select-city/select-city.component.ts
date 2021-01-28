@@ -10,8 +10,10 @@ import { scrollElementToTop } from 'app/util/util';
 export class SelectCityComponent implements OnInit {
 
   @Input() city: string;
+  @Input() error: string;
   @Input() state: string;
   @Input() mandatory: boolean;
+
 
   @Output() cityChange = new EventEmitter();
   @Output() stateChange = new EventEmitter();
@@ -26,13 +28,14 @@ export class SelectCityComponent implements OnInit {
 
   options: any;
   states: any;
+  hasError:boolean;
 
 
   get filteredCities() {
-    if (!this.city || this.city == "") {
+    if (!this.select || this.select == "") {
       return this.options;
     } else {
-      return this.citiesService.findMatchingCities(this.city);
+      return this.citiesService.findMatchingCities(this.select);
     }
   }
 
@@ -45,6 +48,8 @@ export class SelectCityComponent implements OnInit {
     }
   }
 
+  select:string;
+  isSelected:boolean;
 
   constructor(
     private citiesService: CitiesService
@@ -55,7 +60,10 @@ export class SelectCityComponent implements OnInit {
     this.showState = false;
     this.options = citiesService.getAllCities();
     this.states = citiesService.states;
+    this.hasError = false;
     this.mandatory = false;
+    this.select = "Select City";
+    this.isSelected = false;
   }
 
   ngOnInit() {
@@ -77,7 +85,37 @@ export class SelectCityComponent implements OnInit {
     this.enterKey.emit();
   }
 
+  ngOnChanges(changes) {
+    if (this.error && this.error.length) {
+      this.hasError = true;
+    } else {
+      this.hasError = false;
+    }
+  }
+
+
+  onBlur(e) {
+    console.log(e);
+
+    setTimeout(()=> {
+
+      if (!this.isSelected) {
+        this.selectCity(this.city);
+      }
+    }, 100);
+
+  }
+
+  onChange(key) {
+
+    this.select = key;
+    this.isSelected = false;
+
+  }
   selectCity(city) {
+    this.city = city;
+    this.isSelected = true;
+    this.select = city;
     this.cityChange.emit(city);
     if (this.showState) {
       let found = this.citiesService.findStateForCity(city);

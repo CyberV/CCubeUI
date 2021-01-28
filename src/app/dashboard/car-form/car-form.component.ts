@@ -65,7 +65,15 @@ export class CarFormComponent implements OnInit {
     return valid;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
+
+  ngOnChanges() {
+    if (this.regNo && this.isRegNoValid) {
+      this.findingCar = true;
+    }
+  }
 
   saveCar(carData) {
     if (!this.verifyOnly) {
@@ -105,7 +113,7 @@ export class CarFormComponent implements OnInit {
     }
 
 
-    this.carReady.emit({...carDetails, regNo:this.regNo});
+    this.carReady.emit({...carDetails, regNo: this.regNo ? this.regNo.trim() : ''});
 
     //this.router.navigate(['plans'], { state: carDetails});
   }

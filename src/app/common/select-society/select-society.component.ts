@@ -4,6 +4,7 @@ import { CitiesService } from 'app/cities.service';
 
 import {scrollElementToTop} from 'app/util/util';
 
+
 declare var $;
 @Component({
   selector: 'select-society',
@@ -33,8 +34,10 @@ export class SelectSocietyComponent implements OnInit {
   states: any;
 
   select = 'Select Society';
+  isSelected:boolean;
 
   unlisted:boolean;
+  lastValue:string;
 
   get filteredSocieties() {
     if (!this.select || this.select == "" || this.select == 'Select Society' || this.select == 'Other') {
@@ -57,6 +60,8 @@ export class SelectSocietyComponent implements OnInit {
     this.city="faridabad";
     this.society = "";
     this.disabled = false;
+    this.isSelected = false;
+    this.lastValue = "";
     this.unlisted = false;
     this.mandatory = false;
     this.showOther = false;
@@ -64,7 +69,10 @@ export class SelectSocietyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectSociety(this.society);
+    if (this.society && this.society.length) {
+      this.selectSociety(this.society);
+    }
+    
     this.options = this.citiesService.getSocietiesForCity(this.city);
   }
 
@@ -112,9 +120,36 @@ export class SelectSocietyComponent implements OnInit {
     
   }
 
+  onBlur(e) {
+    console.log(e);
+
+    setTimeout(()=> {
+
+      if (!this.isSelected) {
+        this.select = this.society;
+        this.isSelected = true;
+      }
+    }, 100);
+
+  }
+
+  onChange(key) {
+    this.lastValue = key;
+    this.isSelected = false;
+    this.select = key;
+  }
+
 
   selectSociety(society ,unlisted = false) {
     this.society = society;
+    if (society && society.length) {
+      this.isSelected = true;
+    }
+    
+    if (!this.unlisted) {
+      this.select = society;
+    }
+    
     this.unlisted = unlisted;
     this.societyChange.emit( {
       isUnlisted: unlisted, 

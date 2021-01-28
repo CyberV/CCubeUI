@@ -5,6 +5,9 @@ import onePageScroll from 'assets/scripts/one-page-scroll.min';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import { HeaderService } from 'app/header.service';
+import { NotificationService } from 'app/services/notification.service';
+import { PlanService } from 'app/services/plan.service';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -39,6 +42,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router, 
     private userService:UserService,
+    private toastController:ToastController,
+    private notificationService:NotificationService,
+    private planService:PlanService,
     private headerService:HeaderService
     ) {
     this.featureList = featureList;
@@ -51,6 +57,7 @@ export class HomeComponent implements OnInit {
       initialSlide: 0,
       centeredSlides: true,
     slidesPerView: 1,
+    autoplay: true,
 
 
       pagination: {
@@ -62,6 +69,14 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = this.userService.isLoggedIn();
 
    }
+
+   async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   ngOnInit() {
     this.startShow=true;
@@ -77,8 +92,13 @@ export class HomeComponent implements OnInit {
     // });
   }
 
-  goToPlans() {
+  goToPlans(forDemo = false) {
     //sessionStorage.removeItem('currentCar');
+
+    if (forDemo) {
+      //sessionStorage.setItem('forDemo', 'true');
+      this.presentToast(`We need some basic details for the Demo.`)
+    }
 
     if (this.isLoggedIn) {
       this.router.navigate(['/signup']);
@@ -91,10 +111,18 @@ export class HomeComponent implements OnInit {
   ionViewWillEnter() {
     this.headerService.setView('home',{});
     this.currentUser = this.userService.getCurrentUser();
+    let sub = this.planService.getCurrentSubscription();
 
     if (this.isLoggedIn) {
 
-      if (this.currentUser.payments && this.currentUser.payments.length) {
+      let notifs = this.notificationService.getAllNotifications();
+
+      let showDashboard = (notifs.new.length > 0 || notifs.historical.length > 0 || notifs.read.length > 0) || (this.currentUser.payments && this.currentUser.payments.length)
+
+      // if (showDashboard && sub) {
+      //   alert('Exit?');
+      // }
+      if (showDashboard) {
         this.router.navigate(['/dashboard/service']);
       } else {
         this.router.navigate(['/dashboard']);

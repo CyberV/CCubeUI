@@ -12,7 +12,8 @@
 
 .panel-header {
     background: white !important;
-
+    height: 40px !important;
+    z-index: 1;
 }
 
 .locked-icon {
@@ -35,6 +36,10 @@
 
     &.error {
         border: 3px solid red;
+    }
+
+    .error-text {
+        color: red;
     }
 
     &.locked {

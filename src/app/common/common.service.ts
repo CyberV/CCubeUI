@@ -35,9 +35,11 @@ let init = async function (city = "faridabad") {
             if (res.success) {
                 data = res.data
                 saveCommonData(res.data);
+                
                resolve (res.data);
             } else {
-                resolve (null);
+                alert('Uh oh! Looks like a Connectivity Issue. Please try again in some time');
+                resolve(null);
             }
         });
     })

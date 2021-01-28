@@ -1,5 +1,7 @@
+ @import "src/variables.scss";
+ 
  .task {
-    font-size: 16px;
+    font-size: 14px;
     color: black;
 }
 
@@ -28,7 +30,21 @@
 .schedule-list {
     max-height: 300px;
     overflow-y: auto;
+    overflow-x: hidden;
     padding-right: 12px;
+
+}
+
+.reschedule-link {
+    color: $secondary-color;
+    font-size: 16px;
+    margin-left: 5px;
+    top: 2px;
+    position: relative;
+
+    &.blocked { 
+        color: gray;
+    }
 }
 
 .badge {

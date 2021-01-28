@@ -47,6 +47,11 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  initiateDemo() {
+      sessionStorage.setItem('forDemo', 'true');
+      this.router.navigate(['signup']);
+  }
+
   goTo(route) {
     this.router.navigate(route);
   }

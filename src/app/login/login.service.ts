@@ -16,6 +16,7 @@ import { MD5 } from 'crypto-js';
 import { UserService } from 'app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { NotificationService } from 'app/services/notification.service';
 
 //var CryptoJS = require("crypto-js");
 
@@ -35,6 +36,10 @@ export class LoginService {
   //private url: string = 'http://localhost:4000/api/';
   private carUrl: string = this.url + "car/details/";
 
+  get currentUser() {
+    return this.srvcUser.getCurrentUser();
+  }
+
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -47,6 +52,7 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private srvcUser: UserService,
+    private notificationService: NotificationService,
     private toastController: ToastController,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -85,6 +91,22 @@ export class LoginService {
       catchError(this.handleError));
   }
 
+  tryCoupon(amount, coupon) {
+    
+    let payload = {
+      amount,
+      phone: this.currentUser.phone,
+      coupon
+    };
+    return this.http.post(this.url + 'subscription/trycoupon', payload).pipe(
+      catchError(this.handleError));
+  }
+
+  getCouponsForUser() {
+    return this.http.post(this.url + 'subscription/getcouponsforuser', { phone: this.currentUser.phone }).pipe(
+      catchError(this.handleError));
+  }
+
   createUser(phone, name, password, email, city) {
 
     let payload = {
@@ -105,6 +127,9 @@ export class LoginService {
   logout() {
     this.srvcUser.setCurrentUser(null);
     this.srvcUser.setUserToken(null);
+
+    sessionStorage.clear();
+
     this.router.navigate(['/home']);
   }
 
@@ -113,14 +138,25 @@ export class LoginService {
       phone: phone,
       otp: otp
     };
-    //let xx = _that;
-
 
     return this.http.post(this.url + 'login/otp', payload).pipe(
       catchError(this.handleError)
     );
   }
 
+
+  rescheduleService(phone, carRegNo, fromDate, toDate) {
+    let payload = {
+      phone,
+      carRegNo,
+      fromDate : new Date(fromDate).toDateString(),
+      toDate: new Date(toDate).toDateString(),
+    };
+
+    return this.http.post(this.url + 'subscription/rescheduleService', payload).pipe(
+      catchError(this.handleError)
+    );
+  }
   login(phone, password) {
 
 
@@ -146,6 +182,14 @@ export class LoginService {
       catchError(this.handleError)
     );
   }
+
+  scheduleAddon(payload) {
+    return this.http.post(this.url + 'subscription/scheduleAddon', payload).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  
 
   addAdhoc(adhoc) {
     return this.http.post(this.url + 'subscription/addadhoc', adhoc).pipe(

@@ -1,0 +1,22 @@
+@import "src/variables.scss";
+
+.reschedule-container {
+    margin-top: 1em;
+    position: relative;
+    padding: 15px;
+}
+
+.count {
+    color: $secondary-color;
+}
+
+.close-link {
+    position: absolute;
+    font-size: 30px;
+    right: 0.5em;
+    top: 0;
+}
+
+.today {
+    color: $primary-color;
+}

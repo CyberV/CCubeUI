@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
+  constructor(
+  ) {
+
+  }
+
+  notificationsEmitter = new Subject();
 
   getAllNotifications() {
     return {
@@ -11,6 +18,18 @@ export class NotificationService {
       historical: this.getHistoricalNotifications(),
       read: this.getReadNotifications()
     }
+  }
+
+
+  events() {
+    if (this.notificationsEmitter.closed) {
+      this.notificationsEmitter = new Subject();
+    }
+    return this.notificationsEmitter;
+  }
+
+  sendNotificationUpdate() {
+    this.notificationsEmitter.next( this.getAllNotifications());
   }
 
   getNewNotifications() {
@@ -30,9 +49,21 @@ export class NotificationService {
 
   saveNewNotification(notif) {
     let notifs = this.getNewNotifications();
-    notifs.push(notif);
-    notif.date =  new Date().toString().split(' ').slice(1,3).join(' ');
-    localStorage.setItem('newNotifications', JSON.stringify(notifs));
+    let n = notif;
+    n.data = JSON.parse(n.data);
+    if (n.title.toLowerCase().indexOf('activated') > -1) {
+      n.action = 'refresh';
+    }
+
+    if (n.data.action) {
+      n.action = n.data.action;
+    }
+    n.date =  new Date().toString().split(' ').slice(1,3).join(' ');
+
+    let all = [n];
+    Array.prototype.push.apply(all, notifs);
+    localStorage.setItem('newNotifications', JSON.stringify(all));
+    this.sendNotificationUpdate();
   }
 
   markNotificationAsRead(notif) {
@@ -51,8 +82,24 @@ export class NotificationService {
 
         localStorage.setItem('newNotifications', JSON.stringify(notifsNew));
         localStorage.setItem('readNotifications', JSON.stringify(read));
+
+        this.moveNotificationsToHistory();
+
+        this.sendNotificationUpdate();
+
       }
     }
+  }
+
+  markAllNotificationsAsRead() {
+    let notifsHistorical = this.getHistoricalNotifications();
+    let notifsNew = this.getNewNotifications();
+
+    Array.prototype.push.apply(notifsHistorical, notifsNew);
+
+    localStorage.setItem('historicalNotifications', JSON.stringify(notifsHistorical));
+    localStorage.setItem('newNotifications', JSON.stringify([]));
+    this.sendNotificationUpdate();
   }
 
   moveNotificationsToHistory() {
@@ -63,7 +110,16 @@ export class NotificationService {
 
     localStorage.setItem('historicalNotifications', JSON.stringify(notifsRead));
     localStorage.setItem('readNotifications', JSON.stringify([]));
+    this.sendNotificationUpdate();
+
   }
 
-  constructor() { }
+  clear() {
+    localStorage.setItem('newNotifications', JSON.stringify([]));
+    localStorage.setItem('historicalNotifications', JSON.stringify([]));
+    localStorage.setItem('readNotifications', JSON.stringify([]));
+    this.sendNotificationUpdate();
+  }
+
+
 }

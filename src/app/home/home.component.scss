@@ -1,3 +1,5 @@
+@import "src/variables.scss";
+
 .container-fluid {
     text-align: justify;
     background: white;
@@ -8,6 +10,20 @@
     @media screen and (max-width: 768px) {
         margin-top: 5em;
     }
+}
+
+#s2 {
+    background: bisque;
+    margin-bottom: 1em;
+}
+#s3 {
+    background: #a9e6a9;
+    margin-bottom: 1em;
+}
+.feature-slide {
+    padding: 37px;
+    background: bisque;
+    min-height: 600px;
 }
 
 .logo {
@@ -69,6 +85,21 @@ a:hover {
 //     background: #00a4a7;
 // }
 
+.sticky {
+    position: sticky;
+    top: 20em;
+    opacity: 0.85;
+    background-color: $secondary-color;
+    padding: 10px;
+    font-size: 20px;
+    z-index: 3;
+    color: white;
+    width: 45%;
+    box-shadow: 1.1px 1.1px #fddaaf;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
 .btn:hover {
     color: white;
     background: orange;
@@ -78,5 +109,5 @@ a:hover {
 .demoRow,
 .contactRow {
 
-    padding: 2em 20px 0;
+    padding: 0 35px;
 }

@@ -1,0 +1,16 @@
+<ion-slides [options]="options">
+
+  <ion-slide *ngFor="let doc of documents; let i = index;">
+
+    <mat-card class="card addon-card animate__animated animate__flipInX" (click)="openFile(doc)">
+      <img  class="card-img-top" [src]="'assets/icons/document.png'"
+        alt="Card image cap">
+      <div class="">
+
+        <div >
+          <span class="card-text one-edge-shadow" [class.contrast]="i%2!=0">{{doc.name}}</span>
+        </div>
+      </div>
+    </mat-card>
+  </ion-slide>
+</ion-slides>

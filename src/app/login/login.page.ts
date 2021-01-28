@@ -69,7 +69,9 @@ export class LoginPage implements OnInit {
     let mobile = sessionStorage.getItem('currentMobile');
 
     if (this.userService.isLoggedIn()) {
-      this.router.navigate(['/dashboard']);
+
+      //this.router.navigate(['/dashboard']);
+      //alert('Exit from Login');
     }
 
     if (!mobile && this.context=='details') {

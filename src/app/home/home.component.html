@@ -1,5 +1,5 @@
 <ion-content fullscreen="true" mnFullpage>
-  <div class="container-fluid hidden-xs desktop-container">
+  <div class="container-fluid hidden-xs desktop-container --no-padding">
     <div class="row">
       <div class="offset-md-2 col-md-8 col-xs-12 header" >
         <div  class="section" id="s1" name="page1">
@@ -12,7 +12,7 @@
           <!-- <typeaway skipAnimation="true" class="title1" *ngIf="startShow" text="Complete Car Care"
             (finished)="doorstep = true;"></typeaway>
           <br /> -->
-          <!-- <div   *ngIf="knowmore" class="row ctaRow ">
+          <div  class="row ctaRow">
               <p>
                 Welcome to the new world and enjoy the ultimate car cleaning experience.
               </p>
@@ -28,41 +28,49 @@
                 Nature and saving a lot of water during the process.
               </p>
 
-            </div> -->
+            </div>
           </div>
 
+          <div class="sticky" (click)="goToPlans(true)">Book A Demo</div>
+
         <div  class="section" id="s2" name="page2">
-          <carousel></carousel>
-          <!-- <ion-slides [options]="slideOpts">
-            <ion-slide *ngFor="let feature of featureList; let i = index">
+          <!-- <carousel></carousel> -->
+          <ion-slides [options]="slideOpts">
+            <ion-slide class="feature-slide" *ngFor="let feature of featureList; let i = index">
                 <feature-card class="" [title]="feature.title"
                 [points]="feature.points" [solution]="feature.solution" [direction]="i%2 == 0 ? 'right' : 'left'"
                 [icon]="feature.icon">
               </feature-card>
             </ion-slide>
-            <div class="swiper-pagination"></div>
           </ion-slides>
-          <div class="swiper-pagination"></div> -->
-          
+          <div class="swiper-pagination"></div>
 
 
         </div>
 
 
 
-        <!-- <div  class="section" id="s3" name="page3">
-          <p class="section-heading"><strong>OUR CONTRIBUTIONS TO SOCIETY</strong></p>
+        <p class="section-heading"><strong>OUR CONTRIBUTIONS TO SOCIETY</strong></p>
+        <div  class="section ctaRow" id="s3" name="page3">
+          
 
           <feature-card class="col-xs-12 col-md-6" *ngFor="let contribution of contributions;"
             [title]="contribution.title" [points]="contribution.points" [solution]="contribution.solution"
             direction="left" [icon]="contribution.icon"></feature-card>
 
-        </div> -->
+        </div>
 
         <div style="display:flex;justify-content:center;align-items:center; margin-bottom: 2em; ">
             <div><span class="btn btn-block" (click)="goToPlans()"
                 >Sign Up Today</span></div>
           </div>
+          <br/>
+          <div style="color:#ec6e22;display:flex;justify-content:center;align-items:center; margin-bottom: 2em; ">
+            <div><span class="btn btn-block"  style="color:#ec6e22;" (click)="goToPlans(true)"
+                >Book A Demo</span></div>
+          </div>
+
+
 
       </div>
     </div>

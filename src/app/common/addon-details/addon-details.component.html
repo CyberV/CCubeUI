@@ -1,14 +1,24 @@
 <div class="addon-container">
   <div class="addon-info">
-    <h2 #pageTop><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+      <span *ngIf="showClose" class="float-right" (click)="closeModal()">X</span>
+    <h2 #pageTop class="--padding-x"><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+    
     <p>
       <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for 1 month.</span>
     </p>
-    <p>
+    <p *ngIf="startDate && !bookedTime">
         <span  class="startLabel">
           Starts from <span>{{startDate}}</span>
         </span>
       </p>
+
+      <p *ngIf="bookedTime">
+        <span  class="startLabel">
+          Scheduled On <span>{{bookedDate}}</span>
+        </span>
+      </p>
+
+      <span *ngIf="bookedTime"></span>
   </div>
   <ion-list>
     <ion-list-header>
@@ -17,10 +27,10 @@
 
     <ion-item-group>
       <ion-item-divider>
-        <ion-label>Details</ion-label>
+        <ion-label class="divider">Details</ion-label>
       </ion-item-divider>
 
-      <ion-item>
+      <ion-item lines="none">
         <ion-label>
           <ion-icon class="water" name="water-outline"></ion-icon> Water Efficient
         </ion-label>
@@ -32,9 +42,9 @@
         </ion-label>
       </ion-item>
 
-      <ng-container *ngIf="!isAdhoc">
+      <ng-container *ngIf="!(addon.code == 'FBW' || addon.code == 'WASH_DEEP')">
         <ion-item-divider>
-          <ion-label>Frequency</ion-label>
+          <ion-label class="divider">Frequency</ion-label>
         </ion-item-divider>
 
         <ion-item lines="none">
@@ -43,9 +53,10 @@
           </ion-label>
         </ion-item>
       </ng-container>
-      <ng-container *ngIf="isAdhoc">
+
+      <ng-container *ngIf="(addon.code == 'FBW' || addon.code == 'WASH_DEEP') && !bookedTime">
           <ion-item-divider>
-            <ion-label>Schedule</ion-label>
+            <ion-label class="divider">Schedule</ion-label>
           </ion-item-divider>
   
           <ion-item lines="none">
@@ -58,19 +69,20 @@
               <ion-icon class="calendar" name="cellular-outline"></ion-icon> Select a Date
             </ion-label> -->
           </ion-item>
-          <ion-item lines="none">
-              <heading text="OR" align="center"></heading>
-            
-          </ion-item>
-          <ion-item lines="none">
+          <ion-item lines="none" class="--margin-top">
               
               <mat-checkbox [checked]="laterSelected" (change)="laterSelected = !laterSelected">
-                  Schedule Later
+                  I will schedule Later
   
                 </mat-checkbox>
           </ion-item>
+
+         
           
         </ng-container>
     </ion-item-group>
   </ion-list>
+  <cta sticky="true" *ngIf="!fromDashboard && !purchased" [loading]="loading" text="BUY" (action)="addAddonToCart()" ></cta>
+
+  <cta sticky="true" *ngIf="!laterSelected && fromDashboard" [loading]="loading" text="Book Now" (action)="scheduleAddon(addon)" ></cta>
 </div>

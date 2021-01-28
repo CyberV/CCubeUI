@@ -27,9 +27,31 @@
 
 
 
-html {
-  scroll-behavior: smooth;
+@font-face {
+  font-family: AppFont;
+  src: url("app/fonts/Lato.woff2"); //change url accordingly
 }
+  
+:root {
+--ion-font-family: 'AppFont' !important;
+  letter-spacing: 0.5px;
+}
+
+.mat-typography, span, div, p, h1, h2, h3,h4, h5, h6, input, button, a {
+  letter-spacing: 0.5px;
+  font-family: 'AppFont' !important;
+}
+
+// html, body {
+//   font-family: 'AppFont' !important;
+// }
+
+
+
+// html {
+//   scroll-behavior: smooth;
+//   font-family: 'AppFont' !important;
+// }
 
 .plans-table-modal .modal-wrapper{
   height:75%;
@@ -63,6 +85,8 @@ html {
    */
   
   body {
+
+    //font-family: 'Lato', sans-serif !important;
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66,140,255;
     --ion-color-primary-contrast: #ffffff;
@@ -213,6 +237,29 @@ html {
   }
 }
 
+.bg-congrats {
+  transition: all 0.2s;
+    background: url(https://i.gifer.com/6ob.gif) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.bg-collect-keys {
+  transition: all 0.2s;
+    background: url(https://i.gifer.com/72f4.gif) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.bg-reminder {
+  
+  transition: all 0.2s;
+  background: url(https://media.giphy.com/media/xFmuT64Jto3mRO4w3G/giphy.gif) no-repeat 79% center fixed;
+  background-size: cover;
+}
+
+.--uppercase {
+  text-transform: uppercase;
+}
+
 .notif-popover {
   --max-width: 300px;
 }
@@ -235,12 +282,29 @@ html {
   text-transform: capitalize;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .vertical-center {
   margin: 0;
   position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+
+.one-edge-shadow {
+
+          box-shadow: 0 8px 6px -8px #00000075;          
+}
+
+.--margin-top {
+  margin-top: 15px;
+}
+
+.--margin {
+  margin: 15px;
 }
 
 .--no-padding {

@@ -1,27 +1,33 @@
-<div class="--padding-x">
-    <heading text="ADDONS" size="24" capitalize="true" align="center"></heading>
+<div class="--padding-x" *ngIf="addOns.length">
+    <heading text="ADDONS" size="24" align="center"></heading>
 
 
     <ion-slides [options]="options">
     
         <ion-slide *ngFor="let addon of addOns; let i = index;">
 
-          <mat-card class="card addon-card animate__animated animate__flipInX"  [class.selected]="isSelected(addon)" [class.active]="active && isSelected(addon)">
-            <img class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.png'" alt="Card image cap">
+          <mat-card class="card addon-card animate__animated animate__flipInX"  [class.selected]="isSelected(addon)" [class.active]="active && isSelected(addon)" [class.blocked]="isBlocked(addon)">
+            <img (click)="sendShowDetails(addon)" class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.jpg'" alt="Card image cap">
             <div class="">
 
-              <div>
-                  <span class="card-text" [class.contrast]="i%2!=0">{{addon.label || addon.name}}</span>
+              <div (click)="sendShowDetails(addon)">
+                  <span class="card-text" [class.contrast]="isSelected(addon)" [class.center-text]="isSmallText(addon)">{{addon.label || addon.name}}</span>
               </div>
               <div class="bottom">
-                  <div class="ion-no-margin rate">
+                  <div class="ion-no-margin rate" *ngIf="!(isSelected(addon) && active)" (click)="sendShowDetails(addon)">
                       <span Rs>{{addon.price}}</span>
                   </div>
-                    <cta *ngIf="!isSelected(addon)" (action)="selectAddon(addon)" text="ADD" outline="true" small="true"></cta>
+                    <cta *ngIf="!isSelected(addon) && !isBlocked(addon)" (action)="selectAddon(addon)" text="ADD" outline="true" small="true"></cta>
                     <span class="animate__animated animate__fadeInUp" *ngIf="isSelected(addon)">
-                      <h2 class="--padding-y" > {{active ? 'ACTIVE' : 'Added!'}}</h2>
+                      <h2 class="--padding-y active-label" (click)="sendShowDetails(addon)"> {{active ? 'ACTIVE' : 'Added !'}}</h2>
                       <span *ngIf="!active" (click)="selectAddon(addon)"  class="badge badge-light ">Remove</span>
                     </span>
+                    <span class="animate__animated animate__fadeInUp" *ngIf="isBlocked(addon)" (click)="sendShowDetails(addon)">
+                        <h2 class="--padding-y" > ACTIVE</h2>
+                    </span>
+                    <cta *ngIf="(isSelected(addon) && active) && !isScheduled(addon) && isSchedulable(addon)" small="true" (action)="sendShowDetails(addon)" text="Book"></cta>
+                    <span class="date-label" *ngIf="isScheduled(addon)"> <ion-icon name="calendar-outline"></ion-icon> {{isScheduled(addon)}} </span>
+
               </div>
               
             </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CompileMetadataResolver } from '@angular/compiler';
+import { NotificationService } from 'app/services/notification.service';
 
 @Component({
   selector: 'purchased-plan',
@@ -20,10 +21,13 @@ export class PurchasedPlanComponent implements OnInit {
   showLink: boolean = false;
 
   expiryDate:string;
+  startDate:string;
   nextPlanStartDate:string;
+  expiry:string;
 
-  constructor() { 
-    this.subscription = {};
+
+  constructor(  ) { 
+    this.expiry = "";
   }
 
   onCompare() {
@@ -46,18 +50,55 @@ export class PurchasedPlanComponent implements OnInit {
 
   ngOnInit() {
     this.expiryDate = new Date(this.payment.expiresOn).toString().split(' ').slice(1,3).join(' ');
-
-    let d = new Date();
   }
 
   ngOnChanges(changes) {
 
     if (changes.payment && this.payment) {
       this.expiryDate = new Date(this.payment.expiresOn).toString().split(' ').slice(1,3).join(' ');
-
+      this.startDate = new Date(this.payment.startDate).toString().split(' ').slice(1,3).join(' ');
       if (this.payment.nextPlan) {
         this.nextPlanStartDate = new Date(this.payment.nextPlan.startDate).toString().split(' ').slice(1,3).join(' ');
 
+      }
+    }
+
+    if (this.subscription) {
+      let {status} = this.subscription;
+      
+      switch (status) {
+        case'Ready': {
+
+          break;
+        }
+        case 'Payment Received': {
+          this.expiry = "Under Processing"
+          break;
+        }
+        case 'Service Scheduled': {
+          this.expiry = "Starts on " + this.startDate;
+          break;
+        }
+        case 'Active': {
+          this.expiry = "Expires on " + this.expiryDate;
+          break;
+        }
+        case 'Expiring': {
+          this.expiry = "Expires on " + this.expiryDate;
+          break;
+        }
+        case 'Expired': {
+          this.expiry = "Expired on " + this.expiryDate;
+          break;
+        }
+        case 'Terminated': {
+          this.expiry = "Services Stopped";
+          break;
+        }
+        case 'Old Customer': {
+          this.expiry = "Welcome Back!";
+          break;
+        }
       }
     }
 

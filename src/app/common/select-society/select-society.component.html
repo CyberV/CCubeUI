@@ -4,7 +4,7 @@
     <div class="input-group">
       <ng-container *ngIf="!disabled"> 
         <input #inpSociety class="form-control --no-padding" (keyup.enter)="onEnterKey($event)" (click)="focus()" type="text" aria-label="society" matInput name="society"
-        [(ngModel)]="select" [matAutocomplete]="auto">
+        [ngModel]="select" (ngModelChange)="onChange($event)" (blur)="onBlur($event)" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption="true">
         <mat-option *ngFor="let option of filteredSocieties" [value]="option" (click)="selectSociety(option)">
           {{option}}

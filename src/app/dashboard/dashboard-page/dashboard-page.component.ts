@@ -5,9 +5,10 @@ import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 
 import {Initialize} from 'app/common/common.service';
+import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
@@ -18,6 +19,7 @@ export class DashboardPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private modalController: ModalController,
     private carService: CarService,
     private planService: PlanService,
     private headerService: HeaderService,
@@ -34,6 +36,7 @@ export class DashboardPageComponent implements OnInit {
     this.includedAdhocs = [];
     this.includedAddons = [];
     this.currentSubscription = null;
+    this.forDemo = false;
   }
 
   context: string;
@@ -46,6 +49,8 @@ export class DashboardPageComponent implements OnInit {
   includedAddons: any;
   includedAdhocs:any;
   currentSubscription:any;
+  activeFeature:any;
+  forDemo:boolean;
 
   ready: boolean;
 
@@ -63,7 +68,8 @@ export class DashboardPageComponent implements OnInit {
 
   ionViewWillEnter() {
     //console.log('Entering View in Dashboard Page');
-
+    this.forDemo = this.planService.forDemo();
+    this.ready = false;
     this.currentUser = this.userService.getCurrentUser();
 
     this.selectedPlan = this.planService.getSelectedPlan();
@@ -85,10 +91,10 @@ export class DashboardPageComponent implements OnInit {
       return;
     }
 
-    if (this.selectedCar && this.context === 'select-car') {
-      this.router.navigate(['/dashboard']);
-      return;
-    }
+    // if (this.selectedCar && this.context === 'select-car') {
+    //   this.router.navigate(['/dashboard']);
+    //   return;
+    // }
 
     // if (this.selectedCar && this.context === 'select-car') {
     //   this.router.navigate(['/dashboard']);
@@ -96,8 +102,10 @@ export class DashboardPageComponent implements OnInit {
     // }
 
     if (!this.selectedCar && this.context === 'dashboard') {
-      this.router.navigate(['/dashboard/select-car']);
-      return;
+      this.carService.restoreBackup();
+      // this.router.navigate(['/dashboard']);
+
+      // return;
     }
 
     this.includedAddons = this.planService.getIncludedAddons();
@@ -107,7 +115,7 @@ export class DashboardPageComponent implements OnInit {
 
     switch (this.context) {
       case 'dashboard': {
-        this.headerService.setText('Choose Your Plan');
+        this.headerService.setText(this.forDemo ? 'Book A Demo' : 'Choose Your Plan');
         break;
       }
       case 'select-car': {
@@ -115,6 +123,7 @@ export class DashboardPageComponent implements OnInit {
         break;
       }
       case 'plan': {
+        this.activeFeature = this.route.snapshot.paramMap.get('code');
         this.headerService.setText(this.selectedPlan.name + ' Plan');
         break;
       }
@@ -123,7 +132,7 @@ export class DashboardPageComponent implements OnInit {
         break;
       }
       case 'addon': {
-        this.headerService.setText(this.selectedAddon.name + ' Addon');
+        this.headerService.setText(this.selectedAddon.label || this.selectedAddon.name + ' Addon');
         break;
       }
       case 'service': {
@@ -171,7 +180,14 @@ export class DashboardPageComponent implements OnInit {
   }
 
   setDateForAdhoc(date) {
-    this.selectedAdhoc.startDate = date;
+    let found = this.includedAddons.filter((adn) => adn.code == this.selectedAddon.code);
+    if (found.length) {
+      found = found[0];
+      found.scheduledDate = date;
+    }
+
+    this.planService.setIncludedAddons(this.includedAddons);
+
   }
 
   async presentToast(msg) {
@@ -250,6 +266,24 @@ export class DashboardPageComponent implements OnInit {
 
     this.router.navigate(['/dashboard/select-car']);
 
+  }
+
+  async openAddon(addon) {
+    const modal = await this.modalController.create({
+      component: AddonDetailsComponent,
+      cssClass: 'plans-table-modal',
+      componentProps: { 
+        addon: addon,
+        showClose: true
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+
+
+
+    });
   }
 
   goToDashboard(carData?) {

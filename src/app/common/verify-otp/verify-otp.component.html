@@ -1,27 +1,29 @@
 
 <div>
-  <span>Please enter your <span highlight>{{length}} digit Verification Code </span> sent to your Mobile Number</span>
+  <span class="label">Please enter Your Verification Code sent to your mobile</span>
 </div>
 
 <div class="row">
-  <div class="col-8 --no-padding-right">
+  <div class="col-12 --no-padding-right asd">
       <div class="otp-input">
+        <div class="mid">
           <input *ngFor="let i of arr; let indx = index" 
             [class]="'otp-'+indx" 
             type="number" maxlength="1"
             (click)="onClick($event)"
+            placeholder="-"
             (keyup)="onChange($event)"
             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
             maxlength="1"
             >
-        
-            
+            </div>
         </div>
   </div>
-  <div class="col-4 --no-padding">
-     <span class="resend" (click)="resendOtp()">Resend OTP</span> 
-  </div>
 </div>
+
+
+<div class="resend" (click)="resendOtp()"> Resend OTP </div> 
+
 
 
 <p *ngIf="mismatch" class="mismatch"> OTP does not match. Try Again!</p>

@@ -71,6 +71,10 @@ import { AdhocSliderComponent } from './adhoc-slider/adhoc-slider.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
+import { RescheduleComponent } from './reschedule/reschedule.component';
+import { BookDemoComponent } from './book-demo/book-demo.component';
+import { CouponsListComponent } from './coupons-list/coupons-list.component';
+import { DocumentListComponent } from './document-list/document-list.component';
 
 
 
@@ -127,6 +131,10 @@ import { ServiceHistoryComponent } from './service-history/service-history.compo
     AdhocSliderComponent,
     DatepickerComponent,
     ServiceHistoryComponent,
+    RescheduleComponent,
+    BookDemoComponent,
+    CouponsListComponent,
+    DocumentListComponent,
 
     // Directives
     RsDirective,
@@ -203,6 +211,10 @@ import { ServiceHistoryComponent } from './service-history/service-history.compo
     AdhocSliderComponent,
     DatepickerComponent,
     ServiceHistoryComponent,
+    RescheduleComponent,
+    BookDemoComponent,
+    CouponsListComponent,
+    DocumentListComponent,
     
     //Directives
 

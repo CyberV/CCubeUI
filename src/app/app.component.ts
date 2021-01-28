@@ -20,6 +20,7 @@ import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 
 import { Initialize } from 'app/common/common.service';
 import { NotificationService } from './services/notification.service';
+import { rebeccapurple } from 'color-name';
 
 declare var $;
 @Component({
@@ -37,6 +38,7 @@ export class AppComponent {
   headerText: string;
   currentUser: any;
   isLoggedIn: boolean;
+  hasNewNotifications:boolean;
 
   headerType: string;      // text, view
   viewData: any;
@@ -66,6 +68,7 @@ export class AppComponent {
     this.hideBackButton = false;
     this.headerType = '';
     this.fcmInitialized = false;
+    this.hasNewNotifications = false;
     this.ready = false;
 
     this.noBackNavigation = [
@@ -154,8 +157,13 @@ export class AppComponent {
   async presentAlert(data = null) {
     let alert;
     if (data) {
+      let cls = '';
+      cls = data.title.toLowerCase().indexOf('reminder') > -1 ? 'bg-reminder' : cls;
+      cls = data.title.toLowerCase().indexOf('congratulations') > -1 ? 'bg-congrats' : cls;
+      cls = data.title.toLowerCase().indexOf('key') > -1 ? 'bg-collect-keys' : cls;
+  
       alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
+        cssClass: 'my-custom-class ' + cls,
         header: data.title || 'Notification',
         message: data.body || 'This is a demo message.',
         buttons: ['OK']
@@ -172,6 +180,21 @@ export class AppComponent {
 
 
     await alert.present();
+
+    alert.onWillDismiss().then(()=> {
+      if (data.action && data.action == 'refresh') {
+        window.location.reload();
+      }
+      alert.cssClass = 'animate__animated  animate__fadeOut';
+
+      setTimeout(()=>{
+        this.notificationService.markNotificationAsRead(data);
+      }, 1000);
+    });
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 
   goBack() {
@@ -188,6 +211,11 @@ export class AppComponent {
 
   async ngAfterViewInit() {
     this.menu.enable(true, 'first');
+    this.hasNewNotifications = this.notificationService.getNewNotifications().length > 0;
+
+    this.notificationService.events().subscribe((notifs:any) => {
+      this.hasNewNotifications = notifs.new.length > 0;
+    })
 
     // this.checkData().then((data) => {
     //   this.ready = true;
@@ -217,11 +245,45 @@ export class AppComponent {
 
   onActivate(comp) {
 
-    this.notificationService.saveNewNotification({body: 'Sameple ' + comp.context});
+    //this.notificationService.saveNewNotification({title:'Congratulations', 'body': 'Sample Notif', data: JSON.stringify({car: {"model":"Duster","price":"Rs. 8.49 Lakh","details":"1498 cc | 20 kmpl | Petrol","bodyType":"suv","image":"./assets/icons/makers/models/149.png","id":149,"searchedBy":["9560879722"],"ownedBy":[],"missing":false,"_id":"5f9884d25d45340018b88841","carId":"149","maker":"RENAULT","regNo":"hr51bl0139","fuelType":"DIESEL","registeredOn":"11/23/2016","year":2016,"ownerName":"VIKRANT SIWACH","variant":"RENAULT DUSTER","fuelNorms":"BHARAT STAGE IV","chassisNo":"MEEHSRAWEG90XXXXX","engineNo":"K9KF830E0XXXXX","insuranceUpto":"2020-11-28T00:00:00.000Z","fitness":"2031-11-04T00:00:00.000Z","vehicleType":"MOTOR CAR (LMV)","age":"3 years","__v":0,"name":"duster"}, msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}})});
 
     this.context = comp.context;
 
     this.isLoggedIn = this.userService.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      if (!this.fcmInitialized) {
+        try {
+          
+          if (FCM &&  FCM.getToken()) {
+            FCM.getToken().then((res:any) => {
+
+              this.loginService.updateToken(res).subscribe((response:any) => {
+                if (!response.success) {
+                  this.presentAlert(response.errorMsg || JSON.parse(response.error));
+                } else {
+                  this.fcmInitialized = true;
+                  // this.presentAlert({
+                  //   title: 'Hi there!',
+                  //   body: 'Hope you\'re doing great.'
+                  // })
+                }
+              });
+            });
+
+            FCM.onTokenRefresh().subscribe((res:any) => {
+              this.loginService.updateToken(res).subscribe((response:any) => {
+                // if (!response.success) {
+                //   this.presentAlert(response.errorMsg || JSON.parse(response.error));
+                // }
+              });
+            })
+          }
+        } catch(e) {
+          console.log('Error in Notifications', e);
+        }
+      }
+    }
 
     this.userService.listner().subscribe((evt: any) => {
       switch (evt.event) {
@@ -232,39 +294,6 @@ export class AppComponent {
         }
         case 'LOGGED_IN': {
           this.menu.enable(true, 'first');
-
-          if (!this.fcmInitialized) {
-            try {
-              
-              if (FCM &&  FCM.getToken()) {
-                FCM.getToken().then((res:any) => {
-
-                  this.loginService.updateToken(res).subscribe((response:any) => {
-                    if (!response.success) {
-                      this.presentAlert(response.errorMsg || JSON.parse(response.error));
-                    } else {
-                      this.fcmInitialized = true;
-                      // this.presentAlert({
-                      //   title: 'Hi there!',
-                      //   body: 'Hope you\'re doing great.'
-                      // })
-                    }
-                  });
-                });
-
-                FCM.onTokenRefresh().subscribe((res:any) => {
-                  this.loginService.updateToken(res).subscribe((response:any) => {
-                    // if (!response.success) {
-                    //   this.presentAlert(response.errorMsg || JSON.parse(response.error));
-                    // }
-                  });
-                })
-              }
-            } catch(e) {
-              console.log('Error in Notifications', e);
-            }
-          }
-
           break;
         }
         default: break;
@@ -299,6 +328,11 @@ export class AppComponent {
       case 'dashboard': {
         this.carService.clear();
         this.router.navigate(['/dashboard/select-car']);
+        break;
+      }
+      case 'book' : {
+        //sessionStorage.setItem('forDemo', 'true');
+        this.router.navigate(['/signup']);
         break;
       }
       case 'signup': {

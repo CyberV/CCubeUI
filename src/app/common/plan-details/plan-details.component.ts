@@ -3,7 +3,9 @@ import { IonContent } from '@ionic/angular';
 
 import plansList from 'assets/planslist.json';
 import { planData } from 'app/common/common.service';
+import { scrollElementToTop } from 'app/util/util';
 
+declare var $;
 @Component({
   selector: 'plan-details',
   templateUrl: './plan-details.component.html',
@@ -13,6 +15,7 @@ export class PlanDetailsComponent implements OnInit {
 
   @Input() plan: any;
   @Input() features: any;
+  @Input() activeFeature;
 
   @Input() compact:boolean;
   @Input() hideCta:boolean;
@@ -32,7 +35,6 @@ export class PlanDetailsComponent implements OnInit {
     this.currentFeatures = [];
     this.compact = false;
     this.hideCta = false;
-
   }
 
   async ngOnInit() {
@@ -48,6 +50,19 @@ export class PlanDetailsComponent implements OnInit {
       });
     }
 
+  }
+
+  ngOnChanges(changes) {
+  }
+
+  ngAfterViewInit() {
+    if (this.activeFeature) {
+      console.log('Ready to Show feature', this.activeFeature);
+      setTimeout(()=> {
+        scrollElementToTop($('#' + this.activeFeature)[0]);
+
+      }, 1000);
+    }
   }
 
 

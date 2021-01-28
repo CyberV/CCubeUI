@@ -1,14 +1,18 @@
 <div class="row">
   <div class="col-12 mobile-input" [class.--no-padding]="inputOnly">
       <label *ngIf="!inputOnly" for="mobileNumber" [class.red]="hasError">{{name}} <span *ngIf="mandatory"><sup class="mandatory-link">*</sup></span></label>
+      
       <div class="input-group">
         <div class="input-group-prepend" *ngIf="name === 'Mobile Number'">
           <span class="input-group-text" id="basic-addon3"> + 91 | </span>
         </div>
         <span *ngIf="readonly" [ngClass]="{'readonly' : readonly}"> {{value}}</span>
         <ion-icon *ngIf="inputOnly" name="search-outline"></ion-icon>
-        <input *ngIf="!readonly && !labelOnly" [attr.type]="type == 'password'? 'password': 'search'" autocomplete="false" required #phoneInput 
+        <input *ngIf="!readonly && !labelOnly" [attr.type]="type == 'password'? 'password':  (type == 'date' ? 'date' : 'search')" autocomplete="false" required #phoneInput 
+          [attr.min]="constraints.min"
+          [attr.max]="constraints.max"
           [ngClass]="{'form-control' : true, 'error-field': hasError}" 
+          
           [class.not-mobile]="name !== 'Mobile Number'"
           (click)="focus()"
           (input)="onPhoneChange(phoneInput.value)"
@@ -18,6 +22,11 @@
           (keyup.enter)="onEnterKey($event)"
           [style.text-transform]="uppercase? 'uppercase': 'none'"
           aria-describedby="basic-addon3">
+
+          <div *ngIf="!readonly && value && value.length > 0" class="input-group-append clear-text" (click)="clearText()">
+              <!-- <div class="input-group-append clear-text" (click)="clearText()"> -->
+              <ion-icon name="close-outline"></ion-icon>
+          </div>
 
           <span *ngIf="hasError" class="error-msg"> {{error}}</span>
       </div>

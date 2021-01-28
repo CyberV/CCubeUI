@@ -1,9 +1,9 @@
-<mobile-input name="House No / Flat No" (enterKey)="focusTo('inpStreet')" mandatory="true" type="text" [(value)]="location.houseNo"></mobile-input>
+<mobile-input [readonly]="disableAll" name="House No / Flat No" (enterKey)="focusTo('inpStreet')" mandatory="true" type="text" [(value)]="location.houseNo"></mobile-input>
 
-<mobile-input #inpStreet name="Street / Block Name" (enterKey)="focusTo('inpSociety')" type="text" [(value)]="location.block"></mobile-input>
+<mobile-input [readonly]="disableAll" #inpStreet name="Street / Block Name" (enterKey)="focusTo('inpSociety')" type="text" [(value)]="location.block"></mobile-input>
 
-<select-society #inpSociety (unlistedChange)="isUnlisted" [society]="location.society" (societyChange)="handleSocietyChange($event)" (enterKey)="focusTo('ctaConfirm')" [city]="location.city" mandatory="true" ></select-society>
+<select-society [disabled]="disableAll" #inpSociety (unlistedChange)="isUnlisted" [society]="location.society" (societyChange)="handleSocietyChange($event)" (enterKey)="focusTo('ctaConfirm')" [city]="location.city" mandatory="true" ></select-society>
 
 <select-city #inpCity [(city)]="location.city" mandatory="true" (enterKey)="focusTo('ctaConfirm')" [(state)]="location.state" [showState]="true" [disabled]="true"></select-city>
 
-<cta #ctaConfirm text="Confirm" [disabled]="!allFieldsReady" (action)="sendConfirmation()"></cta>
+<cta *ngIf="!disableAll" #ctaConfirm text="Confirm" [disabled]="!allFieldsReady" (action)="sendConfirmation()"></cta>

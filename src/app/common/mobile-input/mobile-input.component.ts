@@ -28,6 +28,8 @@ export class MobileInputComponent implements OnInit {
   @Input() inputOnly:boolean;
   @Input() mandatory:boolean;
 
+  @Input() constraints:any;
+
   @Input() uppercase:boolean;
   @Input() readonly: boolean;
 
@@ -46,15 +48,23 @@ export class MobileInputComponent implements OnInit {
     this.mandatory = false;
 
     this.hasError = false;
+    this.constraints = {
+      min: '',
+      max: ''
+    };
    }
 
   onPhoneChange(value) {
-    this.value = value;
+    this.value = value.trim();
     this.valueChange.emit(this.value);
   }
 
   onEnterKey(e) {
     this.enterKey.emit();
+  }
+
+  clearText() {
+    this.onPhoneChange("");
   }
 
   focus() {

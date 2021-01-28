@@ -22,13 +22,21 @@
     }
 
     .new-item {
-        --background: #7ccaff2b;
+
+            margin: 0;
+            border-bottom: 2px solid $secondary-color;
+
         margin-bottom: 2px;
     }
 
     .recent-item {
-        --background:  white;
+        margin: 0;
+        border-bottom: 2px solid gray;
         margin-bottom: 2px;
+
+        &:last-of-type {
+            border-bottom: none;
+        }
     }
 
 }

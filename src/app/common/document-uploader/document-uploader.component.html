@@ -1,4 +1,12 @@
 
   <h3>{{text}}</h3>
 
+  <ion-grid *ngIf="photos.length">
+    <ion-row>
+      <ion-col size="6" *ngFor="let photo of photos">
+        <img [src]="photo.base64" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <cta text="Upload" outline="true" small="true" icon="document-attach-outline" (action)="sendFile()"></cta>

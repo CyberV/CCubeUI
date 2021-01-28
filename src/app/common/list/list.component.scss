@@ -25,14 +25,14 @@
 
     .limiter {
         display: block;
-
-        border-bottom: 3px solid $primary-color;
-        // background: $primary-color;
+        border-bottom: 1px solid #dceeef;
         padding-top: 5px;
-        color: $primary-color;
+        color: #00a4a7;
         text-align: center;
         line-height: 34px;
         margin: 0 auto;
+        width: 90%;
+        margin-top: 12px;
 
         &.larger {
             // height: 45px;

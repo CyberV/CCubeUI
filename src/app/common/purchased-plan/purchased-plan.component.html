@@ -8,7 +8,7 @@
           (click)="showLink = !showLink">
       </div>
 
-      <div class="col-6">
+      <div class="col-6 --no-padding-left">
         <div *ngIf="car" class="car-info" role="alert">
           <span class="model">{{car.model}}</span>
           <span class="regNo">{{car.regNo}}</span>
@@ -21,14 +21,14 @@
             'badge-light': subscription.status == 'Ready',
             'badge-warning': subscription.status == 'Expiring',
             'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
-            'badge-success': subscription.status == 'Payment Received'}">{{subscription.status | uppercase}}</div>
+            'badge-success': subscription.status == 'Payment Received'  || subscription.status == 'Service Scheduled'}">{{subscription.status | uppercase}}</div>
             <br/>
-          <span>Expires On {{expiryDate}}</span>
+          <span class="expiry">{{expiry}}</span>
 
           <ng-container *ngIf="payment.nextPlan">
               <span>
                   <span class="plan-name">{{payment.nextPlan.plan.name}}</span> Plan
-                  <span>Starting On {{nextPlanStartDate}}</span>
+                  <span class="expiry">Starting On {{nextPlanStartDate}}</span>
                 </span>
                 
           </ng-container>

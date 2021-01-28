@@ -12,6 +12,7 @@ import { CarService } from 'app/services/car.service';
 import { PlanService } from 'app/services/plan.service';
 import { scrollElementToTop } from 'app/util/util';
 import { PlanSliderComponent } from 'app/common/plan-slider/plan-slider.component';
+import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 
 
 declare var $: any;
@@ -59,6 +60,21 @@ export class DashboardComponent implements OnInit {
       initialSlide: 1,
       speed: 400
     };
+  }
+
+  async openAddon(addon) {
+    const modal = await this.modalController.create({
+      component: AddonDetailsComponent,
+      cssClass: 'plans-table-modal',
+      componentProps: { 
+        addon: addon,
+        showClose: true
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+    });
   }
 
   openFirst() {
@@ -127,7 +143,7 @@ export class DashboardComponent implements OnInit {
 
   onAddonSelect(addon) {
 
-    //this.planService.includeAddon(addon);
+    this.planService.includeAddon(addon);
 
     this.presentToast('Please select a Plan');
 
@@ -156,6 +172,7 @@ export class DashboardComponent implements OnInit {
   }
 
   goToCarSelector() {
+    //this.carService.clear();
     this.router.navigate(['/dashboard/select-car']);
   }
 
@@ -181,7 +198,12 @@ export class DashboardComponent implements OnInit {
     this.isPlanSelected = true;
     this.selectedPlan = payload.plan;
     this.planService.changePlan(this.selectedPlan);
+    if (payload.feature) {
+    this.router.navigate(['/dashboard/plan', {code: payload.feature.code}]);
+
+    } else {
     this.router.navigate(['/dashboard/plan']);
+    }
 
   }
 

@@ -19,6 +19,7 @@ export class ThanksPageComponent implements OnInit {
     ) { }
 
   public context: string;
+  clearInterval:any;
 
   payment:any;
   order:any
@@ -48,13 +49,14 @@ export class ThanksPageComponent implements OnInit {
 
     sessionStorage.removeItem('currentCar');
 
-    setTimeout( () => {
+    this.clearInterval = setTimeout( () => {
       this.goToDashboard();
     }, 10000); 
   }
 
 
   goToDashboard() {
+    clearInterval(this.clearInterval);
     this.router.navigate(['/dashboard/service']);
   }
 }

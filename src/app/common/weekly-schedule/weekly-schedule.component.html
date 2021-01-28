@@ -1,14 +1,14 @@
 <div class="schedule-list">
 
-    <div class="alert" [class.alert-light]="i>0" [class.alert-primary]="i==0" role="alert" *ngFor="let service of schedule; let i = index">
+    <div class="alert alert-light" role="alert" *ngFor="let service of schedule; let i = index">
         <div class="row">
             <div class="col-4 ">
                 <span class="day vertical-center-text">{{service.day}}</span><br/>
-                <span *ngIf="i==0" class="badge badge-info ">Today</span>
+                <span *ngIf="i==0" class="badge badge-info ">{{startDate}}</span>
             </div>
             <div class="col-8">
                 <span class="task">
-                    {{service.task}} 
+                    {{service.task}} <ion-icon class="reschedule-link" [class.blocked]="service.isRescheduled"  *ngIf="service.task == 'Full Body Wash'" (click)="openReschedule(service)" name="calendar-outline"></ion-icon>
                 </span> <br/>
                 <span *ngFor="let adhoc of service.adhocs" class="badge badge-warning adhoc"> {{adhoc}} </span> 
                 <ng-container *ngFor="let addon of service.addons">

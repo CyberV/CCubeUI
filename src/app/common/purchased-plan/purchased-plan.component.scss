@@ -28,9 +28,14 @@
 
   .status-badge {
     margin: 0.5em 0;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: normal;
     letter-spacing: 2px;
+  }
+
+  .expiry {
+    font-size: 13px;
+    font-style: italic;
   }
 
   .tabs-container {

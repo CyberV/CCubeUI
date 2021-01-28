@@ -15,6 +15,13 @@
   }
 }
 
+.divider {
+  --color: $secondary-color;
+  color: $primary-color;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .description {
   font-weight: normal;
   margin-bottom:1em;
@@ -53,7 +60,10 @@ margin-bottom: 5px;
 }
 
 .addon-container {
-  margin-bottom: 1em;
+  margin-bottom: 3em;
+  overflow-y:auto;
+  overflow-x:hidden;
+
 
   &.compact {
     width: 110%;
