@@ -21,6 +21,12 @@
       "dom"
     ]
   },
+  "baseUrl": "./",
+  "paths": {
+    "crypto": [
+      "./node_modules/crypto-js"
+    ]
+  },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

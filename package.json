@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "node patch.js && ng build --base-href=/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -29,6 +29,7 @@
     "@ionic-native/core": "^5.27.0",
     "@ionic-native/date-picker": "^5.30.0",
     "@ionic-native/fcm": "^5.29.0",
+    "@ionic-native/firebase-messaging": "^5.30.0",
     "@ionic-native/geolocation": "^5.27.0",
     "@ionic-native/native-geocoder": "^5.27.0",
     "@ionic/angular": "^5.0.7",
@@ -94,6 +95,15 @@
     "ts-node": "^8.8.2",
     "tslint": "^6.1.1",
     "typescript": "^3.8.3"
+  },
+  "browser": {
+      "crypto": false,
+      "stream": false,
+      "http": false,
+      "https":false,
+      "net": false,
+      "path": false,
+      "tls": false  
   },
   "description": "Build a platform agnostic app that runs on iOS, Android, and the web - with just one codebase",
   "cordova": {
