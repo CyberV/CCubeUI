@@ -1,0 +1,100 @@
+@import "src/variables.scss";
+
+ion-slides {
+    padding: 1em 0;
+  border-radius: 15px;
+}
+
+ion-slides, ion-button {
+  margin-bottom: 1em;
+}
+
+.badge-light {
+  margin-top: 1em;
+}
+
+ion-slide:nth-of-type(0){
+  margin-left: 15px;
+}
+.addon-card {
+
+  &.selected {
+    
+    border: 3px solid $primary-color;
+  }
+
+  &.blocked {
+    border: 2px solid green;
+  }
+
+  .active-label {
+    margin-bottom: -25px;
+    color: green;
+  }
+
+  .date-label {
+    margin-top: 1em;
+    position: relative;
+    display: block;
+    color: $secondary-color;
+    font-size: 20px;
+
+    ion-icon {
+      position: relative;
+    top: 5px;
+    left: -2px;
+    font-size: 25px;
+    }
+  }
+
+  &.active {
+    
+    border: 3px solid green;
+  }
+
+  border-radius: 10px;
+  padding: 16px 0;
+
+  .badge-warning {
+    color:white;
+    font-size: 16px;
+  }
+  
+    .card-body {
+      padding-top: 0;
+    }
+
+    .bottom {
+ 
+    }
+  
+    .card-text {
+        min-height: 52px;
+        display: block;
+        font-size: 14px;
+        max-height: 40px;
+        background: #01a3a68c;
+        color: white;
+        position: relative;
+        /* margin-top: -31px; */
+        padding: 10px 0;
+        /* font-weight: 800; */
+        letter-spacing: 2px;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+        width: 100%;
+
+    &.contrast {
+      background: $secondary-light-color;
+    }
+    }
+
+    
+  
+    .rate {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }

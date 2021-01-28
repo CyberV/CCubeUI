@@ -1,4 +1,4 @@
-<div class="row" id="top">
+<div class="row" id="top" [class.slim]="slim">
     <div class="col-7 --no-padding">
       <!-- <img class="page-logo" src="assets/whitell.png" /> -->
       <img *ngIf="car" class="page-logo --no-padding" [src]="car.image" ><br/>
@@ -7,13 +7,13 @@
     <div class="col-5">
 
       <div class="row">
-        <div *ngIf="car" class="car-info" role="alert">
-          <span class="maker">{{car.maker}}</span> <br/> <span class="model">{{car.model}}</span>
-          <div class="plan-comparison-link" >
-              
-          </div>
+        <div *ngIf="car" class="car-info" [class.slim]="slim" role="alert">
+          <span class="maker">{{car.maker | lowercase}}</span> <br/> <span class="model">{{car.model}}</span>
+          <br/><span class="displayType">{{displayType}}</span>
           <!-- <cta small="true" text="Change Car" (action)="onChangeCar()"></cta> -->
-          <div class="alert-link" (click)="onChangeCar()">Change Car</div>
+          <div *ngIf="!hideRemove" class="alert-link" (click)="onChangeCar()">Change Car</div>
+          
+
         </div>
       </div>
 

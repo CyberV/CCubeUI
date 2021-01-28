@@ -36,6 +36,10 @@ export class LoginService {
   //private url: string = 'http://localhost:4000/api/';
   private carUrl: string = this.url + "car/details/";
 
+  get currentUser() {
+    return this.srvcUser.getCurrentUser();
+  }
+
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -84,6 +88,22 @@ export class LoginService {
       otp
     };
     return this.http.post(this.url + 'otp/verify/', payload).pipe(
+      catchError(this.handleError));
+  }
+
+  tryCoupon(amount, coupon) {
+    
+    let payload = {
+      amount,
+      phone: this.currentUser.phone,
+      coupon
+    };
+    return this.http.post(this.url + 'subscription/trycoupon', payload).pipe(
+      catchError(this.handleError));
+  }
+
+  getCouponsForUser() {
+    return this.http.post(this.url + 'subscription/getcouponsforuser', { phone: this.currentUser.phone }).pipe(
       catchError(this.handleError));
   }
 

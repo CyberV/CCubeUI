@@ -10,21 +10,26 @@
             <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
             <ng-container *ngIf="(mode.plan || mode.addon || mode.adhoc) && selectedCar; else noItemsTemplate">
                 <checkout-details 
+                #detailsComp
                 [includedAddons]="includedAddons" 
                 [includedAdhocs]="includedAdhocs"
                 [addon]="selectedAddon" 
                 [adhoc]="selectedAdhoc"
                 [plan]="selectedPlan" 
                 [car]="selectedCar"
+                [discount]="discount"
                 [mode]="mode"
-                (removeAddon)="onAddonSelected($event)"
+                (removeAddon)="onAddonSelected($event, true)"
                 (removeAdhoc)="onAdhocSelected($event)"
+                (removeCoupon)="onRemoveCoupon($event)"
                 (showAddonDetails)="openAddon($event)"
+                
                 >
   
   
               </checkout-details>
   
+              <coupons-list [slim]="true" [appliedCoupons]="appliedCoupons" [availableCoupons]="availableCoupons" [totalAmount]="netPayable" (discount)="applyDiscount($event)"></coupons-list>
              
   
               <addon-slider  [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)" (showDetails)="openAddon($event)"></addon-slider>

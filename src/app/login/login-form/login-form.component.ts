@@ -166,6 +166,7 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit() {
     this.isCarReady = false;
+    //this.otpSent = true;
 
     let savedMobile = sessionStorage.getItem('currentMobile');
 

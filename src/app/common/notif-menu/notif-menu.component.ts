@@ -91,11 +91,11 @@ export class NotifMenuComponent implements OnInit {
   }
 
   clearNotifications() {
-    this.notificationService.moveNotificationsToHistory();
+    this.notificationService.markAllNotificationsAsRead();
     this.popoverController.dismiss();
 
 
-    this.presentToast('Read Notifications moved to Service History!');
+    this.presentToast('Notifications moved to Service History!');
   }
 
   readNotification(item) {

@@ -61,15 +61,15 @@
     <div class="menu-header">
       <div class="top">
         <div class="row ">
-          <div class="col-3">
-            <ion-icon name="person-outline"></ion-icon>
+          <div class="col-3 user-profile-image">
+            <img src="assets/icons/user.png">
           </div>
           <div class="col-9 ">
             <div class="row user-row">
-              <div class="col-12">
+              <div class="col-12 name">
                 {{currentUser && currentUser.name}}
               </div>
-              <div class="col-12">
+              <div class="col-12 phone">
                 {{currentUser && currentUser.phone}}
               </div>
             </div>
@@ -81,24 +81,24 @@
     <ion-content>
       <ion-list class="menu-items">
 
-        <ion-item [class.selected]="context==='service'" (click)="goTo('service')">
+        <ion-item lines="none" [class.selected]="context==='service'" (click)="goTo('service')">
           <ion-icon name="home-outline"></ion-icon> Dashboard
         </ion-item>
-        <ion-item [class.selected]="['select-car', 'plan', 'dashboard', 'checkout', 'confirm'].indexOf(context)>-1"
+        <ion-item lines="none" [class.selected]="['select-car', 'plan', 'dashboard', 'checkout', 'confirm'].indexOf(context)>-1"
           (click)="goTo('dashboard')">
           <ion-icon name="car-sport-outline"></ion-icon> Add New Car
         </ion-item>
-        <ion-item [class.selected]="context==='profile'" (click)="goTo('profile')">
+        <ion-item lines="none" [class.selected]="context==='profile'" (click)="goTo('profile')">
           <ion-icon name="person-circle-outline"></ion-icon>Profile
         </ion-item>
-        <ion-item (click)="goTo('about-us')">
+        <ion-item lines="none" (click)="goTo('about-us')">
           <ion-icon name="people-circle-outline"></ion-icon>About Us
         </ion-item>
-        <ion-item (click)="goTo('contact-us')">
+        <ion-item lines="none" (click)="goTo('contact-us')">
           <ion-icon name="mail-outline"></ion-icon>Contact Us
         </ion-item>
-        <ion-item (click)="logout()" style="color:red;"> 
-          <ion-icon name="power-outline" style="color:red;"></ion-icon> Log Out
+        <ion-item lines="none" (click)="logout()" > 
+          <ion-icon name="power-outline"></ion-icon> Log Out
         </ion-item>
 
       </ion-list>

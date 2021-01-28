@@ -17,7 +17,9 @@ export class AddonDetailsComponent implements OnInit {
   @Input() addon:any;
   @Input() adhoc:any;
   @Input() showClose: any;
+  @Input() purchased: boolean;
   @Input() bookedTime:any;
+  @Input() fromDashboard:boolean;
 
   @Output() changeAddon = new EventEmitter();
   @Output() scheduleLater = new EventEmitter();
@@ -45,6 +47,8 @@ export class AddonDetailsComponent implements OnInit {
     this.startDate = null;
     this.loading = false;
     this.bookedTime = false;
+    this.fromDashboard = false;
+    this.purchased = false;
   }
 
   selectDate(date) {
@@ -72,6 +76,13 @@ export class AddonDetailsComponent implements OnInit {
 
   get bookedDate() {
     return this.bookedTime ? new Date(this.bookedTime).toString().split(' ').slice(1,3).join(' ') : 'NA';  
+  }
+
+  addAddonToCart() {
+    this.addon.scheduledDate = this.selectedDate;
+    this.modalController.dismiss({
+      addon: this.addon
+    });
   }
   
   scheduleAddon(addon) {
@@ -105,6 +116,13 @@ export class AddonDetailsComponent implements OnInit {
     return now > later;
   }
 
+  ngOnChanges(changes) {
+    if (this.addon && this.addon.scheduledDate) {
+      this.selectedDate = this.addon.scheduledDate;
+      this.laterSelected = false;
+    } 
+  }
+
   ngOnInit() {
     if (this.adhoc && !this.addon) {
       this.addon = this.adhoc;
@@ -117,6 +135,9 @@ export class AddonDetailsComponent implements OnInit {
       this.minDate = new Date(currentYear, currentMonth, currentDate + (this.isAfter7pm() ? 2 : 1));
       this.maxDate = new Date(currentYear, currentMonth + 1, currentDate);
     } else if (this.addon) {
+      if (this.addon && this.addon.scheduledDate) {
+        this.selectedDate = this.addon.scheduledDate;
+      } 
       this.isAdhoc = false;
       const currentYear = new Date().getFullYear();
       const currentMonth = new Date().getMonth();

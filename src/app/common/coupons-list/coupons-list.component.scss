@@ -1,0 +1,97 @@
+.discount-container {
+    position: relative;
+    right: -10px;
+
+    ion-label {
+        float: right;
+        width: 100px;
+    }
+
+    .discount-label {
+        position: absolute;
+        float: none;
+        display: block;
+        top: 15px;
+        margin: 0 auto;
+        color: white;
+        right: 15px;
+    }
+}
+
+@import "src/variables.scss";
+
+.spinner {
+    position: absolute;
+    right: 2em;
+}
+
+.list-notif {
+
+    font-size: 12px;
+    overflow-y: auto;
+
+    .discount-item {
+        margin: 0;
+        margin-bottom: 10px;
+        border: 1px solid #dcc0c075;
+        border-radius: 10px;
+        padding: 10px;
+
+        &.applied {
+            background: aliceblue;
+            .applied {
+                color: $secondary-color;
+            }
+
+        }
+
+        &.personal {
+            box-shadow: 0 8px 6px -8px $primary-color;          
+        }
+
+        &.society {
+            box-shadow: 0 8px 6px -8px $secondary-color;          
+        }
+
+        .name {
+            font-size: 16px;
+        }
+
+        .desc {
+            font-size: 12px;
+        }
+    }
+
+    .divider {
+        font-size: 14px;
+        background: lighten(orange, 20%);
+
+        ion-label {
+            white-space: pre-line;
+            font-size: 14px;
+        }
+    }
+
+    ion-label {
+        white-space: pre-line;
+        font-size: 12px;
+    }
+
+    .new-item {
+
+            margin: 0;
+
+        margin-bottom: 5px;
+    }
+
+    .recent-item {
+        margin: 0;
+        border-bottom: 2px solid gray;
+        margin-bottom: 2px;
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+
+}

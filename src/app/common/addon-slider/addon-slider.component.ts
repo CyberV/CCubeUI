@@ -33,6 +33,12 @@ export class AddonSliderComponent implements OnInit {
     return addon.code == 'FBW' || addon.code == 'WASH_DEEP';
   }
 
+  isSmallText(addon) {
+    let t = addon.label || addon.name;
+
+    return t.length <= 11;
+  }
+
   isScheduled (addon) {
     if (!this.dateMap.length) {
       return false;
@@ -43,8 +49,8 @@ export class AddonSliderComponent implements OnInit {
 
   options = {
     centeredSlides: false,
-    slidesPerView: 2.5,
-    spaceBetween: 15,
+    slidesPerView: 2.3,
+    spaceBetween: 20,
   };
 
   addonMap:any;

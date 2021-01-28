@@ -213,6 +213,7 @@ export class ServicePageComponent implements OnInit {
       componentProps: { 
         addon: addon,
         showClose: true,
+        fromDashboard: true,
         bookedTime
       }
     });

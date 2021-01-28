@@ -11,6 +11,14 @@ p{
     align-self: center;
 }
 
+.card {
+    border-radius: 25px;
+}
+
+.card-img-top {
+    border-radius: 20px 20px 0 0;
+}
+
 .profile-content {
     background: $bg-gray;
     color: black;
@@ -22,7 +30,7 @@ p{
 .container {
     background: $bg-white;
     border-radius: 25px;
-    padding: 5em 25px;
+    padding: 25px;
     scroll-behavior: smooth;
     margin-top: 2em;
 

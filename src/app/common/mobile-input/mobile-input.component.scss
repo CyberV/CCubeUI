@@ -10,7 +10,7 @@
 
     input {
         border: none;
-        border-bottom: 1px solid #bcbcbc;
+        border-bottom: 1px solid $primary-color;
         border-radius: 0;
         background: transparent;
         color: $bg-black;
@@ -23,10 +23,15 @@
 
     .readonly {
         border: none;
-        border-bottom: 1px solid #bcbcbc;
+        border-bottom: 1px solid $primary-color;
         background: transparent;
         font-weight: bold;
         width: 100%;
+        color: gray;
+    }
+
+    .mobile-label {
+        text-align: center;
         color: gray;
     }
 
@@ -52,13 +57,26 @@
 
     span {
         border: none;
-        border-bottom: 1px solid #bcbcbc;
+        border-bottom: 1px solid $primary-color;
         background: transparent;
         font-weight: bold;
         border-radius: 0;
         color: black;
         padding-left: 0;
     }
+}
+
+
+textarea:focus, input:focus{
+    outline: none;
+    border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.clear-text {
+    right: -10px;
+    position: absolute;
+    z-index: 10;
 }
 
 ion-icon {

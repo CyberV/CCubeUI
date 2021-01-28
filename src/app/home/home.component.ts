@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
     //sessionStorage.removeItem('currentCar');
 
     if (forDemo) {
-      sessionStorage.setItem('forDemo', 'true');
+      //sessionStorage.setItem('forDemo', 'true');
       this.presentToast(`We need some basic details for the Demo.`)
     }
 

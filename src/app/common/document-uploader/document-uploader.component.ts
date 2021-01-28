@@ -22,36 +22,49 @@ export class DocumentUploaderComponent implements OnInit {
     secretAccessKey: 'JI3r5tRDfpbAgN+kxe90rEm0kFZHddmMIm6gQaXc'
   }
 
+  photos:any;
 
   constructor(
     private photoService:PhotoService
   ) {
     this.text = "Upload your Car Documents to your Vault for future use and Safe Keeping.";
+    this.photos = [];
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.refreshPhotos();
+  }
 
+  async refreshPhotos() {
+    await this.photoService.loadSaved();
+    this.photos = this.photoService.photos;
+    if (this.photos.length) {
+      alert(JSON.stringify(this.photos[0]))
+    console.log('Photos Found', this.photos);
+    }
+    
   }
 
   async sendFile() {
-    await this.photoService.addNewToGallery();
-    await this.photoService.loadSaved();
-    console.log(await this.photoService.photos);
-
-    //this.file.emit();
-    const newFileName = 'whitell.png';
-    //let file = fs.readFileSync('../../../../' + newFileName);
-
-    const S3Client = new S3(this.config);
-    /*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
-
-    /* This is optional */
+    this.file.emit();
+    // await this.photoService.addNewToGallery();
+    // await this.refreshPhotos();
 
 
-    S3Client
-      .uploadFile(this.photoService.photos[0].base64)
-      .then(data => console.log('Data AWS', data))
-      .catch(err => console.error('Error AWS', err))
+    // //this.file.emit();
+    // const newFileName = 'whitell.png';
+    // //let file = fs.readFileSync('../../../../' + newFileName);
+
+    // const S3Client = new S3(this.config);
+    // /*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
+
+    // /* This is optional */
+
+
+    // S3Client
+    //   .uploadFile(this.photoService.photos[0].base64)
+    //   .then(data => console.log('Data AWS', data))
+    //   .catch(err => console.error('Error AWS', err))
   }
 
 }

@@ -12,7 +12,11 @@
       </div>
     </div>
 
-
+    <ion-item *ngIf="newItems.length > 0" class="recent-item" lines="none" (click)="clearNotifications()">
+      <ion-label class="text-center" >
+        CLEAR ALL
+      </ion-label>
+    </ion-item>
   </ion-item-group>
   <ion-item-group>
 

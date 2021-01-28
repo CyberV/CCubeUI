@@ -6,10 +6,53 @@
 
 .plan-info {
   text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+mat-expansion-panel {
+  margin: 0 0 10px;
+  border-radius: 10px !important;
+  border: 0.5px solid #00a4a729;
+  box-shadow: none !important;
+
+  &.mat-expanded {
+    box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+    mat-expansion-panel-header {
+      margin-bottom: 10px;
+    }
+  }
+
+  mat-expansion-panel-header {
+    padding: 35px 18px;
+   
+
+    &.mat-expanded {
+      background: aliceblue;
+      .frequency {
+        color: $primary-color;
+      }
+    }
+  }
+  .feature {
+    color: $primary-color;
+    font-weight: 400;
+  }
+  .frequency {
+    color: $secondary-color;
+    text-transform: capitalize;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
+.mat-expansion-panel-content {
+  padding-top: 10px !important;
 }
 
 .feature {
-  width: 120%;
+  width: 96%;
 margin-bottom: 5px;
 
 
@@ -43,7 +86,13 @@ margin-bottom: 5px;
     }
 
     .feature {
-      border-bottom: 1px solid #e6d6d6;
+      .name {
+        display: inline-block;
+        max-width: 165px;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+      }
     }
   }
 }

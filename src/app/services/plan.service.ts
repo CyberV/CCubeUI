@@ -256,6 +256,11 @@ export class PlanService {
       info.adhocs = info.adhocs.substr(0, info.adhocs.length - 2);
     }
 
+    if (order.discount && order.discount.discount > 0) {
+      total -= order.discount.discount;
+      info.discount = order.discount;
+    }
+
     order.total = total;
     order.info = info;
 
@@ -392,6 +397,15 @@ export class PlanService {
 
   setIncludedAddons(d) {
     sessionStorage.setItem('includedAddons', JSON.stringify(d));
+  }
+
+  getAppliedCoupon() {
+    let adhocs = sessionStorage.getItem('appliedCoupon');
+    return adhocs && adhocs != "null" ? JSON.parse(adhocs) : null;
+  }
+
+  setAppliedCoupon(d) {
+    sessionStorage.setItem('appliedCoupon', d ? JSON.stringify(d) : null);
   }
 
   excludeAdhoc(adhoc) {

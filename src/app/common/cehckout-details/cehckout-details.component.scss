@@ -1,5 +1,17 @@
 @import 'src/variables.scss';
 
+.discount-value {
+    position: relative;
+    margin-left: -30px;
+    font-size: 16px;
+}
+
+.carRegNo {
+    span {
+        margin-right: 5px;
+    }
+}
+
 .headers-top {
 
     display: block;

@@ -12,6 +12,7 @@ export class CheckoutDetailsComponent implements OnInit {
   @Input() car: any;
   @Input() addon: any;
   @Input() adhoc: any;
+  @Input() discount: any;
   @Input() includedAddons: any;
   @Input() includedAdhocs: any;
   @Input() mode: any;
@@ -19,6 +20,7 @@ export class CheckoutDetailsComponent implements OnInit {
   @Output() showAddonDetails = new EventEmitter();
   @Output() removeAdhoc = new EventEmitter();
   @Output() removeAddon = new EventEmitter();
+  @Output() removeCoupon = new EventEmitter();
 
   get productName() {
     let {mode,plan,addon,adhoc} = this;
@@ -29,6 +31,21 @@ export class CheckoutDetailsComponent implements OnInit {
     let {mode,plan,addon,adhoc} = this;
     return  mode.plan ? 'Plan' : (mode.adhoc ? 'Service' : (mode.addon ? 'Addon' : 'Plan'))
   }
+
+  get regNo() {
+    let reg = this.car.regNo;
+
+    let x=   {
+      pre: reg.substr(0,4),
+      mid:'',
+      post: reg.substr(6,4)
+  }
+
+  x.mid = reg.replace(x.pre,"").replace(x.post,'');
+
+  return x;
+
+}
 
   get productPrice() {
     let {mode,plan,addon,adhoc} = this;
@@ -62,9 +79,35 @@ export class CheckoutDetailsComponent implements OnInit {
     this.addonPrice = 0;
     this.mode = null;
     this.adhocPrice = 0;
+    this.discount = {};
+  }
+
+  calculateDiscount() {
+    let total = this.getOrderPrice();
+    let dscnt = 0;
+    if (this.discount && this.discount.coupon) {
+      let coupon = this.discount.coupon;
+      if (coupon.unit == 'percent') {
+        dscnt = Math.floor(total * (coupon.value/100));
+      } else {
+        dscnt = coupon.value;
+      }
+      return dscnt;
+    } else {
+      return 0;
+    }
+  }
+
+  onRemoveCoupon(cpn) {
+    this.removeCoupon.emit(cpn);
   }
 
   ngOnChanges(changes) {
+
+    if (this.discount.coupon) {
+      this.discount.discount = this.calculateDiscount();
+    }
+
     if (changes.includedAddons && this.includedAddons && this.includedAddons.length) {
       this.addonPrice = 0;
       this.includedAddons.forEach((adn) => {
@@ -82,13 +125,23 @@ export class CheckoutDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.lastPlan = this.plan ? JSON.parse(JSON.stringify(this.plan)) : null;
+
+    let coupon = this.planService.getAppliedCoupon();
+    if (coupon) {
+      this.discount = {
+        discount: 0,
+        coupon: coupon
+      };
+      this.discount.discount = this.calculateDiscount();
+    }
+
     if (this.plan && this.lastPlan) {
       this.upgradePrice = this.planService.getUpdatePrice(this.plan.name);
     }
 
   }
 
-  getTotalPayable() {
+  getOrderPrice() {
 
     let {mode}= this;
     let total = 0;
@@ -104,10 +157,21 @@ export class CheckoutDetailsComponent implements OnInit {
         total += this.adhocPrice;
       }
 
+
       return total;
     } else {
       return total;
     }
+  }
+
+  getTotalPayable() {
+
+    let total = this.getOrderPrice();
+    if (this.discount && this.discount.discount) {
+      total -= this.discount.discount;
+    }
+
+    return total;
   }
 
   toggleUpgrade(planName = null) {

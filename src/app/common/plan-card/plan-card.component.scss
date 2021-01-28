@@ -8,7 +8,7 @@
 
 
     .card-top {
-        background: lighten($primary-color, 5%);
+        background: transparent linear-gradient(134deg, #00A4A7 0%, #009295 22%, #005254 100%) 0% 0% no-repeat padding-box;
         border-top-left-radius: 25px;
         border-top-right-radius: 25px;
         color: white;
@@ -30,15 +30,15 @@
     .card-title {
         color: white;
         font-size: 30px;
-        text-transform: uppercase;
-        letter-spacing: 3px;
+        //text-transform: uppercase;
+        letter-spacing: 2px;
 
     }
 
     .monthly-label {
         position: relative;
         letter-spacing: 2px;
-        top: -10px;
+        top: -5px;
     }
 
     .actions-row {

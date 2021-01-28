@@ -73,6 +73,8 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
 import { RescheduleComponent } from './reschedule/reschedule.component';
 import { BookDemoComponent } from './book-demo/book-demo.component';
+import { CouponsListComponent } from './coupons-list/coupons-list.component';
+import { DocumentListComponent } from './document-list/document-list.component';
 
 
 
@@ -131,6 +133,8 @@ import { BookDemoComponent } from './book-demo/book-demo.component';
     ServiceHistoryComponent,
     RescheduleComponent,
     BookDemoComponent,
+    CouponsListComponent,
+    DocumentListComponent,
 
     // Directives
     RsDirective,
@@ -209,6 +213,8 @@ import { BookDemoComponent } from './book-demo/book-demo.component';
     ServiceHistoryComponent,
     RescheduleComponent,
     BookDemoComponent,
+    CouponsListComponent,
+    DocumentListComponent,
     
     //Directives
 

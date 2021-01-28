@@ -186,6 +186,10 @@ export class AppComponent {
         window.location.reload();
       }
       alert.cssClass = 'animate__animated  animate__fadeOut';
+
+      setTimeout(()=>{
+        this.notificationService.markNotificationAsRead(data);
+      }, 1000);
     });
   }
 
@@ -247,6 +251,40 @@ export class AppComponent {
 
     this.isLoggedIn = this.userService.isLoggedIn();
 
+    if (this.isLoggedIn) {
+      if (!this.fcmInitialized) {
+        try {
+          
+          if (FCM &&  FCM.getToken()) {
+            FCM.getToken().then((res:any) => {
+
+              this.loginService.updateToken(res).subscribe((response:any) => {
+                if (!response.success) {
+                  this.presentAlert(response.errorMsg || JSON.parse(response.error));
+                } else {
+                  this.fcmInitialized = true;
+                  // this.presentAlert({
+                  //   title: 'Hi there!',
+                  //   body: 'Hope you\'re doing great.'
+                  // })
+                }
+              });
+            });
+
+            FCM.onTokenRefresh().subscribe((res:any) => {
+              this.loginService.updateToken(res).subscribe((response:any) => {
+                // if (!response.success) {
+                //   this.presentAlert(response.errorMsg || JSON.parse(response.error));
+                // }
+              });
+            })
+          }
+        } catch(e) {
+          console.log('Error in Notifications', e);
+        }
+      }
+    }
+
     this.userService.listner().subscribe((evt: any) => {
       switch (evt.event) {
         case 'LOGGED_OUT': {
@@ -256,39 +294,6 @@ export class AppComponent {
         }
         case 'LOGGED_IN': {
           this.menu.enable(true, 'first');
-
-          if (!this.fcmInitialized) {
-            try {
-              
-              if (FCM &&  FCM.getToken()) {
-                FCM.getToken().then((res:any) => {
-
-                  this.loginService.updateToken(res).subscribe((response:any) => {
-                    if (!response.success) {
-                      this.presentAlert(response.errorMsg || JSON.parse(response.error));
-                    } else {
-                      this.fcmInitialized = true;
-                      // this.presentAlert({
-                      //   title: 'Hi there!',
-                      //   body: 'Hope you\'re doing great.'
-                      // })
-                    }
-                  });
-                });
-
-                FCM.onTokenRefresh().subscribe((res:any) => {
-                  this.loginService.updateToken(res).subscribe((response:any) => {
-                    // if (!response.success) {
-                    //   this.presentAlert(response.errorMsg || JSON.parse(response.error));
-                    // }
-                  });
-                })
-              }
-            } catch(e) {
-              console.log('Error in Notifications', e);
-            }
-          }
-
           break;
         }
         default: break;
@@ -326,7 +331,7 @@ export class AppComponent {
         break;
       }
       case 'book' : {
-        sessionStorage.setItem('forDemo', 'true');
+        //sessionStorage.setItem('forDemo', 'true');
         this.router.navigate(['/signup']);
         break;
       }

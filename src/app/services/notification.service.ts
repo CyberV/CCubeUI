@@ -59,8 +59,10 @@ export class NotificationService {
       n.action = n.data.action;
     }
     n.date =  new Date().toString().split(' ').slice(1,3).join(' ');
-    notifs.push(n);
-    localStorage.setItem('newNotifications', JSON.stringify(notifs));
+
+    let all = [n];
+    Array.prototype.push.apply(all, notifs);
+    localStorage.setItem('newNotifications', JSON.stringify(all));
     this.sendNotificationUpdate();
   }
 
@@ -87,6 +89,17 @@ export class NotificationService {
 
       }
     }
+  }
+
+  markAllNotificationsAsRead() {
+    let notifsHistorical = this.getHistoricalNotifications();
+    let notifsNew = this.getNewNotifications();
+
+    Array.prototype.push.apply(notifsHistorical, notifsNew);
+
+    localStorage.setItem('historicalNotifications', JSON.stringify(notifsHistorical));
+    localStorage.setItem('newNotifications', JSON.stringify([]));
+    this.sendNotificationUpdate();
   }
 
   moveNotificationsToHistory() {

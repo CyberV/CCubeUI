@@ -24,7 +24,7 @@
         </ion-slide>
 
 
-        <ion-slide (click)="addCar()" class="add-car-slide">
+        <ion-slide (click)="addCar()" class="add-car-slide" [class.full-width]="payments.length == 0">
           <p>
             <ion-icon name="add-circle-outline"></ion-icon><br />
           </p>
@@ -43,8 +43,13 @@
   <div class="row car-info-container">
     <div class="col-12">
       <ng-container *ngIf="!loading &&  payments.length == 0">
+        
         <heading text="Looks like you haven't registered a car yet." align="center"></heading>
-        <cta text="Add Car" (action)="addCar()"></cta>
+        <div class="--padding-x">
+            <cta text="Add Car"(action)="addCar()"></cta>
+        </div>
+        <br/>
+        <book-demo></book-demo>
       </ng-container>
       <ng-container *ngIf="payments.length">
         <ion-slides #planSlider [options]="planSliderOptions">
@@ -55,6 +60,7 @@
           </ion-slide>
 
         </ion-slides>
+        
         <div class="row --padding-x">
           <div class="col-12 tabs-container">
             <mat-accordion>
@@ -81,7 +87,7 @@
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                <document-uploader></document-uploader>
+                <document-list></document-list>
 
 
               </mat-expansion-panel>
@@ -118,8 +124,8 @@
   <spinner></spinner>
 </ng-container>
 
-<ng-container *ngIf="!loading && payments.length > 0">
-  <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" (upgradeNow)="handleUpgradePlan($event)"
+<ng-container *ngIf="!loading && payments.length > 0" >
+  <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" class="--padding-y" (upgradeNow)="handleUpgradePlan($event)"
     (showDetails)="showPlanDetails($event)"></upgrade-slider>
 
   <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->

@@ -5,10 +5,11 @@
     text-transform: uppercase;
     font-size: 18px;
     border-color:transparent;
+    letter-spacing: 1.5px;
 }
 
 .cta.btn-primary {
-    background: $primary-color;
+    background: transparent linear-gradient(180deg, #00A4A7 0%, #009295 22%, #005254 100%) 0% 0% no-repeat padding-box;
 }
 
 .btn-red {
@@ -18,7 +19,8 @@
 
 .cta.btn-outline-secondary {
     border: 1px solid $primary-color;
-    color: $primary-color;
+    color: white;
+    background: #00A4A7 0% 0% no-repeat padding-box;
 
     &:hover {
         background: $secondary-color;
@@ -36,12 +38,35 @@
     }
 }
 
+.blanket {
+    width: 100%;
+    height: 60px;
+    background: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.halfWidth {
+    width: 50% !important;
+    margin: 0 auto;
+    position: relative !important;
+    float: none;
+    bottom: 0 !important;
+    top: 10px;
+    border-radius: 15px !important;
+}
+
 .btn-main {
     position: fixed;
     bottom: 0;
     z-index: 10;
     border-radius: 0;
     left: 0;
+    width: 96%;
+    left: 2%;
+    bottom: 1%;
 
     &.disabled {
         background: $cta-disabled-color;

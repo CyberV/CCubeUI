@@ -1,5 +1,14 @@
 @import "src/variables.scss";
 
+#top {
+  margin-top: -2em;
+  max-height: 145px;
+
+  &.slim {
+    max-height: 115px;
+  }
+}
+
 .page-logo {
     width: 100%;
     margin-bottom: 10px;
@@ -14,9 +23,13 @@
   }
 
   .car-info {
-    top: 45px;
+    top: 35px;
     position: relative;
     font-size: 16px;
+
+    &.slim {
+      top: 20px;
+    }
 
     .plan-comparison-link {
       color: $secondary-color;
@@ -24,15 +37,19 @@
     }
 
     .maker {
-      text-transform: capitalize;
+      text-transform: uppercase;
       font-size: 80%;
       color: #627d7d;
     }
 
 
+    .displayType {
+      font-size: 80%;
+      color: #627d7d;
+    }
+
     .alert-link {
       font-weight: 400;
-      text-transform: uppercase;
       font-size: 70%;
       color: red;
     }

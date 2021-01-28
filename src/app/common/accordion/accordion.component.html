@@ -2,7 +2,7 @@
     <mat-expansion-panel *ngIf="disabled" class = "drop panel-container" disabled>
         <mat-expansion-panel-header class = "drop panel-header">
             <mat-panel-title #drawerToggle>
-                <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled , 'error': error, 'locked ': locked}"> {{step}}  </span> <span class="title">{{title}}</span> 
+                <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled , 'error': error, 'locked ': locked}"> {{step}}  </span> <span class="title" [class.error-text]="error">{{title}}</span> 
             </mat-panel-title>
             <mat-panel-description class = "drop">
                

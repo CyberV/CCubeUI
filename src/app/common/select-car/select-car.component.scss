@@ -10,6 +10,24 @@
 .maker-row {
     padding-left:0;
     padding-right:0;
+
+    .maker-row-content {
+        .col-5, .col-7 {
+            //top: 12px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+    }
+}
+
+.model-row {
+    .model-row-content {
+        .col-6, .col-7 {
+            //top: 12px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+    }
 }
 .panel-models {
     padding-left: 30px;
@@ -30,6 +48,7 @@
     margin-top: 10px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    padding-bottom: 0;
 
     // @media screen and (max-width:768px){
     //     min-height: 100px;
@@ -47,7 +66,6 @@
     .image-row {
         padding-right: 0;
         padding-left: 10px;
-        top: 12px;
     }
 
     &:hover {
@@ -56,10 +74,22 @@
         }
     }
 
-    .card-title {
-        margin-top: 2em !important;
-        font: 500 calc(18px * 0.83)/20px Roboto, "Helvetica Neue", sans-serif !important;
+    .model {
+        .card-title {
+            margin-top: 1em !important;
+        }
     }
+
+    .card-title {
+        margin-top: 2em ;
+        font: 500 calc(18px * 0.83)/20px !important;
+        font-size: 16px;
+        color: gray;
+    }
+}
+
+.top-1 {
+    margin-top: 1em !important;
 }
 
 

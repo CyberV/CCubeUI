@@ -16,6 +16,7 @@ export class BookDemoComponent implements OnInit {
   name: any;
   location: any;
   booked:any;
+  details:any;
 
   constructor(
     private userService: UserService,
@@ -24,6 +25,7 @@ export class BookDemoComponent implements OnInit {
   ) {
     this.compact = false;
     this.booked = false;
+    this.details = {};
 
     this.phone = "";
     this.name = "";
@@ -32,13 +34,17 @@ export class BookDemoComponent implements OnInit {
     };
   }
 
+  clearDemo() {
+    localStorage.setItem('demoBooked', null);
+  }
+
   ngOnInit() {
     let booked = localStorage.getItem('demoBooked');
 
     if (booked) {
       booked = JSON.parse(booked);
-      this.booked = booked;
-
+      this.booked = true;
+      this.details = booked;
     }
   }
 
@@ -60,7 +66,10 @@ export class BookDemoComponent implements OnInit {
       if (response.success) {
         alert('Demo Request Submitted Successfully! Our team will soon be in touch.');
         sessionStorage.setItem('forDemo', 'null');
-        localStorage.setItem('demoBooked', 'true');
+        localStorage.setItem('demoBooked', JSON.stringify({
+          car: this.carService.getCurrentCar(),
+          date: new Date()
+        }));
         window.location.reload();
       } else {
         alert(response.errorMsg || response.error.msg || response.error)

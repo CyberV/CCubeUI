@@ -10,6 +10,7 @@ import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 import { AccordionComponent } from 'app/common/accordion/accordion.component';
 import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
+import { CheckoutDetailsComponent } from 'app/common/cehckout-details/cehckout-details.component';
 
 @Component({
   selector: 'app-checkout',
@@ -23,6 +24,7 @@ export class CheckoutComponent implements OnInit {
 
   carMismatch: boolean;
   carIdentified: boolean;
+  availableCoupons: any;
 
   //current Order
   order: any;
@@ -40,7 +42,7 @@ export class CheckoutComponent implements OnInit {
   selectedAddon: any;
   selectedAdhoc: any;
   blockedAddons: any;
-
+  netPayable:any;
 
   currentUser: any;
   currentLocation: any;
@@ -52,11 +54,14 @@ export class CheckoutComponent implements OnInit {
   mode: any;
 
   isUnlisted: boolean;
+  appliedCoupons:any;
 
 
   page: string;
   savedLocation: any;
+  discount: any;
 
+  @ViewChildren('detailsComp') detailsComp:QueryList<CheckoutDetailsComponent>;
   @ViewChildren('drawerCar') drawerCar: QueryList<AccordionComponent>;
   @ViewChildren('drawerLocation') drawerLocation: QueryList<AccordionComponent>;
   @ViewChildren('drawerTime') drawerTime: QueryList<AccordionComponent>;
@@ -77,6 +82,7 @@ export class CheckoutComponent implements OnInit {
     this.carMismatch = false;
     this.carIdentified = false;
     this.page = '1';
+    this.netPayable = 0;
     this.retryAddon = false;
     this.loading = false;
     this.updatedCarDetails = {};
@@ -90,6 +96,8 @@ export class CheckoutComponent implements OnInit {
     this.includedAddons = [];
     this.includedAdhocs = [];
     this.blockedAddons = [];
+    this.availableCoupons = [];
+    this.appliedCoupons = [];
     this.mode = {};
     this.isUnlisted = false;
     this.savedLocation = {
@@ -113,6 +121,15 @@ export class CheckoutComponent implements OnInit {
 
     this.step2Ready = false;
     this.step3Ready = false;
+    this.discount = {};
+  }
+
+  applyDiscount(discountData) {
+    this.discount = {
+      discount: discountData.discount,
+      coupon: discountData.coupon
+    };
+    this.appliedCoupons = [discountData.coupon];
   }
 
   ngOnInit() {
@@ -185,6 +202,7 @@ export class CheckoutComponent implements OnInit {
       mode: this.mode,
       addons: order.addons,
       adhocs: order.adhocs,
+      discount: order.discount,
       info: order.info,
       total: order.total,
       carAlreadyActive: carAlreadyActive,
@@ -248,9 +266,15 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  onAddonSelected(addon) {
-    this.includedAddons = this.includedAddons.some((a) => a.name == addon.name) ? this.planService.excludeAddon(addon) : this.planService.includeAddon(addon);
-    this.refreshCarAndPlans();
+  onAddonSelected(addon, bypass = false) {
+    if (!bypass)
+    bypass = this.includedAddons.some((a) => a.name == addon.name);
+    if (!bypass && (addon.code == 'FBW' || addon.code == 'WASH_DEEP')) {
+       this.openAddon(addon, this.includedAddons.some((a) => a.name == addon.name));
+    } else {
+      this.includedAddons = this.includedAddons.some((a) => a.name == addon.name) ? this.planService.excludeAddon(addon) : this.planService.includeAddon(addon);
+      this.refreshCarAndPlans();
+    }
   }
 
   refreshCarAndPlans() {
@@ -296,25 +320,32 @@ export class CheckoutComponent implements OnInit {
       this.forRenew = !!this.selectedPlan.forRenew;
     }
 
+    let order = this.planService.getCurrentOrder(); 
+    if (order && order.discount) {
+      this.discount = order.discount;
+    }
     this.generateOrder();
 
 
   }
 
-  async openAddon(addon) {
+  async openAddon(addon, added = false) {
     const modal = await this.modalController.create({
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
       componentProps: {
         addon: addon,
+        purchased: this.includedAddons.some((a) => a.name == addon.name),
         showClose: true
       }
     });
     await modal.present();
 
-    modal.onDidDismiss().then((data) => {
-
-
+    modal.onDidDismiss().then((data:any) => {
+      console.log('Received Data from aDdon modal on close', data);
+      if (data && data.data &&  data.data.addon) {
+        this.onAddonSelected(data.data.addon, true);
+      }
 
     });
   }
@@ -531,6 +562,25 @@ export class CheckoutComponent implements OnInit {
     switch (this.context) {
       case 'checkout': {
         this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc ? 'Service' : 'Addon')));
+        this.loginService.getCouponsForUser().subscribe((res:any) => {
+          this.availableCoupons = res.success ? res.data : [];
+          this.netPayable = this.detailsComp.first.getTotalPayable();
+          let coupon = this.planService.getAppliedCoupon();
+          this.appliedCoupons = coupon ?  [coupon] : [];
+          if (coupon) {
+            let dscnt = 0;
+            if (coupon.unit == 'percent') {
+              dscnt = Math.floor(this.netPayable * (coupon.value/100));
+            } else {
+              dscnt = coupon.value;
+            }
+            this.discount = {
+              discount: dscnt,
+              coupon:coupon
+            }
+          }
+
+        })
         break;
       }
       case 'confirm': {
@@ -549,6 +599,12 @@ export class CheckoutComponent implements OnInit {
     }, 200);
   }
 
+  onRemoveCoupon(coupon) {
+    this.planService.setAppliedCoupon(null);
+    this.discount = {};
+    this.appliedCoupons = [];
+  }
+
   generateOrder() {
     let plan = !!this.selectedPlan;
     let addon = !!(this.includedAddons && this.includedAddons.length);
@@ -564,6 +620,7 @@ export class CheckoutComponent implements OnInit {
       addons: this.includedAddons,
       adhocs: this.includedAdhocs,
       plan: this.planService.getSelectedPlan(),
+      discount: this.discount,
       car: this.selectedCar
     };
 

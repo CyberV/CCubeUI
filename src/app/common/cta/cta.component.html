@@ -1,8 +1,13 @@
+<div class="blanket" *ngIf="sticky">
+
+</div>
 <div class="row">
+
   <div class="col-12">
     <button type="button"
         [disabled]="disabled" 
         [ngClass]="{
+          'halfWidth': halfWidth,
           'btn cta btn-lg btn-block': true ,
         'btn-primary' : !outline,
         'btn-main' : sticky,

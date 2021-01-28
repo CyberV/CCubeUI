@@ -57,6 +57,11 @@
             color: $secondary-color;
           }
 
+          &.full-width {
+            width: 135px !important;
+            float: left;
+          }
+
       }
 
         .car-box {

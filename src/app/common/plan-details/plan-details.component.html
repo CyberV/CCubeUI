@@ -22,13 +22,20 @@
       <mat-expansion-panel class = "drop" id="{{feature.code}}"  *ngFor="let feature of currentFeatures" [expanded]="feature.code == activeFeature" >
         <mat-expansion-panel-header class = "drop">
           <mat-panel-title>
-              {{feature.name}}
+            <div class="row">
+              <div class="col-12"> <span class="feature">{{feature.name}}</span></div>
+              <div class="col-12"><span class="frequency">({{feature.frequency}})</span></div>
+              
+               
+            </div>
+            
+            
           </mat-panel-title>
           <mat-panel-description class = "drop">
               
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p class="frequency">{{feature.frequency}}</p>
+        
 
         {{feature.description}} 
        

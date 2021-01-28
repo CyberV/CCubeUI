@@ -21,7 +21,7 @@
             {{ productLabel}}
           </div>
           <div class="col-3 ">
-            Type
+           
           </div>
           <div class="col-4 --no-padding-left text-center">
             Amount
@@ -32,7 +32,7 @@
               {{ productName}}
           </div>
           <div class="col-3 body-type --no-padding-left">
-            {{car.bodyType}}
+           
           </div>
           <div class="col-4 text-center">
             <span Rs>{{ productPrice}} </span>
@@ -59,7 +59,7 @@
         <div *ngIf="car.regNo" class="row content-row">
           <div class="col-12">
             <ion-icon name="car-sport-outline" class="vertical-center-text"></ion-icon>
-            <div class="vertical-center-text">{{car.regNo | uppercase}} </div>
+            <div class="vertical-center-text carRegNo"><span>{{regNo.pre | uppercase}}</span><span>{{regNo.mid | uppercase}}</span><span>{{regNo.post | uppercase}}</span></div>
           </div>
         </div>
 
@@ -137,6 +137,12 @@
               </ion-item>
             </ion-list>
           </cc-accordion>
+
+          <div class="row" [style.marginTop.em]="1"  *ngIf="discount.discount > 0">
+              <div class="col-6">Coupon Applied - {{discount.coupon.name}}</div>
+              <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div>
+              <div class="col-4 text-center float-right"> <span class="discount-value"> - <span Rs>{{ discount.discount}}</span> </span></div>
+            </div>
         <cc-accordion [title]="addon && !plan? 'Addon Details' : 'Plan Details'" [compact]="true">
           <plan-details *ngIf="plan" [plan]="plan" [compact]="true"></plan-details>
           <addon-details *ngIf="!plan && addon" [addon]="addon"></addon-details>
@@ -149,6 +155,8 @@
         <div class="col-4 text-center"> <span> &#8377; {{ getTotalPayable()}}</span></div>
         <div class="col-8 tax-row">(Inclusive of all taxes)</div>
       </div>
+
+      
     </div>
   </mat-card>
 </div>

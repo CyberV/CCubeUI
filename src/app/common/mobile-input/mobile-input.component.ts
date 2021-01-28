@@ -63,6 +63,10 @@ export class MobileInputComponent implements OnInit {
     this.enterKey.emit();
   }
 
+  clearText() {
+    this.onPhoneChange("");
+  }
+
   focus() {
     let inp:any = this.phoneInput;
 
