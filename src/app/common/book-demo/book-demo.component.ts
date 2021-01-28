@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
 import { CarService } from 'app/services/car.service';
@@ -11,6 +11,8 @@ import { CarService } from 'app/services/car.service';
 export class BookDemoComponent implements OnInit {
 
   @Input() compact: boolean;
+
+  @ViewChildren('bookAccordion') bookAccordion : QueryList<BookDemoComponent>;
 
   phone: any;
   name: any;
@@ -36,6 +38,7 @@ export class BookDemoComponent implements OnInit {
 
   clearDemo() {
     localStorage.setItem('demoBooked', null);
+    window.location.reload();
   }
 
   ngOnInit() {
@@ -43,8 +46,16 @@ export class BookDemoComponent implements OnInit {
 
     if (booked) {
       booked = JSON.parse(booked);
-      this.booked = true;
-      this.details = booked;
+
+      if (booked) {
+        this.booked = true;
+        this.details = booked;
+      } else {
+        this.booked = false;
+      }
+
+    } else {
+      this.booked = false;
     }
   }
 

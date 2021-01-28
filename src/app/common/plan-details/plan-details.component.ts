@@ -39,6 +39,11 @@ export class PlanDetailsComponent implements OnInit {
 
   async ngOnInit() {
 
+
+
+  }
+
+  async ngOnChanges(changes) {
     if (!(this.features && this.features.length > 0)) {
       this.features = (await planData()).plansList.features;
     }
@@ -49,20 +54,16 @@ export class PlanDetailsComponent implements OnInit {
         this.currentFeatures.push(this.features.filter((ftr) => ftr.code === feature)[0]);
       });
     }
-
-  }
-
-  ngOnChanges(changes) {
   }
 
   ngAfterViewInit() {
-    if (this.activeFeature) {
-      console.log('Ready to Show feature', this.activeFeature);
-      setTimeout(()=> {
-        scrollElementToTop($('#' + this.activeFeature)[0]);
+    // if (this.activeFeature) {
+    //   console.log('Ready to Show feature', this.activeFeature);
+    //   setTimeout(()=> {
+    //     scrollElementToTop($('#' + this.activeFeature)[0]);
 
-      }, 1000);
-    }
+    //   }, 1000);
+    // }
   }
 
 

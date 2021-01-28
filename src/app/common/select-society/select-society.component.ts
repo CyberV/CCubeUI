@@ -125,12 +125,16 @@ export class SelectSocietyComponent implements OnInit {
 
     setTimeout(()=> {
 
-      if (!this.isSelected) {
+      if (!this.isSelected && this.select.length > 0 && this.select != 'Other') {
         this.select = this.society;
         this.isSelected = true;
       }
     }, 100);
 
+  }
+
+  clearText() {
+    this.onChange("");
   }
 
   onChange(key) {

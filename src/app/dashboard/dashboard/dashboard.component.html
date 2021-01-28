@@ -1,5 +1,6 @@
 <selected-car *ngIf="currentCar && isCarSelected" [car]="currentCar" (changeCar)="resetCar()"></selected-car>
-<book-demo></book-demo>
+
+<ads-list></ads-list>
   <div class="row">
     <div class="col-md-6 col-xs-12" [class.col-md-12]="isCarSelected">
 
@@ -16,6 +17,7 @@
           <addon-slider  [bodyType]="currentCar.bodyType" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelect($event)" (showDetails)="openAddon($event)"></addon-slider>
           <adhoc-slider  [bodyType]="currentCar.bodyType" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelect($event)"></adhoc-slider>
 
+          <book-demo></book-demo>
 
         </ng-container>
 

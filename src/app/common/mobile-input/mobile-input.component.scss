@@ -12,7 +12,9 @@
         border: none;
         border-bottom: 1px solid $primary-color;
         border-radius: 0;
+        height: 25px;
         background: transparent;
+        text-transform: capitalize;
         color: $bg-black;
     }
 
@@ -57,7 +59,7 @@
 
     span {
         border: none;
-        border-bottom: 1px solid $primary-color;
+        //border-bottom: 1px solid $primary-color;
         background: transparent;
         font-weight: bold;
         border-radius: 0;

@@ -13,6 +13,7 @@ export class CheckoutConfirmationComponent implements OnInit {
   hasAddons:boolean;
   hasAdhocs:boolean;
   totalAmount:any;
+  address:string;
 
   mode:any;
 
@@ -33,6 +34,12 @@ export class CheckoutConfirmationComponent implements OnInit {
       this.hasAdhocs = !!(this.details.adhocs && this.details.adhocs.length);
       this.totalAmount = this.details.total;
       this.mode = this.details.mode;
+
+      if (this.details.location) {
+        let loc = this.details.location;
+        this.address = loc.houseNo + ", " + (loc.block ? loc.block + ", " : "") + loc.society + ", " + loc.city + ', ' + loc.state;
+      }
+
   }
   }
 
@@ -42,6 +49,12 @@ export class CheckoutConfirmationComponent implements OnInit {
         this.hasAdhocs = !!(this.details.adhocs && this.details.adhocs.length);
         this.totalAmount = this.details.total;
         this.mode = this.details.mode;
+
+        if (this.details.location) {
+          let loc = this.details.location;
+          this.address = loc.houseNo + ", " + (loc.block ? loc.block + ", " : "") + loc.society + ", " + loc.city + ', ' + loc.state;
+        }
+      
     }
   }
 

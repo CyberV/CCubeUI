@@ -1,5 +1,11 @@
 @import 'src/variables.scss';
 
+.clear-text {
+    right: -10px;
+    position: absolute;
+    z-index: 10;
+}
+
 .mobile-input {
     margin-top: 1em;
     label {
@@ -10,9 +16,10 @@
 
     input {
         border: none;
-        border-bottom: 1px solid #bcbcbc;
+        border-bottom: 1px solid $primary-color;
         border-radius: 0;
         background: transparent;
+        height: 25px;
         color: $bg-black;
     }
 
@@ -31,6 +38,7 @@
 
     .mandatory-link {
         color: $secondary-color;
+        border-bottom: none;
     }
 
 

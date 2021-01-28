@@ -104,13 +104,13 @@
     "typescript": "^3.8.3"
   },
   "browser": {
-      "crypto": false,
-      "stream": false,
-      "http": false,
-      "https":false,
-      "net": false,
-      "path": false,
-      "tls": false  
+    "crypto": false,
+    "stream": false,
+    "http": false,
+    "https": false,
+    "net": false,
+    "path": false,
+    "tls": false
   },
   "description": "Build a platform agnostic app that runs on iOS, Android, and the web - with just one codebase",
   "cordova": {

@@ -178,6 +178,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   async showConfirmation() {
+    this.generateOrder();
     this.currentUser = this.userService.getCurrentUser();
     let order = this.planService.getCurrentOrder();
     let allPayments = JSON.parse(sessionStorage.getItem('allPayments'));
@@ -202,6 +203,7 @@ export class CheckoutComponent implements OnInit {
       mode: this.mode,
       addons: order.addons,
       adhocs: order.adhocs,
+      location: order.location,
       discount: order.discount,
       info: order.info,
       total: order.total,
@@ -380,15 +382,20 @@ export class CheckoutComponent implements OnInit {
         this.step3Ready = true;
   
         setTimeout(() => {
+          if(!this.verificationComplete) {
+            this.drawerLocation.first.toggle();
           this.drawerTime.first.toggle();
+          }
+          
         }, 500);
       }, 200);
     } else {
       setTimeout(() => {
         this.step3Ready = true;
-        this.drawerLocation.first.toggle();
+        
   
         setTimeout(() => {
+          this.drawerLocation.first.toggle();
           this.drawerTime.first.toggle();
         }, 500);
       }, 200);
@@ -620,6 +627,7 @@ export class CheckoutComponent implements OnInit {
       addons: this.includedAddons,
       adhocs: this.includedAdhocs,
       plan: this.planService.getSelectedPlan(),
+      location: this.savedLocation,
       discount: this.discount,
       car: this.selectedCar
     };

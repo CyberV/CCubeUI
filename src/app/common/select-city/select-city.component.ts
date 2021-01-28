@@ -81,6 +81,10 @@ export class SelectCityComponent implements OnInit {
     }
   }
 
+  clearText() {
+    this.onChange("");
+  }
+
   onEnterKey(e) {
     this.enterKey.emit();
   }
@@ -99,7 +103,7 @@ export class SelectCityComponent implements OnInit {
 
     setTimeout(()=> {
 
-      if (!this.isSelected) {
+      if (!this.isSelected && this.select.length > 0) {
         this.selectCity(this.city);
       }
     }, 100);

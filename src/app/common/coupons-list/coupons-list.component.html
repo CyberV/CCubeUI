@@ -1,7 +1,7 @@
 <div [class.--padding-x]="!slim">
 
 
-<cc-accordion [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied'">
+<cc-accordion [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied : ' + (appliedCoupons[0].unit=='percent' ? '' : 'Rs ') +  appliedCoupons[0].value + (appliedCoupons[0].unit=='percent' ? ' %' : '') + ' OFF !'" #couponAccordion>
   <heading *ngIf="availableCoupons.length == 0" text="No Coupons Available Today!"></heading>
   <ion-list class="list-notif">
     <ion-item-group>
@@ -22,7 +22,7 @@
               <ion-label>
                 <img src="assets/icons/discount.png" />
                 <div class="discount-label">
-                  <span *ngIf="item.unit!='percent'" Rs [rscolor]="'white'">{{item.value}} OFF !</span>
+                  <span *ngIf="item.unit!='percent'"> &#8377; {{item.value}} OFF !</span>
                   <span *ngIf="item.unit=='percent'">{{item.value}} % OFF</span>
                 </div>
               </ion-label>

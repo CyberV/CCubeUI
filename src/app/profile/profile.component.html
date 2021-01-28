@@ -17,6 +17,11 @@
                   
                 </ul>
 
+                <mobile-input [readonly]="true" name="Referral Code" [(value)]="currentUser.refererCode"> </mobile-input>
+                <br/>
+                <span>Share this Referral code with your friends and Earn Great Rewards !</span>
+
+
             </div>
             <div class="card-body">
               <cta text="Log Out" (action)="logOutUser()"></cta>

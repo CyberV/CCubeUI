@@ -14,10 +14,20 @@
               </div>
             </div>
           </li>
+          <li class="list-group-item" *ngIf="address">
+            <div class="row">
+              <div class="col-6">
+                Customer Address
+              </div>
+              <div class="col-6">
+                {{address}}
+              </div>
+            </div>
+          </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-6">
-                  Car Registration Number
+                  Car Number
               </div>
               <div class="col-6">
                   {{details.car.regNo | uppercase}}

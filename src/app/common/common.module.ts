@@ -75,6 +75,7 @@ import { RescheduleComponent } from './reschedule/reschedule.component';
 import { BookDemoComponent } from './book-demo/book-demo.component';
 import { CouponsListComponent } from './coupons-list/coupons-list.component';
 import { DocumentListComponent } from './document-list/document-list.component';
+import { AdsListComponent } from './ads-list/ads-list.component';
 
 
 
@@ -135,6 +136,7 @@ import { DocumentListComponent } from './document-list/document-list.component';
     BookDemoComponent,
     CouponsListComponent,
     DocumentListComponent,
+    AdsListComponent,
 
     // Directives
     RsDirective,
@@ -215,6 +217,7 @@ import { DocumentListComponent } from './document-list/document-list.component';
     BookDemoComponent,
     CouponsListComponent,
     DocumentListComponent,
+    AdsListComponent,
     
     //Directives
 

@@ -5,6 +5,10 @@
       <ng-container *ngIf="!disabled"> 
         <input #inpSociety class="form-control --no-padding" (keyup.enter)="onEnterKey($event)" (click)="focus()" type="text" aria-label="society" matInput name="society"
         [ngModel]="select" (ngModelChange)="onChange($event)" (blur)="onBlur($event)" [matAutocomplete]="auto">
+        <div *ngIf="select && select.length > 0 && select != 'Select Society'" class="input-group-append clear-text" (click)="clearText()">
+          <!-- <div class="input-group-append clear-text" (click)="clearText()"> -->
+          <ion-icon name="close-outline"></ion-icon>
+      </div>
       <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption="true">
         <mat-option *ngFor="let option of filteredSocieties" [value]="option" (click)="selectSociety(option)">
           {{option}}

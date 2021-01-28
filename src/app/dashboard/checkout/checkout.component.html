@@ -144,7 +144,7 @@
                   
    -->
 
-            <cta text="Checkout" [disabled]="!verificationComplete" [sticky]="true" [loading]="loading" (action)="showConfirmation()"></cta>
+            <cta text="Checkout" *ngIf="verificationComplete" [sticky]="true" [loading]="loading" (action)="showConfirmation()"></cta>
 
           </div>
 

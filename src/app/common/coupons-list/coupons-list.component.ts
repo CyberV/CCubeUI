@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, QueryList, ViewChildren } from '@angular/core';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
+import { AccordionComponent } from '../accordion/accordion.component';
+import { BookDemoComponent } from '../book-demo/book-demo.component';
 
 @Component({
   selector: 'coupons-list',
@@ -17,6 +19,9 @@ export class CouponsListComponent implements OnInit {
   loading: any;
 
   @Output() discount = new EventEmitter();
+
+  @ViewChildren('couponAccordion') couponAccordion : QueryList<AccordionComponent>;
+
 
   get filteredCoupons() {
     if (this.appliedCoupons && this.appliedCoupons.length) {
@@ -81,6 +86,8 @@ export class CouponsListComponent implements OnInit {
             discount: response.data.discount,
             coupon: coupon
           });
+
+          this.couponAccordion.first.toggle();
       }
     })
   }

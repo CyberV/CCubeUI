@@ -42,7 +42,9 @@ export class LoginFormComponent implements OnInit {
   public userExists: boolean;
   public forgotPassword: boolean;
   existingUser:boolean;
+  
 
+  @ViewChildren('inpRef') inpRef: QueryList<HTMLElement>;
   @ViewChildren('inpEmail') inpEmail: QueryList<HTMLElement>;
   @ViewChildren('inpCity') inpCity: QueryList<HTMLElement>;
   @ViewChildren('inpPass') inpPass: QueryList<HTMLElement>;
@@ -225,6 +227,7 @@ export class LoginFormComponent implements OnInit {
   focusTo(emt) {
 
     this.allInputs = {
+      inpRef: this.inpRef.first,
       inpEmail: this.inpEmail.first,
       inpCity: this.inpCity.first,
       inpPass: this.inpPass.first,
