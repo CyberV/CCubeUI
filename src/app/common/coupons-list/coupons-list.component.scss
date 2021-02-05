@@ -47,10 +47,12 @@
 
         &.not-eligible {
             pointer-events: none;
-            opacity: 0.8;
+            opacity: 0.6;
 
             .stand-out {
                 opacity: 1;
+                font-weight: bold;
+                font-size: 14px;
                 pointer-events: all;
 
             }
