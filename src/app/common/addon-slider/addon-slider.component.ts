@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CarService } from 'app/services/car.service';
 import { Router } from '@angular/router';
 import { PlanService } from 'app/services/plan.service';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'addon-slider',
@@ -20,6 +21,8 @@ export class AddonSliderComponent implements OnInit {
   @Output() showDetails = new EventEmitter();
   @Input() active:boolean;
   @Input() plan:any;
+
+  @ViewChild('adnSlider')adnSlider : IonSlides;
 
   isSelected(addon) {
     return this.addonMap.indexOf(addon.code) > -1;
@@ -53,9 +56,12 @@ export class AddonSliderComponent implements OnInit {
     spaceBetween: 20,
   };
 
+  showAnimation:boolean;
+
   addonMap:any;
   blockedMap:any;
   dateMap:any;
+
 
   constructor(
     private carService:CarService,
@@ -74,12 +80,25 @@ export class AddonSliderComponent implements OnInit {
     this.blockedMap = [];
     this.subscriptionAddons = [];
     this.dateMap = [];
+    this.showAnimation = false;
    }
 
   ngOnInit() {}
 
   sendShowDetails(addon) {
     this.showDetails.emit(addon);
+  }
+
+  ngAfterViewInit() {
+    this.animate();
+  }
+
+  animate() {
+    this.showAnimation = false;
+    setTimeout(()=> {
+      this.showAnimation = true;
+      this.adnSlider.startAutoplay()
+    }, 200);
   }
 
   ngOnChanges(changes) {
@@ -99,6 +118,9 @@ export class AddonSliderComponent implements OnInit {
     }
 
     if (changes.selectedAddons && this.selectedAddons) {
+      if (this.adnSlider) {
+        this.adnSlider.stopAutoplay();
+      }
       this.addonMap = [];
       this.addonMap = this.selectedAddons.map((addon) => {
         return addon.code;

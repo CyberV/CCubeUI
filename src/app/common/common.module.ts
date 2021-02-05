@@ -76,6 +76,7 @@ import { BookDemoComponent } from './book-demo/book-demo.component';
 import { CouponsListComponent } from './coupons-list/coupons-list.component';
 import { DocumentListComponent } from './document-list/document-list.component';
 import { AdsListComponent } from './ads-list/ads-list.component';
+import { ReferEarnComponent } from './refer-earn/refer-earn.component';
 
 
 
@@ -137,6 +138,7 @@ import { AdsListComponent } from './ads-list/ads-list.component';
     CouponsListComponent,
     DocumentListComponent,
     AdsListComponent,
+    ReferEarnComponent,
 
     // Directives
     RsDirective,
@@ -218,6 +220,7 @@ import { AdsListComponent } from './ads-list/ads-list.component';
     CouponsListComponent,
     DocumentListComponent,
     AdsListComponent,
+    ReferEarnComponent,
     
     //Directives
 

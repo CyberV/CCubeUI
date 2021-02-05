@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import carsList from 'assets/carslist.json';
 import { AccordionComponent } from '../accordion/accordion.component';
+import {scrollElementToTop} from 'app/util/util';
 
 
 @Component({
@@ -95,9 +96,17 @@ export class SelectCarComponent implements OnInit {
         this.modelDrawer.drawerToggle.nativeElement.scrollIntoView();
       }, 500)
     }, 500);
+   }
 
+   onModelToggle(isOpen) {
+    console.log('Model Opened', isOpen);
+    // this.maker
+    // scrollElementToTop()
+   }
 
-  
+   onMakerToggle(isOpen) {
+    console.log('Maker Opened', isOpen);
+
    }
 
    selectModel(mdl) {

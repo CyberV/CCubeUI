@@ -11,6 +11,7 @@ import { PlanService } from 'app/services/plan.service';
 import { AccordionComponent } from 'app/common/accordion/accordion.component';
 import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 import { CheckoutDetailsComponent } from 'app/common/cehckout-details/cehckout-details.component';
+import { scrollElementToTop, scrollToBottom } from 'app/util/util';
 
 @Component({
   selector: 'app-checkout',
@@ -42,7 +43,7 @@ export class CheckoutComponent implements OnInit {
   selectedAddon: any;
   selectedAdhoc: any;
   blockedAddons: any;
-  netPayable:any;
+  netPayable: any;
 
   currentUser: any;
   currentLocation: any;
@@ -54,14 +55,14 @@ export class CheckoutComponent implements OnInit {
   mode: any;
 
   isUnlisted: boolean;
-  appliedCoupons:any;
+  appliedCoupons: any;
 
 
   page: string;
   savedLocation: any;
   discount: any;
 
-  @ViewChildren('detailsComp') detailsComp:QueryList<CheckoutDetailsComponent>;
+  @ViewChildren('detailsComp') detailsComp: QueryList<CheckoutDetailsComponent>;
   @ViewChildren('drawerCar') drawerCar: QueryList<AccordionComponent>;
   @ViewChildren('drawerLocation') drawerLocation: QueryList<AccordionComponent>;
   @ViewChildren('drawerTime') drawerTime: QueryList<AccordionComponent>;
@@ -205,6 +206,7 @@ export class CheckoutComponent implements OnInit {
       adhocs: order.adhocs,
       location: order.location,
       discount: order.discount,
+      bonus: order.bonus,
       info: order.info,
       total: order.total,
       carAlreadyActive: carAlreadyActive,
@@ -270,9 +272,9 @@ export class CheckoutComponent implements OnInit {
 
   onAddonSelected(addon, bypass = false) {
     if (!bypass)
-    bypass = this.includedAddons.some((a) => a.name == addon.name);
+      bypass = this.includedAddons.some((a) => a.name == addon.name);
     if (!bypass && (addon.code == 'FBW' || addon.code == 'WASH_DEEP')) {
-       this.openAddon(addon, this.includedAddons.some((a) => a.name == addon.name));
+      this.openAddon(addon, this.includedAddons.some((a) => a.name == addon.name));
     } else {
       this.includedAddons = this.includedAddons.some((a) => a.name == addon.name) ? this.planService.excludeAddon(addon) : this.planService.includeAddon(addon);
       this.refreshCarAndPlans();
@@ -322,7 +324,7 @@ export class CheckoutComponent implements OnInit {
       this.forRenew = !!this.selectedPlan.forRenew;
     }
 
-    let order = this.planService.getCurrentOrder(); 
+    let order = this.planService.getCurrentOrder();
     if (order && order.discount) {
       this.discount = order.discount;
     }
@@ -343,9 +345,9 @@ export class CheckoutComponent implements OnInit {
     });
     await modal.present();
 
-    modal.onDidDismiss().then((data:any) => {
+    modal.onDidDismiss().then((data: any) => {
       console.log('Received Data from aDdon modal on close', data);
-      if (data && data.data &&  data.data.addon) {
+      if (data && data.data && data.data.addon) {
         this.onAddonSelected(data.data.addon, true);
       }
 
@@ -377,23 +379,23 @@ export class CheckoutComponent implements OnInit {
       sessionStorage.setItem('userLocation', JSON.stringify(locationData));
     }
 
-    if(this.savedLocation && this.savedLocation.houseNo.length) {
+    if (this.savedLocation && this.savedLocation.houseNo.length) {
       setTimeout(() => {
         this.step3Ready = true;
-  
+
         setTimeout(() => {
-          if(!this.verificationComplete) {
+          if (!this.verificationComplete) {
             this.drawerLocation.first.toggle();
-          this.drawerTime.first.toggle();
+            this.drawerTime.first.toggle();
           }
-          
+
         }, 500);
       }, 200);
     } else {
       setTimeout(() => {
         this.step3Ready = true;
-        
-  
+
+
         setTimeout(() => {
           this.drawerLocation.first.toggle();
           this.drawerTime.first.toggle();
@@ -442,7 +444,7 @@ export class CheckoutComponent implements OnInit {
           this.carMismatch = false;
           this.step2Ready = true;
 
-          debugger;
+
 
           if (this.savedLocation && this.savedLocation.houseNo.length) {
             this.completeVerification();
@@ -476,6 +478,7 @@ export class CheckoutComponent implements OnInit {
           car: this.selectedCar,
           addons: this.includedAddons,
           adhocs: this.includedAdhocs,
+          bonusApplied: this.currentUser.referralBonusPending,
           location: this.currentLocation,
           officeTime: this.officeTime,
           startDate: +(new Date()),
@@ -569,21 +572,21 @@ export class CheckoutComponent implements OnInit {
     switch (this.context) {
       case 'checkout': {
         this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc ? 'Service' : 'Addon')));
-        this.loginService.getCouponsForUser().subscribe((res:any) => {
+        this.loginService.getCouponsForUser().subscribe((res: any) => {
           this.availableCoupons = res.success ? res.data : [];
           this.netPayable = this.detailsComp.first.getTotalPayable();
           let coupon = this.planService.getAppliedCoupon();
-          this.appliedCoupons = coupon ?  [coupon] : [];
+          this.appliedCoupons = coupon ? [coupon] : [];
           if (coupon) {
             let dscnt = 0;
             if (coupon.unit == 'percent') {
-              dscnt = Math.floor(this.netPayable * (coupon.value/100));
+              dscnt = Math.floor(this.netPayable * (coupon.value / 100));
             } else {
               dscnt = coupon.value;
             }
             this.discount = {
               discount: dscnt,
-              coupon:coupon
+              coupon: coupon
             }
           }
 
@@ -604,6 +607,11 @@ export class CheckoutComponent implements OnInit {
     setTimeout(() => {
       this.retryAddon = true;
     }, 200);
+  }
+
+  goToAddons() {
+    console.log('scroll ti bopptom');
+    scrollToBottom();
   }
 
   onRemoveCoupon(coupon) {
@@ -628,6 +636,7 @@ export class CheckoutComponent implements OnInit {
       adhocs: this.includedAdhocs,
       plan: this.planService.getSelectedPlan(),
       location: this.savedLocation,
+      bonus: this.currentUser.referralBonusPending,
       discount: this.discount,
       car: this.selectedCar
     };

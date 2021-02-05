@@ -1,6 +1,6 @@
 <ion-content>
   <div class="container-fluid">
-    <div class="row profile-content">
+    <div *ngIf="ready" class="row profile-content">
       <div class="offset-md-2 col-md-8">
         <div class="container">
 
@@ -17,11 +17,7 @@
                   
                 </ul>
 
-                <mobile-input [readonly]="true" name="Referral Code" [(value)]="currentUser.refererCode"> </mobile-input>
-                <br/>
-                <span>Share this Referral code with your friends and Earn Great Rewards !</span>
-
-
+                <refer-earn></refer-earn>
             </div>
             <div class="card-body">
               <cta text="Log Out" (action)="logOutUser()"></cta>
@@ -30,5 +26,6 @@
         </div>
       </div>
     </div>
+    <spinner *ngIf="!ready" color="blue"></spinner>
   </div>
 </ion-content>

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <mobile-input [labelOnly]="true" name="Select Your Car"></mobile-input>
-    <cc-accordion #makerDrawer [title]="makerLabel">
+    <cc-accordion #makerDrawer [title]="makerLabel" (onToggle)="onMakerToggle($event)">
       <mobile-input class="maker-search" [inputOnly]="true" type="text" placeholder="Search..." [(value)]="maker"
         (valueChange)="makerSelected = false; model=''; modelSelected = false; "></mobile-input>
       <div class="panel-makers row">
@@ -30,7 +30,7 @@
       </div>
     </cc-accordion>
 
-    <cc-accordion #modelDrawer *ngIf="makerSelected" [title]="modelLabel">
+    <cc-accordion #modelDrawer *ngIf="makerSelected" [title]="modelLabel"  (onToggle)="onModelToggle($event)">
       <mobile-input class="model-search" [inputOnly]="true" type="text" placeholder="Search..." [(value)]="model"
         (valueChange)="modelSelected = false"></mobile-input>
 

@@ -45,6 +45,18 @@
 
         }
 
+        &.not-eligible {
+            pointer-events: none;
+            opacity: 0.8;
+
+            .stand-out {
+                opacity: 1;
+                pointer-events: all;
+
+            }
+
+        }
+
         &.personal {
             box-shadow: 0 8px 6px -8px $primary-color;          
         }

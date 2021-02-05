@@ -126,6 +126,9 @@
   <spinner></spinner>
 </ng-container>
 
+
+<refer-earn [slim]="true"></refer-earn>
+
 <ng-container *ngIf="!loading && payments.length > 0" >
   <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" class="--padding-y" (upgradeNow)="handleUpgradePlan($event)"
     (showDetails)="showPlanDetails($event)"></upgrade-slider>

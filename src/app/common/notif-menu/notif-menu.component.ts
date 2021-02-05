@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from 'app/services/notification.service';
 import { AlertController, PopoverController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'notif-menu',
@@ -15,6 +16,7 @@ export class NotifMenuComponent implements OnInit {
   constructor(
     private notificationService:NotificationService,
     private alertController: AlertController,
+    private router: Router,
     private popoverController:PopoverController,
     private toastController: ToastController
     ) {
@@ -60,6 +62,9 @@ export class NotifMenuComponent implements OnInit {
       alert.onWillDismiss().then(()=> {
         if (data.action && data.action == 'refresh') {
           window.location.reload();
+        }
+        if (data.action && data.action == 'refer') {
+          this.router.navigate(['/profile']);
         }
         alert.cssClass = 'animate__animated  animate__fadeOut';
       });

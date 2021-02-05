@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'app/login/login.service';
 import { UserService } from 'app/services/user.service';
 import { HeaderService } from 'app/header.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-profile',
@@ -13,12 +14,15 @@ export class ProfileComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private userService:UserService,
-    private headerService:HeaderService
+    private headerService:HeaderService,
+    private socialSharing: SocialSharing
   ) {
     this.currentUser = null;
+    this.ready = false;
    }
 
   currentUser:any;
+  ready: boolean;
 
   context:string;
 
@@ -33,8 +37,38 @@ export class ProfileComponent implements OnInit {
     
   }
 
-  ionViewWillEnter() {
+  share() {
+    let d:any = localStorage.getItem('commonData');
+    if (d) {
+      d = JSON.parse(d);
+
+      d = d.config.filter((c) => c.name == 'APP_LINK');
+    }
+    var options = {
+      message: `Use my Referral Code "${this.currentUser.refererCode}" to earn exciting rewards!`, // not supported on some apps (Facebook, Instagram)
+      subject: 'the subject', // fi. for email
+      files: ['', ''], // an array of filenames either locally or remotely
+      url: d.value || 'www.ccubeco.com',
+      chooserTitle: 'Pick an app', // Android only, you can override the default share sheet title
+      // appPackageName: 'com.apple.social.facebook', // Android only, you can provide id of the App you want to share with
+      iPadCoordinates: '0,0,0,0' //IOS only iPadCoordinates for where the popover should be point.  Format with x,y,width,height
+    };
+    
+
+    this.socialSharing.shareWithOptions(options).then((res:any) => {
+      //alert(JSON.stringify(res));
+    })
+  }
+
+  async ionViewWillEnter() {
     this.context = 'profile';
+    this.ready = false;
+
+    let refreshed = await this.loginService.refreshUser(this.currentUser.phone);
+    if (refreshed) {
+      this.currentUser = refreshed;
+      this.ready = true;
+    }
   }
 
 }

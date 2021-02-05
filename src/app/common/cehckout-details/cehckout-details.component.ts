@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'checkout-details',
@@ -21,6 +22,8 @@ export class CheckoutDetailsComponent implements OnInit {
   @Output() removeAdhoc = new EventEmitter();
   @Output() removeAddon = new EventEmitter();
   @Output() removeCoupon = new EventEmitter();
+
+  user:any;
 
   get productName() {
     let {mode,plan,addon,adhoc} = this;
@@ -69,7 +72,8 @@ export class CheckoutDetailsComponent implements OnInit {
 
 
   constructor(
-    private planService: PlanService
+    private planService: PlanService,
+    private userService: UserService
   ) {
 
     this.upgradeSelected = false;
@@ -80,6 +84,8 @@ export class CheckoutDetailsComponent implements OnInit {
     this.mode = null;
     this.adhocPrice = 0;
     this.discount = {};
+
+    this.user = userService.getCurrentUser();
   }
 
   calculateDiscount() {
@@ -169,6 +175,10 @@ export class CheckoutDetailsComponent implements OnInit {
     let total = this.getOrderPrice();
     if (this.discount && this.discount.discount) {
       total -= this.discount.discount;
+    }
+
+    if (this.user.referralBonusPending && this.user.referralBonusPending > 0) {
+      total -= +(this.user.referralBonusPending);
     }
 
     return total;

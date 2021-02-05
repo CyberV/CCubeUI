@@ -29,7 +29,11 @@
   
               </checkout-details>
   
-              <coupons-list [slim]="true" [appliedCoupons]="appliedCoupons" [availableCoupons]="availableCoupons" [totalAmount]="netPayable" (discount)="applyDiscount($event)"></coupons-list>
+              <coupons-list [slim]="true" 
+                [appliedCoupons]="appliedCoupons" [availableCoupons]="availableCoupons" [totalAmount]="netPayable" 
+                (discount)="applyDiscount($event)"
+                (showAddons)="goToAddons()"
+                ></coupons-list>
              
   
               <addon-slider  [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)" (showDetails)="openAddon($event)"></addon-slider>

@@ -1,131 +1,145 @@
 <div class="card animate__animated animate__fadeIn">
 
   <div class="">
-      <heading [text]="details.isUnlisted ? '' : 'Please Confirm your details'" showClose="true"></heading>
-  <br/>
-      <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-6">
-                Customer Name
-              </div>
-              <div class="col-6">
-                {{details.userName}}
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="address">
-            <div class="row">
-              <div class="col-6">
-                Customer Address
-              </div>
-              <div class="col-6">
-                {{address}}
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-6">
-                  Car Number
-              </div>
-              <div class="col-6">
-                  {{details.car.regNo | uppercase}}
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-6">
-                Maker
-              </div>
-              <div class="col-6">
-                  {{details.car.maker}} 
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-6">
-                  Model
-              </div>
-              <div class="col-6">
-                {{details.car.model}}
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="mode && mode.plan">
-            <div class="row">
-              <div class="col-6">
-                  Selected {{mode.plan ? 'Plan':  (mode.addhoc ? 'Service' :'Addon')}}
-              </div>
-              <div class="col-6">
-                  {{mode.plan ? details.plan.name: (mode.addhoc ? details.info.adhocs : details.info.addons )}}
-              </div>
-            </div>
-          </li>
-          <li *ngIf="hasAddons" class="list-group-item">
-              <div class="row">
-                <div class="col-6">
-                    Addons Included
-                </div>
-                <div class="col-6">
-                    {{details.info.addons}}
-                </div>
-              </div>
-            </li>
-            <li *ngIf="hasAdhocs" class="list-group-item">
-                <div class="row">
-                  <div class="col-6">
-                      Services Included
-                  </div>
-                  <div class="col-6">
-                      {{details.info.adhocs}}
-                  </div>
-                </div>
-              </li>
-          <li *ngIf="details.plan && details.plan.forRenew" class="list-group-item">
-              <div class="row">
-                <div class="col-6">
-                    Period
-                </div>
-                <div class="col-6">
-                    {{details.plan.period}}
-                </div>
-              </div>
-            </li>
-            <li class="list-group-item" *ngIf="details.discount && details.discount.discount > 0">
-                <div class="row">
-                  <div class="col-6">
-                      Service Total :
-                  </div>
-                  <div class="col-6">
-                      <span Rs>{{details.discount.discount + totalAmount}}</span>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item" *ngIf="details.discount && details.discount.discount > 0">
-                  <div class="row">
-                    <div class="col-6">
-                        Discount :
-                    </div>
-                    <div class="col-6">
-                        <span Rs>{{details.discount.discount}}</span>
-                    </div>
-                  </div>
-                </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-6">
-                  Final Price :
-              </div>
-              <div class="col-6">
-                  <span Rs>{{totalAmount}}</span>
-              </div>
-            </div>
-          </li>
-      
-        </ul>
+    <heading [text]="details.isUnlisted ? '' : 'Please Confirm your details'" showClose="true"></heading>
+    <br />
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Customer Name
+          </div>
+          <div class="col-6">
+            {{details.userName}}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item" *ngIf="address">
+        <div class="row">
+          <div class="col-6">
+            Customer Address
+          </div>
+          <div class="col-6">
+            {{address}}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Car Number
+          </div>
+          <div class="col-6">
+            {{details.car.regNo | uppercase}}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Maker
+          </div>
+          <div class="col-6">
+            {{details.car.maker}}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Model
+          </div>
+          <div class="col-6">
+            {{details.car.model}}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item" *ngIf="mode && mode.plan">
+        <div class="row">
+          <div class="col-6">
+            Selected {{mode.plan ? 'Plan':  (mode.addhoc ? 'Service' :'Addon')}}
+          </div>
+          <div class="col-6">
+            {{mode.plan ? details.plan.name: (mode.addhoc ? details.info.adhocs : details.info.addons )}}
+          </div>
+        </div>
+      </li>
+      <li *ngIf="hasAddons" class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Addons Included
+          </div>
+          <div class="col-6">
+            {{details.info.addons}}
+          </div>
+        </div>
+      </li>
+      <li *ngIf="hasAdhocs" class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Services Included
+          </div>
+          <div class="col-6">
+            {{details.info.adhocs}}
+          </div>
+        </div>
+      </li>
+      <li *ngIf="details.plan && details.plan.forRenew" class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Period
+          </div>
+          <div class="col-6">
+            {{details.plan.period}}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item"
+        *ngIf="(details.discount && details.discount.discount > 0 ) || (details.bonus && details.bonus > 0)">
+        <div class="row">
+          <div class="col-6">
+            Service Total :
+          </div>
+          <div class="col-6">
+            <span Rs>{{details.discount.discount + totalAmount}}</span>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item" *ngIf="details.discount && details.discount.discount > 0">
+        <div class="row">
+          <div class="col-6">
+            Discount :
+          </div>
+          <div class="col-6">
+            <span Rs>{{details.discount.discount}}</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item" *ngIf="(details.bonus && details.bonus > 0)">
+        <div class="row">
+          <div class="col-6">
+            Referral Bonus :
+          </div>
+          <div class="col-6">
+            <span Rs>{{details.bonus}}</span>
+          </div>
+        </div>
+      </li>
+
+
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-6">
+            Final Price :
+          </div>
+          <div class="col-6">
+            <span Rs>{{totalAmount}}</span>
+          </div>
+        </div>
+      </li>
+
+    </ul>
   </div>
 
   <ng-container *ngIf="details.carAlreadyActive">
@@ -140,16 +154,18 @@
   </ng-container>
 
   <ng-container *ngIf="details.isUnlisted">
-      <heading text="We are currently not operational in your society." align="center"></heading>
-      <heading text="Our Sales team will soon be in touch to arrange a Demo in your Society." align="center"></heading>
-      <heading text="STAY SAFE" align="center" capitalize="true"></heading>
-      <heading text="BE HAPPY!" align="center" capitalize="true"></heading>
-      
-      <br/>
-      Reach out to us for a Real Time Update: <a  class="email-link" href="mailto:support@ccubeco.com">support@ccubeco.com</a>
+    <heading text="We are currently not operational in your society." align="center"></heading>
+    <heading text="Our Sales team will soon be in touch to arrange a Demo in your Society." align="center"></heading>
+    <heading text="STAY SAFE" align="center" capitalize="true"></heading>
+    <heading text="BE HAPPY!" align="center" capitalize="true"></heading>
 
-      <cta small="true" text="OK" (action)="dismissOnly()"></cta>
+    <br />
+    Reach out to us for a Real Time Update: <a class="email-link"
+      href="mailto:support@ccubeco.com">support@ccubeco.com</a>
+
+    <cta small="true" text="OK" (action)="dismissOnly()"></cta>
 
   </ng-container>
-  <cta *ngIf="!details.isUnlisted && !details.carAlreadyActive" text="Pay" halfWidth="true" sticky="true" (action)="dismissAndPay()"></cta>
-</div> 
+  <cta *ngIf="!details.isUnlisted && !details.carAlreadyActive" text="Pay" halfWidth="true" sticky="true"
+    (action)="dismissAndPay()"></cta>
+</div>

@@ -19,9 +19,17 @@ export class CarFormComponent implements OnInit {
   currentCar:any;
   showFileUploader:boolean;
 
+  isModelSelected:boolean;
+
   @Input() regNo: any;
   maker: string;
   model: string;
+  
+  get regError() {
+    let er = ((!this.isModelSelected && (this.regNo.length == 0 && this.findingCar)) ? 'Registration Number is Required.' + console.log('am I here?') : null );
+    console.log('Error', er);
+    return er;
+  }
 
   @ViewChildren('ctaCar') ctaCar : QueryList<HTMLElement>;
 
@@ -35,6 +43,7 @@ export class CarFormComponent implements OnInit {
     this.verifyOnly = false;
     this.showFileUploader = false;
     this.regNo="";
+    this.isModelSelected = false;
   }
 
 
@@ -66,11 +75,13 @@ export class CarFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   ngOnChanges() {
-    if (this.regNo && this.isRegNoValid) {
+    if (!this.regNo) {
+      this.regNo = "";
+    }
+    if (this.regNo && this.regNo.length > 6 && this.isRegNoValid) {
       this.findingCar = true;
     }
   }
@@ -79,6 +90,8 @@ export class CarFormComponent implements OnInit {
     if (!this.verifyOnly) {
       this.carService.changeCar(carData);
     };
+
+    this.isModelSelected = true;
 
     this.currentCar = this.carService.getCurrentCar()
   }

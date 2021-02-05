@@ -1,0 +1,105 @@
+<div class="modal-container-addon">
+  <div class="float-right" class="close-btn" (click)="dismissModal()">
+    <span><ion-icon name="close-outline" ></ion-icon></span>
+  </div>
+
+  <mobile-input *ngIf="!slim" [readonly]="true" name="Referral Code" [(value)]="currentUser.refererCode">
+  </mobile-input>
+  <br />
+  <!-- <span>Share this Referral code with your friends and Earn Great Rewards !</span> -->
+
+  <div [class.slim-container]="slim">
+
+
+    <div class="money">
+      <ion-icon name="cash-outline"></ion-icon> <span> Referral Bonus Earned : <span
+          Rs>{{currentUser.referralBonusPending}}</span></span>
+    </div>
+
+    <div class="money" *ngIf="currentUser.referralBonusAvailed > 0">
+      <ion-icon name="cash-outline"></ion-icon> <span> Referral Bonus Used : <span
+          Rs>{{currentUser.referralBonusAvailed}}</span></span>
+    </div>
+
+
+    <div class="row">
+      <div class="col-12">
+        <div class="progress-container" *ngIf="arrays.pending" (click)="tryProfile()">
+          <div class="mid-line"></div>
+
+          <ng-container *ngFor="let itm of arrays.current">
+            <ion-icon class="completed" name="car-sport-outline"></ion-icon>
+            <ion-icon class="check" name="checkmark-done-outline"></ion-icon>
+          </ng-container>
+
+          <ion-icon class="pending" *ngFor="let itm of arrays.pending" name="car-sport-outline"></ion-icon>
+        </div>
+        <div class="status-text">{{"Completed " + currentProgress + " / " + config.signup.unitCount}} <span *ngIf="slim"
+            (click)="share()" class="slim-share"> Refer Now</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-container *ngIf="!slim">
+    <div class="milestone">
+      <ion-icon name="trophy-outline"></ion-icon> <span> Current Milestone : {{currentMilestone}}</span>
+    </div>
+
+
+    <div class="signups">
+      <ion-icon name="person-add-outline"></ion-icon> <span> Signups Remaining : {{pendingCount}}
+      </span>
+    </div>
+    <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></button> -->
+    <span class="" data-bs-toggle="collapse" href="" role="button" aria-expanded="false"
+      (click)="detailsOpen = !detailsOpen" class="show-more" aria-controls="collapseExample">
+      {{detailsOpen ? 'Show Less' : ' Show More '}} <ion-icon *ngIf="detailsOpen"
+        class="animate__animated animate__fadeIn" name="chevron-up-outline"></ion-icon>
+      <ion-icon class="animate__animated animate__fadeIn" *ngIf="!detailsOpen" name="chevron-down-outline"></ion-icon>
+    </span>
+
+    <div [class.hidden]="!detailsOpen" id="collapseExample">
+      <ion-list class="ref-items">
+        <ion-item class="animate__animated" [class.animate__fadeInDown]="detailsOpen"
+          [class.animate__fadeOutUp]="!detailsOpen">
+          <p>
+            Earn a Referral Bonus of <span Rs>{{config.signup.unitBonus}}</span> for each Milestone you reach !
+          </p>
+
+        </ion-item>
+        <ion-item class="animate__animated" [class.animate__fadeInDown]="detailsOpen"
+          [class.animate__fadeOutUp]="!detailsOpen">
+          <p>
+            You can reach to the next milestone after <span>{{config.signup.unitCount}} Signups</span> using your
+            Referral
+            Code.
+          </p>
+        </ion-item>
+        <ion-item class="animate__animated" [class.animate__fadeInDown]="detailsOpen"
+          [class.animate__fadeOutUp]="!detailsOpen">
+          <p>
+            A Mega Bonus of <span Rs>{{config.signup.megaBonus}}</span> awaits you on reaching <span>{{milestoneMax}}
+              Milestones.</span>
+          </p>
+        </ion-item>
+        <ion-item class="animate__animated" [class.animate__fadeInDown]="detailsOpen"
+          [class.animate__fadeOutUp]="!detailsOpen">
+          <p>
+            Get a Guaranteed Bonus of <span Rs>{{config.purchase.unitBonus}}</span> on Plan Purchase of each Referral.
+          </p>
+        </ion-item>
+        <ion-item class="animate__animated" [class.animate__fadeInDown]="detailsOpen"
+          [class.animate__fadeOutUp]="!detailsOpen">
+          <p>
+            Mega Bonus of <span Rs>{{config.purchase.megaBonus}}</span> after <span>{{config.purchase.megaCount}}
+              Purchases</span> from your Referrals.
+          </p>
+        </ion-item>
+      </ion-list>
+    </div>
+    <p class="share-btn" (click)="share()">
+      <ion-icon name="share-social-outline"></ion-icon> Refer Now
+    </p>
+  </ng-container>
+</div>

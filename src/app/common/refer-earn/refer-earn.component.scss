@@ -1,0 +1,200 @@
+@import 'src/variables.scss';
+
+.share-btn {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    border: 0.5px solid #ffeb3bb3;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 1em;
+    background: transparent linear-gradient(0deg, #FFC107 0%, #FFEB3B 23%, #FF5722 116%) 0% 0% no-repeat padding-box;
+
+    width: fit-content;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.completed, .pending {
+    font-size: 35px;
+    margin-right: 0.5em;
+}
+
+.hidden {
+    animation-name: hideAway;
+    animation-duration: 1s;
+    transition: all 1s;
+    display: none;
+}
+
+.show-more {
+    display: block;
+    color: $secondary-color;
+    /* text-align: right; */
+    margin-top: 1em;
+
+    ion-icon {
+        position: relative;
+        top: 2px;
+    }
+}
+
+@keyframes hideAway {
+    0%   {opacity: 1;
+    display: block;}
+    100% {opacity: 0; display: none;}
+  }
+
+.check {
+    right: 15%;
+    top: -26px;
+    font-size: 20px;
+    background: transparent !important;
+    color: green;
+    font-weight: bold;
+}
+
+.ref-items {
+    margin-top: 1em;
+    span {
+        margin: 0 4px;
+        font-size: 16px;
+    }
+}
+
+.completed {
+    color: $primary-color;
+}
+
+.pending {
+    color: gray;
+}
+
+
+.slim-share {
+    color: $secondary-color;
+    float: right;
+    text-align: right;
+    position: relative;
+}
+
+ion-item {
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 0.5em;
+    margin-left: -1em;  
+    opacity: 0.8;
+}
+
+.status-text {
+    color: gray;
+    font-size: 14px;
+    font-style: italic;
+    top: -15px;
+    position: relative;
+}
+
+.milestone, .signups, .money {
+    position: relative;
+    ion-icon {
+        color: gold;
+        font-size: 18px;
+    }
+
+    span {
+        position: relative;
+        top: -3px;
+        font-size: 16px;
+        margin-left: 5px;
+
+        .rs-symbol {
+            margin-right: 0 !important;
+        }
+    }
+
+}
+
+.money {
+    ion-icon {
+        color: green;
+    }
+}
+
+
+.signups {
+
+    ion-icon {
+        color: $secondary-color;
+
+    }
+
+
+}
+
+.close-btn {
+    right: 1em;
+    position: absolute;
+    top: 1em;
+    color: red;
+    opacity: 0.4;
+    font-size: 24px;
+    z-index: 100;
+    
+}
+
+.slim-container {
+    padding: 0 30px;
+    .mid-line {
+        width: 150% !important;
+        left: -50px !important;
+    }
+}
+
+.progress-container {
+
+    .mid-line {
+        width: 120%;
+    height: 1px;
+    background: #9f7c7c;
+    position: relative;
+    top: 18px;
+    left: -26px;
+    z-index: 1;
+
+    &::after {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        top: -3px;
+        /* right: 0; */
+        float: right;
+        position: relative;
+        height: 8px;
+        border-radius: 4px;
+        background-color: #9f7c7c;
+    }
+
+    &::before {
+        content: '';
+    display: inline-block;
+    width: 8px;
+    top: -10px;
+    position: relative;
+    height: 8px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 4px;
+    background-color: $primary-color;
+    }
+    }
+
+    ion-icon {
+        background: white;
+        position: relative;
+        z-index: 2;
+    }
+
+    width: fit-content;
+    margin: 1em auto;
+    
+}

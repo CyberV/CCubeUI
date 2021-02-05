@@ -66,7 +66,7 @@ export class DashboardPageComponent implements OnInit {
     this.ready = false;
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     //console.log('Entering View in Dashboard Page');
     this.forDemo = this.planService.forDemo();
     this.ready = false;
@@ -157,7 +157,9 @@ export class DashboardPageComponent implements OnInit {
             this.ready = true;
 
           }
-        })
+        });
+
+        await this.loginService.refreshUser(this.currentUser.phone);
         //}
         return;
       }

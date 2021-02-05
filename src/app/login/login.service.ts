@@ -107,13 +107,14 @@ export class LoginService {
       catchError(this.handleError));
   }
 
-  createUser(phone, name, password, email, city) {
+  createUser(phone, name, password, email, city, refCode = null) {
 
     let payload = {
       phone: phone,
       name: name,
       password: password,
       email,
+      referedBy: refCode,
       city: city || "Faridabad"
     };
 
@@ -121,6 +122,23 @@ export class LoginService {
     return this.http.post(this.url + 'user/create', payload).pipe(
       catchError(this.handleError)
     );
+
+  }
+
+
+  async refreshUser(phone) {
+    return new Promise(async (resolve) => {
+      this.http.post(this.url + 'user/find/' + phone,{}).pipe(
+        catchError(this.handleError)
+      ).subscribe((res:any) => {
+        if (res.success) {
+          localStorage.setItem('currentUser', JSON.stringify(res.data));
+          resolve(res.data);
+        } else {
+          resolve (false);
+        }
+      });
+    })
 
   }
 

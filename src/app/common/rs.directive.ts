@@ -14,7 +14,7 @@ export class RsDirective  {
  
     let color = this.color || '#ec6b1e';
 
-    $(this.el.nativeElement).prepend("<span style='color: " + color + "; margin-right: 5px;' >&#8377;</span>");
+    $(this.el.nativeElement).prepend("<span class='rs-symbol' style='color: " + color + "; margin-right: 5px;' >&#8377;</span>");
    }
 
 

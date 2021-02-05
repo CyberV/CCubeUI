@@ -42,7 +42,7 @@ export class UserService {
   checkUserLogin() {
       
   }
-
+  
   isLoggedIn() {
     return !!this._currentUser;
   }

@@ -2,9 +2,9 @@
     <heading text="ADD-ONS" size="24" align="center"></heading>
 
 
-    <ion-slides [options]="options">
+    <ion-slides [options]="options" #adnSlider>
     
-        <ion-slide *ngFor="let addon of addOns; let i = index;">
+        <ion-slide *ngFor="let addon of addOns; let i = index;" class="animate__animated " [class.animate__flipInX]="showAnimation">
 
           <mat-card class="card addon-card animate__animated animate__flipInX"  [class.selected]="isSelected(addon)" [class.active]="active && isSelected(addon)" [class.blocked]="isBlocked(addon)">
             <img (click)="sendShowDetails(addon)" class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.jpg'" alt="Card image cap">

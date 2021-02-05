@@ -3,7 +3,7 @@
 
     <div class="row new-item" lines="none" *ngFor="let item of newItems" (click)="readNotification(item)">
       <div class="col-4 --no-padding ">
-        <img [src]="item.data.car.image">
+        <img [src]="(item.data.car && item.data.car.image) || 'assets/icons/ccubeBlue.png'">
       </div>
       <div class="col-8 --no-padding-left bold">
         <ion-label>
@@ -22,7 +22,7 @@
 
     <div class="row recent-item" lines="none" *ngFor="let item of recentItems" (click)="clearNotifications()">
       <div class="col-4 --no-padding">
-        <img [src]="item.data.car.image">
+        <img [src]="( item.data.car && item.data.car.image ) || 'assets/icons/ccubeBlue.png'">
       </div>
       <div class="col-8 --no-padding-left">
         <ion-label>

@@ -24,6 +24,7 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "src/variables.scss";
 
 
 
@@ -75,6 +76,29 @@
   overflow-y:auto;
   overflow-x: hidden;
   color: black;
+}
+
+.refer-modal .modal-wrapper {
+  height: 50%;
+  top: 25%;
+  width: 80%;
+  border-radius: 10px;
+  position: absolute;
+  display: block;
+  overflow-y:auto;
+  overflow-x: hidden;
+  color: black;
+  padding: 1em;
+
+  .modal-container-addon {
+    padding: 1em 2em;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .close-btn {
+    display: block;
+  }
 }
 
 
@@ -343,4 +367,12 @@ padding:0 !important;
 .--padding-y {
   padding: 15px 0px;
   margin:0;
+}
+
+.--no-margin {
+  margin: 0 !important;
+}
+
+.highlight {
+  color: $secondary-color;
 }

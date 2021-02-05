@@ -19,8 +19,13 @@ export class CouponsListComponent implements OnInit {
   loading: any;
 
   @Output() discount = new EventEmitter();
+  @Output() showAddons = new EventEmitter();
 
   @ViewChildren('couponAccordion') couponAccordion : QueryList<AccordionComponent>;
+
+  isCouponEligible(coupon) {
+    return this.totalAmount >= coupon.minCartValue;
+  }
 
 
   get filteredCoupons() {
@@ -90,6 +95,13 @@ export class CouponsListComponent implements OnInit {
           this.couponAccordion.first.toggle();
       }
     })
+  }
+
+  sendToAddons() {
+
+    this.showAddons.emit();
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <span *ngIf="noCar">Car Registration Number Empty</span>
+    <!-- <span *ngIf="noCar">Please Enter a Valid Registration Number</span> -->
     <div *ngIf="!noCar">
       <div *ngIf="loading">
         <spinner color="blue"></spinner>
@@ -28,7 +28,7 @@
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Maker : {{carDetails.maker}}</li>
+            <li class="list-group-item">Body Type : {{carDetails.displayLabel}}</li>
             <li class="list-group-item">Fuel : {{carDetails.fuelType}}</li>
             <li class="list-group-item">Registeration Date: {{carDetails.registeredOn}} </li>
           </ul>

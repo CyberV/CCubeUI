@@ -69,7 +69,10 @@ export class DashboardComponent implements OnInit {
       componentProps: { 
         addon: addon,
         showClose: true
-      }
+      },
+      swipeToClose: true,
+      showBackdrop: true,
+      backdropDismiss: true,
     });
     await modal.present();
 

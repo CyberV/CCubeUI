@@ -261,6 +261,11 @@ export class PlanService {
       info.discount = order.discount;
     }
 
+    if (order.bonus && order.bonus > 0) {
+      total -= order.bonus;
+      info.bonus = order.bonus;
+    }
+
     order.total = total;
     order.info = info;
 

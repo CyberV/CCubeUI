@@ -9,7 +9,7 @@
       <div class="row">
         <div *ngIf="car" class="car-info" [class.slim]="slim" role="alert">
           <span class="maker">{{car.maker | lowercase}}</span> <br/> <span class="model">{{car.model}}</span>
-          <br/><span class="displayType">{{displayType}}</span>
+          <br/><span class="displayType">{{car.displayLabel}}</span>
           <!-- <cta small="true" text="Change Car" (action)="onChangeCar()"></cta> -->
           <div *ngIf="!hideRemove" class="alert-link" (click)="onChangeCar()">Change Car</div>
           

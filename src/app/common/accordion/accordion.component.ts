@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { scrollElementToTop } from 'app/util/util';
 
 @Component({
   selector: 'cc-accordion',
@@ -17,8 +19,12 @@ export class AccordionComponent implements OnInit {
   @Input() defaultOpen:boolean;
   @Input() label:string;
 
-  @ViewChild('drawerToggle') drawerToggle: ElementRef;
+  @Output() onToggle = new EventEmitter();
 
+  @ViewChild('drawerToggle') drawerToggle: ElementRef;
+  @ViewChild('drawerPannel') drawerPannel: MatExpansionPanel;
+
+  
   hasStep:boolean;
   initDone:boolean;
 
@@ -46,11 +52,31 @@ export class AccordionComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+    this.drawerPannel.closed.subscribe(() => {
+      this.onToggle.emit(false);
+    });
+    this.drawerPannel.opened.subscribe(() => {
+      this.onToggle.emit(true);
+
+      setTimeout(()=> {
+        let inp:any = this.drawerToggle;
+        scrollElementToTop(inp.nativeElement);
+      }, 100);
+      
+    });
+  }
+
   toggle() {
     if (this.drawerToggle && this.drawerToggle.nativeElement) {
       this.drawerToggle.nativeElement.click();
     }
   } 
+
+  onHandleClick(ev) {
+    this.onToggle.emit()
+    console.log(ev);
+  }
 
   ngOnChanges(changes) {
     this.hasStep = !! (this.step && this.step.length);

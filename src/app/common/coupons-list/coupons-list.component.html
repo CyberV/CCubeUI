@@ -11,8 +11,8 @@
               <span class="name">{{item.name}}</span>
               <br/>
               Valid For: <span class="desc">
-                <span *ngIf="item.validFor=='user'"> Only You</span>
-                <span *ngIf="item.validFor=='society'"> {{item.society}} </span>
+                <span *ngIf="item.validFor=='user'"> Just for You</span>
+                <span *ngIf="item.validFor=='society'"> Your Society</span>
                 <span *ngIf="item.validFor=='all'">All</span>
               </span> <br/>
               <span class="applied">APPLIED </span>
@@ -22,30 +22,44 @@
               <ion-label>
                 <img src="assets/icons/discount.png" />
                 <div class="discount-label">
-                  <span *ngIf="item.unit!='percent'"> &#8377; {{item.value}} OFF !</span>
+                  <span *ngIf="item.unit!='percent'"> &#8377; {{item.value}} OFF</span>
                   <span *ngIf="item.unit=='percent'">{{item.value}} % OFF</span>
                 </div>
               </ion-label>
             </div>
           </div>
 
-      <div class="row discount-item one-edge-shadow" [class.personal]="item.validFor=='user'" [class.society]="item.validFor=='society'"  *ngFor="let item of filteredCoupons" (click)="applyCoupon(item)">
+      <div 
+        class="row discount-item one-edge-shadow" 
+        [class.personal]="item.validFor=='user'" 
+        [class.society]="item.validFor=='society'"  
+        [class.not-eligible]="!isCouponEligible(item)"
+        
+        *ngFor="let item of filteredCoupons" (click)="applyCoupon(item)">
         <div class="col-8 --no-padding ">
           <spinner *ngIf="loading[item.code]" class="spinner" [color]="'blue'"></spinner>
           <span class="name">{{item.name}}</span>
           <br/>
-          Valid For: <span class="desc">
+          Valid For: 
+          <span class="desc">
             <span *ngIf="item.validFor=='user'"> Only You</span>
             <span *ngIf="item.validFor=='society'"> {{item.society}} </span>
             <span *ngIf="item.validFor=='all'">All</span>
           </span>
+          <br/>
+          <span class="stand-out">Minimum Cart Value : <span class="desc" ><span Rs>{{item.minCartValue}}</span></span></span>
+
+          <ng-container *ngIf="!isCouponEligible(item)">
+            <br/>
+            <span class="stand-out"  (click)="sendToAddons()" > Try one of our fantastic <span class="highlight">Addons</span> ? </span>
+          </ng-container>
          
         </div>
         <div class="col-4 --no-padding bold discount-container">
           <ion-label>
             <img src="assets/icons/discount.png" />
             <div class="discount-label">
-              <span *ngIf="item.unit!='percent'" Rs [rscolor]="'white'">{{item.value}} OFF !</span>
+              <span *ngIf="item.unit!='percent'">&#8377; {{item.value}} OFF</span>
               <span *ngIf="item.unit=='percent'">{{item.value}} % OFF</span>
             </div>
           </ion-label>

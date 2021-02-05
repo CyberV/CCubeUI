@@ -1,5 +1,11 @@
 declare var $;
 
+
+export function scrollToBottom() {
+  let cont = $('.container');
+  cont[0].scrollTop = 2000;
+}
+
 export function scrollElementToTop(emt) {
   let inp: any = emt;
 

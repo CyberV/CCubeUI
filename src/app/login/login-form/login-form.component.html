@@ -36,7 +36,7 @@
 
 <div *ngIf="context=='details'" class="animate__animated animate__fadeInLeft details-container">
   <mobile-input  [error]="errors ? errors.name : null" (enterKey)="focusTo('inpRef')" type="text" name="Full Name" [(value)]="newUser.name" (valueChange)="errors.name = null" ></mobile-input>
-  <mobile-input  #inpRef (enterKey)="focusTo('inpEmail')" type="text" name="Referral Code" [(value)]="newUser.referredBy" ></mobile-input>
+  <mobile-input  #inpRef (enterKey)="focusTo('inpEmail')" type="text" name="Referral Code" [(value)]="newUser.referedBy" ></mobile-input>
   <mobile-input #inpEmail  (enterKey)="focusTo('inpCity')" [error]="errors ? errors.email : null" type="email" name="Email Id" [(value)]="newUser.email" (valueChange)="validateEmail($event)"></mobile-input>
   <select-city  #inpCity  (enterKey)="focusTo('inpPass')"  [error]="errors ? errors.city : null" [(city)]="newUser.city"  (cityChange)="errors.city = null"></select-city>
   <mobile-input #inpPass (enterKey)="focusTo('inpConfirmPass')" [error]="errors ? errors.password : null" type="password" name="Password" [(value)]="newUser.password"  (valueChange)="errors.password = null" ></mobile-input>

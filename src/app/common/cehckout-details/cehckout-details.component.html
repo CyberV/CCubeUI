@@ -143,6 +143,12 @@
               <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div>
               <div class="col-4 text-center float-right"> <span class="discount-value"> - <span Rs>{{ discount.discount}}</span> </span></div>
             </div>
+
+            <div class="row" [style.marginTop.em]="1"  *ngIf="user.referralBonusPending > 0">
+                <div class="col-8">Referral Bonus Applied</div>
+                <!-- <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div> -->
+                <div class="col-4 text-center float-right"> <span class="discount-value"> - <span Rs>{{ user.referralBonusPending }}</span> </span></div>
+              </div>
         <cc-accordion [title]="addon && !plan? 'Addon Details' : 'Plan Details'" [compact]="true">
           <plan-details *ngIf="plan" [plan]="plan" [compact]="true"></plan-details>
           <addon-details *ngIf="!plan && addon" [addon]="addon"></addon-details>

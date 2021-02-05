@@ -1,10 +1,11 @@
 <div class="addon-container">
-  <div class="addon-info">
-      <span *ngIf="showClose" class="float-right" (click)="closeModal()">X</span>
-    <h2 #pageTop class="--padding-x"><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+  
+  <div class="addon-info" >
+      <span *ngIf="showClose" class="float-right close-btn" (click)="closeModal()"><ion-icon name="close-outline"></ion-icon></span>
+    <h2 #pageTop class="--padding --no-margin"><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
     
     <p>
-      <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for 1 month.</span>
+      <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for 1 month</span>
     </p>
     <p *ngIf="startDate && !bookedTime">
         <span  class="startLabel">
@@ -20,6 +21,7 @@
 
       <span *ngIf="bookedTime"></span>
   </div>
+  <spinner color="blue" *ngIf="!addon"></spinner>
   <ion-list>
     <ion-list-header>
       <span class="description">{{addon.description}}</span>
