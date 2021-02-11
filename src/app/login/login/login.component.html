@@ -8,9 +8,13 @@
       </div>
   <div class="row">
     <div class="col-12">
-      <app-login-form *ngIf="!showLogin || loginOnly" [context]="context" [loginOnly]="loginOnly"></app-login-form>
+      <app-login-form #loginForm *ngIf="!showLogin || loginOnly" [context]="context" [loginOnly]="loginOnly"></app-login-form>
+
 
       <app-signin-form *ngIf="showLogin && !loginOnly"  [context]="context" (forgotPassword)="loginOnly = true;"></app-signin-form>
+
+      <cta *ngIf="(!showLogin || loginOnly ) && context == 'details'" class="signup-btn" text="Create Account" [sticky]="true" [loading]="loading" (action)="createUser()" ></cta>
+
     </div>
   </div>
 </div>

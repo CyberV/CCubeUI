@@ -8,9 +8,9 @@ import { planData } from 'app/common/common.service';
 })
 export class PlanService {
 
-  AllPlans : any;
+  AllPlans: any;
 
-  AllFeatures : any;
+  AllFeatures: any;
   OnlyAddons: any;
 
   get UpgradePlan() {
@@ -25,26 +25,26 @@ export class PlanService {
     }
   }
 
-  fixedAdhocs:any;
+  fixedAdhocs: any;
 
   ngOnInit() {
-    
+
   }
 
   constructor(
     private carService: CarService
   ) {
-    let _p:any = planData;
+    let _p: any = planData;
     this.AllPlans = this.getAllPlans();
     this.AllFeatures = this.getAllFeatures();
 
     this.fixedAdhocs = ['WASH_DEEP', 'FBW'];
     this.OnlyAddons = [];
     let map = this.AllFeatures.map((ftr) => ftr.code);
-    for(let i=0; i<this.AllFeatures.length;i++) {
+    for (let i = 0; i < this.AllFeatures.length; i++) {
       let remove = false;
-      
-      remove = this.fixedAdhocs.some((adhoc) => adhoc == this.AllFeatures[i].code );
+
+      remove = this.fixedAdhocs.some((adhoc) => adhoc == this.AllFeatures[i].code);
 
       if (!remove) {
         this.OnlyAddons.push(JSON.parse(JSON.stringify(this.AllFeatures[i])));
@@ -52,14 +52,14 @@ export class PlanService {
     }
 
 
-   }
+  }
 
-   clearAll() {
+  clearAll() {
 
     this.clear();
     this.clearAddons();
     this.clearAdhocs();
-   }
+  }
 
   clear() {
     sessionStorage.setItem('selectedPlan', null);
@@ -112,24 +112,24 @@ export class PlanService {
   }
 
   getAllPlans() {
-    let common =JSON.parse(localStorage.getItem('commonData'));
-    return common && common !="" && common != 'null'? common.plansList.plans : [];
+    let common = JSON.parse(localStorage.getItem('commonData'));
+    return common && common != "" && common != 'null' ? common.plansList.plans : [];
   }
 
   getAllSubscriptions() {
-    let common =JSON.parse(sessionStorage.getItem('currentPayments'));
-    return common && common !="" && common != 'null'? common : [];
+    let common = JSON.parse(sessionStorage.getItem('currentPayments'));
+    return common && common != "" && common != 'null' ? common : [];
   }
 
   forDemo() {
-    let common =JSON.parse(sessionStorage.getItem('forDemo'));
-    return common && common !="" && common != 'null' ? common : false;
+    let common = JSON.parse(sessionStorage.getItem('forDemo'));
+    return common && common != "" && common != 'null' ? common : false;
   }
 
   getAllFeatures() {
-    let common =JSON.parse(localStorage.getItem('commonData'));
+    let common = JSON.parse(localStorage.getItem('commonData'));
 
-    return common && common !="" && common != 'null'? common.plansList.features : [];
+    return common && common != "" && common != 'null' ? common.plansList.features : [];
   }
 
   getPlanByName(planName) {
@@ -230,49 +230,55 @@ export class PlanService {
 
   }
 
-  lockCurrentOrder(order) {
-    let total = 0;
-    let info: any = {};
-
-    if (order.plan) {
-      total += order.plan.price;
-    }
-
-    if (order.addons && order.addons.length) {
-      info.addons = "";
-      order.addons.forEach((adn) => {
-        total += adn.price;
-        info.addons += adn.name + ", "
-      });
-      info.addons = info.addons.substr(0, info.addons.length - 2);
-    }
-
-    if (order.adhocs) {
-      info.adhocs = "";
-      order.adhocs.forEach((adh) => {
-        total += adh.price;
-        info.adhocs += adh.name + ", "
-      });
-      info.adhocs = info.adhocs.substr(0, info.adhocs.length - 2);
-    }
-
-    if (order.discount && order.discount.discount > 0) {
-      total -= order.discount.discount;
-      info.discount = order.discount;
-    }
-
-    if (order.bonus && order.bonus > 0) {
-      total -= order.bonus;
-      info.bonus = order.bonus;
-    }
-
-    order.total = total;
-    order.info = info;
+  async lockCurrentOrder(order) {
+    return new Promise((resolve) => {
 
 
-    sessionStorage.setItem('currentOrder', JSON.stringify(order));
+      let total = 0;
+      let info: any = {};
 
-    return order;
+      if (order.plan) {
+        total += order.plan.price;
+      }
+
+      if (order.addons && order.addons.length) {
+        info.addons = "";
+        order.addons.forEach((adn) => {
+          total += adn.price;
+          info.addons += adn.name + ", "
+        });
+        info.addons = info.addons.substr(0, info.addons.length - 2);
+      }
+
+      if (order.adhocs) {
+        info.adhocs = "";
+        order.adhocs.forEach((adh) => {
+          total += adh.price;
+          info.adhocs += adh.name + ", "
+        });
+        info.adhocs = info.adhocs.substr(0, info.adhocs.length - 2);
+      }
+
+      if (order.bonus && order.bonus > 0) {
+        total -= order.bonus;
+        info.bonus = order.bonus;
+      }
+
+      if (order.discount && order.discount.discount > 0) {
+        total -= order.discount.discount;
+        info.discount = order.discount;
+      }
+
+
+
+      order.total = total;
+      order.info = info;
+
+
+      sessionStorage.setItem('currentOrder', JSON.stringify(order));
+
+      resolve(order);
+    })
   }
 
   getCurrentSubscription() {
@@ -290,31 +296,31 @@ export class PlanService {
   getFeaturesForPlan(planName) {
     let found = this.AllPlans.filter((pln) => pln.name == planName);
 
-        if (found && found.length) {
-          found = found[0];
-          let ff = this.AllFeatures.filter((ftr) => found.features.some((fftr) => fftr == ftr.code));
-          return ff;
-        }
+    if (found && found.length) {
+      found = found[0];
+      let ff = this.AllFeatures.filter((ftr) => found.features.some((fftr) => fftr == ftr.code));
+      return ff;
+    }
   }
 
-  
+
   getUniqueFeaturesForPlan(planName, ignoreAdhocs = false) {
-        let found = this.AllPlans.filter((pln) => pln.name == planName);
+    let found = this.AllPlans.filter((pln) => pln.name == planName);
 
-        let src = ignoreAdhocs ?  this.OnlyAddons: this.AllFeatures;
+    let src = ignoreAdhocs ? this.OnlyAddons : this.AllFeatures;
 
-        if (found && found.length) {
-          found = found[0];
-          let ff = src.filter((ftr) => found.uniqueFeatures.some((fftr) => {
+    if (found && found.length) {
+      found = found[0];
+      let ff = src.filter((ftr) => found.uniqueFeatures.some((fftr) => {
 
-            let allowed = fftr == ftr.code;
-            
-            return allowed;
-            
-          }
-            ));
-          return ff;
-        }
+        let allowed = fftr == ftr.code;
+
+        return allowed;
+
+      }
+      ));
+      return ff;
+    }
   }
 
   getAddonsForPlan(planName) {
@@ -329,7 +335,7 @@ export class PlanService {
 
     })
 
-    switch(planName) {
+    switch (planName) {
       case 'Standard': {
         Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Deluxe', true));
         Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));

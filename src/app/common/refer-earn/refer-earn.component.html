@@ -1,7 +1,10 @@
 <div class="modal-container-addon">
+
   <div class="float-right" class="close-btn" (click)="dismissModal()">
     <span><ion-icon name="close-outline" ></ion-icon></span>
   </div>
+
+  <heading text="Refer & Earn" align="center"></heading>
 
   <mobile-input *ngIf="!slim" [readonly]="true" name="Referral Code" [(value)]="currentUser.refererCode">
   </mobile-input>

@@ -3,26 +3,33 @@
     <div *ngIf="ready" class="row profile-content">
       <div class="offset-md-2 col-md-8">
         <div class="container">
+          <spinner *ngIf="!ready" class="text-center" color='blue'></spinner>
+          <ng-container *ngIf="ready">
+              <div *ngIf="context=='profile'" class="card animate__animated animate__bounceInDown">
+                  <img class="card-img-top" src="assets/icons/user.png" alt="User Image">
+                  <div class="card-body">
+                      <ul class="list-group list-group-flush" *ngIf="currentUser">
+                        
+                          <mobile-input [readonly]="true" name="Name" [(value)]="currentUser.name"> </mobile-input>
+                        
+                            <mobile-input [readonly]="true" name="Phone" [(value)]="currentUser.phone"> </mobile-input>
+                         
+                            <mobile-input [readonly]="true" name="Email" [(value)]="currentUser.email"> </mobile-input>
+                        
+                      </ul>
+                      <refer-earn slim="true"></refer-earn>
+                  </div>
+                  <div class="card-body">
+                    <cta text="Log Out" (action)="logOutUser()"></cta>
+                  </div>
+                </div>
+      
+                <div *ngIf="context=='refer'">
+                  <refer-earn></refer-earn>
+                </div>
+          </ng-container>
 
-          <div class="card animate__animated animate__bounceInDown">
-            <img class="card-img-top" src="assets/icons/user.png" alt="User Image">
-            <div class="card-body">
-                <ul class="list-group list-group-flush" *ngIf="currentUser">
-                  
-                    <mobile-input [readonly]="true" name="Name" [(value)]="currentUser.name"> </mobile-input>
-                  
-                      <mobile-input [readonly]="true" name="Phone" [(value)]="currentUser.phone"> </mobile-input>
-                   
-                      <mobile-input [readonly]="true" name="Email" [(value)]="currentUser.email"> </mobile-input>
-                  
-                </ul>
-
-                <refer-earn></refer-earn>
-            </div>
-            <div class="card-body">
-              <cta text="Log Out" (action)="logOutUser()"></cta>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@ export class UserService {
   }
 
   getCurrentUser() {
-    return this._currentUser;
+    return  localStorage.getItem('currentUser') != "null" ? JSON.parse(localStorage.getItem('currentUser')): null; 
   }
 
   listner() {

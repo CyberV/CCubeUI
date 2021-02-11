@@ -17,42 +17,42 @@ export class CheckoutDetailsComponent implements OnInit {
   @Input() includedAddons: any;
   @Input() includedAdhocs: any;
   @Input() mode: any;
-  
+
   @Output() showAddonDetails = new EventEmitter();
   @Output() removeAdhoc = new EventEmitter();
   @Output() removeAddon = new EventEmitter();
   @Output() removeCoupon = new EventEmitter();
 
-  user:any;
+  user: any;
 
   get productName() {
-    let {mode,plan,addon,adhoc} = this;
-    return  mode.plan ? plan.name : (mode.adhoc ? adhoc.name : (mode.addon ? addon.name : 'Plan'))
+    let { mode, plan, addon, adhoc } = this;
+    return mode.plan ? plan.name : (mode.adhoc ? adhoc.name : (mode.addon ? addon.name : 'Plan'))
   }
 
   get productLabel() {
-    let {mode,plan,addon,adhoc} = this;
-    return  mode.plan ? 'Plan' : (mode.adhoc ? 'Service' : (mode.addon ? 'Addon' : 'Plan'))
+    let { mode, plan, addon, adhoc } = this;
+    return mode.plan ? 'Plan' : (mode.adhoc ? 'Service' : (mode.addon ? 'Addon' : 'Plan'))
   }
 
   get regNo() {
     let reg = this.car.regNo;
 
-    let x=   {
-      pre: reg.substr(0,4),
-      mid:'',
-      post: reg.substr(6,4)
+    let x = {
+      pre: reg.substr(0, 4),
+      mid: '',
+      post: reg.substr(6, 4)
+    }
+
+    x.mid = reg.replace(x.pre, "").replace(x.post, '');
+
+    return x;
+
   }
 
-  x.mid = reg.replace(x.pre,"").replace(x.post,'');
-
-  return x;
-
-}
-
   get productPrice() {
-    let {mode,plan,addon,adhoc} = this;
-    return  mode.plan ? plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? addon.price : 'Plan'))
+    let { mode, plan, addon, adhoc } = this;
+    return mode.plan ? plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? addon.price : 'Plan'))
   }
 
   upgradeSelected: boolean;
@@ -66,7 +66,7 @@ export class CheckoutDetailsComponent implements OnInit {
   addonPrice: any;
   adhocPrice: any;
 
-  sendShowDetails(addon){
+  sendShowDetails(addon) {
     this.showAddonDetails.emit(addon);
   }
 
@@ -94,7 +94,7 @@ export class CheckoutDetailsComponent implements OnInit {
     if (this.discount && this.discount.coupon) {
       let coupon = this.discount.coupon;
       if (coupon.unit == 'percent') {
-        dscnt = Math.floor(total * (coupon.value/100));
+        dscnt = Math.floor(total * (coupon.value / 100));
       } else {
         dscnt = coupon.value;
       }
@@ -147,9 +147,8 @@ export class CheckoutDetailsComponent implements OnInit {
 
   }
 
-  getOrderPrice() {
-
-    let {mode}= this;
+  getServiceTotal() {
+    let { mode } = this;
     let total = 0;
 
     if (mode) {
@@ -162,12 +161,22 @@ export class CheckoutDetailsComponent implements OnInit {
       if (mode.adhoc) {
         total += this.adhocPrice;
       }
-
-
       return total;
     } else {
       return total;
     }
+  }
+
+  getOrderPrice() {
+
+    let total = this.getServiceTotal();
+
+    if (this.user.referralBonusPending && this.user.referralBonusPending > 0) {
+      total -= +(this.user.referralBonusPending);
+    }
+
+    return total;
+
   }
 
   getTotalPayable() {
@@ -175,10 +184,6 @@ export class CheckoutDetailsComponent implements OnInit {
     let total = this.getOrderPrice();
     if (this.discount && this.discount.discount) {
       total -= this.discount.discount;
-    }
-
-    if (this.user.referralBonusPending && this.user.referralBonusPending > 0) {
-      total -= +(this.user.referralBonusPending);
     }
 
     return total;
@@ -203,7 +208,7 @@ export class CheckoutDetailsComponent implements OnInit {
     this.removeAddon.emit(addon);
   }
 
-  
+
   sendRemoveAdhoc(adhoc) {
     this.removeAdhoc.emit(adhoc);
   }

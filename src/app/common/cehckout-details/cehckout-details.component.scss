@@ -78,6 +78,39 @@
         color: $primary-color;
         margin-right: 10px;
     }
+
+    .text-center {
+        text-align: right !important;
+        padding-right: 25px;
+    }
+
+    .badge-danger {
+        font-size: 10px;
+        margin: 0 0 0px 6px;
+        position: relative;
+        opacity: 0.8;
+    }
+    
+}
+
+.small-text {
+    font-size: 16px !important;
+}
+
+.big-icon, .big-icon2 {
+    position: relative;
+    top: -2px;
+    font-size: 26px;
+    color: $primary-color;
+    margin-right: 10px;
+
+    &.icon-wallet, &.icon-coupon &.icon-car, &.icon-calendar {
+        font-size: 22px !important;
+    margin-right: 14px !important;
+    left: 3px;
+    top: -1px;
+    }
+
 }
 
 mat-select {
@@ -101,6 +134,10 @@ mat-select {
     font-size: 80%;
 }
 
+.icon-text {
+    font-size: 16px;
+}
+
 .card-container{
     background: $primary-color;
     padding: 0;
@@ -112,7 +149,6 @@ mat-select {
         background: white;
         padding: 15px;
         border-radius: 25px;
-        padding-bottom: 0;
     }
 
     .bottom {

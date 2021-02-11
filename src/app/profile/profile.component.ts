@@ -3,6 +3,7 @@ import { LoginService } from 'app/login/login.service';
 import { UserService } from 'app/services/user.service';
 import { HeaderService } from 'app/header.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,32 +14,33 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private userService:UserService,
-    private headerService:HeaderService,
-    private socialSharing: SocialSharing
+    private userService: UserService,
+    private headerService: HeaderService,
+    private socialSharing: SocialSharing,
+    private route: ActivatedRoute,
   ) {
     this.currentUser = null;
     this.ready = false;
-   }
+  }
 
-  currentUser:any;
+  currentUser: any;
   ready: boolean;
 
-  context:string;
+  context: string;
 
   ngOnInit() {
     this.currentUser = this.userService.getCurrentUser();
-    this.headerService.setText('Your Profile');
+
   }
 
   logOutUser() {
     this.loginService.logout();
 
-    
+
   }
 
   share() {
-    let d:any = localStorage.getItem('commonData');
+    let d: any = localStorage.getItem('commonData');
     if (d) {
       d = JSON.parse(d);
 
@@ -53,9 +55,9 @@ export class ProfileComponent implements OnInit {
       // appPackageName: 'com.apple.social.facebook', // Android only, you can provide id of the App you want to share with
       iPadCoordinates: '0,0,0,0' //IOS only iPadCoordinates for where the popover should be point.  Format with x,y,width,height
     };
-    
 
-    this.socialSharing.shareWithOptions(options).then((res:any) => {
+
+    this.socialSharing.shareWithOptions(options).then((res: any) => {
       //alert(JSON.stringify(res));
     })
   }
@@ -63,12 +65,28 @@ export class ProfileComponent implements OnInit {
   async ionViewWillEnter() {
     this.context = 'profile';
     this.ready = false;
+    this.route.params.subscribe(async (rdata) => {
+      this.context = this.route.snapshot.routeConfig.path || 'dashboard';
+      let refreshed = await this.loginService.refreshUser(this.currentUser.phone);
+      if (refreshed) {
+        this.currentUser = refreshed;
+      }
 
-    let refreshed = await this.loginService.refreshUser(this.currentUser.phone);
-    if (refreshed) {
-      this.currentUser = refreshed;
-      this.ready = true;
-    }
+      switch (this.context) {
+        case 'profile': {
+          this.headerService.setText('Your Profile');
+          this.ready = true;
+          break;
+        }
+        case 'refer': {
+          this.headerService.setText('Refer & Earn');
+          this.ready = true;
+          break;
+        } default: {
+          this.ready = true;
+        }
+      }
+    });
   }
 
 }

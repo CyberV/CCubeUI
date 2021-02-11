@@ -21,7 +21,7 @@
                 [mode]="mode"
                 (removeAddon)="onAddonSelected($event, true)"
                 (removeAdhoc)="onAdhocSelected($event)"
-                (removeCoupon)="onRemoveCoupon($event)"
+                (removeCoupon)="onRemoveCoupon()"
                 (showAddonDetails)="openAddon($event)"
                 
                 >
@@ -30,8 +30,10 @@
               </checkout-details>
   
               <coupons-list [slim]="true" 
-                [appliedCoupons]="appliedCoupons" [availableCoupons]="availableCoupons" [totalAmount]="netPayable" 
+                [appliedCoupons]="appliedCoupons" [availableCoupons]="availableCoupons" 
+                [totalAmount]="serviceTotal" 
                 (discount)="applyDiscount($event)"
+                (removeCoupon)="onRemoveCoupon()"
                 (showAddons)="goToAddons()"
                 ></coupons-list>
              

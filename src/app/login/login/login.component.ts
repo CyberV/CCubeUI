@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,9 @@ export class LoginComponent implements OnInit {
 
   showLogin:boolean;
   loginOnly:boolean;
+  loading: boolean;
+
+  @ViewChildren('loginForm') loginForm : QueryList<LoginFormComponent>;
 
   constructor(
     private activatedRoute: ActivatedRoute
@@ -19,10 +23,19 @@ export class LoginComponent implements OnInit {
 
     this.showLogin = false;
     this.loginOnly = false;
+    this.loading =false;
   }
 
   ionViewWillEnter() {
    
+  }
+
+  createUser() {
+    if (this.loginForm.first) {
+      this.loading = true;
+      this.loginForm.first.createUser();
+    }
+    
   }
 
   ngOnInit() {

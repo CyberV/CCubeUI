@@ -5,6 +5,11 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { File, FileEntry } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+//import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -72,6 +77,10 @@ export function socialConfigs() {
   ],
   providers: [
     FileChooser,
+    FileOpener,
+    FilePath,
+    PreviewAnyFile,
+    File,
     SocialSharing,
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

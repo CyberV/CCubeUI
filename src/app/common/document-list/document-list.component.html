@@ -1,12 +1,16 @@
+{{documents[0].name}} {{!!documents[0].image}} {{documents[0].localUrl}}<br/>
+{{documents[1].name}} {{!!documents[1].image}} {{documents[1].localUrl}}<br/>
+{{documents[2].name}} {{!!documents[2].image}} {{documents[2].localUrl}}<br/>
+{{documents[3].name}} {{!!documents[3].image}} {{documents[3].localUrl}}<br/>
 <ion-slides [options]="options">
 
   <ion-slide *ngFor="let doc of documents; let i = index;">
-
-    <mat-card class="card addon-card animate__animated animate__flipInX" (click)="openFile(doc)">
-      <img  class="card-img-top" [src]="'assets/icons/document.png'"
+    <mat-card class="card addon-card animate__animated animate__flipInX" (click)="openFile(doc, i)">
+      <!-- <div class="card-bg-top top-{{i}}" [class.no-image]="!doc.image" ></div> -->
+      <img  *ngIf="!isImageSelected(doc)"class="card-img-top" [src]="'assets/icons/document.png'"
         alt="Card image cap">
-      <div class="">
-
+        <img *ngIf="isImageSelected(doc)" class="card-img-top" [src]="doc.image">
+      <div class="doc-name">
         <div >
           <span class="card-text one-edge-shadow" [class.contrast]="i%2!=0">{{doc.name}}</span>
         </div>

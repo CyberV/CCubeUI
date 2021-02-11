@@ -10,3 +10,10 @@
 .email-link {
     color: $primary-color;
 }
+
+.list-group {
+
+    &.has-sticky-button {
+        padding-bottom: 50px;
+    }
+}

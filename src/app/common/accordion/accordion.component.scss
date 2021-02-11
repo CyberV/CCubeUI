@@ -60,8 +60,18 @@
     color: black;
 }
 
+.compact-separator {
+    // border-bottom: 1px solid $secondary-color;
+    // border-radius: 20px;
+}
+
 .compact {
     margin:0;
+    color: gray;
+
+    .mat-expansion-panel-header-title {
+        color: gray !important;
+    }
 
     .mat-expansion-panel-body {
         padding: 0 10px 16px;

@@ -20,6 +20,7 @@ export class CouponsListComponent implements OnInit {
 
   @Output() discount = new EventEmitter();
   @Output() showAddons = new EventEmitter();
+  @Output() removeCoupon = new EventEmitter();
 
   @ViewChildren('couponAccordion') couponAccordion : QueryList<AccordionComponent>;
 
@@ -80,6 +81,13 @@ export class CouponsListComponent implements OnInit {
     this.loading = {};
   }
 
+  ngOnChanges(changes) {
+    if(changes.totalAmount && this.totalAmount) {
+      debugger;
+    }
+
+  }
+
   applyCoupon(coupon) {
     this.loading[coupon.code] = true;
     this.loginService.tryCoupon(this.totalAmount, coupon).subscribe((response:any) => {
@@ -95,6 +103,10 @@ export class CouponsListComponent implements OnInit {
           this.couponAccordion.first.toggle();
       }
     })
+  }
+
+  onRemoveCoupon() {
+    this.removeCoupon.emit();
   }
 
   sendToAddons() {

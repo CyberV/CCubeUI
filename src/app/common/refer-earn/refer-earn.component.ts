@@ -43,12 +43,13 @@ export class ReferEarnComponent implements OnInit {
   async tryProfile() {
     
     if (this.slim) {
-    const modal = await this.modalController.create({
-      component: ReferEarnComponent,
-      cssClass: 'refer-modal',
-      componentProps: {}
-    });
-    await modal.present();
+      this.router.navigate(['/refer']);
+    // const modal = await this.modalController.create({
+    //   component: ReferEarnComponent,
+    //   cssClass: 'refer-modal',
+    //   componentProps: {}
+    // });
+    // await modal.present();
     }
   }
 

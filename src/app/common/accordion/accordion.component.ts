@@ -9,24 +9,24 @@ import { scrollElementToTop } from 'app/util/util';
 })
 export class AccordionComponent implements OnInit {
 
-  @Input() title:string;
-  @Input() step:string;
-  @Input() error:boolean;
+  @Input() title: string;
+  @Input() step: string;
+  @Input() error: boolean;
 
   @Input() compact: boolean;
-  @Input() disabled:boolean;
-  @Input() locked:boolean;
-  @Input() defaultOpen:boolean;
-  @Input() label:string;
+  @Input() disabled: boolean;
+  @Input() locked: boolean;
+  @Input() defaultOpen: boolean;
+  @Input() label: string;
 
   @Output() onToggle = new EventEmitter();
 
   @ViewChild('drawerToggle') drawerToggle: ElementRef;
   @ViewChild('drawerPannel') drawerPannel: MatExpansionPanel;
 
-  
-  hasStep:boolean;
-  initDone:boolean;
+
+  hasStep: boolean;
+  initDone: boolean;
 
   constructor() {
 
@@ -44,34 +44,37 @@ export class AccordionComponent implements OnInit {
   ngOnInit() {
 
     if (this.defaultOpen) {
-      setTimeout(()=> {
+      setTimeout(() => {
         this.toggle();
       }, 500);
-     
+
     }
 
   }
 
   ngAfterViewInit() {
-    this.drawerPannel.closed.subscribe(() => {
-      this.onToggle.emit(false);
-    });
-    this.drawerPannel.opened.subscribe(() => {
-      this.onToggle.emit(true);
+    if (this.drawerPannel) {
+      this.drawerPannel.closed.subscribe(() => {
+        this.onToggle.emit(false);
+      });
+      this.drawerPannel.opened.subscribe(() => {
+        this.onToggle.emit(true);
 
-      setTimeout(()=> {
-        let inp:any = this.drawerToggle;
-        scrollElementToTop(inp.nativeElement);
-      }, 100);
-      
-    });
+        if (!this.compact) {
+          setTimeout(() => {
+            let inp: any = this.drawerToggle;
+            scrollElementToTop(inp.nativeElement);
+          }, 100);
+        }
+      });
+    }
   }
 
   toggle() {
     if (this.drawerToggle && this.drawerToggle.nativeElement) {
       this.drawerToggle.nativeElement.click();
     }
-  } 
+  }
 
   onHandleClick(ev) {
     this.onToggle.emit()
@@ -79,8 +82,8 @@ export class AccordionComponent implements OnInit {
   }
 
   ngOnChanges(changes) {
-    this.hasStep = !! (this.step && this.step.length);
-    
+    this.hasStep = !!(this.step && this.step.length);
+
     // if (changes.locked) {
 
     //   if (this.defaultOpen && !this.initDone) {
@@ -91,8 +94,8 @@ export class AccordionComponent implements OnInit {
     //     this.toggle();
     //   }, 200); 
 
-        
-      
+
+
     // }
   }
 

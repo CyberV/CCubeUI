@@ -1,9 +1,9 @@
 <div class="card animate__animated animate__fadeIn">
 
   <div class="">
-    <heading [text]="details.isUnlisted ? '' : 'Please Confirm your details'" showClose="true"></heading>
+    <heading [text]="details.isUnlisted ? '' : 'Please Confirm your details'" showClose="true" [slim]="true"></heading>
     <br />
-    <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush" [class.has-sticky-button]="!details.isUnlisted && !details.carAlreadyActive">
       <li class="list-group-item">
         <div class="row">
           <div class="col-6">
@@ -101,10 +101,20 @@
             Service Total :
           </div>
           <div class="col-6">
-            <span Rs>{{details.discount.discount + totalAmount}}</span>
+            <span Rs>{{serviceTotal}}</span>
           </div>
         </div>
       </li>
+      <li class="list-group-item" *ngIf="(details.bonus && details.bonus > 0)">
+          <div class="row">
+            <div class="col-6">
+              Referral Bonus :
+            </div>
+            <div class="col-6">
+              <span Rs>{{details.bonus}}</span>
+            </div>
+          </div>
+        </li>
       <li class="list-group-item" *ngIf="details.discount && details.discount.discount > 0">
         <div class="row">
           <div class="col-6">
@@ -116,16 +126,7 @@
         </div>
       </li>
 
-      <li class="list-group-item" *ngIf="(details.bonus && details.bonus > 0)">
-        <div class="row">
-          <div class="col-6">
-            Referral Bonus :
-          </div>
-          <div class="col-6">
-            <span Rs>{{details.bonus}}</span>
-          </div>
-        </div>
-      </li>
+
 
 
       <li class="list-group-item">
@@ -166,6 +167,6 @@
     <cta small="true" text="OK" (action)="dismissOnly()"></cta>
 
   </ng-container>
-  <cta *ngIf="!details.isUnlisted && !details.carAlreadyActive" text="Pay" halfWidth="true" sticky="true"
+  <cta *ngIf="!details.isUnlisted && !details.carAlreadyActive" [sticky]="true" text="Pay" halfWidth="true" sticky="true"
     (action)="dismissAndPay()"></cta>
 </div>

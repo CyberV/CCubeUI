@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterUserComponent } from './pages/initial-screens/register-user/register-user.component';
+import { ReferEarnComponent } from './common/refer-earn/refer-earn.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    component: ProfileComponent
+  },
+  {
+    path: 'refer',
     component: ProfileComponent
   },
   {

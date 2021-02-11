@@ -3,10 +3,32 @@
     <ion-toolbar>
 
       <ion-title class="app-header ion-title">
-        <ion-icon class="menu-btn float-left" (click)="toggleMenu()"
+          <ion-icon class="menu-btn float-left" (click)="toggleMenu()"
           *ngIf="isLoggedIn && ['checkout','confirm', 'thanks'].indexOf(context) < 0" name="menu-outline"></ion-icon>
 
-        <span *ngIf="headerType=='text'" class="header-text">{{headerText}}</span>
+        <div class="row" *ngIf="headerType=='text'">
+          <div class="col-2">
+             
+          </div>
+          <div class="col-8">
+              <span class="header-text">{{headerText}}</span>
+        
+          </div>
+          <div class="col-2 notif">
+              <div class="btn-group" (click)="presentPopover($event)">
+                <span >
+                  <ion-icon [ngClass]="{
+                    'animate__animated': true,
+                     'active': notifToggleOpen,
+                    'animate__swing': ready }"  name="notifications-outline"
+                   ></ion-icon>
+                  <span *ngIf="hasNewNotifications" class="notif-badge" [class.show]="ready">&nbsp;</span>
+                </span>
+              </div>
+            </div>
+        </div>
+
+
         <div *ngIf="headerType=='view'">
           <div class="row view-checkout" *ngIf="viewData.viewName=='checkout'">
             <div class="col-4 text">
@@ -91,6 +113,9 @@
         <ion-item lines="none" [class.selected]="context==='profile'" (click)="goTo('profile')">
           <ion-icon name="person-circle-outline"></ion-icon>Profile
         </ion-item>
+        <ion-item lines="none" [class.selected]="context==='refer'" (click)="goTo('refer')">
+            <ion-icon name="wallet-outline"></ion-icon>Refer & Earn
+          </ion-item>
         <ion-item lines="none" (click)="goTo('about-us')">
           <ion-icon name="people-circle-outline"></ion-icon>About Us
         </ion-item>

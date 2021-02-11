@@ -12,6 +12,7 @@ ion-app {
 
     height: 56px;
     padding: 10px;
+    padding-top: 5px;
 
     .header-text {
         letter-spacing: 1px;
@@ -27,19 +28,7 @@ ion-app {
     font-weight: 400;
      text-align: center;
 
-    .notif {
-        ion-icon {
-            font-size: 25px;
-            margin-top: -3px;
-            margin-right: 14px;
-            transition: all 0.2s ease-in;
 
-        }
-
-        .active {
-            color: white;
-        }
-    }
 
     // .payable {
     //     text-align: right;
@@ -48,6 +37,19 @@ ion-app {
     // .text {
     //     text-align: left;
     // }
+}
+
+.notif {
+    ion-icon {
+        font-size: 25px;
+        margin-top: -1px;
+        transition: all 0.2s ease-in;
+
+    }
+
+    .active {
+        color: white;
+    }
 }
 
 .view-dashboard {
@@ -83,7 +85,7 @@ ion-app {
 }
 .menu-btn {
     font-size: 30px;
-    bottom: 12px;
+    top: 15%;
     float: left!important;
     left: 15px;
     z-index: 1;

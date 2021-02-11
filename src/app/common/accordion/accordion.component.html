@@ -7,11 +7,14 @@
           {{step}} </span> <span class="title">{{title}}</span>
       </mat-panel-title>
       <mat-panel-description class="drop price">
-        <span *ngIf="label" class="label" Rs> {{label}} </span>
+        <span *ngIf="label" class="" Rs> {{label}} </span>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div class="panel-content" [class.--no-padding]="hasStep">
-      <ng-content></ng-content>
+
+      <div [class.compact-separator]="compact">
+        <ng-content></ng-content>
+      </div>
     </div>
   </mat-expansion-panel>
   <mat-expansion-panel *ngIf="disabled" class="drop panel-container" disabled>

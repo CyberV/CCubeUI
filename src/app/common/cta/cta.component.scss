@@ -59,14 +59,19 @@
 }
 
 .btn-main {
-    position: fixed;
-    bottom: 0;
+    position: fixed !important;
+    bottom: 0 !important;
     z-index: 10;
     border-radius: 0;
-    left: 0;
+    left: 0 !important;
     width: 96%;
-    left: 2%;
-    bottom: 1%;
+    left: 2% !important;
+    bottom: 1% !important;
+    top: unset !important;
+
+    &.halfWidth {
+        left: 25% !important;
+    }
 
     &.disabled {
         background: $cta-disabled-color;

@@ -27,7 +27,6 @@ export class CarFormComponent implements OnInit {
   
   get regError() {
     let er = ((!this.isModelSelected && (this.regNo.length == 0 && this.findingCar)) ? 'Registration Number is Required.' + console.log('am I here?') : null );
-    console.log('Error', er);
     return er;
   }
 

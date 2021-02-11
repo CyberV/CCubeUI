@@ -347,6 +347,10 @@ export class AppComponent {
         this.router.navigate(['/profile']);
         break;
       }
+      case 'refer': {
+        this.router.navigate(['/refer']);
+        break;
+      }
       case 'service': {
         this.router.navigate(['/dashboard/service']);
         break;
