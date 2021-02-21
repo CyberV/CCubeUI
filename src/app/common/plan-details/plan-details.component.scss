@@ -88,10 +88,14 @@ margin-bottom: 5px;
     .feature {
       .name {
         display: inline-block;
-        max-width: 165px;
+        max-width: 190px;
         text-overflow: ellipsis;
         overflow-x: hidden;
         white-space: nowrap;
+
+        @media screen and (min-width: 400px) {
+          max-width: 235px;
+        }
       }
     }
   }

@@ -13,6 +13,8 @@ import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { ChartComponent } from './chart/chart.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
+
 
 import { ChartsModule } from 'ng2-charts';
 import { ChartViewComponent } from './chart-view/chart-view.component';
@@ -77,6 +79,9 @@ import { CouponsListComponent } from './coupons-list/coupons-list.component';
 import { DocumentListComponent } from './document-list/document-list.component';
 import { AdsListComponent } from './ads-list/ads-list.component';
 import { ReferEarnComponent } from './refer-earn/refer-earn.component';
+import { ImageToolbarComponent } from './image-toolbar/image-toolbar.component';
+import { CounterComponent } from './counter/counter.component';
+import { WarningComponent } from './warning/warning.component';
 
 
 
@@ -139,6 +144,9 @@ import { ReferEarnComponent } from './refer-earn/refer-earn.component';
     DocumentListComponent,
     AdsListComponent,
     ReferEarnComponent,
+    ImageToolbarComponent,
+    CounterComponent,
+    WarningComponent,
 
     // Directives
     RsDirective,
@@ -156,10 +164,12 @@ import { ReferEarnComponent } from './refer-earn/refer-earn.component';
     MatFormFieldModule,
     MatAutocompleteModule,
     NgxMaterialTimepickerModule,
+    NgxIonicImageViewerModule,
     FormsModule,
     MatCheckboxModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    
     
     TooltipModule,
     RouterModule
@@ -221,6 +231,9 @@ import { ReferEarnComponent } from './refer-earn/refer-earn.component';
     DocumentListComponent,
     AdsListComponent,
     ReferEarnComponent,
+    ImageToolbarComponent,
+    CounterComponent,
+    WarningComponent,
     
     //Directives
 

@@ -1,12 +1,12 @@
 <ion-content>
   <div class="container-fluid">
-    <div *ngIf="ready" class="row profile-content">
+    <div *ngIf="ready" class="row profile-content" [class.fullPage]="context!='profile'">
       <div class="offset-md-2 col-md-8">
         <div class="container">
           <spinner *ngIf="!ready" class="text-center" color='blue'></spinner>
           <ng-container *ngIf="ready">
               <div *ngIf="context=='profile'" class="card animate__animated animate__bounceInDown">
-                  <img class="card-img-top" src="assets/icons/user.png" alt="User Image">
+                  <img class="card-img-top" [src]="profilePic" (click)="setProfilePic()" alt="User Image">
                   <div class="card-body">
                       <ul class="list-group list-group-flush" *ngIf="currentUser">
                         
@@ -17,7 +17,7 @@
                             <mobile-input [readonly]="true" name="Email" [(value)]="currentUser.email"> </mobile-input>
                         
                       </ul>
-                      <refer-earn slim="true"></refer-earn>
+                      <refer-earn slim="true" noPadding="true"></refer-earn>
                   </div>
                   <div class="card-body">
                     <cta text="Log Out" (action)="logOutUser()"></cta>
@@ -26,6 +26,18 @@
       
                 <div *ngIf="context=='refer'">
                   <refer-earn></refer-earn>
+                </div>
+
+                <div *ngIf="context=='contact'">
+                  <heading text="For Feedback, Appreciation or Requests"></heading>
+                  <br/>
+                  <h3> Write to us @ <a href="mailto:support@ccubeco.com">support@ccubeco.com</a></h3>
+                  <h3> Call us @ <a href="tel:7827852332">78278 52332</a></h3>
+                  
+                  <a href="https://wa.me/917827852332"><img src="assets/whatsapp.png"></a>
+                  <h3>  Or drop us a message on <a href="https://wa.me/917827852332">
+                   Whattsapp</a></h3>
+
                 </div>
           </ng-container>
 

@@ -16,6 +16,7 @@ export class CtaComponent implements OnInit {
   @Input() icon:string;
   @Input() color:string;
   @Input() halfWidth : boolean;
+  @Input() capitalize: boolean;
 
   @Input() subtext: string;
   @Input() secondaryCta:string;
@@ -37,7 +38,7 @@ export class CtaComponent implements OnInit {
     this.sticky = false;
     this.color="inherit";
     this.halfWidth = false;
-
+    this.capitalize = false;
     this.small = false;
     this.icon="";
   }

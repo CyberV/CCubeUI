@@ -153,7 +153,7 @@
 
         </div>
 
-        <div class="row content-row" *ngIf="user.referralBonusPending > 0">
+        <div class="row content-row" *ngIf="(user.referralBonusPending > 0) || (discount.discount > 0)">
             <div class="col-8">
               <ion-icon class="big-icon vertical-center-text" name="cart-outline"></ion-icon> <span
                 class="icon-text">Cart Total</span>

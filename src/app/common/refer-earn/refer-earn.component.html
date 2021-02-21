@@ -4,14 +4,14 @@
     <span><ion-icon name="close-outline" ></ion-icon></span>
   </div>
 
-  <heading text="Refer & Earn" align="center"></heading>
+  <heading *ngIf="slim" text="Refer & Earn" align="center"></heading>
 
   <mobile-input *ngIf="!slim" [readonly]="true" name="Referral Code" [(value)]="currentUser.refererCode">
   </mobile-input>
   <br />
   <!-- <span>Share this Referral code with your friends and Earn Great Rewards !</span> -->
 
-  <div [class.slim-container]="slim">
+  <div [class.slim-container]="slim" [class.--no-padding]="noPadding">
 
 
     <div class="money">

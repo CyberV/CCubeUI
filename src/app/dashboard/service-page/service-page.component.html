@@ -16,7 +16,9 @@
           <div class="car-box" [class.active]="selectedIndex == i" (click)="selectCar(i)">
 
             <ion-label class="car-image"><img [src]="payment.payments[0].car.image" /></ion-label>
-            <ion-badge *ngIf="getNotificationCount(payment.payments[0].car.regNo) > 0"> <ion-icon name="notifications-outline"></ion-icon> {{getNotificationCount(payment.payments[0].car.regNo)}}</ion-badge>
+            <ion-badge *ngIf="getNotificationCount(payment.payments[0].car.regNo) > 0">
+              <ion-icon name="notifications-outline"></ion-icon> {{getNotificationCount(payment.payments[0].car.regNo)}}
+            </ion-badge>
           </div>
           <!-- <mat-card class="card addon-card animate__animated animate__flipInX">
             
@@ -43,26 +45,54 @@
   <div class="row car-info-container">
     <div class="col-12">
       <ng-container *ngIf="!loading &&  payments.length == 0">
-        
+
         <heading text="Looks like you haven't registered a car yet." align="center"></heading>
         <div class="--padding-x">
-            <cta text="Add Car"(action)="addCar()"></cta>
+          <cta text="Add Car" (action)="addCar()"></cta>
         </div>
-        <br/>
+        <br />
         <book-demo></book-demo>
       </ng-container>
       <ng-container *ngIf="payments.length">
         <ion-slides #planSlider [options]="planSliderOptions">
 
           <ion-slide *ngFor="let payment of payments; let i = index" (mouseup)="demoEvent($event)">
-            <purchased-plan [style.width.%]="100" [subscription]="payment" (renewPlan)="handleRenewPlan($event)" [payment]="payment.payments[0]"
-              [car]="payment.payments[0].car" [plan]="payment.payments[0].plan"></purchased-plan>
+            <purchased-plan [style.width.%]="100" [subscription]="payment" (renewPlan)="handleRenewPlan($event)"
+              [payment]="payment.payments[0]" [car]="payment.payments[0].car" [plan]="payment.payments[0].plan">
+            </purchased-plan>
           </ion-slide>
 
         </ion-slides>
 
         <ads-list></ads-list>
-        
+
+        <div class="row --padding-x info-row" *ngIf="selectedSubscription.isRcMissing">
+          <div class="col-12 tabs-container">
+            <mat-accordion>
+              <mat-expansion-panel class="drop">
+                <mat-expansion-panel-header class="drop">
+                  <mat-panel-title>
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                     <span
+                      class="header-text">Information Required!</span>
+                  </mat-panel-title>
+                  <mat-panel-description class="drop">
+
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                  <heading>Your car details are not verified. </heading>
+                  <heading>Please share your car's Registration Certificate immediately.</heading>
+
+                  <cta small="true" text="Upload Now" (action)="shareRc()"></cta>
+              </mat-expansion-panel>
+
+            </mat-accordion>
+          </div>
+        </div>
+
+        <br/>
+
         <div class="row --padding-x">
           <div class="col-12 tabs-container">
             <mat-accordion>
@@ -76,8 +106,11 @@
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                <weekly-schedule *ngIf="selectedSubscription.schedule.length" [hasAvailedFreeReschedule]="selectedSubscription.hasAvailedFreeReschedule" [lastDate]="selectedPayment.expiresOn" [schedule]="selectedSubscription.schedule"></weekly-schedule>
-                <heading *ngIf="!selectedSubscription.schedule.length"  text="Schedule is Under Processing. Please wait for Plan Activation."></heading>
+                <weekly-schedule *ngIf="selectedSubscription.schedule.length"
+                  [hasAvailedFreeReschedule]="selectedSubscription.hasAvailedFreeReschedule"
+                  [lastDate]="selectedPayment.expiresOn" [schedule]="selectedSubscription.schedule"></weekly-schedule>
+                <heading *ngIf="!selectedSubscription.schedule.length"
+                  text="Schedule is Under Processing. Please wait for Plan Activation."></heading>
 
               </mat-expansion-panel>
               <mat-expansion-panel class="drop">
@@ -89,8 +122,7 @@
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
-                yo
-                <document-list  [carRegNo]="selectedCar.regNo" ></document-list>
+                <document-list [carRegNo]="selectedCar.regNo"></document-list>
 
 
               </mat-expansion-panel>
@@ -130,14 +162,16 @@
 
 <refer-earn [slim]="true"></refer-earn>
 
-<ng-container *ngIf="!loading && payments.length > 0" >
-  <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" class="--padding-y" (upgradeNow)="handleUpgradePlan($event)"
-    (showDetails)="showPlanDetails($event)"></upgrade-slider>
+<ng-container *ngIf="!loading && payments.length > 0">
+  <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" class="--padding-y"
+    (upgradeNow)="handleUpgradePlan($event)" (showDetails)="showPlanDetails($event)"></upgrade-slider>
 
   <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
 
-  <addon-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPayment.plan" [selectedAddons]="subAddons" [subscriptionAddons]="selectedSubscription.addons" [active]="true"  (showDetails)="openAddon($event)" (addonSelected)="onAddonSelected($event)"></addon-slider>
+  <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons"
+    [subscriptionAddons]="selectedSubscription.addons" [active]="true" (showDetails)="openAddon($event)"
+    (addonSelected)="onAddonSelected($event)"></addon-slider>
 
-  <adhoc-slider [selectedAdhocs]="subAdhocs"  active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
-  
+  <adhoc-slider [selectedAdhocs]="subAdhocs" active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
+
 </ng-container>

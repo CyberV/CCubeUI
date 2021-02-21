@@ -16,32 +16,32 @@ export class CarFormComponent implements OnInit {
   showCarSelector: boolean;
   findingCar: boolean;
   loading: boolean;
-  currentCar:any;
-  showFileUploader:boolean;
+  currentCar: any;
+  showFileUploader: boolean;
 
-  isModelSelected:boolean;
+  isModelSelected: boolean;
 
   @Input() regNo: any;
   maker: string;
   model: string;
-  
+
   get regError() {
-    let er = ((!this.isModelSelected && (this.regNo.length == 0 && this.findingCar)) ? 'Registration Number is Required.' + console.log('am I here?') : null );
+    let er = ((!this.isModelSelected && (this.regNo.length == 0 && this.findingCar)) ? 'Registration Number is Required' : null);
     return er;
   }
 
-  @ViewChildren('ctaCar') ctaCar : QueryList<HTMLElement>;
+  @ViewChildren('ctaCar') ctaCar: QueryList<HTMLElement>;
 
 
   constructor(
-    private carService:CarService
+    private carService: CarService
   ) {
     this.showCarSelector = false;
     this.findingCar = false;
     this.loading = false;
     this.verifyOnly = false;
     this.showFileUploader = false;
-    this.regNo="";
+    this.regNo = "";
     this.isModelSelected = false;
   }
 
@@ -80,7 +80,7 @@ export class CarFormComponent implements OnInit {
     if (!this.regNo) {
       this.regNo = "";
     }
-    if (this.regNo && this.regNo.length > 6 && this.isRegNoValid) {
+    if (!this.showFileUploader && this.regNo && this.regNo.length > 6 && this.isRegNoValid) {
       this.findingCar = true;
     }
   }
@@ -111,21 +111,38 @@ export class CarFormComponent implements OnInit {
     if (error.vehicleTypeMismatch) {
 
     } else {
-      this.showFileUploader = true;
+      this.currentCar = this.carService.getCurrentCar();
+
+      if (this.currentCar) {
+        this.currentCar.regNo = this.regNo;
+
+        this.carService.changeCar(this.currentCar);
+        this.findingCar = false;
+
+        this.showFileUploader = true;
+
+        setTimeout(() => {
+          this.goToPlans(this.currentCar);
+        }, 2000);
+      } else {
+        this.showFileUploader = true;
+        this.regNo="";
+        this.findingCar = false;
+      }
     }
-    
+
   }
 
   goToPlans(carDetails) {
 
-    
+
 
     if (!this.verifyOnly) {
       this.carService.changeCar(carDetails);
     }
 
 
-    this.carReady.emit({...carDetails, regNo: this.regNo ? this.regNo.trim() : ''});
+    this.carReady.emit({ ...carDetails, regNo: this.regNo ? this.regNo.trim() : '' });
 
     //this.router.navigate(['plans'], { state: carDetails});
   }

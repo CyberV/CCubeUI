@@ -1,18 +1,44 @@
 <ion-content fullscreen="true" mnFullpage>
   <div class="container-fluid hidden-xs desktop-container --no-padding">
     <div class="row">
-      <div class="offset-md-2 col-md-8 col-xs-12 header" >
-        <div  class="section" id="s1" name="page1">
+      <div class="offset-md-2 col-md-8 col-xs-12 header">
+        <div class="section" id="s1" name="page1">
           <span *ngIf="startShow" [style.display]="startShow ? 'visible': 'none'" class="logo-container"><img
               class="logo " src="./assets/whitell.png" alt="CCubeLogo" border="0" />
           </span><br />
 
-          <heading text="Complete Car Care" align="center" size="30" color="#00a4a7" capitalize="true"></heading>
-          <heading text="At your Doorstep!" align="center" color="#ec6b1e" slim="true"></heading>
+          <div *ngIf="!showSlides" class="animate__animated" [class.animate__backOutLeft]="beginAnimation">
+              <heading text="Complete Car Care" align="center" size="30" color="#00a4a7" capitalize="true"></heading>
+              <heading text="At your Doorstep!" align="center" color="#ec6b1e" slim="true"></heading>
+
+              <counter></counter>
+
+              <div class="entry">
+                  <img src="./assets/slides/0.png">
+                  <div class="text">
+                    
+                    <cta text="Get Started" style="position: relative; left: -5px;" (action)="start()"></cta>
+                  </div>
+              </div>
+            </div>
+
+          <div *ngIf="showSlides" class="animate__animated animate__backInRight">
+
+
+              <carousel></carousel>
+        <!-- <div class="sticky" (click)="goToPlans(true)">Book A Demo</div> -->
+
+              
+          
+          </div>
+          <cta *ngIf="showSlides" sticky="true" text="Sign Up Now" (action)="goToPlans()"></cta>
+         
+
+          
           <!-- <typeaway skipAnimation="true" class="title1" *ngIf="startShow" text="Complete Car Care"
             (finished)="doorstep = true;"></typeaway>
           <br /> -->
-          <div  class="row ctaRow">
+          <!-- <div  class="row ctaRow">
               <p>
                 Welcome to the new world and enjoy the ultimate car cleaning experience.
               </p>
@@ -28,13 +54,35 @@
                 Nature and saving a lot of water during the process.
               </p>
 
+            </div> -->
+        </div>
+
+
+
+        <div clsass="section-2">
+
+        </div>
+
+
+
+     
+
+
+        <!-- <div class="row">
+            <div class="offset-2 col-4">
+                <img class="logo " src="./assets/icons/save-water.gif" alt="Save Water with CCube" border="0" />
             </div>
-          </div>
+            <div class="col-4" style="margin-top: 5%">
+                <heading text="Come! Join the Revolution! " align="center"></heading>
+            </div>
+          </div> -->
 
-          <div class="sticky" (click)="goToPlans(true)">Book A Demo</div>
 
+
+
+        <!-- 
         <div  class="section" id="s2" name="page2">
-          <!-- <carousel></carousel> -->
+         
           <ion-slides [options]="slideOpts">
             <ion-slide class="feature-slide" *ngFor="let feature of featureList; let i = index">
                 <feature-card class="" [title]="feature.title"
@@ -46,11 +94,11 @@
           <div class="swiper-pagination"></div>
 
 
-        </div>
+        </div> -->
 
 
 
-        <p class="section-heading"><strong>OUR CONTRIBUTIONS TO SOCIETY</strong></p>
+        <!-- <p class="section-heading"><strong>OUR CONTRIBUTIONS TO SOCIETY</strong></p>
         <div  class="section ctaRow" id="s3" name="page3">
           
 
@@ -68,7 +116,7 @@
           <div style="color:#ec6e22;display:flex;justify-content:center;align-items:center; margin-bottom: 2em; ">
             <div><span class="btn btn-block"  style="color:#ec6e22;" (click)="goToPlans(true)"
                 >Book A Demo</span></div>
-          </div>
+          </div> -->
 
 
 
@@ -77,7 +125,7 @@
   </div>
 </ion-content>
 
-  <!-- <div *ngIf="knowmore" class="row ctaRow">
+<!-- <div *ngIf="knowmore" class="row ctaRow">
       <div class="col-12">
         <div style="display:flex;justify-content:center;align-items:center;">
           <div><button class="btn btn-block animate__animated animate__flipInX"

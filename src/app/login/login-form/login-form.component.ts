@@ -394,7 +394,7 @@ export class LoginFormComponent implements OnInit {
 
   createUser() {
     if (!this.validateData(this.newUser)) {
-      return;
+      return false;
     }
 
     this.srvcLogin.createUser(this.newUser.mobile, this.newUser.name, this.newUser.password, this.newUser.email, this.newUser.city, this.newUser.referedBy)

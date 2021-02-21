@@ -7,6 +7,8 @@ import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 import { NotificationService } from 'app/services/notification.service';
 import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
+import { ShareService } from 'app/services/share.service';
+import { share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-service-page',
@@ -75,6 +77,7 @@ export class ServicePageComponent implements OnInit {
     private modalController: ModalController,
     public toastController: ToastController,
     private carService: CarService,
+    private shareService:ShareService,
     private notificationService: NotificationService
   ) {
 
@@ -224,6 +227,12 @@ export class ServicePageComponent implements OnInit {
   }
 
   ionViewWillEnter() {
+  }
+
+  async shareRc() {
+    let shared = await this.shareService.shareRc(this.selectedCar.regNo);
+
+    //alert('Shared ' +  shared.toString());
   }
 
   ngOnChanges(changes) {

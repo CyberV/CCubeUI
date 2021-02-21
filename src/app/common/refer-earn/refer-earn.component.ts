@@ -14,6 +14,8 @@ export class ReferEarnComponent implements OnInit {
 
   @Input() slim:boolean;
 
+  @Input() noPadding:boolean;
+
   currentUser:any;
   config: any;
   milestoneLength: number;
@@ -37,6 +39,7 @@ export class ReferEarnComponent implements OnInit {
       this.detailsOpen = false;
       this.slim = false;
       this.appConfig = {};
+      this.noPadding = false;
     }
 
 

@@ -12,6 +12,14 @@
     background: transparent linear-gradient(180deg, #00A4A7 0%, #009295 22%, #005254 100%) 0% 0% no-repeat padding-box;
 }
 
+.normal-text {
+    text-transform: none
+}
+
+.capital-text {
+    text-transform: capitalize;
+}
+
 .btn-red {
     color:red !important;
     border-color: red !important;

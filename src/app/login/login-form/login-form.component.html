@@ -35,13 +35,20 @@
 </div>
 
 <div *ngIf="context=='details'" class="animate__animated animate__fadeInLeft details-container">
-  <mobile-input  [error]="errors ? errors.name : null" (enterKey)="focusTo('inpRef')" type="text" name="Full Name" [(value)]="newUser.name" (valueChange)="errors.name = null" ></mobile-input>
-  <mobile-input  #inpRef (enterKey)="focusTo('inpEmail')" type="text" name="Referral Code" [(value)]="newUser.referedBy" ></mobile-input>
-  <mobile-input #inpEmail  (enterKey)="focusTo('inpCity')" [error]="errors ? errors.email : null" type="email" name="Email Id" [(value)]="newUser.email" (valueChange)="validateEmail($event)"></mobile-input>
-  <select-city  #inpCity  (enterKey)="focusTo('inpPass')"  [error]="errors ? errors.city : null" [(city)]="newUser.city"  (cityChange)="errors.city = null"></select-city>
-  <mobile-input #inpPass (enterKey)="focusTo('inpConfirmPass')" [error]="errors ? errors.password : null" type="password" name="Password" [(value)]="newUser.password"  (valueChange)="errors.password = null" ></mobile-input>
+  <mobile-input [mandatory]="true" [error]="errors ? errors.name : null" (enterKey)="focusTo('inpEmail')" type="text" name="Full Name" [(value)]="newUser.name" (valueChange)="errors.name = null" ></mobile-input>
+  <mobile-input [mandatory]="true" #inpEmail  (enterKey)="focusTo('inpCity')" [error]="errors ? errors.email : null" type="email" name="Email Id" [(value)]="newUser.email" (valueChange)="validateEmail($event)"></mobile-input>
+  <select-city  [mandatory]="true" #inpCity  (enterKey)="focusTo('inpPass')"  [error]="errors ? errors.city : null" [(city)]="newUser.city"  (cityChange)="errors.city = null"></select-city>
+  <mobile-input [mandatory]="true" #inpPass (enterKey)="focusTo('inpConfirmPass')" [error]="errors ? errors.password : null" type="password" name="Password" [(value)]="newUser.password"  (valueChange)="errors.password = null" ></mobile-input>
   <!-- <mobile-input #inpConfirmPass (enterKey)="focusTo('ctaSignup')" [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input> -->
-  <mobile-input #inpConfirmPass  [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input>
+  <mobile-input [mandatory]="true" #inpConfirmPass (enterKey)="focusTo('inpRef')"  [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input>
+  <mobile-input  #inpRef type="text" name="Referral Code" [(value)]="newUser.referedBy" ></mobile-input>
+  <br/>
+  <div class="row">
+    <div class="col-12">
+        <span class="tip">PRO TIP: </span>Use a friend's Referral Code to win a guaranteed Bonus on Plan Purchase.
+    </div>
+
+  </div>
   
 
 

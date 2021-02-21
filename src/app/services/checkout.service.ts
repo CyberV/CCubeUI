@@ -11,13 +11,15 @@ import { WindowRefService } from 'app/window-ref.service';
 import { UserService } from './user.service';
 
 // Test
-// const api_key = "rzp_test_lzrrcON3EuW3nI";
-// const api_secret = "caFrU097wpTYMi0xQgcCfonJ"
+const api_key = "rzp_test_iw0QQKe6eyEP2g";
+const api_secret = "xa1TxbgErELViPesDtnEcgPx"
 
 // Live
-const api_key = "rzp_live_TuRL1kcjKl8uWp";
-const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
-const BYPASS_PAYMENT = true;
+// const api_key = "rzp_live_TuRL1kcjKl8uWp";
+// const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
+
+
+const BYPASS_PAYMENT = false;
 
 
 @Injectable({
@@ -107,8 +109,8 @@ export class CheckoutService {
       "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       "currency": "INR",
       "name": "CCube",
-      "description": "Test Transaction",
-      "image": "https://example.com/your_logo",
+      "description": "Service Payment to CCube",
+      "image": "https://ccubeco.com/assets/ccube.png",
       "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       "handler": (response, error) => {
         if (error) {

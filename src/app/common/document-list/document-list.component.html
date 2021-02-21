@@ -1,8 +1,8 @@
-{{documents[0].name}} {{!!documents[0].image}} {{documents[0].localUrl}}<br/>
+<!-- {{documents[0].name}} {{!!documents[0].image}} {{documents[0].localUrl}}<br/>
 {{documents[1].name}} {{!!documents[1].image}} {{documents[1].localUrl}}<br/>
 {{documents[2].name}} {{!!documents[2].image}} {{documents[2].localUrl}}<br/>
-{{documents[3].name}} {{!!documents[3].image}} {{documents[3].localUrl}}<br/>
-<ion-slides [options]="options">
+{{documents[3].name}} {{!!documents[3].image}} {{documents[3].localUrl}}<br/> -->
+<ion-slides #slider [options]="options">
 
   <ion-slide *ngFor="let doc of documents; let i = index;">
     <mat-card class="card addon-card animate__animated animate__flipInX" (click)="openFile(doc, i)">
@@ -17,4 +17,30 @@
       </div>
     </mat-card>
   </ion-slide>
+  <ion-slide (click)="addNewDoc()">
+    <mat-card class="card addon-card animate__animated animate__flipInX" >
+        <img class="card-img-top " [src]="'assets/icons/document.png'">
+        <!-- <ion-icon class="card-icon-top" name="add-circle-outline"></ion-icon> -->
+      <div class="doc-name">
+        <div >
+          <span class="card-text one-edge-shadow" >Add New Document</span>
+        </div>
+      </div>
+    </mat-card>
+  </ion-slide>
 </ion-slides>
+
+<ng-container *ngIf="addingNewDoc">
+  <mobile-input name="Document Name" [(value)]="newDoc.name" type="text"></mobile-input>
+  <subheading text="Name must be Unique"></subheading>
+
+  <cta  capitalize="true" small="true" text="Select File" (action)="addNewDoc(newDoc.name)"></cta>
+
+</ng-container>
+
+<!-- <ion-img-viewer *ngIf="documents[0].image"
+  title="Demo" 
+  text="Component" 
+  scheme="dark" 
+  [src]="documents[0].image">
+</ion-img-viewer> -->

@@ -10,6 +10,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 //import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalPageModule } from './modal/modal.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplashScreen } from '@capacitor/core';
+import { IonicStorageModule } from '@ionic/storage';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -65,6 +67,7 @@ export function socialConfigs() {
     CommonComponentsModule, 
     IonicModule, 
     IonicModule.forRoot(), 
+    IonicStorageModule.forRoot(),
     AppRoutingModule, 
     SocialLoginModule, 
     HttpClientModule, 
@@ -73,6 +76,7 @@ export function socialConfigs() {
     ModalPageModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxIonicImageViewerModule 
 
   ],
   providers: [

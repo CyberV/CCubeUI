@@ -39,8 +39,8 @@
             </div>
           </div>
           <div class="row" *ngIf="viewData.viewName=='home'">
-              <div class="offset-1 col-5 --uppercase">
-                  <span class="link" (click)="goTo('book')">Book Demo</span>
+              <div class="offset-1 col-5">
+                  <span class="link" (click)="goTo('book')">Book A Demo</span>
                 </div>
             <div class="col-3">
               <span class="link" (click)="goTo('signup')">Signup</span>
@@ -84,7 +84,7 @@
       <div class="top">
         <div class="row ">
           <div class="col-3 user-profile-image">
-            <img src="assets/icons/user.png">
+            <img [src]="profilePic">
           </div>
           <div class="col-9 ">
             <div class="row user-row">
@@ -115,9 +115,6 @@
         </ion-item>
         <ion-item lines="none" [class.selected]="context==='refer'" (click)="goTo('refer')">
             <ion-icon name="wallet-outline"></ion-icon>Refer & Earn
-          </ion-item>
-        <ion-item lines="none" (click)="goTo('about-us')">
-          <ion-icon name="people-circle-outline"></ion-icon>About Us
         </ion-item>
         <ion-item lines="none" (click)="goTo('contact-us')">
           <ion-icon name="mail-outline"></ion-icon>Contact Us

@@ -60,6 +60,9 @@ export class CheckoutComponent implements OnInit {
   page: string;
   savedLocation: any;
   discount: any;
+  timeSaved:boolean;
+
+  isRcMissing:boolean;
 
   get netPayable () {
     return this.detailsComp.first ? this.detailsComp.first.getTotalPayable() : 0;
@@ -90,6 +93,7 @@ export class CheckoutComponent implements OnInit {
     this.carMismatch = false;
     this.carIdentified = false;
     this.page = '1';
+    this.isRcMissing = false;
 
     this.retryAddon = false;
     this.loading = false;
@@ -107,6 +111,7 @@ export class CheckoutComponent implements OnInit {
     this.availableCoupons = [];
     this.appliedCoupons = [];
     this.mode = {};
+    this.timeSaved = false;
     this.isUnlisted = false;
     this.savedLocation = {
       houseNo: '',
@@ -166,6 +171,7 @@ export class CheckoutComponent implements OnInit {
         }
         resolve(this.discount);
       } else {
+        this.onRemoveCoupon();
         resolve();
       }
     })
@@ -445,7 +451,7 @@ export class CheckoutComponent implements OnInit {
         }, 200);
       }
 
-
+      this.completeVerification(true);
     }
 
     changePlan() {
@@ -462,10 +468,24 @@ export class CheckoutComponent implements OnInit {
       await this.refreshCarAndPlans();
     }
 
-    completeVerification() {
+    completeVerification(fromTime = false, saveTime=false) {
 
-      this.verificationComplete = true;
-      this.drawerTime.first.toggle();
+      if (saveTime) {
+        this.timeSaved = true;
+      }
+
+      if (this.timeSaved && this.currentLocation&& (this.currentLocation.length || this.currentLocation.society.length) && this.carIdentified && !this.carMismatch) {
+        this.verificationComplete = true;
+      } else {
+        this.verificationComplete = false;
+      }
+
+      if (fromTime) {
+        this.drawerTime.first.toggle();
+
+
+        
+      }
 
       // setTimeout(()=>{
       //   //this.showConfirmation();
@@ -489,7 +509,7 @@ export class CheckoutComponent implements OnInit {
 
 
             if (this.savedLocation && this.savedLocation.houseNo.length) {
-              this.completeVerification();
+              this.completeVerification(true);
             } else {
               setTimeout(() => {
                 this.drawerLocation.first.toggle();
@@ -517,6 +537,7 @@ export class CheckoutComponent implements OnInit {
           let payload: any = {
             phone: this.currentUser.phone,
             plan: updatedPlan,
+            isRcMissing : this.isRcMissing,
             car: this.selectedCar,
             addons: this.includedAddons,
             adhocs: this.includedAdhocs,
@@ -666,6 +687,10 @@ export class CheckoutComponent implements OnInit {
 
       if (this.context == 'confirm') {
         this.order = await this.planService.getCurrentOrder();
+          this.order.isRcMissing = this.isRcMissing;
+          this.order.car.regNo = this.selectedCar.regNo;
+          this.order = await this.planService.lockCurrentOrder(this.order);
+        
       } else {
         await this.applyCoupon();
 
@@ -706,8 +731,10 @@ export class CheckoutComponent implements OnInit {
 
     verifyCar(carDetails) {
 
-      if (!carDetails.maker) {
+      this.isRcMissing = false;
+      if (!carDetails.fuelType) {
         // Car API Failed. fallback to RC document
+        this.isRcMissing = true;
         this.carIdentified = true;
         this.carMismatch = false;
         let regNo = carDetails.regNo;
@@ -740,6 +767,8 @@ export class CheckoutComponent implements OnInit {
         this.carService.changeCar(this.updatedCarDetails);
         this.selectedCar = this.carService.getCurrentCar();
       }
+
+      this.completeVerification();
     }
 
   }

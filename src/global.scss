@@ -55,8 +55,8 @@
 // }
 
 .plans-table-modal .modal-wrapper{
-  height:75%;
-  top: 25%;
+  height:70%;
+  top: 30%;
   position: absolute;
   display: block;
   border-top-left-radius: 30px;
@@ -76,6 +76,42 @@
   overflow-y:auto;
   overflow-x: hidden;
   color: black;
+}
+
+.ion-img-viewer {
+  height: 90%;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  .modal-wrapper {
+    //height: 90%;
+    top: 0;
+    position: absolute;
+    left: 0;
+  }
+}
+
+.ion-img-toolbar {
+  z-index: 2000 !important;
+  height: 10%;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    top: unset;
+
+
+  .modal-wrapper {
+    //height: 10%;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    color: white;
+    font-size: 26px;
+    width: 100%;
+    background: black;
+    padding: 30px 10px;
+  }
 }
 
 .refer-modal .modal-wrapper {

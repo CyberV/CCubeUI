@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   createUser() {
     if (this.loginForm.first) {
       this.loading = true;
-      this.loginForm.first.createUser();
+      this.loading = this.loginForm.first.createUser();
     }
     
   }

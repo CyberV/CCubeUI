@@ -37,7 +37,7 @@ ion-slide:nth-of-type(0){
   margin-left: 15px;
 }
 
-.card-img-top {
+.card-img-top, .card-icon-top {
   height: 185px;
   object-fit: cover;
   border-radius: 10px;
@@ -102,7 +102,7 @@ ion-slide:nth-of-type(0){
         display: block;
         font-size: 14px;
         max-height: 40px;
-        background: #01a3a68c;
+        background: $primary-color;
         color: white;
         position: relative;
         /* margin-top: -31px; */

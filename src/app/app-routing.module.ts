@@ -16,10 +16,6 @@ const routes: Routes = [
     loadChildren: () => import ('./leads/leads.module').then(m => m.LeadsModule)
   },
   {
-    path: 'pages',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
     path: 'home',
     component: HomeComponent
   },
@@ -33,6 +29,10 @@ const routes: Routes = [
   },
   {
     path: 'refer',
+    component: ProfileComponent
+  },
+  {
+    path: 'contact',
     component: ProfileComponent
   },
   {

@@ -21,6 +21,8 @@ import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 import { Initialize } from 'app/common/common.service';
 import { NotificationService } from './services/notification.service';
 import { rebeccapurple } from 'color-name';
+import { DocumentService } from './services/document.service';
+import { runInThisContext } from 'vm';
 
 declare var $;
 @Component({
@@ -47,6 +49,7 @@ export class AppComponent {
   ready:boolean;
 
   notifToggleOpen:boolean;
+  profilePic: any;
 
   constructor(
     private platform: Platform,
@@ -56,6 +59,7 @@ export class AppComponent {
     private menu: MenuController,
     private userService: UserService,
     private alertController: AlertController,
+    private documentService:DocumentService,
     private carService: CarService,
     public toastController: ToastController,
     private popoverController:PopoverController,
@@ -109,6 +113,8 @@ export class AppComponent {
   }
 
   async ngOnInit() {
+
+     this.profilePic = await this.documentService.getProfilePicture();
 
     this.ready = false;
     console.log('Before Init in APP')
@@ -243,7 +249,9 @@ export class AppComponent {
     //console.log('Deactivated', data);
   }
 
-  onActivate(comp) {
+  async onActivate(comp) {
+
+    this.profilePic = await this.documentService.getProfilePicture();
 
     //this.notificationService.saveNewNotification({title:'Congratulations', 'body': 'Sample Notif', data: JSON.stringify({car: {"model":"Duster","price":"Rs. 8.49 Lakh","details":"1498 cc | 20 kmpl | Petrol","bodyType":"suv","image":"./assets/icons/makers/models/149.png","id":149,"searchedBy":["9560879722"],"ownedBy":[],"missing":false,"_id":"5f9884d25d45340018b88841","carId":"149","maker":"RENAULT","regNo":"hr51bl0139","fuelType":"DIESEL","registeredOn":"11/23/2016","year":2016,"ownerName":"VIKRANT SIWACH","variant":"RENAULT DUSTER","fuelNorms":"BHARAT STAGE IV","chassisNo":"MEEHSRAWEG90XXXXX","engineNo":"K9KF830E0XXXXX","insuranceUpto":"2020-11-28T00:00:00.000Z","fitness":"2031-11-04T00:00:00.000Z","vehicleType":"MOTOR CAR (LMV)","age":"3 years","__v":0,"name":"duster"}, msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}})});
 
@@ -349,6 +357,10 @@ export class AppComponent {
       }
       case 'refer': {
         this.router.navigate(['/refer']);
+        break;
+      }
+      case 'contact-us': {
+        this.router.navigate(['/contact']);
         break;
       }
       case 'service': {

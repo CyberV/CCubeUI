@@ -6,6 +6,11 @@
 
 .addon-info {
   text-align: center;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 200;
+  padding-bottom: 10px;
 }
 
 .startLabel {

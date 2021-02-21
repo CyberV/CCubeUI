@@ -34,35 +34,35 @@ export class SelectedCarComponent implements OnInit {
   ngOnInit() {}
 
   ngOnChanges() {
-    // if (this.car) {
-    //   switch(this.car.bodyType.toLowerCase()) {
-    //     case 'hatchback': {
-    //       this.displayType = 'Hatchback';
-    //       break;
-    //     }
-    //     case 'phatchback': {
-    //       this.displayType = 'Premium Hatchback';
-    //       break;
-    //     }
-    //     case 'sedan': {
-    //       this.displayType = 'Sedan';
-    //       break;
-    //     }
-    //     case 'csuv': {
-    //       this.displayType = this.car.displayType == 'crossover' ? 'Crossover' : 'Compact SUV';
-    //       break;
-    //     }
-    //     case 'suv': {
-    //       this.displayType = this.car.displayType == 'mpv' ? 'MPV' : 'SUV';
-    //       break;
-    //     }
-    //     case 'luxury': {
-    //       this.displayType = 'Luxury Car';
-    //       break;
-    //     }
-    //     default:;
-    //   }
-    // }
+    if (this.car) {
+      switch(this.car.bodyType.toLowerCase()) {
+        case 'hatchback': {
+          this.displayType = 'Hatchback';
+          break;
+        }
+        case 'phatchback': {
+          this.displayType = 'Premium Hatchback';
+          break;
+        }
+        case 'sedan': {
+          this.displayType = 'Sedan';
+          break;
+        }
+        case 'csuv': {
+          this.displayType = this.car.displayType == 'crossover' ? 'Crossover' : 'Compact SUV';
+          break;
+        }
+        case 'suv': {
+          this.displayType = this.car.displayType == 'mpv' ? 'MPV' : 'SUV';
+          break;
+        }
+        case 'luxury': {
+          this.displayType = 'Luxury Car';
+          break;
+        }
+        default:;
+      }
+    }
   }
 
 }

@@ -1,0 +1,14 @@
+@import "src/variables.scss";
+
+.imageOptions {
+    text-align: center;
+    top: 22px;
+    left: -10px;
+    position: relative;
+
+    ion-icon {
+      color: $primary-color;
+      top: 3px;
+      position: relative;
+    }
+}

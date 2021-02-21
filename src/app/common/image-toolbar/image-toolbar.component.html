@@ -1,0 +1,21 @@
+<div class='imageOptions animate__animated animate__bounceInUp'>
+  <div class='row' *ngIf="!showDelete">
+    <div class='col-6' (click)="onAction('share')">
+      <ion-icon name='share-social-outline'></ion-icon> Share
+    </div>
+    <div class='col-6' (click)="onAction('update')">
+      <ion-icon name='refresh-outline'></ion-icon> Update
+    </div>
+  </div>
+  <div class='row' *ngIf="showDelete">
+    <div class='col-4' (click)="onAction('share')">
+      <ion-icon name='share-social-outline'></ion-icon> Share
+    </div>
+    <div class='col-4 --no-padding' (click)="onAction('update')">
+      <ion-icon name='refresh-outline'></ion-icon> Update
+    </div>
+    <div class='col-4' (click)="onAction('delete')">
+      <ion-icon name='refresh-outline'></ion-icon> Delete
+    </div>
+  </div>
+</div>

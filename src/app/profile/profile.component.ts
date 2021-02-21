@@ -4,6 +4,7 @@ import { UserService } from 'app/services/user.service';
 import { HeaderService } from 'app/header.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ActivatedRoute } from '@angular/router';
+import { DocumentService } from 'app/services/document.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private headerService: HeaderService,
     private socialSharing: SocialSharing,
+    private documentService:DocumentService,
     private route: ActivatedRoute,
   ) {
     this.currentUser = null;
@@ -27,10 +29,10 @@ export class ProfileComponent implements OnInit {
   ready: boolean;
 
   context: string;
+  profilePic:any;
 
-  ngOnInit() {
+  async ngOnInit() {
     this.currentUser = this.userService.getCurrentUser();
-
   }
 
   logOutUser() {
@@ -72,6 +74,8 @@ export class ProfileComponent implements OnInit {
         this.currentUser = refreshed;
       }
 
+      this.profilePic = await this.documentService.getProfilePicture();
+
       switch (this.context) {
         case 'profile': {
           this.headerService.setText('Your Profile');
@@ -85,8 +89,18 @@ export class ProfileComponent implements OnInit {
         } default: {
           this.ready = true;
         }
+        case 'contact': {
+          this.headerService.setText('Contact Us');
+          this.ready = true;
+          break;
+        } 
       }
     });
+  }
+
+  async setProfilePic() {
+    this.profilePic = await this.documentService.updateProfilePicture();
+    //window.location.reload();
   }
 
 }

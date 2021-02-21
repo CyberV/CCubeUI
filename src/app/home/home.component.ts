@@ -8,6 +8,10 @@ import { HeaderService } from 'app/header.service';
 import { NotificationService } from 'app/services/notification.service';
 import { PlanService } from 'app/services/plan.service';
 import { ToastController } from '@ionic/angular';
+//import {FlipCounterJs} from 'flip-counter-js';
+import FlipClock from 'flipclock';
+
+declare var FlipCounterJs;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -36,6 +40,8 @@ export class HomeComponent implements OnInit {
   currentUser:any;
 
   isLoggedIn:boolean;
+  beginAnimation:boolean;
+  showSlides:boolean;
 
   @ViewChildren('attention') attention : QueryList<ElementRef>;
 
@@ -67,7 +73,8 @@ export class HomeComponent implements OnInit {
     };
 
     this.isLoggedIn = this.userService.isLoggedIn();
-
+    this.showSlides = false;
+    this.beginAnimation = false;
    }
 
    async presentToast(msg) {
@@ -80,6 +87,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.startShow=true;
+
     // setTimeout(()=> {
     //   this.startShow=true;
     // }, 1000);
@@ -90,6 +98,14 @@ export class HomeComponent implements OnInit {
     // this.appScroll = new onePageScroll({
     //     el: el
     // });
+  }
+
+  start () {
+    this.beginAnimation = true;
+
+    setTimeout(() => {
+      this.showSlides = true;
+    }, 100);
   }
 
   goToPlans(forDemo = false) {
@@ -108,12 +124,26 @@ export class HomeComponent implements OnInit {
    
   }
 
+  ionViewDidEnter() {
+  //   var fc = new FlipCounterJs();
+  //   //fc.
+  
+  // //FlipCounter
+  // fc.increment(10); // Add 10
+
+  const el = document.getElementById('waterTimer');
+
+const clock = new FlipClock(el, new Date, {
+	face: 'HourCounter'
+});
+  }
+
   ionViewWillEnter() {
     this.headerService.setView('home',{});
     this.currentUser = this.userService.getCurrentUser();
     let sub = this.planService.getCurrentSubscription();
 
-    if (this.isLoggedIn) {
+    if (this.userService.isLoggedIn()) {
 
       let notifs = this.notificationService.getAllNotifications();
 
