@@ -33,6 +33,14 @@ export class CounterComponent implements OnInit {
   }
 
   ngOnInit() {
+    let dt:any = localStorage.getItem('commonData');
+
+    if (dt && dt != "null") {
+      dt = JSON.parse(dt);
+      if (dt.waterSaved &&dt.waterSaved > 100000) {
+        this.value = dt.waterSaved
+      }
+    }
     this.mock = [];
     let values = [];
     let str = this.value.toString();

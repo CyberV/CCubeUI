@@ -749,6 +749,7 @@ export class CheckoutComponent implements OnInit {
 
         setTimeout(() => {
           this.step2Ready = !this.carMismatch;
+          this.completeVerification();
         }, 1000);
 
         return;

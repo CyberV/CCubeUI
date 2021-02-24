@@ -15,6 +15,29 @@ p{
     height: 25px;
 }
 
+.contact-section {
+    .row {
+        margin-bottom:10px;
+    }
+    .col-2 {
+        font-size: 25px;
+        color: $primary-color;
+    }
+
+    .col-10 {
+        font-size: 20px;
+        font-style: italic;
+        color: black;
+    }
+
+    img {
+        width: 80%;
+    left: 5px;
+    top: -8px;
+    position: relative;
+    }
+}
+
 .card {
     border-radius: 25px;
 }

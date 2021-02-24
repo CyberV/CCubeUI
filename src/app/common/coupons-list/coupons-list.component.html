@@ -14,6 +14,7 @@
           <div class="col-12 --no-padding --no-margin">
             <div class="row --no-padding --no-margin">
               <div class="col-8 --no-padding ">
+                 
                 <ion-icon name="pricetag-outline" class="icon-coupon vertical-center-text"></ion-icon> <span
                   class="name">{{item.name}}</span>
                 <br />
@@ -59,8 +60,10 @@
 
             <div class="row --no-padding --no-margin" [class.--low-opacity]="!isCouponEligible(item)">
               <div class="col-8 --no-padding ">
+                  
                 <ion-icon name="pricetag-outline" class="icon-coupon vertical-center-text"></ion-icon> <span
                   class="name">{{item.name}}</span>
+                  <spinner *ngIf="loading[item.code]" class="spinner" [color]="'blue'"></spinner>
                 <br />
                 Valid For: <span class="desc">
                   <span *ngIf="item.validFor=='user'"> Just for You</span>
