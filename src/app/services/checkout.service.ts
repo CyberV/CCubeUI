@@ -11,15 +11,18 @@ import { WindowRefService } from 'app/window-ref.service';
 import { UserService } from './user.service';
 
 // Test
-// const api_key = "rzp_test_iw0QQKe6eyEP2g";
-// const api_secret = "xa1TxbgErELViPesDtnEcgPx"
+const api_key = "rzp_test_iw0QQKe6eyEP2g";
+const api_secret = "xa1TxbgErELViPesDtnEcgPx"
+
+declare var Razorpay: any;
+declare var RazorpayCheckout: any;
 
 // Live
-const api_key = "rzp_live_TuRL1kcjKl8uWp";
-const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
+// const api_key = "rzp_live_TuRL1kcjKl8uWp";
+// const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
 
 
-const BYPASS_PAYMENT = true;
+const BYPASS_PAYMENT = false;
 
 
 @Injectable({
@@ -75,7 +78,7 @@ export class CheckoutService {
         });
         obs.complete();
 
-        return {unsubscribe() {}};
+        return { unsubscribe() { } };
       });
     }
 
@@ -90,20 +93,7 @@ export class CheckoutService {
     );
   }
 
-  tryPayment(order, amount) {
-    if (BYPASS_PAYMENT) {
-      this.checkoutEmitter.next({
-        success: true,
-        order: order,
-        user: this.user
-      })
-
-      return;
-    }
-
-    let orderId = order.id;
-    this.refreshUser();
-
+  payWithRazorpay(order, amount, orderId) {
     var options = {
       "key": api_key, // Enter the Key ID generated from the Dashboard
       "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -112,27 +102,6 @@ export class CheckoutService {
       "description": "Service Payment to CCube",
       "image": "https://ccubeco.com/assets/ccube.png",
       "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "handler": (response, error) => {
-        if (error) {
-          console.log('error in payment', error);
-          this.checkoutEmitter.error(error);
-          return;
-        }
-
-        console.log('Payment Success', response)
-
-        let verified = this.verifyOrder(orderId, response.razorpay_payment_id, response.razorpay_signature);
-
-        console.log('Payment verified', verified);
-
-        this.checkoutEmitter.next({
-          success: true,
-          order: order
-        })
-        // alert(response.razorpay_payment_id);
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature)
-      },
       "prefill": {
         "name": this.user.name,
         "email": this.user.email,
@@ -143,15 +112,158 @@ export class CheckoutService {
       },
       "theme": {
         "color": "#00a5a8"
+      },
+      modal: {
+        ondismiss: function () {
+          //alert('dismissed')
+        }
       }
     };
-    var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
-    rzp1.open();
+
+    var successCallback = (success) => {
+
+      var orderId = success.razorpay_order_id;
+      var signature = success.razorpay_signature;
+      //alert(JSON.stringify(success));
+
+      try {
+        // if (error) {
+        //   console.log('error in payment', error);
+        //   this.checkoutEmitter.error(error);
+        //   return;
+        // }
+
+
+
+        ////alert('Payment Success: ' + JSON.stringify(response));
+
+        let verified = this.verifyOrder(orderId, success.razorpay_payment_id, success.razorpay_signature);
+
+        console.log('Payment verified', verified);
+
+        this.checkoutEmitter.next({
+          success: true,
+          order: order
+        });
+      } catch (e) {
+        //alert('Error in Payments ' + e);
+        console.log('Error in Payment s Razorpa ', e);
+      }
+    };
+
+    var cancelCallback = (error) => {
+      //alert(error.description + ' (Error ' + error.code + ')');
+      console.log('error in payment', error);
+      //   this.checkoutEmitter.error(error);
+      //   return;
+    };
+
+
+    let o = null;
+    let opened = false;
+
+    try{
+    if (RazorpayCheckout) {
+      //alert('Found Razorpay Checkout');
+      RazorpayCheckout.on('payment.success', successCallback)
+      RazorpayCheckout.on('payment.cancel', cancelCallback)
+      RazorpayCheckout.open(options);
+      opened = true;
+    }
+
+  } catch(ee) {
+  }
+
+
+    if (Razorpay && !opened) {
+      o = Razorpay;
+
+      //alert('Found Razorpay');
+      o = new Razorpay(options);
+      o.on('payment.success', successCallback);
+      o.on('payment.cancel', cancelCallback);
+      o.open();
+    }
+
+  }
+
+  tryPayment(order, amount) {
+    try {
+      if (BYPASS_PAYMENT) {
+        this.checkoutEmitter.next({
+          success: true,
+          order: order,
+          user: this.user
+        })
+
+        return;
+      }
+
+      let orderId = order.id;
+      this.refreshUser();
+
+      this.payWithRazorpay(order, amount, orderId);
+
+      // var options = {
+      //   "key": api_key, // Enter the Key ID generated from the Dashboard
+      //   "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      //   "currency": "INR",
+      //   "name": "CCube",
+      //   "description": "Service Payment to CCube",
+      //   "image": "https://ccubeco.com/assets/ccube.png",
+      //   "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      //   "handler": (response, error) => {
+      //     try {
+      //     if (error) {
+      //       console.log('error in payment', error);
+      //       this.checkoutEmitter.error(error);
+      //       return;
+      //     }
+
+      //     //alert('Payment Success: ' + JSON.stringify(response));
+
+      //     let verified = this.verifyOrder(orderId, response.razorpay_payment_id, response.razorpay_signature);
+
+      //     console.log('Payment verified', verified);
+
+      //     this.checkoutEmitter.next({
+      //       success: true,
+      //       order: order
+      //     });
+      //   } catch(ee)  {
+      //     //alert('Error in Payment Handler: ' + JSON.stringify(ee));
+      //   }
+      //     // //alert(response.razorpay_payment_id);
+      //     // //alert(response.razorpay_order_id);
+      //     // //alert(response.razorpay_signature)
+      //   },
+      //   "prefill": {
+      //     "name": this.user.name,
+      //     "email": this.user.email,
+      //     "contact": this.user.phone
+      //   },
+      //   "notes": {
+      //     "address": "Razorpay Corporate Office"
+      //   },
+      //   "theme": {
+      //     "color": "#00a5a8"
+      //   }
+      // };
+      // var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
+      // rzp1.open();
+    } catch (e) {
+      //alert('Error in Payments Try Paymeny' + e);
+      console.log('Error in Payment s Try Paymeny ', e);
+    }
   }
 
   verifyOrder(orderId, paymentId, signature) {
 
-    return hash(orderId + "|" + paymentId, api_secret) == signature;
+    try {
+      return hash(orderId + "|" + paymentId, api_secret) == signature;
+    } catch (e) {
+      //alert('Error in Verify signature' + JSON.stringify(e));
+    }
 
   }
 

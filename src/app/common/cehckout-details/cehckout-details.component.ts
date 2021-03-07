@@ -19,6 +19,7 @@ export class CheckoutDetailsComponent implements OnInit {
   @Input() mode: any;
 
   @Output() showAddonDetails = new EventEmitter();
+  @Output() planChanged = new EventEmitter();
   @Output() removeAdhoc = new EventEmitter();
   @Output() removeAddon = new EventEmitter();
   @Output() removeCoupon = new EventEmitter();
@@ -52,7 +53,7 @@ export class CheckoutDetailsComponent implements OnInit {
 
   get productPrice() {
     let { mode, plan, addon, adhoc } = this;
-    return mode.plan ? plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? addon.price : 'Plan'))
+    return mode.plan ? plan.originalPrice || plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? addon.price : 'Plan'))
   }
 
   upgradeSelected: boolean;
@@ -153,7 +154,7 @@ export class CheckoutDetailsComponent implements OnInit {
 
     if (mode) {
       if (mode.plan) {
-        total += this.plan.price;
+        total += this.plan.originalPrice || this.plan.price;
       }
       if (mode.addon) {
         total += this.addonPrice;
@@ -192,14 +193,14 @@ export class CheckoutDetailsComponent implements OnInit {
   toggleUpgrade(planName = null) {
 
     if (planName) {
-      this.upgradeSelected = true;
       this.upgradToPlan = planName;
       this.upgradePrice = this.planService.getUpdatePrice(this.lastPlan.name, planName);
-      this.planService.changePlanForCar(this.upgradeSelected ? planName : this.lastPlan.name);
-      this.plan = this.planService.getSelectedPlan();
+      //this.planService.changePlanForCar(this.upgradeSelected ? planName : this.lastPlan.name);
+      //this.plan = this.planService.getSelectedPlan();
     } else {
       this.planService.changePlanForCar(this.upgradeSelected ? this.lastPlan.name : this.upgradToPlan);
       this.plan = this.planService.getSelectedPlan();
+      this.planChanged.emit(this.plan);
       this.upgradeSelected = !this.upgradeSelected;
     }
   }

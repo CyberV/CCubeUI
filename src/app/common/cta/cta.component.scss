@@ -12,6 +12,16 @@
     background: transparent linear-gradient(180deg, #00A4A7 0%, #009295 22%, #005254 100%) 0% 0% no-repeat padding-box;
 }
 
+
+.tiny {
+    margin: 0;
+    right: 1em;
+    position: relative;
+    font-size: 12px !important;
+//     background: transparent linear-gradient(
+// 180deg
+// , #ff9800 5%, #ec6b1e 22%, #0cb5b9 100%) 0% 0% no-repeat padding-box !important; 
+}
 .normal-text {
     text-transform: none
 }

@@ -47,6 +47,7 @@
     "aws-s3": "^2.0.5",
     "aws-sdk": "^2.819.0",
     "chart.js": "^2.9.3",
+    "com.razorpay.cordova": "git+https://github.com/razorpay/razorpay-cordova.git",
     "cordova-ios": "6.1.1",
     "cordova-plugin-fcm-with-dependecy-updated": "^7.3.1",
     "cordova-plugin-geolocation": "^4.0.2",
@@ -108,6 +109,7 @@
     "cordova-res": "^0.15.1",
     "cordova-sqlite-storage": "^5.1.0",
     "es6-promise-plugin": "^4.2.2",
+    "ionic-plugin-deeplinks": "^1.0.22",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "^5.0.1",
     "karma": "^5.0.1",
@@ -160,7 +162,8 @@
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-file": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "com.razorpay.cordova": {}
     },
     "platforms": [
       "ios",

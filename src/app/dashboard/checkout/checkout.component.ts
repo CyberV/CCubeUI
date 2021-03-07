@@ -157,7 +157,7 @@ export class CheckoutComponent implements OnInit {
 
       //let total = this.context == 'checkout' && this.detailsComp.first ? this.detailsComp.first.getOrderPrice() : ;
 
-      if (coupon && coupon.code && this.detailsComp.first && this.detailsComp.first.getOrderPrice() >= coupon.minCartValue) {
+      if (coupon && coupon.code && this.detailsComp.first && this.detailsComp.first.getServiceTotal() >= coupon.minCartValue) {
         this.appliedCoupons = coupon ? [coupon] : [];
         let dscnt = 0;
         if (coupon.unit == 'percent') {
@@ -168,7 +168,9 @@ export class CheckoutComponent implements OnInit {
         this.discount = {
           discount: dscnt,
           coupon: coupon
-        }
+        };
+
+        this.planService.setAppliedCoupon(coupon);
         resolve(this.discount);
       } else {
         this.onRemoveCoupon();
@@ -208,6 +210,7 @@ export class CheckoutComponent implements OnInit {
 
       this.carService.changeCar(this.updatedCarDetails);
       this.selectedCar = this.carService.getCurrentCar();
+      this.planService.changePlanForCar(this.selectedPlan.name, this.selectedCar);
       this.router.navigate(["/dashboard/plan"]);
 
     }
@@ -454,10 +457,9 @@ export class CheckoutComponent implements OnInit {
       this.completeVerification(true);
     }
 
-    changePlan() {
+    changePlan(newPlan) {
 
-      this.planService.clear();
-      this.router.navigate(['/dashboard']);
+     this.selectedPlan = newPlan;
     }
 
     ionViewWillLeave() {
@@ -532,12 +534,15 @@ export class CheckoutComponent implements OnInit {
       }
 
       this.checkoutService.events().subscribe(async (evt) => {
+        try {
         if (evt.success) {
+          let order = this.planService.getCurrentOrder();
           let updatedPlan = this.planService.getSelectedPlan();
           let payload: any = {
             phone: this.currentUser.phone,
             plan: updatedPlan,
             isRcMissing : this.isRcMissing,
+            coupon: (order.discount && order.discount.coupon) ? order.discount.coupon : null,
             car: this.selectedCar,
             addons: this.includedAddons,
             adhocs: this.includedAdhocs,
@@ -630,6 +635,10 @@ export class CheckoutComponent implements OnInit {
             'Please try again!'
           );
         }
+      } catch (er) {
+        alert( 'Error in Checkout Subscribe: ' + JSON.stringify(er)
+        );
+      }
 
         this.planService.setAppliedCoupon(null);
       });
@@ -639,6 +648,13 @@ export class CheckoutComponent implements OnInit {
           this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc ? 'Service' : 'Addon')));
           this.loginService.getCouponsForUser().subscribe(async (res: any) => {
             this.availableCoupons = res.success ? res.data : [];
+
+            let found = this.availableCoupons.filter((c) => c.name == 'CCUBE-QRTRLY');
+
+            if (found.length && this.planService.getPlanDuration() == 'quarterly') {
+              found = found[0];
+              await this.applyCoupon(found);
+            }
            
             await this.applyCoupon();
           })

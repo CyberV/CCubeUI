@@ -62,6 +62,10 @@ export class DashboardComponent implements OnInit {
     };
   }
 
+  onDurationToggle(duration) {
+    this.currentPlans = this.planService.getAllPlans();
+  }
+
   async openAddon(addon) {
     const modal = await this.modalController.create({
       component: AddonDetailsComponent,
@@ -117,7 +121,7 @@ export class DashboardComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.currentPlans = (await planData()).plansList;
+    this.currentPlans = this.planService.getAllPlans();
     console.log('Loaded Plans?, ',this.currentPlans);
   }
 

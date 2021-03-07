@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-12">
+    <span class="switch-container">
+      <span class="plan_selector">
+        <div class="option option_1 plan_duration" [class.active_option]="!open" (click)="setActivePlanDuration(0)">
+          Monthly</div>
+        <div class="option option_2 plan_duration active_option" [class.active_option]="open"
+          (click)="setActivePlanDuration(1)">Quarterly</div>
+      </span>
+
+      <ion-label>
+        <img src="assets/icons/arrow.png" />
+        <div class="discount-label">
+
+          <span class="label"> <span [class.active]="open">{{discountValue}} %</span> OFF</span>
+        </div>
+      </ion-label>
+    </span>
+  </div>
+</div>
+
+
+<!-- <subheading text="Extra 20% Off on Quarterly Plans" slim="true"></subheading> -->

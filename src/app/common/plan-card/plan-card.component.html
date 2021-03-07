@@ -1,14 +1,14 @@
-<mat-card class="card animate__animated animate__headShake">
+<mat-card class="card animate__animated animate__fadeInRight">
   <div class="card-body card-top"  (click)="onShowDetails()" [style.borderColor]="color">
     <h5 class="card-title" > {{plan.name}} </h5>
-    <h6 class="monthly-label">MONTHLY PLAN</h6>
+    <h6 class="monthly-label">{{plan.originalPrice ? 'QUARTERLY' : 'MONTHLY'}} PLAN</h6>
 
   </div>
   <p class="card-text"  (click)="onShowDetails()">
-      <span *ngIf="!forUpgrade"class="price" Rs>{{ plan.pricing[bodyType] }}</span>
+      <span class="old-price" *ngIf="!forUpgrade && plan.originalPrice" Rs> {{plan.originalPrice}}</span> <span *ngIf="!forUpgrade" class="price" Rs>{{ plan.price }}</span>
       <span *ngIf="forUpgrade">
         <span> Extra </span>
-        <span class="price" Rs > {{ plan.price }} <span class="permonth"> /month </span></span> 
+       <span class="price" Rs > {{ plan.price }} <span class="permonth"> /month </span></span> 
       </span>
       <br />
       <span></span>

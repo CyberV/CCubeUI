@@ -14,6 +14,7 @@ mat-expansion-panel {
   margin: 0 0 10px;
   border-radius: 10px !important;
   border: 1px solid #00a4a729;
+  width: 100%;
   box-shadow: none !important;
 
   &.mat-expanded {
@@ -69,6 +70,16 @@ margin-bottom: 5px;
 .price {
   color: $primary-color;
   font-size: 150%;
+}
+
+.old-price {
+  color: gray;
+  font-size: 100%;
+  margin-right: 10px;
+  text-decoration: line-through;
+  /* margin-left: -5.5em; */
+  left: 18px;
+  position: relative;
 }
 
 .plan-container {

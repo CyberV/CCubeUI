@@ -65,9 +65,9 @@ export class PlanCardComponent implements OnInit {
           //this.missingFeatures = this.missingFeatures.filter ( (ftr) => ftr.code !== last.code);
         });
 
-        if (this.bodyType && !this.forUpgrade) {
-          this.plan.price = this.plan.pricing[this.bodyType];
-        }
+        // if (this.bodyType && !this.forUpgrade) {
+        //   this.plan.price = this.plan.pricing[this.bodyType];
+        // }
         
 
         

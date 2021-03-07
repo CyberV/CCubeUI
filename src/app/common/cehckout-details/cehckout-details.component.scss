@@ -3,7 +3,7 @@
 .discount-value {
     position: relative;
     margin-left: -30px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .carRegNo {
@@ -86,11 +86,23 @@
 
     .badge-danger {
         font-size: 10px;
-        margin: 0 0 0px 6px;
         position: relative;
         opacity: 0.8;
     }
     
+}
+
+.coupon-lane {
+    font-size: 12px;
+    margin-left: 40px;
+    .yo {
+        color: $secondary-color;
+    }
+}
+
+.net-payable {
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
 .small-text {
@@ -111,10 +123,14 @@
     top: -1px;
     }
 
+    &.icon-coupon {
+        top: 5px;
+    }
+
 }
 
 mat-select {
-    width: 65px;
+    width: 80px;
     border-bottom: dashed $secondary-color;
 }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CarService } from './car.service';
 import plansList from 'assets/planslist.json';
 import { planData } from 'app/common/common.service';
+import { getConfigValue } from 'app/common/common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,9 @@ export class PlanService {
     return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0]));
   }
 
-  createPeriodLabel(date) {
+  createPeriodLabel(date, duration = "monthly") {
     if (date) {
-      return date.toString().split(' ').slice(1, 2).join(' ') + " - " + new Date(+(date) + 2592000000).toString().split(' ').slice(1, 2).join(' ') + " " + new Date(+(date) + 2592000000).getFullYear();
+      return date.toString().split(' ').slice(1, 2).join(' ') + " - " + new Date(+(date) + (2592000000 * (duration == 'quarterly' ? 3 : 1))).toString().split(' ').slice(1, 2).join(' ') + " " + new Date(+(date) + 2592000000).getFullYear();
     } else {
       return null;
     }
@@ -32,7 +33,7 @@ export class PlanService {
   }
 
   constructor(
-    private carService: CarService
+    private carService: CarService,
   ) {
     let _p: any = planData;
     this.AllPlans = this.getAllPlans();
@@ -113,7 +114,18 @@ export class PlanService {
 
   getAllPlans() {
     let common = JSON.parse(localStorage.getItem('commonData'));
-    return common && common != "" && common != 'null' ? common.plansList.plans : [];
+    if (common && common != "" && common != 'null') {
+      let plans = common.plansList.plans;
+
+      for (let i = 0; i < plans.length; i++) {
+        plans[i] = this.updatePlanPricing(plans[i]);
+      }
+      return plans;
+
+
+    } else {
+      return [];
+    }
   }
 
   getAllSubscriptions() {
@@ -200,15 +212,95 @@ export class PlanService {
 
     if (found && found.length) {
 
-      found[0].price = found[0].pricing[car.bodyType];
+      found = this.updatePlanPricing(found[0]);
+
 
       if (plan && plan.forRenew) {
-        found[0].forRenew = true;
-        found[0].lastDate = plan.lastDate;
-        found[0].period = plan.period;
+        found.forRenew = true;
+        found.lastDate = plan.lastDate;
+        found.period = plan.period;
       }
 
-      this.changePlan(found[0]);
+      this.changePlan(found);
+    }
+  }
+
+  private updatePlanPricing(plan) {
+    let car = this.carService.getCurrentCar();
+    let bodyType = 'sedan';
+    if (car) {
+      bodyType = car.bodyType;
+    }
+    plan.price = +(plan.pricing[bodyType]);
+
+    let duration = this.getPlanDuration();
+
+    plan.duration = duration;
+    plan.period = this.createPeriodLabel(new Date(), plan.duration);
+
+    if (duration == "quarterly") {
+
+      plan.price = plan.price * 3;
+
+      let dscnt: number = (getConfigValue('DISCOUNT_QUARTERLY'));
+
+      if (dscnt && dscnt > 0) {
+        plan.originalPrice = plan.price;
+        let discount = Math.floor((plan.price * dscnt) / 100);
+        plan.price = plan.originalPrice - discount;
+      }
+
+      return plan;
+    } else {
+      plan.originalPrice = null;
+    }
+    return plan;
+  }
+
+  getPlanDuration() {
+    let subs = sessionStorage.getItem('planDuration');
+    return subs && subs != "null" ? subs : 'monthly';
+  }
+
+  updatePlanDuration(duration) {
+    let plan = this.getSelectedPlan();
+    if (plan) {
+      sessionStorage.setItem('planDuration', duration);
+      let updatedPlan = this.updatePlanPricing(plan);
+      this.changePlan(updatedPlan);
+    }
+    else {
+      sessionStorage.setItem('planDuration', duration);
+    }
+
+    let addons = this.getIncludedAddons();
+
+    if (addons && addons.length) {
+      let data = [];
+      for (let i = 0; i < addons.length; i++) {
+        let addon = addons[i];
+        addon.duration = duration;
+        addon.period = this.createPeriodLabel(new Date(), addon.duration);
+
+        addon.price = addon.pricing[this.carService.getCurrentCar().bodyType];
+        if (duration == "quarterly") {
+          addon.price = addon.price * 3;
+
+          let dscnt: number = (getConfigValue('DISCOUNT_QUARTERLY'));
+
+          if (dscnt && dscnt > 0) {
+            addon.originalPrice = addon.price;
+            let discount = Math.floor((addon.price * dscnt) / 100);
+            addon.price = addon.originalPrice - discount;
+          } else {
+            addon.originalPrice = null;
+          }
+
+        }
+        data.push(addon);
+      }
+
+      sessionStorage.setItem('includedAddons', JSON.stringify(data));
     }
   }
 
@@ -238,7 +330,7 @@ export class PlanService {
       let info: any = {};
 
       if (order.plan) {
-        total += order.plan.price;
+        total += order.plan.originalPrice || order.plan.price;
       }
 
       if (order.addons && order.addons.length) {
@@ -323,6 +415,8 @@ export class PlanService {
     }
   }
 
+
+
   getAddonsForPlan(planName) {
     let addons = [];
 
@@ -386,6 +480,19 @@ export class PlanService {
     return addons;
   }
 
+  includeAddonWithCode(addonCode) {
+    let found = this.getAllFeatures().filter((f) => f.code.toLowerCase() == addonCode.toLowerCase());
+
+    let car = this.carService.getCurrentCar();
+
+    if (found.length && car) {
+      found = found[0];
+
+      found.price = found.pricing[car.bodyType];
+      this.includeAddon(found);
+    }
+  }
+
   includeAddon(addon) {
     let addons = this.getIncludedAddons();
     if (!addons) {
@@ -394,6 +501,13 @@ export class PlanService {
 
     if (addons.some((a) => a.name == addon.name)) {
     } else {
+
+      addon.duration = this.getPlanDuration();
+
+      if (addon.duration == 'quarterly') {
+        addon.price = addon.price * 3;
+      }
+
       addons.push(addon);
       sessionStorage.setItem('includedAddons', JSON.stringify(addons));
     }

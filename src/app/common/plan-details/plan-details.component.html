@@ -1,10 +1,20 @@
 <div class="plan-container --padding-x" [class.compact]="compact">
+
   <div class="plan-info">
-    <h2 #pageTop><span class="plan-name">{{plan.name}}</span> Monthly Plan </h2>
-    <p>
-      <span class="price" Rs> {{plan.price}}</span> for 1 month.
-    </p>
+    <h2 #pageTop><span class="plan-name">{{plan.name}}</span> {{plan.originalPrice ? 'Quarterly' : 'Monthly'}} Plan </h2>
+    <div class="row">
+      <div class="col-4 --no-padding-right text-right">
+          <span class="old-price animate__animated animate__fadeInRight" *ngIf="plan.originalPrice"> {{plan.originalPrice}}</span>
+      </div>
+      <div class="col-4 --no-padding-left">
+          <span class="price" Rs> {{plan.price}}</span> 
+      </div>
+
+    </div>
+
+    <switch *ngIf="!compact" (toggle)="onPlanDurationToggle($event)"></switch>
   </div>
+
   <div *ngIf="compact" class="">
     <mat-panel-title *ngFor="let feature of currentFeatures">
       <div class="feature">

@@ -82,6 +82,7 @@ import { ReferEarnComponent } from './refer-earn/refer-earn.component';
 import { ImageToolbarComponent } from './image-toolbar/image-toolbar.component';
 import { CounterComponent } from './counter/counter.component';
 import { WarningComponent } from './warning/warning.component';
+import { SwitchComponent } from './switch/switch.component';
 
 
 
@@ -147,6 +148,7 @@ import { WarningComponent } from './warning/warning.component';
     ImageToolbarComponent,
     CounterComponent,
     WarningComponent,
+    SwitchComponent,
 
     // Directives
     RsDirective,
@@ -234,6 +236,7 @@ import { WarningComponent } from './warning/warning.component';
     ImageToolbarComponent,
     CounterComponent,
     WarningComponent,
+    SwitchComponent,
     
     //Directives
 

@@ -133,7 +133,7 @@ export class LoginFormComponent implements OnInit {
       car: {}
     };
 
-    this.errors = null;
+    this.errors = {};
 
 
     if (this.platform.is('android') || this.platform.is('ios')) {
@@ -395,6 +395,8 @@ export class LoginFormComponent implements OnInit {
   createUser() {
     if (!this.validateData(this.newUser)) {
       return false;
+    } else {
+      this.errors = {};
     }
 
     this.srvcLogin.createUser(this.newUser.mobile, this.newUser.name, this.newUser.password, this.newUser.email, this.newUser.city, this.newUser.referedBy)

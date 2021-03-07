@@ -84,6 +84,10 @@ export class AddonDetailsComponent implements OnInit {
       addon: this.addon
     });
   }
+
+  onAddonDurationToggle(duration) {
+    this.addon = this.planService.getIncludedAddons()[0];
+  }
   
   scheduleAddon(addon) {
     this.loading = true;
@@ -154,7 +158,7 @@ export class AddonDetailsComponent implements OnInit {
         const currentMonth = new Date().getMonth();
         const planDate = startDate.getDate();
 
-        let foundAddon = currentSubs.filter((adn) => adn.addon.code == this.addon.code);
+        let foundAddon = currentSubs.addons.filter((adn) => adn.addon.code == this.addon.code);
 
         if (foundAddon.length) {
           foundAddon = foundAddon[0];

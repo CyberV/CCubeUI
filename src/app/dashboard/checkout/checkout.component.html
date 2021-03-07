@@ -19,6 +19,7 @@
                 [car]="selectedCar"
                 [discount]="discount"
                 [mode]="mode"
+                (planChanged)="changePlan($event)"
                 (removeAddon)="onAddonSelected($event, true)"
                 (removeAdhoc)="onAdhocSelected($event)"
                 (removeCoupon)="onRemoveCoupon()"
@@ -56,18 +57,20 @@
 
             <cc-accordion #drawerCar title="Verify Your Car" [step]="'1'" [error]="carMismatch" [locked]="step2Ready">
               <car-form [regNo]="selectedCar.regNo" *ngIf="resetCarForm" [verifyOnly]="true" (carReady)="verifyCar($event)"></car-form>
-              <div *ngIf="carMismatch && carIdentified" class="alert alert-danger" role="alert">
+              <!-- <div class="alert alert-danger" role="alert">
                 Selected Car doesn't match with Registration Number!
                 <br/>
                 
-              </div>
+              </div> -->
+
+              <warning  *ngIf="carMismatch && carIdentified" text="This is a different car. You can continue to checkout after reviewing plan for this car."></warning>
 
               <div class="row" *ngIf="carMismatch">
                 <div class="col-6 --no-padding-right">
                     <cta text="Review Plan" (action)="updatePlan()"></cta>
                 </div>
                 <div class="col-6">
-                    <cta class="float-right" (action)="resetCarNumber()" text="Change  Car No" outline="true"></cta>
+                    <cta class="float-right" (action)="resetCarNumber()" text="Retry" outline="true"></cta>
                 </div>
               </div>
               

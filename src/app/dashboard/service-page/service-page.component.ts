@@ -143,6 +143,7 @@ export class ServicePageComponent implements OnInit {
     this.selectedSubscription = this.payments[index];
     this.selectedPayment = this.selectedSubscription.payments[0];
     this.selectedCar = this.selectedPayment.car;
+    this.planService.updatePlanDuration(this.selectedSubscription.duration);
     this.carService.changeCar(this.selectedCar);
     this.selectedIndex = index;
 

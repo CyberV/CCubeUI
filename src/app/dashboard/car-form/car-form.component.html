@@ -1,8 +1,8 @@
 <div class="car-form">
-    <img *ngIf="currentCar && !verifyOnly" [src]="currentCar.image" class="center animate__animated animate__tada"/>
+    <img *ngIf="currentCar && !verifyOnly" [src]="currentCar.image" class="center animate__animated animate__tada" style="margin-bottom: -1em"/>
         <mobile-input type="text" uppercase="true" name="Enter Your Car Number" [error]="regError" (enterKey)="focusTo('ctaCar')" placeholder="" [(value)]="regNo" (valueChange)="findingCar = false; showFileUploader = false;" ></mobile-input>
         <warning *ngIf="showFileUploader && !verifyOnly" text="We are facing some technical difficulties. You can try again or select car below."></warning>
-        <cta #ctaCar *ngIf="!findingCar" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
+        <cta #ctaCar *ngIf="!findingCar && isTypingRegNo" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
 
         <car-display *ngIf="findingCar" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)" (error)="onError($event)" (carReady)="saveCar($event)"></car-display>
         <!-- <document-uploader *ngIf="showFileUploader && verifyOnly" (file)="goToPlans($event)" text="Upload your Car's RC Document."></document-uploader> -->

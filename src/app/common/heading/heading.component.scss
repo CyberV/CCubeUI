@@ -13,6 +13,8 @@
 }
 
 .capitalized {
+    z-index: 2;
+    position: relative;
 
     letter-spacing: 4px;
 
@@ -20,7 +22,7 @@
 
                 display: inline-block;  
                 &:first-of-type {
-                    color: $secondary-color;
+                     color: $primary-color;
                     font-size: 32px;
                 }
             }  

@@ -25,13 +25,13 @@ export function scrollElementToTop(emt) {
 
 
     if (cont.length && emtTop > top) {
-
+      let c = cont[cont.length - 1];
 
       if (top != 0) {
-        cont[0].scrollTop = $(inp).offset().top;
+        c.scrollTop = $(inp).offset().top;
         console.log('Current Top', top, 'emt top', emtTop);
       } else {
-        cont[0].scrollTop = $(inp).offset().top - 100;
+        c.scrollTop = $(inp).offset().top - 100;
         console.log('Current Top', top, 'emt top', emtTop);
         //inp.scrollIntoView({behavior:'smooth', block:'start'})
       }

@@ -64,7 +64,7 @@ export class AccordionComponent implements OnInit {
           setTimeout(() => {
             let inp: any = this.drawerToggle;
             scrollElementToTop(inp.nativeElement);
-          }, 100);
+          }, 500);
         }
       });
     }

@@ -4,6 +4,7 @@ import { IonContent } from '@ionic/angular';
 import plansList from 'assets/planslist.json';
 import { planData } from 'app/common/common.service';
 import { scrollElementToTop } from 'app/util/util';
+import { PlanService } from 'app/services/plan.service';
 
 declare var $;
 @Component({
@@ -31,7 +32,9 @@ export class PlanDetailsComponent implements OnInit {
 
   isActive: boolean = true;
 
-  constructor() {
+  constructor(
+    private planService:PlanService
+  ) {
     this.currentFeatures = [];
     this.compact = false;
     this.hideCta = false;
@@ -41,6 +44,12 @@ export class PlanDetailsComponent implements OnInit {
 
 
 
+  
+  
+  }
+
+  onPlanDurationToggle(duration) {
+    this.plan = this.planService.getSelectedPlan();
   }
 
   async ngOnChanges(changes) {

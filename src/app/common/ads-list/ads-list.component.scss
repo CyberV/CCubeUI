@@ -1,3 +1,39 @@
+@import 'src/variables';
+
 .carousel {
     margin: 0 0 2em;
+}
+
+.info-container {
+    position: absolute;
+    right: 1em;
+    top: 30%;
+    text-align: right;
+    font-size: 20px;
+
+    .desc {
+        font-size: 16px;
+        color: #4b5757;
+        margin-top: 8px;
+        max-width: 300px;
+        text-overflow: ellipsis;
+    }
+}
+
+.discount-container {
+    display: block;
+    width: 100%;
+    background: $secondary-color;
+    padding: 8px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    transform: rotate(-45deg);
+    position: absolute;
+    left: -36%;
+    top: 32px;
+
+    &.contrast {
+        background: $primary-color;
+    }
 }

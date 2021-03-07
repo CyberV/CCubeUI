@@ -8,9 +8,13 @@
       <ng-container *ngIf="isCarSelected">
 
         <ng-container>
+          <heading slim="true" capitalize="true" text="SUBSCRIPTION PLANS" align="center"></heading>
+          <div class="row --no-margin">
+            <div class="col-12 text-center duration-container">
+                 <switch (toggle)="onDurationToggle($event)"></switch>  
+            </div>
+          </div>
 
-
-          
           <plan-slider #planSlider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
             (buyNow)="buyPlan($event)"></plan-slider>
 

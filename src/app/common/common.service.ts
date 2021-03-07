@@ -46,6 +46,20 @@ let init = async function (city = "faridabad") {
     
 };
 
+export function getConfigValue(configKey) {
+    let common = readCommonData();
+
+    if (common) {
+        let found = common.config.filter((c) => c.name == configKey);
+
+        if (found.length) {
+            return found[0].value;
+        }
+    } else {
+        return null;
+    }
+}
+
 // (async function asd() {
 //     await init();
 // } )();

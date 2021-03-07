@@ -63,26 +63,21 @@
           <plan-details *ngIf="plan" [plan]="plan" [compact]="true"></plan-details>
           <addon-details *ngIf="!plan && addon" [addon]="addon"></addon-details>
         </cc-accordion>
+
+
       </div>
+
       <div>
-          <div *ngIf="car.regNo" class="row content-row">
+        <!-- <div *ngIf="car.regNo" class="row content-row">
               <div class="col-12">
                 <ion-icon name="car-sport-outline" class="vertical-center-text big-icon2 icon-car"></ion-icon>
                 <div class="vertical-center-text carRegNo small-text">
                   <span>{{regNo.pre | uppercase}}</span><span>{{regNo.mid | uppercase}}</span><span>{{regNo.post | uppercase}}</span>
                 </div>
               </div>
-            </div>
-    
-            <ng-container *ngIf="plan && plan.period">
-              <div class="row content-row">
-                <div class="col-12">
-                  <ion-icon name="calendar-outline" class="vertical-center-text big-icon2 icon-calendar"></ion-icon> <span
-                    class="vertical-center-text small-text"> {{plan.period}}</span>
-                </div>
-    
-              </div>
-            </ng-container>
+            </div> -->
+
+
         <cc-accordion *ngIf="includedAddons && includedAddons.length" [label]="addonPrice" [title]="'Addons Included'"
           compact="true">
           <ion-list>
@@ -120,48 +115,76 @@
         </cc-accordion>
 
 
-        <div class="row content-row " [style.marginTop.em]="1" *ngIf="plan && lastPlan.name != 'Elite'">
+        <ng-container *ngIf="plan && plan.period">
+            <div class="row content-row">
+              <div class="col-12">
+                <ion-icon name="calendar-outline" class="vertical-center-text big-icon2 icon-calendar"></ion-icon> <span
+                  class="vertical-center-text small-text"> {{plan.period}}</span>
+              </div>
+  
+            </div>
+          </ng-container>
+        <div class="row content-row " *ngIf="plan && lastPlan.name != 'Elite'">
           <br /><br />
           <div class="col-12 icon-text">
             <span>
-              <mat-checkbox [checked]="upgradeSelected" (change)="toggleUpgrade()">
-                <div>
-                  Upgrade your Plan to             <span class="upgrade-options" style="top:0;">
+              <!-- <mat-checkbox [checked]="upgradeSelected" (change)="toggleUpgrade()"> -->
+              <div class="row">
+                <div class="col-9 --no-padding-right">
+
+                  {{upgradeSelected ? 'Plan Upgraded to' : 'Upgrade Plan to '}} <span class="upgrade-options"
+                    style="top:0;">
 
 
-                      <span *ngIf="lastPlan.name == 'Standard'">
-                        <mat-select [value]="upgradToPlan" (valueChange)="toggleUpgrade($event)">
-                          <mat-option [value]="'Elite'">
-                            Elite
-                          </mat-option>
-                          <mat-option [value]="'Deluxe'">
-                            Deluxe
-                          </mat-option>
-                        </mat-select>
-                      </span>
-                      <span *ngIf="lastPlan.name == 'Deluxe'">
-                        Elite
-                      </span>
-        
+                    <span *ngIf="lastPlan.name == 'Standard'">
+                      <mat-select [value]="upgradToPlan" (valueChange)="toggleUpgrade($event)">
+                        <mat-option [value]="'Elite'">
+                          Elite
+                        </mat-option>
+                        <mat-option [value]="'Deluxe'">
+                          Deluxe
+                        </mat-option>
+                      </mat-select>
                     </span>
-                  @ <span class="upgrade-price" Rs> {{upgradePrice}}</span>
+                    <span *ngIf="lastPlan.name == 'Deluxe'">
+                      Elite
+                    </span>
+
+                  </span>
+                  <span style="display:block;">
+                    @ <span class="upgrade-price" Rs> {{upgradePrice}}</span>
+                  </span>
+
                 </div>
-              </mat-checkbox>
+                <div class="col-3">
+                  <cta tiny="true" small="true" [text]="upgradeSelected ? 'Remove' : 'ADD'" (action)="toggleUpgrade()">
+                  </cta>
+                </div>
+
+              </div>
+              <!-- </mat-checkbox> -->
             </span>
           </div>
 
 
         </div>
 
-        <div class="row content-row" *ngIf="(user.referralBonusPending > 0) || (discount.discount > 0)">
-            <div class="col-8">
-              <ion-icon class="big-icon vertical-center-text" name="cart-outline"></ion-icon> <span
-                class="icon-text">Cart Total</span>
-            </div>
-            <!-- <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div> -->
-            <div class="col-4 text-center float-right"> <span class="discount-value"> <span
-                  Rs>{{ getServiceTotal() }}</span> </span></div>
+        <!-- <div class="row content-row">
+          <div class="col-12">
+              <div class="float-right" *ngIf="plan">Plan Period <switch></switch></div>
+
           </div>
+        </div> -->
+
+        <div class="row content-row" *ngIf="(user.referralBonusPending > 0) || (discount.discount > 0)">
+          <div class="col-8">
+            <ion-icon class="big-icon vertical-center-text" name="cart-outline"></ion-icon> <span class="icon-text">Cart
+              Total</span>
+          </div>
+          <!-- <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div> -->
+          <div class="col-4 text-center float-right"> <span class="discount-value"> <span
+                Rs>{{ getServiceTotal() }}</span> </span></div>
+        </div>
 
         <div class="row content-row" *ngIf="user.referralBonusPending > 0">
           <div class="col-8">
@@ -175,20 +198,32 @@
 
         <div class="row content-row" [style.marginTop.px]="10" *ngIf="discount.discount > 0">
           <div class="col-8 --no-padding-right">
-            <ion-icon class="big-icon vertical-center-text icon-coupon" name="pricetags-outline"></ion-icon> <span
-              class="icon-text">{{discount.coupon.name}}</span> <span (click)="onRemoveCoupon(discount.coupon)" class="badge badge-danger">Remove</span>
+            <ion-icon class="big-icon vertical-center-text icon-coupon" name="pricetags-outline"></ion-icon>
+            <span class="icon-text">
+              Coupon Applied 
+            </span>
+
+
           </div>
           <!-- <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div> -->
           <div class="col-4 text-center float-right"> <span class="discount-value"> - <span
                 Rs>{{ discount.discount}}</span> </span></div>
+          <div class="col-12 coupon-lane">
+            <span>{{discount.coupon.name}} </span> -
+            <span class="yo" *ngIf="discount.coupon.unit!='percent'"> &#8377; {{discount.coupon.value}}</span>
+            <span class=" yo" *ngIf="discount.coupon.unit=='percent'">{{discount.coupon.value}} %</span>
+            OFF!
+            <br/>
+            <span (click)="onRemoveCoupon(discount.coupon)" class="badge badge-danger">Remove</span>
+          </div>
         </div>
 
       </div>
     </div>
-    <div class="bottom container">
+    <div class="bottom">
       <div class="row">
         <div class="col-8">Net Payable</div>
-        <div class="col-4 text-center"> <span> &#8377; {{ getTotalPayable()}}</span></div>
+        <div class="col-4 text-center"> <span class="net-payable"> &#8377; {{ getTotalPayable()}}</span></div>
         <div class="col-8 tax-row">(Inclusive of all taxes)</div>
       </div>
 

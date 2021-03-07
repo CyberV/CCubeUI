@@ -58,6 +58,14 @@
         }
     }
 
+    .old-price {
+        color: gray;
+        font-size: 100%;
+        margin-right: 10px;
+        margin-left: -88px;
+        text-decoration: line-through;
+      }
+
     .feature-list {
         text-align: left;
         font-size: 16px;
