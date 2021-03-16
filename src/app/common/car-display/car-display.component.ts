@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LoginService } from 'app/login/login.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'car-display',
@@ -25,7 +26,7 @@ export class CarDisplayComponent implements OnInit {
 
   entry: any;
 
-  constructor(private srvcLogin: LoginService) {
+  constructor(private srvcLogin: LoginService, private activatedRoute:ActivatedRoute) {
     this.carNo = "";
     this.loading = true;
     this.isCarReady = false;
@@ -110,6 +111,7 @@ export class CarDisplayComponent implements OnInit {
         this.loading = false;
         if (res.success) {
         } else {
+          if (this.activatedRoute.snapshot.routeConfig.path == 'select-car')
           alert('There was an issue in getting your car details.');
           this.error.next({
             error: res.error

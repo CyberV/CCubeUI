@@ -170,7 +170,7 @@ export class LoginFormComponent implements OnInit {
     this.isCarReady = false;
     //this.otpSent = true;
 
-    let savedMobile = sessionStorage.getItem('currentMobile');
+    let savedMobile = localStorage.getItem('userMobile');
 
     if (savedMobile && savedMobile != 'null') {
       this.newUser.mobile = savedMobile;
@@ -301,6 +301,7 @@ export class LoginFormComponent implements OnInit {
   beginAuth() {
     if (!this.loading) {
       this.loading = true;
+      localStorage.setItem('userMobile', this.newUser.mobile);
       this.srvcLogin.sendOtp(this.newUser.mobile)
         .subscribe((res: any) => {
           console.log('Send OTP Response', res);
@@ -486,7 +487,7 @@ export class LoginFormComponent implements OnInit {
   async verifyOtp(otp) {
 
     if (this.loginOnly && this.userNotFound) {
-      sessionStorage.setItem('currentMobile', this.newUser.mobile);
+      localStorage.setItem('userMobile', this.newUser.mobile);
       this.router.navigate(['/signup/details']);
       return;
     }
@@ -544,7 +545,7 @@ export class LoginFormComponent implements OnInit {
         } else {
 
 
-        sessionStorage.setItem('currentMobile', this.newUser.mobile);
+        localStorage.setItem('userMobile', this.newUser.mobile);
         this.router.navigate(['/signup/details']);
         }
       }

@@ -18,6 +18,8 @@ ion-app {
         letter-spacing: 1px;
         text-transform: capitalize;
         font-weight: 400;
+        min-height: 25px;
+        display: block;
     }
 }
 
@@ -99,11 +101,14 @@ ion-list {
 
 .user-profile-image {
     padding: 0;
+    max-width: 60px;
+    max-height: 60px;
 
     img {
         border-radius: 200px;
         margin-top: -9px;
         border: 3px solid white;
+        max-height: 60px;
     }
 }
 

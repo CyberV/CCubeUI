@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CarService } from 'app/services/car.service';
 import { Router } from '@angular/router';
+import { PlanService } from 'app/services/plan.service';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'adhoc-slider',
@@ -13,26 +15,64 @@ export class AdhocSliderComponent implements OnInit {
   @Input() adhocs:any;
   @Input() selectedAdhocs:any;
   @Output() adhocSelected = new EventEmitter();
+  @Input() subscriptionAdhocs: any;
   @Input() active:boolean;
+  @Input() plan:any;
+
+  @Input() blockedAddons:any;
+  @Output() showDetails = new EventEmitter();
+
 
   isSelected(adhoc) {
     return this.adhocMap.indexOf(adhoc.name) > -1;
   }
 
+  @ViewChild('adnSlider')adnSlider : IonSlides;
+
+  isBlocked(addon) {
+    return this.blockedMap.indexOf(addon.code) > -1;
+  }
+
+  isSchedulable(addon) {
+    return addon.isAdhoc;
+  }
+
+  isSmallText(addon) {
+    let t = addon.label || addon.name;
+
+    return t.length <= 11;
+  }
+
+  isScheduled (addon) {
+    if (!this.dateMap.length) {
+      return false;
+    }
+    let found = this.dateMap.filter((obj) => obj.code == addon.code);
+    return found.length && found[0].date != "Date" ? found[0].date  : false;
+  }
+
   options = {
     centeredSlides: false,
-    slidesPerView: 2.5,
-    spaceBetween: 15,
+    slidesPerView: 2.3,
+    spaceBetween: 20,
   };
 
+  blockedMap:any;
+  dateMap:any;
+
   adhocMap:any;
+  showAnimation:boolean;
 
   constructor(
     private carService:CarService,
-    private router:Router
+    private router:Router,
+    private planService: PlanService
   ) {
     this.active = false;
     this.bodyType = 'sedan';
+    this.showAnimation = false;
+    this.blockedAddons = [];
+    this.subscriptionAdhocs = [];
     this.adhocs = [
       {
         name:'Deep Wash in a shop',
@@ -53,16 +93,114 @@ export class AdhocSliderComponent implements OnInit {
 
     this.selectedAdhocs = [];
     this.adhocMap = [];
+    this.blockedMap=[];
+    this.adhocMap = [];
+    this.dateMap = [];
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.adhocs = this.planService.getAdhocsForPlan(this.plan ? this.plan.name : 'Standard');
+    this.updatePrice();
+  }
+
+  sendShowDetails(addon) {
+    this.showDetails.emit(addon);
+  }
+
+  ngAfterViewInit() {
+    this.animate();
+  }
+
+  animate() {
+    this.showAnimation = false;
+    setTimeout(()=> {
+      this.showAnimation = true;
+      this.adnSlider ? this.adnSlider.startAutoplay() : '' ;
+    }, 200);
+  }
+
+  parse() {
+    let added = [];
+    let blocked = [];
+    let available = [];
+
+    this.adhocs.forEach( (adn)=> {
+
+      if (this.isSelected(adn)) {
+        added.push(adn);
+      } else if (this.isBlocked(adn)) {
+        blocked.push(adn);
+      } else {
+        available.push(adn);
+      }
+
+    });
+
+
+    Array.prototype.push.apply(added, available);
+
+    Array.prototype.push.apply(added, blocked);
+
+    this.adhocs = added;
+  }
 
   ngOnChanges(changes) {
+
+    
+    if (changes.subscriptionAdhocs && this.subscriptionAdhocs) {
+      this.dateMap = this.subscriptionAdhocs.map((adn) => {
+        return {
+          code: adn.addon.code,
+          date: new Date(adn.scheduledTime).toString().split(' ').slice(1,3).join(' ')
+        };
+      })
+    }
+
     if (changes.selectedAdhocs && this.selectedAdhocs) {
       this.adhocMap = [];
       this.adhocMap = this.selectedAdhocs.map((adhoc) => {
         return adhoc.name;
       });
+    }
+
+    if (changes.selectedAdhocs && this.selectedAdhocs) {
+      if (this.adnSlider) {
+        this.adnSlider.stopAutoplay();
+      }
+      this.adhocMap = [];
+      this.adhocMap = this.selectedAdhocs.map((addon) => {
+        return addon.code;
+      });
+
+      this.parse();
+    }
+
+    if (changes.blockedAddons && this.blockedAddons && this.blockedAddons.length) {
+      console.log('Blocked', this.blockedAddons);
+      this.blockedMap = this.blockedAddons.map((a) => a.code);
+      this.parse();
+
+    }
+
+    if (changes.bodyType && this.bodyType && this.adhocs) {
+      this.updatePrice();
+    }
+
+
+
+    if (changes.plan && this.plan) {
+      this.adhocs = this.planService.getAdhocsForPlan(this.plan ? this.plan.name : 'Standard');
+      this.updatePrice();
+    }
+  }
+
+  
+  updatePrice() {
+    
+    if (this.bodyType && this.adhocs) {
+      for (let i=0;i< this.adhocs.length; i++) {
+        this.adhocs[i].price = this.adhocs[i].pricing[this.bodyType];
+      }
     }
   }
 

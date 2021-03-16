@@ -8,6 +8,9 @@
           <div *ngIf="context=='checkout'" class="--padding-x">
 
             <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
+
+            <switch (toggle)="refreshCarAndPlans()" slim="true"></switch>
+
             <ng-container *ngIf="(mode.plan || mode.addon || mode.adhoc) && selectedCar; else noItemsTemplate">
                 <checkout-details 
                 #detailsComp
@@ -39,8 +42,10 @@
                 ></coupons-list>
              
   
-              <addon-slider [plan]="selectedPlan"  [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)" (showDetails)="openAddon($event)"></addon-slider>
-              <adhoc-slider [bodyType]="selectedCar.bodyType" *ngIf="retryAddon && (mode.plan || mode.adhoc)" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
+            <ng-container *ngIf="retryAddon">
+              <addon-slider [plan]="selectedPlan"  [bodyType]="selectedCar.bodyType" *ngIf="(mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)" (showDetails)="openAddon($event)"></addon-slider>
+              <adhoc-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPlan" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
+            </ng-container>
               <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
             </ng-container>
             <ng-template #noItemsTemplate>

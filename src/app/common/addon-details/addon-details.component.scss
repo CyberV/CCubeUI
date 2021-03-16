@@ -20,6 +20,17 @@
   }
 }
 
+.old-price {
+  color: gray;
+  font-size: 100%;
+  margin-right: 24px;
+  text-decoration: line-through;
+  /* margin-left: -5.5em; */
+  left: 18px;
+  position: relative;
+}
+
+
 .close-btn {
   position: absolute;
   right: 10px;

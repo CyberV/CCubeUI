@@ -33,7 +33,7 @@ export class AddonSliderComponent implements OnInit {
   }
 
   isSchedulable(addon) {
-    return addon.code == 'FBW' || addon.code == 'WASH_DEEP';
+    return addon.isAdhoc;
   }
 
   isSmallText(addon) {
@@ -97,7 +97,7 @@ export class AddonSliderComponent implements OnInit {
     this.showAnimation = false;
     setTimeout(()=> {
       this.showAnimation = true;
-      this.adnSlider.startAutoplay()
+      this.adnSlider ? this.adnSlider.startAutoplay() : '' ;
     }, 200);
   }
 

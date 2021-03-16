@@ -39,13 +39,13 @@ export class PlanService {
     this.AllPlans = this.getAllPlans();
     this.AllFeatures = this.getAllFeatures();
 
-    this.fixedAdhocs = ['WASH_DEEP', 'FBW'];
+    this.fixedAdhocs = this.AllFeatures.filter((f) => f.isAdhoc == true);
     this.OnlyAddons = [];
     let map = this.AllFeatures.map((ftr) => ftr.code);
     for (let i = 0; i < this.AllFeatures.length; i++) {
       let remove = false;
 
-      remove = this.fixedAdhocs.some((adhoc) => adhoc == this.AllFeatures[i].code);
+      remove = this.fixedAdhocs.some((adhoc) => adhoc.code.toLowerCase() == this.AllFeatures[i].code.toLowerCase());
 
       if (!remove) {
         this.OnlyAddons.push(JSON.parse(JSON.stringify(this.AllFeatures[i])));
@@ -296,6 +296,8 @@ export class PlanService {
             addon.originalPrice = null;
           }
 
+        } else {
+          addon.originalPrice = null;
         }
         data.push(addon);
       }
@@ -414,20 +416,42 @@ export class PlanService {
       return ff;
     }
   }
+  getAdhocsForPlan(planName) {
+    return this.fixedAdhocs;
+    // let addons = [];
 
+
+
+    // switch (planName) {
+    //   case 'Standard': {
+    //     Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Deluxe', true));
+    //     Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
+    //     break;
+    //   }
+    //   case 'Deluxe': {
+
+    //     Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
+
+    //     break;
+    //   }
+    //   default: return addons;
+    // }
+
+    // return addons;
+  }
 
 
   getAddonsForPlan(planName) {
     let addons = [];
 
-    this.fixedAdhocs.forEach((adhocCode) => {
-      let found = this.AllFeatures.filter((ftr) => ftr.code == adhocCode);
+    // this.fixedAdhocs.forEach((adhocCode) => {
+    //   let found = this.AllFeatures.filter((ftr) => ftr.code == adhocCode);
 
-      if (found && found.length) {
-        addons.push(JSON.parse(JSON.stringify(found[0])));
-      }
+    //   if (found && found.length) {
+    //     addons.push(JSON.parse(JSON.stringify(found[0])));
+    //   }
 
-    })
+    // })
 
     switch (planName) {
       case 'Standard': {

@@ -59,9 +59,9 @@
 
 
 
-        <cc-accordion [title]="productName" [label]="productPrice" [compact]="true">
+        <cc-accordion *ngIf="plan" [title]="productName" [label]="productPrice" [compact]="true">
           <plan-details *ngIf="plan" [plan]="plan" [compact]="true"></plan-details>
-          <addon-details *ngIf="!plan && addon" [addon]="addon"></addon-details>
+         
         </cc-accordion>
 
 
@@ -175,8 +175,8 @@
 
           </div>
         </div> -->
-
-        <div class="row content-row" *ngIf="(user.referralBonusPending > 0) || (discount.discount > 0)">
+        <hr/>
+        <div class="row content-row">
           <div class="col-8">
             <ion-icon class="big-icon vertical-center-text" name="cart-outline"></ion-icon> <span class="icon-text">Cart
               Total</span>

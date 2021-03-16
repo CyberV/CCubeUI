@@ -108,6 +108,9 @@ export class AppComponent {
 
           break;
         }
+        case 'hide': {
+          this.headerType = null;
+        }
       }
     })
   }

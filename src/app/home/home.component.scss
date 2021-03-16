@@ -1,15 +1,26 @@
 @import "src/variables.scss";
 
+ion-content {
+    --overflow: hidden;
+}
+
 .container-fluid {
     text-align: justify;
     background: white;
     color: black;
     padding: 0 32px;
     //margin-bottom: 5em;
-    margin-top: 1em;
+    //margin-top: 1em;
 
-    @media screen and (max-width: 768px) {
-        margin-top: 5em;
+    // @media screen and (max-width: 768px) {
+    //     margin-top: 5em;
+    // }
+}
+
+.sshot-slide {
+    transform: rotate(45deg);
+    ion-slide {
+        width: 50%;
     }
 }
 
@@ -27,8 +38,15 @@
     min-height: 600px;
 }
 
+.logo-container {
+    top: 10px;
+    position: relative;
+}
+
 .logo {
     width: 50%;
+    position: relative;
+    z-index: 10;
 
     @media screen and (min-width: 768px) {
         width: 70%
@@ -37,11 +55,29 @@
 
 .entry {
     position: relative;
-    top: -25px;
+    top: -75px;
     .text {
         position: absolute;
         bottom: 5em;
         left: 2em;
+        bottom: 4em;
+        left: 45px;
+
+        @media screen and (min-width: 350px) { 
+            bottom: 5em;
+            left: 2em;
+        }
+
+        cta {
+            position: relative;
+            left: -12px;
+            top: 10px;
+
+            @media screen  and (min-width: 400px ){
+                left: -7px;
+                top: -10px;
+            }
+        }
     }
 
     img {

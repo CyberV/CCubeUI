@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
+
 
 declare var $;
 @Component({
@@ -8,26 +10,52 @@ declare var $;
 })
 export class CarouselComponent implements OnInit {
 
-  constructor() { }
+  @Output() slideChange = new EventEmitter();
+  @Output() skip = new EventEmitter();
+
+  currentIndex : number;
+  constructor() {
+    this.options = {
+      autoplay: false,
+      centeredSlides: true,
+    slidesPerView: 1,
+    // spaceBetween: 0,
+    };
+    this.currentIndex = 0;
+   }
+
+  @ViewChild('carousel') carousel: IonSlides;
+
+  options:any;
 
   ngOnInit() {}
-
   ngAfterViewInit() {
-    // $(".carousel").on("touchstart", function(event){
-    //   var xClick = event.originalEvent.touches[0].pageX;
-    //   $(this).one("touchmove", function(event){
-    //       var xMove = event.originalEvent.touches[0].pageX;
-    //       if( Math.floor(xClick - xMove) > 5 ){
-    //           $('.carousel').carousel('next');
-    //       }
-    //       else if( Math.floor(xClick - xMove) < -5 ){
-    //           $('.carousel').carousel('prev');
-    //       }
-    //   });
-    //   $(".carousel").on("touchend", function(){
-    //           $(this).off("touchmove");
-    //   });
-    // });
+
+
+     
+    
+    this.carousel.ionSlideWillChange.subscribe((a,b ,c) => {
+      //console.log('Slide Change' , a, b, c);
+      this.carousel.getActiveIndex().then((i) => {
+        this.currentIndex = i;
+        this.slideChange.emit(this.currentIndex);
+      })
+      
+    })
   }
+
+  sendSkip() {
+    this.skip.emit();
+    
+  }
+
+  nextSlide() {
+    this.carousel.slideNext();
+  }
+
+  previousSlide() {
+    this.carousel.slidePrev();
+  }
+
 
 }

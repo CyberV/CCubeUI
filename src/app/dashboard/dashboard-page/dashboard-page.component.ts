@@ -25,6 +25,7 @@ export class DashboardPageComponent implements OnInit {
     private headerService: HeaderService,
     private toastController: ToastController,
     private loginService: LoginService,
+    private activatedRoute:ActivatedRoute,
     private userService: UserService
   ) {
 
@@ -112,6 +113,7 @@ export class DashboardPageComponent implements OnInit {
     this.includedAdhocs = this.planService.getIncludedAdhocs();
 
     this.selectedAddon = this.includedAddons[this.includedAddons.length -1];
+    this.selectedAdhoc = this.includedAdhocs[this.includedAdhocs.length -1];
 
     switch (this.context) {
       case 'dashboard': {
@@ -178,6 +180,17 @@ export class DashboardPageComponent implements OnInit {
     } else {
       this.planService.includeAddon(addon);
       this.includedAddons = this.planService.getIncludedAddons();
+    }
+  }
+
+  onAdhocSelect(adhoc) {
+    //this.presentToast('Please select a Plan');
+    if (this.includedAdhocs.some((a) => a.name == adhoc.name)) {
+      this.planService.excludeAdhoc(adhoc);
+      this.includedAdhocs = this.planService.getIncludedAdhocs();
+    } else {
+      this.planService.excludeAdhoc(adhoc);
+      this.includedAdhocs = this.planService.getIncludedAdhocs();
     }
   }
 

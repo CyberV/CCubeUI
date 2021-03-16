@@ -27,6 +27,7 @@ export class MobileInputComponent implements OnInit {
   @Input() labelOnly:boolean;
   @Input() inputOnly:boolean;
   @Input() mandatory:boolean;
+  @Input() noScroll:boolean ;
 
   @Input() constraints:any;
 
@@ -48,6 +49,7 @@ export class MobileInputComponent implements OnInit {
     this.mandatory = false;
 
     this.hasError = false;
+    this.noScroll = false;
     this.constraints = {
       min: '',
       max: ''
@@ -70,7 +72,7 @@ export class MobileInputComponent implements OnInit {
   focus() {
     let inp:any = this.phoneInput;
 
-    if (inp) {
+    if (inp && !this.noScroll) {
       scrollElementToTop(inp.nativeElement);
     }
 

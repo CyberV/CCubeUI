@@ -9,7 +9,6 @@ import { NotificationService } from 'app/services/notification.service';
 import { PlanService } from 'app/services/plan.service';
 import { ToastController } from '@ionic/angular';
 //import {FlipCounterJs} from 'flip-counter-js';
-import FlipClock from 'flipclock';
 
 declare var FlipCounterJs;
 @Component({
@@ -45,6 +44,16 @@ export class HomeComponent implements OnInit {
 
   @ViewChildren('attention') attention : QueryList<ElementRef>;
 
+  ssOptions = {
+    initialSlide: 0,
+    centeredSlides: true,
+  slidesPerView: 1,
+  autoplay: true,
+  };
+
+  showSignup:boolean;
+
+
   constructor(
     private router: Router, 
     private userService:UserService,
@@ -56,7 +65,9 @@ export class HomeComponent implements OnInit {
     this.featureList = featureList;
     this.contributions = contributionsList;
     this.isLoggedIn = false;
+    this.showSignup = false;
     this.currentUser={};
+
 
         
     this.slideOpts = {
@@ -100,6 +111,17 @@ export class HomeComponent implements OnInit {
     // });
   }
 
+  onSlideChange(indx) {
+
+
+    this.showSignup = indx == 2;
+    
+  }
+
+  onSkip() {
+    this.goToPlans();
+  }
+
   start () {
     this.beginAnimation = true;
 
@@ -130,16 +152,10 @@ export class HomeComponent implements OnInit {
   
   // //FlipCounter
   // fc.increment(10); // Add 10
-
-  const el = document.getElementById('waterTimer');
-
-const clock = new FlipClock(el, new Date, {
-	face: 'HourCounter'
-});
   }
 
   ionViewWillEnter() {
-    this.headerService.setView('home',{});
+    this.headerService.hideHeader();
     this.currentUser = this.userService.getCurrentUser();
     let sub = this.planService.getCurrentSubscription();
 

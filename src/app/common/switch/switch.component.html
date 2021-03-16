@@ -8,7 +8,7 @@
           (click)="setActivePlanDuration(1)">Quarterly</div>
       </span>
 
-      <ion-label>
+      <ion-label *ngIf="!slim">
         <img src="assets/icons/arrow.png" />
         <div class="discount-label">
 

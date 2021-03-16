@@ -1,11 +1,11 @@
 <div class="counter-container">
 
-<heading text="Litres of Water Saved Till Date" align="center"></heading>
+<heading text="Water Saved Till Date" align="center"></heading>
   <div class="row">
     <div class="col-12">
       <div class="container">
           <div class="srow">
-            <ul [class]="'flip counter-'+ crnt" *ngFor="let crnt of mock">
+            <ul [class]="'flip counter-'+ crnt" *ngFor="let crnt of mock; let i = index;">
               <li>
                 <a href="#">
                   <div class="up">
@@ -90,6 +90,7 @@
                   </div>
                 </a>
               </li>
+              <span class="comma" *ngIf="(( (mock.length - i ) >2 )) && (+(mock.length - i)%2 == 0)">,</span>
               <li>
                 <a href="#">
                   <div class="up">
@@ -127,10 +128,14 @@
                 </a>
               </li>
             </ul>
+            
           </div>
+          
         </div>
         </div>
+       
   </div>
+  <subheading text="* in litres"></subheading>
 
   <!-- <div class="row">
     <div class="col-12">

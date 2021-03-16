@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
 import { getConfigValue } from '../common.service';
 
@@ -10,6 +10,8 @@ import { getConfigValue } from '../common.service';
 export class SwitchComponent implements OnInit {
 
   @Output() toggle = new EventEmitter();
+
+  @Input() slim:boolean;
   open: boolean;
   activePlanDuration: string;
 
@@ -21,6 +23,7 @@ export class SwitchComponent implements OnInit {
     this.open = false;
     this.activePlanDuration = 'monthly';
     this.discountValue = 20;
+    this.slim = false;
   }
 
   ngOnInit() {

@@ -25,7 +25,7 @@ export class SigninFormComponent implements OnInit {
 
   @ViewChildren('inpPass') inpPass : QueryList<HTMLElement>;
   @ViewChildren('ctaLogin') ctaLogin : QueryList<HTMLElement>;
-
+  savedMobile:string;
 
   get isPhoneValid() {
     return this.user.mobile && (this.user.mobile.length>=9);
@@ -42,6 +42,7 @@ export class SigninFormComponent implements OnInit {
       mobile:'',
       password:''
     };
+    this.savedMobile = null;
     this.loading = false;
     this.showError= false;
     this.errorMsg= "";
@@ -49,7 +50,23 @@ export class SigninFormComponent implements OnInit {
 
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let savedMobile = localStorage.getItem('userMobile') ;
+    this.user.mobile = savedMobile ? savedMobile : '';
+
+    this.savedMobile = savedMobile;
+
+    if (savedMobile) {
+      setTimeout(()=> {
+        this.focusTo('inpPass');
+      }, 500);
+      
+    }
+  }
+
+  ngAfterViewInit() {
+
+  }
 
   sendOTP() {
 

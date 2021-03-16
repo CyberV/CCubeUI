@@ -18,6 +18,8 @@ export class VerifyOtpComponent implements OnInit {
   @Output() changeNumber = new EventEmitter();
   @Output() resend = new EventEmitter();
 
+  resendingOtp:boolean;
+
   arr:any;
   private otp;
 
@@ -25,6 +27,7 @@ export class VerifyOtpComponent implements OnInit {
     private toastController: ToastController,
     private loginService:LoginService) {
     this.mismatch = false;
+    this.resendingOtp = false;
    }
 
   ngOnInit() {
@@ -103,7 +106,9 @@ export class VerifyOtpComponent implements OnInit {
 
   resendOtp() {
     //this.resend.emit();
+    this.resendingOtp = true;
     this.loginService.resendOtp(this.mobile.toString()).subscribe((response:any)=>{
+
       if (response.success) {
         this.presentToast('OTP Resent Successfully!');
       } else {
@@ -111,6 +116,7 @@ export class VerifyOtpComponent implements OnInit {
           this.presentToast('MAX LIMIT Reached! Please try again after some time');
         }
       }
+      this.resendingOtp = false;
     });
   }
 

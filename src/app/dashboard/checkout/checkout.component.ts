@@ -322,7 +322,7 @@ export class CheckoutComponent implements OnInit {
     async onAddonSelected(addon, bypass = false) {
       if (!bypass)
         bypass = this.includedAddons.some((a) => a.name == addon.name);
-      if (!bypass && (addon.code == 'FBW' || addon.code == 'WASH_DEEP')) {
+      if (!bypass && addon.isAdhoc) {
         this.openAddon(addon, this.includedAddons.some((a) => a.name == addon.name));
       } else {
         this.includedAddons = this.includedAddons.some((a) => a.name == addon.name) ? this.planService.excludeAddon(addon) : this.planService.includeAddon(addon);

@@ -22,7 +22,8 @@
 </div>
 
 
-<div class="resend" (click)="resendOtp()"> Resend OTP </div> 
+<spinner slim="true" *ngIf="resendingOtp" color="blue"></spinner>
+<div class="resend" (click)="resendOtp()"> {{resendingOtp ? 'Retrying' : 'Resend'}} OTP </div> 
 
 
 

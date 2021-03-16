@@ -4,7 +4,7 @@
       <div class="offset-md-2 col-md-8 col-xs-12 header">
         <div class="section" id="s1" name="page1">
           <span *ngIf="startShow" [style.display]="startShow ? 'visible': 'none'" class="logo-container"><img
-              class="logo " src="./assets/whitell.png" alt="CCubeLogo" border="0" />
+              class="logo " src="./assets/whitell.png" alt="CCubeLogo" border="0" (click)="showSlides = false; beginAnimation = false; showSignup= false;" />
           </span><br />
 
           <div *ngIf="!showSlides" class="animate__animated" [class.animate__backOutLeft]="beginAnimation">
@@ -13,11 +13,19 @@
 
               <counter></counter>
 
+              <!-- <ion-slides class="sshot-slide" [options]="ssOptions">
+                <ion-slide> <img src="./assets/slides/ss-3.png"></ion-slide>
+                <ion-slide> <img src="./assets/slides/ss-2.png"></ion-slide>
+                <ion-slide> <img src="./assets/slides/ss-1.png"></ion-slide>
+              </ion-slides> -->
+
               <div class="entry">
                   <img src="./assets/slides/0.png">
+
+                  
                   <div class="text">
-                    
-                    <cta text="Get Started" style="position: relative; left: -5px;" (action)="start()"></cta>
+                       <!-- Say <span highlight>goodbye</span> to your daily Car Cleaning and Maintainence problems. -->
+                    <cta text="Get Started" (action)="start()"></cta>
                   </div>
               </div>
             </div>
@@ -25,13 +33,13 @@
           <div *ngIf="showSlides" class="animate__animated animate__backInRight">
 
 
-              <carousel></carousel>
+              <carousel (slideChange)="onSlideChange($event)" (skip)="onSkip()"></carousel>
         <!-- <div class="sticky" (click)="goToPlans(true)">Book A Demo</div> -->
 
               
           
           </div>
-          <cta *ngIf="showSlides" sticky="true" text="Sign Up Now" (action)="goToPlans()"></cta>
+          <cta *ngIf="showSignup" sticky="true" text="Sign Up Now" (action)="goToPlans()"></cta>
          
 
           

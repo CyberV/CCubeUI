@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-header class="ion-header" *ngIf="isMobile">
+  <ion-header class="ion-header animate__animated animate__slideInDown" *ngIf="isMobile && headerType">
     <ion-toolbar>
 
       <ion-title class="app-header ion-title">
@@ -14,7 +14,7 @@
               <span class="header-text">{{headerText}}</span>
         
           </div>
-          <div class="col-2 notif">
+          <div class="col-2 notif" *ngIf="isLoggedIn">
               <div class="btn-group" (click)="presentPopover($event)">
                 <span >
                   <ion-icon [ngClass]="{

@@ -3,13 +3,21 @@
   <div class="row">
     <div class="offset-1 col-10">
         <mobile-input name="Mobile Number" placeholder="" (enterKey)="focusTo('ctaOtp')" [(value)]="newUser.mobile" (valueChange)="otpSent = false;"></mobile-input>
+
+
+
         <cta #ctaOtp *ngIf="!otpSent" sticky="true" text="Get Verification Code" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
         </cta>
       
         <br/>
       
         
+        <ng-container *ngIf="!loginOnly && existingUser">
+          <span class="login-banner">Welcome Back! Login Now with OTP.</span>
+          <span class="text-center">Or <span highlight [routerLink]="['/signup/login']">Continue with Password</span></span>
         
+          <!-- <span *ngIf="!existingUser" class="login-banner">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>     -->
+      </ng-container>
       
         <verify-otp #verifyOtpComp
         *ngIf="otpSent"
@@ -22,12 +30,6 @@
         
     </div>
   </div>
-
-  <ng-container *ngIf="!loginOnly">
-      <span *ngIf="existingUser" class="login-banner">Welcome Back! Login Now with OTP.</span>
-    
-      <!-- <span *ngIf="!existingUser" class="login-banner">Already a Member? <a class="link" [routerLink]="['/signup/login']">Log In</a></span>     -->
-  </ng-container>
 
   <span *ngIf="userNotFound" class="login-banner">We didn't find an Account with this number. Continue to Signup.</span>
 

@@ -21,6 +21,13 @@ export class HeaderService {
     });
   }
 
+  hideHeader() {
+    this.headerSubject.next({
+      key: 'hide',
+      data : true
+    });
+  }
+
   setView(viewName:string, viewOptions:any) {
     this.headerSubject.next({
       key: 'view',
