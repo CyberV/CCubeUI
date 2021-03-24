@@ -14,12 +14,12 @@
   <div [class.slim-container]="slim" [class.--no-padding]="noPadding">
 
 
-    <div class="money">
+    <div class="money" (click)="tryProfile()">
       <ion-icon name="cash-outline"></ion-icon> <span> Referral Bonus Earned : <span
           Rs>{{currentUser.referralBonusPending}}</span></span>
     </div>
 
-    <div class="money" *ngIf="currentUser.referralBonusAvailed > 0">
+    <div class="money" (click)="tryProfile()" *ngIf="currentUser.referralBonusAvailed > 0">
       <ion-icon name="cash-outline"></ion-icon> <span> Referral Bonus Used : <span
           Rs>{{currentUser.referralBonusAvailed}}</span></span>
     </div>

@@ -14,12 +14,37 @@ export class AdsListComponent implements OnInit {
 
   ads: any;
 
+
+
+  options = {
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'custom',
+      renderCustom: (swiper, current, total) => {
+        return this.customProgressBar(current, total);
+      }
+    }
+  };
+
+  private customProgressBar(current: number, total: number): string {
+    const ratio: number = current / total;
+
+    const progressBarStyle: string = 'style=\'transform: translate3d(0px, 0px, 0px) scaleX(' + ratio + ') scaleY(1); transition-duration: 300ms;\'';
+    const progressBar: string = '<span class=\'swiper-pagination-progressbar-fill\' ' + progressBarStyle + '></span>';
+
+    let progressBarContainer: string = '<div class=\'swiper-pagination-progressbar\' style=\'height: 4px; top: 6px; width: 100%;\'>';
+    progressBarContainer += progressBar;
+    progressBarContainer += '</span></div>';
+
+    return progressBarContainer;
+  }
+
   @Output() action = new EventEmitter();
   constructor(
-    private router:Router,
+    private router: Router,
     private planService: PlanService,
     private carService: CarService,
-    private toastController:ToastController
+    private toastController: ToastController
   ) {
 
     this.ads = [];
@@ -73,7 +98,7 @@ export class AdsListComponent implements OnInit {
     if (ads && ads.length) {
       this.ads = ads;
     }
-   }
+  }
 
   async presentToast(msg) {
     const toast = await this.toastController.create({
@@ -93,30 +118,30 @@ export class AdsListComponent implements OnInit {
 
     } else {
 
-    switch(ad.action) {
-      case'addcar': {
-        this.carService.clear();
-        this.router.navigate(['/dashboard/select-car'])
-        break;
-      }
-      case'upgrade': {
-        this.presentToast('Upgrade your car.');
+      switch (ad.action) {
+        case 'addcar': {
+          this.carService.clear();
+          this.router.navigate(['/dashboard/select-car'])
+          break;
+        }
+        case 'upgrade': {
+          this.presentToast('Upgrade your car.');
 
-        break;
-      }
-      case'quarterly': {
-        this.presentToast('Buy/Renew a Plan to see quarterly benefits.');
-        this.planService.updatePlanDuration('quarterly');
+          break;
+        }
+        case 'quarterly': {
+          this.presentToast('Buy/Renew a Plan to see quarterly benefits.');
+          this.planService.updatePlanDuration('quarterly');
 
-        break;
+          break;
+        }
+        case 'referral': {
+          this.router.navigate(['/refer'])
+          break;
+        }
+          break;
       }
-      case'referral': {
-        this.router.navigate(['/refer'])
-        break;
-      }
-      break;
     }
-  }
   }
 
 

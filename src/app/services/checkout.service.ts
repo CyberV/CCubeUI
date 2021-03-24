@@ -9,6 +9,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { hash } from 'app/services/crypto.service';
 import { WindowRefService } from 'app/window-ref.service';
 import { UserService } from './user.service';
+import { LoginService } from 'app/login/login.service';
 
 // Test
 const api_key = "rzp_test_iw0QQKe6eyEP2g";
@@ -22,7 +23,7 @@ declare var RazorpayCheckout: any;
 // const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
 
 
-const BYPASS_PAYMENT = false;
+const BYPASS_PAYMENT = true;
 
 
 @Injectable({
@@ -43,6 +44,7 @@ export class CheckoutService {
   constructor(
     private http: HttpClient,
     private userService: UserService,
+    private loginService:LoginService,
     private winRef: WindowRefService) {
     this.refreshUser();
   }
@@ -145,6 +147,7 @@ export class CheckoutService {
           success: true,
           order: order
         });
+        this.loginService.refreshUser(this.user.phone);
       } catch (e) {
         //alert('Error in Payments ' + e);
         console.log('Error in Payment s Razorpa ', e);
@@ -162,28 +165,34 @@ export class CheckoutService {
     let o = null;
     let opened = false;
 
-    try{
-    if (RazorpayCheckout) {
-      //alert('Found Razorpay Checkout');
-      RazorpayCheckout.on('payment.success', successCallback)
-      RazorpayCheckout.on('payment.cancel', cancelCallback)
-      RazorpayCheckout.open(options);
-      opened = true;
+    try {
+      if (RazorpayCheckout) {
+        console.log('Found Razorpay Checkout');
+        RazorpayCheckout.on('payment.success', successCallback)
+        RazorpayCheckout.on('payment.cancel', cancelCallback)
+        RazorpayCheckout.open(options);
+        opened = true;
+      }
+      
+    } catch (ee) {
+      console.log('Error in RZRPY Payment', ee);
     }
 
-  } catch(ee) {
-  }
+    try {
+      if (Razorpay && !opened) {
+        o = Razorpay;
 
+        console.log('Found Razorpay');
+        o = new Razorpay(options);
+        o.on('payment.success', successCallback);
+        o.on('payment.cancel', cancelCallback);
+        o.open();
+      }
 
-    if (Razorpay && !opened) {
-      o = Razorpay;
-
-      //alert('Found Razorpay');
-      o = new Razorpay(options);
-      o.on('payment.success', successCallback);
-      o.on('payment.cancel', cancelCallback);
-      o.open();
+    } catch (ee) {
+      console.log('Error in RZRPY Payment', ee);
     }
+
 
   }
 

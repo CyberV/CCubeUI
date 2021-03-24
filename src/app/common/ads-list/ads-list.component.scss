@@ -9,16 +9,25 @@
     right: 1em;
     top: 30%;
     text-align: right;
-    font-size: 20px;
+    font-size: 90%;
 
     .desc {
-        font-size: 16px;
+        font-size: 95%;
         color: #4b5757;
         margin-top: 8px;
         max-width: 300px;
         text-overflow: ellipsis;
     }
 }
+
+
+    .swiper-container-horizontal>.swiper-pagination-bullets {
+      position: relative;
+      top: 0em;
+    }
+  ion-slides {
+      margin-bottom: 1em;
+  }
 
 .discount-container {
     display: block;
@@ -27,11 +36,17 @@
     padding: 8px;
     text-align: center;
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     transform: rotate(-45deg);
     position: absolute;
     left: -36%;
     top: 32px;
+
+    .discount-label {
+        span {
+            font-size: 24px;
+        }
+    }
 
     &.contrast {
         background: $primary-color;

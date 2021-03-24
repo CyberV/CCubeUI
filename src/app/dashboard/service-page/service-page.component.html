@@ -5,6 +5,8 @@
   </div>
 </div>
 
+<ads-list *ngIf="!loading &&  payments.length == 0"></ads-list>
+
 <ng-container *ngIf="!loading">
   <div class="row">
     <div class="col-12 car-slider-container --padding-x">
@@ -45,19 +47,22 @@
   <div class="row car-info-container">
     <div class="col-12">
       <ng-container *ngIf="!loading &&  payments.length == 0">
-
+        
         <heading text="Looks like you haven't registered a car yet." align="center"></heading>
         <div class="--padding-x">
           <cta text="Add Car" (action)="addCar()"></cta>
         </div>
         <br />
+        
         <book-demo></book-demo>
       </ng-container>
       <ng-container *ngIf="payments.length">
         <ion-slides #planSlider [options]="planSliderOptions">
 
-          <ion-slide *ngFor="let payment of payments; let i = index" (mouseup)="demoEvent($event)">
+          <ion-slide *ngFor="let payment of payments; let i = index">
             <purchased-plan [style.width.%]="100" [subscription]="payment" (renewPlan)="handleRenewPlan($event)"
+
+            (scheduleService)="handleScheduleService($event)"
               [payment]="payment.payments[0]" [car]="payment.payments[0].car" [plan]="payment.payments[0].plan">
             </purchased-plan>
           </ion-slide>
@@ -162,16 +167,34 @@
 
 <refer-earn [slim]="true"></refer-earn>
 
-<ng-container *ngIf="!loading && payments.length > 0">
+<ng-container *ngIf="!loading && payments.length > 0 && !selectedSubscription.isAdhoc ">
   <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" class="--padding-y"
     (upgradeNow)="handleUpgradePlan($event)" (showDetails)="showPlanDetails($event)"></upgrade-slider>
 
-  <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
-
-  <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons"
+    <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons"
     [subscriptionAddons]="selectedSubscription.addons" [active]="true" (showDetails)="openAddon($event)"
     (addonSelected)="onAddonSelected($event)"></addon-slider>
 
-  <adhoc-slider [selectedAdhocs]="subAdhocs" active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
+  <!-- <adhoc-slider [selectedAdhocs]="subAdhocs" active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider> -->
 
+  
+  <adhoc-slider [bodyType]="selectedCar.bodyType" [subscriptionAdhocs]="selectedSubscription.adhocs" [active]="true" [selectedAdhocs]="subAdhocs" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" ></adhoc-slider>
+
+  <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
 </ng-container>
+
+
+<ng-container *ngIf="!loading && payments.length > 0 && selectedSubscription && selectedSubscription.isAdhoc">
+  <switch (toggle)="refreshPlans()"></switch>
+    <plan-slider #planSelector [plans]="currentPlans" [bodyType]="selectedCar.bodyType" (showDetails)="onShowDetails($event)"
+    (buyNow)="buyPlan($event)"></plan-slider>
+yo
+      <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons"
+      [subscriptionAddons]="selectedSubscription.addons" [active]="true" (showDetails)="openAddon($event)"
+      (addonSelected)="promptForPlan($event)"></addon-slider>
+  
+    <!-- <adhoc-slider [selectedAdhocs]="subAdhocs" active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider> -->
+    <adhoc-slider [bodyType]="selectedCar.bodyType" [subscriptionAdhocs]="selectedSubscription.adhocs" [active]="true" [selectedAdhocs]="subAdhocs" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" ></adhoc-slider>
+  
+    <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
+  </ng-container>

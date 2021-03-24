@@ -17,7 +17,8 @@ export class ConfirmLocationComponent implements OnInit {
   allInputs:any;
 
   get allFieldsReady() {
-    return this.location.houseNo.length > 0 && this.location.city.length > 0 && this.location.state.length > 0 && !!this.location.society && this.location.society.length > 0;
+    let loc = this.location.location || this.location;
+    return loc.houseNo.length > 0 && loc.city.length > 0 && loc.state.length > 0 && ((loc.society && loc.society.length > 0) ||(loc.location && loc.location.society.length > 0));
   }
 
   @Output() confirm = new EventEmitter();

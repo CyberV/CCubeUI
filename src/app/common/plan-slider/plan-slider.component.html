@@ -1,5 +1,5 @@
 
-    <ion-slides [options]="slideOpts">
+    <ion-slides #slides class="plan-slider" [options]="slideOpts">
       <ion-slide *ngFor="let plan of planList; let i = index;">
         <plan-card 
             [plan]="plan" 

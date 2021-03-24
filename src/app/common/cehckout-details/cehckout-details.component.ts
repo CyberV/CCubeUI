@@ -53,7 +53,7 @@ export class CheckoutDetailsComponent implements OnInit {
 
   get productPrice() {
     let { mode, plan, addon, adhoc } = this;
-    return mode.plan ? plan.originalPrice || plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? addon.price : 'Plan'))
+    return mode.plan ? plan.originalPrice || plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? (addon.originalPrice || addon.price) : 'Plan'))
   }
 
   upgradeSelected: boolean;
@@ -118,7 +118,7 @@ export class CheckoutDetailsComponent implements OnInit {
     if (changes.includedAddons && this.includedAddons && this.includedAddons.length) {
       this.addonPrice = 0;
       this.includedAddons.forEach((adn) => {
-        this.addonPrice += adn.price;
+        this.addonPrice += adn.originalPrice || adn.price;
       });
     }
 

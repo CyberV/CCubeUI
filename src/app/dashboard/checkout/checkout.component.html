@@ -9,7 +9,7 @@
 
             <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
 
-            <switch (toggle)="refreshCarAndPlans()" slim="true"></switch>
+            <switch *ngIf="mode.addon || mode.plan" (toggle)="refreshCarAndPlans()"></switch>
 
             <ng-container *ngIf="(mode.plan || mode.addon || mode.adhoc) && selectedCar; else noItemsTemplate">
                 <checkout-details 
@@ -24,7 +24,7 @@
                 [mode]="mode"
                 (planChanged)="changePlan($event)"
                 (removeAddon)="onAddonSelected($event, true)"
-                (removeAdhoc)="onAdhocSelected($event)"
+                (removeAdhoc)="onAdhocSelected($event, true)"
                 (removeCoupon)="onRemoveCoupon()"
                 (showAddonDetails)="openAddon($event)"
                 
@@ -33,7 +33,7 @@
   
               </checkout-details>
   
-              <coupons-list [slim]="true" 
+              <coupons-list #cpnList [slim]="true" 
                 [appliedCoupons]="appliedCoupons" [availableCoupons]="availableCoupons" 
                 [totalAmount]="serviceTotal" 
                 (discount)="applyDiscount($event)"
@@ -43,8 +43,10 @@
              
   
             <ng-container *ngIf="retryAddon">
+              plan {{mode.plan}} addon {{mode.addon}} adhoc {{mode.adhoc}}
+              <br/> show addons : {{mode.plan || mode.addon}}
               <addon-slider [plan]="selectedPlan"  [bodyType]="selectedCar.bodyType" *ngIf="(mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)" (showDetails)="openAddon($event)"></addon-slider>
-              <adhoc-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPlan" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider>
+              <adhoc-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPlan" [selectedAdhocs]="includedAdhocs" [blockedAdhocs]="blockedAdhocs" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" ></adhoc-slider>
             </ng-container>
               <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
             </ng-container>
@@ -52,9 +54,6 @@
                 <heading text="Looks like your cart is empty."></heading>
                 <cta text="Back To Dashboard" (action)="backToDashboard()"></cta>
               </ng-template>
-
-
-           
           </div>
 
           <div *ngIf="context=='confirm' && selectedCar" class="--padding-x">
@@ -68,11 +67,12 @@
                 
               </div> -->
 
-              <warning  *ngIf="carMismatch && carIdentified" text="This is a different car. You can continue to checkout after reviewing plan for this car."></warning>
+              <warning  *ngIf="carMismatch && carIdentified" [text]="'This is a different car. You can continue to checkout after reviewing pricing for this car.'"></warning>
 
               <div class="row" *ngIf="carMismatch">
                 <div class="col-6 --no-padding-right">
-                    <cta text="Review Plan" (action)="updatePlan()"></cta>
+                  mode {{mode | json}}
+                    <cta [text]="'Review ' + (mode.plan ? 'Plan' : 'Service')" (action)="updatePlan()"></cta>
                 </div>
                 <div class="col-6">
                     <cta class="float-right" (action)="resetCarNumber()" text="Retry" outline="true"></cta>

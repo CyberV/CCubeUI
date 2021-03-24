@@ -19,7 +19,7 @@ export function scrollElementToTop(emt) {
 
     let cont = $('.container');
 
-    let top = cont[0].scrollTop,
+    let top = cont[cont.length - 1].scrollTop,
       emtTop = $(inp).offset().top;
 
 
@@ -39,6 +39,9 @@ export function scrollElementToTop(emt) {
 
 
 
-    }
+    } else if (emt.className.indexOf('plan-slider') > -1) {
+      let c = cont[cont.length - 1];
+      c.scrollTop = 800;
+    } 
   }
 }

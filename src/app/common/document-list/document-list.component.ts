@@ -205,7 +205,6 @@ export class DocumentListComponent implements OnInit {
 
   async openFile(doc, index) {
     let bypass = false;
-    debugger;
     try {
       if (doc.image) {
         let mime = this.documentService.getMIMEtype(doc.localUrl)

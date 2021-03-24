@@ -53,7 +53,10 @@ export class AddonDetailsComponent implements OnInit {
 
   selectDate(date) {
     this.laterSelected = false;
-    this.scheduleDate.emit(new Date(date));
+    this.scheduleDate.emit({
+      date: new Date(date),
+      adhoc: this.addon
+    });
   }
 
   sendScheduleLater() {
@@ -77,6 +80,7 @@ export class AddonDetailsComponent implements OnInit {
   get bookedDate() {
     return this.bookedTime ? new Date(this.bookedTime).toString().split(' ').slice(1,3).join(' ') : 'NA';  
   }
+  
 
   addAddonToCart() {
     this.addon.scheduledDate = this.selectedDate;
@@ -86,7 +90,13 @@ export class AddonDetailsComponent implements OnInit {
   }
 
   onAddonDurationToggle(duration) {
-    this.addon = this.planService.getIncludedAddons()[0];
+    let addons = this.planService.getIncludedAddons();
+    if (addons.length) {
+      this.addon = addons[0];
+    } else {
+      let multiplier = duration == 'quarterly' ? 3 : 1;
+      this.addon.price = this.addon.pricing[this.carService.getCurrentCar().bodyType] * multiplier;
+    }
   }
   
   scheduleAddon(addon) {
@@ -124,6 +134,7 @@ export class AddonDetailsComponent implements OnInit {
     if (this.addon && this.addon.scheduledDate) {
       this.selectedDate = this.addon.scheduledDate;
       this.laterSelected = false;
+      this.bookedTime = this.selectedDate;
     } 
   }
 
@@ -151,7 +162,8 @@ export class AddonDetailsComponent implements OnInit {
 
       let currentSubs = this.planService.getCurrentSubscription();
 
-      if (currentSubs) {
+      let car = this.carService.getCurrentCar();
+      if (currentSubs && currentSubs.carRegNo == car.regNo) {
         let startDate = new Date(currentSubs.startDate);
 
         const currentYear = new Date().getFullYear();

@@ -14,17 +14,17 @@ export class AdhocSliderComponent implements OnInit {
   @Input() bodyType:string;
   @Input() adhocs:any;
   @Input() selectedAdhocs:any;
-  @Output() adhocSelected = new EventEmitter();
   @Input() subscriptionAdhocs: any;
   @Input() active:boolean;
   @Input() plan:any;
+  @Input('blockedAdhocs') blockedAddons:any;
 
-  @Input() blockedAddons:any;
   @Output() showDetails = new EventEmitter();
+  @Output() adhocSelected = new EventEmitter();
 
 
   isSelected(adhoc) {
-    return this.adhocMap.indexOf(adhoc.name) > -1;
+    return this.adhocMap.indexOf(adhoc.code) > -1;
   }
 
   @ViewChild('adnSlider')adnSlider : IonSlides;
@@ -101,6 +101,7 @@ export class AdhocSliderComponent implements OnInit {
   ngOnInit() {
     this.adhocs = this.planService.getAdhocsForPlan(this.plan ? this.plan.name : 'Standard');
     this.updatePrice();
+    this.parse();
   }
 
   sendShowDetails(addon) {
@@ -132,7 +133,7 @@ export class AdhocSliderComponent implements OnInit {
         blocked.push(adn);
       } else {
         available.push(adn);
-      }
+      } 
 
     });
 
@@ -154,13 +155,6 @@ export class AdhocSliderComponent implements OnInit {
           date: new Date(adn.scheduledTime).toString().split(' ').slice(1,3).join(' ')
         };
       })
-    }
-
-    if (changes.selectedAdhocs && this.selectedAdhocs) {
-      this.adhocMap = [];
-      this.adhocMap = this.selectedAdhocs.map((adhoc) => {
-        return adhoc.name;
-      });
     }
 
     if (changes.selectedAdhocs && this.selectedAdhocs) {
@@ -197,7 +191,7 @@ export class AdhocSliderComponent implements OnInit {
   
   updatePrice() {
     
-    if (this.bodyType && this.adhocs) {
+    if (this.bodyType && this.adhocs && this.adhocs.length && this.adhocs[0].pricing) {
       for (let i=0;i< this.adhocs.length; i++) {
         this.adhocs[i].price = this.adhocs[i].pricing[this.bodyType];
       }

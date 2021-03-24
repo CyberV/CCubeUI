@@ -148,6 +148,10 @@ mat-select {
     --padding-start: 0;
     --padding-end: 0;
     width: 105%;
+
+    .badge {
+        color:red;
+    }
 }
 
 .tax-row {

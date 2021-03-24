@@ -48,7 +48,6 @@ export class SubmitLeadsComponent implements OnInit {
   }
 
   addEmptyLeads(n=1) {
-    debugger;
     for(let i=0;i<=n-1; i++) {
       this.leads.push({
         name: '',

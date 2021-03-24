@@ -31,9 +31,9 @@ declare var _that;
 export class LoginService {
 
   private domain: string = 'api-ccube.herokuapp.com';
-  private  url: string = 'https://' + this.domain + '/api/';
+  //private  url: string = 'https://' + this.domain + '/api/';
 
-  //private url: string = 'http://localhost:4000/api/';
+  private url: string = 'http://localhost:4000/api/';
   private carUrl: string = this.url + "car/details/";
 
   get currentUser() {
@@ -91,12 +91,12 @@ export class LoginService {
       catchError(this.handleError));
   }
 
-  tryCoupon(amount, coupon) {
+  tryCoupon(amount, couponCode) {
     
     let payload = {
       amount,
       phone: this.currentUser.phone,
-      coupon
+      couponCode
     };
     return this.http.post(this.url + 'subscription/trycoupon', payload).pipe(
       catchError(this.handleError));

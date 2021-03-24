@@ -150,11 +150,13 @@ export class DashboardComponent implements OnInit {
 
   onAddonSelect(addon) {
 
-    this.planService.includeAddon(addon);
+    //this.planService.includeAddon(addon);
 
     this.presentToast('Please select a Plan');
 
-    $('.container')[0].scrollTop = 0;
+    // scrollElementToTop(document.querySelectorAll('plan-slider')[0]);
+    let cont  =  $('.container');
+    cont[cont.length - 1].scrollTop = 300;
   }
 
   onAdhocSelect(adhoc) {

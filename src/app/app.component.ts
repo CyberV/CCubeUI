@@ -23,6 +23,7 @@ import { NotificationService } from './services/notification.service';
 import { rebeccapurple } from 'color-name';
 import { DocumentService } from './services/document.service';
 import { runInThisContext } from 'vm';
+import { PlanService } from './services/plan.service';
 
 declare var $;
 @Component({
@@ -60,6 +61,7 @@ export class AppComponent {
     private userService: UserService,
     private alertController: AlertController,
     private documentService:DocumentService,
+    private planService:PlanService,
     private carService: CarService,
     public toastController: ToastController,
     private popoverController:PopoverController,
@@ -122,6 +124,7 @@ export class AppComponent {
     this.ready = false;
     console.log('Before Init in APP')
     await Initialize(this.userService.getCurrentUser() ? this.userService.getCurrentUser().city || '' : '');
+    this.planService.refreshPlans();
     console.log('After Init in APP Ready true')
 
     setTimeout(()=> {

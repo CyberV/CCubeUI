@@ -9,7 +9,7 @@
 
       <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for {{addon.originalPrice ? '3 months' : '1 month'}}</span>
     </p>
-    <switch *ngIf="!addon.isAdhoc" (toggle)="onAddonDurationToggle($event)"></switch>
+    <switch *ngIf="!showClose && (!addon.isAdhoc)" (toggle)="onAddonDurationToggle($event)"></switch>
     <p *ngIf="!addon.isAdhoc && startDate && !bookedTime">
         <span  class="startLabel">
           Starts from <span>{{startDate}}</span>

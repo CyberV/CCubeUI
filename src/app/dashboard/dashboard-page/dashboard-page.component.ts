@@ -194,14 +194,19 @@ export class DashboardPageComponent implements OnInit {
     }
   }
 
-  setDateForAdhoc(date) {
-    let found = this.includedAddons.filter((adn) => adn.code == this.selectedAddon.code);
+  setDateForAdhoc(data) {
+    let {date,adhoc} = data;
+    this.selectedAdhoc = adhoc;
+    let found = this.includedAdhocs.filter((adn) => adn.code == this.selectedAdhoc.code);
     if (found.length) {
       found = found[0];
-      found.scheduledDate = date;
+      let indx = this.includedAdhocs.indexOf(found);
+
+
+      this.includedAdhocs[indx].scheduledDate = date;
     }
 
-    this.planService.setIncludedAddons(this.includedAddons);
+    this.planService.setIncludedAdhocs(this.includedAdhocs);
 
   }
 

@@ -88,10 +88,10 @@
                     <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.label || adn.name}}
                   </div>
                   <div class="col-2 --no-padding">
-                    <span class="badge badge-light" (click)="sendRemoveAddon(adn)">Remove</span>
+                    <span class="badge badge-light" (click)="sendRemoveAddon(adn)">X</span>
                   </div>
                   <div class="col-3">
-                    <span class="addon-price float-right" Rs>{{adn.price}}</span>
+                    <span class="addon-price float-right" Rs>{{adn.originalPrice || adn.price}}</span>
                   </div>
                 </div>
 
@@ -107,7 +107,7 @@
             <ion-item *ngFor="let adn of includedAdhocs" class="addon-info">
               <ion-label>
                 <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
-                <span class="badge badge-light" (click)="sendRemoveAdhoc(adn)">Remove</span>
+                <span class="badge badge-light" (click)="sendRemoveAdhoc(adn)"><ion-icon name="close-outline"></ion-icon></span>
                 <span class="addon-price float-right" Rs>{{adn.price}}</span>
               </ion-label>
             </ion-item>

@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter () {
 
-    let mobile = sessionStorage.getItem('currentMobile');
+    let mobile = localStorage.getItem('userMobile')
 
     if (this.userService.isLoggedIn()) {
 

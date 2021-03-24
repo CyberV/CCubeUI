@@ -52,7 +52,6 @@ export class DocumentService {
 
       if (this.user && this.user.phone) {
         let data = await this.storage.get('docs-' + this.user.phone).then((data) => {
-          debugger;
           if (data && data != "null") {
             data = JSON.parse(data);
             resolve(data);

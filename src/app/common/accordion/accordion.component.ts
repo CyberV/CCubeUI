@@ -28,6 +28,8 @@ export class AccordionComponent implements OnInit {
   hasStep: boolean;
   initDone: boolean;
 
+  public isOpen:boolean;
+
   constructor() {
 
     this.title = '';
@@ -39,6 +41,7 @@ export class AccordionComponent implements OnInit {
     this.locked = false;
     this.defaultOpen = false;
     this.initDone = false;
+    this.isOpen = false;
   }
 
   ngOnInit() {
@@ -56,9 +59,11 @@ export class AccordionComponent implements OnInit {
     if (this.drawerPannel) {
       this.drawerPannel.closed.subscribe(() => {
         this.onToggle.emit(false);
+        this.isOpen = false;
       });
       this.drawerPannel.opened.subscribe(() => {
         this.onToggle.emit(true);
+      this.isOpen = true;
 
         if (!this.compact) {
           setTimeout(() => {

@@ -82,7 +82,7 @@
   <ion-menu class="side-menu" side="start" menuId="first" contentId="my-content">
     <div class="menu-header">
       <div class="top">
-        <div class="row ">
+        <div class="row " (click)="goTo('profile')" > 
           <div class="col-3 user-profile-image">
             <img [src]="profilePic">
           </div>

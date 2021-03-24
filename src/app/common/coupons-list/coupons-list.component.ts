@@ -3,6 +3,7 @@ import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 import { AccordionComponent } from '../accordion/accordion.component';
 import { BookDemoComponent } from '../book-demo/book-demo.component';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'coupons-list',
@@ -17,6 +18,7 @@ export class CouponsListComponent implements OnInit {
 
   @Input() appliedCoupons:any;
   loading: any;
+  customCoupon:string;
 
   @Output() discount = new EventEmitter();
   @Output() showAddons = new EventEmitter();
@@ -41,11 +43,13 @@ export class CouponsListComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private planService: PlanService
+    private planService: PlanService,
+    private toastController: ToastController
   ) {
     this.totalAmount = 100;
     this.slim = false;
     this.appliedCoupons = [];
+    this.customCoupon = '';
     this.availableCoupons = [
       {
         name: 'CCUBE-USER-1',
@@ -83,24 +87,68 @@ export class CouponsListComponent implements OnInit {
 
   ngOnChanges(changes) {
     if(changes.totalAmount && this.totalAmount) {
-      debugger;
+      this.applyCoupon(this.appliedCoupons.length ? this.appliedCoupons[0] : null);
     }
 
   }
 
-  applyCoupon(coupon) {
+  tryCoupon(couponCode) {
+    if (!couponCode) {
+      return;
+    }
+    this.loading[couponCode] = true;
+    this.loginService.tryCoupon(this.totalAmount, couponCode).subscribe(async (response:any) => {
+      this.loading[couponCode]= false;
+      if (response.success) {
+        this.customCoupon = "";
+        this.planService.setAppliedCoupon(response.data.coupon);
+        this.appliedCoupons = [response.data.coupon];
+        this.discount.emit(response.data);
+
+          if (this.couponAccordion.first.isOpen)
+          this.couponAccordion.first.toggle();
+      } else {
+        this.presentToast(response.error);
+        this.planService.setAppliedCoupon(null);
+        this.appliedCoupons = [];
+        this.discount.emit({
+          discount: 0,
+          coupon: null
+        });
+      }
+    })
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
+  async applyCoupon(coupon) {
+    if (!coupon) {
+      return;
+    }
     this.loading[coupon.code] = true;
-    this.loginService.tryCoupon(this.totalAmount, coupon).subscribe((response:any) => {
+    this.loginService.tryCoupon(this.totalAmount, coupon.code).subscribe(async (response:any) => {
       this.loading[coupon.code]= false;
       if (response.success) {
         this.planService.setAppliedCoupon(coupon);
         this.appliedCoupons = [coupon];
-          this.discount.emit({
-            discount: response.data.discount,
-            coupon: coupon
-          });
+        this.discount.emit(response.data);
 
+          if (this.couponAccordion.first.isOpen)
           this.couponAccordion.first.toggle();
+      } else {
+        this.planService.setAppliedCoupon(null);
+        this.appliedCoupons = [];
+        this.discount.emit({
+          discount: 0,
+          coupon: null
+        });
       }
     })
   }

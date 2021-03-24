@@ -12,35 +12,71 @@
         <div *ngIf="car" class="car-info" role="alert">
           <span class="model">{{car.model}}</span>
           <span class="regNo">{{car.regNo}}</span>
-          <span>
-            <span class="plan-name">{{plan.name}}</span> <div class='badge quarterly-label badge-pill badge-info'>{{ plan.duration =='quarterly' ? 'Quarterly' : 'Monthly' }} Plan</div>
-          </span>
-          
-          <div [ngClass]="{
-            'badge status-badge' : true,
-            'badge-primary': subscription.status == 'Active',
-            'badge-light': subscription.status == 'Ready',
-            'badge-warning': subscription.status == 'Expiring',
-            'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
-            'badge-success': subscription.status == 'Payment Received'  || subscription.status == 'Service Scheduled'}">{{subscription.status | uppercase}}</div>
+          <ng-container *ngIf="mode == 'plan'">
+            <span>
+              <span class="plan-name">{{plan.name}}</span>
+              <div class='badge quarterly-label badge-pill badge-info'>
+                {{ plan.duration =='quarterly' ? 'Quarterly' : 'Monthly' }} Plan</div>
+            </span>
 
-            
-            <br/>
-          <span class="expiry">{{expiry}}</span>
+            <div
+              [ngClass]="{
+                  'badge status-badge' : true,
+                  'badge-primary': subscription.status == 'Active',
+                  'badge-light': subscription.status == 'Ready',
+                  'badge-warning': subscription.status == 'Expiring',
+                  'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
+                  'badge-success': subscription.status == 'Payment Received'  || subscription.status == 'Service Scheduled'}">
+              {{subscription.status | uppercase}}</div>
 
-          <ng-container *ngIf="payment.nextPlan">
+
+            <br />
+            <span class="expiry">{{expiry}}</span>
+
+            <ng-container *ngIf="payment.nextPlan">
               <span>
-                  <span class="plan-name">{{payment.nextPlan.plan.name}}</span> Plan
-                  <span class="expiry">Starting On {{nextPlanStartDate}}</span>
-                </span>
-                
+                <span class="plan-name">{{payment.nextPlan.plan.name}}</span> Plan
+                <span class="expiry">Starting On {{nextPlanStartDate}}</span>
+              </span>
+
+            </ng-container>
+
+            <br />
+            <div *ngIf="subscription.showRenew" (click)="sendRenewPlan()" class="renew-link">
+              <span>Renew Plan</span>
+            </div>
+            <br />
+          </ng-container>
+          <ng-container *ngIf="mode == 'adhoc'">
+            <div class="adhoc-name">
+              <span class="plan-name">{{adhoc && adhoc.addon.name}}</span>
+              <ion-select interface="action-sheet" *ngIf="subscription.adhocs.length > 1" [value]="adhoc.addon.name" (ionChange)="selectAdhoc($event)">
+                <ion-select-option *ngFor="let adh of subscription.adhocs" [value]="adh.addon.name"
+                  (click)="selectAdhoc(adh)">{{adh.addon.name}}</ion-select-option>
+              </ion-select>
+            </div>
+
+            <div [ngClass]="{
+                  'badge adhoc-status-badge' : true,
+                  'badge-primary': subscription.status == 'Scheduled' ||  subscription.status == 'Active' ,
+                  'badge-light': subscription.status == 'Ready',
+                  'badge-warning': subscription.status == 'Expiring' || subscription.status == 'Missed',
+                  'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
+                  'badge-success': subscription.status == 'Purchased'}">
+              {{subscription.status | uppercase}}</div>
+            <span class="expiry">{{expiry}}</span>
+            <div *ngIf="subscription.status == 'Missed'" (click)="sendReschedule()" class="schedule-link">
+              <span>Reschedule</span>
+            </div>
+
+            <div *ngIf="subscription.status == 'Purchased'" (click)="sendReschedule()" class="schedule-link">
+
+              <span>
+                <ion-icon [style.color]="'#ffa169'" name="calendar-outline"></ion-icon>Schedule Now
+              </span>
+            </div>
           </ng-container>
 
-          <br/>
-          <div *ngIf="subscription.showRenew" (click)="sendRenewPlan()" class="renew-link">
-            <span>Renew Plan</span>
-          </div>
-          <br/>
           <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -14,6 +14,8 @@ export class PlanSliderComponent implements OnInit {
   
   @Output() buyNow = new EventEmitter();
   @Output() showDetails = new EventEmitter();
+
+  @ViewChild('slides') slides: HTMLElement;
 
   planList;
   colors;

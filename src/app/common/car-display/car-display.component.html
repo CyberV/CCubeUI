@@ -13,23 +13,21 @@
       </div>
       <ng-container *ngIf="isCarReady">
         <div *ngIf="!verifyOnly" class="card animate__animated animate__bounceInDown">
-          <div class="card-body">
-            <ng-container *ngIf="vehicleTypeMismatch">
+          <div class="card-body"  *ngIf="vehicleTypeMismatch">
+            <ng-container>
               <heading text="Uh Oh! This isn't a Car." color="red">
                   <subheading text="Vehicle Class : {{carDetails.vehicleType}}" slim="true" color="black"></subheading>
               </heading>
              
             </ng-container>
 
-            <p class="card-text">
-              <span>You're driving a {{carDetails.year}} {{carDetails.variant}}</span>
-              <br />
-              <span></span>
-            </p>
+
           </div>
           <ul class="list-group list-group-flush">
+              <li class="list-group-item">Maker : {{carDetails.maker}}</li>
+              <li class="list-group-item">Model : {{carDetails.model}}</li>
             <li class="list-group-item">Body Type : {{carDetails.displayLabel}}</li>
-            <li class="list-group-item">Fuel : {{carDetails.fuelType}}</li>
+            <!-- <li class="list-group-item">Fuel : {{carDetails.fuelType}}</li> -->
             <li class="list-group-item">Registeration Date: {{carDetails.registeredOn}} </li>
           </ul>
           <div class="card-body">
@@ -44,7 +42,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Maker : {{carDetails.maker}}</li>
             <li class="list-group-item">Model : {{carDetails.model}}</li>
-            <li class="list-group-item">Body Type: {{carDetails.bodyType}} </li>
+            <li class="list-group-item">Body Type: {{carDetails.displayLabel}} </li>
           </ul>
           <p *ngIf="vehicleTypeMismatch" class="card-body">
               <span>The Registration Number doesn't belong to a Car. Please Try Again with a valid Car Registration Number!</span>

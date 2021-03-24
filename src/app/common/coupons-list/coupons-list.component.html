@@ -2,9 +2,21 @@
 
 
   <cc-accordion
-    [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied : ' + (appliedCoupons[0].unit=='percent' ? '' : 'Rs ') +  appliedCoupons[0].value + (appliedCoupons[0].unit=='percent' ? ' %' : '') + ' OFF !'"
+    [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied : ' +  (appliedCoupons.length ? ((appliedCoupons[0].unit=='percent' ? '' : 'Rs ') +  appliedCoupons[0].value + (appliedCoupons[0].unit=='percent' ? ' %' : '') + ' OFF !') : '')"
     #couponAccordion>
+
+    <div class="row">
+      <div class="col-9">
+        <mobile-input type="text" placeholder="Have a Coupon Code?" name="Coupon Code" [(value)]="customCoupon"></mobile-input>
+      </div>
+      <div class="col-3">
+        <cta small="true" [disabled]="customCoupon.length < 3" outline="true" text="TRY" [loading]="loading[customCoupon]"  (action)="tryCoupon(customCoupon)"></cta>
+        
+      </div>
+    </div>
+    <br/>
     <heading *ngIf="availableCoupons.length == 0" text="No Coupons Available Today!"></heading>
+
     <ion-list class="list-notif">
       <ion-item-group>
 
@@ -22,6 +34,7 @@
                   <span *ngIf="item.validFor=='user'"> Just for You</span>
                   <span *ngIf="item.validFor=='society'"> Your Society</span>
                   <span *ngIf="item.validFor=='all'">All</span>
+                  <span *ngIf="item.validFor=='special'">Exclusive Customers</span>
                 </span> <br />
                 
 

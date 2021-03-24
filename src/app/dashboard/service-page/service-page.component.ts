@@ -9,7 +9,10 @@ import { NotificationService } from 'app/services/notification.service';
 import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 import { ShareService } from 'app/services/share.service';
 import { share } from 'rxjs/operators';
+import { PlanSliderComponent } from 'app/common/plan-slider/plan-slider.component';
+import { scrollElementToTop } from 'app/util/util';
 
+declare var $;
 @Component({
   selector: 'app-service-page',
   templateUrl: './service-page.component.html',
@@ -34,6 +37,7 @@ export class ServicePageComponent implements OnInit {
   sliderInitialized: boolean;
   upgradePlans: any;
   selectedSubscription: any;
+  currentPlans: any = [];
 
   carSliderOptions = {
     centeredSlides: false,
@@ -48,6 +52,7 @@ export class ServicePageComponent implements OnInit {
   };
 
   @ViewChildren('planSlider') planSlider: QueryList<IonSlides>;
+  @ViewChildren('planSelector') planSelector: QueryList<PlanSliderComponent>;
 
   notifications: any;
 
@@ -77,7 +82,7 @@ export class ServicePageComponent implements OnInit {
     private modalController: ModalController,
     public toastController: ToastController,
     private carService: CarService,
-    private shareService:ShareService,
+    private shareService: ShareService,
     private notificationService: NotificationService
   ) {
 
@@ -116,28 +121,60 @@ export class ServicePageComponent implements OnInit {
 
   ngOnDestroy() {
     console.log('Service Page Destroyed');
-    document.removeEventListener('backbutton', this.onBackButton,true);
+    document.removeEventListener('backbutton', this.onBackButton, true);
   }
 
-    async onBackButton(event) {
-      event.preventDefault();
-      event.stopPropagation(); 
+  gotoPlans(plan) {
+    console.log(plan);
+  }
 
-      if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-        // this.platform.exitApp(); // Exit from app
-        navigator['app'].exitApp(); // work in ionic 4
 
-      } else {
-        const toast = await this.toastController.create({
-          message: 'Press back again to exit App.',
-          duration: 2000,
-          position: 'middle'
-        });
-        toast.present();
-        // console.log(JSON.stringify(toast));
-        this.lastTimeBackPress = new Date().getTime();
-      }
+  buyPlan(payload) {
+    this.planService.changePlan(payload.plan);
+    this.goToCheckout();
+
+  }
+
+  onShowDetails(payload) {
+
+    this.planService.changePlan(payload.plan);
+    if (payload.feature) {
+    this.router.navigate(['/dashboard/plan', {code: payload.feature.code}]);
+
+    } else {
+    this.router.navigate(['/dashboard/plan']);
     }
+
+  }
+
+  refreshPlans() {
+    this.currentPlans = this.planService.getAllPlans();
+  }
+
+  goToCheckout() {
+    
+    this.router.navigate(['/dashboard/checkout']);
+  }
+
+  async onBackButton(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+      // this.platform.exitApp(); // Exit from app
+      navigator['app'].exitApp(); // work in ionic 4
+
+    } else {
+      const toast = await this.toastController.create({
+        message: 'Press back again to exit App.',
+        duration: 2000,
+        position: 'middle'
+      });
+      toast.present();
+      // console.log(JSON.stringify(toast));
+      this.lastTimeBackPress = new Date().getTime();
+    }
+  }
 
   selectCar(index) {
     this.selectedSubscription = this.payments[index];
@@ -146,6 +183,7 @@ export class ServicePageComponent implements OnInit {
     this.planService.updatePlanDuration(this.selectedSubscription.duration);
     this.carService.changeCar(this.selectedCar);
     this.selectedIndex = index;
+    this.currentPlans = this.planService.getAllPlans();
 
     this.planService.setCurrentSubscription(this.selectedSubscription);
 
@@ -153,17 +191,19 @@ export class ServicePageComponent implements OnInit {
 
 
     this.subAddons = this.selectedSubscription.addons.map((adn) => adn.addon);
-    
+
 
 
     this.subAdhocs = this.selectedSubscription.adhocs.map((adn) => adn.addon);
-    
 
 
 
-    setTimeout(() => {
-      this.upgradePlans = this.planService.getUpgradePlans(this.selectedPayment.plan.name);
-    }, 100);
+
+    if (!this.selectedSubscription.isAdhoc) {
+      setTimeout(() => {
+        this.upgradePlans = this.planService.getUpgradePlans(this.selectedPayment.plan.name);
+      }, 100);
+    }
 
     setTimeout(() => {
       if (this.planSlider && this.planSlider.first) {
@@ -195,11 +235,12 @@ export class ServicePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentPlans = this.planService.getAllPlans();
+    console.log('Loaded Plans?, ', this.currentPlans);
 
   }
 
   async openAddon(addon) {
-    debugger;
     let bookedTime = false;
     if (this.selectedSubscription.addons.length) {
       let found = this.selectedSubscription.addons.filter((adn) => adn.addon.code == addon.code);
@@ -214,7 +255,7 @@ export class ServicePageComponent implements OnInit {
     const modal = await this.modalController.create({
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
-      componentProps: { 
+      componentProps: {
         addon: addon,
         showClose: true,
         fromDashboard: true,
@@ -223,7 +264,7 @@ export class ServicePageComponent implements OnInit {
     });
     await modal.present();
 
-    modal.onDidDismiss().then((data)=> {
+    modal.onDidDismiss().then((data) => {
     });
   }
 
@@ -286,6 +327,10 @@ export class ServicePageComponent implements OnInit {
     this.router.navigate(['/dashboard/checkout']);
   }
 
+  handleScheduleService(adhoc) {
+    this.openAddon(adhoc.addon);
+  }
+
   handleUpgradePlan(data) {
     let { plan } = data;
 
@@ -322,6 +367,13 @@ export class ServicePageComponent implements OnInit {
     this.planService.clearAdhocs();
     this.planService.includeAdhoc(adhoc);
     this.router.navigate(['/dashboard/adhoc']);
+  }
+
+  promptForPlan(addon) {
+    if (this.planSelector.first) {
+      this.presentToast('Please select a plan first!');
+      scrollElementToTop($('.plan-slider')[0]);
+    }
   }
 
   onAddonSelected(addon) {

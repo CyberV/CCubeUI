@@ -3,6 +3,7 @@ import { CarService } from './car.service';
 import plansList from 'assets/planslist.json';
 import { planData } from 'app/common/common.service';
 import { getConfigValue } from 'app/common/common.service';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,12 @@ export class PlanService {
 
   constructor(
     private carService: CarService,
+    private toastController: ToastController
   ) {
-    let _p: any = planData;
+    this.refreshPlans();
+  }
+
+  refreshPlans() {
     this.AllPlans = this.getAllPlans();
     this.AllFeatures = this.getAllFeatures();
 
@@ -51,7 +56,6 @@ export class PlanService {
         this.OnlyAddons.push(JSON.parse(JSON.stringify(this.AllFeatures[i])));
       }
     }
-
 
   }
 
@@ -338,7 +342,7 @@ export class PlanService {
       if (order.addons && order.addons.length) {
         info.addons = "";
         order.addons.forEach((adn) => {
-          total += adn.price;
+          total += adn.originalPrice || adn.price;
           info.addons += adn.name + ", "
         });
         info.addons = info.addons.substr(0, info.addons.length - 2);
@@ -498,6 +502,7 @@ export class PlanService {
       addons.splice(addons.indexOf(addons.filter((a) => a.name == addon.name)[0]), 1);
     }
 
+    this.presentToast(addon.name + " Removed!");
 
     sessionStorage.setItem('includedAddons', JSON.stringify(addons));
 
@@ -534,9 +539,19 @@ export class PlanService {
 
       addons.push(addon);
       sessionStorage.setItem('includedAddons', JSON.stringify(addons));
+      this.presentToast(addon.name + " Added!");
     }
 
     return addons;
+  }
+
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
   getIncludedAdhocs() {
@@ -548,6 +563,10 @@ export class PlanService {
     sessionStorage.setItem('includedAddons', JSON.stringify(d));
   }
 
+  setIncludedAdhocs(d) {
+    sessionStorage.setItem('includedAdhocs', JSON.stringify(d));
+  }
+
   getAppliedCoupon() {
     let adhocs = sessionStorage.getItem('appliedCoupon');
     return adhocs && adhocs != "null" ? JSON.parse(adhocs) : null;
@@ -555,6 +574,20 @@ export class PlanService {
 
   setAppliedCoupon(d) {
     sessionStorage.setItem('appliedCoupon', d ? JSON.stringify(d) : null);
+  }
+
+  refreshAdhocs() {
+    let adhocs = this.getIncludedAdhocs();
+    let car = this.carService.getCurrentCar();
+
+    if (adhocs.length && car) {
+      for (let i = 0; i < adhocs.length; i++) {
+        adhocs[i].price = adhocs[i].pricing[car.bodyType];
+      }
+
+      sessionStorage.setItem('includedAdhocs', JSON.stringify(adhocs));
+
+    }
   }
 
   excludeAdhoc(adhoc) {
@@ -570,6 +603,7 @@ export class PlanService {
     }
 
     sessionStorage.setItem('includedAdhocs', JSON.stringify(adhocs));
+    this.presentToast(adhoc.name + " Removed!");
 
     return adhocs;
   }
@@ -583,6 +617,8 @@ export class PlanService {
     if (adhocs.some((a) => a.name == adhoc.name)) {
     } else {
       adhocs.push(adhoc);
+      this.presentToast(adhoc.name + " Added!");
+
       sessionStorage.setItem('includedAdhocs', JSON.stringify(adhocs));
     }
 
