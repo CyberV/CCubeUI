@@ -15,6 +15,10 @@ export class WeeklyScheduleComponent implements OnInit {
 
   startDate:any;
 
+  displayDate(date) {
+    return new Date(date).toString().split(' ').slice(1,3).join(' ');
+  }
+
   constructor(
     private modalController:ModalController
   ) {

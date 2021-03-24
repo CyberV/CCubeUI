@@ -21,6 +21,7 @@ export class AdhocSliderComponent implements OnInit {
 
   @Output() showDetails = new EventEmitter();
   @Output() adhocSelected = new EventEmitter();
+  @Output() reschedule = new EventEmitter();
 
 
   isSelected(adhoc) {
@@ -106,6 +107,16 @@ export class AdhocSliderComponent implements OnInit {
 
   sendShowDetails(addon) {
     this.showDetails.emit(addon);
+  }
+
+  sendReschedule(addon){
+    let found = this.subscriptionAdhocs.filter((adh) => adh.addon.code == addon.code);
+
+    if (found.length) {
+      found = found[0];
+      this.reschedule.emit(found);
+    }
+
   }
 
   ngAfterViewInit() {

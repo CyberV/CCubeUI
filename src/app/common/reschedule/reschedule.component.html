@@ -1,6 +1,7 @@
 <div class="reschedule-container">
     <ion-icon class="close-link" name="close-outline" style="color:red;" (click)="dismiss()"></ion-icon>
-  <heading text="Reschedule Full Body Wash" align="center"></heading>
+  <heading *ngIf="!forAdhoc" text="Reschedule Full Body Wash" align="center"></heading>
+  <heading *ngIf="forAdhoc" [text]="'Reschedule ' + adhoc.addon.name" align="center"></heading>
 <br/>
   <span class="count">Free Reschedules Left: </span>
   <span class="">
@@ -12,9 +13,15 @@
       <span >You may Reschedule this service for  <span *ngIf="count>0"> Free </span> <span *ngIf="count<=0">the price of <span Rs> 50 </span></span></span>
 
       <br/><br/>
-      <span>You can reschedule to any future working day within the same Monthly Cycle.</span>
+      <span *ngIf="!forAdhoc">You can reschedule to any future working day within the same Monthly Cycle.</span>
+      <span *ngIf="forAdhoc">You can reschedule to any working day before service expiry.</span> 
+
+      <!-- <warning *ngIf="!forAdhoc || (adhoc && adhoc.addon.code == 'FBW')" text="Wednesdays are Off!"></warning> -->
     <br/><br/>
       <span>Service Scheduled On : <span class="today">{{today}}</span></span>
+
+      <br/>
+      Service Expires On : <span *ngIf="forAdhoc" class="expiry">{{expiry}}</span>
       
       <mobile-input type="date" [error]="dateError" name="Reschedule To" [constraints]="constraints" [value]="selectedDate" (valueChange)="checkDate($event)"></mobile-input>
       

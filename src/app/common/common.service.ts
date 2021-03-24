@@ -3,9 +3,9 @@ import { IonItem } from '@ionic/angular';
 import { async } from 'q';
 
 let domain: string = 'api-ccube.herokuapp.com';
-//let  url: string = 'https://' + domain + '/api/';
+let  url: string = 'https://' + domain + '/api/';
 
-let url: string = 'http://localhost:4000/api/';
+//let url: string = 'http://localhost:4000/api/';
 
 let data = null;
 

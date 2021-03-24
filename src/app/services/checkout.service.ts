@@ -23,7 +23,7 @@ declare var RazorpayCheckout: any;
 // const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
 
 
-const BYPASS_PAYMENT = true;
+const BYPASS_PAYMENT = false;
 
 
 @Injectable({

@@ -31,9 +31,9 @@ declare var _that;
 export class LoginService {
 
   private domain: string = 'api-ccube.herokuapp.com';
-  //private  url: string = 'https://' + this.domain + '/api/';
+  private  url: string = 'https://' + this.domain + '/api/';
 
-  private url: string = 'http://localhost:4000/api/';
+  //private url: string = 'http://localhost:4000/api/';
   private carUrl: string = this.url + "car/details/";
 
   get currentUser() {
@@ -163,12 +163,13 @@ export class LoginService {
   }
 
 
-  rescheduleService(phone, carRegNo, fromDate, toDate) {
+  rescheduleService(phone, carRegNo, fromDate, toDate, addonName = '') {
     let payload = {
       phone,
       carRegNo,
       fromDate : new Date(fromDate).toDateString(),
       toDate: new Date(toDate).toDateString(),
+      addonName
     };
 
     return this.http.post(this.url + 'subscription/rescheduleService', payload).pipe(

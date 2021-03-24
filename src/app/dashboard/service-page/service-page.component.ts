@@ -11,6 +11,7 @@ import { ShareService } from 'app/services/share.service';
 import { share } from 'rxjs/operators';
 import { PlanSliderComponent } from 'app/common/plan-slider/plan-slider.component';
 import { scrollElementToTop } from 'app/util/util';
+import { RescheduleComponent } from 'app/common/reschedule/reschedule.component';
 
 declare var $;
 @Component({
@@ -307,6 +308,40 @@ export class ServicePageComponent implements OnInit {
   addCar() {
     this.carService.clear();
     this.router.navigate(['/dashboard/select-car'])
+  }
+
+  handleAdhocReschedule(adhoc) {
+    let found = this.selectedSubscription.schedule.filter((sch) => {
+      return sch.date == adhoc.scheduledTime;
+    });
+
+    if (found.length) {
+      this.openReschedule(found[0], adhoc);
+    }
+  }
+
+  async openReschedule(schedule, adhoc) {
+    const modal = await this.modalController.create({
+      component: RescheduleComponent,
+      cssClass: 'plans-table-modal',
+      componentProps: { 
+        showClose: true,
+        schedule: schedule,
+        forAdhoc : true,
+        adhoc: adhoc,
+        count: 1,
+
+        canReschedule: !schedule.isRescheduled,
+        lastDate: adhoc.expiresOn
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((data)=> {
+
+
+
+    });
   }
 
   handleRenewPlan(data) {

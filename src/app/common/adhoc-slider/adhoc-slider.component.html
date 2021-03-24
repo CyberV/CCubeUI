@@ -27,7 +27,7 @@
                       <h2 class="--padding-y" > ACTIVE</h2>
                   </span>
                   <cta *ngIf="(isSelected(addon) && active) && !isScheduled(addon) && isSchedulable(addon)" small="true" (action)="sendShowDetails(addon)" text="Book"></cta>
-                  <span class="date-label" *ngIf="isScheduled(addon)"> <ion-icon name="calendar-outline"></ion-icon> {{isScheduled(addon)}} </span>
+                  <span class="date-label" (click)="sendReschedule(addon)" *ngIf="isScheduled(addon)"> <ion-icon name="calendar-outline"></ion-icon> {{isScheduled(addon)}} </span>
             </div>
           </div>
         </mat-card>
