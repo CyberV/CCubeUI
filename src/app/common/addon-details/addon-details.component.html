@@ -1,28 +1,32 @@
 <div class="addon-container">
-  
-  <div class="addon-info" >
-      <span *ngIf="showClose" class="float-right close-btn" (click)="closeModal()"><ion-icon name="close-outline"></ion-icon></span>
-    <h2 #pageTop class="--padding --no-margin"><span class="addon-name">{{addon.name}}</span> {{isAdhoc ? 'Service' : 'Add On'}} </h2>
-    
+
+  <div class="addon-info">
+    <span *ngIf="showClose" class="float-right close-btn" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </span>
+    <h2 #pageTop class="--padding --no-margin"><span class="addon-name">{{addon.name}}</span>
+      {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+
     <p>
       <span class="old-price animate__animated animate__fadeInRight">{{addon.originalPrice}} </span>
 
-      <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for {{addon.originalPrice ? '3 months' : '1 month'}}</span>
+      <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for
+        {{addon.originalPrice ? '3 months' : '1 month'}}</span>
     </p>
     <switch *ngIf="!showClose && (!addon.isAdhoc)" (toggle)="onAddonDurationToggle($event)"></switch>
     <p *ngIf="!addon.isAdhoc && startDate && !bookedTime">
-        <span  class="startLabel">
-          Starts from <span>{{startDate}}</span>
-        </span>
-      </p>
+      <span class="startLabel">
+        Starts from <span>{{startDate}}</span>
+      </span>
+    </p>
 
-      <p *ngIf="bookedTime">
-        <span  class="startLabel">
-          Scheduled On <span>{{bookedDate}}</span>
-        </span>
-      </p>
+    <p *ngIf="bookedTime">
+      <span class="startLabel">
+        Scheduled On <span>{{bookedDate}}</span>
+      </span>
+    </p>
 
-      <span *ngIf="bookedTime"></span>
+    <span *ngIf="bookedTime"></span>
   </div>
   <spinner color="blue" *ngIf="!addon"></spinner>
   <ion-list>
@@ -59,35 +63,50 @@
         </ion-item>
       </ng-container>
 
-      <ng-container *ngIf="addon.isAdhoc && !bookedTime">
-          <ion-item-divider>
-            <ion-label class="divider">Schedule</ion-label>
-          </ion-item-divider>
-  
-          <ion-item lines="none">
+      <ng-container *ngIf="!fromDashboard || (addon.isAdhoc && !bookedTime)">
+        <ion-item-divider>
+          <ion-label class="divider">Schedule</ion-label>
+        </ion-item-divider>
 
+        <ion-item lines="none">
+          <div class="row --no-margin">
+            <datepicker [readOnly]="laterSelected" [class.error-date]="dateError" [minDate]="minDate" [maxDate]="maxDate" [(value)]="selectedDate"
+              placeholder="Period: Next 30 days" (valueChange)="selectDate($event)"></datepicker>
 
-            <datepicker [readOnly]="laterSelected" [minDate]="minDate" [maxDate]="maxDate" [(value)]="selectedDate" placeholder="Period: Next 30 days" (valueChange)="selectDate($event)"></datepicker>
-           
-
-            <!-- <ion-label (click)="showDatePicker()">
+          </div>
+         
+          <!-- <ion-label (click)="showDatePicker()">
               <ion-icon class="calendar" name="cellular-outline"></ion-icon> Select a Date
             </ion-label> -->
-          </ion-item>
-          <ion-item lines="none" class="--margin-top">
-              
-              <mat-checkbox [checked]="laterSelected" (change)="laterSelected = !laterSelected">
-                  I will schedule Later
-  
-                </mat-checkbox>
-          </ion-item>
+        </ion-item>
+        <div *ngIf="dateError" class="row --no-margin">
+            <br />
+            <p class="error-msg">{{dateError}}</p>
+          </div>
+        <ion-item lines="none" class="--margin-top">
 
-         
-          
-        </ng-container>
+          <mat-checkbox [checked]="laterSelected" (change)="laterSelected = !laterSelected" (change)="selectDate(null, laterSelected)">
+            I will schedule Later
+
+          </mat-checkbox>
+        </ion-item>
+
+
+
+      </ng-container>
     </ion-item-group>
   </ion-list>
-  <cta sticky="true" *ngIf="!fromDashboard && !purchased" [loading]="loading" text="BUY" (action)="addAddonToCart()" ></cta>
+  fromDashboard {{fromDashboard}} purchased {{purchased}} laterSelected {{laterSelected}}
+  bookedTime {{bookedTime}}
 
-  <cta sticky="true" *ngIf="!laterSelected && fromDashboard" [loading]="loading" text="Book Now" (action)="scheduleAddon(addon)" ></cta>
+  <br />
+
+
+
+  <cta sticky="true" *ngIf="!laterSelected && fromDashboard && purchased && !bookedTime" [loading]="loading"
+    text="Book Now" (action)="scheduleAddon(addon)"></cta>
+
+  <cta sticky="true" *ngIf="fromDashboard &&!purchased" [loading]="loading" text="Buy" (action)="addAddonToCart()">
+  </cta>
+
 </div>

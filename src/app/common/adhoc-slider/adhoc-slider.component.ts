@@ -11,13 +11,13 @@ import { IonSlides } from '@ionic/angular';
 })
 export class AdhocSliderComponent implements OnInit {
 
-  @Input() bodyType:string;
-  @Input() adhocs:any;
-  @Input() selectedAdhocs:any;
+  @Input() bodyType: string;
+  @Input() adhocs: any;
+  @Input() selectedAdhocs: any;
   @Input() subscriptionAdhocs: any;
-  @Input() active:boolean;
-  @Input() plan:any;
-  @Input('blockedAdhocs') blockedAddons:any;
+  @Input() active: boolean;
+  @Input() plan: any;
+  @Input('blockedAdhocs') blockedAddons: any;
 
   @Output() showDetails = new EventEmitter();
   @Output() adhocSelected = new EventEmitter();
@@ -28,7 +28,7 @@ export class AdhocSliderComponent implements OnInit {
     return this.adhocMap.indexOf(adhoc.code) > -1;
   }
 
-  @ViewChild('adnSlider')adnSlider : IonSlides;
+  @ViewChild('adnSlider') adnSlider: IonSlides;
 
   isBlocked(addon) {
     return this.blockedMap.indexOf(addon.code) > -1;
@@ -44,12 +44,12 @@ export class AdhocSliderComponent implements OnInit {
     return t.length <= 11;
   }
 
-  isScheduled (addon) {
+  isScheduled(addon) {
     if (!this.dateMap.length) {
       return false;
     }
     let found = this.dateMap.filter((obj) => obj.code == addon.code);
-    return found.length && found[0].date != "Date" ? found[0].date  : false;
+    return found.length && found[0].date != "Date" ? found[0].date : false;
   }
 
   options = {
@@ -58,15 +58,15 @@ export class AdhocSliderComponent implements OnInit {
     spaceBetween: 20,
   };
 
-  blockedMap:any;
-  dateMap:any;
+  blockedMap: any;
+  dateMap: any;
 
-  adhocMap:any;
-  showAnimation:boolean;
+  adhocMap: any;
+  showAnimation: boolean;
 
   constructor(
-    private carService:CarService,
-    private router:Router,
+    private carService: CarService,
+    private router: Router,
     private planService: PlanService
   ) {
     this.active = false;
@@ -76,7 +76,7 @@ export class AdhocSliderComponent implements OnInit {
     this.subscriptionAdhocs = [];
     this.adhocs = [
       {
-        name:'Deep Wash in a shop',
+        name: 'Deep Wash in a shop',
         label: 'Deep Wash in Shop',
         description: 'Try Deep Wash today to notice the visible difference.',
         rating: 4.5,
@@ -84,7 +84,7 @@ export class AdhocSliderComponent implements OnInit {
         icon: 'ppe'
       },
       {
-        name:'Full Body Wash',
+        name: 'Full Body Wash',
         description: 'Try Full Body Wash today to notice the visible difference.',
         rating: 4.5,
         price: 400,
@@ -94,10 +94,10 @@ export class AdhocSliderComponent implements OnInit {
 
     this.selectedAdhocs = [];
     this.adhocMap = [];
-    this.blockedMap=[];
+    this.blockedMap = [];
     this.adhocMap = [];
     this.dateMap = [];
-   }
+  }
 
   ngOnInit() {
     this.adhocs = this.planService.getAdhocsForPlan(this.plan ? this.plan.name : 'Standard');
@@ -106,10 +106,15 @@ export class AdhocSliderComponent implements OnInit {
   }
 
   sendShowDetails(addon) {
-    this.showDetails.emit(addon);
+
+    if (!this.isBlocked(addon)) {
+      this.showDetails.emit(addon);
+    }
+
+
   }
 
-  sendReschedule(addon){
+  sendReschedule(addon) {
     let found = this.subscriptionAdhocs.filter((adh) => adh.addon.code == addon.code);
 
     if (found.length) {
@@ -125,9 +130,9 @@ export class AdhocSliderComponent implements OnInit {
 
   animate() {
     this.showAnimation = false;
-    setTimeout(()=> {
+    setTimeout(() => {
       this.showAnimation = true;
-      this.adnSlider ? this.adnSlider.startAutoplay() : '' ;
+      this.adnSlider ? this.adnSlider.startAutoplay() : '';
     }, 200);
   }
 
@@ -136,7 +141,7 @@ export class AdhocSliderComponent implements OnInit {
     let blocked = [];
     let available = [];
 
-    this.adhocs.forEach( (adn)=> {
+    this.adhocs.forEach((adn) => {
 
       if (this.isSelected(adn)) {
         added.push(adn);
@@ -144,7 +149,7 @@ export class AdhocSliderComponent implements OnInit {
         blocked.push(adn);
       } else {
         available.push(adn);
-      } 
+      }
 
     });
 
@@ -158,12 +163,12 @@ export class AdhocSliderComponent implements OnInit {
 
   ngOnChanges(changes) {
 
-    
+
     if (changes.subscriptionAdhocs && this.subscriptionAdhocs) {
       this.dateMap = this.subscriptionAdhocs.map((adn) => {
         return {
           code: adn.addon.code,
-          date: new Date(adn.scheduledTime).toString().split(' ').slice(1,3).join(' ')
+          date: new Date(adn.scheduledTime).toString().split(' ').slice(1, 3).join(' ')
         };
       })
     }
@@ -199,11 +204,11 @@ export class AdhocSliderComponent implements OnInit {
     }
   }
 
-  
+
   updatePrice() {
-    
+
     if (this.bodyType && this.adhocs && this.adhocs.length && this.adhocs[0].pricing) {
-      for (let i=0;i< this.adhocs.length; i++) {
+      for (let i = 0; i < this.adhocs.length; i++) {
         this.adhocs[i].price = this.adhocs[i].pricing[this.bodyType];
       }
     }
@@ -211,7 +216,6 @@ export class AdhocSliderComponent implements OnInit {
 
   selectAdhoc(adhoc) {
     this.adhocSelected.emit(adhoc);
-    
   }
 
 }

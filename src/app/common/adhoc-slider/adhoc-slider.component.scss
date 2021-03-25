@@ -159,7 +159,12 @@ ion-slide:nth-of-type(0){
       min-height: 50px;
       display: block;
       max-height: 40px;
-      padding: 2px 4px;
+      padding:0;
+
+      @media screen and (min-width: 400px){
+        padding: 2px 4px;
+      }
+
 
       background: $secondary-color;
     color: white;

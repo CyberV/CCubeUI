@@ -66,6 +66,10 @@ export class PlanService {
     this.clearAdhocs();
   }
 
+  clearSubscription() {
+    sessionStorage.setItem('currentSubscription', null);
+  }
+
   clear() {
     sessionStorage.setItem('selectedPlan', null);
   }
@@ -94,7 +98,8 @@ export class PlanService {
 
   }
 
-  getUpgradePlans(planName) {
+  getUpgradePlans(payment) {
+    let planName = payment.nextPlan && payment.nextPlan.plan ? payment.nextPlan.plan.name : payment.plan.name;
     let currentPlan = this.getPlanByName(planName);
     let targetPlan = this.UpgradePlan;
 
@@ -468,7 +473,7 @@ export class PlanService {
         Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
 
         break;
-      }
+      } 
       default: return addons;
     }
 
@@ -490,7 +495,7 @@ export class PlanService {
     return addons && addons != "null" ? JSON.parse(addons) : [];
   }
 
-  excludeAddon(addon) {
+  excludeAddon(addon, showToast=false) {
     let addons = this.getIncludedAddons();
     if (!addons) {
       return;
@@ -502,7 +507,7 @@ export class PlanService {
       addons.splice(addons.indexOf(addons.filter((a) => a.name == addon.name)[0]), 1);
     }
 
-    this.presentToast(addon.name + " Removed!");
+    showToast ? this.presentToast(addon.name + " Removed!") : '';
 
     sessionStorage.setItem('includedAddons', JSON.stringify(addons));
 
@@ -522,7 +527,7 @@ export class PlanService {
     }
   }
 
-  includeAddon(addon) {
+  includeAddon(addon, showToast = false) {
     let addons = this.getIncludedAddons();
     if (!addons) {
       addons = [];
@@ -539,7 +544,7 @@ export class PlanService {
 
       addons.push(addon);
       sessionStorage.setItem('includedAddons', JSON.stringify(addons));
-      this.presentToast(addon.name + " Added!");
+      showToast ? this.presentToast(addon.name + " Added!") : '';
     }
 
     return addons;
@@ -590,7 +595,7 @@ export class PlanService {
     }
   }
 
-  excludeAdhoc(adhoc) {
+  excludeAdhoc(adhoc, showToast = false) {
     let adhocs = this.getIncludedAdhocs();
     if (!adhocs) {
       return;
@@ -603,12 +608,12 @@ export class PlanService {
     }
 
     sessionStorage.setItem('includedAdhocs', JSON.stringify(adhocs));
-    this.presentToast(adhoc.name + " Removed!");
+    showToast ? this.presentToast(adhoc.name + " Removed!") : '';
 
     return adhocs;
   }
 
-  includeAdhoc(adhoc) {
+  includeAdhoc(adhoc, showToast = false) {
     let adhocs = this.getIncludedAdhocs();
     if (!adhocs) {
       adhocs = [];
@@ -617,7 +622,9 @@ export class PlanService {
     if (adhocs.some((a) => a.name == adhoc.name)) {
     } else {
       adhocs.push(adhoc);
-      this.presentToast(adhoc.name + " Added!");
+
+      
+      showToast ?this.presentToast(adhoc.name + " Added!") : '';
 
       sessionStorage.setItem('includedAdhocs', JSON.stringify(adhocs));
     }

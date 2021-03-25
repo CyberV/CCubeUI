@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
     
     switch(this.context) {
       case 'signup': {
-        this.headerService.setText('Sign Up ');
+        this.headerService.setView('home', {});
         break;
       }
       case 'details': {

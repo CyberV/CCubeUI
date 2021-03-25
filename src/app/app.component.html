@@ -38,14 +38,14 @@
               Net Payable: <span Rs>{{viewData.viewOptions.amount}}</span>
             </div>
           </div>
-          <div class="row" *ngIf="viewData.viewName=='home'">
-              <div class="offset-1 col-5">
-                  <span class="link" (click)="goTo('book')">Book A Demo</span>
-                </div>
-            <div class="col-3">
-              <span class="link" (click)="goTo('signup')">Signup</span>
+          <div class="row view-home" *ngIf="viewData.viewName=='home'">
+              <!-- <div class="offset-1 col-5">
+                   <span class="link" (click)="goTo('book')">Book A Demo</span> 
+                </div> -->
+            <div class="col-8">
+              <span >Signup</span>
             </div>
-            <div class="col-3">
+            <div class="col-4 text-small">
               <span class="link" (click)="goTo('login')">Login</span>
             </div>
           </div>

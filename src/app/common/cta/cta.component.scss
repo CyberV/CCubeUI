@@ -92,7 +92,7 @@
     }
 
     &.disabled {
-        background: $cta-disabled-color;
+        pointer-events: none;
     }
 }
 

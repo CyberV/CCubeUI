@@ -202,7 +202,7 @@ export class ServicePageComponent implements OnInit {
 
     if (!this.selectedSubscription.isAdhoc) {
       setTimeout(() => {
-        this.upgradePlans = this.planService.getUpgradePlans(this.selectedPayment.plan.name);
+        this.upgradePlans = this.planService.getUpgradePlans(this.selectedPayment);
       }, 100);
     }
 
@@ -243,13 +243,14 @@ export class ServicePageComponent implements OnInit {
 
   async openAddon(addon) {
     let bookedTime = false;
-    if (this.selectedSubscription.addons.length) {
-      let found = this.selectedSubscription.addons.filter((adn) => adn.addon.code == addon.code);
+    if (this.selectedSubscription.adhocs.length) {
+      let found = this.selectedSubscription.adhocs.filter((adn) => adn.addon.code == addon.code);
 
       if (found.length) {
         found = found[0];
         if (found.scheduledTime) {
           bookedTime = found.scheduledTime;
+          addon.scheduledDate = bookedTime;
         }
       }
     }
@@ -257,15 +258,30 @@ export class ServicePageComponent implements OnInit {
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
       componentProps: {
-        addon: addon,
+        addon: addon.isAdhoc ? null : addon,
+        adhoc: addon.isAdhoc ? addon : null,
         showClose: true,
         fromDashboard: true,
+        purchased: (addon.isAdhoc ? this.selectedSubscription.adhocs : this.selectedSubscription.addons).some((a) => a.addon.name == addon.name),
         bookedTime
       }
     });
     await modal.present();
 
     modal.onDidDismiss().then((data) => {
+      if (data && data.data && data.data.addon && !this.selectedSubscription.isAdhoc) {
+        //alert(JSON.stringify(data));
+        let addon = data.data.addon;
+        if (addon.isAdhoc) {
+        this.onAdhocSelected(addon);
+        this.router.navigate(['/dashboard/adhoc']);
+        } else {
+          this.onAddonSelected(addon);
+          this.router.navigate(['/dashboard/addon']);
+        }
+      } else {
+        this.promptForPlan();
+      }
     });
   }
 
@@ -285,6 +301,10 @@ export class ServicePageComponent implements OnInit {
         this.selectedPayment = this.payments[this.selectedIndex].payments[0];
         this.selectedCar = this.selectedPayment.car;
         this.selectCar(this.selectedIndex);
+        setTimeout(()=> {
+          this.selectCar(this.selectedIndex);
+
+        }, 100);
       }
     }
   }
@@ -311,12 +331,12 @@ export class ServicePageComponent implements OnInit {
   }
 
   handleAdhocReschedule(adhoc) {
-    let found = this.selectedSubscription.schedule.filter((sch) => {
-      return sch.date == adhoc.scheduledTime;
-    });
+    let schedule = {
+      date : adhoc.scheduledTime || adhoc.scheduledDate
+    };
 
-    if (found.length) {
-      this.openReschedule(found[0], adhoc);
+    if (schedule.date) {
+      this.openReschedule(schedule, adhoc);
     }
   }
 
@@ -404,7 +424,7 @@ export class ServicePageComponent implements OnInit {
     this.router.navigate(['/dashboard/adhoc']);
   }
 
-  promptForPlan(addon) {
+  promptForPlan() {
     if (this.planSelector.first) {
       this.presentToast('Please select a plan first!');
       scrollElementToTop($('.plan-slider')[0]);

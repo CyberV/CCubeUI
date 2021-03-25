@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CompileMetadataResolver } from '@angular/compiler';
 import { NotificationService } from 'app/services/notification.service';
+import { prettyDate } from 'app/util/util';
 
 @Component({
   selector: 'purchased-plan',
@@ -30,9 +31,12 @@ export class PurchasedPlanComponent implements OnInit {
 
   adhoc: any;
 
+  pretty:any;
+
   constructor() {
     this.expiry = "";
     this.mode = "plan";
+    this.pretty = prettyDate;
   }
 
   onCompare() {
@@ -50,7 +54,6 @@ export class PurchasedPlanComponent implements OnInit {
       payment: this.payment,
       lastDate: new Date(this.payment.expiresOn)
     });
-
   }
 
   ngOnInit() {

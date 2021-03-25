@@ -23,6 +23,12 @@ ion-app {
     }
 }
 
+.view-home {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+     text-align: right;
+}
 
 .view-dashboard, .view-checkout {
     letter-spacing: 1px;
@@ -220,6 +226,9 @@ ion-fab-button {
 .link {
     font-weight: 300;
     font-size: 18px;
+    text-transform: capitalize;
+    margin-right: 10px;
+    text-decoration: underline;
 
 }
 

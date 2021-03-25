@@ -14,12 +14,12 @@ import { CarService } from 'app/services/car.service';
 })
 export class AddonDetailsComponent implements OnInit {
 
-  @Input() addon:any;
-  @Input() adhoc:any;
+  @Input() addon: any;
+  @Input() adhoc: any;
   @Input() showClose: any;
   @Input() purchased: boolean;
-  @Input() bookedTime:any;
-  @Input() fromDashboard:boolean;
+  @Input() bookedTime: any;
+  @Input() fromDashboard: boolean;
 
   @Output() changeAddon = new EventEmitter();
   @Output() scheduleLater = new EventEmitter();
@@ -29,17 +29,20 @@ export class AddonDetailsComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
-  selectedDate:any;
-  laterSelected:boolean;
-  loading:boolean;
+  selectedDate: any;
+  laterSelected: boolean;
+  loading: boolean;
 
-  startDate:any;
-  isAdhoc:boolean;
+  startDate: any;
+  isAdhoc: boolean;
+
+  dateError: any;
+
   constructor(
-    private planService:PlanService,
-    private userService:UserService,
-    private carService:CarService,
-    private loginServie:LoginService,
+    private planService: PlanService,
+    private userService: UserService,
+    private carService: CarService,
+    private loginServie: LoginService,
     private modalController: ModalController
   ) {
     this.isAdhoc = false;
@@ -49,14 +52,19 @@ export class AddonDetailsComponent implements OnInit {
     this.bookedTime = false;
     this.fromDashboard = false;
     this.purchased = false;
+    this.dateError = null;
   }
 
-  selectDate(date) {
-    this.laterSelected = false;
-    this.scheduleDate.emit({
-      date: new Date(date),
-      adhoc: this.addon
-    });
+  selectDate(date, later = false) {
+    this.laterSelected = later;
+    this.checkDate(date);
+
+      this.scheduleDate.emit({
+        date: date ? new Date(date) : null,
+        adhoc: this.addon,
+        error: this.laterSelected ? false : !!this.dateError
+      });
+    
   }
 
   sendScheduleLater() {
@@ -68,19 +76,19 @@ export class AddonDetailsComponent implements OnInit {
       }
     } else {
 
-        payload = {
-          isAdhoc: false,
-          addon: this.addon
-        
+      payload = {
+        isAdhoc: false,
+        addon: this.addon
+
       }
     }
     this.scheduleLater.emit(payload);
   }
 
   get bookedDate() {
-    return this.bookedTime ? new Date(this.bookedTime).toString().split(' ').slice(1,3).join(' ') : 'NA';  
+    return this.bookedTime ? new Date(this.bookedTime).toString().split(' ').slice(1, 3).join(' ') : 'NA';
   }
-  
+
 
   addAddonToCart() {
     this.addon.scheduledDate = this.selectedDate;
@@ -98,7 +106,7 @@ export class AddonDetailsComponent implements OnInit {
       this.addon.price = this.addon.pricing[this.carService.getCurrentCar().bodyType] * multiplier;
     }
   }
-  
+
   scheduleAddon(addon) {
     this.loading = true;
 
@@ -108,40 +116,64 @@ export class AddonDetailsComponent implements OnInit {
       addonCode: addon.code,
       scheduledDate: this.selectedDate
     };
-    this.loginServie.scheduleAddon(payload).subscribe((response:any)=> {
+    this.loginServie.scheduleAddon(payload).subscribe((response: any) => {
       this.loading = false;
       console.log('Response from Scheduke addon', response);
       if (response.success) {
-        alert('Service Scheduled' );
+        alert('Service Scheduled');
       }
       this.closeModal();
     });
   }
 
-  
+
   closeModal() {
     this.modalController.dismiss();
   }
 
   isAfter7pm() {
-    let now:any = new Date().toLocaleTimeString();
+    let now: any = new Date().toLocaleTimeString();
     let later = "7:00:00 PM";
 
     return now > later;
   }
 
+  validate = dateString => {
+    const day = (new Date(dateString)).getDay();
+    if (day == 3) {
+      return false;
+    }
+    return true;
+  }
+
+  checkDate(e) {
+    if (!this.validate(e)) {
+      this.dateError = 'Wednesdays are Off!';
+      this.selectedDate = e;
+    } else {
+      this.selectedDate = e;
+      this.dateError = null;
+    }
+  }
+
   ngOnChanges(changes) {
-    if (this.addon && this.addon.scheduledDate) {
+    if ((this.addon && this.addon.scheduledDate) || (this.bookedTime)) {
       this.selectedDate = this.addon.scheduledDate;
       this.laterSelected = false;
       this.bookedTime = this.selectedDate;
-    } 
+    }
   }
 
   ngOnInit() {
     if (this.adhoc && !this.addon) {
       this.addon = this.adhoc;
       this.isAdhoc = true;
+
+      if ((this.addon && this.addon.scheduledDate) || (this.bookedTime)) {
+        this.selectedDate = this.addon.scheduledDate;
+        this.laterSelected = false;
+        this.bookedTime = this.selectedDate;
+      }
 
       this.startDate = 'Tomorrow';
       const currentYear = new Date().getFullYear();
@@ -152,12 +184,12 @@ export class AddonDetailsComponent implements OnInit {
     } else if (this.addon) {
       if (this.addon && this.addon.scheduledDate) {
         this.selectedDate = this.addon.scheduledDate;
-      } 
+      }
       this.isAdhoc = false;
       const currentYear = new Date().getFullYear();
       const currentMonth = new Date().getMonth();
       const currentDate = new Date().getDate();
-      this.minDate = new Date(currentYear, currentMonth, currentDate +  (this.isAfter7pm() ? 2 : 1));
+      this.minDate = new Date(currentYear, currentMonth, currentDate + (this.isAfter7pm() ? 2 : 1));
       this.maxDate = new Date(currentYear, currentMonth + 1, currentDate);
 
       let currentSubs = this.planService.getCurrentSubscription();
@@ -176,8 +208,8 @@ export class AddonDetailsComponent implements OnInit {
           foundAddon = foundAddon[0];
           this.maxDate = new Date(foundAddon.expiresOn);
         }
-  
-  
+
+
         let diff = -1 * (planDate - (new Date().getDate()));
         console.log('Diff in days from cycle date', diff);
 
@@ -185,13 +217,13 @@ export class AddonDetailsComponent implements OnInit {
         if (diff <= 10) {
           this.startDate = 'Tomorrow';
         } else {
-          let nextCycleDate = new Date(currentYear, currentMonth+1, planDate);
-          this.startDate = nextCycleDate.toString().split(' ').slice(1,3).join(' ');
+          let nextCycleDate = new Date(currentYear, currentMonth + 1, planDate);
+          this.startDate = nextCycleDate.toString().split(' ').slice(1, 3).join(' ');
         }
       }
 
     }
-    
+
 
 
   }

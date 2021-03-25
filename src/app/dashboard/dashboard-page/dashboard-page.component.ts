@@ -38,6 +38,7 @@ export class DashboardPageComponent implements OnInit {
     this.includedAddons = [];
     this.currentSubscription = null;
     this.forDemo = false;
+    this.dateError = false;
   }
 
   context: string;
@@ -56,6 +57,7 @@ export class DashboardPageComponent implements OnInit {
   ready: boolean;
 
   payments: any;
+  dateError:boolean;
 
   ngOnInit() {
     this.route.params.subscribe((rdata) => {
@@ -117,6 +119,7 @@ export class DashboardPageComponent implements OnInit {
 
     switch (this.context) {
       case 'dashboard': {
+        this.planService.clearSubscription();
         this.headerService.setText(this.forDemo ? 'Book A Demo' : 'Choose Your Plan');
         break;
       }
@@ -172,6 +175,10 @@ export class DashboardPageComponent implements OnInit {
     this.ready = true;
   }
 
+  onDateChange(data) {
+    this.dateError = data.error;
+  }
+
   onAddonSelect(addon) {
     //this.presentToast('Please select a Plan');
     if (this.includedAddons.some((a) => a.name == addon.name)) {
@@ -195,7 +202,8 @@ export class DashboardPageComponent implements OnInit {
   }
 
   setDateForAdhoc(data) {
-    let {date,adhoc} = data;
+    let {date,adhoc,error} = data;
+    this.dateError = error;
     this.selectedAdhoc = adhoc;
     let found = this.includedAdhocs.filter((adn) => adn.code == this.selectedAdhoc.code);
     if (found.length) {

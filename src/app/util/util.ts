@@ -6,6 +6,10 @@ export function scrollToBottom() {
   cont[0].scrollTop = 2000;
 }
 
+export function prettyDate(date) {
+  return new Date(date).toString().split(' ').slice(1, 3).join(' ');
+}
+
 export function scrollElementToTop(emt) {
   let inp: any = emt;
 

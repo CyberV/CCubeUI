@@ -149,6 +149,13 @@ mat-select {
     --padding-end: 0;
     width: 105%;
 
+    .schedule {
+        font-size: 14px;
+        font-style: italic;
+        color: gray;
+        margin-left: 25px;
+    }
+
     .badge {
         color:red;
     }

@@ -154,6 +154,7 @@ export class CheckoutComponent implements OnInit {
     } else {
       this.appliedCoupons = [];
     }
+    this.loading = false;
 
   }
 
@@ -162,7 +163,6 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     return new Promise((resolve) => {
-
       if (this.context == 'checkout' && !this.detailsComp.first) {
         resolve({});
       }
@@ -412,6 +412,7 @@ export class CheckoutComponent implements OnInit {
 
       if (this.selectedPlan.name == 'Elite') {
         this.planService.clearAddons();
+        this.includedAddons = [];
       }
 
       this.forRenew = !!this.selectedPlan.forRenew;
@@ -420,12 +421,14 @@ export class CheckoutComponent implements OnInit {
     let appliedCoupon = this.planService.getAppliedCoupon();
     let qrt = getConfigValue('COUPON_QUARTERLY');
     if (this.mode.plan && this.planService.getPlanDuration() == 'quarterly' && this.cpnList) {
+      
       if (appliedCoupon && appliedCoupon.code != qrt) {
         this.applyCoupon(appliedCoupon);
       } else {
         setTimeout(()=>{
+          this.loading = true;
           this.cpnList.tryCoupon(qrt);
-        },1000);
+        },10);
 
       }
 
@@ -447,13 +450,29 @@ export class CheckoutComponent implements OnInit {
   }
 
   async openAddon(addon, added = false) {
+    let bookedTime = false;
+
+    if (this.includedAdhocs.length) {
+      let found = this.includedAdhocs.filter((adn) => adn.code == addon.code);
+
+      if (found.length) {
+        found = found[0];
+        if (found.scheduledDate) {
+          bookedTime = found.scheduledDate;
+          addon.scheduledDate = bookedTime;
+        }
+      }
+    }
+
     const modal = await this.modalController.create({
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
       componentProps: {
-        addon: addon,
+        addon: addon.isAdhoc ? null : addon,
+        adhoc: addon.isAdhoc ? addon : null,
         purchased: (addon.isAdhoc ? this.includedAdhocs : this.includedAddons).some((a) => a.name == addon.name),
-        showClose: true
+        showClose: true,
+        bookedTime
       }
     });
     await modal.present();
@@ -522,6 +541,7 @@ export class CheckoutComponent implements OnInit {
   changePlan(newPlan) {
 
     this.selectedPlan = newPlan;
+    this.refreshCarAndPlans();
   }
 
   ionViewWillLeave() {
@@ -615,6 +635,7 @@ export class CheckoutComponent implements OnInit {
             location: this.currentLocation,
             officeTime: this.officeTime,
             startDate: +(new Date()),
+            order: order,
             lastDate: updatedPlan && updatedPlan.lastDate
           };
 
@@ -694,6 +715,7 @@ export class CheckoutComponent implements OnInit {
 
           }
 
+          this.planService.clearAll();
 
         } else {
           alert(
@@ -711,6 +733,7 @@ export class CheckoutComponent implements OnInit {
     switch (this.context) {
       case 'checkout': {
         this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc ? 'Service' : 'Addon')));
+        this.loading = true;
         this.loginService.getCouponsForUser().subscribe(async (res: any) => {
           this.availableCoupons = res.success ? res.data : [];
 
@@ -722,6 +745,8 @@ export class CheckoutComponent implements OnInit {
           }
 
           await this.applyCoupon();
+
+          this.loading = false;
         })
         break;
       }

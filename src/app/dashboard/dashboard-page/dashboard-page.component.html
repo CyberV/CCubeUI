@@ -27,7 +27,7 @@
               <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
               <addon-details [adhoc]="selectedAdhoc" (changeAddon)="goToDashboard()" (sendScheduleLater)="goToCheckout()" (scheduleDate)="setDateForAdhoc($event)">
               </addon-details>
-              <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
+              <cta text="Proceed To Checkout" [disabled]="dateError" [sticky]="true" (action)="goToCheckout()"></cta>
             </div>
             <div  *ngIf="context==='addon' && selectedAddon">
                 <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>

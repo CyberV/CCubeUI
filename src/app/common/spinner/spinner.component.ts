@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { whitesmoke } from 'color-name';
 
 @Component({
   selector: 'spinner',
@@ -9,12 +10,14 @@ export class SpinnerComponent implements OnInit {
 
   @Input() color:string;
   @Input() slim:boolean;
+  @Input() width:number; /// in px
 
   classMap:any;
 
   constructor() {
     this.color = '';
     this.slim = false;
+    this.width = 0;
 
 
    }

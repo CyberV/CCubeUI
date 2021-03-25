@@ -178,7 +178,9 @@
   <!-- <adhoc-slider [selectedAdhocs]="subAdhocs" active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider> -->
 
   
-  <adhoc-slider [bodyType]="selectedCar.bodyType" [subscriptionAdhocs]="selectedSubscription.adhocs" [active]="true" [selectedAdhocs]="subAdhocs" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" ></adhoc-slider>
+  <adhoc-slider 
+  [bodyType]="selectedCar.bodyType" [subscriptionAdhocs]="selectedSubscription.adhocs" [active]="true" [selectedAdhocs]="subAdhocs" 
+  (reschedule)="handleAdhocReschedule($event)" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" ></adhoc-slider>
 
   <!-- <plan-slider *ngIf="upgradePlans.length" [plans]="upgradePlans"></plan-slider> -->
 </ng-container>
@@ -190,7 +192,7 @@
     (buyNow)="buyPlan($event)"></plan-slider>
       <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons"
       [subscriptionAddons]="selectedSubscription.addons" [active]="true" (showDetails)="openAddon($event)"
-      (addonSelected)="promptForPlan($event)"></addon-slider>
+      (addonSelected)="promptForPlan()"></addon-slider>
   
     <!-- <adhoc-slider [selectedAdhocs]="subAdhocs" active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider> -->
     <adhoc-slider [bodyType]="selectedCar.bodyType" [subscriptionAdhocs]="selectedSubscription.adhocs" [active]="true" [selectedAdhocs]="subAdhocs" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" (reschedule)="handleAdhocReschedule($event)"></adhoc-slider>

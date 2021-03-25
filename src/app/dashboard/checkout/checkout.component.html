@@ -46,7 +46,7 @@
               <addon-slider [plan]="selectedPlan"  [bodyType]="selectedCar.bodyType" *ngIf="(mode.plan || mode.addon)" [blockedAddons]="blockedAddons" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelected($event)" (showDetails)="openAddon($event)"></addon-slider>
               <adhoc-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPlan" [selectedAdhocs]="includedAdhocs" [blockedAdhocs]="blockedAdhocs" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" ></adhoc-slider>
             </ng-container>
-              <cta text="Confirm" [sticky]="true" [loading]="loading" (action)="confirmCheckout()"></cta>
+              <cta text="Confirm" [sticky]="true" [loading]="loading" [disabled]="loading" (action)="confirmCheckout()"></cta>
             </ng-container>
             <ng-template #noItemsTemplate>
                 <heading text="Looks like your cart is empty."></heading>

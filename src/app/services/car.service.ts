@@ -73,7 +73,6 @@ export class CarService {
     sessionStorage.setItem('currentAddon', null);
     sessionStorage.setItem('includedAddons', null);
     sessionStorage.setItem('includedAdhocs', null);
-  
   }
 
   getCurrentAddon() {

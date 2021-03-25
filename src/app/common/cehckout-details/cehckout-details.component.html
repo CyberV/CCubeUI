@@ -61,7 +61,7 @@
 
         <cc-accordion *ngIf="plan" [title]="productName" [label]="productPrice" [compact]="true">
           <plan-details *ngIf="plan" [plan]="plan" [compact]="true"></plan-details>
-         
+
         </cc-accordion>
 
 
@@ -106,24 +106,34 @@
           <ion-list>
             <ion-item *ngFor="let adn of includedAdhocs" class="addon-info">
               <ion-label>
-                <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
-                <span class="badge badge-light" (click)="sendRemoveAdhoc(adn)"><ion-icon name="close-outline"></ion-icon></span>
-                <span class="addon-price float-right" Rs>{{adn.price}}</span>
+                <div>
+                  <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.name}}
+                  <span class="badge badge-light" (click)="sendRemoveAdhoc(adn)">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </span>
+                  <span class="addon-price float-right" Rs>{{adn.price}}</span>
+                </div>
+                <div >
+                  <span *ngIf="adn.scheduledDate" class="schedule">
+                    {{pretty(adn.scheduledDate)}}
+                  </span>
+                </div>
               </ion-label>
+
             </ion-item>
           </ion-list>
         </cc-accordion>
 
 
         <ng-container *ngIf="plan && plan.period">
-            <div class="row content-row">
-              <div class="col-12">
-                <ion-icon name="calendar-outline" class="vertical-center-text big-icon2 icon-calendar"></ion-icon> <span
-                  class="vertical-center-text small-text"> {{plan.period}}</span>
-              </div>
-  
+          <div class="row content-row">
+            <div class="col-12">
+              <ion-icon name="calendar-outline" class="vertical-center-text big-icon2 icon-calendar"></ion-icon> <span
+                class="vertical-center-text small-text"> {{plan.period}}</span>
             </div>
-          </ng-container>
+
+          </div>
+        </ng-container>
         <div class="row content-row " *ngIf="plan && lastPlan.name != 'Elite'">
           <br /><br />
           <div class="col-12 icon-text">
@@ -175,7 +185,7 @@
 
           </div>
         </div> -->
-        <hr/>
+        <hr />
         <div class="row content-row">
           <div class="col-8">
             <ion-icon class="big-icon vertical-center-text" name="cart-outline"></ion-icon> <span class="icon-text">Cart
@@ -200,7 +210,7 @@
           <div class="col-8 --no-padding-right">
             <ion-icon class="big-icon vertical-center-text icon-coupon" name="pricetags-outline"></ion-icon>
             <span class="icon-text">
-              Coupon Applied 
+              Coupon Applied
             </span>
 
 
@@ -213,7 +223,7 @@
             <span class="yo" *ngIf="discount.coupon.unit!='percent'"> &#8377; {{discount.coupon.value}}</span>
             <span class=" yo" *ngIf="discount.coupon.unit=='percent'">{{discount.coupon.value}} %</span>
             OFF!
-            <br/>
+            <br />
             <span (click)="onRemoveCoupon(discount.coupon)" class="badge badge-danger">Remove</span>
           </div>
         </div>

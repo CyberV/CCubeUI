@@ -48,13 +48,7 @@ export class RescheduleComponent implements OnInit {
     this.adhoc = {};
   }
 
-  validate = dateString => {
-    const day = (new Date(dateString)).getDay();
-    if (day == 3) {
-      return false;
-    }
-    return true;
-  }
+
 
   dismiss() {
     this.modalController.dismiss();
@@ -82,6 +76,14 @@ export class RescheduleComponent implements OnInit {
       alert('It aint right');
     }
 
+  }
+
+  validate = dateString => {
+    const day = (new Date(dateString)).getDay();
+    if (day == 3) {
+      return false;
+    }
+    return true;
   }
 
   checkDate(e) {

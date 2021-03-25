@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
 import { UserService } from 'app/services/user.service';
+import { prettyDate } from 'app/util/util';
 
 @Component({
   selector: 'checkout-details',
@@ -71,12 +72,13 @@ export class CheckoutDetailsComponent implements OnInit {
     this.showAddonDetails.emit(addon);
   }
 
+  pretty:any;
 
   constructor(
     private planService: PlanService,
     private userService: UserService
   ) {
-
+    this.pretty = prettyDate;
     this.upgradeSelected = false;
     this.upgradToPlan = 'Elite';
     this.originalPlan = {};
@@ -146,6 +148,10 @@ export class CheckoutDetailsComponent implements OnInit {
       this.upgradePrice = this.planService.getUpdatePrice(this.plan.name);
     }
 
+  }
+
+  formatDate(date) {
+    return new Date(date).toDateString();
   }
 
   getServiceTotal() {
