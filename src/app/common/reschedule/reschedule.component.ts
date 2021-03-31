@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
+import { CheckoutService } from 'app/services/checkout.service';
 
 @Component({
   selector: 'app-reschedule',
@@ -36,7 +37,8 @@ export class RescheduleComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private loginService: LoginService,
-    private planService: PlanService
+    private planService: PlanService,
+    private checkoutService: CheckoutService
   ) {
     this.canReschedule = true;
     this.count = 1;
@@ -62,6 +64,23 @@ export class RescheduleComponent implements OnInit {
       end = new Date(this.selectedDate).toDateString();
 
     if (sub) {
+
+      if (this.count == 1) {
+        this.loading = true;
+        this.checkoutService.createOrder(50).subscribe((res: any) => {
+          if (res.success) {
+            let orderId = res.data.id;
+            let order = res.data;
+    
+            console.log('Order Created', orderId, res.data);
+            this.checkoutService.tryPayment(order, res.data.amount);
+    
+          } else {
+            this.loading = false;
+            console.log('Error creating order', res.errorMsg, res.error);
+          }
+        });
+      } else {
       this.loginService.rescheduleService(sub.phone, sub.car.regNo, st, end, this.forAdhoc ? this.adhoc.addon.name : '')
         .subscribe((response: any) => {
           this.loading = false;
@@ -70,10 +89,11 @@ export class RescheduleComponent implements OnInit {
           } else {
             alert(response.errorMsg || response.error);
           }
-        })
+        });
+      }
 
     } else {
-      alert('It aint right');
+      alert('Please restart App!');
     }
 
   }
@@ -87,7 +107,8 @@ export class RescheduleComponent implements OnInit {
   }
 
   checkDate(e) {
-    if (!this.validate(e)) {
+    
+    if (this.adhoc.addon.code == 'FBW' && !this.validate(e)) {
       this.dateError = 'Wednesdays are Off!';
       this.selectedDate = null;
     } else {
@@ -139,6 +160,35 @@ export class RescheduleComponent implements OnInit {
       }
       console.log('constraints', this.constraints);
     }
+
+    this.checkoutService.events().subscribe(async (evt) => {
+      try {
+        if (evt.success) {
+          let sub = this.planService.getCurrentSubscription();
+          this.loading = true;
+          
+          let st = new Date(this.today).toDateString(),
+          end = new Date(this.selectedDate).toDateString();
+
+          this.loginService.rescheduleService(sub.phone, sub.car.regNo, st, end, this.forAdhoc ? this.adhoc.addon.name : '')
+          .subscribe((response: any) => {
+            this.loading = false;
+            if (response.success) {
+              this.dismiss();
+            } else {
+              alert(response.errorMsg || response.error);
+            }
+          });
+        
+
+        } else {
+
+        }
+      } catch (e) {
+
+      }
+    });
+
   }
 
 }

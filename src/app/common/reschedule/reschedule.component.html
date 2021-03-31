@@ -3,14 +3,14 @@
   <heading *ngIf="!forAdhoc" text="Reschedule Full Body Wash" align="center"></heading>
   <heading *ngIf="forAdhoc" [text]="'Reschedule ' + adhoc.addon.name" align="center"></heading>
 <br/>
-  <span class="count">Free Reschedules Left: </span>
+  <span class="count">Reschedules Left: </span>
   <span class="">
-    {{count}}
+    {{2 - count}}
   </span>
 
   <br/><br/>
   <ng-container *ngIf="canReschedule">
-      <span >You may Reschedule this service for  <span *ngIf="count>0"> Free </span> <span *ngIf="count<=0">the price of <span Rs> 50 </span></span></span>
+      <span >You may Reschedule this service for  <span *ngIf="count==0"> Free </span> <span *ngIf="count!= 0">the price of <span Rs> 50 </span></span></span>
 
       <br/><br/>
       <span *ngIf="!forAdhoc">You can reschedule to any future working day within the same Monthly Cycle.</span>
@@ -21,7 +21,7 @@
       <span>Service Scheduled On : <span class="today">{{today}}</span></span>
 
       <br/>
-      Service Expires On : <span *ngIf="forAdhoc" class="expiry">{{expiry}}</span>
+      <span *ngIf="forAdhoc">Service Expires On : <span class="expiry">{{expiry}}</span></span>
       
       <mobile-input type="date" [error]="dateError" name="Reschedule To" [constraints]="constraints" [value]="selectedDate" (valueChange)="checkDate($event)"></mobile-input>
       

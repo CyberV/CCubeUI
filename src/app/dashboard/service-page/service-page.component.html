@@ -171,14 +171,14 @@
   <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" class="--padding-y"
     (upgradeNow)="handleUpgradePlan($event)" (showDetails)="showPlanDetails($event)"></upgrade-slider>
 
-    <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons"
+    <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons" [plan]="selectedSubscription.payments[0].plan"
     [subscriptionAddons]="selectedSubscription.addons" [active]="true" (showDetails)="openAddon($event)"
     (addonSelected)="onAddonSelected($event)"></addon-slider>
 
   <!-- <adhoc-slider [selectedAdhocs]="subAdhocs" active="true" (adhocSelected)="onAdhocSelected($event)"></adhoc-slider> -->
 
   
-  <adhoc-slider 
+  <adhoc-slider  [plan]="selectedSubscription.payments[0].plan"
   [bodyType]="selectedCar.bodyType" [subscriptionAdhocs]="selectedSubscription.adhocs" [active]="true" [selectedAdhocs]="subAdhocs" 
   (reschedule)="handleAdhocReschedule($event)" (adhocSelected)="onAdhocSelected($event)" (showDetails)="openAddon($event)" ></adhoc-slider>
 

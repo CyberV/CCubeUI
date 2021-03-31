@@ -15,6 +15,8 @@ export class PlanService {
   AllFeatures: any;
   OnlyAddons: any;
 
+  discountConfig:any;
+
   get UpgradePlan() {
     return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0]));
   }
@@ -41,10 +43,12 @@ export class PlanService {
   }
 
   refreshPlans() {
+    this.discountConfig = getConfigValue("INBUILTDISCOUNT_CONFIG");
     this.AllPlans = this.getAllPlans();
     this.AllFeatures = this.getAllFeatures();
 
     this.fixedAdhocs = this.AllFeatures.filter((f) => f.isAdhoc == true);
+    
     this.OnlyAddons = [];
     let map = this.AllFeatures.map((ftr) => ftr.code);
     for (let i = 0; i < this.AllFeatures.length; i++) {
@@ -234,18 +238,42 @@ export class PlanService {
     }
   }
 
+  isSecondCar() {
+    let car = this.carService.getCurrentCar();
+    let subs = this.getAllSubscriptions();
+    return subs.length > 0 && car && car.regNo !=  subs[0].carRegNo;
+  }
+
   private updatePlanPricing(plan) {
     let car = this.carService.getCurrentCar();
     let bodyType = 'sedan';
+    let subs = this.getAllSubscriptions();
+    let sub = subs.filter((s) => s.carRegNo == car.regNo);
     if (car) {
       bodyType = car.bodyType;
     }
     plan.price = +(plan.pricing[bodyType]);
+    plan.carNumber = sub.length ? subs.indexOf(sub[0]) + 1 : subs.length + 1;
+
+    if (this.isSecondCar()) {
+      if (this.discountConfig && this.discountConfig.plan && this.discountConfig.plan.secondCar) {
+        plan.originalPrice = plan.price;
+       
+        plan.forSecondCar = true;
+        plan.price -= this.discountConfig.plan.secondCar;
+      } else {
+        plan.originalPrice = null;
+        plan.forSecondCar = null;
+      }
+    } else {
+      plan.originalPrice = null;
+      plan.forSecondCar = null;
+    }
 
     let duration = this.getPlanDuration();
 
     plan.duration = duration;
-    plan.period = this.createPeriodLabel(new Date(), plan.duration);
+    plan.period = this.createPeriodLabel(plan.lastDate ? new Date(plan.lastDate) : new Date(), plan.duration);
 
     if (duration == "quarterly") {
 
@@ -261,7 +289,7 @@ export class PlanService {
 
       return plan;
     } else {
-      plan.originalPrice = null;
+      plan.originalPrice = plan.originalPrice ? plan.originalPrice : null;
     }
     return plan;
   }
@@ -286,12 +314,23 @@ export class PlanService {
 
     if (addons && addons.length) {
       let data = [];
+      plan = this.getSelectedPlan();
       for (let i = 0; i < addons.length; i++) {
         let addon = addons[i];
         addon.duration = duration;
-        addon.period = this.createPeriodLabel(new Date(), addon.duration);
+        addon.period = plan.period;
 
         addon.price = addon.pricing[this.carService.getCurrentCar().bodyType];
+
+        if (plan && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
+          addon.originalPrice = addon.price;
+          addon.withPlan = true;
+          addon.price -= this.discountConfig.addon.withPlan;
+        } else {
+          addon.originalPrice = null;
+          addon.withPlan = false;
+        }        
+
         if (duration == "quarterly") {
           addon.price = addon.price * 3;
 
@@ -302,11 +341,11 @@ export class PlanService {
             let discount = Math.floor((addon.price * dscnt) / 100);
             addon.price = addon.originalPrice - discount;
           } else {
-            addon.originalPrice = null;
+            addon.originalPrice = addon.originalPrice ? addon.originalPrice : null;
           }
 
         } else {
-          addon.originalPrice = null;
+          addon.originalPrice = addon.originalPrice ? addon.originalPrice : null;          
         }
         data.push(addon);
       }

@@ -9,6 +9,9 @@
       <div class="col-4 --no-padding-left">
           <span class="price" Rs> {{plan.price}}</span> 
       </div>
+      <div *ngIf="plan.forSecondCar" class="col-4 second-car">
+        For Car # {{plan.carNumber}}
+      </div>
 
     </div>
 

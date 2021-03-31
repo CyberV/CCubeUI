@@ -9,6 +9,12 @@ ion-slides, ion-button {
   margin-bottom: 1em;
 }
 
+.original-price {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 14px;
+}
+
 ion-slide:nth-of-type(0){
   margin-left: 15px;
 }

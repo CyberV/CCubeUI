@@ -9,6 +9,13 @@ ion-slides, ion-button {
   margin-bottom: 1em;
 }
 
+.original-price {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 14px;
+}
+
+
 .badge-light {
   margin-top: 1em;
 }
@@ -36,6 +43,13 @@ ion-slide:nth-of-type(0){
     color: $secondary-color;
     font-style: italic;
     letter-spacing: 0.2px;
+  }
+
+  .expiry {
+    position: relative;
+    display: block;
+    margin-top: 20px;
+    font-size: 13px;
   }
 
   .date-label {

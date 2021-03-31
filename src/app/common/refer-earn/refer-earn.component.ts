@@ -36,7 +36,7 @@ export class ReferEarnComponent implements OnInit {
       this.milestoneLength = 3;
       this.milestoneMax = 10;
       this.arrays = {};
-      this.detailsOpen = false;
+      this.detailsOpen = true;
       this.slim = false;
       this.appConfig = {};
       this.noPadding = false;

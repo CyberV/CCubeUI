@@ -1,0 +1,19 @@
+- Signup with Phone/OTP
+- Referral Benefits at Signup
+- Login with Phone and Password/OTP
+- Identify Car using Car Registration Number
+- Choose from multiple Subscription Plans
+- Pay monthly or quarterly for Plans
+- Create your own plan with a variety of Add-ons to choose from
+- Purchase and schedule 1 time services
+- Easily accessible coupons at Checkout
+- Easy checkout with guaranteed Referral Bonus
+- Book a Demo
+- Real time updates on Mobile
+- Check and adjust weekly schedule
+- Reschedule services to fit your schedule
+- Store important documents in 1 place for easy accessible
+- Submit feedback/complaints
+- Upgrade to Premium Plans
+- One Click Renew
+- Manage multiple cars with ease

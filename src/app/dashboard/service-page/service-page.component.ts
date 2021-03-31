@@ -349,9 +349,8 @@ export class ServicePageComponent implements OnInit {
         schedule: schedule,
         forAdhoc : true,
         adhoc: adhoc,
-        count: 1,
-
-        canReschedule: !schedule.isRescheduled,
+        count: adhoc.rescheduleCount,
+        canReschedule: adhoc.rescheduleCount < 2,
         lastDate: adhoc.expiresOn
       }
     });

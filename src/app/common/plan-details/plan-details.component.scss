@@ -8,6 +8,14 @@
   text-align: center;
   position: relative;
   z-index: 2;
+
+  .second-car {
+    z-index: 2;
+    font-size: 14px;
+    padding: 0 0 10px 0px;
+    left: -30px;
+    color: orange;
+  }
 }
 
 mat-expansion-panel {

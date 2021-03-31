@@ -245,7 +245,15 @@ export class DocumentListComponent implements OnInit {
           }
 
           let extnsn: any = fileName.split('.');
-          extnsn = '.' + extnsn[extnsn.length - 1];
+          extnsn = extnsn[extnsn.length - 1];
+          let allowedExtensions = ['png', 'jpg', 'jpeg'];
+          if (allowedExtensions.indexOf(extnsn) == -1) {
+            alert( 'Unsupported File Format. Please choose JPG/PNG.'
+            );
+            return;
+          }
+
+          extnsn = '.' + extnsn;
 
           let imageData;
 

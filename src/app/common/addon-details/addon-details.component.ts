@@ -147,7 +147,8 @@ export class AddonDetailsComponent implements OnInit {
   }
 
   checkDate(e) {
-    if (!this.validate(e)) {
+    
+    if (this.addon && this.addon.code == 'FBW' && !this.validate(e)) {
       this.dateError = 'Wednesdays are Off!';
       this.selectedDate = e;
     } else {

@@ -10,8 +10,8 @@
     <p>
       <span class="old-price animate__animated animate__fadeInRight">{{addon.originalPrice}} </span>
 
-      <span class="price" Rs> {{addon.price}}</span> <span *ngIf="!isAdhoc"> for
-        {{addon.originalPrice ? '3 months' : '1 month'}}</span>
+      <span class="price" Rs> {{addon.price}}</span> <span class="with-plan" *ngIf="addon.withPlan"> With Plan </span> <span *ngIf="!isAdhoc"> for
+        {{addon.duration == 'quarterly' ? '3 months' : '1 month'}}</span>
     </p>
     <switch *ngIf="!showClose && (!addon.isAdhoc)" (toggle)="onAddonDurationToggle($event)"></switch>
     <p *ngIf="!addon.isAdhoc && startDate && !bookedTime">
@@ -96,13 +96,9 @@
       </ng-container>
     </ion-item-group>
   </ion-list>
-  fromDashboard {{fromDashboard}} purchased {{purchased}} laterSelected {{laterSelected}}
-  bookedTime {{bookedTime}}
-
   <br />
 
-
-
+  <cta sticky="true" *ngIf="!fromDashboard &&!purchased" [loading]="loading" text="Buy" (action)="addAddonToCart()"></cta>
   <cta sticky="true" *ngIf="!laterSelected && fromDashboard && purchased && !bookedTime" [loading]="loading"
     text="Book Now" (action)="scheduleAddon(addon)"></cta>
 

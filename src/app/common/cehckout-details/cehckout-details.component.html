@@ -78,7 +78,7 @@
             </div> -->
 
 
-        <cc-accordion *ngIf="includedAddons && includedAddons.length" [label]="addonPrice" [title]="'Addons Included'"
+        <cc-accordion *ngIf="includedAddons && includedAddons.length" [label]="addonPrice" [title]="addonLabel"
           compact="true">
           <ion-list>
             <ion-item *ngFor="let adn of includedAddons" class="addon-info">
@@ -91,7 +91,7 @@
                     <span class="badge badge-light" (click)="sendRemoveAddon(adn)">X</span>
                   </div>
                   <div class="col-3">
-                    <span class="addon-price float-right" Rs>{{adn.originalPrice || adn.price}}</span>
+                    <span class="addon-price float-right" Rs>{{ ((duration == 'monthly') ? adn.price || adn.originalPrice :  adn.originalPrice || adn.price)}}</span>
                   </div>
                 </div>
 
@@ -195,6 +195,16 @@
           <div class="col-4 text-center float-right"> <span class="discount-value"> <span
                 Rs>{{ getServiceTotal() }}</span> </span></div>
         </div>
+
+        <div class="row content-row" *ngIf="mode.plan && plan.forSecondCar && discountConfig && discountConfig.plan && discountConfig.plan.secondCar">
+            <div class="col-8">
+              <ion-icon class="big-icon vertical-center-text icon-wallet" name="gift-outline"></ion-icon> <span
+                class="icon-text">New Car Discount</span>
+            </div>
+            <!-- <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div> -->
+            <div class="col-4 text-center float-right"> <span class="discount-value"> - <span
+                  Rs>{{ discountConfig.plan.secondCar }}</span> </span></div>
+          </div>
 
         <div class="row content-row" *ngIf="user.referralBonusPending > 0">
           <div class="col-8">

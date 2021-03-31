@@ -14,7 +14,7 @@
           <span class="regNo">{{car.regNo}}</span>
           <ng-container *ngIf="mode == 'plan'">
             <span>
-              <span class="plan-name">{{plan.name}}</span>
+              <span class="plan-name" (click)="goToPlan()" >{{plan.name}}</span>
               <div class='badge quarterly-label badge-pill badge-info'>
                 {{ plan.duration =='quarterly' ? 'Quarterly' : 'Monthly' }} Plan</div>
             </span>

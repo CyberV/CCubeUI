@@ -7,7 +7,7 @@ import { LoginService } from 'app/login/login.service';
 import { PlanService } from 'app/services/plan.service';
 import { ToastController, ModalController } from '@ionic/angular';
 
-import {Initialize} from 'app/common/common.service';
+import { Initialize } from 'app/common/common.service';
 import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
 @Component({
   selector: 'app-dashboard-page',
@@ -25,7 +25,7 @@ export class DashboardPageComponent implements OnInit {
     private headerService: HeaderService,
     private toastController: ToastController,
     private loginService: LoginService,
-    private activatedRoute:ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private userService: UserService
   ) {
 
@@ -39,6 +39,7 @@ export class DashboardPageComponent implements OnInit {
     this.currentSubscription = null;
     this.forDemo = false;
     this.dateError = false;
+    this.viewPlanOnly = false;
   }
 
   context: string;
@@ -49,15 +50,17 @@ export class DashboardPageComponent implements OnInit {
   selectedAddon: any;
   selectedAdhoc: any;
   includedAddons: any;
-  includedAdhocs:any;
-  currentSubscription:any;
-  activeFeature:any;
-  forDemo:boolean;
+  includedAdhocs: any;
+  currentSubscription: any;
+  activeFeature: any;
+  forDemo: boolean;
 
   ready: boolean;
 
   payments: any;
-  dateError:boolean;
+  dateError: boolean;
+
+  viewPlanOnly:boolean;
 
   ngOnInit() {
     this.route.params.subscribe((rdata) => {
@@ -79,7 +82,7 @@ export class DashboardPageComponent implements OnInit {
     this.selectedCar = this.carService.getCurrentCar();
 
     let adhocs = this.planService.getIncludedAdhocs();
-    this.selectedAdhoc = adhocs[adhocs.length-1];
+    this.selectedAdhoc = adhocs[adhocs.length - 1];
 
     this.currentSubscription = this.planService.getCurrentSubscription();
 
@@ -114,12 +117,21 @@ export class DashboardPageComponent implements OnInit {
     this.includedAddons = this.planService.getIncludedAddons();
     this.includedAdhocs = this.planService.getIncludedAdhocs();
 
-    this.selectedAddon = this.includedAddons[this.includedAddons.length -1];
-    this.selectedAdhoc = this.includedAdhocs[this.includedAdhocs.length -1];
+    this.selectedAddon = this.includedAddons.length ? this.includedAddons[this.includedAddons.length - 1] : null;
+    this.selectedAdhoc = this.includedAdhocs.length ? this.includedAdhocs[this.includedAdhocs.length - 1] : null;
 
     switch (this.context) {
       case 'dashboard': {
         this.planService.clearSubscription();
+        this.planService.clearAddons();
+        this.planService.clearAdhocs();
+
+        this.includedAddons = this.planService.getIncludedAddons();
+        this.includedAdhocs = this.planService.getIncludedAdhocs();
+
+        this.selectedAddon = this.includedAddons.length ? this.includedAddons[this.includedAddons.length - 1] : null;
+        this.selectedAdhoc = this.includedAdhocs.length ? this.includedAdhocs[this.includedAdhocs.length - 1] : null;
+
         this.headerService.setText(this.forDemo ? 'Book A Demo' : 'Choose Your Plan');
         break;
       }
@@ -130,6 +142,14 @@ export class DashboardPageComponent implements OnInit {
       case 'plan': {
         this.activeFeature = this.route.snapshot.paramMap.get('code');
         this.headerService.setText(this.selectedPlan.name + ' Plan');
+
+        let sub = this.planService.getCurrentSubscription();
+
+        if (sub) {
+          this.viewPlanOnly = true;
+        } else {
+          this.viewPlanOnly = false;
+        }
         break;
       }
       case 'adhoc': {
@@ -202,7 +222,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   setDateForAdhoc(data) {
-    let {date,adhoc,error} = data;
+    let { date, adhoc, error } = data;
     this.dateError = error;
     this.selectedAdhoc = adhoc;
     let found = this.includedAdhocs.filter((adn) => adn.code == this.selectedAdhoc.code);
@@ -289,6 +309,10 @@ export class DashboardPageComponent implements OnInit {
     this.router.navigate(['/dashboard/checkout']);
   }
 
+  goBack() {
+    this.router.navigate(['/dashboard/service']);
+  }
+
   resetCar() {
     this.carService.clear();
 
@@ -300,14 +324,14 @@ export class DashboardPageComponent implements OnInit {
     const modal = await this.modalController.create({
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
-      componentProps: { 
+      componentProps: {
         addon: addon,
         showClose: true
       }
     });
     await modal.present();
 
-    modal.onDidDismiss().then((data)=> {
+    modal.onDidDismiss().then((data) => {
 
 
 

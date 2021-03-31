@@ -17,11 +17,16 @@
               <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
               <plan-details [activeFeature]="activeFeature" [hideCta]="true" [plan]="selectedPlan" (changePlan)="goToDashboard()">
               </plan-details>
-              <addon-slider [plan]="selectedPlan" [bodyType]="selectedCar.bodyType" (showDetails)="openAddon($event)" (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
+              <ng-container *ngIf="!viewPlanOnly">
+                  <addon-slider [plan]="selectedPlan" [bodyType]="selectedCar.bodyType" (showDetails)="openAddon($event)" (addonSelected)="onAddonSelect($event)" [selectedAddons]="includedAddons"></addon-slider>
               
-              <adhoc-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPlan" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelect($event)"></adhoc-slider>
+                  <adhoc-slider [bodyType]="selectedCar.bodyType" [plan]="selectedPlan" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelect($event)"></adhoc-slider>
+    
+              </ng-container>
 
-              <cta text="Proceed To Checkout" [sticky]="true" (action)="goToCheckout()"></cta>
+              <cta text="Proceed To Checkout"  *ngIf="!viewPlanOnly" [sticky]="true" (action)="goToCheckout()"></cta>
+              <cta text="Back To Dashboard" *ngIf="viewPlanOnly" [sticky]="true" (action)="goBack()"></cta>
+
             </div>
             <div *ngIf="context==='adhoc' && selectedAdhoc">
               <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>

@@ -15,12 +15,19 @@
               </div>
               <div class="bottom">
                   <div class="ion-no-margin rate" *ngIf="!(isSelected(addon) && active)" (click)="sendShowDetails(addon)">
-                      <span Rs>{{addon.price}}</span>
+                      <span Rs>{{addon.price}} <br/></span>
+                      <span *ngIf="addon.originalPrice" class="original-price"> {{addon.originalPrice}}</span>
+
+           
+                     
                   </div>
-                    <cta *ngIf="!isSelected(addon) && !isBlocked(addon)" (action)="selectAddon(addon)" text="ADD" outline="true" small="true"></cta>
+                  <span></span>
+                    <cta *ngIf="!isSelected(addon) && !isBlocked(addon)" (action)="selectAddon(addon)" text="Buy" outline="true" small="true"></cta>
                     <span class="animate__animated animate__fadeInUp" *ngIf="isSelected(addon)">
                       <h2 class="--padding-y active-label" (click)="sendShowDetails(addon)"> {{active ? 'ACTIVE' : 'Added !'}}</h2>
                       <span *ngIf="!active" (click)="selectAddon(addon)"  class="badge badge-light ">Remove</span>
+
+                      <span class="expiry" *ngIf="active"> Expires On {{pretty(addon)}}</span>
                     </span>
                     <span class="animate__animated animate__fadeInUp" *ngIf="isBlocked(addon)" (click)="sendShowDetails(addon)">
                         <h2 class="--padding-y" > ACTIVE</h2>

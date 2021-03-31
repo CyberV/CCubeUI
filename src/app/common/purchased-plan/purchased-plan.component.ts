@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CompileMetadataResolver } from '@angular/compiler';
 import { NotificationService } from 'app/services/notification.service';
 import { prettyDate } from 'app/util/util';
+import { PlanService } from 'app/services/plan.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'purchased-plan',
@@ -33,7 +35,10 @@ export class PurchasedPlanComponent implements OnInit {
 
   pretty:any;
 
-  constructor() {
+  constructor(
+    private planService:PlanService,
+    private router: Router
+  ) {
     this.expiry = "";
     this.mode = "plan";
     this.pretty = prettyDate;
@@ -45,6 +50,11 @@ export class PurchasedPlanComponent implements OnInit {
 
   onChangeCar() {
     this.changeCar.emit();
+  }
+
+  goToPlan() {
+    this.planService.changePlan(this.plan);
+    this.router.navigate(['/dashboard/plan']);
   }
 
   sendRenewPlan() {

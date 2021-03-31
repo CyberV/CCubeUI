@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlanService } from 'app/services/plan.service';
 import { UserService } from 'app/services/user.service';
 import { prettyDate } from 'app/util/util';
+import { ToastController } from '@ionic/angular';
+import { getConfigValue } from '../common.service';
 
 @Component({
   selector: 'checkout-details',
@@ -26,6 +28,9 @@ export class CheckoutDetailsComponent implements OnInit {
   @Output() removeCoupon = new EventEmitter();
 
   user: any;
+
+  duration:string;
+  discountConfig:any;
 
   get productName() {
     let { mode, plan, addon, adhoc } = this;
@@ -52,9 +57,13 @@ export class CheckoutDetailsComponent implements OnInit {
 
   }
 
+  get addonLabel() {
+    return 'Addons (' + (this.duration == 'monthly' ? '1 month)' : '3 months)');
+  }
+
   get productPrice() {
     let { mode, plan, addon, adhoc } = this;
-    return mode.plan ? plan.originalPrice || plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? (addon.originalPrice || addon.price) : 'Plan'))
+    return mode.plan ? plan.originalPrice || plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? (this.duration == 'monthly'? (addon.price || addon.originalPrice) :  (addon.originalPrice || addon.price)) : 'Plan'))
   }
 
   upgradeSelected: boolean;
@@ -76,7 +85,8 @@ export class CheckoutDetailsComponent implements OnInit {
 
   constructor(
     private planService: PlanService,
-    private userService: UserService
+    private userService: UserService,
+    private toastController:ToastController
   ) {
     this.pretty = prettyDate;
     this.upgradeSelected = false;
@@ -87,6 +97,8 @@ export class CheckoutDetailsComponent implements OnInit {
     this.mode = null;
     this.adhocPrice = 0;
     this.discount = {};
+    this.duration = 'monthly';
+    this.discountConfig = getConfigValue('INBUILTDISCOUNT_CONFIG');
 
     this.user = userService.getCurrentUser();
   }
@@ -111,16 +123,31 @@ export class CheckoutDetailsComponent implements OnInit {
     this.removeCoupon.emit(cpn);
   }
 
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   ngOnChanges(changes) {
 
     if (this.discount.coupon) {
       this.discount.discount = this.calculateDiscount();
     }
 
+    if (changes.plan && this.plan) {
+      this.duration = this.plan.duration;
+      //this.presentToast(`Pricing updated for ${this.duration == 'monthly' ? 1 : 3} month${this.duration == 'monthly'? '':'s'}`);
+    }
+
     if (changes.includedAddons && this.includedAddons && this.includedAddons.length) {
       this.addonPrice = 0;
-      this.includedAddons.forEach((adn) => {
-        this.addonPrice += adn.originalPrice || adn.price;
+      
+      this.includedAddons.forEach((addon) => {
+        
+        this.addonPrice += ((this.duration == 'monthly') ? (addon.price || addon.originalPrice) :  (addon.originalPrice || addon.price));
       });
     }
 
@@ -155,8 +182,9 @@ export class CheckoutDetailsComponent implements OnInit {
   }
 
   getServiceTotal() {
-    let { mode } = this;
+    let { mode, discountConfig } = this;
     let total = 0;
+  
 
     if (mode) {
       if (mode.plan) {
@@ -182,6 +210,12 @@ export class CheckoutDetailsComponent implements OnInit {
       total -= +(this.user.referralBonusPending);
     }
 
+    let { discountConfig } = this;
+    
+    if (this.plan && this.plan.forSecondCar &&  discountConfig && discountConfig.plan && discountConfig.plan.secondCar) {
+      total -= discountConfig.plan.secondCar;
+    }
+
     return total;
 
   }
@@ -192,6 +226,7 @@ export class CheckoutDetailsComponent implements OnInit {
     if (this.discount && this.discount.discount) {
       total -= this.discount.discount;
     }
+
 
     return total;
   }

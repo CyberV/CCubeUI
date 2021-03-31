@@ -3,6 +3,7 @@ import { CarService } from 'app/services/car.service';
 import { Router } from '@angular/router';
 import { PlanService } from 'app/services/plan.service';
 import { IonSlides } from '@ionic/angular';
+import { getConfigValue } from '../common.service';
 
 @Component({
   selector: 'adhoc-slider',
@@ -91,13 +92,15 @@ export class AdhocSliderComponent implements OnInit {
         icon: 'sanitize'
       }
     ];
-
+    this.discountConfig = getConfigValue('INBUILTDISCOUNT_CONFIG');
     this.selectedAdhocs = [];
     this.adhocMap = [];
     this.blockedMap = [];
     this.adhocMap = [];
     this.dateMap = [];
   }
+
+  discountConfig:any;
 
   ngOnInit() {
     this.adhocs = this.planService.getAdhocsForPlan(this.plan ? this.plan.name : 'Standard');
@@ -210,6 +213,15 @@ export class AdhocSliderComponent implements OnInit {
     if (this.bodyType && this.adhocs && this.adhocs.length && this.adhocs[0].pricing) {
       for (let i = 0; i < this.adhocs.length; i++) {
         this.adhocs[i].price = this.adhocs[i].pricing[this.bodyType];
+
+        if (this.plan && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
+          this.adhocs[i].originalPrice = this.adhocs[i].price;
+          this.adhocs[i].withPlan = true;
+          this.adhocs[i].price -= this.discountConfig.addon.withPlan;
+        } else {
+          this.adhocs[i].withPlan = false;
+          this.adhocs[i].originalPrice = null;
+        }
       }
     }
   }

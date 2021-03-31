@@ -3,6 +3,8 @@ import { CarService } from 'app/services/car.service';
 import { Router } from '@angular/router';
 import { PlanService } from 'app/services/plan.service';
 import { IonSlides } from '@ionic/angular';
+import { prettyDate } from 'app/util/util';
+import { getConfigValue } from '../common.service';
 
 @Component({
   selector: 'addon-slider',
@@ -11,18 +13,18 @@ import { IonSlides } from '@ionic/angular';
 })
 export class AddonSliderComponent implements OnInit {
 
-  @Input() bodyType:string;
-  @Input() addOns:any;
-  @Input() selectedAddons:any;
-  @Input() blockedAddons:any;
-  @Input() subscriptionAddons:any;
+  @Input() bodyType: string;
+  @Input() addOns: any;
+  @Input() selectedAddons: any;
+  @Input() blockedAddons: any;
+  @Input() subscriptionAddons: any;
 
   @Output() addonSelected = new EventEmitter();
   @Output() showDetails = new EventEmitter();
-  @Input() active:boolean;
-  @Input() plan:any;
+  @Input() active: boolean;
+  @Input() plan: any;
 
-  @ViewChild('adnSlider')adnSlider : IonSlides;
+  @ViewChild('adnSlider') adnSlider: IonSlides;
 
   isSelected(addon) {
     return this.addonMap.indexOf(addon.code) > -1;
@@ -42,12 +44,12 @@ export class AddonSliderComponent implements OnInit {
     return t.length <= 11;
   }
 
-  isScheduled (addon) {
+  isScheduled(addon) {
     if (!this.dateMap.length) {
       return false;
     }
     let found = this.dateMap.filter((obj) => obj.code == addon.code);
-    return found.length && found[0].date != "Date" ? found[0].date  : false;
+    return found.length && found[0].date != "Date" ? found[0].date : false;
   }
 
   options = {
@@ -56,21 +58,22 @@ export class AddonSliderComponent implements OnInit {
     spaceBetween: 20,
   };
 
-  showAnimation:boolean;
+  showAnimation: boolean;
 
-  addonMap:any;
-  blockedMap:any;
-  dateMap:any;
-
+  addonMap: any;
+  blockedMap: any;
+  dateMap: any;
+  discountConfig: any;
 
   constructor(
-    private carService:CarService,
-    private router:Router,
-    private planService:PlanService
+    private carService: CarService,
+    private router: Router,
+    private planService: PlanService
   ) {
     this.active = false;
     this.bodyType = 'sedan';
     this.plan = null;
+    this.discountConfig = getConfigValue('INBUILTDISCOUNT_CONFIG');
 
     this.addOns = this.planService.getAddonsForPlan('Standard');
 
@@ -81,9 +84,9 @@ export class AddonSliderComponent implements OnInit {
     this.subscriptionAddons = [];
     this.dateMap = [];
     this.showAnimation = false;
-   }
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   sendShowDetails(addon) {
     this.showDetails.emit(addon);
@@ -95,10 +98,14 @@ export class AddonSliderComponent implements OnInit {
 
   animate() {
     this.showAnimation = false;
-    setTimeout(()=> {
+    setTimeout(() => {
       this.showAnimation = true;
-      this.adnSlider ? this.adnSlider.startAutoplay() : '' ;
+      this.adnSlider ? this.adnSlider.startAutoplay() : '';
     }, 200);
+  }
+
+  pretty(addon) {
+    return prettyDate(this.subscriptionAddons.filter((a) => a.addon.code == addon.code)[0].expiresOn);
   }
 
   ngOnChanges(changes) {
@@ -107,7 +114,7 @@ export class AddonSliderComponent implements OnInit {
       this.dateMap = this.subscriptionAddons.map((adn) => {
         return {
           code: adn.addon.code,
-          date: new Date(adn.scheduledTime).toString().split(' ').slice(1,3).join(' ')
+          date: new Date(adn.scheduledTime).toString().split(' ').slice(1, 3).join(' ')
         };
       })
     }
@@ -142,10 +149,18 @@ export class AddonSliderComponent implements OnInit {
   }
 
   updatePrice() {
-    
     if (this.bodyType && this.addOns) {
-      for (let i=0;i< this.addOns.length; i++) {
+      for (let i = 0; i < this.addOns.length; i++) {
         this.addOns[i].price = this.addOns[i].pricing[this.bodyType];
+        if (this.plan && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
+          this.addOns[i].originalPrice = this.addOns[i].price;
+          this.addOns[i].withPlan = true;
+          this.addOns[i].price -= this.discountConfig.addon.withPlan;
+        } else {
+          this.addOns[i].withPlan = false;
+          this.addOns[i].originalPrice = null;
+        }
+
       }
     }
   }
@@ -155,7 +170,7 @@ export class AddonSliderComponent implements OnInit {
     let blocked = [];
     let available = [];
 
-    this.addOns.forEach( (adn)=> {
+    this.addOns.forEach((adn) => {
 
       if (this.isSelected(adn)) {
         added.push(adn);
