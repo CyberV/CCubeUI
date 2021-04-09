@@ -216,8 +216,7 @@ export class CheckoutDetailsComponent implements OnInit {
       total -= discountConfig.plan.secondCar;
     }
 
-    return total;
-
+    return total >= 0 ? total : 0;
   }
 
   getTotalPayable() {
@@ -228,7 +227,7 @@ export class CheckoutDetailsComponent implements OnInit {
     }
 
 
-    return total;
+    return total >= 0 ? total : 0;
   }
 
   toggleUpgrade(planName = null) {

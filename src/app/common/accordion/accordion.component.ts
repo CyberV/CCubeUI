@@ -17,6 +17,7 @@ export class AccordionComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() locked: boolean;
   @Input() defaultOpen: boolean;
+  @Input() scrollable: boolean;
   @Input() label: string;
 
   @Output() onToggle = new EventEmitter();
@@ -42,6 +43,7 @@ export class AccordionComponent implements OnInit {
     this.defaultOpen = false;
     this.initDone = false;
     this.isOpen = false;
+    this.scrollable = false;
   }
 
   ngOnInit() {

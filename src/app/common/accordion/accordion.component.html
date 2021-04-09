@@ -10,7 +10,7 @@
         <span *ngIf="label" class="" Rs> {{label}} </span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <div class="panel-content" [class.--no-padding]="hasStep">
+    <div class="panel-content" [class.--no-padding]="hasStep" [class.scrollable]="scrollable">
 
       <div [class.compact-separator]="compact">
         <ng-content></ng-content>

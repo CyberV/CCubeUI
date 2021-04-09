@@ -83,6 +83,7 @@ import { ImageToolbarComponent } from './image-toolbar/image-toolbar.component';
 import { CounterComponent } from './counter/counter.component';
 import { WarningComponent } from './warning/warning.component';
 import { SwitchComponent } from './switch/switch.component';
+import { TermsComponent } from './terms/terms.component';
 
 
 
@@ -149,6 +150,7 @@ import { SwitchComponent } from './switch/switch.component';
     CounterComponent,
     WarningComponent,
     SwitchComponent,
+    TermsComponent,
 
     // Directives
     RsDirective,
@@ -237,7 +239,7 @@ import { SwitchComponent } from './switch/switch.component';
     CounterComponent,
     WarningComponent,
     SwitchComponent,
-    
+    TermsComponent,
     //Directives
 
     RsDirective

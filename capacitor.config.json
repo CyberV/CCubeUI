@@ -1,5 +1,5 @@
 {
-  "appId": "com.ccube.customer",
+  "appId": "com.ccube.customers",
   "appName": "CCube",
   "bundledWebRuntime": false,
   "npmClient": "npm",

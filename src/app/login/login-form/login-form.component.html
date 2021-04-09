@@ -43,18 +43,16 @@
   <mobile-input [mandatory]="true" #inpPass (enterKey)="focusTo('inpConfirmPass')" [error]="errors ? errors.password : null" type="password" name="Password" [(value)]="newUser.password"  (valueChange)="errors.password = null" ></mobile-input>
   <!-- <mobile-input #inpConfirmPass (enterKey)="focusTo('ctaSignup')" [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input> -->
   <mobile-input [mandatory]="true" #inpConfirmPass (enterKey)="focusTo('inpRef')"  [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input>
-  <mobile-input  #inpRef type="text" name="Referral Code" [(value)]="newUser.referedBy" ></mobile-input>
+  <mobile-input  #inpRef type="text" name="Referral Code" [(value)]="newUser.referedBy" uppercase="true"></mobile-input>
   <br/>
   <div class="row">
     <div class="col-12">
         <span class="tip">PRO TIP: </span>Use a friend's Referral Code to win a guaranteed Bonus on Plan Purchase.
     </div>
-
   </div>
-  
-
-
-
+  <br/>
+  <span *ngIf="!upgradeSelected && (errors ? errors.terms : false)" class="error-msg"> {{errors.terms}} <br/></span>
+    <mat-checkbox [checked]="false" (change)="upgradeSelected = !upgradeSelected"> I accept the </mat-checkbox>  <span class="terms" highlight (click)="showTerms()"> Terms & Conditions</span>
 
   <!-- <cta #ctaSignup *ngIf="!userExists" class="signup-btn hidden" text="Create Account" [loading]="loading" (action)="createUser()" ></cta> -->
 

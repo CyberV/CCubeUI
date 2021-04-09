@@ -57,6 +57,10 @@ export class ServicePageComponent implements OnInit {
 
   notifications: any;
 
+  wakeupTime: string;
+  officeTime: string;
+  savingTime: boolean;
+
   getNotificationCount(regNo) {
     try {
 
@@ -93,6 +97,7 @@ export class ServicePageComponent implements OnInit {
     })
 
     this.payments = [];
+    this.savingTime = false;
     this.upgradePlans = [];
     this.selectedCar = null;
     this.selectedIndex = 0;
@@ -102,6 +107,9 @@ export class ServicePageComponent implements OnInit {
     this.selectedSubscription = null;
     this.subAddons = [];
     this.subAdhocs = [];
+
+    this.officeTime = "";
+    this.wakeupTime = "";
 
     // this.platform.backButton.subscribeWithPriority(1, () => { // to disable hardware back button on whole app
     // });
@@ -140,10 +148,10 @@ export class ServicePageComponent implements OnInit {
 
     this.planService.changePlan(payload.plan);
     if (payload.feature) {
-    this.router.navigate(['/dashboard/plan', {code: payload.feature.code}]);
+      this.router.navigate(['/dashboard/plan', { code: payload.feature.code }]);
 
     } else {
-    this.router.navigate(['/dashboard/plan']);
+      this.router.navigate(['/dashboard/plan']);
     }
 
   }
@@ -153,7 +161,7 @@ export class ServicePageComponent implements OnInit {
   }
 
   goToCheckout() {
-    
+
     this.router.navigate(['/dashboard/checkout']);
   }
 
@@ -273,8 +281,8 @@ export class ServicePageComponent implements OnInit {
         //alert(JSON.stringify(data));
         let addon = data.data.addon;
         if (addon.isAdhoc) {
-        this.onAdhocSelected(addon);
-        this.router.navigate(['/dashboard/adhoc']);
+          this.onAdhocSelected(addon);
+          this.router.navigate(['/dashboard/adhoc']);
         } else {
           this.onAddonSelected(addon);
           this.router.navigate(['/dashboard/addon']);
@@ -297,11 +305,23 @@ export class ServicePageComponent implements OnInit {
   ngOnChanges(changes) {
     if (changes.payments && this.payments.length) {
       this.selectedIndex = 0;
+      let sub = this.planService.getCurrentSubscription();
+      if (sub) {
+        let found = this.payments.filter((s) => s.carRegNo == sub.carRegNo);
+        if (found.length) {
+          found = found[0];
+          this.selectedIndex = this.payments.indexOf(found);
+
+          if (this.selectedIndex < 0) {
+            this.selectedIndex = 0;
+          }
+        }
+      }
       if (this.payments.length) {
         this.selectedPayment = this.payments[this.selectedIndex].payments[0];
         this.selectedCar = this.selectedPayment.car;
         this.selectCar(this.selectedIndex);
-        setTimeout(()=> {
+        setTimeout(() => {
           this.selectCar(this.selectedIndex);
 
         }, 100);
@@ -325,6 +345,24 @@ export class ServicePageComponent implements OnInit {
     toast.present();
   }
 
+  saveTime() {
+    this.savingTime = true;
+    this.loginService.updateTiming(this.selectedSubscription.carRegNo, this.officeTime, this.wakeupTime).subscribe((data: any) => {
+      this.savingTime = false;
+      if (data.success) {
+
+        this.presentToast('Timings Updated Successfully!');
+
+        setTimeout(()=> {
+          window.location.reload();
+
+        }, 1000);
+      } else {
+        this.presentToast('Timings Not updated. ' + data.error);
+      }
+    })
+  }
+
   addCar() {
     this.carService.clear();
     this.router.navigate(['/dashboard/select-car'])
@@ -332,7 +370,7 @@ export class ServicePageComponent implements OnInit {
 
   handleAdhocReschedule(adhoc) {
     let schedule = {
-      date : adhoc.scheduledTime || adhoc.scheduledDate
+      date: adhoc.scheduledTime || adhoc.scheduledDate
     };
 
     if (schedule.date) {
@@ -344,10 +382,10 @@ export class ServicePageComponent implements OnInit {
     const modal = await this.modalController.create({
       component: RescheduleComponent,
       cssClass: 'plans-table-modal',
-      componentProps: { 
+      componentProps: {
         showClose: true,
         schedule: schedule,
-        forAdhoc : true,
+        forAdhoc: true,
         adhoc: adhoc,
         count: adhoc.rescheduleCount,
         canReschedule: adhoc.rescheduleCount < 2,
@@ -356,7 +394,7 @@ export class ServicePageComponent implements OnInit {
     });
     await modal.present();
 
-    modal.onDidDismiss().then((data)=> {
+    modal.onDidDismiss().then((data) => {
 
 
 

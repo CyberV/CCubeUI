@@ -15,6 +15,17 @@
 
 }
 
+.terms {
+    position: relative;
+    top: -3px;
+}
+
+mat-checkbox {
+    &.mat-checkbox-disabled.mat-checkbox-checked .mat-checkbox-background {
+     background: rgb(0,178,0);
+    }
+  }
+
 .signup-btn {
     bottom: -10%;
     width: 120%;

@@ -402,6 +402,8 @@ export class PlanService {
       }
 
       if (order.bonus && order.bonus > 0) {
+
+        order.bonus = order.bonus > order.serviceTotal ? order.serviceTotal : order.bonus;
         total -= order.bonus;
         info.bonus = order.bonus;
       }
@@ -413,7 +415,7 @@ export class PlanService {
 
 
 
-      order.total = total;
+      order.total = total >= 0 ? total: 0;
       order.info = info;
 
 

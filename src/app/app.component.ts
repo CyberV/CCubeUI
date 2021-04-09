@@ -369,6 +369,10 @@ export class AppComponent {
         this.router.navigate(['/contact']);
         break;
       }
+      case 'about': {
+        this.router.navigate(['/about']);
+        break;
+      }
       case 'service': {
         this.router.navigate(['/dashboard/service']);
         break;

@@ -12,15 +12,15 @@ import { UserService } from './user.service';
 import { LoginService } from 'app/login/login.service';
 
 // Test
-const api_key = "rzp_test_iw0QQKe6eyEP2g";
-const api_secret = "xa1TxbgErELViPesDtnEcgPx"
+// const api_key = "rzp_test_iw0QQKe6eyEP2g";
+// const api_secret = "xa1TxbgErELViPesDtnEcgPx"
 
 declare var Razorpay: any;
 declare var RazorpayCheckout: any;
 
 // Live
-// const api_key = "rzp_live_TuRL1kcjKl8uWp";
-// const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
+const api_key = "rzp_live_TuRL1kcjKl8uWp";
+const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
 
 
 const BYPASS_PAYMENT = false;
@@ -70,12 +70,13 @@ export class CheckoutService {
 
   createOrder(amount: number) {
 
-    if (BYPASS_PAYMENT) {
+    if (BYPASS_PAYMENT || amount == 0) {
       return new Observable((obs) => {
         obs.next({
           success: true,
           data: {
             id: -1,
+            amount: 0,
           },
         });
         obs.complete();
@@ -198,7 +199,7 @@ export class CheckoutService {
 
   tryPayment(order, amount) {
     try {
-      if (BYPASS_PAYMENT) {
+      if (BYPASS_PAYMENT || amount == 0) {
         this.checkoutEmitter.next({
           success: true,
           order: order,

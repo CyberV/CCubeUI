@@ -1,0 +1,15 @@
+<div class="row main-row">
+  <div class="col-12">
+      <spinner *ngIf="!privacyConfig"></spinner>
+      <ng-container *ngIf="privacyConfig">
+        <cc-accordion title="Terms & Conditions" scrollable="true">
+            <p *ngFor="let item of privacyConfig.terms">{{item}}</p>
+            <br/>
+        </cc-accordion>
+        <cc-accordion title="Privacy Policy" scrollable="true">
+            <p *ngFor="let item of privacyConfig.privacy">{{item}}</p>
+            <br/>
+        </cc-accordion>
+      </ng-container>
+  </div>
+</div>

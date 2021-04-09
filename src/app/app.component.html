@@ -111,16 +111,16 @@
           <ion-icon name="car-sport-outline"></ion-icon> Add New Car
         </ion-item>
         <ion-item lines="none" [class.selected]="context==='profile'" (click)="goTo('profile')">
-          <ion-icon name="person-circle-outline"></ion-icon>Profile
+          <ion-icon name="person-circle-outline"></ion-icon> Profile
         </ion-item>
         <ion-item lines="none" [class.selected]="context==='refer'" (click)="goTo('refer')">
-            <ion-icon name="wallet-outline"></ion-icon>Refer & Earn
+            <ion-icon name="wallet-outline"></ion-icon> Refer & Earn
         </ion-item>
         <ion-item lines="none" (click)="goTo('contact-us')">
-          <ion-icon name="mail-outline"></ion-icon>Contact Us
+          <ion-icon name="mail-outline"></ion-icon> Contact Us
         </ion-item>
-        <ion-item lines="none" (click)="logout()" > 
-          <ion-icon name="power-outline"></ion-icon> Log Out
+        <ion-item lines="none" (click)="goTo('about')">
+          <ion-icon name="alert-circle-outline"></ion-icon> About
         </ion-item>
 
       </ion-list>

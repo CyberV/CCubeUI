@@ -90,6 +90,10 @@ div::-webkit-scrollbar-thumb:hover {
   font-family: 'AppFont' !important;
 }
 
+.error-msg {
+  color: red;
+}
+
 // html, body {
 //   font-family: 'AppFont' !important;
 // }
@@ -117,6 +121,19 @@ div::-webkit-scrollbar-thumb:hover {
   height: 75%;
   top: 12%;
   width: 90%;
+  border-radius: 10px;
+  position: absolute;
+  display: block;
+  overflow-y:auto;
+  overflow-x: hidden;
+  color: black;
+}
+
+.terms-modal .modal-wrapper{
+  height: 50%;
+  top: 25%;
+  width: 90%;
+  padding: 1em;
   border-radius: 10px;
   position: absolute;
   display: block;

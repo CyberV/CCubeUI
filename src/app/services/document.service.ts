@@ -100,7 +100,7 @@ export class DocumentService {
         let appDir = await this.file.resolveDirectoryUrl(this.file.applicationDirectory + "www/assets/docs/");
         fileEntry.copyTo(appDir, profilePic.localUrl);
 
-        resolve(profilePic);
+        resolve(profilePic.image);
   
       };
     });

@@ -5,6 +5,7 @@ import { HeaderService } from 'app/header.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ActivatedRoute } from '@angular/router';
 import { DocumentService } from 'app/services/document.service';
+import { getConfigValue } from 'app/common/common.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
   ) {
     this.currentUser = null;
     this.ready = false;
+    this.privacyConfig = null;
   }
 
   currentUser: any;
@@ -31,8 +33,11 @@ export class ProfileComponent implements OnInit {
   context: string;
   profilePic:any;
 
+  privacyConfig:any;
+
   async ngOnInit() {
     this.currentUser = this.userService.getCurrentUser();
+    
   }
 
   logOutUser() {
@@ -94,6 +99,10 @@ export class ProfileComponent implements OnInit {
           this.ready = true;
           break;
         } 
+        case 'about': {
+          this.headerService.setText('About CCUBE');
+          this.ready = true;
+        }
       }
     });
   }

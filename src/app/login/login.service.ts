@@ -196,6 +196,19 @@ export class LoginService {
     );
   }
 
+  updateTiming(carNo, officeTime, wakeupTime) {
+    return this.http.post(this.url + 'subscription/updateTiming', {
+      phone: this.currentUser.phone,
+      carRegNo: carNo,
+      timing : {
+        office: officeTime,
+        wakeup: wakeupTime
+      }
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   addAddon(addon) {
     return this.http.post(this.url + 'subscription/addaddon', addon).pipe(
       catchError(this.handleError)

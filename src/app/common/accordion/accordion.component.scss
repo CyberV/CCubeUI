@@ -90,6 +90,13 @@
         left: -25px;
         padding: 0 !important;
         position: relative;
+
+
+    }
+
+    .scrollable {
+        max-height: 225px;
+        overflow-y: scroll;
     }
 
     .panel-header {

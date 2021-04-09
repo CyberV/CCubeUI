@@ -71,6 +71,40 @@
 
         <ads-list></ads-list>
 
+        
+          <div class="row --padding-x info-row" *ngIf="!selectedSubscription.isAdhoc && selectedSubscription.officeTime.length == 0">
+          <div class="col-12 tabs-container">
+            <mat-accordion>
+              <mat-expansion-panel class="drop">
+                <mat-expansion-panel-header class="drop">
+                  <mat-panel-title>
+                      <ion-icon name="information-circle-outline"></ion-icon>
+                     <span
+                      class="header-text">Confirm Timing</span>
+                  </mat-panel-title>
+                  <mat-panel-description class="drop">
+
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                  <span>To be able to serve you on time, we need the following details </span>
+
+                  <heading text="What time do you wake up ?"></heading>
+                  <input class="wakeupTime" name="wakeupTime" [(ngModel)]="wakeupTime" [ngxTimepicker]="pickerWake" minutesGap="15" placeholder="ex. 8:00 AM">
+                  <ngx-material-timepicker #pickerWake  minutesGap="15"></ngx-material-timepicker>
+
+                  <heading text="What time do you leave for office ?"></heading>
+                  <input class="officeTime" name="officeTime" [(ngModel)]="officeTime" [ngxTimepicker]="picker" minutesGap="15" placeholder="ex. 10:00 AM">
+                  <ngx-material-timepicker #picker  minutesGap="15"></ngx-material-timepicker>
+                <cta text="Confirm" small="true" [loading]="savingTime" [disabled]="!(wakeupTime.length > 0 && officeTime.length > 0)" (action)="saveTime()"></cta>
+              </mat-expansion-panel>
+
+            </mat-accordion>
+          </div>
+        </div>
+
+        <br/>
+
         <div class="row --padding-x info-row" *ngIf="selectedSubscription.isRcMissing">
           <div class="col-12 tabs-container">
             <mat-accordion>

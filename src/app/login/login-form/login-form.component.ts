@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 import { AuthService } from 'angularx-social-login';
-import { Platform } from '@ionic/angular';
+import { Platform, ModalController } from '@ionic/angular';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
@@ -15,6 +15,7 @@ import { Initialize } from 'app/common/common.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { CarService } from 'app/services/car.service';
 import { VerifyOtpComponent } from 'app/common/verify-otp/verify-otp.component';
+import { TermsComponent } from 'app/common/terms/terms.component';
 
 declare var SMSReceive: any;
 @Component({
@@ -101,6 +102,8 @@ export class LoginFormComponent implements OnInit {
   allInputs;
   userNotFound:boolean;
 
+  upgradeSelected:boolean;
+
   constructor(
     private socialAuthService: AuthService,
     public platform: Platform,
@@ -109,6 +112,7 @@ export class LoginFormComponent implements OnInit {
     private geolocation: Geolocation,
     private srvcUser: UserService,
     private carService: CarService,
+    private modalController:ModalController,
     public toastController: ToastController,
 
     private router: Router) {
@@ -126,7 +130,7 @@ export class LoginFormComponent implements OnInit {
     this.allInputs = {};
     this.userNotFound = false;
     this.existingUser = false;
-
+    this.upgradeSelected = false;
     this.loginOnly = false;
 
     this.newUser = {
@@ -388,9 +392,32 @@ export class LoginFormComponent implements OnInit {
       this.errors['email'] = 'Please enter a valid Email.'
     }
 
+    if (this.upgradeSelected) {
+      valid.terms = true;
+    } else {
+      valid.terms = false;
+      this.errors['terms'] = '';
+      this.errors['terms'] = 'Please accept:'
+    }
 
-    return !((valid.name && valid.phone && valid.password && valid.email && valid.city) ? false : true);
 
+    return !((valid.terms && valid.name && valid.phone && valid.password && valid.email && valid.city) ? false : true);
+
+  }
+
+  async showTerms() {
+    let modal = await this.modalController.create({
+      component: TermsComponent,
+      cssClass: 'terms-modal',
+      swipeToClose: true,
+      showBackdrop: true,
+      backdropDismiss: true,
+      componentProps: {
+        showClose: true
+      }
+    });
+
+    await modal.present();
   }
 
   createUser() {

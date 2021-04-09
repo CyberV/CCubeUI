@@ -36,6 +36,10 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+  path: 'about',
+    component: ProfileComponent
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },{

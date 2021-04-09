@@ -516,10 +516,10 @@ export class CheckoutComponent implements OnInit {
         this.step3Ready = true;
 
         setTimeout(() => {
-          if (!this.verificationComplete) {
+
             this.drawerLocation.first.toggle();
-            this.drawerTime.first.toggle();
-          }
+            //this.drawerTime.first.toggle();
+          
 
         }, 500);
       }, 200);
@@ -530,7 +530,7 @@ export class CheckoutComponent implements OnInit {
 
         setTimeout(() => {
           this.drawerLocation.first.toggle();
-          this.drawerTime.first.toggle();
+          //this.drawerTime.first.toggle();
         }, 500);
       }, 200);
     }
@@ -561,14 +561,14 @@ export class CheckoutComponent implements OnInit {
     let hasLocation = this.currentLocation && (this.currentLocation.society || this.currentLocation.location.society).length;
 
 
-    if (this.timeSaved && hasLocation && this.carIdentified && !this.carMismatch) {
+    if (hasLocation && this.carIdentified && !this.carMismatch) {
       this.verificationComplete = true;
     } else {
       this.verificationComplete = false;
     }
 
     if (fromTime) {
-      this.drawerTime.first.toggle();
+      //this.drawerTime.first.toggle();
 
 
 
@@ -631,7 +631,7 @@ export class CheckoutComponent implements OnInit {
             car: this.selectedCar,
             addons: this.includedAddons,
             adhocs: this.includedAdhocs,
-            bonusApplied: this.currentUser.referralBonusPending,
+            bonusApplied: order.bonus,
             location: this.currentLocation,
             officeTime: this.officeTime,
             startDate: +(new Date()),
