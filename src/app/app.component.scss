@@ -1,10 +1,14 @@
 @import 'src/variables.scss';
 
 ion-app {
-    background: $primary-color;
+    //background: $primary-color;
     color: white;
 }
 
+.empty-content {
+    margin-top: -3em;
+    padding-top: 6em;
+}
 .ion-header {
     background: #00A4A7 0% 0% no-repeat padding-box;
 }

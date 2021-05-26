@@ -1,4 +1,4 @@
-<selected-car *ngIf="currentCar && isCarSelected" [car]="currentCar" (changeCar)="resetCar()"></selected-car>
+<selected-car [showBack]="false" *ngIf="currentCar && isCarSelected" [car]="currentCar" (changeCar)="resetCar()"></selected-car>
 
 <ads-list></ads-list>
   <div class="row">

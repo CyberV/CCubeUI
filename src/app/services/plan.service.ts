@@ -47,14 +47,16 @@ export class PlanService {
     this.AllPlans = this.getAllPlans();
     this.AllFeatures = this.getAllFeatures();
 
-    this.fixedAdhocs = this.AllFeatures.filter((f) => f.isAdhoc == true);
+    this.fixedAdhocs = this.AllFeatures.filter((f) => f.isAdhoc == true && f.active);
     
     this.OnlyAddons = [];
     let map = this.AllFeatures.map((ftr) => ftr.code);
     for (let i = 0; i < this.AllFeatures.length; i++) {
       let remove = false;
 
-      remove = this.fixedAdhocs.some((adhoc) => adhoc.code.toLowerCase() == this.AllFeatures[i].code.toLowerCase());
+      //remove = this.fixedAdhocs.some((adhoc) => adhoc.code.toLowerCase() == this.AllFeatures[i].code.toLowerCase());
+
+      remove = this.AllFeatures[i].isAdhoc;
 
       if (!remove) {
         this.OnlyAddons.push(JSON.parse(JSON.stringify(this.AllFeatures[i])));
@@ -248,12 +250,12 @@ export class PlanService {
     let car = this.carService.getCurrentCar();
     let bodyType = 'sedan';
     let subs = this.getAllSubscriptions();
-    let sub = subs.filter((s) => s.carRegNo == car.regNo);
+    let sub = car ? subs.filter((s) => s.carRegNo == car.regNo) : null;
     if (car) {
       bodyType = car.bodyType;
     }
     plan.price = +(plan.pricing[bodyType]);
-    plan.carNumber = sub.length ? subs.indexOf(sub[0]) + 1 : subs.length + 1;
+    plan.carNumber = sub && sub.length ? subs.indexOf(sub[0]) + 1 : subs.length + 1;
 
     if (this.isSecondCar()) {
       if (this.discountConfig && this.discountConfig.plan && this.discountConfig.plan.secondCar) {
@@ -334,15 +336,15 @@ export class PlanService {
         if (duration == "quarterly") {
           addon.price = addon.price * 3;
 
-          let dscnt: number = (getConfigValue('DISCOUNT_QUARTERLY'));
+          // let dscnt: number = (getConfigValue('DISCOUNT_QUARTERLY'));
 
-          if (dscnt && dscnt > 0) {
-            addon.originalPrice = addon.price;
-            let discount = Math.floor((addon.price * dscnt) / 100);
-            addon.price = addon.originalPrice - discount;
-          } else {
-            addon.originalPrice = addon.originalPrice ? addon.originalPrice : null;
-          }
+          // if (dscnt && dscnt > 0) {
+          //   addon.originalPrice = addon.price;
+          //   let discount = Math.floor((addon.price * dscnt) / 100);
+          //   addon.price = addon.originalPrice - discount;
+          // } else {
+          //   addon.originalPrice = addon.originalPrice ? addon.originalPrice : null;
+          // }
 
         } else {
           addon.originalPrice = addon.originalPrice ? addon.originalPrice : null;          
@@ -436,6 +438,18 @@ export class PlanService {
     }
   }
 
+  changeDateForAdhoc(adhoc) {
+    let adhocs = this.getIncludedAdhocs();
+
+    let found = adhocs.filter((a) => a.code == adhoc.code);
+    
+    if (found.length) {
+      found = adhocs.indexOf(found[0]);
+      adhocs[found].scheduledDate = adhoc.scheduledDate;
+      this.setIncludedAdhocs(adhocs);
+    }
+  }
+
 
   getFeaturesForPlan(planName) {
     let found = this.AllPlans.filter((pln) => pln.name == planName);
@@ -492,6 +506,7 @@ export class PlanService {
 
 
   getAddonsForPlan(planName) {
+    debugger;
     let addons = [];
 
     // this.fixedAdhocs.forEach((adhocCode) => {

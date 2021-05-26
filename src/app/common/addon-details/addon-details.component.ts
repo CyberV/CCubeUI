@@ -58,6 +58,11 @@ export class AddonDetailsComponent implements OnInit {
   selectDate(date, later = false) {
     this.laterSelected = later;
     this.checkDate(date);
+    this.addon.scheduledDate = this.selectedDate;
+
+    if (this.purchased) {
+      this.planService.changeDateForAdhoc(this.addon);
+    }
 
       this.scheduleDate.emit({
         date: date ? new Date(date) : null,
@@ -173,7 +178,7 @@ export class AddonDetailsComponent implements OnInit {
       if ((this.addon && this.addon.scheduledDate) || (this.bookedTime)) {
         this.selectedDate = this.addon.scheduledDate;
         this.laterSelected = false;
-        this.bookedTime = this.selectedDate;
+        //this.bookedTime = this.selectedDate;
       }
 
       this.startDate = 'Tomorrow';

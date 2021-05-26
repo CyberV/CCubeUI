@@ -3,7 +3,7 @@ declare var $;
 
 export function scrollToBottom() {
   let cont = $('.container');
-  cont[0].scrollTop = 2000;
+  cont[cont.length - 1].scrollTop = 2000;
 }
 
 export function prettyDate(date) {

@@ -2,7 +2,7 @@
 
 
 
-    <ion-slides options="options">
+    <ion-slides #adSlider options="options">
       <ion-slide *ngFor="let ad of ads; let i = index" (click)="selectAd(ad)">
           <div >
               <img [src]="'assets/backgrounds/' + ad.image + '.png'" class="d-block w-100" alt="...">
@@ -16,4 +16,11 @@
             </div>
       </ion-slide>
     </ion-slides>
+
+    <div class="pagination-row row">
+      <div class="col-12 text-center">
+        <span class="dot" *ngFor="let ad of ads;let i = index" (click)="adSlider.slideTo(i)" [class.selected]="selectedIndex == i" ></span>
+
+      </div>
+    </div>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CompileMetadataResolver } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'selected-car',
@@ -13,13 +14,17 @@ export class SelectedCarComponent implements OnInit {
   @Output() changeCar = new EventEmitter();
   @Input() hideRemove:boolean;
   @Input() slim:boolean;
+  @Input() showBack:boolean;
 
   showLink: boolean = false;
 
    displayType:string;
 
-  constructor() {
+  constructor(
+    private router:Router
+  ) {
     this.hideRemove = false;
+    this.showBack = true;
     this.slim = false;
    }
 
@@ -32,6 +37,10 @@ export class SelectedCarComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  backToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
 
   ngOnChanges() {
     if (this.car) {

@@ -71,8 +71,9 @@ export class DashboardComponent implements OnInit {
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
       componentProps: { 
-        addon: addon,
-        showClose: true
+        addon: addon.isAdhoc ? null : addon,
+        adhoc: addon.isAdhoc ? addon : null,
+        showClose: true 
       },
       swipeToClose: true,
       showBackdrop: true,
@@ -81,6 +82,15 @@ export class DashboardComponent implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then((data)=> {
+      if (data.data && data.data.addon) {
+        let a =  data.data.addon;
+        if (a.isAdhoc) {
+          this.onAdhocSelect(a);
+        } else {
+          this.onAddonSelect(a);
+        }
+        
+      }
     });
   }
 

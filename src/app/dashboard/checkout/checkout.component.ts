@@ -46,6 +46,7 @@ export class CheckoutComponent implements OnInit {
   selectedAdhoc: any;
   blockedAddons: any;
   blockedAdhocs: any;
+  cpnBackup :any;
 
   currentUser: any;
   currentLocation: any;
@@ -113,6 +114,7 @@ export class CheckoutComponent implements OnInit {
     this.order = null;
     this.includedAddons = [];
     this.includedAdhocs = [];
+    this.cpnBackup =null;
     this.blockedAddons = [];
     this.blockedAdhocs = [];
     this.availableCoupons = [];
@@ -261,13 +263,14 @@ export class CheckoutComponent implements OnInit {
     let order = this.planService.getCurrentOrder();
     let allPayments = JSON.parse(sessionStorage.getItem('allPayments'));
     let carAlreadyActive = false;
-    if (this.mode.plan) {
-      if (!order.plan.period) {
+    if (this.mode.plan && !this.forRenew) {
+ 
 
         if (allPayments && allPayments.length) {
-          carAlreadyActive = allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
+          carAlreadyActive = allPayments.filter((p) => {return p.car.regNo.toLowerCase() == order.car.regNo.toLowerCase() && !p.isAdhoc}).length > 0
+          //allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
         }
-      } else {
+       else {
 
       }
     } else {
@@ -423,20 +426,23 @@ export class CheckoutComponent implements OnInit {
     if (this.mode.plan && this.planService.getPlanDuration() == 'quarterly' && this.cpnList) {
       
       if (appliedCoupon && appliedCoupon.code != qrt) {
-        this.applyCoupon(appliedCoupon);
-      } else {
+        this.cpnBackup = JSON.parse(JSON.stringify(appliedCoupon));
+      }
         setTimeout(()=>{
           this.loading = true;
           this.cpnList.tryCoupon(qrt);
         },10);
 
-      }
+      //}
 
     } else {
 
 
       if (appliedCoupon && appliedCoupon.code == qrt) {
         this.onRemoveCoupon();
+        if (this.cpnBackup) {
+          await this.applyCoupon(this.cpnBackup)
+        }
       } else if (appliedCoupon && appliedCoupon.code) {
         await this.applyCoupon(appliedCoupon);
       }
@@ -472,7 +478,7 @@ export class CheckoutComponent implements OnInit {
         adhoc: addon.isAdhoc ? addon : null,
         purchased: (addon.isAdhoc ? this.includedAdhocs : this.includedAddons).some((a) => a.name == addon.name),
         showClose: true,
-        bookedTime
+        // bookedTime
       }
     });
     await modal.present();
@@ -481,6 +487,9 @@ export class CheckoutComponent implements OnInit {
       console.log('Received Data from aDdon modal on close', data);
       if (data && data.data && data.data.addon) {
         addon.isAdhoc ? this.onAdhocSelected(data.data.addon, true) : this.onAddonSelected(data.data.addon, true);
+      } else {
+        this.includedAdhocs = this.planService.getIncludedAdhocs();
+        this.includedAddons = this.planService.getIncludedAddons();
       }
 
     });
@@ -558,7 +567,7 @@ export class CheckoutComponent implements OnInit {
       this.timeSaved = true;
     }
 
-    let hasLocation = this.currentLocation && (this.currentLocation.society || this.currentLocation.location.society).length;
+    let hasLocation = this.currentLocation && (this.currentLocation.society || (this.currentLocation.location && this.currentLocation.location.society));
 
 
     if (hasLocation && this.carIdentified && !this.carMismatch) {
@@ -580,6 +589,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   async ionViewWillEnter() {
+
+    this.loginService.refreshUser(this.currentUser.phone).then((u) => {
+      this.currentUser = this.userService.getCurrentUser();
+    })
 
     this.refreshCarAndPlans();
 

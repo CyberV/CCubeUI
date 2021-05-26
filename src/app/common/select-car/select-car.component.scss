@@ -7,6 +7,8 @@
     overflow-y: scroll;
 }
 
+
+
 .maker-row {
     padding-left:0;
     padding-right:0;
@@ -14,8 +16,8 @@
     .maker-row-content {
         .col-5, .col-7 {
             //top: 12px;
-            padding-top: 12px;
-            padding-bottom: 12px;
+            // padding-top: 12px;
+            // padding-bottom: 12px;
         }
     }
 }
@@ -24,14 +26,16 @@
     .model-row-content {
         .col-6, .col-7 {
             //top: 12px;
-            padding-top: 12px;
-            padding-bottom: 12px;
+            // padding-top: 12px;
+            // padding-bottom: 12px;
         }
     }
 }
 .panel-models {
     padding-left: 30px;
     padding-right: 30px;
+    overflow-x: hidden;
+    overflow-y:scroll;
 }
 
 .maker-search, .model-search {
@@ -49,6 +53,7 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     padding-bottom: 0;
+    max-height: 95px;
 
     // @media screen and (max-width:768px){
     //     min-height: 100px;

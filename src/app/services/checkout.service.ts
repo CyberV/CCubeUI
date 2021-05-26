@@ -23,7 +23,7 @@ const api_key = "rzp_live_TuRL1kcjKl8uWp";
 const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
 
 
-const BYPASS_PAYMENT = false;
+const BYPASS_PAYMENT = true;
 
 
 @Injectable({

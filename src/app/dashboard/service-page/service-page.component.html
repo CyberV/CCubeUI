@@ -8,7 +8,7 @@
 <ads-list *ngIf="!loading &&  payments.length == 0"></ads-list>
 
 <ng-container *ngIf="!loading">
-  <div class="row">
+  <div class="row car-selector-row">
     <div class="col-12 car-slider-container --padding-x">
 
 
@@ -100,10 +100,12 @@
               </mat-expansion-panel>
 
             </mat-accordion>
+            <br/>
           </div>
+               
         </div>
 
-        <br/>
+
 
         <div class="row --padding-x info-row" *ngIf="selectedSubscription.isRcMissing">
           <div class="col-12 tabs-container">
@@ -127,10 +129,12 @@
               </mat-expansion-panel>
 
             </mat-accordion>
+                    
+        <br/>
           </div>
+  
         </div>
 
-        <br/>
 
         <div class="row --padding-x">
           <div class="col-12 tabs-container">

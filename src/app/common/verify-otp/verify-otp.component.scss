@@ -53,6 +53,9 @@ input[type=number] {
 }
 
 .mismatch {
+  width: 238px;
+  display: flex;
+  margin-left: 1em;
   top: 65px;
   position: relative;
   color: red;

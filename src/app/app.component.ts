@@ -120,17 +120,21 @@ export class AppComponent {
   async ngOnInit() {
 
      this.profilePic = await this.documentService.getProfilePicture();
+     this.headerText = ' ';
+     this.headerType = 'text';
 
     this.ready = false;
+
     console.log('Before Init in APP')
     await Initialize(this.userService.getCurrentUser() ? this.userService.getCurrentUser().city || '' : '');
     this.planService.refreshPlans();
-    console.log('After Init in APP Ready true')
+    console.log('After Init in APP Ready true');
+    
 
     setTimeout(()=> {
       this.ready = true;
 
-    }, 1000);
+    }, 100);
 
     //this.presentAlert('Demo');
   }
@@ -256,6 +260,7 @@ export class AppComponent {
   }
 
   async onActivate(comp) {
+    this.menu.enable(true, 'first');
 
     this.profilePic = await this.documentService.getProfilePicture();
 
@@ -332,7 +337,7 @@ export class AppComponent {
   }
 
   toggleMenu() {
-
+    this.menu.enable(true, 'first');
     this.menu.toggle('first');
   }
 

@@ -216,8 +216,9 @@ export class DashboardPageComponent implements OnInit {
       this.planService.excludeAdhoc(adhoc);
       this.includedAdhocs = this.planService.getIncludedAdhocs();
     } else {
-      this.planService.excludeAdhoc(adhoc);
-      this.includedAdhocs = this.planService.getIncludedAdhocs();
+      this.openAddon(adhoc);
+      // this.planService.includeAdhoc(adhoc);
+      // this.includedAdhocs = this.planService.getIncludedAdhocs();
     }
   }
 
@@ -325,7 +326,8 @@ export class DashboardPageComponent implements OnInit {
       component: AddonDetailsComponent,
       cssClass: 'plans-table-modal',
       componentProps: {
-        addon: addon,
+        addon: addon.isAdhoc ? null : addon,
+        adhoc: addon.isAdhoc ? addon : null,
         showClose: true
       }
     });
@@ -333,6 +335,20 @@ export class DashboardPageComponent implements OnInit {
 
     modal.onDidDismiss().then((data) => {
 
+      if (data.data && data.data.addon) {
+        let a =  data.data.addon;
+        if (a.isAdhoc) {
+          this.planService.includeAdhoc(a);
+          this.includedAdhocs = this.planService.getIncludedAdhocs();
+        } else {
+          this.planService.includeAddon(a);
+          this.includedAddons = this.planService.getIncludedAddons();
+        }
+        
+      } else {
+        this.includedAdhocs = this.planService.getIncludedAdhocs();
+        this.includedAddons = this.planService.getIncludedAddons();
+      }
 
 
     });

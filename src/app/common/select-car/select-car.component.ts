@@ -51,7 +51,7 @@ export class SelectCarComponent implements OnInit {
     if (this.model.length) {
       return mkr.cars.filter( (car) => {
         return  car.model.toLowerCase().indexOf(this.model.toLowerCase()) > -1
-      })
+      });
     } else  {
       return mkr.cars;
     }

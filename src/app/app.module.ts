@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
+import { TooltipsModule } from 'ionic4-tooltips';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
@@ -34,6 +35,7 @@ import { ModalPageModule } from './modal/modal.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplashScreen } from '@capacitor/core';
 import { IonicStorageModule } from '@ionic/storage';
+import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
 
 export function socialConfigs() {
   const config = new AuthServiceConfig(
@@ -68,6 +70,7 @@ export function socialConfigs() {
     IonicModule, 
     IonicModule.forRoot(), 
     IonicStorageModule.forRoot(),
+    TooltipsModule.forRoot(),
     AppRoutingModule, 
     SocialLoginModule, 
     HttpClientModule, 
@@ -83,6 +86,7 @@ export function socialConfigs() {
     FileChooser,
     FileOpener,
     FilePath,
+    SmsRetriever,
     PreviewAnyFile,
     File,
     SocialSharing,

@@ -121,6 +121,11 @@ export class AddonSliderComponent implements OnInit {
 
     if (changes.plan && this.plan) {
       this.addOns = this.planService.getAddonsForPlan(this.plan.name);
+
+      if (this.subscriptionAddons.length) {
+
+      this.addOns = this.planService.getAddonsForPlan('Standard');
+      }
       this.updatePrice();
     }
 

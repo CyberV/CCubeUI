@@ -45,6 +45,20 @@
     }
   }
 
+.wakeupTime, .officeTime {
+  border: none;
+  border-bottom: 1px solid gray;
+  
+}
+
+
+.car-selector-row {
+  position: sticky;
+  top: -25px;
+  z-index: 100;
+  background: white;
+}
+
 .car-slider-container {
   
 

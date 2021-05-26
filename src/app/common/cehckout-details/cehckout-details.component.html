@@ -84,14 +84,13 @@
             <ion-item *ngFor="let adn of includedAddons" class="addon-info">
               <ion-label>
                 <div class="row --no-padding">
-                  <div class="col-7 addon-title --no-padding-right" (click)="sendShowDetails(adn)">
+                  <div class="col-9 addon-title --no-padding-right" (click)="sendShowDetails(adn)">
                     <ion-icon class="water" name="checkmark-circle-outline"></ion-icon>{{adn.label || adn.name}}
-                  </div>
-                  <div class="col-2 --no-padding">
-                    <span class="badge badge-light" (click)="sendRemoveAddon(adn)">X</span>
+
+                    <span class="badge badge-light" (click)="sendRemoveAddon(adn)">  <ion-icon name="close-outline"></ion-icon></span>
                   </div>
                   <div class="col-3">
-                    <span class="addon-price float-right" Rs>{{ ((duration == 'monthly') ? adn.price || adn.originalPrice :  adn.originalPrice || adn.price)}}</span>
+                    <span class="addon-price float-right" Rs>{{ ((duration == 'monthly') ? (adn.price || adn.originalPrice) :  ( adn.price || adn.originalPrice))}}</span>
                   </div>
                 </div>
 

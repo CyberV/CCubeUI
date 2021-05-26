@@ -17,6 +17,8 @@ import { CarService } from 'app/services/car.service';
 import { VerifyOtpComponent } from 'app/common/verify-otp/verify-otp.component';
 import { TermsComponent } from 'app/common/terms/terms.component';
 
+import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
+
 declare var SMSReceive: any;
 @Component({
   selector: 'app-login-form',
@@ -112,6 +114,7 @@ export class LoginFormComponent implements OnInit {
     private geolocation: Geolocation,
     private srvcUser: UserService,
     private carService: CarService,
+    private sms: SmsRetriever,
     private modalController:ModalController,
     public toastController: ToastController,
 
@@ -468,29 +471,37 @@ export class LoginFormComponent implements OnInit {
   }
 
   start() {
-    try {
+//     try {
+
+//       this.sms.getAppHash()
+//   .then((res: any) => console.log('apphash: ' +  res))
+//   .catch((error: any) => console.error(error));
+// this.sms.startWatching()
+//   .then((res: any) => console.log('msg: ' +  res))
+//   .catch((error: any) => console.error(error));
+
 
     
-    if (SMSReceive)
-    SMSReceive.startWatch(
-      () => {
-        document.addEventListener('onSMSArrive', (e: any) => {
-          var IncomingSMS = e.data;
-          this.processSMS(IncomingSMS);
-        });
-      },
-      () => { console.log('watch start failed') }
-    );
-    } catch(e) {
-      console.log('Error in SMS', e);
-    }
+//     if (SMSReceive)
+//     SMSReceive.startWatch(
+//       () => {
+//         document.addEventListener('onSMSArrive', (e: any) => {
+//           var IncomingSMS = e.data;
+//           this.processSMS(IncomingSMS);
+//         });
+//       },
+//       () => { console.log('watch start failed') }
+//     );
+//     } catch(e) {
+//       console.log('Error in SMS', e);
+//     }
   }
 
   stop() {
-    SMSReceive.stopWatch(
-      () => { console.log('watch stopped') },
-      () => { console.log('watch stop failed') }
-    )
+    // SMSReceive.stopWatch(
+    //   () => { console.log('watch stopped') },
+    //   () => { console.log('watch stop failed') }
+    // )
   }
 
   processSMS(data) {

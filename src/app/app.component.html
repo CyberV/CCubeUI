@@ -79,7 +79,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-menu class="side-menu" side="start" menuId="first" contentId="my-content">
+  <ion-menu class="side-menu" *ngIf="ready" side="start" menuId="first" contentId="main">
     <div class="menu-header">
       <div class="top">
         <div class="row " (click)="goTo('profile')" > 
@@ -127,69 +127,13 @@
     </ion-content>
   </ion-menu>
 
-  <!-- <ion-menu side="start" menuId="first" contentId="main">
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Start Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    
-    <ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
-      <ion-header>
-        <ion-toolbar color="tertiary">
-          <ion-title>Custom Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    
-    <ion-menu side="end" type="push" contentId="main">
-      <ion-header>
-        <ion-toolbar color="danger">
-          <ion-title>End Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu> -->
-
   <app-navbar *ngIf="!isMobile"></app-navbar>
 
-  <!-- <ion-fab *ngIf="!hideBackButton" slot="fixed">
-    <ion-fab-button (click)="goBack()">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
-  <!-- <ion-content *ngIf="!ready">
-    <spinner></spinner>
-  </ion-content> -->
+  <ion-content class="empty-content"  *ngIf="!ready">
+    <spinner color="blue"></spinner>
+  </ion-content>
 
-  <ion-router-outlet id="my-content" [class.push-down]="!isMobile" (activate)='onActivate($event)'
+  <ion-router-outlet *ngIf="ready"  id="main" [class.push-down]="!isMobile" (activate)='onActivate($event)'
     (deactivate)='onDeactivate($event)' animated="true"></ion-router-outlet>
 
 

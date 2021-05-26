@@ -45,14 +45,26 @@
   }
 
 .check {
-    right: 15%;
-    top: -26px;
+    right: 10%;
+    top: -28px;
     font-size: 20px;
     background: transparent !important;
     color: green;
     font-weight: bold;
 }
 
+.ref-row {
+    font-size: 14px;
+    ion-icon {
+        font-size: 20px;
+    }
+}
+
+ion-list {
+    .row {
+        width: 100%;
+    }
+}
 .ref-items {
     margin-top: 1em;
     span {
@@ -63,6 +75,7 @@
 
 .completed {
     color: $primary-color;
+    margin-right: 5px;
 }
 
 .pending {
@@ -98,6 +111,10 @@ ion-item {
     ion-icon {
         color: gold;
         font-size: 18px;
+    }
+
+    ion-icon[name="person-outline"] {
+        color: green;
     }
 
     span {
@@ -144,9 +161,12 @@ ion-item {
 
 .slim-container {
     padding: 0 30px;
-    .mid-line {
-        width: 150% !important;
-        left: -50px !important;
+    // .mid-line {
+    //     width: 150% !important;
+    //     left: -50px !important;
+    // }
+    .pending {
+        margin-right: 10px !important;
     }
 }
 

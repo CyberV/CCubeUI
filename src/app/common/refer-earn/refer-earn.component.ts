@@ -4,6 +4,7 @@ import { UserService } from 'app/services/user.service';
 import { BPClient } from 'blocking-proxy';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { prettyDate } from 'app/util/util';
 
 @Component({
   selector: 'refer-earn',
@@ -28,6 +29,11 @@ export class ReferEarnComponent implements OnInit {
   detailsOpen:boolean;
 
   arrays:any;
+  refCount:number;
+
+  pretty(date) {
+    return prettyDate(date);
+  }
 
   constructor(private socialSharing: SocialSharing,
     private modalController: ModalController,
@@ -39,6 +45,7 @@ export class ReferEarnComponent implements OnInit {
       this.detailsOpen = true;
       this.slim = false;
       this.appConfig = {};
+      this.refCount = 0;
       this.noPadding = false;
     }
 
@@ -78,8 +85,10 @@ export class ReferEarnComponent implements OnInit {
       this.config = [];
     }
 
-    this.currentMilestone = Math.floor(this.currentUser.referCount / this.milestoneLength);
-    this.currentProgress = Math.floor(this.currentUser.referCount % this.milestoneLength);
+    let refCount = this.currentUser.referees.filter((r) => r.bonusAvailed).length;
+    this.refCount = refCount;
+    this.currentMilestone = Math.floor(refCount / this.milestoneLength);
+    this.currentProgress = Math.floor(refCount % this.milestoneLength);
 
     this.pendingCount = this.milestoneLength - this.currentProgress;
 

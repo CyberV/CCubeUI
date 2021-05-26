@@ -147,7 +147,7 @@ export class CheckoutDetailsComponent implements OnInit {
       
       this.includedAddons.forEach((addon) => {
         
-        this.addonPrice += ((this.duration == 'monthly') ? (addon.price || addon.originalPrice) :  (addon.originalPrice || addon.price));
+        this.addonPrice += ((this.duration == 'monthly') ? (addon.price || addon.originalPrice) :  ( addon.price || addon.originalPrice));
       });
     }
 
