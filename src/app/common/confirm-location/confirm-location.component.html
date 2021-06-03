@@ -4,6 +4,14 @@
 
 <select-society [disabled]="disableAll" #inpSociety (unlistedChange)="isUnlisted" [society]="location.society" (societyChange)="handleSocietyChange($event)" (enterKey)="focusTo('ctaConfirm')" [city]="location.city" mandatory="true" ></select-society>
 
+<div  *ngIf="!isUnlisted && location.society != 'Other' && location.society.length > 0 && !disableAll && (societyData ? societyData.isUnlisted : true)">
+        <br/>
+
+        <p note> You may have new coupons. <span highlight (click)="sendRetryCoupon()">Click to check Now. </span> </p>
+        
+</div>
+
+
 <select-city #inpCity [(city)]="location.city" mandatory="true" (enterKey)="focusTo('ctaConfirm')" [(state)]="location.state" [showState]="true" [disabled]="true"></select-city>
 
 <cta *ngIf="!disableAll" #ctaConfirm text="Confirm" [disabled]="!allFieldsReady" (action)="sendConfirmation()"></cta>

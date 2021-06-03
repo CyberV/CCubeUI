@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   @Input() currentCar: any;
   @Input() includedAddons:any;
   @Input() includedAdhocs:any;
+  @Input() planDuration:string;
 
   selectedPlan: any;
 
@@ -149,6 +150,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnChanges(changes) {
 
+
+    if (changes.planDuration) {
+      this.planService.updatePlanDuration(this.planDuration);
+    }
     let car = this.carService.getCurrentCar();
     
     

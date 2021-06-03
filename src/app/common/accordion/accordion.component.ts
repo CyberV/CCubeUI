@@ -58,7 +58,7 @@ export class AccordionComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    if (this.drawerPannel) {
+    if (this.drawerPannel && !this.initDone) {
       this.drawerPannel.closed.subscribe(() => {
         this.onToggle.emit(false);
         this.isOpen = false;
@@ -74,18 +74,20 @@ export class AccordionComponent implements OnInit {
           }, 500);
         }
       });
+      this.initDone = true;
     }
   }
 
   toggle() {
+    this.ngAfterViewInit();
     if (this.drawerToggle && this.drawerToggle.nativeElement) {
       this.drawerToggle.nativeElement.click();
     }
   }
 
   onHandleClick(ev) {
-    this.onToggle.emit()
-    console.log(ev);
+    //this.onToggle.emit(this.isOpen);
+    //console.log(ev);
   }
 
   ngOnChanges(changes) {

@@ -104,6 +104,7 @@ export class LoginFormComponent implements OnInit {
   allInputs;
   userNotFound:boolean;
 
+  isUnlisted:boolean;
   upgradeSelected:boolean;
 
   constructor(
@@ -135,6 +136,7 @@ export class LoginFormComponent implements OnInit {
     this.existingUser = false;
     this.upgradeSelected = false;
     this.loginOnly = false;
+    this.isUnlisted = false;
 
     this.newUser = {
       car: {}
@@ -171,6 +173,15 @@ export class LoginFormComponent implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  selectSociety(data) {
+
+    this.isUnlisted = data.isUnlisted;
+
+    localStorage.setItem('selectedSociety', JSON.stringify(data));
+    console.log(data);
+
   }
 
   ngOnInit() {

@@ -39,6 +39,8 @@ export class SelectSocietyComponent implements OnInit {
   unlisted:boolean;
   lastValue:string;
 
+  otherSoc:string;
+
   get filteredSocieties() {
     if (!this.select || this.select == "" || this.select == 'Select Society' || this.select == 'Other') {
       return this.options;
@@ -65,6 +67,7 @@ export class SelectSocietyComponent implements OnInit {
     this.unlisted = false;
     this.mandatory = false;
     this.showOther = false;
+    this.otherSoc = "";
     this.states = citiesService.states;
   }
 
@@ -73,6 +76,10 @@ export class SelectSocietyComponent implements OnInit {
       this.selectSociety(this.society);
     }
     
+    
+  }
+
+  ngOnChanges(changes) {
     this.options = this.citiesService.getSocietiesForCity(this.city);
   }
 
@@ -80,9 +87,12 @@ export class SelectSocietyComponent implements OnInit {
     //console.log(d, this.society);
   }
 
-  showUnlisted() {
+  showUnlisted(socName='') {
     this.select = 'Other';
     this.unlisted = true;
+    if(socName != '' && socName) {
+      this.otherSoc = socName;
+    }
     this.focus(true);
   }
 

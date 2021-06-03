@@ -4,14 +4,14 @@
 
     <ion-slides #adSlider options="options">
       <ion-slide *ngFor="let ad of ads; let i = index" (click)="selectAd(ad)">
-          <div >
+          <div class="ad-container">
               <img [src]="'assets/backgrounds/' + ad.image + '.png'" class="d-block w-100" alt="...">
               <div class="info-container">
                 <span class="title">{{ad.title}}</span>
                 <p class="desc">{{ad.description}}</p>
               </div>
               <div class="discount-container" [class.contrast]="i%2==1" *ngIf="ad.discount!='null'">
-                <span class="discount-label"> Save <span>{{ad.discount}}</span></span>
+                <span class="discount-label"> <span>{{ad.discount}}</span></span>
               </div>
             </div>
       </ion-slide>

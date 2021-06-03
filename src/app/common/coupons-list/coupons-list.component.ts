@@ -92,6 +92,11 @@ export class CouponsListComponent implements OnInit {
 
   }
 
+  openCoupons() {
+    if (!this.couponAccordion.first.isOpen)
+    this.couponAccordion.first.toggle();
+  }
+
   tryCoupon(couponCode) {
     if (!couponCode) {
       return;
@@ -109,12 +114,12 @@ export class CouponsListComponent implements OnInit {
           this.couponAccordion.first.toggle();
       } else {
         this.presentToast(response.error);
-        this.planService.setAppliedCoupon(null);
-        this.appliedCoupons = [];
-        this.discount.emit({
-          discount: 0,
-          coupon: null
-        });
+        //this.planService.setAppliedCoupon(null);
+        //this.appliedCoupons = [];
+        // this.discount.emit({
+        //   discount: 0,
+        //   coupon: null
+        // });
       }
     })
   }
@@ -164,8 +169,14 @@ export class CouponsListComponent implements OnInit {
     event.stopPropagation();
   }
 
+  societyData:any;
+
   ngOnInit() {
     let coupon = this.planService.getAppliedCoupon();
+
+    let soc = localStorage.getItem('selectedSociety');
+
+    this.societyData = soc && soc != "null" ? JSON.parse(soc) : null;
 
     if (coupon) {
       this.appliedCoupons = [coupon];

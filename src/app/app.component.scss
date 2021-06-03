@@ -54,8 +54,9 @@ ion-app {
 .notif {
     ion-icon {
         font-size: 25px;
-        margin-top: 3px;
+        top: -3px;
         transition: all 0.2s ease-in;
+        position: relative;
 
     }
 
@@ -66,7 +67,7 @@ ion-app {
 
 .view-dashboard {
     position: relative;
-    top: 2px;
+    top: 3px;
 }
 
 .side-menu {

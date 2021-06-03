@@ -12,15 +12,15 @@ import { UserService } from './user.service';
 import { LoginService } from 'app/login/login.service';
 
 // Test
-// const api_key = "rzp_test_iw0QQKe6eyEP2g";
-// const api_secret = "xa1TxbgErELViPesDtnEcgPx"
+const api_key = "rzp_test_iw0QQKe6eyEP2g";
+const api_secret = "xa1TxbgErELViPesDtnEcgPx"
 
 declare var Razorpay: any;
 declare var RazorpayCheckout: any;
 
 // Live
-const api_key = "rzp_live_TuRL1kcjKl8uWp";
-const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
+// const api_key = "rzp_live_TuRL1kcjKl8uWp";
+// const api_secret = "cBA44yBhjNi3g2oCYI0EkbWF"
 
 
 const BYPASS_PAYMENT = true;

@@ -21,6 +21,6 @@
       <span class="form-control disabled" *ngIf="disabled"> {{society}}</span>
       
     </div>
-    <mobile-input #inpOther *ngIf="unlisted" mandatory="true" (click)="focus(true)" class="animate__animated animate__bounceInDown" name="Society Name & Location" [(value)]="society" (valueChange)="selectSociety($event, true)" (keyup.enter)="onEnterKey($event)" type="text"></mobile-input>
+    <mobile-input [value]="otherSoc" #inpOther *ngIf="unlisted" mandatory="true" (click)="focus(true)" class="animate__animated animate__bounceInDown" name="Society Name & Location"  (valueChange)="selectSociety($event, true)" (keyup.enter)="onEnterKey($event)" type="text"></mobile-input>
   </div>
 </div>

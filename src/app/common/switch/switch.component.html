@@ -2,10 +2,10 @@
   <div class="col-12">
     <span class="switch-container">
       <span class="plan_selector">
-        <div class="option option_1 plan_duration" [class.active_option]="!open" (click)="setActivePlanDuration(0)">
+        <div class="option option_1 plan_duration" [class.active_option]="!open" (click)="setActivePlanDuration('monthly')">
           Monthly</div>
         <div class="option option_2 plan_duration active_option" [class.active_option]="open"
-          (click)="setActivePlanDuration(1)">Quarterly</div>
+          (click)="setActivePlanDuration('quarterly')">Quarterly</div>
       </span>
 
       <ion-label *ngIf="!slim">

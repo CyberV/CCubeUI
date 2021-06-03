@@ -479,11 +479,11 @@ export class ServicePageComponent implements OnInit {
   showUpgradeSlider() {
     let show = false;
     if (this.selectedPayment.nextPlan) {
-      if (this.selectedPayment.nextPlan.name != 'Elite') {
+      if (this.selectedPayment.nextPlan.name != 'Deluxe') {
         show = true;
       }
     } else {
-      if (this.selectedPayment.plan.name != 'Elite') {
+      if (this.selectedPayment.plan.name != 'Deluxe') {
         show = true;
       }
     }

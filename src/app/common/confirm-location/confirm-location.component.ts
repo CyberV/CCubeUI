@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, ViewChildren, QueryList, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChildren, ViewChild, QueryList, Input } from '@angular/core';
 import { UserService } from 'app/services/user.service';
+import { SelectSocietyComponent } from '../select-society/select-society.component';
 
 @Component({
   selector: 'confirm-location',
@@ -11,6 +12,7 @@ export class ConfirmLocationComponent implements OnInit {
 
 
   @Input() location:any;
+  @Output() retryCoupons = new EventEmitter();
 
   isUnlisted:boolean;
   disableAll:boolean;
@@ -23,8 +25,10 @@ export class ConfirmLocationComponent implements OnInit {
 
   @Output() confirm = new EventEmitter();
 
+  societyData:any;
+
   @ViewChildren('inpStreet') inpStreet: QueryList<HTMLElement>;
-  @ViewChildren('inpSociety') inpSociety: QueryList<HTMLElement>;
+  @ViewChild('inpSociety') inpSociety: SelectSocietyComponent;
   @ViewChildren('inpCity') inpCity: QueryList<HTMLElement>;
   @ViewChildren('ctaConfirm') ctaConfirm: QueryList<HTMLElement>;
 
@@ -40,14 +44,16 @@ export class ConfirmLocationComponent implements OnInit {
       state: ''
     };
     this.isUnlisted = false;
+
    }
+
 
    focusTo(emt) {
 
     this.allInputs = {
       inpStreet: this.inpStreet.first,
       inpCity: this.inpCity.first,
-      inpSociety: this.inpSociety.first,
+      inpSociety: (this.inpSociety )as any,
       ctaConfirm: this.ctaConfirm.first,
     }
 
@@ -56,6 +62,15 @@ export class ConfirmLocationComponent implements OnInit {
     if (e) {
       e.focus();
     }
+  }
+
+  sendRetryCoupon() {
+    let payload = {
+      isUnlisted: this.isUnlisted,
+      society: this.location.society
+    };
+    localStorage.setItem('selectedSociety', JSON.stringify(payload));
+    this.retryCoupons.emit();
   }
 
   handleSocietyChange(data) {
@@ -80,6 +95,20 @@ export class ConfirmLocationComponent implements OnInit {
     if(this.location.houseNo && this.location.houseNo.length) {
       this.disableAll  = true;
       this.sendConfirmation();
+    }
+
+    let soc = localStorage.getItem('selectedSociety');
+
+    this.societyData = soc && soc != "null" ? JSON.parse(soc) : null;
+
+    if (this.societyData) {
+      this.isUnlisted = this.societyData.isUnlisted;
+      this.location.society = this.societyData.society;
+
+      if (this.isUnlisted) {
+        this.inpSociety.showUnlisted(this.societyData.society);
+        //this.location.society = 'Other';
+      }
     }
 
   }

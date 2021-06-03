@@ -1,7 +1,7 @@
 <div class="plan-container --padding-x" [class.compact]="compact">
 
   <div class="plan-info">
-    <h2 #pageTop><span class="plan-name">{{plan.name}}</span> {{plan.originalPrice ? 'Quarterly' : 'Monthly'}} Plan </h2>
+    <h2 #pageTop><span class="plan-name">{{plan.name}}</span> {{plan.duration == 'quarterly' ? 'QUARTERLY' : 'MONTHLY'}} Plan </h2>
     <div class="row">
       <div class="col-4 --no-padding-right text-right">
           <span class="old-price animate__animated animate__fadeInRight" *ngIf="plan.originalPrice"> {{plan.originalPrice}}</span>
@@ -10,7 +10,7 @@
           <span class="price" Rs> {{plan.price}}</span> 
       </div>
       <div *ngIf="plan.forSecondCar" class="col-4 second-car">
-        For Car # {{plan.carNumber}}
+        <!-- For Car # {{plan.carNumber}} -->
       </div>
 
     </div>
@@ -25,11 +25,15 @@
             {{feature.name}}
         </div>
         <div class="float-right --no-padding frequency">
-            <span class="float-right "> {{feature.frequency}}</span>
+            <span class="float-right "> {{feature.frequency == 'Twice a week' && plan.code == 'WFH' ? 'Once a Week' : feature.frequency}}</span>
         </div>
         
       </div>
   </mat-panel-title>
+  </div>
+
+  <div *ngIf="plan.notes && plan.notes.length" class="plan-notes">
+    <span class="note" *ngFor="let note of plan.notes">* <span>{{note}}</span></span>
   </div>
   <mat-accordion *ngIf="!compact">
       <mat-expansion-panel class = "drop" id="{{feature.code}}"  *ngFor="let feature of currentFeatures" >
@@ -37,7 +41,7 @@
           <mat-panel-title>
             <div class="row">
               <div class="col-12"> <span class="feature">{{feature.name}}</span></div>
-              <div class="col-12"><span class="frequency">({{feature.frequency}})</span></div>
+              <div class="col-12"><span class="frequency">({{feature.frequency == 'Twice a week' && plan.code == 'WFH' ? 'Once a Week' : feature.frequency}})</span></div>
               
                
             </div>

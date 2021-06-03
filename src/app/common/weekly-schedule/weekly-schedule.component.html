@@ -2,17 +2,16 @@
 
     <div class="alert alert-light" role="alert" *ngFor="let service of schedule; let i = index">
         <div class="row">
-            <div class="col-4 ">
+            <div class="col-3">
                 <span class="day vertical-center-text">{{service.day}}</span><br/>
                 <span  class=" ">{{displayDate(service.date)}}</span>
             </div>
-            <div class="col-8">
-                <span class="task">
-                    {{service.task}} <ion-icon class="reschedule-link" [class.blocked]="service.isRescheduled"  *ngIf="service.task == 'Full Body Wash'" (click)="openReschedule(service)" name="calendar-outline"></ion-icon>
-                </span> <br/>
+            <div class="col-9 --no-padding-left">
+                <span class="badge task badge-primary adhoc"> {{service.task}} </span>   <ion-icon class="reschedule-link" [class.blocked]="service.isRescheduled"  *ngIf="service.task == 'Full Body Wash'" (click)="openReschedule(service)" name="calendar-outline"></ion-icon>
+                  <br/>
                 <span *ngFor="let adhoc of service.adhocs" class="badge badge-warning adhoc"> {{adhoc}} </span> 
                 <ng-container *ngFor="let addon of service.addons">
-                    <div class="badge badge-primary addon"> <span class="vertical-center-text"> {{addon}} </span></div> 
+                    <div class="badge badge-light addon"> <span class="vertical-center-text"> {{addon}} </span></div> 
                     <ion-icon *ngIf="addon == 'Sanitization'" class="icon-shield" name="shield-checkmark-outline"></ion-icon> 
                 </ng-container>
                

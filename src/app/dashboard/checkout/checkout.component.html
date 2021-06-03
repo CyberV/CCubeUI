@@ -9,7 +9,7 @@
 
             <selected-car *ngIf="selectedCar" [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
 
-            <switch *ngIf="mode.addon || mode.plan" (toggle)="refreshCarAndPlans()"></switch>
+            <switch #durationSwitch *ngIf="mode.addon || mode.plan" (toggle)="refreshCarAndPlans()"></switch>
 
             <ng-container *ngIf="(mode.plan || mode.addon || mode.adhoc) && selectedCar; else noItemsTemplate">
                 <checkout-details 
@@ -81,8 +81,8 @@
               </div>
             </cc-accordion>
 
-            <cc-accordion #drawerLocation title="Confirm Your Location" [step]="'2'" [disabled]="!step2Ready" [locked]="step3Ready">
-              <confirm-location [location]="savedLocation" (confirm)="saveLocation($event)"></confirm-location>
+            <cc-accordion #drawerLocation title="Confirm Your Location" [step]="'2'" [disabled]="!step2Ready" [locked]="step3Ready" (onToggle)="handleLocationOpen($event)">
+              <confirm-location #confLoc [location]="savedLocation" (confirm)="saveLocation($event)" (retryCoupons)="retryCoupons()"></confirm-location>
             </cc-accordion>
 
             

@@ -4,6 +4,7 @@ import plansList from 'assets/planslist.json';
 import { planData } from 'app/common/common.service';
 import { getConfigValue } from 'app/common/common.service';
 import { ToastController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,11 @@ export class PlanService {
   OnlyAddons: any;
 
   discountConfig:any;
+  private _planSubject = new Subject();
+
 
   get UpgradePlan() {
-    return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.name.toLowerCase() == 'elite')[0]));
+    return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.code.toLowerCase() == 'dlx')[0]));
   }
 
   createPeriodLabel(date, duration = "monthly") {
@@ -40,6 +43,13 @@ export class PlanService {
     private toastController: ToastController
   ) {
     this.refreshPlans();
+  }
+
+  listner() {
+    if (this._planSubject.closed) {
+      this._planSubject = new Subject();
+    }
+    return this._planSubject;
   }
 
   refreshPlans() {
@@ -109,18 +119,24 @@ export class PlanService {
     let currentPlan = this.getPlanByName(planName);
     let targetPlan = this.UpgradePlan;
 
-    switch (currentPlan.name) {
-      case 'Standard': {
+    switch (currentPlan.code) {
+      case 'WFH':{
         return [
-          this.generateComparisonPlan(currentPlan, targetPlan),
+          this.generateComparisonPlan(currentPlan, this.getPlanByName('Standard')),
           this.generateComparisonPlan(currentPlan, this.getPlanByName('Deluxe'))
         ];
 
       }
-      case 'Deluxe': {
-        return [this.generateComparisonPlan(currentPlan, targetPlan)];
+      case 'STD': {
+        return [
+          this.generateComparisonPlan(currentPlan, this.getPlanByName('Deluxe'))
+        ];
+
       }
-      case 'Elite': {
+      case 'DLX': {
+        return [];
+      }
+      case 'ELT': {
         return [];
       }
       default: return [];
@@ -311,6 +327,11 @@ export class PlanService {
     else {
       sessionStorage.setItem('planDuration', duration);
     }
+
+    this._planSubject.next({
+      key: 'planDuration',
+      value: duration
+    });
 
     let addons = this.getIncludedAddons();
 
@@ -519,17 +540,18 @@ export class PlanService {
     // })
 
     switch (planName) {
+      case 'Work From Home':
       case 'Standard': {
         Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Deluxe', true));
-        Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
+        //Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
         break;
       }
-      case 'Deluxe': {
+      // case 'Deluxe': {
 
-        Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
+      //   Array.prototype.push.apply(addons, this.getUniqueFeaturesForPlan('Elite', true));
 
-        break;
-      } 
+      //   break;
+      // } 
       default: return addons;
     }
 

@@ -18,7 +18,7 @@ export class AdsListComponent implements OnInit {
 
 
   options = {
-    autoplay: 1000,
+    autoplay: 3000,
     loop: true,
     centeredSlides: false,
     spaceBetween: 10,

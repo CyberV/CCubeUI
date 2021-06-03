@@ -14,6 +14,8 @@ import { CheckoutDetailsComponent } from 'app/common/cehckout-details/cehckout-d
 import { scrollElementToTop, scrollToBottom } from 'app/util/util';
 import { CouponsListComponent } from 'app/common/coupons-list/coupons-list.component';
 import { getConfigValue } from 'app/common/common.service';
+import { SwitchComponent } from 'app/common/switch/switch.component';
+import { ConfirmLocationComponent } from 'app/common/confirm-location/confirm-location.component';
 
 @Component({
   selector: 'app-checkout',
@@ -80,9 +82,12 @@ export class CheckoutComponent implements OnInit {
   @ViewChildren('drawerCar') drawerCar: QueryList<AccordionComponent>;
   @ViewChildren('drawerLocation') drawerLocation: QueryList<AccordionComponent>;
   @ViewChildren('drawerTime') drawerTime: QueryList<AccordionComponent>;
+  @ViewChild('durationSwitch') durationSwitch: SwitchComponent;
 
   @ViewChild('cpnList') cpnList: CouponsListComponent;
 
+
+  @ViewChildren('confLoc') confLoc :QueryList<ConfirmLocationComponent>;
 
   constructor(
     private router: Router,
@@ -455,6 +460,31 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  retryCoupons() {
+    window.history.back();
+   
+  }
+
+  findCouponComponent() {
+    setTimeout(()=> {
+      if (this.cpnList) {
+      this.cpnList.openCoupons();
+      let cont = document.getElementsByClassName('container');
+      cont[cont.length-1].scrollTop = 500;
+      } else {
+        this.findCouponComponent();
+      }
+    }, 1000);
+  }
+
+  handleLocationOpen(d) {
+    console.log(d);
+    if (d) {
+      this.confLoc.first.ngOnInit();
+    }
+
+  }
+
   async openAddon(addon, added = false) {
     let bookedTime = false;
 
@@ -588,11 +618,17 @@ export class CheckoutComponent implements OnInit {
     // }, 1000);
   }
 
+  savedSociety:any;
+
   async ionViewWillEnter() {
 
     this.loginService.refreshUser(this.currentUser.phone).then((u) => {
       this.currentUser = this.userService.getCurrentUser();
     })
+
+  let soc = localStorage.getItem('selectedSociety');
+
+  this.savedSociety = soc && soc != "null" ? JSON.parse(soc) : null;
 
     this.refreshCarAndPlans();
 
@@ -747,7 +783,7 @@ export class CheckoutComponent implements OnInit {
       case 'checkout': {
         this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc ? 'Service' : 'Addon')));
         this.loading = true;
-        this.loginService.getCouponsForUser().subscribe(async (res: any) => {
+        this.loginService.getCouponsForUser(this.savedSociety && !this.savedSociety.isUnlisted ? this.savedSociety.society : "").subscribe(async (res: any) => {
           this.availableCoupons = res.success ? res.data : [];
 
           let found = this.availableCoupons.filter((c) => c.name == 'CCUBE-QRTRLY');
@@ -786,6 +822,14 @@ export class CheckoutComponent implements OnInit {
   }
 
   onRemoveCoupon() {
+    if (this.appliedCoupons.length && this.appliedCoupons[0].code == getConfigValue('COUPON_QUARTERLY')) {
+      this.presentToast('Plan changed to Monthly.');
+      this.planService.setAppliedCoupon(null);
+      this.discount = {};
+      this.appliedCoupons = [];
+      this.durationSwitch.setActivePlanDuration(0);
+      return;
+    } 
     this.planService.setAppliedCoupon(null);
     this.discount = {};
     this.appliedCoupons = [];

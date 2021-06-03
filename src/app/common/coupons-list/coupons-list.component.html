@@ -3,8 +3,10 @@
 
   <cc-accordion
     [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied : ' +  (appliedCoupons.length ? ((appliedCoupons[0].unit=='percent' ? '' : 'Rs ') +  appliedCoupons[0].value + (appliedCoupons[0].unit=='percent' ? ' %' : '') + ' OFF !') : '')"
+    (onToggle)="ngOnInit()"
     #couponAccordion>
 
+    <p note *ngIf="societyData && societyData.isUnlisted"> * More coupons might be available after selecting your society on next page. </p>
     <div class="row">
       <div class="col-9">
         <mobile-input type="text" placeholder="Have a Coupon Code?" name="Coupon Code" [(value)]="customCoupon"></mobile-input>

@@ -72,7 +72,13 @@ export class DashboardPageComponent implements OnInit {
     this.ready = false;
   }
 
+  planDuration:string;
+
   async ionViewWillEnter() {
+    this.planDuration = "";
+    this.planDuration = this.planService.getPlanDuration();
+    this.planService.updatePlanDuration(this.planDuration);
+
     //console.log('Entering View in Dashboard Page');
     this.forDemo = this.planService.forDemo();
     this.ready = false;

@@ -1,7 +1,7 @@
 @import "src/variables.scss";
 
 .logo-container{
-    top: -10px;
+    top: -20px;
     position: relative;
 }
 
@@ -54,8 +54,9 @@
 
 .car-selector-row {
   position: sticky;
-  top: -25px;
+  top: -26px;
   z-index: 100;
+  margin-top: -25px;
   background: white;
 }
 

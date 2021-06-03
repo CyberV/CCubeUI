@@ -11,7 +11,7 @@
           <heading slim="true" capitalize="true" text="SUBSCRIPTION PLANS" align="center"></heading>
           <div class="row --no-margin">
             <div class="col-12 text-center duration-container">
-                 <switch (toggle)="onDurationToggle($event)"></switch>  
+                 <switch (toggle)="onDurationToggle($event)" [planDuration]="planDuration"></switch>  
             </div>
           </div>
 

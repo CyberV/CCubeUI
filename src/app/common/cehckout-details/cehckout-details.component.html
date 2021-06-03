@@ -133,7 +133,7 @@
 
           </div>
         </ng-container>
-        <div class="row content-row " *ngIf="plan && lastPlan.name != 'Elite'">
+        <div class="row content-row " *ngIf="plan && lastPlan.name != 'Deluxe'">
           <br /><br />
           <div class="col-12 icon-text">
             <span>
@@ -145,19 +145,23 @@
                     style="top:0;">
 
 
-                    <span *ngIf="lastPlan.name == 'Standard'">
+                    <span *ngIf="lastPlan.name != 'Standard'">
                       <mat-select [value]="upgradToPlan" (valueChange)="toggleUpgrade($event)">
-                        <mat-option [value]="'Elite'">
-                          Elite
-                        </mat-option>
                         <mat-option [value]="'Deluxe'">
                           Deluxe
                         </mat-option>
+                        <mat-option [value]="'Standard'">
+                          Standard
+                        </mat-option>
                       </mat-select>
                     </span>
-                    <span *ngIf="lastPlan.name == 'Deluxe'">
+                    <span *ngIf="lastPlan.name == 'Standard'">
+                        Deluxe
+                      </span>
+  
+                    <!-- <span *ngIf="lastPlan.name == 'Deluxe'">
                       Elite
-                    </span>
+                    </span> -->
 
                   </span>
                   <span style="display:block;">

@@ -13,7 +13,7 @@ export class SwitchComponent implements OnInit {
 
   @Input() slim:boolean;
   open: boolean;
-  activePlanDuration: string;
+  @Input('planDuration') activePlanDuration: string;
 
   discountValue:number;
 
@@ -30,58 +30,29 @@ export class SwitchComponent implements OnInit {
     this.open = this.planService.getPlanDuration() == 'quarterly';
 
     this.discountValue = getConfigValue('DISCOUNT_QUARTERLY');
+
+    this.planService.listner().subscribe((d:any) => {
+      if (d.key == 'planDuration') {
+        this.open = d.value == 'quarterly';
+      }
+    })
     //this.getPlanDuration();
   }
 
+  ngOnChanges(changes) {
+    if (this.activePlanDuration.length) {
+      this.setActivePlanDuration(this.activePlanDuration);
+    }
+  }
 
 
 
   setActivePlanDuration(activeIndex) {
 
-    this.open = activeIndex == 1;
+    this.open = activeIndex == 'quarterly';
 
     this.sendToggle();
-
-    // if (activeDuration !== this.activePlanDuration) {
-    //   this.activePlanDuration = activeDuration;
-    //   const options = document.getElementsByClassName("plan_duration");
-    //   for (let i = 0, x = options.length; i < x; i++) {
-    //     if (options[i].innerHTML !== activeDuration) {
-    //       options[i].classList.remove("active_option");
-    //     }
-    //   }
-    //   options[activeIndex].classList.add("active_option");
-
-    //   const plan = allPlansList(activeCarType);
-    //   let { standard, deluxe, elite } = plan;
-
-    //   if (activeDuration === "Quarterly") {
-    //     standard = Math.floor(standard * 3 - (standard * 60) / 100);
-    //     deluxe = Math.floor(deluxe * 3 - (deluxe * 60) / 100);
-    //     elite = Math.floor(elite * 3 - (elite * 60) / 100);
-    //   }
-    //   document.getElementById("standard").innerHTML = standard;
-    //   document.getElementById("deluxe").innerHTML = deluxe;
-    //   document.getElementById("elite").innerHTML = elite;
-    //   document.getElementById("standard_mobile").innerHTML = standard;
-    //   document.getElementById("deluxe_mobile").innerHTML = deluxe;
-    //   document.getElementById("elite_mobile").innerHTML = elite;
-    //   document.getElementById("standard_modal_price").innerHTML = standard;
-    //   document.getElementById("deluxe_modal_price").innerHTML = deluxe;
-    //   document.getElementById("elite_modal_price").innerHTML = elite;
-    // }
   }
-
-
-  // getPlanDuration() {
-  //   const options = document.getElementsByClassName("plan_duration");
-  //   for (let i = 0, x = options.length; i < x; i++) {
-  //     options[i].addEventListener("click", (e) => {
-  //       this.setActivePlanDuration(i);
-  //     });
-  //   }
-  // }
-
 
   sendToggle() {
     console.log('Switch yes', this.open);

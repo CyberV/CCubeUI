@@ -18,6 +18,15 @@
   }
 }
 
+.plan-notes {
+  margin: 0 0 10px 0;
+  .note {
+    color: gray;
+    display: block;
+    font-style: italic;
+  }
+}
+
 mat-expansion-panel {
   margin: 0 0 10px;
   border-radius: 10px !important;

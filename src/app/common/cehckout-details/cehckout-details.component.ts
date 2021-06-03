@@ -90,7 +90,7 @@ export class CheckoutDetailsComponent implements OnInit {
   ) {
     this.pretty = prettyDate;
     this.upgradeSelected = false;
-    this.upgradToPlan = 'Elite';
+    this.upgradToPlan = 'Deluxe';
     this.originalPlan = {};
     this.includedAddons = [];
     this.addonPrice = 0;

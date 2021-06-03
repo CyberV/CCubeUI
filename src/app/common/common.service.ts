@@ -17,6 +17,7 @@ let readCommonData = function () {
 
   let saveCommonData = function(data) {
     if (data) {
+        data.updatedAt = +(new Date());
         localStorage.setItem('commonData', JSON.stringify(data));
     }
   }
@@ -24,6 +25,19 @@ let readCommonData = function () {
 
 let init = async function (city = "faridabad") {
     return new Promise( (resolve) => {
+
+        let d = readCommonData();
+
+        // if (d) {
+        //     let old = d.updatedAt || +(new Date());
+        //     let now = +(new Date());
+        //     if (now - old >= (30* 60 * 1000)) {
+
+        //     } else {
+        //         console.log('Loading from cache. Last updated ' + ((now-old) /(60000) ) + ' minutes ago');
+        //         resolve(d);
+        //     }
+        // }
 
         if (!city || city == '') {
             city = "faridabad"

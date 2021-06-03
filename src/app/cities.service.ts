@@ -142,8 +142,14 @@ export class CitiesService {
   }
 
   getSocietiesForCity(city) {
-    return this.allSocieties;
 
+    let found = JSON.parse(localStorage.getItem('commonData')).allSocieties.filter(s => s.city.toLowerCase() == city.toLowerCase());
+    
+    if (found.length) {
+      return found[0].societies.map((m) => m.name);
+    } else {
+      return [];
+    }
   }
 
   getAllSocieties() {

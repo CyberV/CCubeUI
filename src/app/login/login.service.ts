@@ -102,8 +102,8 @@ export class LoginService {
       catchError(this.handleError));
   }
 
-  getCouponsForUser() {
-    return this.http.post(this.url + 'subscription/getcouponsforuser', { phone: this.currentUser.phone }).pipe(
+  getCouponsForUser(society="") {
+    return this.http.post(this.url + 'subscription/getcouponsforuser', { phone: this.currentUser.phone , society: society}).pipe(
       catchError(this.handleError));
   }
 

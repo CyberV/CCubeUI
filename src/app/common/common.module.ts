@@ -9,6 +9,9 @@ import { MobileInputComponent } from './mobile-input/mobile-input.component';
 import { CtaComponent } from './cta/cta.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { HighlightDirective } from './highlight.directive';
+import { NoteDirective } from './note.directive';
+
+
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
 import { ChartComponent } from './chart/chart.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
@@ -98,6 +101,7 @@ import { TermsComponent } from './terms/terms.component';
     CtaComponent,
     SpinnerComponent,
     HighlightDirective,
+    NoteDirective,
     VerifyOtpComponent,
     ChartComponent,
     IndicatorComponent,
@@ -187,6 +191,7 @@ import { TermsComponent } from './terms/terms.component';
     CtaComponent,
     SpinnerComponent,
     HighlightDirective,
+    NoteDirective,
     VerifyOtpComponent,
     ChartComponent,
     IndicatorComponent,

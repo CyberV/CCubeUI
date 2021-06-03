@@ -5,7 +5,7 @@
         <div class="container">
           <ng-container *ngIf="ready">
             <app-dashboard *ngIf="context==='dashboard' && !forDemo" [includedAddons]="includedAddons"
-              [includedAdhocs]="includedAdhocs" [currentCar]="selectedCar"></app-dashboard>
+              [includedAdhocs]="includedAdhocs" [currentCar]="selectedCar" [planDuration]="planDuration"></app-dashboard>
               <div *ngIf="context==='dashboard' && forDemo">
               <selected-car [car]="selectedCar" (changeCar)="resetCar()"></selected-car>
 

@@ -1,7 +1,7 @@
 <mat-card class="card animate__animated animate__fadeInRight">
   <div class="card-body card-top"  (click)="onShowDetails()" [style.borderColor]="color">
     <h5 class="card-title" > {{plan.name}} </h5>
-    <h6 class="monthly-label">{{plan.originalPrice ? 'QUARTERLY' : 'MONTHLY'}} PLAN</h6>
+    <h6 class="monthly-label">{{plan.duration == 'quarterly' ? 'QUARTERLY' : 'MONTHLY'}} PLAN</h6>
 
   </div>
   <p class="card-text"  (click)="onShowDetails()">
@@ -15,7 +15,7 @@
     </p>
   <div class="card-body feature-list" >
    
-    <list limit="6">
+    <list limit="6"  *ngIf="currentFeatures.length > 0">
       <div class="row feature-row" *ngFor="let ftr of currentFeatures" (click)="onShowDetails(ftr)">
         <div class="col-1 text">
           <ion-icon slot="start" [style.color]="colors[ftr.weight - 1]" class="ion-color-yellow" name="star"></ion-icon>
@@ -27,6 +27,30 @@
 
       </div>
     </list>
+
+    <ng-container *ngIf="currentFeatures.length == 0">
+        <div class="row feature-row" >
+            <div class="col-1 text">
+              <ion-icon slot="start" [style.color]="colors[0]" class="ion-color-yellow" name="star"></ion-icon>
+            </div>
+            <div class="col-10">
+              Outside Cleaning - Twice a Week
+            </div>
+    
+    
+          </div>
+          <div class="row feature-row" >
+              <div class="col-1 text">
+                <ion-icon slot="start" [style.color]="colors[0]" class="ion-color-yellow" name="star"></ion-icon>
+              </div>
+              <div class="col-10">
+                Inside Cleaning - Twice a Week
+              </div>
+      
+      
+            </div>
+    </ng-container>
+
   </div>
 
   <div class="card-body actions-row">
