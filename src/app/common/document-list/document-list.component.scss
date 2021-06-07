@@ -5,7 +5,7 @@ ion-slides {
   border-radius: 15px;
 }
 
-ion-slides, ion-button {
+ion-button {
   margin-bottom: 1em;
 }
 
@@ -28,9 +28,10 @@ ion-slides, ion-button {
 }
 
 .doc-name {
-  position: relative;
-  bottom: 66px;
+  position: absolute;
+  bottom: 0;
   left: 0;
+  width: 100%;
 }
 
 ion-slide:nth-of-type(0){
@@ -38,15 +39,20 @@ ion-slide:nth-of-type(0){
 }
 
 .card-img-top, .card-icon-top {
-  height: 185px;
-  object-fit: cover;
+  height: 110px;
+  top: -25px;
+  position: relative;
+  object-fit: contain;
   border-radius: 10px;
 }
 .addon-card {
   position: relative;
   border-radius: 10px;
   padding: 0;
-  max-height: 185px;
+  max-height: 94px;
+  max-width: 96px;
+  min-width: 96px;
+  max-width: 100px;
 
 
   &.selected {
@@ -98,16 +104,16 @@ ion-slide:nth-of-type(0){
     }
   
     .card-text {
-        min-height: 52px;
+        min-height: 30px;
         display: block;
-        font-size: 14px;
+        font-size: 10px;
         max-height: 40px;
         background: $primary-color;
         color: white;
         position: relative;
         /* margin-top: -31px; */
-        padding: 10px 6px; 
-        /* font-weight: 800; */
+        top: -5px;
+        padding: 3px 6px;
         letter-spacing: 2px;
         display: inline-block;
         vertical-align: middle;

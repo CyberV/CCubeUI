@@ -12,6 +12,18 @@
     background: transparent linear-gradient(180deg, #00A4A7 0%, #009295 22%, #005254 100%) 0% 0% no-repeat padding-box;
 }
 
+.pill {
+    font-size: 14px !important;
+    border-radius: 20px;
+    margin-bottom: -10px;
+}
+
+.slim {
+    margin-top: 5px !important;
+    font-size: 14px !important;
+    padding: 1px 20px !important;
+}
+
 
 .tiny {
     margin: 0;

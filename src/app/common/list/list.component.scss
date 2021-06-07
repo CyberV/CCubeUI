@@ -1,11 +1,11 @@
 @import 'src/variables.scss';
 
 .list-container {
-    height: 200px;
+
     overflow-y: hidden;
     overflow-x: hidden;
     transition: all 1s ease-in-out();
-    min-height: 150px;
+    min-height: 100px;
 
     max-height: 220px;
 
@@ -34,6 +34,8 @@
         margin: 0 auto;
         width: 90%;
         margin-top: 12px;
+        font-size: 12px;
+        height: 30px;
 
         &.larger {
             // height: 45px;

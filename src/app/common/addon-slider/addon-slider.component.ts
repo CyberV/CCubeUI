@@ -41,7 +41,7 @@ export class AddonSliderComponent implements OnInit {
   isSmallText(addon) {
     let t = addon.label || addon.name;
 
-    return t.length <= 11;
+    return t.length <= 13;
   }
 
   isScheduled(addon) {
@@ -55,7 +55,7 @@ export class AddonSliderComponent implements OnInit {
   options = {
     centeredSlides: false,
     slidesPerView: 2.3,
-    spaceBetween: 20,
+    spaceBetween: 10,
   };
 
   showAnimation: boolean;

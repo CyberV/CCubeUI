@@ -8,7 +8,7 @@ export class NoteDirective {
   constructor(el:ElementRef) {
     el.nativeElement.style.color = "gray";
     el.nativeElement.style.fontStyle = "italic";
-    el.nativeElement.style.fontSize = "90%";
+    el.nativeElement.style.fontSize = "10px";
   }
 
 }

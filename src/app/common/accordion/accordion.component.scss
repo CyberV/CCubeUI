@@ -47,8 +47,13 @@
     }
 }
 
-.title {
+.empty {
+    color: black;
+    pointer-events: none;
+}
 
+.title {
+    font-size: 12px;
 }
 
 .accordion-container {

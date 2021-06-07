@@ -206,7 +206,7 @@
             </div>
             <!-- <div class="col-2 --no-padding-left"><span class="badge badge-light" (click)="onRemoveCoupon(discount.coupon)">Remove</span></div> -->
             <div class="col-4 text-center float-right"> <span class="discount-value"> - <span
-                  Rs>{{ discountConfig.plan.secondCar }}</span> </span></div>
+                  Rs>{{ discountConfig.plan.secondCar  * (duration == 'quarterly' ? 3 : 1) }}</span> </span></div>
           </div>
 
         <div class="row content-row" *ngIf="user.referralBonusPending > 0">

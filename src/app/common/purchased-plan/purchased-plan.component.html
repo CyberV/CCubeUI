@@ -30,7 +30,6 @@
               {{subscription.status | uppercase}}</div>
 
 
-            <br />
             <span class="expiry">{{expiry}}</span>
 
             <ng-container *ngIf="payment.nextPlan">
@@ -41,11 +40,10 @@
 
             </ng-container>
 
-            <br />
             <div *ngIf="subscription.showRenew" (click)="sendRenewPlan()" class="renew-link">
               <span>Renew Plan</span>
             </div>
-            <br />
+
           </ng-container>
           <ng-container *ngIf="mode == 'adhoc'">
             <div class="adhoc-name">
@@ -63,18 +61,19 @@
                   'badge-warning': subscription.status == 'Expiring' || subscription.status == 'Missed',
                   'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
                   'badge-success': subscription.status == 'Purchased'}">
-              {{subscription.status | uppercase}}</div>
+              {{subscription.status | uppercase}}</div> 
+              <div *ngIf="subscription.status == 'Purchased'" (click)="sendReschedule()" class="schedule-link">
+
+                  <span>
+                     <ion-icon [style.color]="'#ffa169'" name="calendar-outline"></ion-icon>
+                  </span>
+                </div>
             <span class="expiry">{{expiry}}</span>
             <div *ngIf="subscription.status == 'Missed'" (click)="sendReschedule()" class="schedule-link">
               <span>Reschedule</span>
             </div>
 
-            <div *ngIf="subscription.status == 'Purchased'" (click)="sendReschedule()" class="schedule-link">
-
-              <span>
-                <ion-icon [style.color]="'#ffa169'" name="calendar-outline"></ion-icon>Schedule Now
-              </span>
-            </div>
+           
           </ng-container>
 
           <!-- <span class="alert-link float-right" (click)="resetCar()">Change Car</span> -->

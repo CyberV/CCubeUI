@@ -6,16 +6,17 @@
 
 .info-container {
     position: absolute;
-    right: 1.5em;
-    top: 20%;
+    right: 1em;
+    top: 15%;
     text-align: right;
-    font-size: 90%;
+    font-size: 70%;
 
     .desc {
         font-size: 95%;
         color: #4b5757;
         margin-top: 2px;
-        max-width: 300px;
+        max-width:  240px;;
+        
         text-overflow: ellipsis;
     }
 }
@@ -27,14 +28,15 @@
 
     img {
         border-radius: 10px;
+        height: 92px;
     }
 }
 
 .pagination-row {
 
     .dot {
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
         display: inline-block;
         top: -6px;
         position: relative;
@@ -45,10 +47,10 @@
         transition: all 0.1s ease-in-out;
         &.selected {
             top: -5px;
-            width: 12px;
-            height: 12px;
-            background: $primary-color;
-            border: 2px solid $primary-color;
+            width: 10px;
+            height: 10px;
+            background: $secondary-color;
+            border: 2px solid $secondary-color;
         }
     }
 }
@@ -66,18 +68,26 @@
     display: block;
     width: 100%;
     background: $secondary-color;
-    padding: 8px;
+    padding: 2px;
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     transform: rotate(-45deg);
     position: absolute;
-    left: -36%;
-    top: 32px;
+    left: -120px;
+
+    @media screen and (min-width: 370px) {
+        left: -41%;
+        clip-path: polygon(40% 1%, 93% 0, 100% 100%, 34% 100%);
+    }
+
+
+    top: 19px;
+    clip-path: polygon(40% 1%, 93% 0, 100% 100%, 32% 100%);
 
     .discount-label {
         span {
-            font-size: 24px;
+            font-size: 16px;
         }
     }
 

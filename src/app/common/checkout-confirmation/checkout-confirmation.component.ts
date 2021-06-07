@@ -31,7 +31,7 @@ export class CheckoutConfirmationComponent implements OnInit {
    }
 
   ngOnInit() {
-    debugger;
+     
     if (this.details) {
       this.hasAddons = !!(this.details.addons && this.details.addons.length);
       this.hasAdhocs = !!(this.details.adhocs && this.details.adhocs.length);
@@ -48,7 +48,7 @@ export class CheckoutConfirmationComponent implements OnInit {
   }
 
   ngOnChanges(changes) {
-    debugger;
+     
     if ( this.details) {
         this.hasAddons = !!(this.details.addons && this.details.addons.length);
         this.hasAdhocs = !!(this.details.adhocs && this.details.adhocs.length);

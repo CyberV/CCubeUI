@@ -182,7 +182,7 @@ export class AdsListComponent implements OnInit {
     });
 
     setTimeout(() => {
-      debugger;
+       
       if (this.adSlider && this.adSlider.first) {
         if (!this.sliderInitialized) {
           this.adSlider.first.ionSlideDidChange.subscribe((ev) => {

@@ -19,17 +19,20 @@ export class AccordionComponent implements OnInit {
   @Input() defaultOpen: boolean;
   @Input() scrollable: boolean;
   @Input() label: string;
+  @Input() empty: boolean;
 
   @Output() onToggle = new EventEmitter();
 
   @ViewChild('drawerToggle') drawerToggle: ElementRef;
   @ViewChild('drawerPannel') drawerPannel: MatExpansionPanel;
 
+  lastTime:number;
+
 
   hasStep: boolean;
   initDone: boolean;
 
-  public isOpen:boolean;
+  public isOpen: boolean;
 
   constructor() {
 
@@ -44,6 +47,7 @@ export class AccordionComponent implements OnInit {
     this.initDone = false;
     this.isOpen = false;
     this.scrollable = false;
+    this.empty = false;
   }
 
   ngOnInit() {
@@ -65,7 +69,7 @@ export class AccordionComponent implements OnInit {
       });
       this.drawerPannel.opened.subscribe(() => {
         this.onToggle.emit(true);
-      this.isOpen = true;
+        this.isOpen = true;
 
         if (!this.compact) {
           setTimeout(() => {
@@ -78,10 +82,46 @@ export class AccordionComponent implements OnInit {
     }
   }
 
-  toggle() {
+  toggle(state = null) {
+
+    if (!this.lastTime) {
+      this.lastTime = +(new Date());
+    } else {
+      let now = +(new Date());
+
+      if (now-this.lastTime > 3000) {
+
+      } else {
+        return;
+      }
+    }
+
+
     this.ngAfterViewInit();
     if (this.drawerToggle && this.drawerToggle.nativeElement) {
-      this.drawerToggle.nativeElement.click();
+      if (state) {
+
+        switch (state) {
+          case true: {
+            if (!this.isOpen) {
+              this.drawerToggle.nativeElement.click();
+
+            }
+            break;
+          }
+          case false: {
+            if (!this.isOpen) {
+              this.drawerToggle.nativeElement.click();
+
+            }
+            break;
+
+          } default: ;
+        }
+        this.isOpen
+      } else {
+        this.drawerToggle.nativeElement.click();
+      }
     }
   }
 

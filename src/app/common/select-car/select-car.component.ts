@@ -109,6 +109,8 @@ export class SelectCarComponent implements OnInit {
 
    }
 
+   displayType:string;
+
    selectModel(mdl) {
     this.model = mdl.model.toUpperCase();
     this.modelSelected = true;
@@ -121,6 +123,34 @@ export class SelectCarComponent implements OnInit {
       model: this.model,
       bodyType: this.selected.model.bodyType
     });
+
+    switch(this.selected.model.bodyType.toLowerCase()) {
+      case 'hatchback': {
+        this.displayType = 'Hatchback';
+        break;
+      }
+      case 'phatchback': {
+        this.displayType = 'Premium Hatchback';
+        break;
+      }
+      case 'sedan': {
+        this.displayType = 'Sedan';
+        break;
+      }
+      case 'csuv': {
+        this.displayType =  'Compact SUV';
+        break;
+      }
+      case 'suv': {
+        this.displayType = 'SUV';
+        break;
+      }
+      case 'luxury': {
+        this.displayType = 'Luxury Car';
+        break;
+      }
+      default:;
+    }
 
 
     setTimeout( ()=> {

@@ -4,6 +4,7 @@ import { PlanService } from 'app/services/plan.service';
 import { AccordionComponent } from '../accordion/accordion.component';
 import { BookDemoComponent } from '../book-demo/book-demo.component';
 import { ToastController } from '@ionic/angular';
+import { CarService } from 'app/services/car.service';
 
 @Component({
   selector: 'coupons-list',
@@ -17,6 +18,7 @@ export class CouponsListComponent implements OnInit {
   @Input() slim:boolean;
 
   @Input() appliedCoupons:any;
+  @Input() society:string;
   loading: any;
   customCoupon:string;
 
@@ -44,9 +46,11 @@ export class CouponsListComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private planService: PlanService,
+    private carService: CarService,
     private toastController: ToastController
   ) {
     this.totalAmount = 100;
+    this.society = "";
     this.slim = false;
     this.appliedCoupons = [];
     this.customCoupon = '';
@@ -101,8 +105,9 @@ export class CouponsListComponent implements OnInit {
     if (!couponCode) {
       return;
     }
+    let car = this.carService.getCurrentCar();
     this.loading[couponCode] = true;
-    this.loginService.tryCoupon(this.totalAmount, couponCode).subscribe(async (response:any) => {
+    this.loginService.tryCoupon(this.totalAmount, couponCode, car ? car.bodyType : null).subscribe(async (response:any) => {
       this.loading[couponCode]= false;
       if (response.success) {
         this.customCoupon = "";
@@ -138,7 +143,8 @@ export class CouponsListComponent implements OnInit {
       return;
     }
     this.loading[coupon.code] = true;
-    this.loginService.tryCoupon(this.totalAmount, coupon.code).subscribe(async (response:any) => {
+    let car = this.carService.getCurrentCar();
+    this.loginService.tryCoupon(this.totalAmount, coupon.code, car ? car.bodyType : null).subscribe(async (response:any) => {
       this.loading[coupon.code]= false;
       if (response.success) {
         this.planService.setAppliedCoupon(coupon);

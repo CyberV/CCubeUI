@@ -1,5 +1,5 @@
 <div class="--padding-x">
-    <heading text="SERVICES" size="24" align="center"></heading>
+    <heading text="SERVICES" size="20" align="center"></heading>
 
 
 
@@ -16,10 +16,11 @@
             </div>
             <div class="bottom">
                 <div class="ion-no-margin rate" *ngIf="!(isSelected(addon) && active)" (click)="sendShowDetails(addon)">
-                    <span Rs>{{addon.price}} <br/></span>  
-                  <span *ngIf="addon.originalPrice" class="original-price"> {{addon.originalPrice}}<br/></span>
+                  <span *ngIf="addon.originalPrice" class="original-price"> {{addon.originalPrice}}</span>
+                    
+                  <span Rs>{{addon.price}} </span>  
                 </div>
-                  <cta *ngIf="!isSelected(addon) && !isBlocked(addon)" (action)="selectAdhoc(addon)" text="Buy" outline="true" small="true"></cta>
+                  <cta *ngIf="!isSelected(addon) && !isBlocked(addon)" (action)="selectAdhoc(addon)" text="Buy" outline="true" small="true" slim="true"></cta>
                   <span class="animate__animated animate__fadeInUp" *ngIf="isSelected(addon)">
                     <h2 class="--padding-y active-label" (click)="sendShowDetails(addon)"> {{active ? 'ACTIVE' : 'Added !'}}</h2>
                     <span *ngIf="!active" (click)="selectAdhoc(addon)"  class="badge badge-light ">Remove</span>

@@ -6,13 +6,15 @@
         color: $primary-color;
         font-weight: 500;
         margin-bottom:0;
+        font-size: 12px;
     }
 
     input {
         border: none;
         border-bottom: 1px solid $primary-color;
         border-radius: 0;
-        height: 25px;
+        height: 18px;
+        font-size: 12px;
         background: transparent;
         text-transform: capitalize;
         color: $bg-black;
@@ -30,6 +32,7 @@
         font-weight: bold;
         width: 100%;
         color: gray;
+        min-height: 20px;
     }
 
     .mobile-label {
@@ -50,7 +53,8 @@
 
     .not-mobile, .input-group-text {
         padding:0;
-        height:25px;
+        height: 18px;
+        font-size: 12px;
     }
 
     .input-group-text {
@@ -88,4 +92,5 @@ textarea:focus, input:focus{
 ion-icon {
     font-size: 24px !important;
     margin-right: 10px;
+    margin-top: -5px;
 }

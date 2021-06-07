@@ -158,12 +158,14 @@ export class HomeComponent implements OnInit {
     this.headerService.hideHeader();
     this.currentUser = this.userService.getCurrentUser();
     let sub = this.planService.getCurrentSubscription();
+    let subs = this.planService.getAllSubscriptions();
 
+    debugger;
     if (this.userService.isLoggedIn()) {
 
       let notifs = this.notificationService.getAllNotifications();
 
-      let showDashboard = (notifs.new.length > 0 || notifs.historical.length > 0 || notifs.read.length > 0) || (this.currentUser.payments && this.currentUser.payments.length)
+      let showDashboard = (notifs.new.length > 0 || notifs.historical.length > 0 || notifs.read.length > 0) || (subs.length > 0);
 
       // if (showDashboard && sub) {
       //   alert('Exit?');

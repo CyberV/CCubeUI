@@ -37,7 +37,7 @@ export class PlanSliderComponent implements OnInit {
     this.slideOpts = {
       initialSlide: 0,
       centeredSlides: true,
-    slidesPerView: 1.3,
+    slidesPerView: 1.4,
     spaceBetween: 20,
       speed: 400,
       autoplay:true

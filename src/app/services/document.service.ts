@@ -64,6 +64,13 @@ export class DocumentService {
 
   }
 
+  async isNameUnique(name) {
+    let docs:any= await this.getAllDocuments();
+    let found = docs.filter((d) => d.name == name);
+
+    return found.length == 0;
+  }
+
   async updateProfilePicture() {
     return new Promise(async (resolve) => {
       const fileURI: string = await this.fileChooser.open();

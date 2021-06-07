@@ -205,6 +205,10 @@ export class PlanService {
   getUpdatePrice(planName, upgradeToPlan = null) {
     let currentPlan;
 
+    if (upgradeToPlan == 'Work From Home') {
+      return 0;
+    }
+
     let car = this.carService.getCurrentCar();
     let upgradePlan = upgradeToPlan ? this.getPlanByName(upgradeToPlan) || this.UpgradePlan : this.UpgradePlan;
 
@@ -258,7 +262,7 @@ export class PlanService {
 
   isSecondCar() {
     let car = this.carService.getCurrentCar();
-    let subs = this.getAllSubscriptions();
+    let subs = this.getAllSubscriptions().filter((s)=> !s.isAdhoc);
     return subs.length > 0 && car && car.regNo !=  subs[0].carRegNo;
   }
 
@@ -295,7 +299,7 @@ export class PlanService {
 
     if (duration == "quarterly") {
 
-      plan.price = plan.price * 3;
+      plan.price = (plan.originalPrice || plan.price) * 3;
 
       let dscnt: number = (getConfigValue('DISCOUNT_QUARTERLY'));
 
@@ -436,7 +440,10 @@ export class PlanService {
         info.discount = order.discount;
       }
 
-
+      if (order.newCarDiscount > 0) {
+        total -= order.newCarDiscount;
+        info.newCarDiscount = order.newCarDiscount;
+      }
 
       order.total = total >= 0 ? total: 0;
       order.info = info;
@@ -527,7 +534,7 @@ export class PlanService {
 
 
   getAddonsForPlan(planName) {
-    debugger;
+     
     let addons = [];
 
     // this.fixedAdhocs.forEach((adhocCode) => {

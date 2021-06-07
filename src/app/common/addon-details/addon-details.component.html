@@ -4,8 +4,8 @@
     <span *ngIf="showClose" class="float-right close-btn" (click)="closeModal()">
       <ion-icon name="close-outline"></ion-icon>
     </span>
-    <h2 #pageTop class="--padding --no-margin"><span class="addon-name">{{addon.name}}</span>
-      {{isAdhoc ? 'Service' : 'Add On'}} </h2>
+    <h3 #pageTop class="--padding --no-margin"><span class="addon-name">{{addon.name}}</span>
+      {{isAdhoc ? 'Service' : 'Add On'}} </h3>
 
     <p>
       <span class="old-price animate__animated animate__fadeInRight">{{addon.originalPrice}} </span>
@@ -97,8 +97,10 @@
     </ion-item-group>
   </ion-list>
   <br />
+<!-- 
+  dateError {{dateError}}
 
-  <!-- laterSelected {{laterSelected}}
+  laterSelected {{laterSelected}}
 
   fromDashboard {{fromDashboard}}
    
@@ -107,7 +109,7 @@
   bookedTime {{bookedTime}}
 
   selectedDate {{selectedDate}} -->
-  <cta sticky="true" *ngIf="!fromDashboard &&!purchased" [loading]="loading" text="Buy" (action)="addAddonToCart()"></cta>
+  <cta sticky="true" *ngIf="!fromDashboard &&!purchased" [disabled]="dateError" [loading]="loading" text="Buy" (action)="addAddonToCart()"></cta>
   <cta sticky="true" *ngIf="!laterSelected && fromDashboard && purchased && !bookedTime" [loading]="loading"
     text="Book Now" (action)="scheduleAddon(addon)"></cta>
 

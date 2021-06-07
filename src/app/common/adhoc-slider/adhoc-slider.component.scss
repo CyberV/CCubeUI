@@ -6,13 +6,17 @@ ion-slides {
 }
 
 ion-slides, ion-button {
-  margin-bottom: 1em;
+  margin-bottom: -1em;
+  margin-top: -3.5em;
 }
 
 .original-price {
   text-decoration: line-through;
   color: gray;
   font-size: 14px;
+  margin-left: -36px;
+  margin-right: 7px;
+  position: relative;
 }
 
 ion-slide:nth-of-type(0){
@@ -20,7 +24,8 @@ ion-slide:nth-of-type(0){
 }
 .adhoc-card {
 
-  min-height: 260px;
+  min-height: 180px;
+  font-size: 14px;
 
   &.selected {
     
@@ -49,15 +54,17 @@ ion-slide:nth-of-type(0){
     }
   
     .card-text {
-      min-height: 45px;
+      min-height: 40px;
       display: block;
-      max-height: 40px;
+      max-height: 50px;
+      padding:0;
+      font-size: 12px;
 
       background: #01a3a68c;
     color: white;
     position: relative;
-    margin-top: -31px;
-    font-weight: 800;
+    margin-top: 0;
+    font-weight: 500;
     letter-spacing: 2px;
 
     display: inline-block;
@@ -73,9 +80,8 @@ ion-slide:nth-of-type(0){
     
   
     .rate {
-      margin-top: 10px;
-      font-size: 20px;
-      font-weight: 500;
+      margin-top: 8px;
+      font-size: 24px;
     }
   }
 
@@ -87,7 +93,8 @@ ion-slides {
 }
 
 ion-slides, ion-button {
-  margin-bottom: 1em;
+  margin-bottom: -5em;
+  margin-top: -4.5em;
 }
 
 .badge-light {
@@ -100,7 +107,8 @@ ion-slide:nth-of-type(0){
 .addon-card {
 
   background: #D9F1F2 0% 0% no-repeat padding-box;
-  min-height: 260px;
+  min-height: 180px;
+  font-size: 14px;
   border: none;
 
   &.selected {
@@ -140,11 +148,11 @@ ion-slide:nth-of-type(0){
   }
 
   border-radius: 10px;
-  padding: 0 0 16px;
+  padding: 0 0 0px;
 
   .badge-warning {
     color:white;
-    font-size: 16px;
+    font-size: 14px;
   }
   
     .card-body {
@@ -156,15 +164,15 @@ ion-slide:nth-of-type(0){
     }
 
     .card-img-top {
-      height: 100px;
+      height: 70px;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
   
     .card-text {
-      min-height: 50px;
+      min-height: 40px;
       display: block;
-      max-height: 40px;
+      max-height: 50px;
       padding:0;
 
       @media screen and (min-width: 400px){
@@ -177,6 +185,7 @@ ion-slide:nth-of-type(0){
     position: relative;
     margin-top: 0;
     font-weight: 500;
+    font-size: 12px;
     letter-spacing: 2px;
 
     display: inline-block;
@@ -196,8 +205,8 @@ ion-slide:nth-of-type(0){
     
   
     .rate {
-      margin-top: 15px;
-      font-size: 24px;
+      margin-top: 8px;
+      font-size: 14px;
     color: #507475;
     }
   }

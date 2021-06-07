@@ -6,14 +6,14 @@
         (valueChange)="makerSelected = false; model=''; modelSelected = false; "></mobile-input>
       <div class="panel-makers row">
         <!-- <ion-slides [options]="options"> -->
-        <div *ngFor="let mkr of filteredMakers" class="col-12 col-md-4 maker-row" (click)="selectMaker(mkr)">
+        <div *ngFor="let mkr of filteredMakers" class="col-4 col-md-4 maker-row" (click)="selectMaker(mkr)">
           <div>
             <mat-card class="card maker animate__animated animate__fadeInDown --no-padding-top">
               <div class="row maker-row-content">
-                <div class="col-5 col-md-12 image-row">
+                <div class="col-12 col-md-12 image-row">
                   <img class="card-img-top" [src]="mkr.logo" [alt]="mkr.name">
                 </div>
-                <div class="col-7 col-md-12">
+                <div class="col-12 col-md-12 --no-padding maker-name">
                   <div class="card-body --no-padding">
                     <h5 class="card-title"> {{mkr.name | uppercase}} </h5>
                   </div>
@@ -38,10 +38,10 @@
           <mat-card *ngFor="let mdl of filteredModels" (click)="selectModel(mdl)"
             class="card col-12 col-md-4 model animate__animated animate__fadeInLeft --no-padding-top">
             <div class="row model-row-content">
-              <div class="col-6 col-md-12 image-row">
+              <div class="col-5 col-md-12 image-row text-center">
                 <img class="card-img-top" [src]="mdl.image" [alt]="mdl.name">
               </div>
-              <div class="col-6 col-md-12">
+              <div class="col-7 col-md-12 text-center">
                 <div class="card-body --no-padding">
                   <h5 class="card-title --no-padding top-1"> {{mdl.model | uppercase}} </h5>
                 </div>
@@ -50,10 +50,13 @@
           </mat-card>
         </div>
     </cc-accordion>
+    <cc-accordion *ngIf="modelSelected" empty="true" [title]="'Body Type : '+ displayType">
+      Check Plans for {{displayType}} on next Page.
+    </cc-accordion>
   </div>
 
   <div *ngIf="modelSelected">
-    <cta text="Show me my Plans" [sticky]="true" (action)="submit()"></cta>
+    <cta text="Show Plans" [sticky]="true" (action)="submit()"></cta>
 
   </div>
 </div>

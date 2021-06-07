@@ -61,6 +61,8 @@ export class ServicePageComponent implements OnInit {
   officeTime: string;
   savingTime: boolean;
 
+  parkingSlot:string;
+
   getNotificationCount(regNo) {
     try {
 
@@ -110,6 +112,7 @@ export class ServicePageComponent implements OnInit {
 
     this.officeTime = "";
     this.wakeupTime = "";
+    this.parkingSlot = "";
 
     // this.platform.backButton.subscribeWithPriority(1, () => { // to disable hardware back button on whole app
     // });

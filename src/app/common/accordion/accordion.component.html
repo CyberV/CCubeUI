@@ -1,10 +1,10 @@
 <mat-accordion class="accordion-container" [class.compact]="compact" [attr.disabled]="disabled">
 
-  <mat-expansion-panel #drawerPannel *ngIf="!disabled" class="drop panel-container">
+  <mat-expansion-panel #drawerPannel *ngIf="!(disabled || empty)" class="drop panel-container">
     <mat-expansion-panel-header class="drop panel-header">
-      <mat-panel-title #drawerToggle (click)="onHandleClick($event)">
+      <mat-panel-title #drawerToggle (click)="onHandleClick($event)" [class.empty]="empty">
         <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled, 'error': error, 'locked ': locked}">
-          {{step}} </span> <span class="title">{{title}}</span>
+          {{step}} </span> <span class="title" >{{title}}</span>
       </mat-panel-title>
       <mat-panel-description class="drop price">
         <span *ngIf="label" class="" Rs> {{label}} </span>
@@ -20,7 +20,7 @@
   <mat-expansion-panel *ngIf="disabled" class="drop panel-container" disabled>
     <mat-expansion-panel-header class="drop panel-header">
       <mat-panel-title #drawerToggle (click)="onHandleClick($event)">
-        <span *ngIf="hasStep" [ngClass]="{'step': true, 'disabled': disabled , 'error': error, 'locked ': locked}">
+        <span *ngIf="hasStep" [ngClass]="{'step': true,  'disabled': disabled && !empty , 'error': error, 'locked ': locked}">
           {{step}} </span> <span class="title" [class.error-text]="error">{{title}}</span>
       </mat-panel-title>
       <mat-panel-description class="drop">
@@ -28,4 +28,16 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
   </mat-expansion-panel>
+
+  <mat-expansion-panel *ngIf="empty" class="drop panel-container">
+      <mat-expansion-panel-header class="drop panel-header">
+        <mat-panel-title #drawerToggle >
+          <span *ngIf="hasStep" [ngClass]="{'step': true,  'disabled': disabled && !empty , 'error': error, 'locked ': locked}">
+            {{step}} </span> <span class="title" [class.error-text]="error">{{title}}</span>
+        </mat-panel-title>
+        <mat-panel-description class="drop">
+  
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
 </mat-accordion>

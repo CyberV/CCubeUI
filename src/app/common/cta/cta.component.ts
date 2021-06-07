@@ -18,11 +18,13 @@ export class CtaComponent implements OnInit {
   @Input() color:string;
   @Input() halfWidth : boolean;
   @Input() capitalize: boolean;
+  @Input() pill:boolean;
 
   @Input() subtext: string;
   @Input() secondaryCta:string;
 
   @Input() sticky: boolean;
+  @Input() slim:boolean;
 
   @Output() action = new EventEmitter();
 
@@ -34,6 +36,7 @@ export class CtaComponent implements OnInit {
     this.text = "CTA";
     this.disabled = false;
     this.loading = false;
+    this.slim = false;
     this.outline = false;
     this.size = 18;
     this.sticky = false;
@@ -42,6 +45,7 @@ export class CtaComponent implements OnInit {
     this.capitalize = false;
     this.small = false;
     this.tiny = false;
+    this.pill = false;
     this.icon="";
   }
 

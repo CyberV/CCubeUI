@@ -3,7 +3,7 @@
 
 .list-notif {
 
-    font-size: 12px;
+    font-size: 10px;
     max-height: 350px;
     overflow-y: auto;
     .divider {
@@ -12,19 +12,19 @@
 
         ion-label {
             white-space: pre-line;
-            font-size: 14px;
+            font-size: 12px;
         }
     }
 
     ion-label {
         white-space: pre-line;
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .new-item {
 
             margin: 0;
-            border-bottom: 2px solid $secondary-color;
+            border-bottom: 1px solid gray;
 
         margin-bottom: 2px;
     }

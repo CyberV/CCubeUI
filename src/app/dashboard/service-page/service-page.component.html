@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="offset-3 col-6">
+  <div class="offset-3 col-6 text-center">
     <span class="logo-container"><img class="logo " src="./assets/whitell.png" alt="CCubeLogo" border="0" />
     </span>
   </div>
@@ -80,23 +80,25 @@
                   <mat-panel-title>
                       <ion-icon name="information-circle-outline"></ion-icon>
                      <span
-                      class="header-text">Confirm Timing</span>
+                      class="header-text">Confirm Details</span>
                   </mat-panel-title>
                   <mat-panel-description class="drop">
 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                  <span>To be able to serve you on time, we need the following details </span>
+                  <span note>To be able to serve you on time, we need the following details </span>
 
-                  <heading text="What time do you wake up ?"></heading>
+                  <heading text="What time do you wake up ?" size="12" slim="true"></heading>
                   <input class="wakeupTime" name="wakeupTime" [(ngModel)]="wakeupTime" [ngxTimepicker]="pickerWake" minutesGap="15" placeholder="ex. 8:00 AM">
                   <ngx-material-timepicker #pickerWake  minutesGap="15"></ngx-material-timepicker>
 
-                  <heading text="What time do you leave for office ?"></heading>
+                  <heading text="What time do you leave for office ?" size="12" ></heading>
                   <input class="officeTime" name="officeTime" [(ngModel)]="officeTime" [ngxTimepicker]="picker" minutesGap="15" placeholder="ex. 10:00 AM">
                   <ngx-material-timepicker #picker  minutesGap="15"></ngx-material-timepicker>
-                <cta text="Confirm" small="true" [loading]="savingTime" [disabled]="!(wakeupTime.length > 0 && officeTime.length > 0)" (action)="saveTime()"></cta>
+
+                  <mobile-input type="text" [(value)]="parkingSlot" name="Parking/Slot No"></mobile-input>
+                <cta text="Confirm" small="true" pill="true" [loading]="savingTime" [disabled]="!(wakeupTime.length > 0 && officeTime.length > 0)" (action)="saveTime()"></cta>
               </mat-expansion-panel>
 
             </mat-accordion>

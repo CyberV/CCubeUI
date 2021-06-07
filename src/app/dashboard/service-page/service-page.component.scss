@@ -6,7 +6,9 @@
 }
 
 .logo {
-    width: 100%;
+    width: 70%;
+    z-index: 333;
+    position: relative;
 
     @media screen and (min-width: 768px) {
         width: 70%
@@ -25,6 +27,10 @@
     right: 0px;
 }
 
+.mat-expansion-panel-body {
+  padding: 0 14px 16px !important;
+}
+
 .tabs-container {
     mat-expansion-panel-header {
 
@@ -37,6 +43,7 @@
         margin-left: 10px;
         text-transform: uppercase;
         letter-spacing: 1px;
+        font-size: 12px;
       }
 
       &:hover {
@@ -48,7 +55,12 @@
 .wakeupTime, .officeTime {
   border: none;
   border-bottom: 1px solid gray;
+  font-size: 12px;
   
+}
+
+.mat-expansion-panel-header {
+  height: 36px !important;
 }
 
 
@@ -61,6 +73,13 @@
 }
 
 .car-slider-container {
+
+  margin-top: 5px;
+
+  // @media screen and (min-width: 400px) {
+  // margin-top: -30px;
+    
+  // }
   
 
       ion-slides {
@@ -68,15 +87,27 @@
       }
 
       .add-car-slide {
+        width: 120px !important;
+        top: 10px;
+
+        @media screen  and (min-width: 400px){
+          top: 20px;  
+        }
+
+        left: -20px;
+        
+          p {
+            margin-top: 15px;
+          }
           ion-icon {
               font-size: 40px;
               color: $secondary-color;
-              margin-top: 15px;
           }
           ion-label {
             padding-right: 5px;
-            text-transform: uppercase;
             color: $secondary-color;
+            margin-left: 5px;
+            font-size: 12px;
           }
 
           &.full-width {
@@ -87,6 +118,7 @@
       }
 
         .car-box {
+          min-height: 70px;
 
             &.active {
                 border-bottom: 5px solid $secondary-color;
@@ -116,6 +148,7 @@
         }
         .swiper-slide img {
             width: 100%;
+            min-height: 80px;
         }
     }
 

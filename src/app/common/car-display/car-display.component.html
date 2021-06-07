@@ -28,15 +28,15 @@
               <li class="list-group-item">Model : {{carDetails.model}}</li>
             <li class="list-group-item">Body Type : {{carDetails.displayLabel}}</li>
             <!-- <li class="list-group-item">Fuel : {{carDetails.fuelType}}</li> -->
-            <li class="list-group-item">Registeration Date: {{carDetails.registeredOn}} </li>
+            <!-- <li class="list-group-item">Registration Date: {{carDetails.registeredOn}} </li> -->
           </ul>
-          <div class="card-body">
-            <cta *ngIf="!vehicleTypeMismatch" text="Show me my Plans" (action)="sendAction()"></cta>
-            <p *ngIf="vehicleTypeMismatch" class="card-text">
+          <div class="card-body" *ngIf="vehicleTypeMismatch">
+            <p  class="card-text">
                 <span>Please Try Again with a valid Car Registration Number!</span>
             </p>
           </div>
         </div>
+        <cta *ngIf="!verifyOnly && !vehicleTypeMismatch" text="Show me my Plans" pill="true" (action)="sendAction()"></cta>
 
         <div *ngIf="verifyOnly" class="card animate__animated animate__bounceInDown">
           <ul class="list-group list-group-flush">

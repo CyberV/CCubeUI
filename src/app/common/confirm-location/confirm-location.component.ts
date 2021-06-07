@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, ViewChildren, ViewChild, QueryList, Input } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 import { SelectSocietyComponent } from '../select-society/select-society.component';
+import { PlanService } from 'app/services/plan.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'confirm-location',
@@ -33,7 +35,9 @@ export class ConfirmLocationComponent implements OnInit {
   @ViewChildren('ctaConfirm') ctaConfirm: QueryList<HTMLElement>;
 
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private planService:PlanService,
+    private alertController:AlertController
   ) {
     this.disableAll = false;
     this.location = {
@@ -77,6 +81,35 @@ export class ConfirmLocationComponent implements OnInit {
     console.log('Confirm location', data);
     this.isUnlisted = data.isUnlisted;
     this.location.society = data.society;
+
+    let cpn = this.planService.getAppliedCoupon();
+    if (this.societyData.society != this.location.society && cpn && cpn.validFor == "society") {
+      this.showCouponAlert()
+    } 
+  }
+
+  async showCouponAlert() {
+    let alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '',
+      subHeader: 'Cooupon Removed',
+      message: 'The selected coupon has been removed. You can check for available coupons for your selected society.',
+      buttons: ['OK']
+    });
+
+
+  await alert.present();
+
+  alert.onWillDismiss().then(()=> {
+    // if (data.action && data.action == 'refresh') {
+    //   window.location.reload();
+    // }
+    alert.cssClass = 'animate__animated  animate__fadeOut';
+
+    // setTimeout(()=>{
+    //   this.notificationService.markNotificationAsRead(data);
+    // }, 1000);
+  });
   }
 
    sendConfirmation() {

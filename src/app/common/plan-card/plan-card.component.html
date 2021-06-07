@@ -5,7 +5,7 @@
 
   </div>
   <p class="card-text"  (click)="onShowDetails()">
-      <span class="old-price" *ngIf="!forUpgrade && plan.originalPrice" Rs> {{plan.originalPrice}}</span> <span *ngIf="!forUpgrade" class="price" Rs>{{ plan.price }}</span>
+      <span class="old-price" *ngIf="!forUpgrade && plan.originalPrice"> {{plan.originalPrice}}</span> <span *ngIf="!forUpgrade" class="price" Rs>{{ plan.price }}</span>
       <span *ngIf="forUpgrade">
         <span> Extra </span>
        <span class="price" Rs > {{ plan.price }} <span class="permonth"> /month </span></span> 
@@ -29,6 +29,8 @@
     </list>
 
     <ng-container *ngIf="currentFeatures.length == 0">
+    <list limit="4">
+
         <div class="row feature-row" >
             <div class="col-1 text">
               <ion-icon slot="start" [style.color]="colors[0]" class="ion-color-yellow" name="star"></ion-icon>
@@ -49,6 +51,7 @@
       
       
             </div>
+            </list>
     </ng-container>
 
   </div>
@@ -61,8 +64,8 @@
     </div> -->
 
     <div class="row">
-      <div class="col-12">
-        <cta [text]="forUpgrade ? 'Upgrade Now' : 'Buy Now'" (action)="onBuy()"></cta>
+      <div class="offset-2 col-8">
+        <cta [text]="forUpgrade ? 'Upgrade Now' : 'Buy Now'"  pill="true" (action)="onBuy()"></cta>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <div class="schedule-list">
 
-    <heading text="Read Notifications can be found here." *ngIf="!history || history.length == 0"></heading>
+    <heading text="Service History can be seen here" size="12" *ngIf="!history || history.length == 0"></heading>
     <div class="alert alert-light" role="alert" *ngFor="let service of history; let i = index">
         <div class="row">
             <div class="col-2 --no-padding">

@@ -8,6 +8,7 @@
   position: relative;
   margin-top:-3px;
   display: table-cell;
+  font-size: 10px;
   letter-spacing: 1.5px;
 }
 
@@ -35,13 +36,13 @@
 
   .status-badge {
     margin: 0.5em 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     letter-spacing: 2px;
   }
 
   .expiry {
-    font-size: 13px;
+    font-size: 10px;
     font-style: italic;
   }
 
@@ -66,11 +67,11 @@
   }
 
   .plan-container {
-    min-height: 185px;
+    min-height: 150px;
   }
   .car-info {
     font-size: 16px;
-    padding: 20px 0 0 0;
+    padding: 10px 0 0 0;
     text-align: left;
     max-height: 215px;
     overflow-y: auto;
@@ -87,7 +88,7 @@
       color: $secondary-color;
       display: inline-block;
       text-transform: uppercase;
-      font-size: 120%;
+      font-size: 16px;
     }
 
     .schedule-link {
@@ -99,17 +100,17 @@
         font-size: 150%;
         top: 4px;
         position: relative;
-        margin-right: 5px;
+        margin-left: 5px;
       }
     }
 
     .plan-name {
-      margin-top: 1em;
+      margin-top: 5px;
       font-weight: 500;
     }
 
     .regNo {
-     
+      font-size: 12px;
       text-transform: uppercase;
     }
 
@@ -117,7 +118,7 @@
     .model {
       letter-spacing: 2px;
       color: $primary-color;
-      font-size: 120%;
+      font-size: 14px;
       text-transform: uppercase;
       font-weight: 500;
     }

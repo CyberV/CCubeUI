@@ -32,9 +32,9 @@
 
 <ng-container *ngIf="addingNewDoc">
   <mobile-input name="Document Name" [(value)]="newDoc.name" type="text"></mobile-input>
-  <subheading text="Name must be Unique"></subheading>
+  <span note>Name must be Unique"></span>
 
-  <cta  capitalize="true" small="true" text="Select File" (action)="addNewDoc(newDoc.name)"></cta>
+  <cta  [disabled]="newDoc.name.length == 0" capitalize="true" small="true" pill="true" text="Select File" (action)="addNewDoc(newDoc.name)"></cta>
 
 </ng-container>
 

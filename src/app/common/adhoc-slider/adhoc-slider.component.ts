@@ -42,7 +42,7 @@ export class AdhocSliderComponent implements OnInit {
   isSmallText(addon) {
     let t = addon.label || addon.name;
 
-    return t.length <= 11;
+    return t.length <= 15;
   }
 
   isScheduled(addon) {

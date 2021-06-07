@@ -23,7 +23,7 @@ export class DocumentListComponent implements OnInit {
 
   options = {
     centeredSlides: false,
-    slidesPerView: 2.3,
+    slidesPerView: 2.5,
     spaceBetween: 12,
   };
 
@@ -63,6 +63,10 @@ export class DocumentListComponent implements OnInit {
     this.addingNewDoc = false;
     this.newDoc = null;
 
+  }
+
+  isNameUnique(name) {
+    return this.documentService.isNameUnique(name);
   }
 
   async ngOnInit() {

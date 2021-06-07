@@ -91,19 +91,20 @@ export class LoginService {
       catchError(this.handleError));
   }
 
-  tryCoupon(amount, couponCode) {
+  tryCoupon(amount, couponCode, bodyType = null) {
     
     let payload = {
       amount,
       phone: this.currentUser.phone,
-      couponCode
+      couponCode,
+      bodyType
     };
     return this.http.post(this.url + 'subscription/trycoupon', payload).pipe(
       catchError(this.handleError));
   }
 
-  getCouponsForUser(society="") {
-    return this.http.post(this.url + 'subscription/getcouponsforuser', { phone: this.currentUser.phone , society: society}).pipe(
+  getCouponsForUser(society="", bodyType = null) {
+    return this.http.post(this.url + 'subscription/getcouponsforuser', { phone: this.currentUser.phone , society: society, bodyType: bodyType}).pipe(
       catchError(this.handleError));
   }
 

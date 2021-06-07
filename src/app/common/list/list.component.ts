@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
   }
 
   get remainingCount() {
-    return $('.list-container', this.emt.nativeElement) ?  $('.list-container', this.emt.nativeElement)[0].children.length - 5 : 5;
+    return $('.list-container', this.emt.nativeElement) ?  $('.list-container', this.emt.nativeElement)[0].children.length - 7 : 5;
   }
 
   isExpanded : boolean;

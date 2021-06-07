@@ -12,7 +12,7 @@
         <mobile-input type="text" placeholder="Have a Coupon Code?" name="Coupon Code" [(value)]="customCoupon"></mobile-input>
       </div>
       <div class="col-3">
-        <cta small="true" [disabled]="customCoupon.length < 3" outline="true" text="TRY" [loading]="loading[customCoupon]"  (action)="tryCoupon(customCoupon)"></cta>
+        <cta small="true" [disabled]="customCoupon.length < 3" pill="true" outline="true" text="TRY" [loading]="loading[customCoupon]"  (action)="tryCoupon(customCoupon)"></cta>
         
       </div>
     </div>
@@ -34,7 +34,7 @@
                 <br />
                 Valid For: <span class="desc">
                   <span *ngIf="item.validFor=='user'"> Just for You</span>
-                  <span *ngIf="item.validFor=='society'"> Your Society</span>
+                  <span *ngIf="item.validFor=='society'"> {{society}}</span>
                   <span *ngIf="item.validFor=='all'">All</span>
                   <span *ngIf="item.validFor=='special'">Exclusive Customers</span>
                 </span> <br />

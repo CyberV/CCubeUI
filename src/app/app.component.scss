@@ -24,6 +24,7 @@ ion-app {
         font-weight: 400;
         min-height: 25px;
         display: block;
+        font-size: 16px;
     }
 }
 
@@ -54,7 +55,7 @@ ion-app {
 .notif {
     ion-icon {
         font-size: 25px;
-        top: -3px;
+        top: 0;
         transition: all 0.2s ease-in;
         position: relative;
 
@@ -83,7 +84,7 @@ ion-app {
     position: absolute;
     top: -2px;
     left: 14px;
-    background: blue;
+    background: $secondary-color;;
     border-radius: 25px;
     border: 2px solid white;
     transition: all 2s;
@@ -137,6 +138,7 @@ ion-list {
     ion-item {
         --background: #00A4A7 0% 0% no-repeat padding-box;
         color: white;
+        font-size: 12px;
     }
 
     .selected {

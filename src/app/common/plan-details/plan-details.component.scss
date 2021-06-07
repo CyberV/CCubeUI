@@ -18,12 +18,21 @@
   }
 }
 
+.name-container {
+  font-size: 16px;
+  margin-top: -1.5em;
+  margin-bottom: 5px;
+}
+
 .plan-notes {
-  margin: 0 0 10px 0;
+  margin: 0 0 10px 10px;
   .note {
     color: gray;
     display: block;
     font-style: italic;
+    font-size: 10px;
+    margin-bottom: 1px;
+    margin-top: -6px;
   }
 }
 
@@ -42,7 +51,8 @@ mat-expansion-panel {
   }
 
   mat-expansion-panel-header {
-    padding: 35px 18px;
+    padding: 18px;
+    font-size: 11px;
    
 
     &.mat-expanded {
@@ -60,13 +70,19 @@ mat-expansion-panel {
     color: $secondary-color;
     text-transform: capitalize;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 400;
   }
 }
 
 .mat-expansion-panel-content {
   padding-top: 10px !important;
+
+}
+
+.desc {
+  font-size: 11px;
+  line-height: 12px;
 }
 
 .feature {
@@ -86,12 +102,12 @@ margin-bottom: 5px;
 
 .price {
   color: $primary-color;
-  font-size: 150%;
+  font-size: 18px;
 }
 
 .old-price {
   color: gray;
-  font-size: 100%;
+  font-size: 12px;
   margin-right: 10px;
   text-decoration: line-through;
   /* margin-left: -5.5em; */
@@ -105,6 +121,7 @@ margin-bottom: 5px;
   &.compact {
     width: 116%;
     padding: 0;
+    margin-top: 15px;
 
     mat-panel-title:last-of-type {
       .feature {

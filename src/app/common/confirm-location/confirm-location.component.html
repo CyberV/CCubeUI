@@ -1,10 +1,13 @@
+<br/>
+<span note> * New Societies have been added. Find yours now!</span>
+
 <mobile-input [readonly]="disableAll" name="House No / Flat No" (enterKey)="focusTo('inpStreet')" mandatory="true" type="text" [(value)]="location.houseNo"></mobile-input>
 
 <mobile-input [readonly]="disableAll" #inpStreet name="Street / Block Name" (enterKey)="focusTo('inpSociety')" type="text" [(value)]="location.block"></mobile-input>
 
 <select-society [disabled]="disableAll" #inpSociety (unlistedChange)="isUnlisted" [society]="location.society" (societyChange)="handleSocietyChange($event)" (enterKey)="focusTo('ctaConfirm')" [city]="location.city" mandatory="true" ></select-society>
 
-<div  *ngIf="!isUnlisted && location.society != 'Other' && location.society.length > 0 && !disableAll && (societyData ? societyData.isUnlisted : true)">
+<div  *ngIf="!isUnlisted && location.society != 'Other' && location.society.length > 0 && !disableAll && (societyData ? societyData.society != location.society : true)">
         <br/>
 
         <p note> You may have new coupons. <span highlight (click)="sendRetryCoupon()">Click to check Now. </span> </p>

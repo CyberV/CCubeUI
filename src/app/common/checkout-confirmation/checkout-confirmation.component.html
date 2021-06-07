@@ -115,10 +115,20 @@
             </div>
           </div>
         </li>
+        <li class="list-group-item" *ngIf="details.newCarDiscount > 0">
+            <div class="row">
+              <div class="col-6">
+                New Car Discount :
+              </div>
+              <div class="col-6">
+                <span Rs>{{details.newCarDiscount}}</span>
+              </div>
+            </div>
+          </li>
       <li class="list-group-item" *ngIf="details.discount && details.discount.discount > 0">
         <div class="row">
           <div class="col-6">
-            Discount :
+            Coupon Discount :
           </div>
           <div class="col-6">
             <span Rs>{{details.discount.discount}}</span>

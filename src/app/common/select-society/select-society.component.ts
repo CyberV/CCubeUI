@@ -48,7 +48,7 @@ export class SelectSocietyComponent implements OnInit {
       let records = this.citiesService.findMatchingSocieties(this.select, this.city);
 
       //this.unlisted = records.length == 0;
-      return records;
+      return records.length == 1 && this.select == records[0] ? this.options : records;
     }
   }
 

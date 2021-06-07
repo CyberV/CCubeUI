@@ -1,7 +1,7 @@
 <div class="plan-container --padding-x" [class.compact]="compact">
 
   <div class="plan-info">
-    <h2 #pageTop><span class="plan-name">{{plan.name}}</span> {{plan.duration == 'quarterly' ? 'QUARTERLY' : 'MONTHLY'}} Plan </h2>
+    <h2 #pageTop class="name-container"><span class="plan-name">{{plan.name}}</span> {{plan.duration == 'quarterly' ? 'QUARTERLY' : 'MONTHLY'}} Plan </h2>
     <div class="row">
       <div class="col-4 --no-padding-right text-right">
           <span class="old-price animate__animated animate__fadeInRight" *ngIf="plan.originalPrice"> {{plan.originalPrice}}</span>
@@ -53,8 +53,8 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         
-
-        {{feature.description}} 
+<span class="desc">  {{feature.description}} </span>
+      
        
         
       </mat-expansion-panel>

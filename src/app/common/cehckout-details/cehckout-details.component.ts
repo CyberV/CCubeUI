@@ -139,6 +139,7 @@ export class CheckoutDetailsComponent implements OnInit {
 
     if (changes.plan && this.plan) {
       this.duration = this.plan.duration;
+      this.toggleUpgrade(this.upgradToPlan);
       //this.presentToast(`Pricing updated for ${this.duration == 'monthly' ? 1 : 3} month${this.duration == 'monthly'? '':'s'}`);
     }
 
@@ -173,6 +174,9 @@ export class CheckoutDetailsComponent implements OnInit {
 
     if (this.plan && this.lastPlan) {
       this.upgradePrice = this.planService.getUpdatePrice(this.plan.name);
+      if (this.planService.getPlanDuration() == 'quarterly') {
+        this.upgradePrice *= 3;
+      }
     }
 
   }
@@ -202,6 +206,16 @@ export class CheckoutDetailsComponent implements OnInit {
     }
   }
 
+  getNewCarDiscount() {
+    
+    let { discountConfig } = this;
+    let discount = 0;
+    if (this.plan && this.plan.forSecondCar &&  discountConfig && discountConfig.plan && discountConfig.plan.secondCar) {
+      discount = discountConfig.plan.secondCar * (this.duration == 'quarterly' ? 3 : 1);
+    }
+    return discount;
+  }
+
   getOrderPrice() {
 
     let total = this.getServiceTotal();
@@ -210,10 +224,9 @@ export class CheckoutDetailsComponent implements OnInit {
       total -= +(this.user.referralBonusPending);
     }
 
-    let { discountConfig } = this;
-    
-    if (this.plan && this.plan.forSecondCar &&  discountConfig && discountConfig.plan && discountConfig.plan.secondCar) {
-      total -= discountConfig.plan.secondCar;
+    let newCarDiscount = this.getNewCarDiscount();
+    if (newCarDiscount) {
+      total -= newCarDiscount;
     }
 
     return total >= 0 ? total : 0;
@@ -235,6 +248,9 @@ export class CheckoutDetailsComponent implements OnInit {
     if (planName) {
       this.upgradToPlan = planName;
       this.upgradePrice = this.planService.getUpdatePrice(this.lastPlan.name, planName);
+      if (this.planService.getPlanDuration() == 'quarterly') {
+        this.upgradePrice *= 3;
+      }
       //this.planService.changePlanForCar(this.upgradeSelected ? planName : this.lastPlan.name);
       //this.plan = this.planService.getSelectedPlan();
     } else {

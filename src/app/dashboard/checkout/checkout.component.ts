@@ -48,7 +48,7 @@ export class CheckoutComponent implements OnInit {
   selectedAdhoc: any;
   blockedAddons: any;
   blockedAdhocs: any;
-  cpnBackup :any;
+  cpnBackup: any;
 
   currentUser: any;
   currentLocation: any;
@@ -87,7 +87,7 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('cpnList') cpnList: CouponsListComponent;
 
 
-  @ViewChildren('confLoc') confLoc :QueryList<ConfirmLocationComponent>;
+  @ViewChildren('confLoc') confLoc: QueryList<ConfirmLocationComponent>;
 
   constructor(
     private router: Router,
@@ -119,7 +119,7 @@ export class CheckoutComponent implements OnInit {
     this.order = null;
     this.includedAddons = [];
     this.includedAdhocs = [];
-    this.cpnBackup =null;
+    this.cpnBackup = null;
     this.blockedAddons = [];
     this.blockedAdhocs = [];
     this.availableCoupons = [];
@@ -149,6 +149,7 @@ export class CheckoutComponent implements OnInit {
     this.step2Ready = false;
     this.step3Ready = false;
     this.discount = {};
+    this.currentSociety = "";
   }
 
   applyDiscount(discountData) {
@@ -199,6 +200,8 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  currentSociety: string;
+
   ngOnInit() {
     //this.refreshCarAndPlans();
 
@@ -211,7 +214,7 @@ export class CheckoutComponent implements OnInit {
     let allSubs = this.planService.getAllSubscriptions();
 
     if (allSubs && allSubs.length) {
-      this.savedLocation = JSON.parse(JSON.stringify(allSubs[0].payments[0].location.society? allSubs[0].payments[0].location : allSubs[0].payments[0].location.location));
+      this.savedLocation = JSON.parse(JSON.stringify(allSubs[0].payments[0].location.society ? allSubs[0].payments[0].location : allSubs[0].payments[0].location.location));
     }
 
   }
@@ -269,13 +272,13 @@ export class CheckoutComponent implements OnInit {
     let allPayments = JSON.parse(sessionStorage.getItem('allPayments'));
     let carAlreadyActive = false;
     if (this.mode.plan && !this.forRenew) {
- 
 
-        if (allPayments && allPayments.length) {
-          carAlreadyActive = allPayments.filter((p) => {return p.car.regNo.toLowerCase() == order.car.regNo.toLowerCase() && !p.isAdhoc}).length > 0
-          //allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
-        }
-       else {
+
+      if (allPayments && allPayments.length) {
+        carAlreadyActive = allPayments.filter((p) => { return p.car.regNo.toLowerCase() == order.car.regNo.toLowerCase() && !p.isAdhoc }).length > 0
+        //allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
+      }
+      else {
 
       }
     } else {
@@ -295,6 +298,7 @@ export class CheckoutComponent implements OnInit {
       info: order.info,
       total: order.total,
       serviceTotal: order.serviceTotal,
+      newCarDiscount: order.newCarDiscount,
       carAlreadyActive: carAlreadyActive,
       isUnlisted: this.isUnlisted
     };
@@ -374,7 +378,7 @@ export class CheckoutComponent implements OnInit {
 
   async refreshCarAndPlans() {
     this.currentUser = this.userService.getCurrentUser();
-    let loc:any = sessionStorage.getItem('userLocation');
+    let loc: any = sessionStorage.getItem('userLocation');
 
     if (loc && loc != 'null') {
       loc = JSON.parse(loc);
@@ -429,14 +433,14 @@ export class CheckoutComponent implements OnInit {
     let appliedCoupon = this.planService.getAppliedCoupon();
     let qrt = getConfigValue('COUPON_QUARTERLY');
     if (this.mode.plan && this.planService.getPlanDuration() == 'quarterly' && this.cpnList) {
-      
+
       if (appliedCoupon && appliedCoupon.code != qrt) {
         this.cpnBackup = JSON.parse(JSON.stringify(appliedCoupon));
       }
-        setTimeout(()=>{
-          this.loading = true;
-          this.cpnList.tryCoupon(qrt);
-        },10);
+      setTimeout(() => {
+        this.loading = true;
+        this.cpnList.tryCoupon(qrt);
+      }, 10);
 
       //}
 
@@ -462,16 +466,23 @@ export class CheckoutComponent implements OnInit {
 
   retryCoupons() {
     window.history.back();
-   
+    this.findCouponComponent();
   }
 
   findCouponComponent() {
-    setTimeout(()=> {
+    setTimeout(() => {
       if (this.cpnList) {
-      this.cpnList.openCoupons();
-      let cont = document.getElementsByClassName('container');
-      cont[cont.length-1].scrollTop = 500;
+        console.log('Found Coupon List. Opening');
+
+        this.cpnList.openCoupons();
+        setTimeout(() => {
+          console.log('Found Coupon List. Opening');
+
+          let cont = document.getElementsByClassName('container');
+          cont[cont.length - 1].scrollTop = 500;
+        }, 200);
       } else {
+        console.log('Retrying to find');
         this.findCouponComponent();
       }
     }, 1000);
@@ -554,13 +565,15 @@ export class CheckoutComponent implements OnInit {
       setTimeout(() => {
         this.step3Ready = true;
 
-        setTimeout(() => {
 
-            this.drawerLocation.first.toggle();
+          setTimeout(() => {
+
+            this.drawerLocation.first.toggle(this.verificationComplete ? false : true);
             //this.drawerTime.first.toggle();
-          
 
-        }, 500);
+
+          }, 500);
+        
       }, 200);
     } else {
       setTimeout(() => {
@@ -568,7 +581,7 @@ export class CheckoutComponent implements OnInit {
 
 
         setTimeout(() => {
-          this.drawerLocation.first.toggle();
+          this.drawerLocation.first.toggle(true);
           //this.drawerTime.first.toggle();
         }, 500);
       }, 200);
@@ -618,7 +631,7 @@ export class CheckoutComponent implements OnInit {
     // }, 1000);
   }
 
-  savedSociety:any;
+  savedSociety: any;
 
   async ionViewWillEnter() {
 
@@ -626,9 +639,9 @@ export class CheckoutComponent implements OnInit {
       this.currentUser = this.userService.getCurrentUser();
     })
 
-  let soc = localStorage.getItem('selectedSociety');
+    let soc = localStorage.getItem('selectedSociety');
 
-  this.savedSociety = soc && soc != "null" ? JSON.parse(soc) : null;
+    this.savedSociety = soc && soc != "null" ? JSON.parse(soc) : null;
 
     this.refreshCarAndPlans();
 
@@ -783,7 +796,8 @@ export class CheckoutComponent implements OnInit {
       case 'checkout': {
         this.headerService.setText('Your Selected ' + (this.mode.plan ? 'Plan' : (this.mode.adhoc ? 'Service' : 'Addon')));
         this.loading = true;
-        this.loginService.getCouponsForUser(this.savedSociety && !this.savedSociety.isUnlisted ? this.savedSociety.society : "").subscribe(async (res: any) => {
+        this.currentSociety = (this.savedSociety && !this.savedSociety.isUnlisted) ? this.savedSociety.society : (this.currentLocation ? this.currentLocation.society : "Your Society");
+        this.loginService.getCouponsForUser(this.currentSociety, this.selectedCar.bodyType).subscribe(async (res: any) => {
           this.availableCoupons = res.success ? res.data : [];
 
           let found = this.availableCoupons.filter((c) => c.name == 'CCUBE-QRTRLY');
@@ -822,14 +836,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   onRemoveCoupon() {
-    if (this.appliedCoupons.length && this.appliedCoupons[0].code == getConfigValue('COUPON_QUARTERLY')) {
+    let duration = this.planService.getPlanDuration();
+    if (duration == 'quarterly' && this.appliedCoupons.length) {
       this.presentToast('Plan changed to Monthly.');
       this.planService.setAppliedCoupon(null);
       this.discount = {};
       this.appliedCoupons = [];
-      this.durationSwitch.setActivePlanDuration(0);
+      this.durationSwitch.setActivePlanDuration('monthly');
       return;
-    } 
+    }
     this.planService.setAppliedCoupon(null);
     this.discount = {};
     this.appliedCoupons = [];
@@ -864,6 +879,7 @@ export class CheckoutComponent implements OnInit {
         bonus: this.currentUser.referralBonusPending,
         serviceTotal: this.serviceTotal,
         discount: this.discount,
+        newCarDiscount: this.detailsComp.first ? this.detailsComp.first.getNewCarDiscount() : 0,
         car: this.selectedCar
       };
 

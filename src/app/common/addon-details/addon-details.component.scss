@@ -2,6 +2,7 @@
 
 .addon-name {
     color: $secondary-color;
+    font-size: 16px;
 }
 
 .addon-info {
@@ -48,6 +49,7 @@
 .divider {
   --color: $secondary-color;
   color: $primary-color;
+  font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -63,7 +65,7 @@
   font-weight: normal;
   margin-bottom: 1em;
   color: #776e6e;
-  font-size: 20px;
+  font-size: 12px;
 }
 
 .water, .time, .frequency {
@@ -95,7 +97,7 @@ margin-bottom: 5px;
 
 .price {
   color: $primary-color;
-  font-size: 150%;
+  font-size: 18px;
 }
 
 .addon-container {
@@ -126,7 +128,11 @@ margin-bottom: 5px;
 
 
 
-
+ion-item {
+  font-size: 12px;
+    height: 34px;
+    top: -8px;
+}
 
 
 
