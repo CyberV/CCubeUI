@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 
 declare var FlipCounterJs;
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
@@ -160,12 +160,11 @@ export class HomeComponent implements OnInit {
     let sub = this.planService.getCurrentSubscription();
     let subs = this.planService.getAllSubscriptions();
 
-    debugger;
     if (this.userService.isLoggedIn()) {
 
       let notifs = this.notificationService.getAllNotifications();
 
-      let showDashboard = (notifs.new.length > 0 || notifs.historical.length > 0 || notifs.read.length > 0) || (subs.length > 0);
+      let showDashboard = this.currentUser.status == 'Active' || (notifs.new.length > 0 || notifs.historical.length > 0 || notifs.read.length > 0) || (subs.length > 0);
 
       // if (showDashboard && sub) {
       //   alert('Exit?');

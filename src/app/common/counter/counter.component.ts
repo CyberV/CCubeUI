@@ -27,18 +27,19 @@ export class CounterComponent implements OnInit {
     this.value = 100000;
 
     this.stepCount = 1;
-    this.interval = 3000;
+    this.interval =  3 * 1000;
     this.ready = false;
     this.offset = 0;
   }
 
   ngOnInit() {
     let dt:any = localStorage.getItem('commonData');
+    let upd = localStorage.getItem('updatedWaterCount');
 
     if (dt && dt != "null") {
       dt = JSON.parse(dt);
-      if (dt.waterSaved &&dt.waterSaved > 100000) {
-        this.value = dt.waterSaved
+      if (dt.waterSaved && dt.waterSaved > 100000) {
+        this.value =  ((upd && upd != 'null') ? +(upd) :  dt.waterSaved);
       }
     }
     this.mock = [];
@@ -60,7 +61,7 @@ export class CounterComponent implements OnInit {
     setTimeout(() => {
       this.setInitialValues(values);
       this.begin();
-    }, 1000);
+    }, 10);
 
   }
 
@@ -107,8 +108,12 @@ export class CounterComponent implements OnInit {
 
 
   increment(index) {
+    if (this.value) {
+      this.value++;
 
-    if (index < 0 ) {
+      localStorage.setItem('updatedWaterCount', this.value.toString());
+    }
+     if (index < 0 ) {
       return;
     }
     $(".counter-container").removeClass("play");

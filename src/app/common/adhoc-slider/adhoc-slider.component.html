@@ -1,13 +1,66 @@
 <div class="--padding-x">
-    <heading text="SERVICES" size="20" align="center"></heading>
+  <heading text="SERVICES" size="20" align="center"></heading>
 
 
 
-    <ion-slides [options]="options" #adnSlider>
-    
-      <ion-slide *ngFor="let addon of adhocs; let i = index;" class="animate__animated " [class.animate__flipInX]="showAnimation">
+  <ion-slides [options]="options" #adnSlider [class.wide]="wide">
 
-        <mat-card class="card addon-card animate__animated animate__flipInX"  [class.selected]="isSelected(addon)" [class.active]="active && isSelected(addon)" [class.blocked]="isBlocked(addon)">
+    <ion-slide *ngFor="let addon of adhocs; let i = index;" class="animate__animated "
+      [class.animate__flipInX]="showAnimation">
+
+      <div class="card animate__animated animate__flipInX">
+        <div class="row no-gutters">
+          <div class="col-6 addon-img" (click)="sendShowDetails(addon)"
+            [style]="'background: url(\'assets/icons/' + addon.icon + '.jpg\');'">
+
+              <div class="discount-container" *ngIf="isComplimentary(addon)">
+                <span class="discount-label"> <span>FREE</span></span>
+              </div>
+
+            <!-- <img class="card-img" src="assets/icons/dusting.jpg" alt="Suresh Dasari Card"> -->
+          </div>
+          <div class="col-6 --no-padding-right">
+            <div class="card-body">
+              <h4 class="card-title" (click)="sendShowDetails(addon)">{{addon.name}}</h4>
+              <div class="ion-no-margin rate" (click)="sendShowDetails(addon)">
+
+                <div *ngIf="!(isSelected(addon) && active)">
+                  <span class="price" Rs>{{addon.price}}</span><span class="original-price" Rs>
+                    {{addon.originalPrice}}</span>
+                </div>
+
+
+              </div>
+              <!-- <a href="#" class="btn btn-primary">Buy</a> -->
+
+
+              <cta class="buy-btn" *ngIf="!isSelected(addon) && !isBlocked(addon)" (action)="selectAdhoc(addon)"
+                text="Buy" small="true" slim="true" pill="true"></cta>
+              <span class="animate__animated animate__fadeInUp" *ngIf="isSelected(addon)">
+                <h2 class="--padding-y active-label" (click)="sendShowDetails(addon)"> {{active ? 'ACTIVE' : 'Added !'}}
+                </h2>
+                <span *ngIf="!active" (click)="selectAdhoc(addon)" class="badge badge-light ">Remove</span>
+
+                <span class="expiry" *ngIf="active && !isScheduled(addon)"> Expires on <br /><span
+                    class="expiry-date">{{pretty(addon)}}</span></span>
+              </span>
+              <span class="animate__animated animate__fadeInUp" *ngIf="isBlocked(addon)"
+                (click)="sendShowDetails(addon)">
+                <h2 class="--padding-y active-label"> ACTIVE</h2>
+              </span>
+              <cta  class="buy-btn" *ngIf="(isSelected(addon) && active) && !isScheduled(addon) && isSchedulable(addon)" pill="true"
+                slim="true" small="true" (action)="sendShowDetails(addon)" text="Book"></cta>
+              <span class="date-label buy-btn" (click)="sendReschedule(addon)" *ngIf="isScheduled(addon)">
+                <ion-icon name="calendar-outline"></ion-icon> {{isScheduled(addon)}}
+              </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <mat-card class="card addon-card animate__animated animate__flipInX"  [class.selected]="isSelected(addon)" [class.active]="active && isSelected(addon)" [class.blocked]="isBlocked(addon)">
           <img (click)="sendShowDetails(addon)" class="card-img-top" [src]="'assets/icons/' + addon.icon +  '.jpg'" alt="Card image cap">
           <div class="">
 
@@ -32,7 +85,9 @@
                   <span class="date-label" (click)="sendReschedule(addon)" *ngIf="isScheduled(addon)"> <ion-icon name="calendar-outline"></ion-icon> {{isScheduled(addon)}} </span>
             </div>
           </div>
-        </mat-card>
-      </ion-slide>
-    </ion-slides>
+        </mat-card> -->
+
+
+    </ion-slide>
+  </ion-slides>
 </div>

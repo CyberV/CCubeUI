@@ -3,6 +3,7 @@ import { HeaderService } from 'app/header.service';
 import { Router } from '@angular/router';
 import { CarService } from 'app/services/car.service';
 import { PlanService } from 'app/services/plan.service';
+import { LoginService } from 'app/login/login.service';
 
 @Component({
   selector: 'app-thanks-page',
@@ -15,6 +16,7 @@ export class ThanksPageComponent implements OnInit {
     private headerService:HeaderService, 
     private router:Router,
     private planService: PlanService,
+    private loginService:LoginService,
     private carService:CarService
     ) { }
 
@@ -24,26 +26,33 @@ export class ThanksPageComponent implements OnInit {
   payment:any;
   order:any
 
-  get startDate()  {
+  receiptId:string;
 
-    return this.payment ?  this.payment.plan ? new Date(this.payment.startDate).toLocaleString() :  new Date(this.payment.startDate || this.payment.paymentDate).toLocaleString() : null;
+  get startDate()  {
+     ;
+    return this.payment ?  this.payment.plan ? new Date(this.payment.startDate || new DataCue()).toDateString() :  new Date(this.payment.startDate || this.payment.paymentDate).toDateString() : new Date().toDateString();
   }
 
   ngOnInit() {
 
     this.context = "thanks";
     this.payment = null;
+    this.receiptId = "";
   }
 
   ionViewWillEnter() {
     this.payment = JSON.parse(sessionStorage.getItem('currentPayment'));
     this.order=  this.planService.getCurrentOrder();
 
+    this.receiptId = (+(new Date())).toString().substr(3,4);
+    
+    this.loginService.refreshUser(this.payment.phone);
+
     if (this.order.addons.length) {
       this.headerService.setText('Addon Purchased!');
-    } else if (this.order.adhocs.length) {
+    } if (this.order.adhocs.length) {
       this.headerService.setText('Service Purchased!');
-    } else {
+    } {
       this.headerService.setText('Plan Purchased!');
     }
 

@@ -3,9 +3,8 @@
     <confirm-location *ngIf="!booked" (confirm)="bookDemo($event)"></confirm-location>
     <ng-container *ngIf="booked">
         <selected-car [car]="details.car" [slim]="true" [hideRemove]="true"></selected-car>
-        <heading [text]="'Demo Request Submitted. Our team will be in touch soon.'"></heading>
+        <heading size="14" [text]="'Demo Request Submitted. Our team will be in touch soon.'"></heading>
         <cta small="true" text="Clear" (action)="clearDemo()"></cta>
     </ng-container>
-    
   </cc-accordion>
 </div>

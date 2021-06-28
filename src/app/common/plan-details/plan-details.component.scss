@@ -20,8 +20,9 @@
 
 .name-container {
   font-size: 16px;
-  margin-top: -1.5em;
+  margin-top: -2.5em;
   margin-bottom: 5px;
+  background: transparent;
 }
 
 .plan-notes {
@@ -105,23 +106,37 @@ margin-bottom: 5px;
   font-size: 18px;
 }
 
+.compact-rows {
+  width: 110%;
+  margin-top: 10px;
+}
+
 .old-price {
   color: gray;
-  font-size: 12px;
-  margin-right: 10px;
+  font-size: 14px;
+  margin-right: -2px;
   text-decoration: line-through;
   /* margin-left: -5.5em; */
-  left: 18px;
+  left: 6%;
+
+  @media screen and (min-width: 375px) {
+    left: 12%;
+  }
   position: relative;
 }
 
 .plan-container {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
+  margin-top: 1em;
 
   &.compact {
     width: 116%;
     padding: 0;
     margin-top: 15px;
+
+    .name-container {
+      margin-top: -1.5em;
+    }
 
     mat-panel-title:last-of-type {
       .feature {

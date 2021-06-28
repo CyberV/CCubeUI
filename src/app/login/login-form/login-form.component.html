@@ -6,7 +6,7 @@
 
 
 
-        <cta #ctaOtp *ngIf="!otpSent" sticky="true" text="Get Verification Code" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
+        <cta #ctaOtp *ngIf="!otpSent" sticky="true" size="14" text="Get Verification Code" [loading]="loading" [disabled]="!isPhoneValid" (action)="beginAuth()">
         </cta>
       
         <br/>
@@ -42,28 +42,31 @@
   
 
   <select-city  [mandatory]="true" #inpCity  (enterKey)="focusTo('inpSociety')"  [error]="errors ? errors.city : null" [(city)]="newUser.city"  (cityChange)="errors.city = null"></select-city>
+ 
+</div>
 
-  <select-society [disabled]="!(newUser.city && newUser.city.length)"  #inpSociety (unlistedChange)="isUnlisted" [society]="newUser.society" (societyChange)="selectSociety($event)" (enterKey)="focusTo('inpPass')" [city]="newUser.city" mandatory="true" ></select-society>
+<div *ngIf="context=='details2'" class="animate__animated animate__fadeInLeft details-container">
+    <select-society [disabled]="!(newUser.city && newUser.city.length)"  #inpSociety (unlistedChange)="isUnlisted" [society]="newUser.society" (societyChange)="selectSociety($event)" (enterKey)="focusTo('inpPass')" [city]="newUser.city" mandatory="true" ></select-society>
 
-  <mobile-input [mandatory]="true" #inpPass (enterKey)="focusTo('inpConfirmPass')" [error]="errors ? errors.password : null" type="password" name="Password" [(value)]="newUser.password"  (valueChange)="errors.password = null" ></mobile-input>
-  <!-- <mobile-input #inpConfirmPass (enterKey)="focusTo('ctaSignup')" [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input> -->
-  <mobile-input [mandatory]="true" #inpConfirmPass (enterKey)="focusTo('inpRef')"  [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input>
-  <mobile-input  #inpRef type="text" name="Referral Code" [(value)]="newUser.referedBy" uppercase="true"></mobile-input>
-  <br/>
-  <div class="row">
-    <div class="col-12">
-        <span class="tip">PRO TIP: </span>Use a friend's Referral Code to win a guaranteed Bonus on Plan Purchase.
+    <mobile-input [mandatory]="true" #inpPass (enterKey)="focusTo('inpConfirmPass')" [error]="errors ? errors.password : null" type="password" name="Password" [(value)]="newUser.password"  (valueChange)="errors.password = null" ></mobile-input>
+    <!-- <mobile-input #inpConfirmPass (enterKey)="focusTo('ctaSignup')" [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input> -->
+    <mobile-input [mandatory]="true" #inpConfirmPass (enterKey)="focusTo('inpRef')"  [error]="errors ? errors.password : null" type="password" name="Confirm Password" [(value)]="newUser.confirmPassword"  (valueChange)="errors.password = null" ></mobile-input>
+    <mobile-input  #inpRef type="text" name="Referral Code" [(value)]="newUser.referedBy" uppercase="true"></mobile-input>
+    <br/>
+    <div class="row">
+      <div class="col-12">
+          <span class="tip">PRO TIP: </span>Use a friend's Referral Code to win a guaranteed Bonus on Plan Purchase.
+      </div>
     </div>
-  </div>
-  <br/>
-  <span *ngIf="!upgradeSelected && (errors ? errors.terms : false)" class="error-msg"> {{errors.terms}} <br/></span>
-    <mat-checkbox [checked]="false" (change)="upgradeSelected = !upgradeSelected"> I accept the </mat-checkbox>  <span class="terms" highlight (click)="showTerms()"> Terms & Conditions</span>
-
-  <!-- <cta #ctaSignup *ngIf="!userExists" class="signup-btn hidden" text="Create Account" [loading]="loading" (action)="createUser()" ></cta> -->
-
-  <span  *ngIf="userExists" class="existingUser">Looks like you are already registered with us. <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
-
-
+    <br/>
+    <span *ngIf="!upgradeSelected && (errors ? errors.terms : false)" class="error-msg"> {{errors.terms}} <br/></span>
+      <mat-checkbox [checked]="false" (change)="upgradeSelected = !upgradeSelected"> I accept the </mat-checkbox>  <span class="terms" highlight (click)="showTerms()"> Terms & Conditions</span>
+  
+    <!-- <cta #ctaSignup *ngIf="!userExists" class="signup-btn hidden" text="Create Account" [loading]="loading" (action)="createUser()" ></cta> -->
+  
+    <span  *ngIf="userExists" class="existingUser">Looks like you are already registered with us. <a class="link" [routerLink]="['/signup/login']">Log In</a></span>
+  
+  
 </div>
 
 <div></div>
@@ -87,7 +90,7 @@
   
   <select-car *ngIf="showCarSelector" (letsgo)="goToPlans($event)"></select-car>
 
-  <!-- <typeahead type="text" name="Car Maker" [(value)]="newUser.car.maker"></typeahead>
+ <typeahead type="text" name="Car Maker" [(value)]="newUser.car.maker"></typeahead>
 
   <mobile-input type="text" name="Car Model" [(value)]="newUser.car.model"></mobile-input> -->
 

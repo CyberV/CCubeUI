@@ -192,19 +192,27 @@ export class LoginService {
   }
 
   addPayment(payment) {
+    let com = sessionStorage.getItem('complimentary');
+
+    if (com) {
+      com = JSON.parse(com);
+
+      payment.complimentary = com;
+    }
     return this.http.post(this.url + 'subscription/addpayment', payment).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateTiming(carNo, officeTime, wakeupTime) {
+  updateTiming(carNo, officeTime, wakeupTime, parkingSlot) {
     return this.http.post(this.url + 'subscription/updateTiming', {
       phone: this.currentUser.phone,
       carRegNo: carNo,
       timing : {
         office: officeTime,
         wakeup: wakeupTime
-      }
+      },
+      parkingSlot
     }).pipe(
       catchError(this.handleError)
     );
@@ -231,6 +239,14 @@ export class LoginService {
   }
 
   renewPayment(payment) {
+    let com = sessionStorage.getItem('complimentary');
+
+    if (com) {
+      com = JSON.parse(com);
+
+      payment.complimentary = com;
+    }
+
     return this.http.post(this.url + 'subscription/renewpayment', payment).pipe(
       catchError(this.handleError)
     );

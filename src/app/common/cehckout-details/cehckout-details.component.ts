@@ -39,7 +39,7 @@ export class CheckoutDetailsComponent implements OnInit {
 
   get productLabel() {
     let { mode, plan, addon, adhoc } = this;
-    return mode.plan ? 'Plan' : (mode.adhoc ? 'Service' : (mode.addon ? 'Addon' : 'Plan'))
+    return mode.plan ? (plan.forUpgrade ? 'Upgrading to ' : '') +  'Plan' : (mode.adhoc ? 'Service' : (mode.addon ? 'Addon' : 'Plan'))
   }
 
   get regNo() {
@@ -58,12 +58,12 @@ export class CheckoutDetailsComponent implements OnInit {
   }
 
   get addonLabel() {
-    return 'Addons (' + (this.duration == 'monthly' ? '1 month)' : '3 months)');
+    return 'Addons (' + (this.duration == 'monthly' ? '1 month)' :  (this.includedAddons.length ? this.includedAddons[0].maxMonths : '3') + ' months)');
   }
 
   get productPrice() {
     let { mode, plan, addon, adhoc } = this;
-    return mode.plan ? plan.originalPrice || plan.price : (mode.adhoc ? adhoc.price : (mode.addon ? (this.duration == 'monthly'? (addon.price || addon.originalPrice) :  (addon.originalPrice || addon.price)) : 'Plan'))
+    return mode.plan ? (plan.forUpgrade ? plan.price : (plan.originalPrice || plan.price )): (mode.adhoc ? adhoc.price : (mode.addon ? (this.duration == 'monthly'? (addon.price || addon.originalPrice) :  (addon.originalPrice || addon.price)) : 'Plan'))
   }
 
   upgradeSelected: boolean;
@@ -137,9 +137,20 @@ export class CheckoutDetailsComponent implements OnInit {
       this.discount.discount = this.calculateDiscount();
     }
 
+    this.duration = this.planService.getPlanDuration();
+
     if (changes.plan && this.plan) {
       this.duration = this.plan.duration;
-      this.toggleUpgrade(this.upgradToPlan);
+
+      if (!this.lastPlan) {
+        this.lastPlan = this.plan;
+      }
+      if (this.lastPlan && this.plan) {
+        this.upgradePrice = this.planService.getUpdatePrice(this.lastPlan.name, this.upgradToPlan);
+        if (this.planService.getPlanDuration() == 'quarterly') {
+          this.upgradePrice *= 3;
+        }
+      }
       //this.presentToast(`Pricing updated for ${this.duration == 'monthly' ? 1 : 3} month${this.duration == 'monthly'? '':'s'}`);
     }
 
@@ -192,7 +203,7 @@ export class CheckoutDetailsComponent implements OnInit {
 
     if (mode) {
       if (mode.plan) {
-        total += this.plan.originalPrice || this.plan.price;
+        total += this.plan.forUpgrade ? this.plan.price : (this.plan.originalPrice || this.plan.price );
       }
       if (mode.addon) {
         total += this.addonPrice;
@@ -247,9 +258,17 @@ export class CheckoutDetailsComponent implements OnInit {
 
     if (planName) {
       this.upgradToPlan = planName;
-      this.upgradePrice = this.planService.getUpdatePrice(this.lastPlan.name, planName);
-      if (this.planService.getPlanDuration() == 'quarterly') {
-        this.upgradePrice *= 3;
+      if (this.lastPlan && this.lastPlan.name) {
+        this.upgradePrice = this.planService.getUpdatePrice(this.lastPlan.name, planName);
+        if (this.planService.getPlanDuration() == 'quarterly') {
+          this.upgradePrice *= 3;
+        }
+
+        if (this.upgradeSelected) {
+          this.planService.changePlanForCar(this.upgradToPlan);
+          this.plan = this.planService.getSelectedPlan();
+          this.planChanged.emit(this.plan);
+        }
       }
       //this.planService.changePlanForCar(this.upgradeSelected ? planName : this.lastPlan.name);
       //this.plan = this.planService.getSelectedPlan();

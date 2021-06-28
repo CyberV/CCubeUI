@@ -6,6 +6,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ActivatedRoute } from '@angular/router';
 import { DocumentService } from 'app/services/document.service';
 import { getConfigValue } from 'app/common/common.service';
+import { PlanService } from 'app/services/plan.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,11 +21,15 @@ export class ProfileComponent implements OnInit {
     private headerService: HeaderService,
     private socialSharing: SocialSharing,
     private documentService:DocumentService,
+    private planService:PlanService,
     private route: ActivatedRoute,
   ) {
     this.currentUser = null;
     this.ready = false;
     this.privacyConfig = null;
+    this.userLocation = {
+
+    };
   }
 
   currentUser: any;
@@ -34,6 +39,8 @@ export class ProfileComponent implements OnInit {
   profilePic:any;
 
   privacyConfig:any;
+
+  userLocation:any;
 
   async ngOnInit() {
     this.currentUser = this.userService.getCurrentUser();
@@ -84,6 +91,11 @@ export class ProfileComponent implements OnInit {
       switch (this.context) {
         case 'profile': {
           this.headerService.setText('Your Profile');
+          let subs = this.planService.getSavedSubscriptions();
+
+          if (subs.length) {
+            this.userLocation = subs[0].payments[0].location;
+          }
           this.ready = true;
           break;
         }

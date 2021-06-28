@@ -73,7 +73,7 @@ export class MobileInputComponent implements OnInit {
     let inp:any = this.phoneInput;
 
     if (inp && !this.noScroll) {
-      scrollElementToTop(inp.nativeElement);
+      //scrollElementToTop(inp.nativeElement);
     }
 
     

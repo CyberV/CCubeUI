@@ -24,8 +24,8 @@
     
               </ng-container>
 
-              <cta text="Proceed To Checkout"  *ngIf="!viewPlanOnly" [sticky]="true" (action)="goToCheckout()"></cta>
-              <cta text="Back To Dashboard" *ngIf="viewPlanOnly" [sticky]="true" (action)="goBack()"></cta>
+              <cta text="Proceed To Checkout"  [sticky]="true" (action)="goToCheckout()"></cta>
+              <!-- <cta text="Back To Dashboard" *ngIf="viewPlanOnly" [sticky]="true" (action)="goBack()"></cta> -->
 
             </div>
             <div *ngIf="context==='adhoc' && selectedAdhoc">

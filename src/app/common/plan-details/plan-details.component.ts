@@ -29,6 +29,7 @@ export class PlanDetailsComponent implements OnInit {
   @ViewChild(IonContent, {static: true}) content: IonContent;
 
   currentFeatures: any;
+  originalFeatures: any;
 
   isActive: boolean = true;
 
@@ -36,6 +37,7 @@ export class PlanDetailsComponent implements OnInit {
     private planService:PlanService
   ) {
     this.currentFeatures = [];
+    this.originalFeatures = [];
     this.compact = false;
     this.hideCta = false;
   }
@@ -61,6 +63,13 @@ export class PlanDetailsComponent implements OnInit {
       this.currentFeatures = [];
       this.plan.features.forEach(feature => {
         this.currentFeatures.push(this.features.filter((ftr) => ftr.code === feature)[0]);
+      });
+    }
+
+    if (this.plan && this.plan.originalPlan && this.features) {
+      this.originalFeatures = [];
+      this.plan.originalPlan.features.forEach(feature => {
+        this.originalFeatures.push(this.features.filter((ftr) => ftr.code === feature)[0]);
       });
     }
   }

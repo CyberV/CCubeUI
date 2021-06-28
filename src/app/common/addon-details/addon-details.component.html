@@ -8,12 +8,12 @@
       {{isAdhoc ? 'Service' : 'Add On'}} </h3>
 
     <p>
-      <span class="old-price animate__animated animate__fadeInRight">{{addon.originalPrice}} </span>
+      <span *ngIf="addon.originalPrice" class="old-price animate__animated animate__fadeInRight" Rs>{{addon.originalPrice}} </span>
 
       <span class="price" Rs> {{addon.price}}</span> <span class="with-plan" *ngIf="addon.withPlan"> With Plan </span> <span *ngIf="!isAdhoc"> for
-        {{addon.duration == 'quarterly' ? '3 months' : '1 month'}}</span>
+        {{addon.duration == 'quarterly' ? (months) + ' months' : '1 month'}}</span>
     </p>
-    <switch *ngIf="!showClose && (!addon.isAdhoc)" (toggle)="onAddonDurationToggle($event)"></switch>
+    <switch *ngIf="(months > 1) && !showClose && (!addon.isAdhoc)" [slim]="true" [forAddons]="true" (toggle)="onAddonDurationToggle($event)"></switch>
     <p *ngIf="!addon.isAdhoc && startDate && !bookedTime">
       <span class="startLabel">
         Starts from <span>{{startDate}}</span>
@@ -25,6 +25,7 @@
         Scheduled On <span>{{bookedDate}}</span>
       </span>
     </p>
+    
 
     <span *ngIf="bookedTime"></span>
   </div>
@@ -63,13 +64,14 @@
         </ion-item>
       </ng-container>
 
-      <ng-container *ngIf="(addon.isAdhoc && !bookedTime)">
+      <ng-container *ngIf="(addon.isAdhoc && !bookedTime && !addonScheduled)">
         <ion-item-divider>
           <ion-label class="divider">Schedule</ion-label>
         </ion-item-divider>
 
-        <ion-item lines="none">
+        <ion-item lines="none" class="date">
           <div class="row --no-margin">
+            <!-- <mobile-input type="date" name="Pick a Date" placeholder="Period: Next 30 days" [(value)]="selectedDate"></mobile-input> -->
             <datepicker [readOnly]="laterSelected" [class.error-date]="dateError" [minDate]="minDate" [maxDate]="maxDate" [(value)]="selectedDate"
               placeholder="Period: Next 30 days" (valueChange)="selectDate($event)"></datepicker>
 
@@ -110,7 +112,7 @@
 
   selectedDate {{selectedDate}} -->
   <cta sticky="true" *ngIf="!fromDashboard &&!purchased" [disabled]="dateError" [loading]="loading" text="Buy" (action)="addAddonToCart()"></cta>
-  <cta sticky="true" *ngIf="!laterSelected && fromDashboard && purchased && !bookedTime" [loading]="loading"
+  <cta sticky="true" *ngIf="!addonScheduled && !laterSelected && fromDashboard && purchased && !bookedTime" [loading]="loading"
     text="Book Now" (action)="scheduleAddon(addon)"></cta>
 
   <cta sticky="true" *ngIf="fromDashboard &&!purchased" [loading]="loading" text="Buy" (action)="addAddonToCart()">

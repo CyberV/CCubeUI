@@ -1,13 +1,18 @@
 @import "src/variables.scss";
 
+
+
 ion-slides {
-  height: 333px;
   border-radius: 15px;
+  margin-bottom: 2em;
+  &.wide {
+    width: 120%;
+    left: -6%;
+  }
 }
 
 ion-slides, ion-button {
-  margin-bottom: -1em;
-  margin-top: -3.5em;
+
 }
 
 .original-price {
@@ -15,7 +20,6 @@ ion-slides, ion-button {
   color: gray;
   font-size: 14px;
   margin-left: -36px;
-  margin-right: 7px;
   position: relative;
 }
 
@@ -88,36 +92,117 @@ ion-slide:nth-of-type(0){
   @import "src/variables.scss";
 
 ion-slides {
-  height: 333px;
   border-radius: 15px;
-}
-
-ion-slides, ion-button {
-  margin-bottom: -5em;
-  margin-top: -4.5em;
 }
 
 .badge-light {
   margin-top: 1em;
+  font-size: 10px;
+    left: -2px;
+    position: relative;
 }
 
-ion-slide:nth-of-type(0){
-  margin-left: 15px;
-}
-.addon-card {
 
-  background: #D9F1F2 0% 0% no-repeat padding-box;
-  min-height: 180px;
+.discount-container {
+  display: block;
+  width: 100%;
+  background: $secondary-color;
+  padding: 2px;
+  text-align: center;
+  color: white;
   font-size: 14px;
-  border: none;
+  transform: rotate(
+-45deg
+);
+  position: absolute;
+  left: -33px;
+  padding-left: 20px;
+  top: 12px;
+  
+  clip-path: polygon(0 0, 100% 0px, 100% 32px, 0% 100%);
 
-  &.selected {
-    
-    border: 1px solid $primary-color;
+  @media screen and (min-width: 370px) {
+      left: -41%;
+      clip-path: polygon(40% 1%, 93% 0, 100% 100%, 0 100%);
   }
 
-  &.blocked {
-    // border: 1px solid green;
+  .discount-label {
+      span {
+          font-size: 13px;
+      }
+  }
+
+  &.contrast {
+      background: $primary-color;
+  }
+}
+
+ion-slides, ion-button {
+}
+
+.card-body {
+  padding: 6px 10px 15px 10px;
+  min-height: 140px;
+  position: relative;
+
+  .card-title {
+    font-size: 12px;
+    margin-bottom: 4px;
+    height: 42px;
+    width: 112%;
+    line-height: 18px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+}
+
+.pagination-row {
+
+  .dot {
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      top: -6px;
+      position: relative;
+      margin-right: 6px;
+      border-radius: 10px;
+      background: white;
+      border: 1px solid gray;
+      transition: all 0.1s ease-in-out;
+      &.selected {
+          top: -5px;
+          width: 10px;
+          height: 10px;
+          background: $secondary-color;
+          border: 2px solid $secondary-color;
+      }
+  }
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 12px;
+  margin-left: 6px;
+  position: relative;
+}
+
+
+.card {
+  border-radius: 10px;
+  min-width: 100% ;
+  text-align: left;
+
+  @media screen and (max-width: 350px){
+    min-width: 210px;
+  }
+
+  .addon-img {
+    background-size: cover !important;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
 
   .active-label {
@@ -125,88 +210,43 @@ ion-slide:nth-of-type(0){
     color: $secondary-color;
     font-style: italic;
     letter-spacing: 0.2px;
+    padding: 12px 0 6px;
+    margin-top: -17px;
+    font-size: 14px;
+  }
+.bottom-15 {
+  position: absolute !important;
+  bottom: 15px;
+}
+
+  .expiry {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    font-size: 10px;
+
+    .expiry-date {
+      position: relative;
+      top: -6px;
+    }
+  }
+
+  .buy-btn {
+    position: absolute !important;
+    bottom: 20px;
   }
 
   .date-label {
-    margin-top: 1em;
     position: relative;
     display: block;
     color: #507475;
-    font-size: 20px;
+    font-size: 16px;
 
     ion-icon {
       position: relative;
-    top: 5px;
-    left: -2px;
-    font-size: 25px;
+      top: 4px;
+      left: -2px;
+      font-size: 22px;
     }
   }
-
-  &.active {
-    
-    // border: 3px solid green;
-  }
-
-  border-radius: 10px;
-  padding: 0 0 0px;
-
-  .badge-warning {
-    color:white;
-    font-size: 14px;
-  }
-  
-    .card-body {
-      padding-top: 0;
-    }
-
-    .bottom {
- 
-    }
-
-    .card-img-top {
-      height: 70px;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-  
-    .card-text {
-      min-height: 40px;
-      display: block;
-      max-height: 50px;
-      padding:0;
-
-      @media screen and (min-width: 400px){
-        padding: 2px 4px;
-      }
-
-
-      background: $secondary-color;
-    color: white;
-    position: relative;
-    margin-top: 0;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 2px;
-
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    width: 100%;
-
-    &.center-text {
-      line-height: 40px;
-    }
-
-    &.contrast {
-      //background: $secondary-color;
-    }
-    }
-
-    
-  
-    .rate {
-      margin-top: 8px;
-      font-size: 14px;
-    color: #507475;
-    }
-  }
+}

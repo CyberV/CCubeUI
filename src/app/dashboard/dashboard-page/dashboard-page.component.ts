@@ -179,12 +179,13 @@ export class DashboardPageComponent implements OnInit {
         this.loginService.getPayments(this.currentUser.phone).subscribe((res: any) => {
           if (res.success) {
             this.payments = res.data ? res.data : [];
-
-            if (this.payments.length) {
               sessionStorage.setItem('allPayments', JSON.stringify(this.payments));
               //this.payments = this.parsePayments(this.payments);
-            }
             sessionStorage.setItem('currentPayments', JSON.stringify(this.payments));
+
+            if (this.payments.length == 0) {
+              this.planService.clearAll();
+            }
             this.ready = true;
 
           }

@@ -4,6 +4,7 @@
     padding: 20px;
     overflow-y:scroll;
     overflow-x: hidden;
+    border-bottom: none;
     //margin-bottom: 3em;
 }
 
@@ -12,8 +13,43 @@
 }
 
 .list-group {
+    margin-top: 5px;
 
     &.has-sticky-button {
-        padding-bottom: 50px;
+        padding-bottom: 70px;
     }
+}
+
+.onTop {
+    position: fixed;
+    bottom: 45px;
+    width: 100%;
+    left: 0%;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    .label {
+    font-size: 14px;
+    }
+
+    .amount {
+        font-size: 18px;
+    }
+}
+
+.col-6 {
+    padding-left: 0;
+    padding-right: 0;
+    color: black;
+    text-align: right;
+
+    &:first-of-type {
+        color: gray;
+        text-align: left;
+    }
+}
+
+li {
+    padding-top: 6px;
+    padding-bottom: 6px;
 }

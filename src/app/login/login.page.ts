@@ -69,9 +69,7 @@ export class LoginPage implements OnInit {
     let mobile = localStorage.getItem('userMobile')
 
     if (this.userService.isLoggedIn()) {
-
-      //this.router.navigate(['/dashboard']);
-      //alert('Exit from Login');
+      this.router.navigate(['/dashboard/service']);
     }
 
     if (!mobile && this.context=='details') {
@@ -86,6 +84,10 @@ export class LoginPage implements OnInit {
       }
       case 'details': {
         this.headerService.setText('Personal Details');
+        break;
+      }
+      case 'details2': {
+        this.headerService.setText('Final Steps');
         break;
       }
       case 'login': {

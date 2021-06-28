@@ -89,7 +89,7 @@ export class AccordionComponent implements OnInit {
     } else {
       let now = +(new Date());
 
-      if (now-this.lastTime > 3000) {
+      if (now-this.lastTime > 1000) {
 
       } else {
         return;
@@ -99,19 +99,20 @@ export class AccordionComponent implements OnInit {
 
     this.ngAfterViewInit();
     if (this.drawerToggle && this.drawerToggle.nativeElement) {
-      if (state) {
+      if (state != null) {
 
         switch (state) {
           case true: {
             if (!this.isOpen) {
-              this.drawerToggle.nativeElement.click();
+              this.drawerPannel.open();
 
             }
             break;
           }
           case false: {
-            if (!this.isOpen) {
-              this.drawerToggle.nativeElement.click();
+            if (this.isOpen) {
+              this.drawerPannel.close();
+              //this.drawerToggle.nativeElement.click();
 
             }
             break;
@@ -120,7 +121,8 @@ export class AccordionComponent implements OnInit {
         }
         this.isOpen
       } else {
-        this.drawerToggle.nativeElement.click();
+        this.drawerPannel.toggle();
+        //this.drawerToggle.nativeElement.click();
       }
     }
   }

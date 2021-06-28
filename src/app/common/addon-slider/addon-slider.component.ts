@@ -18,6 +18,7 @@ export class AddonSliderComponent implements OnInit {
   @Input() selectedAddons: any;
   @Input() blockedAddons: any;
   @Input() subscriptionAddons: any;
+  @Input() wide:boolean;
 
   @Output() addonSelected = new EventEmitter();
   @Output() showDetails = new EventEmitter();
@@ -54,8 +55,8 @@ export class AddonSliderComponent implements OnInit {
 
   options = {
     centeredSlides: false,
-    slidesPerView: 2.3,
-    spaceBetween: 10,
+    slidesPerView: 1.4,
+    spaceBetween: 20,
   };
 
   showAnimation: boolean;
@@ -64,6 +65,8 @@ export class AddonSliderComponent implements OnInit {
   blockedMap: any;
   dateMap: any;
   discountConfig: any;
+  selectedIndex:any;
+  sliderInitialized:boolean;
 
   constructor(
     private carService: CarService,
@@ -79,11 +82,14 @@ export class AddonSliderComponent implements OnInit {
 
     this.blockedAddons = [];
     this.selectedAddons = [];
+    this.wide = false;
     this.addonMap = [];
     this.blockedMap = [];
     this.subscriptionAddons = [];
     this.dateMap = [];
     this.showAnimation = false;
+  this.selectedIndex = 0;
+  this.sliderInitialized = false;
   }
 
   ngOnInit() { }
@@ -92,8 +98,33 @@ export class AddonSliderComponent implements OnInit {
     this.showDetails.emit(addon);
   }
 
+  selectDot(index) {
+    this.selectedIndex = index;
+  }
+
   ngAfterViewInit() {
     this.animate();
+
+    setTimeout(() => {
+       
+      if (this.adnSlider) {
+        if (!this.sliderInitialized) {
+          this.adnSlider.ionSlideDidChange.subscribe((ev) => {
+            this.adnSlider.getActiveIndex().then((da) => {
+              this.selectDot(da);
+            })
+
+          });
+          this.sliderInitialized = true;
+
+          
+          this.adnSlider.startAutoplay();
+
+
+
+      }
+    }
+  }, 2000);
   }
 
   animate() {
@@ -129,7 +160,10 @@ export class AddonSliderComponent implements OnInit {
       this.updatePrice();
     }
 
+
+
     if (changes.selectedAddons && this.selectedAddons) {
+      this.updatePrice();
       if (this.adnSlider) {
         this.adnSlider.stopAutoplay();
       }
@@ -154,10 +188,11 @@ export class AddonSliderComponent implements OnInit {
   }
 
   updatePrice() {
+    let sub = this.planService.getCurrentSubscription();
     if (this.bodyType && this.addOns) {
       for (let i = 0; i < this.addOns.length; i++) {
         this.addOns[i].price = this.addOns[i].pricing[this.bodyType];
-        if (this.plan && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
+        if ( (this.plan || (sub && !sub.isAdhoc)) && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
           this.addOns[i].originalPrice = this.addOns[i].price;
           this.addOns[i].withPlan = true;
           this.addOns[i].price -= this.discountConfig.addon.withPlan;

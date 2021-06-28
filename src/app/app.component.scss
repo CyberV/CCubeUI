@@ -14,9 +14,10 @@ ion-app {
 }
 .app-header {
 
-    height: 56px;
+    //margin-top: 12px;
+    //height: 56px;
     padding: 10px;
-    padding-top: 5px;
+    //padding-top: 5px;
 
     .header-text {
         letter-spacing: 1px;
@@ -25,21 +26,29 @@ ion-app {
         min-height: 25px;
         display: block;
         font-size: 16px;
+        top: 5px;
+        position: relative;
     }
 }
 
 .view-home {
     letter-spacing: 1px;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     font-weight: 400;
-     text-align: right;
+     text-align: center;
+     font-size: 16px;
 }
 
 .view-dashboard, .view-checkout {
     letter-spacing: 1px;
-    text-transform: uppercase;
+    
     font-weight: 400;
      text-align: center;
+
+     .payable {
+        text-align: right;
+        padding-right: 20px;
+     }
 
 
 
@@ -53,9 +62,10 @@ ion-app {
 }
 
 .notif {
+    margin-top: 2px;
     ion-icon {
         font-size: 25px;
-        top: 0;
+        top: 2px;
         transition: all 0.2s ease-in;
         position: relative;
 
@@ -68,11 +78,20 @@ ion-app {
 
 .view-dashboard {
     position: relative;
-    top: 3px;
+    top: 6px;
+
+    
+.notif {
+   
+    ion-icon {
+
+        top: -4px;
+    }
+}
 }
 
 .side-menu {
-    --width: 70%;
+    --width: 60%;
     //opacity: 0.9;
 
     ion-content {
@@ -82,7 +101,7 @@ ion-app {
 
 .notif-badge {
     position: absolute;
-    top: -2px;
+    top: -5px;
     left: 14px;
     background: $secondary-color;;
     border-radius: 25px;
@@ -153,6 +172,10 @@ ion-list {
     }
 }
 
+ion-toolbar {
+    margin-top: -6px;
+}
+
 ion-toolbar, .ion-header, .ion-title {
 
         font-family: 'AppFont' !important;
@@ -166,9 +189,12 @@ ion-toolbar, .ion-header, .ion-title {
     background: transparent linear-gradient(-10deg, #00A4A7 0%, #009295 22%, #005254 100%) 0% 0% no-repeat padding-box;
 
     border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px;
+    border-bottom-left-radius: 25px;    
 }
 
+ion-header.ion-header {
+    //height: 42px;
+}
 .menu-header {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -232,7 +258,7 @@ ion-fab-button {
 
 .link {
     font-weight: 300;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: capitalize;
     margin-right: 10px;
     text-decoration: underline;

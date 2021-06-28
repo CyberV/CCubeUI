@@ -108,7 +108,7 @@ export class RescheduleComponent implements OnInit {
 
   checkDate(e) {
     
-    if ((this.forAdhoc && this.adhoc.addon.code == 'FBW') && !this.validate(e)) {
+    if ((this.adhoc && this.adhoc.addon.code == 'FBW') && !this.validate(e)) {
       this.dateError = 'Wednesdays are Off!';
       this.selectedDate = null;
     } else {

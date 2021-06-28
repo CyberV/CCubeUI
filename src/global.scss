@@ -127,6 +127,11 @@ div::-webkit-scrollbar-thumb:hover {
   overflow-y:auto;
   overflow-x: hidden;
   color: black;
+
+  @media screen and (min-width: 350px) {
+    height: 65%;
+    top: 16%;
+  }
 }
 
 .terms-modal .modal-wrapper{
@@ -514,4 +519,7 @@ padding:0 !important;
 
 .highlight {
   color: $primary-color;
+}
+.--no-click {
+  pointer-events: none;
 }

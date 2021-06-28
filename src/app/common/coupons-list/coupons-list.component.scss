@@ -1,6 +1,6 @@
 .discount-container {
     position: relative;
-    right: -10px;
+    right: -18px;
 
     ion-label {
         float: right;
@@ -14,7 +14,7 @@
         top: 15px;
         margin: 0 auto;
         color: white;
-        right: 15px;
+        right: 10px;
     }
 }
 
@@ -30,6 +30,7 @@
 
     font-size: 12px;
     overflow-y: auto;
+    overflow-x: hidden;
 
     .discount-item {
         margin: 0;
@@ -72,7 +73,7 @@
 
             .stand-out {
                 opacity: 1;
-                font-size: 14px;
+                font-size: 12px;
                 pointer-events: all;
 
             }
@@ -88,7 +89,7 @@
         }
 
         .name {
-            font-size: 16px;
+            font-size: 12px;
         }
 
         .desc {

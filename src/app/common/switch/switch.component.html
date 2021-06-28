@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-12">
     <span class="switch-container">
-      <span class="plan_selector">
+      <span class="plan_selector" [class.addons]="forAddons">
         <div class="option option_1 plan_duration" [class.active_option]="!open" (click)="setActivePlanDuration('monthly')">
           Monthly</div>
         <div class="option option_2 plan_duration active_option" [class.active_option]="open"
-          (click)="setActivePlanDuration('quarterly')">Quarterly</div>
+          (click)="setActivePlanDuration('quarterly')">{{ forAddons ? 'Till Plan Expiry' : 'Quarterly'}}</div>
       </span>
 
       <ion-label *ngIf="!slim">

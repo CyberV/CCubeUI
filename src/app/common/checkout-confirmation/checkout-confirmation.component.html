@@ -1,8 +1,7 @@
 <div class="card animate__animated animate__fadeIn">
 
   <div class="">
-    <heading [text]="details.isUnlisted ? '' : 'Please Confirm your details'" showClose="true" [slim]="true"></heading>
-    <br />
+    <heading [text]="details.isUnlisted ? '' : 'Please confirm your details.'" size="16" showClose="true" [slim]="true"></heading>
     <ul class="list-group list-group-flush" [class.has-sticky-button]="!details.isUnlisted && !details.carAlreadyActive">
       <li class="list-group-item">
         <div class="row">
@@ -84,7 +83,7 @@
           </div>
         </div>
       </li>
-      <li *ngIf="details.plan && details.plan.forRenew" class="list-group-item">
+      <li *ngIf="details.plan && details.plan.period" class="list-group-item">
         <div class="row">
           <div class="col-6">
             Period
@@ -95,10 +94,10 @@
         </div>
       </li>
       <li class="list-group-item"
-        *ngIf="(details.discount && details.discount.discount > 0 ) || (details.bonus && details.bonus > 0)">
+        *ngIf="details.serviceTotal">
         <div class="row">
           <div class="col-6">
-            Service Total :
+            Service Total
           </div>
           <div class="col-6">
             <span Rs>{{serviceTotal}}</span>
@@ -108,7 +107,7 @@
       <li class="list-group-item" *ngIf="(details.bonus && details.bonus > 0)">
           <div class="row">
             <div class="col-6">
-              Referral Bonus :
+              Referral Bonus
             </div>
             <div class="col-6">
               <span Rs>{{details.bonus}}</span>
@@ -118,7 +117,7 @@
         <li class="list-group-item" *ngIf="details.newCarDiscount > 0">
             <div class="row">
               <div class="col-6">
-                New Car Discount :
+                New Car Discount
               </div>
               <div class="col-6">
                 <span Rs>{{details.newCarDiscount}}</span>
@@ -128,7 +127,7 @@
       <li class="list-group-item" *ngIf="details.discount && details.discount.discount > 0">
         <div class="row">
           <div class="col-6">
-            Coupon Discount :
+            Coupon Discount
           </div>
           <div class="col-6">
             <span Rs>{{details.discount.discount}}</span>
@@ -136,39 +135,27 @@
         </div>
       </li>
 
-
-
-
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-6">
-            Final Price :
-          </div>
-          <div class="col-6">
-            <span Rs>{{totalAmount}}</span>
-          </div>
-        </div>
-      </li>
-
     </ul>
   </div>
 
+
+
   <ng-container *ngIf="details.carAlreadyActive">
 
-    <heading align="center" text="You have purchased a Monthly Plan for this Car"></heading>
-    <heading align="center" text="Head to the Dashboard now to Upgrade!"></heading>
+    <heading size="16" align="center" text="You have purchased a Monthly Plan for this Car"></heading>
+    <heading size="16" align="center" text="Head to the Dashboard now to Upgrade!"></heading>
 
-    <heading align="center" text="Or you can try a different Car."></heading>
-
+    <heading size="16" align="center" text="Or you can try a different Car."></heading>
+<br/><br/>
     <cta sticky="true" halfWidth="true" text="OK" (action)="dismissOnly()"></cta>
 
   </ng-container>
 
   <ng-container *ngIf="details.isUnlisted">
-    <heading text="We are currently not operational in your society." align="center"></heading>
-    <heading text="Our Sales team will soon be in touch to arrange a Demo in your Society." align="center"></heading>
-    <heading text="STAY SAFE" align="center" capitalize="true"></heading>
-    <heading text="BE HAPPY!" align="center" capitalize="true"></heading>
+    <heading size="16" text="We are currently not operational in your society." align="center"></heading>
+    <heading size="16" text="Our Sales team will soon be in touch to arrange a Demo in your Society." align="center"></heading>
+    <heading size="16" text="STAY SAFE" align="center" capitalize="true"></heading>
+    <heading  size="16" text="BE HAPPY!" align="center" capitalize="true"></heading>
 
     <br />
     Reach out to us for a Real Time Update: <a class="email-link"
@@ -177,6 +164,16 @@
     <cta small="true" text="OK" (action)="dismissOnly()"></cta>
 
   </ng-container>
+  <li *ngIf="!details.isUnlisted && !details.carAlreadyActive" class="list-group-item onTop">
+    <div class="row">
+      <div class="col-6 label">
+        Final Price
+      </div>
+      <div class="col-6 amount">
+        <span Rs>{{totalAmount}}</span>
+      </div>
+    </div>
+  </li>
   <cta *ngIf="!details.isUnlisted && !details.carAlreadyActive" [sticky]="true" text="Pay" halfWidth="true" sticky="true"
     (action)="dismissAndPay()"></cta>
 </div>

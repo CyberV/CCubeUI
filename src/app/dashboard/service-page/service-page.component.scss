@@ -1,7 +1,7 @@
 @import "src/variables.scss";
 
 .logo-container{
-    top: -20px;
+    top: -15px;
     position: relative;
 }
 
@@ -56,6 +56,9 @@
   border: none;
   border-bottom: 1px solid gray;
   font-size: 12px;
+  margin-bottom: 5px;
+  width: 100%;
+  border-color: $primary-color;
   
 }
 
@@ -66,7 +69,7 @@
 
 .car-selector-row {
   position: sticky;
-  top: -26px;
+  top: -40px;
   z-index: 100;
   margin-top: -25px;
   background: white;
@@ -86,12 +89,16 @@
         border-bottom: 1px solid gray;
       }
 
+      ion-slide {
+        margin-top: auto;
+      }
+
       .add-car-slide {
         width: 120px !important;
-        top: 10px;
+        top: 0px;
 
         @media screen  and (min-width: 400px){
-          top: 20px;  
+          top:  0px;  
         }
 
         left: -20px;
@@ -148,7 +155,7 @@
         }
         .swiper-slide img {
             width: 100%;
-            min-height: 80px;
+            min-height: 60px;
         }
     }
 

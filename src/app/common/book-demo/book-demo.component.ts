@@ -62,6 +62,9 @@ export class BookDemoComponent implements OnInit {
   bookDemo(location) {
     console.log('Booking Demo for ', location);
 
+    if (!location) {
+      return;
+    }
     let user = this.userService.getCurrentUser();
 
     let payload = {

@@ -2,7 +2,7 @@
 
 
   <cc-accordion
-    [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied : ' +  (appliedCoupons.length ? ((appliedCoupons[0].unit=='percent' ? '' : 'Rs ') +  appliedCoupons[0].value + (appliedCoupons[0].unit=='percent' ? ' %' : '') + ' OFF !') : '')"
+    [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied : ' +  (appliedCoupons.length ? ((appliedCoupons[0].unit=='percent' ? '' : 'Rs ') +  appliedCoupons[0].value + (appliedCoupons[0].unit=='percent' ? ' %' : '') + ' OFF') : '')"
     (onToggle)="ngOnInit()"
     #couponAccordion>
 
@@ -82,7 +82,7 @@
                 <br />
                 Valid For: <span class="desc">
                   <span *ngIf="item.validFor=='user'"> Just for You</span>
-                  <span *ngIf="item.validFor=='society'"> Your Society</span>
+                  <span *ngIf="item.validFor=='society'"> {{society}}</span>
                   <span *ngIf="item.validFor=='all'">All</span>
                 </span> <br />
 

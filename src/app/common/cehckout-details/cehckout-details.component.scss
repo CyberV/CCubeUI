@@ -3,12 +3,19 @@
 .discount-value {
     position: relative;
     margin-left: -30px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .carRegNo {
     span {
         margin-right: 5px;
+    }
+}
+
+mat-checkbox {
+    margin-left: 3px;
+    .mat-checkbox-inner-container {
+        margin-right: 15px;
     }
 }
 
@@ -38,12 +45,13 @@
 
 .header-row {
     color: $primary-color;
-    font-size: 140%;
+    font-size: 16px;
 }
 
 .addon-title {
     white-space: nowrap;
   overflow: hidden;
+  font-size: 12px;
   text-overflow: ellipsis;
 }
 
@@ -52,29 +60,37 @@
     font-size: 20px;
     margin-right: 7px;
     position: relative;
-    top: 4px;
+    top: 6px;
 }
 
 .upgrade-options {
     position: relative;
     top: -4px;
-    margin-left: 4px;
+    margin-left: 18px;
+    margin-right: 4px;
+
+    .deluxe-option {
+        margin-top: 2px;
+        display: block;
+    }
 }
 
 .addon-price {
     top: 5px;
+    font-size: 12px;
 }
 
 .upgrade-price {
+    margin-left: 2px;
 }
 
 .content-row {
-    margin-top: 10px;
+    margin-top: 5px;
     color: gray;
     font-size: 120%;
 
     ion-icon {
-        font-size: 26px;
+        font-size: 20px;
         color: $primary-color;
         margin-right: 10px;
     }
@@ -97,20 +113,24 @@ hr {
 }
 
 .coupon-lane {
-    font-size: 12px;
-    margin-left: 40px;
+    font-size: 10px;
+    margin-left: 33px;
     .yo {
         color: $secondary-color;
     }
 }
 
 .net-payable {
-    font-size: 20px;
+    font-size: 16px;
     letter-spacing: 1px;
 }
 
 .small-text {
-    font-size: 16px !important;
+    font-size: 12px !important;
+}
+
+hr {
+    margin: 8px 0;
 }
 
 .big-icon, .big-icon2 {
@@ -121,7 +141,7 @@ hr {
     margin-right: 10px;
 
     &.icon-wallet, &.icon-coupon &.icon-car, &.icon-calendar {
-        font-size: 22px !important;
+        font-size: 20px !important;
     margin-right: 14px !important;
     left: 3px;
     top: -1px;
@@ -133,9 +153,13 @@ hr {
 
 }
 
+.upgrade-container {
+    display: inline-flex;
+}
+
 mat-select {
-    width: 95px;
-    border-bottom: dashed $secondary-color;
+    width: 70px;
+    border-bottom: 1px dashed $secondary-color;
 }
 
 .body-type {
@@ -166,7 +190,11 @@ mat-select {
 }
 
 .icon-text {
-    font-size: 16px;
+    font-size: 12px;
+}
+
+.col-8 {
+    padding-right: 0 !important;
 }
 
 .card-container{
@@ -188,7 +216,7 @@ mat-select {
         color:white;
         padding: 15px;
         padding-top: 0;
-        font-size: 16px;
+        font-size: 14px;
         
         border-bottom-right-radius: 25px;
         border-bottom-left-radius: 25px;

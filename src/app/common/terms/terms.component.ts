@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { getConfigValue } from '../common.service';
 
 @Component({
@@ -8,9 +8,12 @@ import { getConfigValue } from '../common.service';
 })
 export class TermsComponent implements OnInit {
 
+  @Input() showClose:boolean;
+
   privacyConfig:any;
   constructor() {
     this.privacyConfig = getConfigValue('PRIVACY_CONFIG');
+    this.showClose = false;
   }
 
   ngOnInit() {

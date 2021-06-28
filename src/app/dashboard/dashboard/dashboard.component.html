@@ -15,7 +15,7 @@
             </div>
           </div>
 
-          <plan-slider #planSlider [plans]="currentPlans" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
+          <plan-slider #planSlider [plans]="currentPlans" [style.marginTop.px]="-20" [bodyType]="currentCar.bodyType" (showDetails)="onShowDetails($event)"
             (buyNow)="buyPlan($event)"></plan-slider>
 
           <addon-slider  [bodyType]="currentCar.bodyType" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelect($event)" (showDetails)="openAddon($event)"></addon-slider>

@@ -36,13 +36,18 @@
             </p>
           </div>
         </div>
-        <cta *ngIf="!verifyOnly && !vehicleTypeMismatch" text="Show me my Plans" pill="true" (action)="sendAction()"></cta>
+        <div class="row" *ngIf="!verifyOnly && !vehicleTypeMismatch">
+          <div class="offset-3 col-6">
+              <cta align="center" pill="true" text="Show Plans" (action)="sendAction()"></cta>
+
+          </div>
+        </div>
 
         <div *ngIf="verifyOnly" class="card animate__animated animate__bounceInDown">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Maker : {{carDetails.maker}}</li>
             <li class="list-group-item">Model : {{carDetails.model}}</li>
-            <li class="list-group-item">Body Type: {{carDetails.displayLabel}} </li>
+            <li *ngIf="!vehicleTypeMismatch" class="list-group-item">Body Type: {{carDetails.displayLabel}} </li>
           </ul>
           <p *ngIf="vehicleTypeMismatch" class="card-body">
               <span>The Registration Number doesn't belong to a Car. Please Try Again with a valid Car Registration Number!</span>

@@ -38,7 +38,7 @@ export class CtaComponent implements OnInit {
     this.loading = false;
     this.slim = false;
     this.outline = false;
-    this.size = 18;
+    this.size = 14;
     this.sticky = false;
     this.color="inherit";
     this.halfWidth = false;

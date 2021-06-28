@@ -38,7 +38,9 @@
     color: $secondary-color;
     float: right;
     cursor: pointer;
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: -10px;
 }
 
 h1 {

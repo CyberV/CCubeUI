@@ -154,7 +154,7 @@ export class SelectCarComponent implements OnInit {
 
 
     setTimeout( ()=> {
-      this.modelDrawer.toggle();
+      this.modelDrawer.toggle(false);
     }, 500);
 
    }

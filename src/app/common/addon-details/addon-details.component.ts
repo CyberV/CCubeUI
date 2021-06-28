@@ -38,6 +38,9 @@ export class AddonDetailsComponent implements OnInit {
 
   dateError: any;
 
+  months:number;
+  addonScheduled:any;
+
   constructor(
     private planService: PlanService,
     private userService: UserService,
@@ -171,6 +174,30 @@ export class AddonDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    let sub = this.planService.getCurrentSubscription();
+    let months = null;
+
+    if (sub) {
+      let renewDate = new Date(sub.renewDate);
+      let today = new Date();
+
+      months = renewDate.getMonth() - today.getMonth();
+      this.months = months;
+
+      if (months > 1) {
+
+        
+      } else {
+        //this.planService.updatePlanDuration('monthly');
+      }
+    
+    } else {
+      //this.planService.updatePlanDuration('monthly');
+      this.months = 1;
+    }
+
+
     if (this.adhoc && !this.addon) {
       this.addon = this.adhoc;
       this.isAdhoc = true;
@@ -202,6 +229,8 @@ export class AddonDetailsComponent implements OnInit {
 
       let car = this.carService.getCurrentCar();
       if (currentSubs && currentSubs.carRegNo == car.regNo) {
+
+
         let startDate = new Date(currentSubs.startDate);
 
         const currentYear = new Date().getFullYear();
@@ -215,11 +244,11 @@ export class AddonDetailsComponent implements OnInit {
           this.maxDate = new Date(foundAddon.expiresOn);
         }
 
-
         let diff = -1 * (planDate - (new Date().getDate()));
         console.log('Diff in days from cycle date', diff);
 
-
+        this.planService.canUpgradeThisMonth(currentSubs);
+        
         if (diff <= 10) {
           this.startDate = 'Tomorrow';
         } else {
@@ -229,6 +258,10 @@ export class AddonDetailsComponent implements OnInit {
       }
 
     }
+
+    this.addonScheduled = this.fromDashboard && this.purchased && this.addon && this.addon.scheduledDate ? this.addon.scheduledDate : false;
+
+
 
 
 

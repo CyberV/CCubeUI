@@ -93,6 +93,10 @@ export class SelectSocietyComponent implements OnInit {
     if(socName != '' && socName) {
       this.otherSoc = socName;
     }
+    this.societyChange.emit( {
+      isUnlisted: true, 
+      society: this.otherSoc || ''
+    });
     this.focus(true);
   }
 
@@ -145,6 +149,11 @@ export class SelectSocietyComponent implements OnInit {
 
   clearText() {
     this.onChange("");
+    this.societyChange.emit( {
+      isUnlisted: this.unlisted, 
+      society: ''
+    });
+    
   }
 
   onChange(key) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RescheduleComponent } from '../reschedule/reschedule.component';
+import { PlanService } from 'app/services/plan.service';
 
 @Component({
   selector: 'weekly-schedule',
@@ -20,7 +21,8 @@ export class WeeklyScheduleComponent implements OnInit {
   }
 
   constructor(
-    private modalController:ModalController
+    private modalController:ModalController,
+    private planService:PlanService
   ) {
     this.schedule = [];
     this.startDate = "";
@@ -82,8 +84,9 @@ export class WeeklyScheduleComponent implements OnInit {
       cssClass: 'plans-table-modal',
       componentProps: { 
         showClose: true,
+        adhoc: { addon: this.planService.getAddonByCode('FBW')},
         schedule: schedule,
-        count: this.hasAvailedFreeReschedule ? 0 : 1,
+        count: (!schedule.isRescheduled ? 1: 0 )+ (this.hasAvailedFreeReschedule ? 0 : 1),
         canReschedule: !schedule.isRescheduled,
         lastDate: this.lastDate
       }

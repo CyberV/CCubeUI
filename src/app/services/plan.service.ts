@@ -6,6 +6,8 @@ import { getConfigValue } from 'app/common/common.service';
 import { ToastController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 
+import * as moment from 'moment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +19,7 @@ export class PlanService {
   OnlyAddons: any;
 
   discountConfig:any;
+  upgradeConfig:any;
   private _planSubject = new Subject();
 
 
@@ -24,9 +27,9 @@ export class PlanService {
     return JSON.parse(JSON.stringify(this.AllPlans.filter((plan) => plan.code.toLowerCase() == 'dlx')[0]));
   }
 
-  createPeriodLabel(date, duration = "monthly") {
+  createPeriodLabel(date, duration = "monthly", addon = null) {
     if (date) {
-      return date.toString().split(' ').slice(1, 2).join(' ') + " - " + new Date(+(date) + (2592000000 * (duration == 'quarterly' ? 3 : 1))).toString().split(' ').slice(1, 2).join(' ') + " " + new Date(+(date) + 2592000000).getFullYear();
+      return date.toString().split(' ').slice(1, 2).join(' ') + " - " + new Date(+(date) + (2592000000 * (duration == 'quarterly' ? (addon ? addon.maxMonths : 3) : 1))).toString().split(' ').slice(1, 2).join(' ') + " " + new Date(+(date) + 2592000000).getFullYear();
     } else {
       return null;
     }
@@ -56,6 +59,9 @@ export class PlanService {
     this.discountConfig = getConfigValue("INBUILTDISCOUNT_CONFIG");
     this.AllPlans = this.getAllPlans();
     this.AllFeatures = this.getAllFeatures();
+    this.upgradeConfig = getConfigValue("RENEW_ADDON_PERIOD");
+
+
 
     this.fixedAdhocs = this.AllFeatures.filter((f) => f.isAdhoc == true && f.active);
     
@@ -80,6 +86,7 @@ export class PlanService {
     this.clear();
     this.clearAddons();
     this.clearAdhocs();
+    this.clearSubscription();
   }
 
   clearSubscription() {
@@ -99,6 +106,24 @@ export class PlanService {
   }
 
   private generateComparisonPlan(currentPlan, targetPlan) {
+    currentPlan = JSON.parse(JSON.stringify(currentPlan));
+    targetPlan = JSON.parse(JSON.stringify(targetPlan));
+    
+    let sub = this.getCurrentSubscription();
+    let months = 1;
+
+    if (sub) {
+      let renewDate = new Date(sub.renewDate);
+      let today = new Date();
+
+      months = renewDate.getMonth() - today.getMonth();
+      targetPlan.maxMonths = months;
+      
+    
+    } else {
+      targetPlan.maxMonths = 3;
+    }
+
     let features = JSON.parse(JSON.stringify(this.AllFeatures));
     let index = -1;
     currentPlan.features.forEach(featureCode => {
@@ -109,14 +134,37 @@ export class PlanService {
     });
 
     targetPlan.price = this.getUpdatePrice(currentPlan.name, targetPlan.name);
+    targetPlan.upgradePrice = targetPlan.price;
+    targetPlan.forUpgrade = true;
+    targetPlan.originalPlan = currentPlan;
 
     return targetPlan;
 
   }
 
+  getAddonByCode(addonCode) {
+    let found = this.AllFeatures.filter((f) => f.code == addonCode);
+    return found.length ? found[0] : null;
+  }
+
+  getCouponByCode(couponCode) {
+    let coupons = getConfigValue('COUPON_CONFIG');
+
+    if (coupons && coupons.length) {
+      let found = coupons.filter((c)=> c.code == couponCode);
+      return found.length ? found[0] : null;
+    } else {
+      return null;
+    }
+  }
+
   getUpgradePlans(payment) {
-    let planName = payment.nextPlan && payment.nextPlan.plan ? payment.nextPlan.plan.name : payment.plan.name;
+    let planName = payment.plan ? payment.plan.name : null;
+    if (!planName) {
+      return [];
+    }
     let currentPlan = this.getPlanByName(planName);
+    currentPlan.duration = payment.plan.duration;
     let targetPlan = this.UpgradePlan;
 
     switch (currentPlan.code) {
@@ -181,6 +229,13 @@ export class PlanService {
     return found.length ? found[0] : null;
   }
 
+  getSavedSubscriptions() {
+    let common = JSON.parse(sessionStorage.getItem('allPayments'));
+
+    return common && common != "" && common != 'null' ? common : [];
+    
+  }
+
   // setDateFor(type, name, date) {
   //   switch(type) {
   //     case 'addon': {
@@ -231,6 +286,26 @@ export class PlanService {
 
   }
 
+  canUpgradeThisMonth(sub) {
+    if (sub.serviceDay) {
+      return sub.serviceDay <= this.upgradeConfig;
+    } else {
+      return false;
+    }
+  }
+
+  canUpgradePartial(sub) {
+    let today = moment();
+    let daysLeft = moment(sub.renewDate).diff(today, 'days');
+    if (sub.serviceDay) {
+      return !(sub.serviceDay > this.upgradeConfig && daysLeft > 29);
+    } else {
+      return false;
+    }
+  }
+
+
+
   changePlanForCar(planName, car = null) {
 
     let plan = this.getSelectedPlan();
@@ -274,10 +349,16 @@ export class PlanService {
     if (car) {
       bodyType = car.bodyType;
     }
-    plan.price = +(plan.pricing[bodyType]);
+
+    if (!plan.forUpgrade) {
+      plan.price = +(plan.pricing[bodyType]);
+    } else {
+      plan.originalPrice = plan.upgradePrice;
+    }
+
     plan.carNumber = sub && sub.length ? subs.indexOf(sub[0]) + 1 : subs.length + 1;
 
-    if (this.isSecondCar()) {
+    if (this.isSecondCar() && !plan.forUpgrade) {
       if (this.discountConfig && this.discountConfig.plan && this.discountConfig.plan.secondCar) {
         plan.originalPrice = plan.price;
        
@@ -288,22 +369,31 @@ export class PlanService {
         plan.forSecondCar = null;
       }
     } else {
-      plan.originalPrice = null;
+      if (!plan.forUpgrade) {
+        plan.originalPrice = null;
+      }
       plan.forSecondCar = null;
     }
 
     let duration = this.getPlanDuration();
 
     plan.duration = duration;
-    plan.period = this.createPeriodLabel(plan.lastDate ? new Date(plan.lastDate) : new Date(), plan.duration);
+
+    if (!plan.forUpgrade) {
+      plan.period = this.createPeriodLabel(plan.lastDate ? new Date(plan.lastDate) : new Date(), plan.duration);
+    } else {
+      plan.period = this.createPeriodLabel(new Date(), plan.duration);
+    }
+
 
     if (duration == "quarterly") {
 
+      //plan.originalPrice
       plan.price = (plan.originalPrice || plan.price) * 3;
 
       let dscnt: number = (getConfigValue('DISCOUNT_QUARTERLY'));
 
-      if (dscnt && dscnt > 0) {
+      if (dscnt && dscnt > 0 && !plan.forUpgrade) {
         plan.originalPrice = plan.price;
         let discount = Math.floor((plan.price * dscnt) / 100);
         plan.price = plan.originalPrice - discount;
@@ -311,7 +401,11 @@ export class PlanService {
 
       return plan;
     } else {
+
       plan.originalPrice = plan.originalPrice ? plan.originalPrice : null;
+      if (plan.forUpgrade && plan.upgradePrice) {
+        plan.price = plan.originalPrice;
+      }
     }
     return plan;
   }
@@ -322,15 +416,18 @@ export class PlanService {
   }
 
   updatePlanDuration(duration) {
+
+    sessionStorage.setItem('planDuration', duration);
+
     let plan = this.getSelectedPlan();
+
     if (plan) {
-      sessionStorage.setItem('planDuration', duration);
+      plan.duration = duration;
       let updatedPlan = this.updatePlanPricing(plan);
       this.changePlan(updatedPlan);
     }
-    else {
-      sessionStorage.setItem('planDuration', duration);
-    }
+
+
 
     this._planSubject.next({
       key: 'planDuration',
@@ -345,9 +442,11 @@ export class PlanService {
       for (let i = 0; i < addons.length; i++) {
         let addon = addons[i];
         addon.duration = duration;
-        addon.period = plan.period;
+        addon.period = plan ? plan.period : this.createPeriodLabel( new Date(), duration, addon);
 
         addon.price = addon.pricing[this.carService.getCurrentCar().bodyType];
+
+        plan = plan ? plan : (this.getAllSubscriptions().filter((s) => !s.isAdhoc).length > 0);
 
         if (plan && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
           addon.originalPrice = addon.price;
@@ -359,7 +458,7 @@ export class PlanService {
         }        
 
         if (duration == "quarterly") {
-          addon.price = addon.price * 3;
+          addon.price = addon.price * addon.maxMonths;
 
           // let dscnt: number = (getConfigValue('DISCOUNT_QUARTERLY'));
 
@@ -392,6 +491,19 @@ export class PlanService {
 
   }
 
+  
+  upgradePlan (plan, startDate) {
+    
+    plan.forUpgrade = true;
+    plan.startDate = startDate;
+
+    plan.period = this.createPeriodLabel(startDate);
+
+    this.changePlan(plan);
+
+  }
+
+
   changePlan(plan) {
     if (plan) {
       sessionStorage.setItem('selectedPlan', JSON.stringify(plan));
@@ -407,7 +519,7 @@ export class PlanService {
       let info: any = {};
 
       if (order.plan) {
-        total += order.plan.originalPrice || order.plan.price;
+        total += order.plan.forUpgrade ? order.plan.price : (order.plan.originalPrice || order.plan.price);
       }
 
       if (order.addons && order.addons.length) {
@@ -445,7 +557,11 @@ export class PlanService {
         info.newCarDiscount = order.newCarDiscount;
       }
 
-      order.total = total >= 0 ? total: 0;
+      //order.total = total >= 0 ? total: 0;
+      order.total = order.total;
+      if (total != order.total) {
+        console.log('\n\n == = = PAYMENT ERROR !!');
+      }
       order.info = info;
 
 
@@ -453,6 +569,22 @@ export class PlanService {
 
       resolve(order);
     })
+  }
+
+  removeCouponFromOrder() {
+    let order = this.getCurrentOrder();
+
+    order.total += (order.discount ? order.discount.discount : 0);
+    order.discount = null;
+    order.info.discount = null;
+    
+    
+    this.setAppliedCoupon(null);
+
+    
+    sessionStorage.setItem('currentOrder', JSON.stringify(order));
+
+
   }
 
   getCurrentSubscription() {
@@ -612,16 +744,47 @@ export class PlanService {
     }
   }
 
+
+  includeComplimentaryAdhocWithCode(adhocCode) {
+    let found = this.getAllFeatures().filter((f) => f.code.toLowerCase() == adhocCode.toLowerCase());
+
+    let car = this.carService.getCurrentCar();
+
+    if (found.length && car) {
+      found = found[0];
+
+      found.price = found.pricing[car.bodyType];
+      this.includeAdhoc(found, false, true);
+    }
+  }
+
   includeAddon(addon, showToast = false) {
     let addons = this.getIncludedAddons();
     if (!addons) {
       addons = [];
     }
 
+
+
     if (addons.some((a) => a.name == addon.name)) {
     } else {
 
       addon.duration = this.getPlanDuration();
+
+      let sub = this.getCurrentSubscription();
+      let months = 1;
+  
+      if (sub) {
+        let renewDate = new Date(sub.renewDate);
+        let today = new Date();
+  
+        months = renewDate.getMonth() - today.getMonth();
+        addon.maxMonths = months;
+        
+      
+      } else {
+        addon.maxMonths = 3;
+      }
 
       if (addon.duration == 'quarterly') {
         addon.price = addon.price * 3;
@@ -698,20 +861,25 @@ export class PlanService {
     return adhocs;
   }
 
-  includeAdhoc(adhoc, showToast = false) {
+  includeAdhoc(adhoc, showToast = false, complimentary = false) {
     let adhocs = this.getIncludedAdhocs();
     if (!adhocs) {
       adhocs = [];
     }
 
-    if (adhocs.some((a) => a.name == adhoc.name)) {
+    if (!complimentary && adhocs.some((a) => a.name == adhoc.name)) {
     } else {
       adhocs.push(adhoc);
 
+      if (complimentary) {
+        adhoc.complimentary =true;
+       sessionStorage.setItem('complimentary', JSON.stringify({adhocs: [adhoc]}));
+      } else {
+        showToast ?this.presentToast(adhoc.name + " Added!") : '';
+        sessionStorage.setItem('includedAdhocs', JSON.stringify(adhocs));
+      }
       
-      showToast ?this.presentToast(adhoc.name + " Added!") : '';
-
-      sessionStorage.setItem('includedAdhocs', JSON.stringify(adhocs));
+     
     }
 
     return adhocs;

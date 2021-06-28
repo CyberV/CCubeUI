@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PlanService } from 'app/services/plan.service';
 import { IonSlides } from '@ionic/angular';
 import { getConfigValue } from '../common.service';
+import { prettyDate } from 'app/util/util';
 
 @Component({
   selector: 'adhoc-slider',
@@ -17,6 +18,7 @@ export class AdhocSliderComponent implements OnInit {
   @Input() selectedAdhocs: any;
   @Input() subscriptionAdhocs: any;
   @Input() active: boolean;
+  @Input() wide:boolean;
   @Input() plan: any;
   @Input('blockedAdhocs') blockedAddons: any;
 
@@ -45,6 +47,10 @@ export class AdhocSliderComponent implements OnInit {
     return t.length <= 15;
   }
 
+  pretty(addon) {
+    return prettyDate(this.subscriptionAdhocs.filter((a) => a.addon.code == addon.code)[0].expiresOn);
+  }
+
   isScheduled(addon) {
     if (!this.dateMap.length) {
       return false;
@@ -53,9 +59,17 @@ export class AdhocSliderComponent implements OnInit {
     return found.length && found[0].date != "Date" ? found[0].date : false;
   }
 
+  isComplimentary(addon) {
+    if (!this.dateMap.length) {
+      return false;
+    }
+    let found = this.dateMap.filter((obj) => obj.code == addon.code);
+    return found.length && found[0].complimentary ? found[0].complimentary : false;
+  }
+
   options = {
     centeredSlides: false,
-    slidesPerView: 2.3,
+    slidesPerView: 1.4,
     spaceBetween: 20,
   };
 
@@ -74,6 +88,7 @@ export class AdhocSliderComponent implements OnInit {
     this.bodyType = 'sedan';
     this.showAnimation = false;
     this.blockedAddons = [];
+    this.wide = false;
     this.subscriptionAdhocs = [];
     this.adhocs = [
       {
@@ -171,6 +186,7 @@ export class AdhocSliderComponent implements OnInit {
       this.dateMap = this.subscriptionAdhocs.map((adn) => {
         return {
           code: adn.addon.code,
+          complimentary: adn.addon.complimentary,
           date: new Date(adn.scheduledTime).toString().split(' ').slice(1, 3).join(' ')
         };
       })
@@ -180,6 +196,7 @@ export class AdhocSliderComponent implements OnInit {
       if (this.adnSlider) {
         this.adnSlider.stopAutoplay();
       }
+      this.updatePrice();
       this.adhocMap = [];
       this.adhocMap = this.selectedAdhocs.map((addon) => {
         return addon.code;
@@ -209,12 +226,12 @@ export class AdhocSliderComponent implements OnInit {
 
 
   updatePrice() {
-
+    let sub = this.planService.getCurrentSubscription();
     if (this.bodyType && this.adhocs && this.adhocs.length && this.adhocs[0].pricing) {
       for (let i = 0; i < this.adhocs.length; i++) {
         this.adhocs[i].price = this.adhocs[i].pricing[this.bodyType];
 
-        if (this.plan && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
+        if ( (this.plan || (sub && !sub.isAdhoc))  && this.discountConfig && this.discountConfig.addon && this.discountConfig.addon.withPlan) {
           this.adhocs[i].originalPrice = this.adhocs[i].price;
           this.adhocs[i].withPlan = true;
           this.adhocs[i].price -= this.discountConfig.addon.withPlan;

@@ -11,6 +11,11 @@ p{
     align-self: center;
 }
 
+.page-spinner {
+    position: relative;
+    margin-top: 5em;
+}
+
 .input-group-text {
     height: 25px;
 }
@@ -61,12 +66,12 @@ p{
 .container {
     background: $bg-white;
     border-radius: 25px;
-    padding: 25px;
+    padding: 0;
     scroll-behavior: smooth;
     margin-top: 2em;
 
     @media screen and (max-width: 768px) {
-        margin-top: 5em;
+        margin-top: 3.5em;
     }
 }
 

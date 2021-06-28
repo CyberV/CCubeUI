@@ -23,10 +23,14 @@
 .actions-row {
     position: absolute;
     z-index: 2;
-    bottom: 3%;
+    bottom: 0px;
     right: 0;
     width: 100%;
     left: 10px;
+
+    @media screen  and (min-width: 350px){
+        bottom: 40px;
+    }
 }
 
 .swiper-pagination-bullets {
@@ -63,6 +67,7 @@ ion-slides {
     max-height: 495px;
     @media screen and (min-width: 350px) {
         max-height: unset;
+        margin-top: -1em;
     }
    
 }

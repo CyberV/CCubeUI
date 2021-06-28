@@ -12,6 +12,9 @@ export class SwitchComponent implements OnInit {
   @Output() toggle = new EventEmitter();
 
   @Input() slim:boolean;
+
+  @Input() forAddons:boolean;
+
   open: boolean;
   @Input('planDuration') activePlanDuration: string;
 
@@ -21,9 +24,10 @@ export class SwitchComponent implements OnInit {
     private planService: PlanService
   ) {
     this.open = false;
-    this.activePlanDuration = 'monthly';
+    this.activePlanDuration =  this.planService.getPlanDuration()  || 'monthly';
     this.discountValue = 20;
     this.slim = false;
+    this.forAddons = false;
   }
 
   ngOnInit() {

@@ -14,6 +14,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { ServicePageComponent } from './service-page/service-page.component';
+import { AppComponent } from 'app/app.component';
 
 @NgModule({
   declarations: [ 
@@ -35,6 +36,9 @@ import { ServicePageComponent } from './service-page/service-page.component';
     CommonComponentsModule,
     DashboardPageRoutingModule,
 
+  ],
+  providers: [
+    AppComponent
   ]
 })
 export class DashboardModule { }

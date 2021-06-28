@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
 
@@ -52,6 +52,8 @@ export class AppComponent {
   notifToggleOpen:boolean;
   profilePic: any;
 
+  lastTimeBackPress:number;
+
   constructor(
     private platform: Platform,
     private route: ActivatedRoute,
@@ -76,6 +78,7 @@ export class AppComponent {
     this.fcmInitialized = false;
     this.hasNewNotifications = false;
     this.ready = false;
+    this.lastTimeBackPress = 0;
 
     this.noBackNavigation = [
       'select-car',
@@ -197,6 +200,13 @@ export class AppComponent {
 
     await alert.present();
 
+
+    if (data.disappearing) {
+      setTimeout(() => {
+        alert.dismiss();
+      }, 2000);
+    }
+
     alert.onWillDismiss().then(()=> {
       if (data.action && data.action == 'refresh') {
         window.location.reload();
@@ -255,18 +265,74 @@ export class AppComponent {
     
   }
 
+  @HostListener('document:ionBackButton', ['$event'])
+  backAction(event: any) : void {}
+  
+  timePeriodToExit = 2000;
+
+  async onBackButton(event) {
+    event.detail.register(100, async () => {
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+      event.preventDefault();
+    });
+
+    // this.backCount++;
+    // alert(this.backCount);
+
+    if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+      // this.platform.exitApp(); // Exit from app
+      navigator['app'].exitApp(); // work in ionic 4
+
+    } else {
+      const toast = await this.toastController.create({
+        message: 'Press back again to exit.',
+        duration: 2000,
+        position: 'bottom'
+      });
+      toast.present();
+      // console.log(JSON.stringify(toast));
+      this.lastTimeBackPress = new Date().getTime();
+    }
+  }
+
   onDeactivate(comp) {
-    //console.log('Deactivated', data);
+    console.log('Deactivated', comp.context, comp);
+
+    if (comp.context == 'service') {
+      this.backAction =  function() : void {};
+    }
   }
 
   async onActivate(comp) {
     this.menu.enable(true, 'first');
+    console.log('Activated', comp.context, comp);
+
+    if (comp.context == 'landing' && this.userService.isLoggedIn()) {
+      
+      this.currentUser = this.userService.getCurrentUser();
+      let showDashboard = this.currentUser.status == 'Active';
+
+      // if (showDashboard && sub) {
+      //   alert('Exit?');
+      // }
+      if (showDashboard) {
+        this.router.navigate(['/dashboard/service']);
+      } else {
+        this.router.navigate(['/dashboard/select-car']);
+      }
+    }
 
     this.profilePic = await this.documentService.getProfilePicture();
 
     //this.notificationService.saveNewNotification({title:'Congratulations', 'body': 'Sample Notif', data: JSON.stringify({car: {"model":"Duster","price":"Rs. 8.49 Lakh","details":"1498 cc | 20 kmpl | Petrol","bodyType":"suv","image":"./assets/icons/makers/models/149.png","id":149,"searchedBy":["9560879722"],"ownedBy":[],"missing":false,"_id":"5f9884d25d45340018b88841","carId":"149","maker":"RENAULT","regNo":"hr51bl0139","fuelType":"DIESEL","registeredOn":"11/23/2016","year":2016,"ownerName":"VIKRANT SIWACH","variant":"RENAULT DUSTER","fuelNorms":"BHARAT STAGE IV","chassisNo":"MEEHSRAWEG90XXXXX","engineNo":"K9KF830E0XXXXX","insuranceUpto":"2020-11-28T00:00:00.000Z","fitness":"2031-11-04T00:00:00.000Z","vehicleType":"MOTOR CAR (LMV)","age":"3 years","__v":0,"name":"duster"}, msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}})});
 
     this.context = comp.context;
+
+    
+    if (comp.context == 'service') {
+      this.backAction = this.onBackButton;
+    }
 
     this.isLoggedIn = this.userService.isLoggedIn();
 

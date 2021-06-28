@@ -32,10 +32,12 @@ export class SelectCityComponent implements OnInit {
 
 
   get filteredCities() {
+    
     if (!this.select || this.select == "") {
       return this.options;
     } else {
-      return this.citiesService.findMatchingCities(this.select);
+      let c = this.citiesService.findMatchingCities(this.select);
+      return c.length == 1 ? this.options :c;
     }
   }
 

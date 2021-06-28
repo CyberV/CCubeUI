@@ -49,13 +49,14 @@ mat-checkbox {
 }
 
 .details-container {
-    height: 82vh;
+    //height: 82vh;
 }
 
 
 .existingUser {
     position: relative;
     top: 10px;
+    display: block;
 }
 
 .link {

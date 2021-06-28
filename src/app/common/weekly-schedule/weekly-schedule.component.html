@@ -7,12 +7,15 @@
                 <span  class=" ">{{displayDate(service.date)}}</span>
             </div>
             <div class="col-9 --no-padding">
-                <ng-container *ngFor="let task of service.tasks">
-                  <span class="badge task badge-success adhoc" [class.badge-success]="task.task != 'Micro Fiber Dusting' && task.task != 'Leave'" [class.badge-light]="task.task == 'Leave'" [class.badge-primary]="task.task == 'Micro Fiber Dusting'"> {{task.task}} </span>  <ion-icon *ngIf="task.task == 'Internal Sanitization'" class="icon-shield" name="shield-checkmark-outline"></ion-icon>   <ion-icon class="reschedule-link" [class.blocked]="service.isRescheduled"  *ngIf="task.task == 'Outside Eco Wash'" (click)="openReschedule(service)" name="calendar-outline"></ion-icon> <br/> 
+                <div class="task-container" *ngFor="let task of service.tasks" [class.vertical-center]="service.adhocs.length == 0 && service.tasks.length == 1 && ( task.task == 'Micro Fiber Dusting' || task.task == 'Leave')">
+                  <span class="badge task badge-success adhoc" [class.badge-success]="task.task != 'Micro Fiber Dusting' && task.task != 'Leave'" [class.badge-light]="task.task == 'Leave'" [class.badge-primary]="task.task == 'Micro Fiber Dusting'"> {{task.task}} </span> 
+                  <ion-icon *ngIf="task.task == 'Internal Sanitization'" class="icon-shield" name="shield-checkmark-outline"></ion-icon>  
+                  <ion-icon class="reschedule-link" [class.blocked]="service.isRescheduled"  *ngIf="task.task == 'Outside Eco Wash'" (click)="openReschedule(service)" name="calendar-outline"></ion-icon>
+                  <br/>
                   <ng-container *ngFor="let addon of task.addons">
                       <div class="badge badge-light addon"> <span class="vertical-center-text"> {{addon}} </span></div> 
-                  </ng-container><br/>
-                </ng-container>
+                  </ng-container>
+                </div>
 
                 <span *ngFor="let adhoc of service.adhocs" class="badge badge-warning adhoc"> {{adhoc}} </span> 
 

@@ -24,16 +24,16 @@
 	}
 
 	@media screen and (min-width:400px) {
-		right: 4em;
+		right: 5em;
 		
 	}
 
         img {
-            transform: rotate(100deg);
+            transform: rotate(134deg);
             position: relative;
             z-index: 1;
 			left: -3px;
-			top: 14px;
+			top: 23px;
 			height: 20px;
         }
     }
@@ -55,10 +55,10 @@
             border-radius: 15px;
             padding: 4px 4px;
             border: 0px dotted #ff5722;
-            top: 26px;
-            position: relative;
-            font-size: 12px;
-            right: -30px;
+			top: 50px;
+			position: relative;
+			font-size: 12px;
+			right: -34px;
 
             span {
                 transition: all 0.3s ease-in-out;
@@ -183,7 +183,15 @@
 
 
 .plan_selector {
-    width: 260px;
+	width: 260px;
+	
+	&.addons {
+		width: 205px;
+
+		.option-2 {
+			width: 125px;
+		}
+	}
 }
 .plans_section .services-list-section .plan_selector .option {
     font-size: 18px;

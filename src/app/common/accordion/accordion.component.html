@@ -29,7 +29,7 @@
     </mat-expansion-panel-header>
   </mat-expansion-panel>
 
-  <mat-expansion-panel *ngIf="empty" class="drop panel-container">
+  <mat-expansion-panel hideToggle="true" *ngIf="empty" class="drop panel-container">
       <mat-expansion-panel-header class="drop panel-header">
         <mat-panel-title #drawerToggle >
           <span *ngIf="hasStep" [ngClass]="{'step': true,  'disabled': disabled && !empty , 'error': error, 'locked ': locked}">

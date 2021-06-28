@@ -1,5 +1,6 @@
 .card {
     margin-top: 1em;
+    border-radius: 10px;
 }
 .card-title {
     text-transform: capitalize;
@@ -7,4 +8,5 @@
 
 .list-group {
     font-size: 14px;
+    border-radius: 10px !important;
 }

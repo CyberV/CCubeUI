@@ -759,7 +759,7 @@
                 "price": "Rs. 6.95 Lakh",
                 "details": "1199 cc | 22 kmpl | Petrol | Diesel",
                 "bodyType": "hatchback",
-                "image": "https://stimg.cardekho.com/images/carexteriorimages/630x420/Tata/Tata-Nano/1735/1563258193189/front-left-side-47.jpg",
+                "image": "./assets/icons/makers/models/204.png",
                 "carId": 204
             },
             {
@@ -1445,7 +1445,7 @@
                 "price": "Rs. 7.49 Lakh",
                 "details": "999 cc | 22 kmpl | Petrol | Diesel",
                 "bodyType": "phatchback",
-                "image": "https://stimg.cardekho.com/images/carexteriorimages/630x420/Skoda/Skoda-Fabia/2968/1545899323311/front-left-side-47.jpg?tr=w-456",
+                "image": "./assets/icons/makers/models/208.png",
                 "carId": 208
             },
             {
@@ -1453,7 +1453,7 @@
                 "price": "Rs. 7.49 Lakh",
                 "details": "999 cc | 22 kmpl | Petrol | Diesel",
                 "bodyType": "suv",
-                "image": "https://media.zigcdn.com/media/model/2019/Sep/skoda_kodiaq_600x400.jpg",
+                "image": "./assets/icons/makers/models/209.png",
                 "carId": 209
             },
             {
@@ -1990,7 +1990,7 @@
     },
     {
         "maker": "Chevrolet",
-        "logo": "./assets/icons/makers/36.png",
+        "logo": "./assets/icons/makers/37.png",
         "cars": [
             {
                 "model": "Micra",

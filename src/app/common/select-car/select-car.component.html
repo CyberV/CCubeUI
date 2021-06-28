@@ -50,8 +50,8 @@
           </mat-card>
         </div>
     </cc-accordion>
-    <cc-accordion *ngIf="modelSelected" empty="true" [title]="'Body Type : '+ displayType">
-      Check Plans for {{displayType}} on next Page.
+    <cc-accordion class="--no-click" *ngIf="modelSelected" empty="true" [title]="'Body Type : '+ displayType">
+      <p>Check Plans for {{displayType}} on next Page.</p>
     </cc-accordion>
   </div>
 

@@ -83,6 +83,7 @@ export class DashboardComponent implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then((data)=> {
+       ;
       if (data.data && data.data.addon) {
         let a =  data.data.addon;
         if (a.isAdhoc) {

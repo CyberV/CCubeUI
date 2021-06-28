@@ -13,7 +13,8 @@
 
       <app-signin-form *ngIf="showLogin && !loginOnly"  [context]="context" (forgotPassword)="loginOnly = true;"></app-signin-form>
 
-      <cta *ngIf="(!showLogin || loginOnly ) && context == 'details'" class="signup-btn" text="Create Account" [sticky]="true" [loading]="loading" (action)="createUser()" ></cta>
+      <cta *ngIf="(!showLogin || loginOnly ) && context == 'details'" class="signup-btn" text="Next" [sticky]="true" [loading]="loading" (action)="showNextDetails()" ></cta>
+      <cta *ngIf="(!showLogin || loginOnly ) && context == 'details2'" class="signup-btn" text="Create Account" [sticky]="true" [loading]="loading" (action)="createUser()" ></cta>
 
     </div>
   </div>

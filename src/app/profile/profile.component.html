@@ -3,7 +3,7 @@
     <div *ngIf="ready" class="row profile-content" [class.fullPage]="context!='profile'">
       <div class="offset-md-2 col-md-8">
         <div class="container">
-          <spinner *ngIf="!ready" class="text-center" color='blue'></spinner>
+          <spinner class="page-spinner" *ngIf="!ready" class="text-center" color='blue'></spinner>
           <ng-container *ngIf="ready">
               <div *ngIf="context=='profile'" class="card animate__animated animate__bounceInDown">
                   <img class="card-img-top" [src]="profilePic" (click)="setProfilePic()" alt="User Image">
@@ -15,7 +15,11 @@
                             <mobile-input [readonly]="true" name="Phone" [(value)]="currentUser.phone"> </mobile-input>
                          
                             <mobile-input [readonly]="true" name="Email" [(value)]="currentUser.email"> </mobile-input>
-                        
+                            
+<select-society *ngIf="userLocation.society" [disabled]="true" [society]="userLocation.society" [city]="userLocation.city" ></select-society>
+
+<select-city  [(city)]="currentUser.city" [disabled]="true"></select-city>
+
                       </ul>
                       <refer-earn slim="true" noPadding="true"></refer-earn>
                   </div>

@@ -2,11 +2,12 @@
 <div class="row">
     <div class="col-12">
         <h1 
-            [style.color]="color" 
+            [style.color]="color == 'primary' ? '#00a4a7' : color" 
             [style.fontSize]="size + 'px'"
             [style.textAlign]="align"
             [class.outline]="outline"
             [class.slim]="slim"
+
             > 
             <span *ngIf="formattedText" class="capitalized">
                 <span *ngFor="let word of formattedText" class="word">
@@ -18,7 +19,7 @@
             <span *ngIf="!formattedText">
                 {{text}} 
             </span>
-            <span *ngIf="showClose" class="close" (click)="dismiss()">X</span>
+            <span *ngIf="showClose" class="close" (click)="dismiss()"><ion-icon name="close-outline" class="--red-text"></ion-icon> </span>
         </h1>   
         
         <ng-content ></ng-content>

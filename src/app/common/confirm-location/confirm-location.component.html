@@ -1,7 +1,7 @@
 <br/>
 <span note> * New Societies have been added. Find yours now!</span>
 
-<mobile-input [readonly]="disableAll" name="House No / Flat No" (enterKey)="focusTo('inpStreet')" mandatory="true" type="text" [(value)]="location.houseNo"></mobile-input>
+<mobile-input [readonly]="disableAll" name="House No / Flat No" (enterKey)="focusTo('inpStreet')" mandatory="true" type="text" [(value)]="location.houseNo" (valueChange)="checkValues()"></mobile-input>
 
 <mobile-input [readonly]="disableAll" #inpStreet name="Street / Block Name" (enterKey)="focusTo('inpSociety')" type="text" [(value)]="location.block"></mobile-input>
 

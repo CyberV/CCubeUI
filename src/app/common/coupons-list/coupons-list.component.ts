@@ -5,6 +5,7 @@ import { AccordionComponent } from '../accordion/accordion.component';
 import { BookDemoComponent } from '../book-demo/book-demo.component';
 import { ToastController } from '@ionic/angular';
 import { CarService } from 'app/services/car.service';
+import { scrollElementToTop, scrollToTop } from 'app/util/util';
 
 @Component({
   selector: 'coupons-list',
@@ -15,6 +16,7 @@ export class CouponsListComponent implements OnInit {
 
   @Input() availableCoupons:any;
   @Input() totalAmount:number;
+  @Input() serviceTotal:number;
   @Input() slim:boolean;
 
   @Input() appliedCoupons:any;
@@ -29,7 +31,7 @@ export class CouponsListComponent implements OnInit {
   @ViewChildren('couponAccordion') couponAccordion : QueryList<AccordionComponent>;
 
   isCouponEligible(coupon) {
-    return this.totalAmount >= coupon.minCartValue;
+    return this.serviceTotal >= coupon.minCartValue;
   }
 
 
@@ -50,6 +52,7 @@ export class CouponsListComponent implements OnInit {
     private toastController: ToastController
   ) {
     this.totalAmount = 100;
+    this.serviceTotal = 100;
     this.society = "";
     this.slim = false;
     this.appliedCoupons = [];
@@ -90,7 +93,7 @@ export class CouponsListComponent implements OnInit {
   }
 
   ngOnChanges(changes) {
-    if(changes.totalAmount && this.totalAmount) {
+    if(changes.appliedCoupons && this.appliedCoupons.length && changes.appliedCoupons.previousValue && changes.appliedCoupons.previousValue.length && changes.appliedCoupons.currentValue.length && changes.appliedCoupons.previousValue[0].code != changes.appliedCoupons.currentValue[0].code) {
       this.applyCoupon(this.appliedCoupons.length ? this.appliedCoupons[0] : null);
     }
 
@@ -98,11 +101,17 @@ export class CouponsListComponent implements OnInit {
 
   openCoupons() {
     if (!this.couponAccordion.first.isOpen)
-    this.couponAccordion.first.toggle();
+    this.couponAccordion.first.toggle(true);
   }
 
   tryCoupon(couponCode) {
     if (!couponCode) {
+      return;
+    }
+
+    let cpn = this.planService.getCouponByCode(couponCode);
+
+    if (!cpn || !this.isCouponEligible(cpn)) {
       return;
     }
     let car = this.carService.getCurrentCar();
@@ -113,6 +122,7 @@ export class CouponsListComponent implements OnInit {
         this.customCoupon = "";
         this.planService.setAppliedCoupon(response.data.coupon);
         this.appliedCoupons = [response.data.coupon];
+        scrollToTop();
         this.discount.emit(response.data);
 
           if (this.couponAccordion.first.isOpen)
@@ -139,7 +149,7 @@ export class CouponsListComponent implements OnInit {
 
 
   async applyCoupon(coupon) {
-    if (!coupon) {
+    if (!coupon || !this.isCouponEligible(coupon)) {
       return;
     }
     this.loading[coupon.code] = true;
@@ -148,6 +158,7 @@ export class CouponsListComponent implements OnInit {
       this.loading[coupon.code]= false;
       if (response.success) {
         this.planService.setAppliedCoupon(coupon);
+        scrollToTop();
         this.appliedCoupons = [coupon];
         this.discount.emit(response.data);
 
@@ -183,6 +194,10 @@ export class CouponsListComponent implements OnInit {
     let soc = localStorage.getItem('selectedSociety');
 
     this.societyData = soc && soc != "null" ? JSON.parse(soc) : null;
+
+    if (this.societyData && !this.societyData.isUnlisted) {
+      this.society = this.societyData.society;
+    }
 
     if (coupon) {
       this.appliedCoupons = [coupon];

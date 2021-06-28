@@ -6,6 +6,11 @@ export function scrollToBottom() {
   cont[cont.length - 1].scrollTop = 2000;
 }
 
+export function scrollToTop() {
+  let cont = $('.container');
+  cont[cont.length - 1].scrollTop = 0;
+}
+
 export function prettyDate(date) {
   return new Date(date).toString().split(' ').slice(1, 3).join(' ');
 }
@@ -32,10 +37,10 @@ export function scrollElementToTop(emt) {
       let c = cont[cont.length - 1];
 
       if (top != 0) {
-        c.scrollTop = $(inp).offset().top;
+        c.scrollTop = $(inp).offset().top - 70;
         console.log('Current Top', top, 'emt top', emtTop);
       } else {
-        c.scrollTop = $(inp).offset().top - 100;
+        c.scrollTop = $(inp).offset().top;
         console.log('Current Top', top, 'emt top', emtTop);
         //inp.scrollIntoView({behavior:'smooth', block:'start'})
       }

@@ -94,8 +94,9 @@ export function socialConfigs() {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: AuthServiceConfig, useFactory: socialConfigs },
     FCM,
+    AppComponent,
     // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent, HomeComponent, PlanComparisonComponent, MonthlySavingsComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

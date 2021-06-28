@@ -65,7 +65,8 @@
   font-weight: normal;
   margin-bottom: 1em;
   color: #776e6e;
-  font-size: 12px;
+  font-size: 16px;
+    padding-right: 10px;
 }
 
 .water, .time, .frequency {
@@ -132,6 +133,10 @@ ion-item {
   font-size: 12px;
     height: 34px;
     top: -8px;
+
+    &.date {
+      height: auto;
+    }
 }
 
 

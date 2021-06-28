@@ -1,13 +1,15 @@
 <div class="plan-container --padding-x" [class.compact]="compact">
 
   <div class="plan-info">
-    <h2 #pageTop class="name-container"><span class="plan-name">{{plan.name}}</span> {{plan.duration == 'quarterly' ? 'QUARTERLY' : 'MONTHLY'}} Plan </h2>
+    <h2 #pageTop class="name-container"><span class="plan-name">{{plan.name}}</span>
+      {{plan.duration == 'quarterly' ? 'Quarterly' : 'Monthly'}} Plan </h2>
     <div class="row">
       <div class="col-4 --no-padding-right text-right">
-          <span class="old-price animate__animated animate__fadeInRight" *ngIf="plan.originalPrice"> {{plan.originalPrice}}</span>
+        <span class="old-price animate__animated animate__fadeInRight" *ngIf="plan.originalPrice && !plan.forUpgrade" Rs>
+          {{plan.originalPrice}}</span>
       </div>
       <div class="col-4 --no-padding-left">
-          <span class="price" Rs> {{plan.price}}</span> 
+        <span class="price" Rs> {{plan.price}}</span>
       </div>
       <div *ngIf="plan.forSecondCar" class="col-4 second-car">
         <!-- For Car # {{plan.carNumber}} -->
@@ -15,50 +17,81 @@
 
     </div>
 
-    <switch *ngIf="!compact" (toggle)="onPlanDurationToggle($event)"></switch>
+    <switch *ngIf="!compact && (plan.forUpgrade ? plan.maxMonths > 1 : true)" [forAddons]="plan.forUpgrade"
+      [slim]="plan.forUpgrade" (toggle)="onPlanDurationToggle($event)"></switch>
+
+    <heading size="14" slim="true" *ngIf="plan.originalPlan"
+      [text]="'Upgrading from ' + plan.originalPlan.name + ' Plan'" align="center"></heading>
   </div>
 
-  <div *ngIf="compact" class="">
+  <div *ngIf="compact" class="compact-rows">
     <mat-panel-title *ngFor="let feature of currentFeatures">
       <div class="feature">
         <div class="name">
-            {{feature.name}}
+          {{feature.name}}
         </div>
         <div class="float-right --no-padding frequency">
-            <span class="float-right "> {{feature.frequency == 'Twice a week' && plan.code == 'WFH' ? 'Once a Week' : feature.frequency}}</span>
+          <span class="float-right ">
+            {{feature.frequency == 'Twice a week' && plan.code == 'WFH' ? 'Once a Week' : feature.frequency}}</span>
         </div>
-        
+
       </div>
-  </mat-panel-title>
+    </mat-panel-title>
   </div>
 
   <div *ngIf="plan.notes && plan.notes.length" class="plan-notes">
     <span class="note" *ngFor="let note of plan.notes">* <span>{{note}}</span></span>
   </div>
   <mat-accordion *ngIf="!compact">
-      <mat-expansion-panel class = "drop" id="{{feature.code}}"  *ngFor="let feature of currentFeatures" >
-        <mat-expansion-panel-header class = "drop">
+    <mat-expansion-panel class="drop" id="{{feature.code}}" *ngFor="let feature of currentFeatures">
+      <mat-expansion-panel-header class="drop">
+        <mat-panel-title>
+          <div class="row">
+            <div class="col-12"> <span class="feature">{{feature.name}}</span></div>
+            <div class="col-12"><span
+                class="frequency">({{feature.frequency == 'Twice a week' && plan.code == 'WFH' ? 'Once a Week' : feature.frequency}})</span>
+            </div>
+
+
+          </div>
+
+
+        </mat-panel-title>
+        <mat-panel-description class="drop">
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <span class="desc"> {{feature.description}} </span>
+
+
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <ng-container *ngIf="plan.originalPlan && !compact">
+  <heading *ngIf="plan.code != 'STD'" text="+" color="primary" size="40" align="center" slim="true"></heading>
+    <br/>
+    <mat-accordion>
+      <mat-expansion-panel class="drop" id="{{feature.code}}" *ngFor="let feature of originalFeatures">
+        <mat-expansion-panel-header class="drop">
           <mat-panel-title>
             <div class="row">
               <div class="col-12"> <span class="feature">{{feature.name}}</span></div>
-              <div class="col-12"><span class="frequency">({{feature.frequency == 'Twice a week' && plan.code == 'WFH' ? 'Once a Week' : feature.frequency}})</span></div>
-              
-               
+              <div class="col-12"><span
+                  class="frequency">({{feature.frequency == 'Twice a week' && plan.code == 'WFH' ? 'Once a Week' : feature.frequency}})</span>
+              </div>
             </div>
-            
-            
           </mat-panel-title>
-          <mat-panel-description class = "drop">
-              
+          <mat-panel-description class="drop">
+  
           </mat-panel-description>
         </mat-expansion-panel-header>
-        
-<span class="desc">  {{feature.description}} </span>
-      
-       
-        
+  
+        <span class="desc"> {{feature.description}} </span>
       </mat-expansion-panel>
     </mat-accordion>
+  </ng-container>
 
   <!-- <div class="accordion" id="accordionExample">
     <div class="card" *ngFor="let feature of currentFeatures">
@@ -81,7 +114,7 @@
     </div>
   </div> -->
 
-  <cta  *ngIf="!hideCta && !compact" text="Checkout" [sticky]="true"  (action)="sendCheckout()"></cta>
+  <cta *ngIf="!hideCta && !compact" text="Checkout" [sticky]="true" (action)="sendCheckout()"></cta>
 
 </div>
 
@@ -160,4 +193,3 @@
     </div>
   </div>
 </ion-content> -->
-

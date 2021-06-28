@@ -1,16 +1,16 @@
 <div class="reschedule-container">
     <ion-icon class="close-link" name="close-outline" style="color:red;" (click)="dismiss()"></ion-icon>
-  <heading *ngIf="!forAdhoc" text="Reschedule Full Body Wash" align="center"></heading>
-  <heading *ngIf="forAdhoc" [text]="'Reschedule ' + adhoc.addon.name" align="center"></heading>
+  <heading *ngIf="!forAdhoc" slim="true" size="14" text="Reschedule Full Body Wash" align="center"></heading>
+  <heading *ngIf="forAdhoc" size="14" slim="true" [text]="'Reschedule ' + adhoc.addon.name" align="center"></heading>
 <br/>
   <span class="count">Reschedules Left: </span>
   <span class="">
-    {{2 - count}}
+    {{count}}
   </span>
 
   <br/><br/>
   <ng-container *ngIf="canReschedule">
-      <span >You may Reschedule this service for  <span *ngIf="count==0"> Free </span> <span *ngIf="count!= 0">the price of <span Rs> 50 </span></span></span>
+      <span >You may Reschedule this service for  <span *ngIf="count==2"> Free </span> <span *ngIf="count == 1">the price of <span Rs> 50 </span></span></span>
 
       <br/><br/>
       <span *ngIf="!forAdhoc">You can reschedule to any future working day within the same Monthly Cycle.</span>
@@ -25,7 +25,7 @@
       
       <mobile-input type="date" [error]="dateError" name="Reschedule To" [constraints]="constraints" [value]="selectedDate" (valueChange)="checkDate($event)"></mobile-input>
       
-      <cta text="Reschedule" [disabled]="!!!selectedDate" [loading]="loading" (action)="reschedule()"></cta>
+      <cta text="Reschedule" [disabled]="!!!selectedDate" [loading]="loading" sticky="true" (action)="reschedule()"></cta>
       
   </ng-container>
 

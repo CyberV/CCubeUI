@@ -48,7 +48,7 @@
     <div class="col-12">
       <ng-container *ngIf="!loading &&  payments.length == 0">
         
-        <heading text="Looks like you haven't registered a car yet." align="center"></heading>
+        <heading size="14" text="Looks like you haven't registered a car yet." align="center"></heading>
         <div class="--padding-x">
           <cta text="Add Car" (action)="addCar()"></cta>
         </div>
@@ -87,18 +87,18 @@
                   </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                  <span note>To be able to serve you on time, we need the following details </span>
+                  <span note>To be able to serve you on time, we need the following details. All fields are mandatory. </span>
 
-                  <heading text="What time do you wake up ?" size="12" slim="true"></heading>
+                  <heading text="What time do you wake up ? *" slim="true" color="primary" size="14" slim="true"></heading>
                   <input class="wakeupTime" name="wakeupTime" [(ngModel)]="wakeupTime" [ngxTimepicker]="pickerWake" minutesGap="15" placeholder="ex. 8:00 AM">
                   <ngx-material-timepicker #pickerWake  minutesGap="15"></ngx-material-timepicker>
 
-                  <heading text="What time do you leave for office ?" size="12" ></heading>
+                  <heading text="What time do you leave for office ? *" slim="true" color="primary" size="14" ></heading>
                   <input class="officeTime" name="officeTime" [(ngModel)]="officeTime" [ngxTimepicker]="picker" minutesGap="15" placeholder="ex. 10:00 AM">
                   <ngx-material-timepicker #picker  minutesGap="15"></ngx-material-timepicker>
 
-                  <mobile-input type="text" [(value)]="parkingSlot" name="Parking/Slot No"></mobile-input>
-                <cta text="Confirm" small="true" pill="true" [loading]="savingTime" [disabled]="!(wakeupTime.length > 0 && officeTime.length > 0)" (action)="saveTime()"></cta>
+                  <mobile-input type="text" [(value)]="parkingSlot" name="Parking/Slot No *"></mobile-input>
+                <cta text="Confirm" small="true" pill="true" [loading]="savingTime" [disabled]="!(wakeupTime.length > 0 && officeTime.length > 0 && parkingSlot.length > 0)" (action)="saveTime()"></cta>
               </mat-expansion-panel>
 
             </mat-accordion>

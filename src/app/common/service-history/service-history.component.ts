@@ -26,7 +26,7 @@ export class ServiceHistoryComponent implements OnInit {
 
 
       console.log('entries', entries);
-      this.history = entries.historical.filter((notif) => notif.data.car ? notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase() : false);
+      this.history = entries.historical.filter((notif) => notif.data.car ? notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase() : false).reverse();
     } catch (e) {
       alert('eRror in ser his' + e);
     }
@@ -38,7 +38,7 @@ export class ServiceHistoryComponent implements OnInit {
   ngOnChanges(changes) {
     if (changes.carRegNo && this.carRegNo) {
       try {
-        this.history = this.notificationService.getHistoricalNotifications().filter((notif) => notif.data.car ? notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase() : false);
+      this.history = this.notificationService.getHistoricalNotifications().filter((notif) => notif.data.car ? notif.data.car.regNo.toLowerCase() == this.carRegNo.toLowerCase() : false).reverse();
       } catch (e) {
         alert('eRror in ser his' + e);
       }

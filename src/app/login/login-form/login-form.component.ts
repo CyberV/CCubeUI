@@ -31,7 +31,7 @@ export class LoginFormComponent implements OnInit {
   loading: boolean;
 
   @Input() context: string;
-  @Input() loginOnly:boolean;
+  @Input() loginOnly: boolean;
 
   public user: any;
   public isLoggedIn: boolean;
@@ -44,8 +44,8 @@ export class LoginFormComponent implements OnInit {
   public findingCar: boolean;
   public userExists: boolean;
   public forgotPassword: boolean;
-  existingUser:boolean;
-  
+  existingUser: boolean;
+
 
   @ViewChildren('inpRef') inpRef: QueryList<HTMLElement>;
   @ViewChildren('inpEmail') inpEmail: QueryList<HTMLElement>;
@@ -54,7 +54,7 @@ export class LoginFormComponent implements OnInit {
   @ViewChildren('inpConfirmPass') inpConfirmPass: QueryList<HTMLElement>;
   @ViewChildren('ctaSignup') ctaSignup: QueryList<HTMLElement>;
   @ViewChildren('ctaOtp') ctaOtp: QueryList<HTMLElement>;
-  @ViewChildren('verifyOtpComp') verifyOtpComp : QueryList<VerifyOtpComponent>;
+  @ViewChildren('verifyOtpComp') verifyOtpComp: QueryList<VerifyOtpComponent>;
 
 
   errors: any;
@@ -100,12 +100,12 @@ export class LoginFormComponent implements OnInit {
     }
     return valid;
   }
-  
-  allInputs;
-  userNotFound:boolean;
 
-  isUnlisted:boolean;
-  upgradeSelected:boolean;
+  allInputs;
+  userNotFound: boolean;
+
+  isUnlisted: boolean;
+  upgradeSelected: boolean;
 
   constructor(
     private socialAuthService: AuthService,
@@ -116,7 +116,7 @@ export class LoginFormComponent implements OnInit {
     private srvcUser: UserService,
     private carService: CarService,
     private sms: SmsRetriever,
-    private modalController:ModalController,
+    private modalController: ModalController,
     public toastController: ToastController,
 
     private router: Router) {
@@ -181,6 +181,8 @@ export class LoginFormComponent implements OnInit {
 
     localStorage.setItem('selectedSociety', JSON.stringify(data));
     console.log(data);
+
+    this.newUser.society = data.society;
 
   }
 
@@ -339,20 +341,20 @@ export class LoginFormComponent implements OnInit {
 
   validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let xx =  re.test(String(email).toLowerCase());
+    let xx = re.test(String(email).toLowerCase());
 
-    if(xx) {
+    if (xx) {
       this.errors.email = null;
     }
 
     return xx;
-}
+  }
 
   onForgotPassword() {
     this.forgotPassword = true;
   }
 
-  validateData(data) {
+  validateData(data, onlyPage1 = false) {
     let valid: any = {
       phone: false,
       email: false,
@@ -370,7 +372,7 @@ export class LoginFormComponent implements OnInit {
     }
 
 
-    
+
     if (this.newUser.name && this.newUser.name.length) {
       valid.name = true;
     } else {
@@ -392,7 +394,7 @@ export class LoginFormComponent implements OnInit {
 
       if (this.newUser.password && this.newUser.password.length < 4) {
         this.errors['password'] += " Atleast 4 characters required."
-      } else  if (this.newUser.password != this.newUser.confirmPassword) {
+      } else if (this.newUser.password != this.newUser.confirmPassword) {
         this.errors['password'] += " Passwords don't match."
       } else {
         this.errors['password'] = 'Please enter a valid Password.';
@@ -414,8 +416,11 @@ export class LoginFormComponent implements OnInit {
       this.errors['terms'] = 'Please accept:'
     }
 
-
-    return !((valid.terms && valid.name && valid.phone && valid.password && valid.email && valid.city) ? false : true);
+    if (onlyPage1) {
+      return !((valid.name && valid.phone && valid.email && valid.city) ? false : true);
+    } else {
+      return !((valid.terms && valid.name && valid.phone && valid.password && valid.email && valid.city) ? false : true);
+    }
 
   }
 
@@ -434,6 +439,7 @@ export class LoginFormComponent implements OnInit {
     await modal.present();
   }
 
+
   createUser() {
     if (!this.validateData(this.newUser)) {
       return false;
@@ -449,7 +455,7 @@ export class LoginFormComponent implements OnInit {
 
           this.srvcUser.setCurrentUser(res.data);
 
-          console.log('USER City found',res.data.city );
+          console.log('USER City found', res.data.city);
           Initialize(res.data.city);
 
           //this.router.navigate(['/root/dashboard']);
@@ -482,30 +488,30 @@ export class LoginFormComponent implements OnInit {
   }
 
   start() {
-//     try {
+    //     try {
 
-//       this.sms.getAppHash()
-//   .then((res: any) => console.log('apphash: ' +  res))
-//   .catch((error: any) => console.error(error));
-// this.sms.startWatching()
-//   .then((res: any) => console.log('msg: ' +  res))
-//   .catch((error: any) => console.error(error));
+    //       this.sms.getAppHash()
+    //   .then((res: any) => console.log('apphash: ' +  res))
+    //   .catch((error: any) => console.error(error));
+    // this.sms.startWatching()
+    //   .then((res: any) => console.log('msg: ' +  res))
+    //   .catch((error: any) => console.error(error));
 
 
-    
-//     if (SMSReceive)
-//     SMSReceive.startWatch(
-//       () => {
-//         document.addEventListener('onSMSArrive', (e: any) => {
-//           var IncomingSMS = e.data;
-//           this.processSMS(IncomingSMS);
-//         });
-//       },
-//       () => { console.log('watch start failed') }
-//     );
-//     } catch(e) {
-//       console.log('Error in SMS', e);
-//     }
+
+    //     if (SMSReceive)
+    //     SMSReceive.startWatch(
+    //       () => {
+    //         document.addEventListener('onSMSArrive', (e: any) => {
+    //           var IncomingSMS = e.data;
+    //           this.processSMS(IncomingSMS);
+    //         });
+    //       },
+    //       () => { console.log('watch start failed') }
+    //     );
+    //     } catch(e) {
+    //       console.log('Error in SMS', e);
+    //     }
   }
 
   stop() {
@@ -546,38 +552,38 @@ export class LoginFormComponent implements OnInit {
         this.existingUser = true;
       }
       this.loading = true;
-      let verified:any = await new Promise((resolve, reject) => {
+      let verified: any = await new Promise((resolve, reject) => {
         if (this.existingUser) {
           this.srvcLogin.loginWithOtp(this.newUser.mobile, this.customerOtp)
-          .subscribe((res: any) => {
-            console.log('Verify OTP REsponse', res);
-            this.loading = false;
-            if (res.success) {
-              this.otpMismatch = false;
-              this.userNotFound = false;
-              resolve(res);
-            } else {
-              this.otpMismatch = res.error == "Invalid OTP";
-              this.userNotFound = res.error == "Phone Verified. User Not Found";
-              resolve(res);
-            }
-          })
+            .subscribe((res: any) => {
+              console.log('Verify OTP REsponse', res);
+              this.loading = false;
+              if (res.success) {
+                this.otpMismatch = false;
+                this.userNotFound = false;
+                resolve(res);
+              } else {
+                this.otpMismatch = res.error == "Invalid OTP";
+                this.userNotFound = res.error == "Phone Verified. User Not Found";
+                resolve(res);
+              }
+            })
         } else {
           this.srvcLogin.verifyOtp(this.newUser.mobile, this.customerOtp)
-          .subscribe((res: any) => {
-            console.log('Verify OTP REsponse', res);
-            this.loading = false;
-            if (res.success) {
-              this.otpMismatch = false;
-              this.userNotFound = false;
-              resolve(res);
-            } else {
-              this.otpMismatch = true;
-              resolve(res);
-            }
-          })
+            .subscribe((res: any) => {
+              console.log('Verify OTP REsponse', res);
+              this.loading = false;
+              if (res.success) {
+                this.otpMismatch = false;
+                this.userNotFound = false;
+                resolve(res);
+              } else {
+                this.otpMismatch = true;
+                resolve(res);
+              }
+            })
         }
-        
+
       });
 
       console.log('Verified', verified);
@@ -594,8 +600,8 @@ export class LoginFormComponent implements OnInit {
         } else {
 
 
-        localStorage.setItem('userMobile', this.newUser.mobile);
-        this.router.navigate(['/signup/details']);
+          localStorage.setItem('userMobile', this.newUser.mobile);
+          this.router.navigate(['/signup/details']);
         }
       }
 

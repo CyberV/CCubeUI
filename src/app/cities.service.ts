@@ -143,6 +143,10 @@ export class CitiesService {
 
   getSocietiesForCity(city) {
 
+    if (!city) {
+      return [];
+    }
+
     let found = JSON.parse(localStorage.getItem('commonData')).allSocieties.filter(s => s.city.toLowerCase() == city.toLowerCase());
     
     if (found.length) {

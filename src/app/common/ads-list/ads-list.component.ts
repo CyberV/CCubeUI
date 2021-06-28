@@ -186,9 +186,8 @@ export class AdsListComponent implements OnInit {
       if (this.adSlider && this.adSlider.first) {
         if (!this.sliderInitialized) {
           this.adSlider.first.ionSlideDidChange.subscribe((ev) => {
-            console.log('Slider Event', ev);
+
             this.adSlider.first.getActiveIndex().then((da) => {
-              console.log('Active Index', da);
               this.selectDot(da);
             })
 

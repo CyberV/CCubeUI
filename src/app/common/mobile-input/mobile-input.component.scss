@@ -1,20 +1,20 @@
 @import 'src/variables.scss';
 
 .mobile-input {
-    margin-top: 1em;
+    margin-top: 8px;
     label {
         color: $primary-color;
         font-weight: 500;
         margin-bottom:0;
-        font-size: 12px;
+        font-size: 16px;
     }
 
     input {
         border: none;
         border-bottom: 1px solid $primary-color;
         border-radius: 0;
-        height: 18px;
-        font-size: 12px;
+        height: 22px;
+        font-size: 16px;
         background: transparent;
         text-transform: capitalize;
         color: $bg-black;
@@ -29,7 +29,6 @@
         border: none;
         border-bottom: 1px solid $primary-color;
         background: transparent;
-        font-weight: bold;
         width: 100%;
         color: gray;
         min-height: 20px;
@@ -53,8 +52,8 @@
 
     .not-mobile, .input-group-text {
         padding:0;
-        height: 18px;
-        font-size: 12px;
+        height: 22px;
+        font-size: 14px;
     }
 
     .input-group-text {
@@ -69,7 +68,6 @@
         border: none;
         //border-bottom: 1px solid $primary-color;
         background: transparent;
-        font-weight: bold;
         border-radius: 0;
         color: black;
         padding-left: 0;

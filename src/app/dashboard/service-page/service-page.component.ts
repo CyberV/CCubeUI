@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarService } from 'app/services/car.service';
 import { Platform, ToastController, AlertController, IonSlides, ModalController } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { share } from 'rxjs/operators';
 import { PlanSliderComponent } from 'app/common/plan-slider/plan-slider.component';
 import { scrollElementToTop } from 'app/util/util';
 import { RescheduleComponent } from 'app/common/reschedule/reschedule.component';
+import * as moment from 'moment';
 
 declare var $;
 @Component({
@@ -61,7 +62,8 @@ export class ServicePageComponent implements OnInit {
   officeTime: string;
   savingTime: boolean;
 
-  parkingSlot:string;
+  parkingSlot: string;
+  backButtonSubscription : any;
 
   getNotificationCount(regNo) {
     try {
@@ -116,11 +118,11 @@ export class ServicePageComponent implements OnInit {
 
     // this.platform.backButton.subscribeWithPriority(1, () => { // to disable hardware back button on whole app
     // });
-    console.log('subscribing to back');
-    this.platform.backButton.subscribe(async (d) => {
+    // console.log('subscribing to back');
+    // this.platform.backButton.subscribe(async (d) => {
 
-      document.addEventListener('backbutton', this.onBackButton, true);
-    });
+    //   document.addEventListener('backbutton', this.onBackButton, true);
+    // });
   }
 
   demoEvent(evt) {
@@ -133,7 +135,8 @@ export class ServicePageComponent implements OnInit {
 
   ngOnDestroy() {
     console.log('Service Page Destroyed');
-    document.removeEventListener('backbutton', this.onBackButton, true);
+    //this.backButtonSubscription.unsubscribe();
+    //document.removeEventListener('backbutton', this.onBackButton, true);
   }
 
   gotoPlans(plan) {
@@ -171,6 +174,9 @@ export class ServicePageComponent implements OnInit {
   async onBackButton(event) {
     event.preventDefault();
     event.stopPropagation();
+
+    // this.backCount++;
+    // alert(this.backCount);
 
     if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
       // this.platform.exitApp(); // Exit from app
@@ -224,9 +230,7 @@ export class ServicePageComponent implements OnInit {
 
 
           this.planSlider.first.ionSlideDidChange.subscribe((ev) => {
-            console.log('Slider Event', ev);
             this.planSlider.first.getActiveIndex().then((da) => {
-              console.log('Active Index', da);
               this.selectCar(da);
             })
 
@@ -280,7 +284,8 @@ export class ServicePageComponent implements OnInit {
     await modal.present();
 
     modal.onDidDismiss().then((data) => {
-      if (data && data.data && data.data.addon && !this.selectedSubscription.isAdhoc) {
+       ;
+      if (data && data.data && data.data.addon && (this.selectedSubscription.isAdhoc ? data.data.addon.isAdhoc : true)) {
         //alert(JSON.stringify(data));
         let addon = data.data.addon;
         if (addon.isAdhoc) {
@@ -291,7 +296,9 @@ export class ServicePageComponent implements OnInit {
           this.router.navigate(['/dashboard/addon']);
         }
       } else {
-        this.promptForPlan();
+        if (this.selectedSubscription.isAdhoc && data && data.data && data.data.addon && !data.data.addon.isAdhoc) {
+          this.promptForPlan();
+        }
       }
     });
   }
@@ -332,12 +339,42 @@ export class ServicePageComponent implements OnInit {
     }
   }
 
+  backCount:number = 0;
+
   ngAfterViewInit() {
 
     this.planService.clear();
     this.carService.clear(true);
 
+    // this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+
+    //   this.backCount++;
+    //   alert('from back subscribe ' + this.backCount);
+
+    //   //this.onBackButton(event);
+
+    //   //document.addEventListener('backbutton', this.onBackButton, true);
+    //   //navigator['app'].exitApp();
+    // });
   }
+
+   /** Stop hardware back button */
+  //  @HostListener('document:ionBackButton', ['$event'])
+  //  overrideHardwareBackAction(event: any) {
+  //    console.log('back button');
+  //    this.backCount++;
+  //    alert('from host listner ' + this.backCount);
+
+  //    if (this.backCount > 2) {
+  //     navigator['app'].exitApp();
+  //    }
+  //    event.detail.register(100, async () => {
+  //      event.stopImmediatePropagation();
+  //      event.stopPropagation();
+  //      event.preventDefault();
+  //    });
+  //  }
+
 
 
   async presentToast(msg) {
@@ -350,13 +387,13 @@ export class ServicePageComponent implements OnInit {
 
   saveTime() {
     this.savingTime = true;
-    this.loginService.updateTiming(this.selectedSubscription.carRegNo, this.officeTime, this.wakeupTime).subscribe((data: any) => {
+    this.loginService.updateTiming(this.selectedSubscription.carRegNo, this.officeTime, this.wakeupTime, this.parkingSlot).subscribe((data: any) => {
       this.savingTime = false;
       if (data.success) {
 
         this.presentToast('Timings Updated Successfully!');
 
-        setTimeout(()=> {
+        setTimeout(() => {
           window.location.reload();
 
         }, 1000);
@@ -390,7 +427,7 @@ export class ServicePageComponent implements OnInit {
         schedule: schedule,
         forAdhoc: true,
         adhoc: adhoc,
-        count: adhoc.rescheduleCount,
+        count: 2 - adhoc.rescheduleCount,
         canReschedule: adhoc.rescheduleCount < 2,
         lastDate: adhoc.expiresOn
       }
@@ -427,32 +464,39 @@ export class ServicePageComponent implements OnInit {
   }
 
   handleUpgradePlan(data) {
-    let { plan } = data;
-
-    this.planService.changePlanForCar(plan.name);
-    plan = this.planService.getSelectedPlan();
-
-    let { car, payment, expiresOn } = this.selectedPayment;
-
-    // Clear Addon
-    this.carService.clear(true);
-
-    sessionStorage.setItem('currentPayment', JSON.stringify(payment));
-    this.carService.changeCar(car);
-    this.planService.renewPlan(plan, new Date(+(new Date(this.payments[this.selectedIndex].renewDate)) - 86400000));
-
+    this.processUpgradeOptions(data.plan);
     this.router.navigate(['/dashboard/checkout']);
   }
 
-  showPlanDetails(data) {
-    let { car, payment, expiresOn } = this.selectedPayment;
+  processUpgradeOptions(plan) {
+    let { car, payment, expiresOn, cycleDate } = this.selectedPayment;
 
     sessionStorage.setItem('currentPayment', JSON.stringify(payment));
-    this.planService.clear();
-    this.planService.changePlanForCar(data.plan.name);
-    let plan = this.planService.getSelectedPlan();
-    this.planService.renewPlan(plan, new Date(+(new Date(this.payments[this.selectedIndex].renewDate)) - 86400000));
+    //this.planService.clear();
+    //this.planService.changePlanForCar(data.plan.name);
+    
+    
+    if (this.planService.canUpgradePartial(this.selectedSubscription)) {
+      if (this.planService.canUpgradeThisMonth(this.selectedSubscription)) {
+        plan.sameMonthUpgrade = true;
+        this.planService.upgradePlan(plan, this.selectedSubscription.cycleDate);
+      } else {
+        let nextMonthCycleDate = moment(this.selectedSubscription.cycleDate).add(1,'M').toDate();
+        this.planService.upgradePlan(plan, nextMonthCycleDate);
 
+      }
+    } else {
+      this.planService.renewPlan(plan, new Date(+(new Date(this.payments[this.selectedIndex].renewDate)) - 86400000));
+
+    }
+
+
+    this.planService.updatePlanDuration(this.planService.getPlanDuration());
+  }
+
+  showPlanDetails(data) {
+
+    this.processUpgradeOptions(data.plan);
     this.router.navigate(['/dashboard/plan']);
   }
 
@@ -472,7 +516,7 @@ export class ServicePageComponent implements OnInit {
   }
 
   onAddonSelected(addon) {
-    this.planService.clear();
+    //this.planService.clear();
     this.planService.clearAddons();
     this.planService.clearAdhocs();
     this.planService.includeAddon(addon);

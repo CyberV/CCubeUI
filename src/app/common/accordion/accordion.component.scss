@@ -5,8 +5,10 @@
     
 }
 
+
+
 .panel-content {
-    padding-top:15px;
+    padding-top:22px;
     padding-bottom: 15px;
 }
 
@@ -53,7 +55,7 @@
 }
 
 .title {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .accordion-container {
@@ -84,10 +86,16 @@
 
     .price {
         flex-direction: row-reverse;
+        font-size: 14px;
     }
-
+    
     .panel-container {
         box-shadow: none;
+        //height: 30px !important;
+    }
+
+    .panel-header {
+        height: 30px !important;
     }
 
     .panel-content {
@@ -107,6 +115,10 @@
     .panel-header {
         padding-left: 0;
         padding-right: 10px;
+        .mat-expansion-indicator {
+            top: -5px;
+            position: relative;
+        }
     }
 
     .mat-expansion-panel-body {

@@ -3,9 +3,16 @@
 #top {
   margin-top: -2em;
   max-height: 145px;
+  min-height: 130px;
 
   &.slim {
     max-height: 115px;
+    min-height: 0;
+
+    .page-logo {
+      width: 88%;
+      margin-top: 20px;
+    }
   }
 }
 
@@ -32,8 +39,8 @@
 
 .page-logo {
     width: 100%;
-    margin-bottom: 14px;
-    margin-top: -10px;
+    // margin-bottom: 14px;
+     //margin-top: -14px;
   }
 
   .change-car-link {
@@ -48,6 +55,8 @@
     top: 20px;
     position: relative;
     font-size: 16px;
+    left: -10%;
+    width: 110%;
 
     &.slim {
       top: 20px;
