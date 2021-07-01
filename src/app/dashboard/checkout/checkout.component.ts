@@ -159,6 +159,17 @@ export class CheckoutComponent implements OnInit {
   }
 
   applyDiscount(discountData) {
+
+    let duration = this.mode.plan ? 
+    this.selectedPlan.duration
+    : this.mode.addon ? 
+    this.includedAddons[0].duration
+    : 'monthly';
+
+    if (duration == 'quarterly' && discountData && discountData.coupon && discountData.coupon.code !=  getConfigValue('COUPON_QUARTERLY')) {
+      this.presentToast('Plan changed to Monthly.');
+      this.durationSwitch.first.setActivePlanDuration('monthly');
+    }
     if (discountData.discount > 0 && discountData.discount != this.discount.discount && (this.discount.coupon ? discountData.coupon.code != this.discount.coupon.code : true)) {
       this.thisApp.presentAlert({
         title: 'Congratulations',
@@ -998,13 +1009,23 @@ export class CheckoutComponent implements OnInit {
 
     setTimeout(() => {
       this.step2Ready = !this.carMismatch;
-    }, 3000);
+      if (!this.carMismatch) {
+      this.drawerCar.first.toggle(false);
+      }
+      setTimeout(()=> {
+        if (!this.carMismatch) {
+          this.drawerLocation.first.toggle(true);
+        }
+      }, 500);
+
+    }, 1000);
 
     this.updatedCarDetails = carDetails;
 
     if (!this.carMismatch) {
       this.carService.changeCar(this.updatedCarDetails);
       this.selectedCar = this.carService.getCurrentCar();
+
     }
 
     this.completeVerification();

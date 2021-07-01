@@ -213,9 +213,9 @@ export class AppComponent {
       }
       alert.cssClass = 'animate__animated  animate__fadeOut';
 
-      setTimeout(()=>{
-        this.notificationService.markNotificationAsRead(data);
-      }, 1000);
+      // setTimeout(()=>{
+      //   this.notificationService.markNotificationAsRead(data);
+      // }, 1000);
     });
   }
 
@@ -271,6 +271,12 @@ export class AppComponent {
   timePeriodToExit = 2000;
 
   async onBackButton(event) {
+
+    let allow = sessionStorage.getItem('allowBack');
+
+    if (allow ? allow == 'true': false) {
+      return;
+    } 
     event.detail.register(100, async () => {
       event.stopImmediatePropagation();
       event.stopPropagation();

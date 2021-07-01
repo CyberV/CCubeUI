@@ -60,6 +60,8 @@ export class NotifMenuComponent implements OnInit {
       });
 
       alert.onWillDismiss().then(()=> {
+        sessionStorage.setItem('allowBack', 'false');
+
         if (data.action && data.action == 'refresh') {
           window.location.reload();
         }
@@ -68,6 +70,8 @@ export class NotifMenuComponent implements OnInit {
         }
         alert.cssClass = 'animate__animated  animate__fadeOut';
       });
+
+      sessionStorage.setItem('allowBack', 'true');
 
     await alert.present();
 

@@ -89,7 +89,7 @@ export class AccordionComponent implements OnInit {
     } else {
       let now = +(new Date());
 
-      if (now-this.lastTime > 1000) {
+      if (now-this.lastTime > 500) {
 
       } else {
         return;

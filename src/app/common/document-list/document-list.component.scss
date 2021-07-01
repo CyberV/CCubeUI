@@ -39,11 +39,12 @@ ion-slide:nth-of-type(0){
 }
 
 .card-img-top, .card-icon-top {
-  height: 110px;
-  top: -25px;
+
   position: relative;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius:0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .addon-card {
   position: relative;
@@ -53,6 +54,7 @@ ion-slide:nth-of-type(0){
   max-width: 96px;
   min-width: 96px;
   max-width: 100px;
+  min-height: 98px;
 
 
   &.selected {

@@ -29,8 +29,8 @@ export class ThanksPageComponent implements OnInit {
   receiptId:string;
 
   get startDate()  {
-     ;
-    return this.payment ?  this.payment.plan ? new Date(this.payment.startDate || new DataCue()).toDateString() :  new Date(this.payment.startDate || this.payment.paymentDate).toDateString() : new Date().toDateString();
+     let st = this.payment ?  this.payment.plan ? new Date(this.payment.startDate || new DataCue()).toDateString() :  new Date(this.payment.startDate || this.payment.paymentDate).toDateString() : new Date().toDateString();
+    return st != 'Invalid Date' ? st : new Date().toDateString();
   }
 
   ngOnInit() {

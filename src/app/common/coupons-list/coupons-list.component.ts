@@ -111,7 +111,7 @@ export class CouponsListComponent implements OnInit {
 
     let cpn = this.planService.getCouponByCode(couponCode);
 
-    if (!cpn || !this.isCouponEligible(cpn)) {
+    if (cpn && !this.isCouponEligible(cpn)) {
       return;
     }
     let car = this.carService.getCurrentCar();

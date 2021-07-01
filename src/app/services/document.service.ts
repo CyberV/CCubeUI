@@ -115,7 +115,7 @@ export class DocumentService {
 
   }
 
-  getProfilePicture() {
+  async getProfilePicture() {
     return new Promise((resolve) => {
       this.storage.get('profilePicture').then((data: any) => {
         resolve(data && data.image ? data.image :"assets/icons/user.png" );
@@ -130,8 +130,8 @@ export class DocumentService {
 
       let carDocs = docs[carRegNo.toLowerCase()];
 
-      if (carDocs && carDocs.length >= 4) {
-        return carDocs;
+      if (carDocs) {
+        return JSON.parse(JSON.stringify(carDocs));
       }
     }
     return JSON.parse(JSON.stringify(this.emptyDocs));

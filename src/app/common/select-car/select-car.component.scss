@@ -17,6 +17,8 @@
 .maker-row {
     padding-left:0;
     padding-right:0;
+    width: fit-content;
+    display: table;
 
     .maker-row-content {
         .col-5, .col-7 {
@@ -121,6 +123,7 @@
     min-height: 100px;
     //min-width: 100px;
     padding: 0 0 0 10px;
+    min-width: 75px;
 
     .card-body {
         top: -10px;

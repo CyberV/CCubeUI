@@ -134,7 +134,10 @@ export class DocumentListComponent implements OnInit {
       showBackdrop: true
     });
 
+    sessionStorage.setItem('allowBack', 'true');
+
     await modal.present();
+
 
 
 
@@ -154,6 +157,8 @@ export class DocumentListComponent implements OnInit {
       modalToolbar.dismiss();
     });
     modalToolbar.onWillDismiss().then(async (data: any) => {
+      sessionStorage.setItem('allowBack', 'false');
+
       if (data && data.data && data.data.action) {
         switch (data.data.action) {
           case 'update': {
@@ -163,6 +168,7 @@ export class DocumentListComponent implements OnInit {
           }
           case 'share': {
             this.shareService.shareImage(doc);
+            break;
           }
           case 'delete': {
             this.shareService.shareImage(doc);
@@ -171,6 +177,7 @@ export class DocumentListComponent implements OnInit {
             if (newDocs) {
               this.documents = newDocs;
             }
+            break
           }
           default: break;
         }
@@ -236,76 +243,87 @@ export class DocumentListComponent implements OnInit {
           await this.documentService.saveDocumentsForCar(this.documents, this.carRegNo);
         } else {
 
-          const fileURI: string = await this.fileChooser.open();
-          const filePathUrl: string = await this.filePath.resolveNativePath(fileURI);
-          const fileName: string = filePathUrl.substring(filePathUrl.lastIndexOf('/') + 1);
-          const fileEntry: FileEntry = await this.file.resolveLocalFilesystemUrl(fileURI) as FileEntry;
-          const reader: FileReader = new FileReader();
+          let fileURI = null;
+          sessionStorage.setItem('allowBack', 'true');
+          await this.fileChooser.open().then(async(uri) => {
+            fileURI = uri;
+            const filePathUrl: string = await this.filePath.resolveNativePath(fileURI);
+            const fileName: string = filePathUrl.substring(filePathUrl.lastIndexOf('/') + 1);
+            const fileEntry: FileEntry = await this.file.resolveLocalFilesystemUrl(fileURI) as FileEntry;
+            const reader: FileReader = new FileReader();
+  
+            let data = {
+              fileURI,
+              filePathUrl,
+              fileName
+            }
+  
+            let extnsn: any = fileName.split('.');
+            extnsn = extnsn[extnsn.length - 1];
+            let allowedExtensions = ['png', 'jpg', 'jpeg'];
+            if (allowedExtensions.indexOf(extnsn) == -1) {
+              alert( 'Unsupported File Format. Please choose JPG/PNG.'
+              );
+              return;
+            }
+  
+            extnsn = '.' + extnsn;
+  
+            let imageData;
+  
+  
+  
+            //alert(JSON.stringify(data));
+  
+            let fileReadResult: string | ArrayBuffer;
+            let mp3File: any;
+  
+            fileEntry.file((file: any): void => {
+              mp3File = file;
+              reader.readAsDataURL(mp3File);
+            });
+  
+            reader.onloadend = async () => {
+              fileReadResult = reader.result;
+              imageData = fileReadResult as string;
+              //console.log('Image Data ', imageData);
+              // let emt = document.querySelectorAll('.top-' + index)[0] as HTMLElement;
+              // emt.style.backgroundImage = imageData;
+  
+              this.documents[index].image = imageData;
+              this.documents[index].filePathUrl = filePathUrl;
+              this.documents[index].localUrl = doc.name + Math.floor(Math.random() * 100) + extnsn;
+              //alert('ThisDocuments: ' + JSON.stringify(this.documents.map((d) => { return { localUrl: d.localUrl, name: d.name, hasImage: !!d.image }; })));
+  
+              //alert('Trung save documents');
+              await this.documentService.saveDocumentsForCar(this.documents, this.carRegNo);
+              this.addingNewDoc = false;
+  
+              //let fnd = await this.documentService.getDocumentsForCar(this.carRegNo);
+  
+              // if (fnd && !fnd[index].image) {
+              //   this.documentService.saveDocumentsForCar(this.documents, this.carRegNo);
+              //   fnd = this.documentService.getDocumentsForCar(this.carRegNo);
+              // }
+  
+              // alert('Document Saved for car? ' + JSON.stringify(this.documentService.getDocumentsForCar(this.carRegNo)));
+              // alert('Document Saved  All ? ' + JSON.stringify(this.documentService.getAllDocuments()));
+  
+              fileEntry.copyTo(this.appDir, this.documents[index].localUrl);
+  
+              // callback({
+              //   data: { base64: fileReadResult as string },
+              //   fileName
+              // });
+          sessionStorage.setItem('allowBack', 'false');
 
-          let data = {
-            fileURI,
-            filePathUrl,
-            fileName
-          }
-
-          let extnsn: any = fileName.split('.');
-          extnsn = extnsn[extnsn.length - 1];
-          let allowedExtensions = ['png', 'jpg', 'jpeg'];
-          if (allowedExtensions.indexOf(extnsn) == -1) {
-            alert( 'Unsupported File Format. Please choose JPG/PNG.'
-            );
-            return;
-          }
-
-          extnsn = '.' + extnsn;
-
-          let imageData;
-
-
-
-          //alert(JSON.stringify(data));
-
-          let fileReadResult: string | ArrayBuffer;
-          let mp3File: any;
-
-          fileEntry.file((file: any): void => {
-            mp3File = file;
-            reader.readAsDataURL(mp3File);
+            };
+          })
+          .catch(e =>  {
+            //alert(JSON.stringify(e));
+          sessionStorage.setItem('allowBack', 'false');
+            
           });
-
-          reader.onloadend = async () => {
-            fileReadResult = reader.result;
-            imageData = fileReadResult as string;
-            //console.log('Image Data ', imageData);
-            // let emt = document.querySelectorAll('.top-' + index)[0] as HTMLElement;
-            // emt.style.backgroundImage = imageData;
-
-            this.documents[index].image = imageData;
-            this.documents[index].filePathUrl = filePathUrl;
-            this.documents[index].localUrl = doc.name + Math.floor(Math.random() * 100) + extnsn;
-            //alert('ThisDocuments: ' + JSON.stringify(this.documents.map((d) => { return { localUrl: d.localUrl, name: d.name, hasImage: !!d.image }; })));
-
-            //alert('Trung save documents');
-            await this.documentService.saveDocumentsForCar(this.documents, this.carRegNo);
-            this.addingNewDoc = false;
-
-            //let fnd = await this.documentService.getDocumentsForCar(this.carRegNo);
-
-            // if (fnd && !fnd[index].image) {
-            //   this.documentService.saveDocumentsForCar(this.documents, this.carRegNo);
-            //   fnd = this.documentService.getDocumentsForCar(this.carRegNo);
-            // }
-
-            // alert('Document Saved for car? ' + JSON.stringify(this.documentService.getDocumentsForCar(this.carRegNo)));
-            // alert('Document Saved  All ? ' + JSON.stringify(this.documentService.getAllDocuments()));
-
-            fileEntry.copyTo(this.appDir, this.documents[index].localUrl);
-
-            // callback({
-            //   data: { base64: fileReadResult as string },
-            //   fileName
-            // });
-          };
 
         }
       }

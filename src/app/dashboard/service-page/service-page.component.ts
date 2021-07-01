@@ -281,9 +281,13 @@ export class ServicePageComponent implements OnInit {
         bookedTime
       }
     });
+    sessionStorage.setItem('allowBack', 'true');
+
     await modal.present();
 
     modal.onDidDismiss().then((data) => {
+      sessionStorage.setItem('allowBack', 'false');
+
        ;
       if (data && data.data && data.data.addon && (this.selectedSubscription.isAdhoc ? data.data.addon.isAdhoc : true)) {
         //alert(JSON.stringify(data));
