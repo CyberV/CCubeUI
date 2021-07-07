@@ -4,7 +4,7 @@
         <warning *ngIf="showFileUploader && !verifyOnly" text="We are facing some technical difficulties. You can try again or select car below."></warning>
         <cta #ctaCar pill="true" *ngIf="!findingCar && isTypingRegNo" text="Get Car Details" (action)="findingCar = true" [loading]="loading"></cta>
 
-        <car-display *ngIf="findingCar" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)" (error)="onError($event)" (carReady)="saveCar($event)"></car-display>
+        <car-display *ngIf="findingCar && isTypingRegNo" [carNo]="regNo" [verifyOnly]="verifyOnly" (letsgo)="goToPlans($event)" (error)="onError($event)" (carReady)="saveCar($event)"></car-display>
         <!-- <document-uploader *ngIf="showFileUploader && verifyOnly" (file)="goToPlans($event)" text="Upload your Car's RC Document."></document-uploader> -->
 
         <warning *ngIf="showFileUploader && verifyOnly" text="We are facing some technical difficulties. Kindly proceed to Checkout."></warning>

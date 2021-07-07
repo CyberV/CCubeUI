@@ -9,7 +9,12 @@
 <cta #ctaLogin text="Log In" sticky="true"  [loading]="loading" [disabled]="!isPhoneValid" (action)="tryLogin()"></cta>
 <subheading *ngIf="showError" [text]="errorMsg" color="red"></subheading>
 
-<heading  text="Forgot Password ?" (click)="onForgotPassword()"  align="right" size="16"></heading>
+<div class="row">
+      <div class="offset-5 col-7">
+                  <heading  text="Forgot Password ?" (click)="onForgotPassword()"  align="right" size="16"></heading>
+
+      </div>
+</div>
 
 <!-- <verify-otp
         *ngIf="otpSent"

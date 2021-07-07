@@ -20,12 +20,20 @@ export class SelectedCarComponent implements OnInit {
 
    displayType:string;
 
+
+   mock:any;
+
   constructor(
     private router:Router
   ) {
     this.hideRemove = false;
     this.showBack = true;
     this.slim = false;
+
+    this.mock = [];
+    for(let i=0;i<215;i++) {
+      this.mock.push(i);
+    }
    }
 
   onCompare() {
