@@ -11,7 +11,7 @@
       <div class="col-6 --no-padding-left">
         <div *ngIf="car" class="car-info" role="alert">
           <span class="model">{{car.model}}</span>
-          <span class="regNo">{{car.regNo}}</span>
+          <span class="regNo">{{car.displayLabel }} - {{car.regNo.substr(0,2)}} * * * {{car.regNo.substr(car.regNo.length - 4)}}</span>
           <ng-container *ngIf="mode == 'plan'">
             <span>
               <span class="plan-name" (click)="goToPlan()" >{{plan.name}}</span>

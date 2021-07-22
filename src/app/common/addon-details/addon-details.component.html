@@ -115,6 +115,9 @@
   <cta sticky="true" *ngIf="!addonScheduled && !laterSelected && fromDashboard && purchased && !bookedTime" [loading]="loading"
     text="Book Now" (action)="scheduleAddon(addon)"></cta>
 
+  <cta sticky="true" *ngIf="fromDashboard &&purchased && bookedTime" [loading]="loading" text="Reschedule" (action)="openReschedule()"></cta>
+    
+
   <cta sticky="true" *ngIf="fromDashboard &&!purchased" [loading]="loading" text="Buy" (action)="addAddonToCart()">
   </cta>
 

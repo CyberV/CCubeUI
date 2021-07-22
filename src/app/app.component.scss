@@ -23,12 +23,16 @@ ion-app {
         letter-spacing: 1px;
         text-transform: capitalize;
         font-weight: 400;
-        min-height: 25px;
+        min-height: 40px;
         display: block;
         font-size: 16px;
         top: 5px;
         position: relative;
     }
+}
+
+.header-main {
+    height: 40px;
 }
 
 .view-home {
@@ -44,6 +48,11 @@ ion-app {
     
     font-weight: 400;
      text-align: center;
+
+     .notif-badge {
+        position: absolute;
+        top: -5px;
+     }
 
      .payable {
         text-align: right;
@@ -101,7 +110,7 @@ ion-app {
 
 .notif-badge {
     position: absolute;
-    top: -5px;
+    top: 0px;
     left: 14px;
     background: $secondary-color;;
     border-radius: 25px;
@@ -176,6 +185,9 @@ ion-toolbar {
     margin-top: -6px;
 }
 
+.ion-title {
+    padding: 10px 10px 0 10px;
+}
 ion-toolbar, .ion-header, .ion-title {
 
         font-family: 'AppFont' !important;
@@ -190,6 +202,7 @@ ion-toolbar, .ion-header, .ion-title {
 
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;    
+ 
 }
 
 ion-header.ion-header {

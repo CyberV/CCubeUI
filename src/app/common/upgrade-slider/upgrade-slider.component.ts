@@ -11,10 +11,11 @@ export class UpgradeSliderComponent implements OnInit {
 
 
   @Input() plans;
-
+  @Input() purchasedPlan:any;
   
   @Output() upgradeNow = new EventEmitter();
   @Output() showDetails = new EventEmitter();
+  
 
   planList;
   colors;
@@ -30,6 +31,7 @@ export class UpgradeSliderComponent implements OnInit {
 
     this.plans = [];
     this.planList = [];
+    this.purchasedPlan = {};
     //this.allFeatures = 
 
     this.colors = [

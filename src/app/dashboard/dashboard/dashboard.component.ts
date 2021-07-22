@@ -135,6 +135,8 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     this.currentPlans = this.planService.getAllPlans();
     console.log('Loaded Plans?, ',this.currentPlans);
+
+    this.planService.updatePlanDuration(this.planService.getPlanDuration());
   }
 
   async ngAfterViewInit() {
@@ -150,6 +152,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnChanges(changes) {
+
+    if (changes.currentCar && this.currentCar) {
+      this.currentPlans = this.planService.getAllPlans();
+    }
 
 
     if (changes.planDuration) {

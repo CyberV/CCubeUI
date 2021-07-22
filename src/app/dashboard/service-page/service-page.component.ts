@@ -288,7 +288,19 @@ export class ServicePageComponent implements OnInit {
     modal.onDidDismiss().then((data) => {
       sessionStorage.setItem('allowBack', 'false');
 
-       ;
+       
+      if (data && data.data && data.data.openReschedule && data.data.addon) {
+        let found = this.selectedSubscription.adhocs.filter((adh) => adh.addon.code == data.data.addon.code);
+
+        if (found.length) {
+          found = found[0];  
+        this.handleAdhocReschedule(found);
+
+        }
+        return;
+
+      }
+
       if (data && data.data && data.data.addon && (this.selectedSubscription.isAdhoc ? data.data.addon.isAdhoc : true)) {
         //alert(JSON.stringify(data));
         let addon = data.data.addon;

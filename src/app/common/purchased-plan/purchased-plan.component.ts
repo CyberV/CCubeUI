@@ -91,6 +91,36 @@ export class PurchasedPlanComponent implements OnInit {
     }
   }
 
+  if (changes.car && this.car) {
+    switch(this.car.bodyType.toLowerCase()) {
+      case 'hatchback': {
+        this.car.displayLabel = 'Hatchback';
+        break;
+      }
+      case 'phatchback': {
+        this.car.displayLabel = 'Premium Hatchback';
+        break;
+      }
+      case 'sedan': {
+        this.car.displayLabel = 'Sedan';
+        break;
+      }
+      case 'csuv': {
+        this.car.displayLabel = this.car.displayType == 'crossover' ? 'Crossover' : 'Compact SUV';
+        break;
+      }
+      case 'suv': {
+        this.car.displayLabel = this.car.displayType == 'mpv' ? 'MPV' : 'SUV';
+        break;
+      }
+      case 'luxury': {
+        this.car.displayLabel = 'Luxury Car';
+        break;
+      }
+      default:;
+    }
+  }
+
     if (changes.subscription && this.subscription) {
       
       this.mode = this.subscription.isAdhoc ? 'adhoc' : 'plan';

@@ -86,6 +86,7 @@ export class RescheduleComponent implements OnInit {
           this.loading = false;
           if (response.success) {
             this.dismiss();
+            window.location.reload();
           } else {
             alert(response.errorMsg || response.error);
           }
@@ -175,6 +176,7 @@ export class RescheduleComponent implements OnInit {
             this.loading = false;
             if (response.success) {
               this.dismiss();
+              window.location.reload();
             } else {
               alert(response.errorMsg || response.error);
             }
@@ -189,6 +191,11 @@ export class RescheduleComponent implements OnInit {
       }
     });
 
+  }
+
+  ngOnDestroy() {
+    console.log('Destroying checkout listner');
+    this.checkoutService.events().unsubscribe();
   }
 
 }

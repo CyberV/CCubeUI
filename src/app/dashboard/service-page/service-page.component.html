@@ -21,6 +21,7 @@
             <ion-badge *ngIf="getNotificationCount(payment.payments[0].car.regNo) > 0">
               <ion-icon name="notifications-outline"></ion-icon> {{getNotificationCount(payment.payments[0].car.regNo)}}
             </ion-badge>
+            <div class="active-footer"></div>
           </div>
           <!-- <mat-card class="card addon-card animate__animated animate__flipInX">
             
@@ -208,7 +209,7 @@
 <refer-earn [slim]="true"></refer-earn>
 
 <ng-container *ngIf="!loading && payments.length > 0 && !selectedSubscription.isAdhoc ">
-  <upgrade-slider *ngIf="upgradePlans.length" [plans]="upgradePlans" class="--padding-y"
+  <upgrade-slider *ngIf="upgradePlans.length" [purchasedPlan]="selectedPayment.plan" [plans]="upgradePlans" class="--padding-y"
     (upgradeNow)="handleUpgradePlan($event)" (showDetails)="showPlanDetails($event)"></upgrade-slider>
 
     <addon-slider [bodyType]="selectedCar.bodyType" [selectedAddons]="subAddons" [plan]="selectedSubscription.payments[0].plan"

@@ -10,7 +10,7 @@
         <span> Extra </span>
        <span class="price" Rs > {{ plan.price }} <span class="permonth"> /month </span></span> 
       </span>
-      <br />
+      <br />  
       <span></span>
     </p>
   <div class="card-body feature-list" >
@@ -54,6 +54,16 @@
             </list>
     </ng-container>
 
+  </div>
+
+  <div *ngIf="forUpgrade && previousPlan" class="upgrade-section" (click)="onShowDetails()">
+    <div>
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </div>
+    <heading slim="true" align="center" size="12" text="All other features from"></heading>
+    <heading slim="true" align="center" size="14" color="primary" text="{{previousPlan}} Plan"></heading>
+
+    
   </div>
 
   <div class="card-body actions-row">

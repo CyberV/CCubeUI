@@ -267,6 +267,13 @@ export class AddonDetailsComponent implements OnInit {
 
   }
 
+  openReschedule() {
+    this.modalController.dismiss({
+      openReschedule: true,
+      addon: this.addon
+    });
+  }
+
 
 
 }

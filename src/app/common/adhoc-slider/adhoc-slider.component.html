@@ -25,7 +25,7 @@
               <div class="ion-no-margin rate" (click)="sendShowDetails(addon)">
 
                 <div *ngIf="!(isSelected(addon) && active)">
-                  <span class="price" Rs>{{addon.price}}</span><span class="original-price" Rs>
+                  <span class="price" Rs>{{addon.price}}</span><span *ngIf="addon.originalPrice" class="original-price" Rs>
                     {{addon.originalPrice}}</span>
                 </div>
 

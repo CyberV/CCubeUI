@@ -6,6 +6,12 @@ export function scrollToBottom() {
   cont[cont.length - 1].scrollTop = 2000;
 }
 
+
+export function getContainer() {
+  let cont = $('.container');
+  return cont[cont.length - 1];
+}
+
 export function scrollToTop() {
   let cont = $('.container');
   cont[cont.length - 1].scrollTop = 0;

@@ -258,6 +258,10 @@ export class CheckoutComponent implements OnInit {
     this.carService.changeCar(this.updatedCarDetails);
     this.selectedCar = this.carService.getCurrentCar();
 
+    if (this.appliedCoupons.length && this.appliedCoupons[0].validFor == 'society') {
+      this.confLoc.first.showCouponAlert();
+    }
+
     if (this.mode.plan) {
 
 
@@ -463,7 +467,7 @@ export class CheckoutComponent implements OnInit {
     } else {
       this.selectedPlan = plan;
 
-      if (this.selectedPlan.name == 'Elite') {
+      if (this.selectedPlan.code == 'DLX') {
         this.planService.clearAddons();
         this.includedAddons = [];
       }
@@ -659,7 +663,9 @@ export class CheckoutComponent implements OnInit {
       this.timeSaved = true;
     }
 
-    let hasLocation = this.currentLocation && (this.currentLocation.society || (this.currentLocation.location && this.currentLocation.location.society).length);
+    let l= this.currentLocation.location && this.currentLocation.location.society;
+
+    let hasLocation = this.currentLocation && (this.currentLocation.society || (l ? l.length : ''));
 
 
     if (hasLocation && this.carIdentified && !this.carMismatch) {
@@ -748,7 +754,7 @@ export class CheckoutComponent implements OnInit {
             bonusApplied: order.bonus,
             location: this.currentLocation,
             officeTime: this.officeTime,
-            startDate: +(new Date()),
+            startDate: new Date().toDateString(),
             order: order,
             lastDate: updatedPlan && updatedPlan.lastDate
           };

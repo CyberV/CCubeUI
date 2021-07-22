@@ -23,6 +23,7 @@ export class PlanCardComponent implements OnInit {
   missingFeatures: any;
   upgradePrice:any;
   colors: any;
+  previousPlan:any;
 
   constructor(
     private planService:PlanService
@@ -57,7 +58,28 @@ export class PlanCardComponent implements OnInit {
       this.features = this.planService.AllFeatures
     }
 
+    if (this.plan && this.forUpgrade) {
+      let p = '';
+      switch(this.plan.code) {
+        case 'WFH': {
+          p = null;
+          break;
+        }
+        case 'STD': {
+          p = 'Work From Home';
+          break;
+        }
+        case 'DLX': {
+          p = 'Standard';
+          break;
+        }
+        default: break;
+      }
+      this.previousPlan = p;
+    }
+
     if (this.plan && this.plan.features) {
+
         //this.missingFeatures = JSON.parse(JSON.stringify(this.features));
         this.plan.features.forEach(feature => {
           this.currentFeatures.push(this.features.filter( (ftr) => ftr.code === feature)[0]);

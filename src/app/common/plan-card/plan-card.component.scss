@@ -38,6 +38,13 @@
 
     }
 
+    .upgrade-section {
+        ion-icon {
+            color: $secondary-color;
+            font-size: 24px;
+        }
+    }
+
     .monthly-label {
         position: relative;
         letter-spacing: 2px;

@@ -159,11 +159,11 @@ export class DashboardPageComponent implements OnInit {
         break;
       }
       case 'adhoc': {
-        this.headerService.setText(this.selectedAdhoc.name + ' Service');
+        this.headerService.setText(this.selectedAdhoc.name);
         break;
       }
       case 'addon': {
-        this.headerService.setText(this.selectedAddon.label || this.selectedAddon.name + ' Addon');
+        this.headerService.setText(this.selectedAddon.label || this.selectedAddon.name);
         break;
       }
       case 'service': {

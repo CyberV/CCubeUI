@@ -88,6 +88,16 @@ mat-expansion-panel {
 
 .feature {
   width: 96%;
+
+
+  @media screen  and (min-width: 350px){
+    width: 91%;
+  }
+
+  
+  @media screen  and (min-width: 400px){
+    width: 88%;
+  }
 margin-bottom: 5px;
 
 

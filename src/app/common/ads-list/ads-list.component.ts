@@ -4,6 +4,8 @@ import { PlanService } from 'app/services/plan.service';
 import { CarService } from 'app/services/car.service';
 import { ToastController, IonSlides } from '@ionic/angular';
 import { getConfigValue } from '../common.service';
+import { UserService } from 'app/services/user.service';
+import { getContainer } from 'app/util/util';
 declare var $;
 @Component({
   selector: 'ads-list',
@@ -15,7 +17,7 @@ export class AdsListComponent implements OnInit {
   ads: any;
   sliderInitialized:boolean;
 
-
+user:any;
 
   options = {
     autoplay: 3000,
@@ -44,6 +46,7 @@ export class AdsListComponent implements OnInit {
     private router: Router,
     private planService: PlanService,
     private carService: CarService,
+    private userService: UserService,
     private toastController: ToastController
   ) {
 
@@ -98,6 +101,8 @@ export class AdsListComponent implements OnInit {
 
     let ads = getConfigValue('COUPON_CONFIG');
 
+    this.user = this.userService.getCurrentUser();
+
     if (ads && ads.length) {
       this.ads = ads;
 
@@ -129,6 +134,8 @@ export class AdsListComponent implements OnInit {
 
   selectAd(ad) {
 
+    let user = this.user;
+
     if (ad.action.indexOf('addon:') > -1) {
 
       this.planService.includeAddonWithCode(ad.action.split(':')[1]);
@@ -143,13 +150,29 @@ export class AdsListComponent implements OnInit {
           break;
         }
         case 'upgrade': {
-          this.presentToast('Upgrade your car.');
+
+
+
+          if (user && user.status != 'New') {
+            getContainer().scrollTop = 700;
+          } else {
+            this.carService.clear();
+            this.router.navigate(['/dashboard/select-car'])
+          }
+          
 
           break;
         }
         case 'quarterly': {
-          this.presentToast('Buy/Renew a Plan to see quarterly benefits.');
+
           this.planService.updatePlanDuration('quarterly');
+          if (user && user.status != 'New') {
+            getContainer().scrollTop = 700;
+          } else {
+            this.carService.clear();
+            this.presentToast('Buy a Plan to see quarterly benefits.');
+            this.router.navigate(['/dashboard/select-car'])
+          }
 
           break;
         }

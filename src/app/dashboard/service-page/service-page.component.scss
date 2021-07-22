@@ -126,6 +126,9 @@
 
         .car-box {
           min-height: 70px;
+          //max-height: 70px;
+
+
 
             &.active {
                 border-bottom: 5px solid $secondary-color;
@@ -133,12 +136,23 @@
 
             ion-badge {
               position: absolute;
-              right: 20px;
-              padding: 4px;
+              right: 10px;
+              padding: 1px 4px;
+              font-size: 12px;
               border-radius: 15px;
               font-weight: normal;
-              top: 0;
+              top: 5px;
               background: #3fbabc;
+
+              @media screen and (min-width: 350px) {
+                right: 15px;
+                top: 8px;
+              }
+
+              @media screen and (min-width: 400px) {
+                right: 20px;
+                top: 10px;
+              }
 
               ion-icon {
                 position: relative;
