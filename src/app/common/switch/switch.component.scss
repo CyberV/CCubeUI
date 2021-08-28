@@ -7,6 +7,25 @@
     line-height: 40px;
 }
 
+.sticky {
+	background: $secondary-color;
+    border-radius: 0 20px 20px 0;
+    padding: 4px;
+	color: white;
+	position: absolute;
+	top: 0px;
+    	width: 60px;
+    	font-size: 12px;
+
+	z-index: 100;
+
+	@media screen and (min-width: 350px){
+		top: 7px;
+    	width: unset;
+    	font-size: 14px;
+	}
+}
+
 .switch-container {
     position: relative;
 

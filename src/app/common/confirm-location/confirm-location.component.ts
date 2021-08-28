@@ -14,6 +14,8 @@ export class ConfirmLocationComponent implements OnInit {
 
 
   @Input() location: any;
+
+  @Input() forDemo:boolean;
   @Output() retryCoupons = new EventEmitter();
 
   isUnlisted: boolean;
@@ -49,6 +51,7 @@ export class ConfirmLocationComponent implements OnInit {
       city: '',
       state: ''
     };
+    this.forDemo = false; 
     this.isUnlisted = false;
 
   }

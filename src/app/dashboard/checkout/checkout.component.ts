@@ -300,6 +300,7 @@ export class CheckoutComponent implements OnInit {
     this.currentUser = this.userService.getCurrentUser();
     let order = this.planService.getCurrentOrder();
     let allPayments = JSON.parse(sessionStorage.getItem('allPayments'));
+    let showPayLater = false;
     if (this.mode.plan) {
       this.planService.includeComplimentaryAdhocWithCode('FBW');
     }
@@ -308,7 +309,10 @@ export class CheckoutComponent implements OnInit {
 
 
       if (allPayments && allPayments.length) {
-        carAlreadyActive = allPayments.filter((p) => { return p.car.regNo.toLowerCase() == order.car.regNo.toLowerCase() && !p.isAdhoc }).length > 0
+        let cars =allPayments.filter((p) => { return p.car.regNo.toLowerCase() == order.car.regNo.toLowerCase() && !p.isAdhoc });
+        carAlreadyActive = cars.length > 0;
+        showPayLater = cars.length == 0 && this.selectedPlan.duration == 'monthly';
+
         //allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
       }
       else {
@@ -327,6 +331,7 @@ export class CheckoutComponent implements OnInit {
       adhocs: order.adhocs,
       location: this.currentLocation && this.currentLocation.society && this.currentLocation.society.length ? this.currentLocation : order.location,
       discount: order.discount,
+      showPayLater,
       bonus: order.bonus,
       info: order.info,
       total: order.total,
@@ -367,8 +372,13 @@ export class CheckoutComponent implements OnInit {
       } else {
 
         if (data && data.data && data.data.amount) {
-          await this.generateOrder();
-          this.payNow();
+          await this.generateOrder(data.data.payLater);
+          if (data.data.payLater) {
+            this.payLater();
+          } else {
+            this.payNow();
+          }
+        
         }
       }
 
@@ -747,6 +757,7 @@ export class CheckoutComponent implements OnInit {
             phone: this.currentUser.phone,
             plan: updatedPlan,
             isRcMissing: this.isRcMissing,
+            isPostpaid: order.payLater,
             coupon: (order.discount && order.discount.coupon) ? order.discount.coupon : null,
             car: this.selectedCar,
             addons: this.includedAddons,
@@ -921,7 +932,7 @@ export class CheckoutComponent implements OnInit {
     this.appliedCoupons = [];
   }
 
-  async generateOrder() {
+  async generateOrder(payLater = false) {
 
     let plan = !!this.selectedPlan;
     let addon = !!(this.includedAddons && this.includedAddons.length);
@@ -937,6 +948,7 @@ export class CheckoutComponent implements OnInit {
       this.order = await this.planService.getCurrentOrder();
       this.order.isRcMissing = this.isRcMissing;
       this.order.car.regNo = this.selectedCar.regNo;
+      this.order.payLater = payLater;
       this.order = await this.planService.lockCurrentOrder(this.order);
 
     } else {
@@ -949,6 +961,7 @@ export class CheckoutComponent implements OnInit {
         adhocs: this.includedAdhocs,
         plan: this.planService.getSelectedPlan(),
         location: this.savedLocation,
+        payLater: payLater,
         bonus: this.currentUser.referralBonusPending,
         serviceTotal: this.serviceTotal,
         total: this.netPayable,
@@ -979,6 +992,12 @@ export class CheckoutComponent implements OnInit {
         console.log('Error creating order', res.errorMsg, res.error);
       }
     });
+  }
+
+  payLater() {
+    this.loading = true;
+    this.order = this.planService.getCurrentOrder();
+    this.checkoutService.payLater(this.order);
   }
 
   verifyCar(carDetails) {

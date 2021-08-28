@@ -155,7 +155,7 @@
                 <weekly-schedule *ngIf="selectedSubscription.schedule.length"
                   [hasAvailedFreeReschedule]="selectedSubscription.hasAvailedFreeReschedule"
                   [lastDate]="selectedPayment.expiresOn" [schedule]="selectedSubscription.schedule"></weekly-schedule>
-                <heading *ngIf="!selectedSubscription.schedule.length"
+                <heading *ngIf="!selectedSubscription.schedule.length" size="14"
                   text="Schedule is Under Processing. Please wait for Plan Activation."></heading>
 
               </mat-expansion-panel>

@@ -14,6 +14,12 @@
     padding: 10px;
 }
 
+.modal-container-addon {
+    width: 83%;
+    left: 10%;
+    position: relative;
+}
+
 .completed, .pending {
     font-size: 35px;
     margin-right: 0.5em;
@@ -75,7 +81,12 @@ ion-list {
 
 .completed {
     color: $primary-color;
+    margin-right: 0;
+
+    @media screen  and (min-width: 350px){
     margin-right: 5px;
+        
+    }
 }
 
 .pending {
@@ -164,7 +175,7 @@ ion-item {
 }
 
 .slim-container {
-    padding: 0 30px;
+    padding: 0 10px;
     // .mid-line {
     //     width: 150% !important;
     //     left: -50px !important;
@@ -177,7 +188,7 @@ ion-item {
 .progress-container {
 
     .mid-line {
-        width: 120%;
+        width: 117%;
     height: 1px;
     background: #9f7c7c;
     position: relative;

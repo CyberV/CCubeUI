@@ -44,7 +44,7 @@ export class ThanksPageComponent implements OnInit {
     this.payment = JSON.parse(sessionStorage.getItem('currentPayment'));
     this.order=  this.planService.getCurrentOrder();
 
-    this.receiptId = (+(new Date())).toString().substr(3,4);
+    this.receiptId = this.order.receiptId || ('101' + (+(new Date())).toString().substr(3,4));
     
     this.loginService.refreshUser(this.payment.phone);
 

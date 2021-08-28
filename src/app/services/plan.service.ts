@@ -564,6 +564,8 @@ export class PlanService {
       }
       order.info = info;
 
+      order.receiptId = 'CCUBE-101' + (+(new Date())).toString().substr(3,4);
+
 
       sessionStorage.setItem('currentOrder', JSON.stringify(order));
 

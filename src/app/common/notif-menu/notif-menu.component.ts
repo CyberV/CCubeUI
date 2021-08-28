@@ -53,7 +53,7 @@ export class NotifMenuComponent implements OnInit {
 
 
       let alert = await this.alertController.create({
-        cssClass: cls + ' animate__animated  animate__fadeIn ',
+        cssClass: cls + ' alert1 animate__animated  animate__fadeIn ',
         header: data.title || 'Notification',
         message: data.body || 'This is a demo message.',
         buttons: ['OK']
@@ -67,6 +67,11 @@ export class NotifMenuComponent implements OnInit {
         }
         if (data.action && data.action == 'refer') {
           this.router.navigate(['/profile']);
+        }
+        if (data.action && data.action.indexOf('url==') == 0) {
+
+          let url = data.action.substr(5);
+          window.open(url, '_blank');
         }
         alert.cssClass = 'animate__animated  animate__fadeOut';
       });

@@ -734,7 +734,7 @@
                 "model": "Nexon",
                 "price": "Rs. 6.95 Lakh",
                 "details": "1199 cc | 22 kmpl | Petrol | Diesel",
-                "bodyType": "sedan",
+                "bodyType": "csuv",
                 "image": "./assets/icons/makers/models/80.png",
                 "carId": 80
             },
@@ -846,7 +846,7 @@
                 "model": "BRV",
                 "price": "Rs. 9.91 Lakh",
                 "details": "1497 cc | 17 kmpl | Petrol",
-                "bodyType": "csuv",
+                "bodyType": "suv",
                 "image": "https://media.zigcdn.com/media/model/2019/Sep/honda-brv_600x400.jpg",
                 "carId": 206
             },

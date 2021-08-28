@@ -11,7 +11,7 @@
           <heading slim="true" size="16" capitalize="true" text="SUBSCRIPTION PLANS" align="center"></heading>
           <div class="row --no-margin">
             <div class="col-12 text-center duration-container">
-                 <switch (toggle)="onDurationToggle($event)" [planDuration]="planDuration"></switch>  
+                 <switch showDemoLink="true" (onDemo)="handleDemoLink()" (toggle)="onDurationToggle($event)" [planDuration]="planDuration"></switch>  
             </div>
           </div>
 
@@ -21,7 +21,7 @@
           <addon-slider  [bodyType]="currentCar.bodyType" [selectedAddons]="includedAddons" (addonSelected)="onAddonSelect($event)" (showDetails)="openAddon($event)"></addon-slider>
           <adhoc-slider  [bodyType]="currentCar.bodyType" [selectedAdhocs]="includedAdhocs" (adhocSelected)="onAdhocSelect($event)" (showDetails)="openAddon($event)"></adhoc-slider>
 
-          <book-demo></book-demo>
+          <book-demo #demo></book-demo>
 
         </ng-container>
 

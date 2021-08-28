@@ -147,6 +147,18 @@ div::-webkit-scrollbar-thumb:hover {
   color: black;
 }
 
+.alert1{
+  .alert-wrapper {
+    border-radius: 10px;
+  }
+  .alert-head {
+    padding-top: 10px;
+  }
+  .alert-message { 
+    padding-bottom: 0;
+  }
+}
+
 .ion-img-viewer {
   height: 90%;
 

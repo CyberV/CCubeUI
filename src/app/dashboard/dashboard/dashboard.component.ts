@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 import { ModalPage } from 'app/modal/modal.page';
 import { CarService } from 'app/services/car.service';
 import { PlanService } from 'app/services/plan.service';
-import { scrollElementToTop } from 'app/util/util';
+import { scrollElementToTop, scrollToBottom } from 'app/util/util';
 import { PlanSliderComponent } from 'app/common/plan-slider/plan-slider.component';
 import { AddonDetailsComponent } from 'app/common/addon-details/addon-details.component';
+import { BookDemoComponent } from 'app/common/book-demo/book-demo.component';
 
 
 declare var $: any;
@@ -40,6 +41,7 @@ export class DashboardComponent implements OnInit {
   slideOpts: any;
 
   @ViewChildren('planSlider') planSlider: QueryList<HTMLElement>;
+  @ViewChildren('demo') demo: QueryList<BookDemoComponent>;
 
   constructor(
     private carService: CarService,
@@ -186,6 +188,18 @@ export class DashboardComponent implements OnInit {
     this.planService.includeAdhoc(adhoc);
     this.router.navigate(['/dashboard/adhoc'])
 
+  }
+
+  handleDemoLink() {
+    scrollToBottom();
+
+    setTimeout(()=> {
+      this.demo.first.open();
+
+      setTimeout(()=> {
+        scrollToBottom();
+      }, 200);
+    }, 400);
   }
 
   async presentToast(msg) {

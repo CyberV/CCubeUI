@@ -27,7 +27,7 @@
                   'badge-warning': subscription.status == 'Expiring',
                   'badge-danger': subscription.status == 'Expired' || subscription.status == 'Terminated',
                   'badge-success': subscription.status == 'Payment Received'  || subscription.status == 'Service Scheduled'}">
-              {{subscription.status | uppercase}}</div>
+              {{ subscription.status == 'Payment Received' && subscription.isPostpaid ? 'AWAITING SCHEDULE' : (subscription.status | uppercase)}}</div>
 
 
             <span class="expiry">{{expiry}}</span>

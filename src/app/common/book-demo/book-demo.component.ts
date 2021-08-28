@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core
 import { UserService } from 'app/services/user.service';
 import { LoginService } from 'app/login/login.service';
 import { CarService } from 'app/services/car.service';
+import { AccordionComponent } from '../accordion/accordion.component';
+import { scrollToBottom } from 'app/util/util';
 
 @Component({
   selector: 'book-demo',
@@ -12,7 +14,7 @@ export class BookDemoComponent implements OnInit {
 
   @Input() compact: boolean;
 
-  @ViewChildren('bookAccordion') bookAccordion : QueryList<BookDemoComponent>;
+  @ViewChildren('bookAccordion') bookAccordion : QueryList<AccordionComponent>;
 
   phone: any;
   name: any;
@@ -34,6 +36,12 @@ export class BookDemoComponent implements OnInit {
     this.location = {
 
     };
+  }
+
+  open() {
+    this.bookAccordion.first.toggle(true);
+
+
   }
 
   clearDemo() {

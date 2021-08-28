@@ -16,6 +16,8 @@ export class CheckoutConfirmationComponent implements OnInit {
   serviceTotal:number;
   address:string;
 
+  showPayLater:boolean;
+
   mode:any;
 
   constructor(
@@ -27,6 +29,7 @@ export class CheckoutConfirmationComponent implements OnInit {
     this.hasAdhocs = false;
     this.totalAmount = 0;
     this.serviceTotal = 0;
+    this.showPayLater = false;
     this.mode = null;
    }
 
@@ -39,6 +42,9 @@ export class CheckoutConfirmationComponent implements OnInit {
       this.serviceTotal = this.details.serviceTotal || this.details.total;
       this.mode = this.details.mode;
 
+      this.showPayLater = this.details.showPayLater ? this.details.showPayLater : false;
+
+      
       if (this.details.location) {
         let loc = this.details.location;
         this.address = loc.houseNo + ", " + (loc.block ? loc.block + ", " : "") + loc.society + ", " + loc.city + ', ' + loc.state;
@@ -56,6 +62,7 @@ export class CheckoutConfirmationComponent implements OnInit {
         this.serviceTotal = this.details.serviceTotal || this.details.total;
 
         this.mode = this.details.mode;
+        this.showPayLater = this.details.showPayLater ? this.details.showPayLater : false;
 
         if (this.details.location) {
           let loc = this.details.location;
@@ -68,6 +75,13 @@ export class CheckoutConfirmationComponent implements OnInit {
   dismissAndPay() {
     this.modalController.dismiss({
       amount: 1000
+    });
+  }
+
+  sendPayLater() {
+    this.modalController.dismiss({
+      amount: 1000,
+      payLater: true
     });
   }
 

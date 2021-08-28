@@ -2,6 +2,7 @@
 
 
   <cc-accordion
+  colorful="true" alternate="true"
     [title]="appliedCoupons.length == 0 ? 'Looking For Coupons ?' : 'Coupon Applied : ' +  (appliedCoupons.length ? ((appliedCoupons[0].unit=='percent' ? '' : 'Rs ') +  appliedCoupons[0].value + (appliedCoupons[0].unit=='percent' ? ' %' : '') + ' OFF') : '')"
     (onToggle)="ngOnInit()"
     #couponAccordion>

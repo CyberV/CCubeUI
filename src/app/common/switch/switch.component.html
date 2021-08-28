@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="col-12">
+  <div *ngIf="showDemoLink" class="" >
+<div class="sticky animate__animated animate__fadeInLeft" (click)="sendDemo()" >Book A Demo</div>
+  </div>
+  <div [class.col-12]="true" >
     <span class="switch-container">
       <span class="plan_selector" [class.addons]="forAddons">
         <div class="option option_1 plan_duration" [class.active_option]="!open" (click)="setActivePlanDuration('monthly')">

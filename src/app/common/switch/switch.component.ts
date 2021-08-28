@@ -10,9 +10,11 @@ import { getConfigValue } from '../common.service';
 export class SwitchComponent implements OnInit {
 
   @Output() toggle = new EventEmitter();
+  @Output() onDemo = new EventEmitter();
+
 
   @Input() slim:boolean;
-
+  @Input() showDemoLink:boolean;
   @Input() forAddons:boolean;
 
   open: boolean;
@@ -28,6 +30,7 @@ export class SwitchComponent implements OnInit {
     this.discountValue = 20;
     this.slim = false;
     this.forAddons = false;
+    this.showDemoLink = false;
   }
 
   ngOnInit() {
@@ -56,6 +59,10 @@ export class SwitchComponent implements OnInit {
     this.open = activeIndex == 'quarterly';
 
     this.sendToggle();
+  }
+
+  sendDemo() {
+    this.onDemo.emit();
   }
 
   sendToggle() {

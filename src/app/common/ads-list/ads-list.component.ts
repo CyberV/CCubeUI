@@ -136,11 +136,15 @@ user:any;
 
     let user = this.user;
 
-    if (ad.action.indexOf('addon:') > -1) {
+    if (ad.action.indexOf('addon:') == 0) {
 
       this.planService.includeAddonWithCode(ad.action.split(':')[1]);
       this.router.navigate(['/dashboard/addon'])
 
+    } else if (ad.action.indexOf('url==') == 0) {
+
+      let url = ad.action.substr(5);
+      window.open(url, '_blank');
     } else {
 
       switch (ad.action) {

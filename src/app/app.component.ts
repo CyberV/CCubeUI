@@ -36,23 +36,23 @@ export class AppComponent {
   noBackNavigation: any;
 
   hideBackButton: boolean;
-  fcmInitialized:boolean;
+  fcmInitialized: boolean;
 
   headerText: string;
   currentUser: any;
   isLoggedIn: boolean;
-  hasNewNotifications:boolean;
+  hasNewNotifications: boolean;
 
   headerType: string;      // text, view
   viewData: any;
 
   context: string;
-  ready:boolean;
+  ready: boolean;
 
-  notifToggleOpen:boolean;
+  notifToggleOpen: boolean;
   profilePic: any;
 
-  lastTimeBackPress:number;
+  lastTimeBackPress: number;
 
   constructor(
     private platform: Platform,
@@ -62,11 +62,11 @@ export class AppComponent {
     private menu: MenuController,
     private userService: UserService,
     private alertController: AlertController,
-    private documentService:DocumentService,
-    private planService:PlanService,
+    private documentService: DocumentService,
+    private planService: PlanService,
     private carService: CarService,
     public toastController: ToastController,
-    private popoverController:PopoverController,
+    private popoverController: PopoverController,
     private loginService: LoginService,
     private notificationService: NotificationService
   ) {
@@ -122,9 +122,9 @@ export class AppComponent {
 
   async ngOnInit() {
 
-     this.profilePic = await this.documentService.getProfilePicture();
-     this.headerText = ' ';
-     this.headerType = 'text';
+    this.profilePic = await this.documentService.getProfilePicture();
+    this.headerText = ' ';
+    this.headerType = 'text';
 
     this.ready = false;
 
@@ -132,9 +132,9 @@ export class AppComponent {
     await Initialize(this.userService.getCurrentUser() ? this.userService.getCurrentUser().city || '' : '');
     this.planService.refreshPlans();
     console.log('After Init in APP Ready true');
-    
 
-    setTimeout(()=> {
+
+    setTimeout(() => {
       this.ready = true;
 
     }, 100);
@@ -163,14 +163,14 @@ export class AppComponent {
       showBackdrop: true,
       translucent: true
     });
-     await popover.present();
+    await popover.present();
 
 
-     popover.onWillDismiss().then(()=>{
-       this.notifToggleOpen = false;
-     });
+    popover.onWillDismiss().then(() => {
+      this.notifToggleOpen = false;
+    });
 
-     return;
+    return;
   }
 
   async presentAlert(data = null) {
@@ -180,18 +180,17 @@ export class AppComponent {
       cls = data.title.toLowerCase().indexOf('reminder') > -1 ? 'bg-reminder' : cls;
       cls = data.title.toLowerCase().indexOf('congratulations') > -1 ? 'bg-congrats' : cls;
       cls = data.title.toLowerCase().indexOf('key') > -1 ? 'bg-collect-keys' : cls;
-  
+
       alert = await this.alertController.create({
-        cssClass: 'my-custom-class ' + cls,
+        cssClass: 'animate__animated  animate__fadeIn my-custom-class alert1 ' + cls,
         header: data.title || 'Notification',
         message: data.body || 'This is a demo message.',
         buttons: ['OK']
       });
     } else {
       alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
+        cssClass: 'animate__animated  animate__fadeIn my-custom-class alert1 ',
         header: 'Alert',
-        subHeader: 'Subtitle',
         message: 'This is an alert message.',
         buttons: ['OK']
       });
@@ -207,10 +206,20 @@ export class AppComponent {
       }, 2000);
     }
 
-    alert.onWillDismiss().then(()=> {
+    alert.onWillDismiss().then(() => {
+
       if (data.action && data.action == 'refresh') {
         window.location.reload();
       }
+      if (data.action && data.action == 'refer') {
+        this.router.navigate(['/profile']);
+      }
+      if (data.action && data.action.indexOf('url==') == 0) {
+
+        let url = data.action.substr(5);
+        window.open(url, '_blank');
+      }
+      
       alert.cssClass = 'animate__animated  animate__fadeOut';
 
       // setTimeout(()=>{
@@ -229,7 +238,7 @@ export class AppComponent {
 
   get pathname() {
     return window.location.pathname;
-  } 
+  }
 
   get isMobile() {
     return !this.platform.is('desktop');
@@ -239,7 +248,7 @@ export class AppComponent {
     this.menu.enable(true, 'first');
     this.hasNewNotifications = this.notificationService.getNewNotifications().length > 0;
 
-    this.notificationService.events().subscribe((notifs:any) => {
+    this.notificationService.events().subscribe((notifs: any) => {
       this.hasNewNotifications = notifs.new.length > 0;
     })
 
@@ -251,32 +260,32 @@ export class AppComponent {
   }
 
   async checkData() {
-    let _p:any = planData;
-    console.log('p',_p());
-    if(!_p()) {
+    let _p: any = planData;
+    console.log('p', _p());
+    if (!_p()) {
       return await new Promise((resolve) => {
-        setTimeout( ()=> {
-          resolve (this.checkData());
+        setTimeout(() => {
+          resolve(this.checkData());
         }, 500);
       });
     } else {
       return true;
     }
-    
+
   }
 
   @HostListener('document:ionBackButton', ['$event'])
-  backAction(event: any) : void {}
-  
+  backAction(event: any): void { }
+
   timePeriodToExit = 2000;
 
   async onBackButton(event) {
 
     let allow = sessionStorage.getItem('allowBack');
 
-    if (allow ? allow == 'true': false) {
+    if (allow ? allow == 'true' : false) {
       return;
-    } 
+    }
     event.detail.register(100, async () => {
       event.stopImmediatePropagation();
       event.stopPropagation();
@@ -306,16 +315,17 @@ export class AppComponent {
     console.log('Deactivated', comp.context, comp);
 
     if (comp.context == 'service') {
-      this.backAction =  function() : void {};
+      this.backAction = function (): void { };
     }
   }
 
   async onActivate(comp) {
+    //this.presentAlert();
     this.menu.enable(true, 'first');
     console.log('Activated', comp.context, comp);
 
     if (comp.context == 'landing' && this.userService.isLoggedIn()) {
-      
+
       this.currentUser = this.userService.getCurrentUser();
       let showDashboard = this.currentUser.status == 'Active';
 
@@ -331,11 +341,10 @@ export class AppComponent {
 
     this.profilePic = await this.documentService.getProfilePicture();
 
-    //this.notificationService.saveNewNotification({title:'Congratulations', 'body': 'Sample Notif', data: JSON.stringify({car: {"model":"Duster","price":"Rs. 8.49 Lakh","details":"1498 cc | 20 kmpl | Petrol","bodyType":"suv","image":"./assets/icons/makers/models/149.png","id":149,"searchedBy":["9560879722"],"ownedBy":[],"missing":false,"_id":"5f9884d25d45340018b88841","carId":"149","maker":"RENAULT","regNo":"hr51bl0139","fuelType":"DIESEL","registeredOn":"11/23/2016","year":2016,"ownerName":"VIKRANT SIWACH","variant":"RENAULT DUSTER","fuelNorms":"BHARAT STAGE IV","chassisNo":"MEEHSRAWEG90XXXXX","engineNo":"K9KF830E0XXXXX","insuranceUpto":"2020-11-28T00:00:00.000Z","fitness":"2031-11-04T00:00:00.000Z","vehicleType":"MOTOR CAR (LMV)","age":"3 years","__v":0,"name":"duster"}, msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}})});
+    //this.notificationService.saveNewNotification({title:'Congratulations', 'body': 'Sample Notif', data: JSON.stringify({action: 'url==https://stackoverflow.com/questions/17142790/bootstrap-modal-not-working-at-all', car: {"model":"Duster","price":"Rs. 8.49 Lakh","details":"1498 cc | 20 kmpl | Petrol","bodyType":"suv","image":"./assets/icons/makers/models/149.png","id":149,"searchedBy":["9560879722"],"ownedBy":[],"missing":false,"_id":"5f9884d25d45340018b88841","carId":"149","maker":"RENAULT","regNo":"hr51bl0139","fuelType":"DIESEL","registeredOn":"11/23/2016","year":2016,"ownerName":"VIKRANT SIWACH","variant":"RENAULT DUSTER","fuelNorms":"BHARAT STAGE IV","chassisNo":"MEEHSRAWEG90XXXXX","engineNo":"K9KF830E0XXXXX","insuranceUpto":"2020-11-28T00:00:00.000Z","fitness":"2031-11-04T00:00:00.000Z","vehicleType":"MOTOR CAR (LMV)","age":"3 years","__v":0,"name":"duster"}, msg: 'Sameple ' + comp.context, data: {car: {image:"./assets/icons/makers/models/149.png",regNo: 'hr51bl0139'}}})});
 
     this.context = comp.context;
 
-    
     if (comp.context == 'service') {
       this.backAction = this.onBackButton;
     }
@@ -345,14 +354,22 @@ export class AppComponent {
     if (this.isLoggedIn) {
       if (!this.fcmInitialized) {
         try {
-          
-          if (FCM &&  FCM.getToken()) {
-            FCM.getToken().then((res:any) => {
 
-              this.loginService.updateToken(res).subscribe((response:any) => {
+          if (FCM && FCM.getToken()) {
+            FCM.getToken().then((res: any) => {
+
+              this.loginService.updateToken(res).subscribe(async (response: any) => {
                 if (!response.success) {
                   this.presentAlert(response.errorMsg || JSON.parse(response.error));
                 } else {
+
+                  const pushPayload: object = await FCM.getInitialPushPayload();
+
+                  if (pushPayload) {
+                    this.notificationService.saveNewNotification(pushPayload);
+                    this.presentAlert(pushPayload);
+                  }
+                  
                   this.fcmInitialized = true;
                   // this.presentAlert({
                   //   title: 'Hi there!',
@@ -362,15 +379,15 @@ export class AppComponent {
               });
             });
 
-            FCM.onTokenRefresh().subscribe((res:any) => {
-              this.loginService.updateToken(res).subscribe((response:any) => {
+            FCM.onTokenRefresh().subscribe((res: any) => {
+              this.loginService.updateToken(res).subscribe((response: any) => {
                 // if (!response.success) {
                 //   this.presentAlert(response.errorMsg || JSON.parse(response.error));
                 // }
               });
             })
           }
-        } catch(e) {
+        } catch (e) {
           console.log('Error in Notifications', e);
         }
       }
@@ -421,7 +438,7 @@ export class AppComponent {
         this.router.navigate(['/dashboard/select-car']);
         break;
       }
-      case 'book' : {
+      case 'book': {
         //sessionStorage.setItem('forDemo', 'true');
         this.router.navigate(['/signup']);
         break;
@@ -486,19 +503,19 @@ export class AppComponent {
     this.platform.ready().then((data) => {
       try {
         if (FCM && FCM.getToken()) {
-          FCM.onNotification().subscribe((data:any) => {
+          FCM.onNotification().subscribe((data: any) => {
             try {
               this.notificationService.saveNewNotification(data);
               this.presentAlert(data);
-            } catch(err) {
+            } catch (err) {
               console.log('Error in Notification', err);
               alert(data);
             }
-           
+
           });
         }
-      } catch(err) {
-        
+      } catch (err) {
+
       }
     });
   }

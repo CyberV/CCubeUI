@@ -8,8 +8,8 @@
 
 
 .panel-content {
-    padding-top:22px;
-    padding-bottom: 15px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 .panel-header {
@@ -21,6 +21,27 @@
 .locked-icon {
     position: absolute;
     right: 15px;
+}
+
+.colorful {
+
+    .panel-header {
+        background: $primary-color !important;
+    }
+    &.alternate {
+        .panel-header {
+            background: $secondary-color !important;
+        }
+    }
+    .title {
+        font-size: 13px;
+        color: white !important;
+
+        @media screen and (min-width: 350px) {
+            font-size: 16px;
+
+        }
+    }
 }
 
 .step {

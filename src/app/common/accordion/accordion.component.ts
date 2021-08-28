@@ -21,6 +21,9 @@ export class AccordionComponent implements OnInit {
   @Input() label: string;
   @Input() empty: boolean;
 
+  @Input() colorful: boolean;
+  @Input() alternate: boolean;
+
   @Output() onToggle = new EventEmitter();
 
   @ViewChild('drawerToggle') drawerToggle: ElementRef;
@@ -44,6 +47,8 @@ export class AccordionComponent implements OnInit {
     this.error = false;
     this.locked = false;
     this.defaultOpen = false;
+    this.colorful = false;
+    this.alternate = false;
     this.initDone = false;
     this.isOpen = false;
     this.scrollable = false;

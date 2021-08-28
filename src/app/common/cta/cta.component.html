@@ -9,7 +9,7 @@
         [ngClass]="{
           'halfWidth': halfWidth,
           'btn cta btn-lg btn-block': true ,
-        'btn-primary' : !outline,
+        'btn-primary' : !outline && color!='teal',
         'btn-main' : sticky,
         'normal-text': !capitalize,
         'capital-text': capitalize,
@@ -20,7 +20,8 @@
         'tiny': tiny,
         'disabled': disabled,
           'btn-outline-secondary': outline,
-          'btn-red': color=='red'
+          'btn-red': color=='red',
+          'btn-warning': color=='teal'
         }"
 
         [style.fontSize.px]="size"

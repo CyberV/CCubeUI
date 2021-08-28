@@ -122,13 +122,14 @@ export class AddonDetailsComponent implements OnInit {
       phone: this.userService.getCurrentUser().phone,
       carRegNo: this.carService.getCurrentCar().regNo,
       addonCode: addon.code,
-      scheduledDate: this.selectedDate
+      scheduledDate: new Date(this.selectedDate).toDateString()
     };
     this.loginServie.scheduleAddon(payload).subscribe((response: any) => {
       this.loading = false;
       console.log('Response from Scheduke addon', response);
       if (response.success) {
         alert('Service Scheduled');
+        window.location.reload();
       }
       this.closeModal();
     });
