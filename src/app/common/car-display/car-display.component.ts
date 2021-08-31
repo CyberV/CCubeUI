@@ -101,7 +101,8 @@ export class CarDisplayComponent implements OnInit {
 
           // this.page = "signup";
         } else {
-          alert('There was an issue in getting your car details. Please try again or enter Make/Model manually.');
+          let msg = 'There was an issue in getting your car details. ' + (this.verifyOnly ? 'Please continue to Checkout' : 'Please try again or enter Make/Model manually.');
+          alert(msg);
           this.loading = false;
           this.error.next({
             error: res.error

@@ -316,7 +316,7 @@ export class CheckoutComponent implements OnInit {
         //allPayments.map((s) => s.car.regNo.toLowerCase()).indexOf(order.car.regNo.toLowerCase()) > -1;
       }
       else {
-
+        showPayLater = true;
       }
     } else {
 
@@ -547,7 +547,7 @@ export class CheckoutComponent implements OnInit {
   handleLocationOpen(d) {
     console.log(d);
     if (d) {
-      this.confLoc.first.ngOnInit();
+      this.confLoc.first.handleSocietyData();
     }
 
   }
@@ -615,9 +615,14 @@ export class CheckoutComponent implements OnInit {
       this.currentLocation = locationData.location.society ? locationData.location : locationData.location.location;
       this.isUnlisted = locationData.isUnlisted;
       sessionStorage.setItem('userLocation', JSON.stringify(locationData));
-      this.drawerLocation.first ? this.drawerLocation.first.toggle(false) : '';
-      this.step3Ready = true;
-      this.completeVerification(true);
+
+      setTimeout(()=> {
+        console.log('Closing Location Drawer from Save Location');
+        this.drawerLocation.first ? this.drawerLocation.first.toggle(false) : '';
+        this.step3Ready = true;
+        this.completeVerification(true);
+      }, 100);
+
     } else {
       this.step3Ready = false;
       this.currentLocation.society = '';
@@ -721,6 +726,7 @@ export class CheckoutComponent implements OnInit {
           this.step2Ready = true;
 
 
+          console.log('Opening Location Drawer from ionViewEnter');
 
           if (this.savedLocation && this.savedLocation.houseNo.length) {
             this.completeVerification(true);
@@ -1024,7 +1030,13 @@ export class CheckoutComponent implements OnInit {
         this.step2Ready = !this.carMismatch;
         this.completeVerification();
         this.drawerCar.first.toggle(false);
-      }, 1000);
+
+        setTimeout(()=> {
+
+            this.drawerLocation.first.toggle(true);
+          
+        }, 200);
+      }, 100);
 
       return;
 

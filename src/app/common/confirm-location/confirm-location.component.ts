@@ -163,6 +163,11 @@ export class ConfirmLocationComponent implements OnInit {
       this.sendConfirmation();
     }
 
+    this.handleSocietyData();
+
+  }
+
+  handleSocietyData() {
     let soc = localStorage.getItem('selectedSociety');
 
     this.societyData = soc && soc != "null" ? JSON.parse(soc) : null;
@@ -177,7 +182,6 @@ export class ConfirmLocationComponent implements OnInit {
         //this.location.society = 'Other';
       }
     }
-
   }
 
 
