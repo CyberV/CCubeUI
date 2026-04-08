@@ -1,6 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { Plugins } from '@capacitor/core';
-const { SplashScreen } = Plugins;
+import { SplashScreen } from '@capacitor/splash-screen';
 
 import { planData } from './common/common.service';
 
@@ -10,9 +9,6 @@ import { HeaderService } from './header.service';
 import { UserService } from './services/user.service';
 import { CarService } from './services/car.service';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic';
-//import { FCM } from '@ionic-native/fcm/ngx';
-//import {FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic'
-//import { FCM } from '../../plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
 
 import { LoginService } from './login/login.service';
 import { HeadingComponent } from './common/heading/heading.component';
@@ -20,10 +16,10 @@ import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 
 import { Initialize } from 'app/common/common.service';
 import { NotificationService } from './services/notification.service';
-import { rebeccapurple } from 'color-name';
 import { DocumentService } from './services/document.service';
-import { runInThisContext } from 'vm';
 import { PlanService } from './services/plan.service';
+import { TelemetryService } from './services/telemetry.service';
+import { ThemeService } from './services/theme.service';
 
 declare var $;
 @Component({
@@ -68,8 +64,14 @@ export class AppComponent {
     public toastController: ToastController,
     private popoverController: PopoverController,
     private loginService: LoginService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private telemetry: TelemetryService,
+    private themeService: ThemeService
   ) {
+    // N7 – telemetry route tracking + bootstrap event.
+    this.telemetry.init(this.router);
+    // N8 – theme init (applies persisted dark/light/system mode).
+    this.themeService.init();
 
     this.initializeApp();
 

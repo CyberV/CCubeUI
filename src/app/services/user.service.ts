@@ -209,7 +209,7 @@ export class UserService {
 
   handleError(error: any) {
     console.error(error);
-    return throwError(error);
+    return throwError(() => error);
     //return Observable.throw(error || 'Server error');
   }
 

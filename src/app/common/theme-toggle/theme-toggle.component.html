@@ -1,0 +1,26 @@
+<div class="theme-toggle" role="group" aria-label="Theme mode">
+  <button type="button"
+          class="mode-btn"
+          [class.active]="mode === 'light'"
+          (click)="set('light')"
+          aria-label="Use light mode">
+    <ion-icon name="sunny-outline" aria-hidden="true"></ion-icon>
+    <span>Light</span>
+  </button>
+  <button type="button"
+          class="mode-btn"
+          [class.active]="mode === 'system'"
+          (click)="set('system')"
+          aria-label="Follow system preference">
+    <ion-icon name="desktop-outline" aria-hidden="true"></ion-icon>
+    <span>System</span>
+  </button>
+  <button type="button"
+          class="mode-btn"
+          [class.active]="mode === 'dark'"
+          (click)="set('dark')"
+          aria-label="Use dark mode">
+    <ion-icon name="moon-outline" aria-hidden="true"></ion-icon>
+    <span>Dark</span>
+  </button>
+</div>

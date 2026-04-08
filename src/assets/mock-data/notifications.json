@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "data": {
+    "new": [
+      {
+        "id": "n-1001",
+        "title": "Service Reminder",
+        "body": "Your next wash is scheduled tomorrow at 7:30 AM.",
+        "createdAt": "2026-04-07T18:00:00.000Z"
+      }
+    ],
+    "historical": [
+      {
+        "id": "n-1000",
+        "title": "Payment Received",
+        "body": "We received your Gold plan renewal. Thanks!",
+        "createdAt": "2026-03-01T10:30:00.000Z"
+      },
+      {
+        "id": "n-0999",
+        "title": "Welcome",
+        "body": "Welcome to CCube. Let's keep your ride shining.",
+        "createdAt": "2024-08-10T10:00:00.000Z"
+      }
+    ]
+  }
+}

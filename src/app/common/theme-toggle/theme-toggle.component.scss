@@ -1,0 +1,39 @@
+.theme-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--ccube-surface-alt, #f0f0f0);
+  border-radius: 999px;
+  border: 1px solid var(--ion-border-color, #e0e0e0);
+}
+
+.mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ion-text-color-step-600, #555);
+  cursor: pointer;
+
+  ion-icon { font-size: 14px; }
+
+  &:hover { color: var(--ion-text-color, #111); }
+
+  &.active {
+    background: var(--ccube-surface, #fff);
+    color: var(--ion-color-primary, #0a84ff);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  &:focus-visible { outline: 2px solid var(--ion-color-primary, #0a84ff); outline-offset: 1px; }
+}
+
+body.theme-dark .mode-btn.active {
+  background: #2a2a2a;
+  color: #4da3ff;
+}

@@ -1,0 +1,37 @@
+<ion-content class="faq-page">
+  <div class="faq-container">
+    <h1 class="faq-title">Frequently Asked Questions</h1>
+    <p class="faq-lead">Quick answers to the questions we hear most often.</p>
+
+    <label class="faq-search">
+      <span class="sr-only">Search questions</span>
+      <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+      <input type="search"
+             placeholder="Search – e.g. 'refund', 'dark mode', 'offline'"
+             [(ngModel)]="filter"
+             aria-label="Search questions" />
+    </label>
+
+    <ul class="faq-list" role="list">
+      <li *ngFor="let item of filtered()" class="faq-item" [class.open]="item.open">
+        <button type="button"
+                class="faq-question"
+                (click)="toggle(item)"
+                [attr.aria-expanded]="!!item.open">
+          <span>{{ item.question }}</span>
+          <ion-icon [name]="item.open ? 'chevron-up-outline' : 'chevron-down-outline'" aria-hidden="true"></ion-icon>
+        </button>
+        <div class="faq-answer" *ngIf="item.open">
+          <p>{{ item.answer }}</p>
+          <div class="faq-tags" *ngIf="item.tags?.length">
+            <span class="tag" *ngFor="let t of item.tags">#{{ t }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="faq-empty" *ngIf="!filtered().length" role="status">
+      No questions matched "{{ filter }}".
+    </div>
+  </div>
+</ion-content>

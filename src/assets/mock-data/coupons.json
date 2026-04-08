@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "data": {
+    "coupons": [
+      { "code": "WELCOME10", "discountPct": 10, "description": "10% off your first plan" },
+      { "code": "RAINY200", "discountAmt": 200, "description": "Flat Rs 200 off monsoon offer" }
+    ]
+  }
+}

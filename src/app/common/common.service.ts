@@ -1,6 +1,5 @@
 import { LoginService } from "app/login/login.service";
 import { IonItem } from '@ionic/angular';
-import { async } from 'q';
 
 let domain: string = 'api-ccube.herokuapp.com';
 let url: string = 'https://' + domain + '/api/';

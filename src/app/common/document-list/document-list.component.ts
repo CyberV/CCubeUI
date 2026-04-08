@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { File, FileEntry } from '@ionic-native/file/ngx';
+import { File, FileEntry } from '@awesome-cordova-plugins/file/ngx';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FilePath } from '@ionic-native/file-path/ngx';
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
+import { FileChooser } from '@awesome-cordova-plugins/file-chooser/ngx';
 import { DocumentService } from 'app/services/document.service';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
-//import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+import { PreviewAnyFile } from '@awesome-cordova-plugins/preview-any-file/ngx';
 import { ViewerModalComponent } from 'ngx-ionic-image-viewer';
 import { ModalController, IonSlides } from '@ionic/angular';
 import { ImageToolbarComponent } from '../image-toolbar/image-toolbar.component';

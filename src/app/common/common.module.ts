@@ -87,6 +87,8 @@ import { CounterComponent } from './counter/counter.component';
 import { WarningComponent } from './warning/warning.component';
 import { SwitchComponent } from './switch/switch.component';
 import { TermsComponent } from './terms/terms.component';
+import { OfflineBadgeComponent } from './offline-badge/offline-badge.component';
+import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 
 
 
@@ -155,6 +157,8 @@ import { TermsComponent } from './terms/terms.component';
     WarningComponent,
     SwitchComponent,
     TermsComponent,
+    OfflineBadgeComponent,
+    ThemeToggleComponent,
 
     // Directives
     RsDirective,
@@ -245,6 +249,8 @@ import { TermsComponent } from './terms/terms.component';
     WarningComponent,
     SwitchComponent,
     TermsComponent,
+    OfflineBadgeComponent,
+    ThemeToggleComponent,
     //Directives
 
     RsDirective

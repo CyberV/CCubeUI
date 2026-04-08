@@ -268,7 +268,7 @@ export class LoginService {
 
   handleError(error: any) {
     console.error(error);
-    return throwError(error);
+    return throwError(() => error);
     //return Observable.throw(error || 'Server error');
   }
 

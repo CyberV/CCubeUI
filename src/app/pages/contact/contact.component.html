@@ -1,0 +1,66 @@
+<ion-content class="contact-page">
+  <div class="contact-container">
+    <h1 class="contact-title">Contact {{ company }}</h1>
+    <p class="contact-lead">We're here to help. Reach out through any of the channels below or drop us a note.</p>
+
+    <div class="channels">
+      <a class="channel" [href]="telHref()" aria-label="Call support">
+        <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+        <div>
+          <div class="channel-label">Phone</div>
+          <div class="channel-value">{{ phone }}</div>
+        </div>
+      </a>
+
+      <a class="channel" [href]="mailHref()" aria-label="Email support">
+        <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+        <div>
+          <div class="channel-label">Email</div>
+          <div class="channel-value">{{ email }}</div>
+        </div>
+      </a>
+
+      <a class="channel" [href]="whatsappHref()" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>
+        <div>
+          <div class="channel-label">WhatsApp</div>
+          <div class="channel-value">{{ whatsapp }}</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="address" *ngIf="address">
+      <h3>Office</h3>
+      <p>{{ address }}</p>
+    </div>
+
+    <form class="contact-form" (ngSubmit)="submit()" *ngIf="!submitted" aria-labelledby="contact-form-title">
+      <h3 id="contact-form-title">Send us a message</h3>
+
+      <label>
+        <span>Your name</span>
+        <input type="text" name="name" [(ngModel)]="form.name" required />
+      </label>
+
+      <label>
+        <span>Your email</span>
+        <input type="email" name="email" [(ngModel)]="form.email" required />
+      </label>
+
+      <label>
+        <span>Message</span>
+        <textarea name="message" [(ngModel)]="form.message" rows="4" required></textarea>
+      </label>
+
+      <button type="submit" class="submit-btn">Send</button>
+    </form>
+
+    <div class="submitted" *ngIf="submitted" role="status" aria-live="polite">
+      <ion-icon name="checkmark-circle-outline" aria-hidden="true"></ion-icon>
+      <div>
+        <strong>Thanks – we got your message.</strong>
+        <p>Our team will respond within 1 business day.</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

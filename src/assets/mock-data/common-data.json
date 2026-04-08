@@ -1,0 +1,52 @@
+{
+  "success": true,
+  "data": {
+    "config": [
+      { "name": "APP_LINK", "value": "https://www.ccubeco.com" },
+      { "name": "SUPPORT_PHONE", "value": "+91-90000-00000" },
+      { "name": "SUPPORT_EMAIL", "value": "support@ccubeco.com" },
+      { "name": "WHATSAPP_NUMBER", "value": "+919000000000" },
+      { "name": "COMPANY_NAME", "value": "CCube" },
+      { "name": "COMPANY_ADDRESS", "value": "Plot 12, Sector 18, Faridabad, Haryana 121007, India" }
+    ],
+    "waterSaved": 4328950,
+    "plans": [
+      {
+        "name": "Silver",
+        "code": "SILVER",
+        "price": 1499,
+        "frequency": "monthly",
+        "features": ["WASH_WATER", "CLEAN_OUT", "DISINFECT_INT"],
+        "description": "Essential care for your daily driver."
+      },
+      {
+        "name": "Gold",
+        "code": "GOLD",
+        "price": 2499,
+        "frequency": "monthly",
+        "features": ["WASH_WATER", "CLEAN_OUT", "DISINFECT_INT", "RUST_OUT", "INT_CLEAN"],
+        "description": "Comprehensive weekly care with rust protection."
+      },
+      {
+        "name": "Platinum",
+        "code": "PLATINUM",
+        "price": 3999,
+        "frequency": "monthly",
+        "features": ["WASH_WATER", "CLEAN_OUT", "DISINFECT_INT", "RUST_OUT", "INT_CLEAN", "POLISH", "VAC"],
+        "description": "Premium care including polish, vacuum, and on-demand services."
+      }
+    ],
+    "addons": [
+      { "code": "POLISH", "name": "Polish & Wax", "price": 599 },
+      { "code": "VAC", "name": "Deep Vacuum", "price": 399 },
+      { "code": "TYRE", "name": "Tyre Shine", "price": 249 }
+    ],
+    "cities": [
+      { "name": "Faridabad", "serviceable": true },
+      { "name": "Noida", "serviceable": true },
+      { "name": "Gurgaon", "serviceable": true },
+      { "name": "Delhi", "serviceable": true }
+    ],
+    "updatedAt": 1712534400000
+  }
+}

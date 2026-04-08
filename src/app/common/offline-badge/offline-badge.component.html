@@ -1,0 +1,9 @@
+<div class="offline-badge"
+     [class.is-offline]="offline"
+     (click)="toggle()"
+     role="button"
+     [attr.aria-label]="offline ? 'Offline mode is on. Click to go online.' : 'Offline mode is off. Click to enable.'"
+     tabindex="0">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="label">{{ offline ? 'OFFLINE DEMO' : 'ONLINE' }}</span>
+</div>

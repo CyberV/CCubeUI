@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Platform } from '@ionic/angular';
-import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-import '@codetrix-studio/capacitor-google-auth';
-import { Plugins } from '@capacitor/core';
+import { FacebookLoginProvider, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'app/header.service';
 import { UserService } from 'app/services/user.service';
-const { GoogleAuth } = Plugins;
 
 
 @Component({
@@ -28,7 +26,7 @@ export class LoginPage implements OnInit {
 
 
   constructor(
-    private socialAuthService: AuthService, 
+    private socialAuthService: SocialAuthService,
     public platform: Platform, 
     private headerService: HeaderService,
     private userService:UserService,

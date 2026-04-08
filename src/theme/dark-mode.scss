@@ -1,0 +1,47 @@
+/*
+ * N8 – Dark palette overrides
+ *
+ * Scoped to `body.theme-dark`, applied by ThemeService. Only Ionic CSS
+ * variables are touched – no component templates need changes, which
+ * keeps this feature fully reversible.
+ *
+ * See docs/06-additional-insights.md §8.
+ */
+
+body.theme-dark {
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+
+  --ion-text-color: #f0f0f0;
+  --ion-text-color-rgb: 240, 240, 240;
+  --ion-text-color-step-600: #b3b3b3;
+  --ion-text-color-step-750: #8a8a8a;
+
+  --ion-color-primary: #4da3ff;
+  --ion-color-primary-rgb: 77, 163, 255;
+  --ion-color-primary-contrast: #000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+
+  --ion-item-background: #1b1b1b;
+  --ion-toolbar-background: #1b1b1b;
+  --ion-tab-bar-background: #1b1b1b;
+  --ion-card-background: #1e1e1e;
+  --ion-border-color: #2a2a2a;
+
+  /* CCube-specific tokens used by new components. */
+  --ccube-surface: #1e1e1e;
+  --ccube-surface-alt: #262626;
+  --ccube-link: #4da3ff;
+
+  background: var(--ion-background-color);
+  color: var(--ion-text-color);
+}
+
+body.theme-light {
+  /* Explicit light tokens so N8 new components render correctly even when
+   * Ionic's default variables haven't been initialised (e.g. inside the
+   * puppeteer testbed which doesn't boot Ionic). */
+  --ccube-surface: #ffffff;
+  --ccube-surface-alt: #f5f5f5;
+  --ccube-link: #0a84ff;
+}

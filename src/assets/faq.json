@@ -1,0 +1,44 @@
+{
+  "faqs": [
+    {
+      "question": "What is included in the Silver plan?",
+      "answer": "The Silver plan includes daily upper-body wipe, twice-a-week water wash, and interior disinfection. It is the most affordable option for everyday commuters.",
+      "tags": ["plans", "silver"]
+    },
+    {
+      "question": "How do I reschedule a service?",
+      "answer": "Open the Dashboard, tap the upcoming service in the Weekly Schedule, and pick a new date or time. Changes save immediately and you will receive a confirmation notification.",
+      "tags": ["dashboard", "schedule"]
+    },
+    {
+      "question": "Can I pause my subscription when I travel?",
+      "answer": "Yes. From Profile → Manage Subscription, choose 'Pause' and set a return date. No charges are raised for the paused window.",
+      "tags": ["billing", "subscription"]
+    },
+    {
+      "question": "Which cities is CCube available in?",
+      "answer": "We currently operate in Faridabad, Noida, Gurgaon, and Delhi. Offline demo mode shows this hard-coded list; online mode fetches the live serviceable city list.",
+      "tags": ["cities", "coverage"]
+    },
+    {
+      "question": "How do referral rewards work?",
+      "answer": "Share your referral code with a friend. When they subscribe to any monthly plan, you both receive a one-time credit on your next invoice.",
+      "tags": ["referral", "rewards"]
+    },
+    {
+      "question": "Is my payment data stored on the app?",
+      "answer": "No. Payments are processed by Razorpay. The app only stores the order ID and the payment status for reconciliation.",
+      "tags": ["payments", "privacy"]
+    },
+    {
+      "question": "How do I switch to dark mode?",
+      "answer": "Open the side menu and tap the theme toggle. You can choose Light, Dark, or follow your system preference.",
+      "tags": ["ui", "dark-mode"]
+    },
+    {
+      "question": "What is offline demo mode?",
+      "answer": "Offline demo mode lets you explore the entire app without a backend. All screens load with representative mock data. Toggle it via the badge at the bottom-right of the screen.",
+      "tags": ["offline", "demo"]
+    }
+  ]
+}

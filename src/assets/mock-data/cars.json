@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": {
+    "cars": [
+      {
+        "id": 149,
+        "carId": "149",
+        "regNo": "HR51BL0139",
+        "maker": "RENAULT",
+        "model": "Duster",
+        "variant": "RENAULT DUSTER",
+        "fuelType": "DIESEL",
+        "fuelNorms": "BHARAT STAGE IV",
+        "year": 2016,
+        "registeredOn": "11/23/2016",
+        "ownerName": "DEMO USER",
+        "price": "Rs. 8.49 Lakh",
+        "details": "1498 cc | 20 kmpl | Diesel",
+        "bodyType": "suv",
+        "image": "./assets/icons/makers/models/149.png",
+        "chassisNo": "MEEHSRAWEG90XXXXX",
+        "engineNo": "K9KF830E0XXXXX",
+        "insuranceUpto": "2027-11-28T00:00:00.000Z",
+        "fitness": "2031-11-04T00:00:00.000Z",
+        "vehicleType": "MOTOR CAR (LMV)",
+        "age": "10 years"
+      }
+    ]
+  }
+}

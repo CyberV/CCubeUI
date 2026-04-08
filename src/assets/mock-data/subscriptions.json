@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": {
+    "subscriptions": [
+      {
+        "_id": "sub-0001",
+        "planCode": "GOLD",
+        "planName": "Gold",
+        "status": "active",
+        "startDate": "2026-03-01T00:00:00.000Z",
+        "endDate": "2026-04-01T00:00:00.000Z",
+        "car": {
+          "regNo": "HR51BL0139",
+          "maker": "RENAULT",
+          "model": "Duster",
+          "image": "./assets/icons/makers/models/149.png"
+        },
+        "schedule": [
+          { "day": "Monday", "time": "07:30" },
+          { "day": "Wednesday", "time": "07:30" },
+          { "day": "Friday", "time": "07:30" },
+          { "day": "Sunday", "time": "08:00" }
+        ],
+        "payments": [
+          {
+            "orderId": "order_demo_0001",
+            "amount": 2499,
+            "status": "paid",
+            "paidAt": "2026-03-01T10:30:00.000Z",
+            "location": { "city": "Faridabad", "society": "Omaxe Heights" }
+          }
+        ],
+        "history": [
+          { "date": "2026-03-03", "status": "completed", "notes": "Standard wash" },
+          { "date": "2026-03-05", "status": "completed", "notes": "Standard wash" },
+          { "date": "2026-03-07", "status": "completed", "notes": "Standard wash + rust check" },
+          { "date": "2026-03-10", "status": "skipped", "notes": "Rainy day – rescheduled" }
+        ]
+      }
+    ]
+  }
+}

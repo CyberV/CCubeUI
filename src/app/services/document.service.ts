@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserService } from './user.service';
-import { Storage } from '@ionic/storage';
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
-import { FilePath } from '@ionic-native/file-path/ngx';
-import { File, FileEntry } from '@ionic-native/file/ngx';
+import { Storage } from '@ionic/storage-angular';
+import { FileChooser } from '@awesome-cordova-plugins/file-chooser/ngx';
+import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
+import { File, FileEntry } from '@awesome-cordova-plugins/file/ngx';
 
 @Injectable({
   providedIn: 'root'

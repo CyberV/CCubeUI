@@ -1,0 +1,681 @@
+Workspace extension with invalid name (defaultProject) found.
+One or more browsers which are configured in the project's Browserslist configuration will be ignored as ES5 output is not supported by the Angular CLI.
+Ignored browsers: kaios 2.5, op_mini all
+- Generating browser application bundles (phase: setup)...
+    TypeScript compiler options "target" and "useDefineForClassFields" are set to "ES2022" and "false" respectively by the Angular CLI. To control ECMA version and features use the Browserslist configuration. For more information, see https://angular.io/guide/build#configuring-browser-compatibility
+    NOTE: You can set the "target" to "ES2022" in the project's tsconfig to remove this warning.
+✔ Browser application bundle generation complete.
+
+./src/app/app.component.spec.ts:5:0-63 - Error: Module not found: Error: Can't resolve '@ionic-native/splash-screen/ngx' in '/mnt/c/da/06-04-2026/2/b/ui/ui/src/app'
+
+./src/app/app.component.spec.ts:6:0-57 - Error: Module not found: Error: Can't resolve '@ionic-native/status-bar/ngx' in '/mnt/c/da/06-04-2026/2/b/ui/ui/src/app'
+
+./src/app/common/adhoc-slider/adhoc-slider.component.spec.ts:3:0-64 - Error: Module not found: Error: Can't resolve './addon-slider.component' in '/mnt/c/da/06-04-2026/2/b/ui/ui/src/app/common/adhoc-slider'
+
+./src/app/common/typeahead/typeahead.component.spec.ts:3:0-64 - Error: Module not found: Error: Can't resolve './mobile-input.component' in '/mnt/c/da/06-04-2026/2/b/ui/ui/src/app/common/typeahead'
+
+./src/app/dashboard/car-form/checkout.component.spec.ts:3:0-57 - Error: Module not found: Error: Can't resolve './checkout.component' in '/mnt/c/da/06-04-2026/2/b/ui/ui/src/app/dashboard/car-form'
+
+./src/app/leads/leads/leads.page.spec.ts:3:0-51 - Error: Module not found: Error: Can't resolve './leads.component' in '/mnt/c/da/06-04-2026/2/b/ui/ui/src/app/leads/leads'
+
+./src/app/plan.service.spec.ts:2:0-45 - Error: Module not found: Error: Can't resolve './plan.service' in '/mnt/c/da/06-04-2026/2/b/ui/ui/src/app'
+
+./src/app/services/photo.service.ts:40:23-47 - Error: export 'FilesystemDirectory' (imported as 'FilesystemDirectory') was not found in '@capacitor/core' (possible exports: Capacitor, CapacitorCookies, CapacitorException, CapacitorHttp, CapacitorPlatforms, ExceptionCode, Plugins, WebPlugin, WebView, addPlatform, buildRequestInit, registerPlugin, registerWebPlugin, setPlatform)
+
+./src/app/services/photo.service.ts:62:20-40 - Error: export 'CameraResultType' (imported as 'CameraResultType') was not found in '@capacitor/core' (possible exports: Capacitor, CapacitorCookies, CapacitorException, CapacitorHttp, CapacitorPlatforms, ExceptionCode, Plugins, WebPlugin, WebView, addPlatform, buildRequestInit, registerPlugin, registerWebPlugin, setPlatform)
+
+./src/app/services/photo.service.ts:63:16-35 - Error: export 'CameraSource' (imported as 'CameraSource') was not found in '@capacitor/core' (possible exports: Capacitor, CapacitorCookies, CapacitorException, CapacitorHttp, CapacitorPlatforms, ExceptionCode, Plugins, WebPlugin, WebView, addPlatform, buildRequestInit, registerPlugin, registerWebPlugin, setPlatform)
+
+./src/app/services/photo.service.ts:95:19-43 - Error: export 'FilesystemDirectory' (imported as 'FilesystemDirectory') was not found in '@capacitor/core' (possible exports: Capacitor, CapacitorCookies, CapacitorException, CapacitorHttp, CapacitorPlatforms, ExceptionCode, Plugins, WebPlugin, WebView, addPlatform, buildRequestInit, registerPlugin, registerWebPlugin, setPlatform)
+
+./src/app/services/photo.service.ts:148:19-43 - Error: export 'FilesystemDirectory' (imported as 'FilesystemDirectory') was not found in '@capacitor/core' (possible exports: Capacitor, CapacitorCookies, CapacitorException, CapacitorHttp, CapacitorPlatforms, ExceptionCode, Plugins, WebPlugin, WebView, addPlatform, buildRequestInit, registerPlugin, registerWebPlugin, setPlatform)
+
+./src/polyfills.ts:54:0-27 - Error: Module not found: Error: "./dist/zone" is not exported under the conditions ["es2020","es2015","import","module","webpack","development","browser"] from package /mnt/c/da/06-04-2026/2/b/ui/ui/node_modules/zone.js (see exports field in /mnt/c/da/06-04-2026/2/b/ui/ui/node_modules/zone.js/package.json)
+
+./src/test.ts:2:0-35 - Error: Module not found: Error: "./dist/zone-testing" is not exported under the conditions ["es2020","es2015","import","module","webpack","development","browser"] from package /mnt/c/da/06-04-2026/2/b/ui/ui/node_modules/zone.js (see exports field in /mnt/c/da/06-04-2026/2/b/ui/ui/node_modules/zone.js/package.json)
+
+./src/app/app.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/app.component.scss 1:9  root stylesheet
+
+./src/app/common/accordion/accordion.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/accordion/accordion.component.scss 1:9  root stylesheet
+
+./src/app/common/addon-details/addon-details.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/addon-details/addon-details.component.scss 1:9  root stylesheet
+
+./src/app/common/addon-slider/addon-slider.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/addon-slider/addon-slider.component.scss 1:9  root stylesheet
+
+./src/app/common/ads-list/ads-list.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables';
+  │         ^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/ads-list/ads-list.component.scss 1:9  root stylesheet
+
+./src/app/common/carousel/carousel.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/carousel/carousel.component.scss 1:9  root stylesheet
+
+./src/app/common/cehckout-details/cehckout-details.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/cehckout-details/cehckout-details.component.scss 1:9  root stylesheet
+
+./src/app/common/chart-view/chart-view.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/chart-view/chart-view.component.scss 1:9  root stylesheet
+
+./src/app/common/checkout-confirmation/checkout-confirmation.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/checkout-confirmation/checkout-confirmation.component.scss 1:9  root stylesheet
+
+./src/app/common/counter/counter.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables";
+  │         ^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/counter/counter.component.scss 1:9  root stylesheet
+
+./src/app/common/coupons-list/coupons-list.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+   ╷
+21 │ @import "src/variables.scss";
+   │         ^^^^^^^^^^^^^^^^^^^^
+   ╵
+  src/app/common/coupons-list/coupons-list.component.scss 21:9  root stylesheet
+
+./src/app/common/cta/cta.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/cta/cta.component.scss 1:9  root stylesheet
+
+./src/app/common/datepicker/datepicker.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/datepicker/datepicker.component.scss 1:9  root stylesheet
+
+./src/app/common/document-list/document-list.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/document-list/document-list.component.scss 1:9  root stylesheet
+
+./src/app/common/feature-card/feature-card.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/feature-card/feature-card.component.scss 1:9  root stylesheet
+
+./src/app/common/heading/heading.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+4 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/heading/heading.component.scss 4:9  root stylesheet
+
+./src/app/common/image-toolbar/image-toolbar.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/image-toolbar/image-toolbar.component.scss 1:9  root stylesheet
+
+./src/app/common/indicator/indicator.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/indicator/indicator.component.scss 1:9  root stylesheet
+
+./src/app/common/list/list.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/list/list.component.scss 1:9  root stylesheet
+
+./src/app/common/mobile-input/mobile-input.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/mobile-input/mobile-input.component.scss 1:9  root stylesheet
+
+./src/app/common/notif-menu/notif-menu.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/notif-menu/notif-menu.component.scss 1:9  root stylesheet
+
+./src/app/common/plan-card/plan-card.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/plan-card/plan-card.component.scss 1:9  root stylesheet
+
+./src/app/common/plan-details/plan-details.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/plan-details/plan-details.component.scss 1:9  root stylesheet
+
+./src/app/common/plan-slider/plan-slider.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+4 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/plan-slider/plan-slider.component.scss 4:9  root stylesheet
+
+./src/app/common/plan-table/plan-table.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/plan-table/plan-table.component.scss 1:9  root stylesheet
+
+./src/app/common/refer-earn/refer-earn.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/refer-earn/refer-earn.component.scss 1:9  root stylesheet
+
+./src/app/common/reschedule/reschedule.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/reschedule/reschedule.component.scss 1:9  root stylesheet
+
+./src/app/common/select-car/select-car.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/select-car/select-car.component.scss 1:9  root stylesheet
+
+./src/app/common/select-city/select-city.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/select-city/select-city.component.scss 1:9  root stylesheet
+
+./src/app/common/select-society/select-society.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/select-society/select-society.component.scss 1:9  root stylesheet
+
+./src/app/common/selected-car/selected-car.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/selected-car/selected-car.component.scss 1:9  root stylesheet
+
+./src/app/common/slide/slide.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/slide/slide.component.scss 1:9  root stylesheet
+
+./src/app/common/switch/switch.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables";
+  │         ^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/switch/switch.component.scss 1:9  root stylesheet
+
+./src/app/common/thanks-page/thanks-page.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/thanks-page/thanks-page.component.scss 1:9  root stylesheet
+
+./src/app/common/tips-view/tips-view.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/tips-view/tips-view.component.scss 1:9  root stylesheet
+
+./src/app/common/upgrade-slider/upgrade-slider.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+4 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/upgrade-slider/upgrade-slider.component.scss 4:9  root stylesheet
+
+./src/app/common/verify-otp/verify-otp.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/verify-otp/verify-otp.component.scss 1:9  root stylesheet
+
+./src/app/common/weekly-schedule/weekly-schedule.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │  @import "src/variables.scss";
+  │          ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/common/weekly-schedule/weekly-schedule.component.scss 1:10  root stylesheet
+
+./src/app/dashboard/dashboard-page/dashboard-page.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/dashboard/dashboard-page/dashboard-page.component.scss 1:9  root stylesheet
+
+./src/app/dashboard/dashboard/dashboard.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/dashboard/dashboard/dashboard.component.scss 1:9  root stylesheet
+
+./src/app/dashboard/service-page/service-page.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/dashboard/service-page/service-page.component.scss 1:9  root stylesheet
+
+./src/app/home/home.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/home/home.component.scss 1:9  root stylesheet
+
+./src/app/home/home.page.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+2 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/home/home.page.scss 2:9  root stylesheet
+
+./src/app/login/login-form/login-form.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/login/login-form/login-form.component.scss 1:9  root stylesheet
+
+./src/app/login/login.page.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/login/login.page.scss 1:9  root stylesheet
+
+./src/app/login/login/login.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/login/login/login.component.scss 1:9  root stylesheet
+
+./src/app/login/signin-form/signin-form.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/login/signin-form/signin-form.component.scss 1:9  root stylesheet
+
+./src/app/monthly-savings/monthly-savings.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import "src/variables.scss";
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/monthly-savings/monthly-savings.component.scss 1:9  root stylesheet
+
+./src/app/plan-comparison/plan-comparison.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/plan-comparison/plan-comparison.component.scss 1:9  root stylesheet
+
+./src/app/profile/profile.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+Can't find stylesheet to import.
+  ╷
+1 │ @import 'src/variables.scss';
+  │         ^^^^^^^^^^^^^^^^^^^^
+  ╵
+  src/app/profile/profile.component.scss 1:9  root stylesheet
+
+Error: node_modules/ngx-ionic-image-viewer/lib/viewer-modal/viewer-modal.component.d.ts:2:27 - error TS2724: '"@ionic/angular"' has no exported member named 'IonSlides'. Did you mean 'IonicSlides'?
+
+2 import { ModalController, IonSlides } from '@ionic/angular';
+                            ~~~~~~~~~
+
+
+Error: src/app/app.component.spec.ts:5:30 - error TS2307: Cannot find module '@ionic-native/splash-screen/ngx' or its corresponding type declarations.
+
+5 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.component.spec.ts:6:27 - error TS2307: Cannot find module '@ionic-native/status-bar/ngx' or its corresponding type declarations.
+
+6 import { StatusBar } from '@ionic-native/status-bar/ngx';
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/common/addon-slider/addon-slider.component.ts:5:10 - error TS2724: '"@ionic/angular"' has no exported member named 'IonSlides'. Did you mean 'IonicSlides'?
+
+5 import { IonSlides } from '@ionic/angular';
+           ~~~~~~~~~
+
+
+Error: src/app/common/adhoc-slider/adhoc-slider.component.spec.ts:4:38 - error TS2307: Cannot find module './addon-slider.component' or its corresponding type declarations.
+
+4 import { AddonSliderComponent } from './addon-slider.component';
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/common/ads-list/ads-list.component.ts:5:27 - error TS2724: '"@ionic/angular"' has no exported member named 'IonSlides'. Did you mean 'IonicSlides'?
+
+5 import { ToastController, IonSlides } from '@ionic/angular';
+                            ~~~~~~~~~
+
+
+Error: src/app/common/carousel/carousel.component.ts:2:10 - error TS2724: '"@ionic/angular"' has no exported member named 'IonSlides'. Did you mean 'IonicSlides'?
+
+2 import { IonSlides } from '@ionic/angular';
+           ~~~~~~~~~
+
+
+Error: src/app/common/chart/chart.component.ts:3:10 - error TS2724: '"chart.js"' has no exported member named 'ChartDataSets'. Did you mean 'ChartDataset'?
+
+3 import { ChartDataSets, ChartOptions } from 'chart.js';
+           ~~~~~~~~~~~~~
+
+
+Error: src/app/common/chart/chart.component.ts:4:10 - error TS2305: Module '"ng2-charts"' has no exported member 'Color'.
+
+4 import { Color, BaseChartDirective, Label } from 'ng2-charts';
+           ~~~~~
+
+
+Error: src/app/common/chart/chart.component.ts:4:37 - error TS2305: Module '"ng2-charts"' has no exported member 'Label'.
+
+4 import { Color, BaseChartDirective, Label } from 'ng2-charts';
+                                      ~~~~~
+
+
+Error: src/app/common/chart/chart.component.ts:39:7 - error TS2322: Type '{}[]' is not assignable to type '_DeepPartialObject<{ type: "time"; } & Omit<CartesianScaleOptions, "max" | "min"> & { min: string | number; max: string | number; suggestedMin: string | number; ... 5 more ...; ticks: { ...; }; }> | ... 4 more ... | _DeepPartialObject<...>'.
+  Type '{}[]' is not assignable to type '_DeepPartialObject<{ type: "radialLinear"; } & CoreScaleOptions & { animate: boolean; startAngle: number; angleLines: { display: boolean; color: Scriptable<Color, ScriptableScaleContext>; lineWidth: Scriptable<...>; borderDash: Scriptable<...>; borderDashOffset: Scriptable<...>; }; ... 7 more ...; ticks: RadialTickO...'.
+    Types of property 'reverse' are incompatible.
+      Type '() => {}[]' is not assignable to type 'boolean'.
+
+39       xAxes: [{}],
+         ~~~~~
+
+  node_modules/chart.js/types/utils.d.ts:15:30
+    15 type _DeepPartialObject<T> = { [P in keyof T]?: DeepPartial<T[P]> };
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    The expected type comes from property 'xAxes' which is declared here on type '_DeepPartialObject<{ [key: string]: ScaleOptionsByType<"radialLinear" | keyof CartesianScaleTypeRegistry>; }>'
+
+
+Error: src/app/common/chart/chart.component.ts:40:7 - error TS2322: Type '({ id: string; position: string; } | { id: string; position: string; gridLines: { color: string; }; ticks: { fontColor: string; }; })[]' is not assignable to type '_DeepPartialObject<{ type: "time"; } & Omit<CartesianScaleOptions, "max" | "min"> & { min: string | number; max: string | number; suggestedMin: string | number; ... 5 more ...; ticks: { ...; }; }> | ... 4 more ... | _DeepPartialObject<...>'.
+  Type '({ id: string; position: string; } | { id: string; position: string; gridLines: { color: string; }; ticks: { fontColor: string; }; })[]' is not assignable to type '_DeepPartialObject<{ type: "radialLinear"; } & CoreScaleOptions & { animate: boolean; startAngle: number; angleLines: { display: boolean; color: Scriptable<Color, ScriptableScaleContext>; lineWidth: Scriptable<...>; borderDash: Scriptable<...>; borderDashOffset: Scriptable<...>; }; ... 7 more ...; ticks: RadialTickO...'.
+    Types of property 'reverse' are incompatible.
+      Type '() => ({ id: string; position: string; } | { id: string; position: string; gridLines: { color: string; }; ticks: { fontColor: string; }; })[]' is not assignable to type 'boolean'.
+
+40       yAxes: [
+         ~~~~~
+
+  node_modules/chart.js/types/utils.d.ts:15:30
+    15 type _DeepPartialObject<T> = { [P in keyof T]?: DeepPartial<T[P]> };
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    The expected type comes from property 'yAxes' which is declared here on type '_DeepPartialObject<{ [key: string]: ScaleOptionsByType<"radialLinear" | keyof CartesianScaleTypeRegistry>; }>'
+
+
+Error: src/app/common/document-list/document-list.component.ts:10:27 - error TS2724: '"@ionic/angular"' has no exported member named 'IonSlides'. Did you mean 'IonicSlides'?
+
+10 import { ModalController, IonSlides } from '@ionic/angular';
+                             ~~~~~~~~~
+
+
+Error: src/app/common/document-list/document-list.component.ts:150:7 - error TS2345: Argument of type '{ component: typeof ImageToolbarComponent; componentProps: { showDelete: any; }; cssClass: string; showBackdrop: false; swipeToClose: boolean; backdropDismiss: false; }' is not assignable to parameter of type 'ModalOptions<ComponentRef>'.
+  Object literal may only specify known properties, and 'swipeToClose' does not exist in type 'ModalOptions<ComponentRef>'.
+
+150       swipeToClose: false,
+          ~~~~~~~~~~~~
+
+
+Error: src/app/common/highlight.directive.spec.ts:5:23 - error TS2554: Expected 1 arguments, but got 0.
+
+5     const directive = new HighlightDirective();
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+  src/app/common/highlight.directive.ts:8:15
+    8   constructor(el:ElementRef) {
+                    ~~~~~~~~~~~~~
+    An argument for 'el' was not provided.
+
+
+Error: src/app/common/list/list.component.ts:2:26 - error TS2307: Cannot find module '@angular/compiler/src/render3/r3_ast' or its corresponding type declarations.
+
+2 import { Variable } from '@angular/compiler/src/render3/r3_ast';
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/common/purchased-plan/purchased-plan.component.ts:2:10 - error TS2305: Module '"@angular/compiler"' has no exported member 'CompileMetadataResolver'.
+
+2 import { CompileMetadataResolver } from '@angular/compiler';
+           ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/common/rs.directive.spec.ts:5:23 - error TS2554: Expected 1 arguments, but got 0.
+
+5     const directive = new RsDirective();
+                        ~~~~~~~~~~~~~~~~~
+
+  src/app/common/rs.directive.ts:12:15
+    12   constructor(private el: ElementRef) {
+                     ~~~~~~~~~~~~~~~~~~~~~~
+    An argument for 'el' was not provided.
+
+
+Error: src/app/common/selected-car/selected-car.component.ts:2:10 - error TS2305: Module '"@angular/compiler"' has no exported member 'CompileMetadataResolver'.
+
+2 import { CompileMetadataResolver } from '@angular/compiler';
+           ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/common/thanks-page/thanks-page.component.ts:32:90 - error TS2304: Cannot find name 'DataCue'.
+
+32      let st = this.payment ?  this.payment.plan ? new Date(this.payment.startDate || new DataCue()).toDateString() :  new Date(this.payment.startDate || this.payment.paymentDate).toDateString() : new Date().toDateString();
+                                                                                            ~~~~~~~
+
+
+Error: src/app/common/typeahead/typeahead.component.spec.ts:4:38 - error TS2307: Cannot find module './mobile-input.component' or its corresponding type declarations.
+
+4 import { MobileInputComponent } from './mobile-input.component';
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/dashboard/car-form/checkout.component.spec.ts:4:35 - error TS2307: Cannot find module './checkout.component' or its corresponding type declarations.
+
+4 import { CheckoutComponent } from './checkout.component';
+                                    ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/dashboard/dashboard/dashboard.component.ts:81:7 - error TS2345: Argument of type '{ component: typeof AddonDetailsComponent; cssClass: string; componentProps: { addon: any; adhoc: any; showClose: boolean; }; swipeToClose: boolean; showBackdrop: true; backdropDismiss: true; }' is not assignable to parameter of type 'ModalOptions<ComponentRef>'.
+  Object literal may only specify known properties, and 'swipeToClose' does not exist in type 'ModalOptions<ComponentRef>'.
+
+81       swipeToClose: true,
+         ~~~~~~~~~~~~
+
+
+Error: src/app/dashboard/service-page/service-page.component.ts:4:54 - error TS2724: '"@ionic/angular"' has no exported member named 'IonSlides'. Did you mean 'IonicSlides'?
+
+4 import { Platform, ToastController, AlertController, IonSlides, ModalController } from '@ionic/angular';
+                                                       ~~~~~~~~~
+
+
+Error: src/app/leads/leads/leads.page.spec.ts:4:32 - error TS2307: Cannot find module './leads.component' or its corresponding type declarations.
+
+4 import { LeadsComponent } from './leads.component';
+                                 ~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/login/login-form/login-form.component.ts:147:18 - error TS2339: Property 'addListener' does not exist on type 'GoogleAuthPlugin'.
+
+147       GoogleAuth.addListener('userChange', (googleUser: any) => {
+                     ~~~~~~~~~~~
+
+
+Error: src/app/login/login-form/login-form.component.ts:429:7 - error TS2345: Argument of type '{ component: typeof TermsComponent; cssClass: string; swipeToClose: boolean; showBackdrop: true; backdropDismiss: true; componentProps: { showClose: boolean; }; }' is not assignable to parameter of type 'ModalOptions<ComponentRef>'.
+  Object literal may only specify known properties, and 'swipeToClose' does not exist in type 'ModalOptions<ComponentRef>'.
+
+429       swipeToClose: true,
+          ~~~~~~~~~~~~
+
+
+Error: src/app/login/login.page.ts:36:18 - error TS2339: Property 'addListener' does not exist on type 'GoogleAuthPlugin'.
+
+36       GoogleAuth.addListener('userChange', (googleUser: any) => {
+                    ~~~~~~~~~~~
+
+
+Error: src/app/plan.service.spec.ts:3:29 - error TS2307: Cannot find module './plan.service' or its corresponding type declarations.
+
+3 import { PlanService } from './plan.service';
+                              ~~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/photo.service.ts:2:19 - error TS2305: Module '"@capacitor/core"' has no exported member 'CameraResultType'.
+
+2 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto, CameraSource } from '@capacitor/core';
+                    ~~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/photo.service.ts:2:48 - error TS2305: Module '"@capacitor/core"' has no exported member 'FilesystemDirectory'.
+
+2 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto, CameraSource } from '@capacitor/core';
+                                                 ~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/photo.service.ts:2:69 - error TS2305: Module '"@capacitor/core"' has no exported member 'CameraPhoto'.
+
+2 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto, CameraSource } from '@capacitor/core';
+                                                                      ~~~~~~~~~~~
+
+
+Error: src/app/services/photo.service.ts:2:82 - error TS2305: Module '"@capacitor/core"' has no exported member 'CameraSource'.
+
+2 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto, CameraSource } from '@capacitor/core';
+                                                                                   ~~~~~~~~~~~~
+
+
+Error: src/polyfills.ts:55:8 - error TS5097: An import path can only end with a '.ts' extension when 'allowImportingTsExtensions' is enabled.
+
+55 import './zone-flags.ts';
+          ~~~~~~~~~~~~~~~~~
+
+
+
+07 04 2026 00:14:27.914:INFO [karma-server]: Karma v6.4.4 server started at http://localhost:9876/
+07 04 2026 00:14:27.917:INFO [launcher]: Launching browsers ChromeHeadless with concurrency unlimited
+07 04 2026 00:14:27.919:ERROR [karma-server]: Error: Found 1 load error
+    at Server.<anonymous> (/mnt/c/da/06-04-2026/2/b/ui/ui/node_modules/karma/lib/server.js:243:26)
+    at Object.onceWrapper (node:events:633:28)
+    at Server.emit (node:events:531:35)
+    at Server.emit (node:domain:489:12)
+    at emitListeningNT (node:net:1983:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+✔ Browser application bundle generation complete.
+✔ Browser application bundle generation complete.

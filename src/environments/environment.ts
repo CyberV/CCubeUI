@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // Offline Mode (see docs/06-additional-insights.md §5) is ON by default.
+  // The value is the **bootstrap default**; the `OfflineService` may override
+  // at runtime based on `localStorage['offlineMode']`.
+  offlineMode: true
 };
 
 /*

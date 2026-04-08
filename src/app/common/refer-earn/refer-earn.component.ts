@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { UserService } from 'app/services/user.service';
-import { BPClient } from 'blocking-proxy';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { prettyDate } from 'app/util/util';

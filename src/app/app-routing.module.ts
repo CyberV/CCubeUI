@@ -5,6 +5,8 @@ import { PlanComparisonComponent } from './plan-comparison/plan-comparison.compo
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterUserComponent } from './pages/initial-screens/register-user/register-user.component';
 import { ReferEarnComponent } from './common/refer-earn/refer-earn.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 const routes: Routes = [
   {
@@ -32,8 +34,15 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+    // N6 – standalone ContactComponent replaces the legacy ProfileComponent
+    // context-switch. Deep links to /contact keep working without change.
     path: 'contact',
-    component: ProfileComponent
+    component: ContactComponent
+  },
+  {
+    // N6 – brand new FAQ route.
+    path: 'faq',
+    component: FaqComponent
   },
   {
   path: 'about',

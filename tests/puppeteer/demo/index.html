@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CCube – Offline Demo Testbed</title>
+  <link rel="stylesheet" href="./testbed.css" />
+</head>
+<body class="theme-light">
+  <!--
+    Minimal static testbed for Offline Mode, N6 (Contact/FAQ), N7 (Telemetry),
+    and N8 (Dark mode) from the CCube / SSewa codebase.
+
+    This testbed does NOT boot Angular. It loads the same mock-data JSON
+    fixtures (src/assets/mock-data/*.json) and src/assets/faq.json directly
+    via fetch(), so the data contract is identical to what the Angular
+    runtime receives through the OfflineHttpInterceptor.
+  -->
+
+  <header class="app-header" role="banner">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">C³</div>
+      <span>CCube</span>
+    </div>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#/home">Home</a>
+      <a href="#/plans">Plans</a>
+      <a href="#/dashboard">Dashboard</a>
+      <a href="#/profile">Profile</a>
+      <a href="#/contact">Contact</a>
+      <a href="#/faq">FAQ</a>
+      <a href="#/about">About</a>
+    </nav>
+    <div class="header-right">
+      <!-- N8 tri-state theme toggle -->
+      <div class="theme-toggle" role="group" aria-label="Theme mode" id="theme-toggle">
+        <button data-mode="light" aria-label="Use light mode">☀ Light</button>
+        <button data-mode="system" aria-label="Follow system preference">🖥 System</button>
+        <button data-mode="dark" aria-label="Use dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="view" class="view"></main>
+
+  <!-- N7 telemetry log panel (collapsible) -->
+  <aside class="telemetry-panel" id="telemetry-panel" aria-labelledby="telemetry-title">
+    <header>
+      <h4 id="telemetry-title">Telemetry Log</h4>
+      <button id="telemetry-clear" aria-label="Clear telemetry log">Clear</button>
+    </header>
+    <ol id="telemetry-list" role="list" aria-live="polite"></ol>
+  </aside>
+
+  <!-- Offline mode badge -->
+  <div id="offline-badge"
+       class="offline-badge is-offline"
+       role="button"
+       tabindex="0"
+       aria-label="Offline mode is on. Click to go online.">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="label">OFFLINE DEMO</span>
+  </div>
+
+  <script src="./testbed.js"></script>
+</body>
+</html>
