@@ -1,0 +1,753 @@
+TAP version 13
+# Subtest: ApiService: is constructible with no arguments
+ok 1 - ApiService: is constructible with no arguments
+  ---
+  duration_ms: 2.720272
+  type: 'test'
+  ...
+# Subtest: CarService.getCurrentCar: returns null when localStorage is empty
+ok 2 - CarService.getCurrentCar: returns null when localStorage is empty
+  ---
+  duration_ms: 3.67145
+  type: 'test'
+  ...
+# Subtest: CarService.changeCar: persists a normalised car object to localStorage
+ok 3 - CarService.changeCar: persists a normalised car object to localStorage
+  ---
+  duration_ms: 1.607479
+  type: 'test'
+  ...
+# Subtest: CarService.getCurrentCar: returns the saved car after changeCar
+ok 4 - CarService.getCurrentCar: returns the saved car after changeCar
+  ---
+  duration_ms: 1.025776
+  type: 'test'
+  ...
+# Subtest: CarService.changeCar: a null/undefined car is a no-op
+ok 5 - CarService.changeCar: a null/undefined car is a no-op
+  ---
+  duration_ms: 0.505525
+  type: 'test'
+  ...
+# Subtest: CarService.changeAddon: saves the addon to sessionStorage and echoes it back
+ok 6 - CarService.changeAddon: saves the addon to sessionStorage and echoes it back
+  ---
+  duration_ms: 3.705159
+  type: 'test'
+  ...
+# Subtest: CarService.changeAddon: null addon returns null and does not touch storage
+ok 7 - CarService.changeAddon: null addon returns null and does not touch storage
+  ---
+  duration_ms: 0.875159
+  type: 'test'
+  ...
+# Subtest: CarService.getCurrentAddon: returns null when no addon is stored
+ok 8 - CarService.getCurrentAddon: returns null when no addon is stored
+  ---
+  duration_ms: 0.639906
+  type: 'test'
+  ...
+# Subtest: CarService.clear: wipes current car + addon + included state
+ok 9 - CarService.clear: wipes current car + addon + included state
+  ---
+  duration_ms: 1.237537
+  type: 'test'
+  ...
+# Subtest: CarService.clear(addonOnly=true): preserves the current car
+ok 10 - CarService.clear(addonOnly=true): preserves the current car
+  ---
+  duration_ms: 0.820475
+  type: 'test'
+  ...
+# Subtest: CarService.backupCar + restoreBackup: round-trip the current car
+ok 11 - CarService.backupCar + restoreBackup: round-trip the current car
+  ---
+  duration_ms: 1.04217
+  type: 'test'
+  ...
+# Subtest: CarService.restoreBackup: no-op when there is no backup
+ok 12 - CarService.restoreBackup: no-op when there is no backup
+  ---
+  duration_ms: 0.807644
+  type: 'test'
+  ...
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# SOcietites for current city [ 'Puri Pratham', 'SRS Residency' ]
+# Subtest: CitiesService: constructor loads hardcoded city short-list + societies
+ok 13 - CitiesService: constructor loads hardcoded city short-list + societies
+  ---
+  duration_ms: 15.280113
+  type: 'test'
+  ...
+# Subtest: CitiesService: getAllSocieties returns societies from commonData
+ok 14 - CitiesService: getAllSocieties returns societies from commonData
+  ---
+  duration_ms: 3.918112
+  type: 'test'
+  ...
+# Subtest: CitiesService.findMatchingCities: case-insensitive substring match
+ok 15 - CitiesService.findMatchingCities: case-insensitive substring match
+  ---
+  duration_ms: 5.397675
+  type: 'test'
+  ...
+# Subtest: CitiesService.findMatchingCities: empty query returns all
+ok 16 - CitiesService.findMatchingCities: empty query returns all
+  ---
+  duration_ms: 2.090905
+  type: 'test'
+  ...
+# Subtest: CitiesService.findMatchingCities: non-matching query returns empty array
+ok 17 - CitiesService.findMatchingCities: non-matching query returns empty array
+  ---
+  duration_ms: 2.055107
+  type: 'test'
+  ...
+# Subtest: CitiesService.findMatchingSocieties: case-insensitive substring match
+ok 18 - CitiesService.findMatchingSocieties: case-insensitive substring match
+  ---
+  duration_ms: 1.573921
+  type: 'test'
+  ...
+# Subtest: CitiesService.findMatchingStates: case-insensitive substring match
+ok 19 - CitiesService.findMatchingStates: case-insensitive substring match
+  ---
+  duration_ms: 2.494052
+  type: 'test'
+  ...
+# Subtest: CitiesService.findStateForCity: finds a state for a known city
+ok 20 - CitiesService.findStateForCity: finds a state for a known city
+  ---
+  duration_ms: 6.680864
+  type: 'test'
+  ...
+# Subtest: CitiesService.findStateForCity: returns null for unknown city
+ok 21 - CitiesService.findStateForCity: returns null for unknown city
+  ---
+  duration_ms: 6.321937
+  type: 'test'
+  ...
+# Subtest: CitiesService.getSocietiesForCity: returns empty array when city is falsy
+ok 22 - CitiesService.getSocietiesForCity: returns empty array when city is falsy
+  ---
+  duration_ms: 2.925168
+  type: 'test'
+  ...
+# Subtest: CitiesService.getSocietiesForCity: matches city from allSocieties
+ok 23 - CitiesService.getSocietiesForCity: matches city from allSocieties
+  ---
+  duration_ms: 1.371252
+  type: 'test'
+  ...
+# Subtest: CitiesService.getSocietiesForCity: returns empty array for an unknown city
+ok 24 - CitiesService.getSocietiesForCity: returns empty array for an unknown city
+  ---
+  duration_ms: 0.827002
+  type: 'test'
+  ...
+# Subtest: getConfigValue: returns null when commonData is absent
+ok 25 - getConfigValue: returns null when commonData is absent
+  ---
+  duration_ms: 9.40834
+  type: 'test'
+  ...
+# Subtest: getConfigValue: returns the value for a known config key
+ok 26 - getConfigValue: returns the value for a known config key
+  ---
+  duration_ms: 1.751169
+  type: 'test'
+  ...
+# Subtest: getConfigValue: returns undefined for an unknown key when data IS present
+ok 27 - getConfigValue: returns undefined for an unknown key when data IS present
+  ---
+  duration_ms: 0.974101
+  type: 'test'
+  ...
+# Subtest: planData: returns the cached commonData object once it has been saved
+ok 28 - planData: returns the cached commonData object once it has been saved
+  ---
+  duration_ms: 4.227174
+  type: 'test'
+  ...
+# Subtest: planData: returns null when commonData has not been initialised
+ok 29 - planData: returns null when commonData has not been initialised
+  ---
+  duration_ms: 0.51368
+  type: 'test'
+  ...
+# Subtest: crypto.encrypt: returns a non-empty string distinct from input
+ok 30 - crypto.encrypt: returns a non-empty string distinct from input
+  ---
+  duration_ms: 27.502804
+  type: 'test'
+  ...
+# Subtest: crypto.decrypt: round-trips with encrypt for ASCII text
+ok 31 - crypto.decrypt: round-trips with encrypt for ASCII text
+  ---
+  duration_ms: 7.555104
+  type: 'test'
+  ...
+# Subtest: crypto.decrypt: round-trips with encrypt for unicode
+ok 32 - crypto.decrypt: round-trips with encrypt for unicode
+  ---
+  duration_ms: 7.382437
+  type: 'test'
+  ...
+# Subtest: crypto.decrypt: round-trips for empty string
+ok 33 - crypto.decrypt: round-trips for empty string
+  ---
+  duration_ms: 3.903451
+  type: 'test'
+  ...
+# Subtest: crypto.encrypt: two calls with the same plain text produce different cipher (random IV)
+ok 34 - crypto.encrypt: two calls with the same plain text produce different cipher (random IV)
+  ---
+  duration_ms: 8.689309
+  type: 'test'
+  ...
+# Subtest: crypto.hash: returns a 64-char lowercase hex string (HMAC-SHA256)
+ok 35 - crypto.hash: returns a 64-char lowercase hex string (HMAC-SHA256)
+  ---
+  duration_ms: 6.396565
+  type: 'test'
+  ...
+# Subtest: crypto.hash: deterministic for the same (text, secret)
+ok 36 - crypto.hash: deterministic for the same (text, secret)
+  ---
+  duration_ms: 2.418295
+  type: 'test'
+  ...
+# Subtest: crypto.hash: different secrets yield different hashes
+ok 37 - crypto.hash: different secrets yield different hashes
+  ---
+  duration_ms: 2.589166
+  type: 'test'
+  ...
+# Subtest: crypto.hash: uses the default secret when one is not passed
+ok 38 - crypto.hash: uses the default secret when one is not passed
+  ---
+  duration_ms: 3.381815
+  type: 'test'
+  ...
+# Subtest: endpoints: exposes the login.otp contract
+ok 39 - endpoints: exposes the login.otp contract
+  ---
+  duration_ms: 7.173616
+  type: 'test'
+  ...
+# Subtest: endpoints: exposes the login.checkMobile contract
+ok 40 - endpoints: exposes the login.checkMobile contract
+  ---
+  duration_ms: 0.57524
+  type: 'test'
+  ...
+# Subtest: endpoints: every entry uses POST (baseline locks the verb set)
+ok 41 - endpoints: every entry uses POST (baseline locks the verb set)
+  ---
+  duration_ms: 0.717394
+  type: 'test'
+  ...
+# Subtest: HeaderService.setText: emits { key: "text", data } on the listener
+ok 42 - HeaderService.setText: emits { key: "text", data } on the listener
+  ---
+  duration_ms: 20.12914
+  type: 'test'
+  ...
+# Subtest: HeaderService.hideHeader: emits { key: "hide", data: true }
+ok 43 - HeaderService.hideHeader: emits { key: "hide", data: true }
+  ---
+  duration_ms: 1.165607
+  type: 'test'
+  ...
+# Subtest: HeaderService.setView: emits { key: "view", data: { viewName, viewOptions } }
+ok 44 - HeaderService.setView: emits { key: "view", data: { viewName, viewOptions } }
+  ---
+  duration_ms: 0.788591
+  type: 'test'
+  ...
+# Subtest: HeaderService.listner: returns the same subject across calls
+ok 45 - HeaderService.listner: returns the same subject across calls
+  ---
+  duration_ms: 0.42601
+  type: 'test'
+  ...
+# Subtest: HeaderService: multiple subscribers each receive every event
+ok 46 - HeaderService: multiple subscribers each receive every event
+  ---
+  duration_ms: 0.956623
+  type: 'test'
+  ...
+# Subtest: NotificationService: starts with all three inboxes empty
+ok 47 - NotificationService: starts with all three inboxes empty
+  ---
+  duration_ms: 16.401062
+  type: 'test'
+  ...
+# Subtest: NotificationService.saveNewNotification: stores the notif in the "new" inbox
+ok 48 - NotificationService.saveNewNotification: stores the notif in the "new" inbox
+  ---
+  duration_ms: 2.780474
+  type: 'test'
+  ...
+# Subtest: NotificationService.saveNewNotification: sets action=refresh when title contains "activated"
+ok 49 - NotificationService.saveNewNotification: sets action=refresh when title contains "activated"
+  ---
+  duration_ms: 7.846115
+  type: 'test'
+  ...
+# Subtest: NotificationService.saveNewNotification: explicit data.action wins over title heuristic
+ok 50 - NotificationService.saveNewNotification: explicit data.action wins over title heuristic
+  ---
+  duration_ms: 1.970819
+  type: 'test'
+  ...
+# Subtest: NotificationService.saveNewNotification: latest notification is at the head of the list
+ok 51 - NotificationService.saveNewNotification: latest notification is at the head of the list
+  ---
+  duration_ms: 1.112934
+  type: 'test'
+  ...
+# Subtest: NotificationService.markNotificationAsRead: moves a new notif into read, then to history
+ok 52 - NotificationService.markNotificationAsRead: moves a new notif into read, then to history
+  ---
+  duration_ms: 1.180634
+  type: 'test'
+  ...
+# Subtest: NotificationService.markAllNotificationsAsRead: moves everything to historical
+ok 53 - NotificationService.markAllNotificationsAsRead: moves everything to historical
+  ---
+  duration_ms: 0.982089
+  type: 'test'
+  ...
+# Subtest: NotificationService.clear: empties all three inboxes
+ok 54 - NotificationService.clear: empties all three inboxes
+  ---
+  duration_ms: 1.294482
+  type: 'test'
+  ...
+# Subtest: NotificationService.sendNotificationUpdate: emits the current state on the subject
+ok 55 - NotificationService.sendNotificationUpdate: emits the current state on the subject
+  ---
+  duration_ms: 2.267133
+  type: 'test'
+  ...
+# Subtest: NotificationService.events: re-creates the subject after it closes
+ok 56 - NotificationService.events: re-creates the subject after it closes
+  ---
+  duration_ms: 1.379115
+  type: 'test'
+  ...
+# Subtest: PlanService: loads plans and features from commonData on construction
+ok 57 - PlanService: loads plans and features from commonData on construction
+  ---
+  duration_ms: 15.717215
+  type: 'test'
+  ...
+# Subtest: PlanService.getPlanByName: is case-insensitive
+ok 58 - PlanService.getPlanByName: is case-insensitive
+  ---
+  duration_ms: 2.837541
+  type: 'test'
+  ...
+# Subtest: PlanService.getPlanByName: returns null for unknown plan
+ok 59 - PlanService.getPlanByName: returns null for unknown plan
+  ---
+  duration_ms: 1.776345
+  type: 'test'
+  ...
+# Subtest: PlanService.UpgradePlan: returns the DLX plan by default
+ok 60 - PlanService.UpgradePlan: returns the DLX plan by default
+  ---
+  duration_ms: 5.749306
+  type: 'test'
+  ...
+# Subtest: PlanService.getUpdatePrice: sedan Standard → Deluxe = 900 - 500 = 400
+ok 61 - PlanService.getUpdatePrice: sedan Standard → Deluxe = 900 - 500 = 400
+  ---
+  duration_ms: 5.487926
+  type: 'test'
+  ...
+# Subtest: PlanService.getUpdatePrice: Work From Home target is always free
+ok 62 - PlanService.getUpdatePrice: Work From Home target is always free
+  ---
+  duration_ms: 1.568762
+  type: 'test'
+  ...
+# Subtest: PlanService.getUpdatePrice: returns 0 when the car is unknown
+ok 63 - PlanService.getUpdatePrice: returns 0 when the car is unknown
+  ---
+  duration_ms: 2.156829
+  type: 'test'
+  ...
+# Subtest: PlanService.getFeaturesForPlan: returns feature objects matching plan.features codes
+ok 64 - PlanService.getFeaturesForPlan: returns feature objects matching plan.features codes
+  ---
+  duration_ms: 10.067104
+  type: 'test'
+  ...
+# Subtest: PlanService.getUniqueFeaturesForPlan: respects the uniqueFeatures list on the plan
+ok 65 - PlanService.getUniqueFeaturesForPlan: respects the uniqueFeatures list on the plan
+  ---
+  duration_ms: 2.154504
+  type: 'test'
+  ...
+# Subtest: PlanService.getAddonsForPlan: Work From Home exposes Deluxe unique features
+ok 66 - PlanService.getAddonsForPlan: Work From Home exposes Deluxe unique features
+  ---
+  duration_ms: 1.688974
+  type: 'test'
+  ...
+# Subtest: PlanService.getAddonsForPlan: Standard exposes Deluxe unique features
+ok 67 - PlanService.getAddonsForPlan: Standard exposes Deluxe unique features
+  ---
+  duration_ms: 1.390543
+  type: 'test'
+  ...
+# Subtest: PlanService.getAddonsForPlan: Elite has no upsell addons
+ok 68 - PlanService.getAddonsForPlan: Elite has no upsell addons
+  ---
+  duration_ms: 1.513758
+  type: 'test'
+  ...
+# Subtest: PlanService.getAdhocsForPlan: returns all fixed ad-hoc features
+ok 69 - PlanService.getAdhocsForPlan: returns all fixed ad-hoc features
+  ---
+  duration_ms: 1.73592
+  type: 'test'
+  ...
+# Subtest: PlanService.changePlan/getSelectedPlan: round-trips through sessionStorage
+ok 70 - PlanService.changePlan/getSelectedPlan: round-trips through sessionStorage
+  ---
+  duration_ms: 2.230266
+  type: 'test'
+  ...
+# Subtest: PlanService.clear: resets the selected plan
+ok 71 - PlanService.clear: resets the selected plan
+  ---
+  duration_ms: 1.514303
+  type: 'test'
+  ...
+# Subtest: PlanService.clearAll: clears selected plan + addons + adhocs + subscription
+ok 72 - PlanService.clearAll: clears selected plan + addons + adhocs + subscription
+  ---
+  duration_ms: 9.039629
+  type: 'test'
+  ...
+# Subtest: PlanService.includeAddon / excludeAddon: maintains unique-by-name inclusion
+ok 73 - PlanService.includeAddon / excludeAddon: maintains unique-by-name inclusion
+  ---
+  duration_ms: 2.646306
+  type: 'test'
+  ...
+# Subtest: PlanService.includeAdhoc / excludeAdhoc: maintains unique-by-name inclusion
+ok 74 - PlanService.includeAdhoc / excludeAdhoc: maintains unique-by-name inclusion
+  ---
+  duration_ms: 1.702913
+  type: 'test'
+  ...
+# Subtest: PlanService.includeAdhoc(complimentary=true): stores in sessionStorage.complimentary
+ok 75 - PlanService.includeAdhoc(complimentary=true): stores in sessionStorage.complimentary
+  ---
+  duration_ms: 1.719149
+  type: 'test'
+  ...
+# Subtest: PlanService.getPlanDuration: defaults to "monthly"
+ok 76 - PlanService.getPlanDuration: defaults to "monthly"
+  ---
+  duration_ms: 5.64414
+  type: 'test'
+  ...
+# Subtest: PlanService.updatePlanDuration: persists to sessionStorage and emits listener event
+ok 77 - PlanService.updatePlanDuration: persists to sessionStorage and emits listener event
+  ---
+  duration_ms: 6.739976
+  type: 'test'
+  ...
+# Subtest: PlanService.createPeriodLabel: returns null for null date
+ok 78 - PlanService.createPeriodLabel: returns null for null date
+  ---
+  duration_ms: 2.160442
+  type: 'test'
+  ...
+# Subtest: PlanService.createPeriodLabel: monthly period spans one month
+ok 79 - PlanService.createPeriodLabel: monthly period spans one month
+  ---
+  duration_ms: 2.301459
+  type: 'test'
+  ...
+# Subtest: PlanService.getAppliedCoupon / setAppliedCoupon: round-trip
+ok 80 - PlanService.getAppliedCoupon / setAppliedCoupon: round-trip
+  ---
+  duration_ms: 2.251634
+  type: 'test'
+  ...
+# Subtest: PlanService.getCouponByCode: returns the coupon when present in config
+ok 81 - PlanService.getCouponByCode: returns the coupon when present in config
+  ---
+  duration_ms: 3.140154
+  type: 'test'
+  ...
+# Subtest: PlanService.getCouponByCode: returns null when the config has no such coupon
+ok 82 - PlanService.getCouponByCode: returns null when the config has no such coupon
+  ---
+  duration_ms: 3.462582
+  type: 'test'
+  ...
+# Subtest: PlanService.getAddonByCode: returns the feature object by code
+ok 83 - PlanService.getAddonByCode: returns the feature object by code
+  ---
+  duration_ms: 2.087177
+  type: 'test'
+  ...
+# Subtest: PlanService.getAddonByCode: returns null on unknown code
+ok 84 - PlanService.getAddonByCode: returns null on unknown code
+  ---
+  duration_ms: 3.472193
+  type: 'test'
+  ...
+# Subtest: PlanService.canUpgradeThisMonth: requires serviceDay ≤ config
+ok 85 - PlanService.canUpgradeThisMonth: requires serviceDay ≤ config
+  ---
+  duration_ms: 1.54868
+  type: 'test'
+  ...
+# Subtest: PlanService.changePlanForCar: noop when planName is falsy
+ok 86 - PlanService.changePlanForCar: noop when planName is falsy
+  ---
+  duration_ms: 1.599182
+  type: 'test'
+  ...
+# Subtest: PlanService.changePlanForCar: sets the selected plan for the current car
+ok 87 - PlanService.changePlanForCar: sets the selected plan for the current car
+  ---
+  duration_ms: 2.672851
+  type: 'test'
+  ...
+# Subtest: PlanService.getUpgradePlans: WFH current → offers Standard and Deluxe upgrades
+ok 88 - PlanService.getUpgradePlans: WFH current → offers Standard and Deluxe upgrades
+  ---
+  duration_ms: 3.878809
+  type: 'test'
+  ...
+# Subtest: PlanService.getUpgradePlans: STD current → offers Deluxe only
+ok 89 - PlanService.getUpgradePlans: STD current → offers Deluxe only
+  ---
+  duration_ms: 3.027908
+  type: 'test'
+  ...
+# Subtest: PlanService.getUpgradePlans: DLX / ELT current → no upgrades
+ok 90 - PlanService.getUpgradePlans: DLX / ELT current → no upgrades
+  ---
+  duration_ms: 1.576115
+  type: 'test'
+  ...
+# Subtest: PlanService.getUpgradePlans: returns [] when payment has no plan
+ok 91 - PlanService.getUpgradePlans: returns [] when payment has no plan
+  ---
+  duration_ms: 1.474682
+  type: 'test'
+  ...
+# Subtest: PlanService.isSecondCar: returns false when there are no subscriptions
+ok 92 - PlanService.isSecondCar: returns false when there are no subscriptions
+  ---
+  duration_ms: 1.153355
+  type: 'test'
+  ...
+# Subtest: PlanService.renewPlan: stamps forRenew + lastDate on the plan
+ok 93 - PlanService.renewPlan: stamps forRenew + lastDate on the plan
+  ---
+  duration_ms: 2.163853
+  type: 'test'
+  ...
+# Subtest: PlanService.upgradePlan: stamps forUpgrade + startDate on the plan
+ok 94 - PlanService.upgradePlan: stamps forUpgrade + startDate on the plan
+  ---
+  duration_ms: 1.41504
+  type: 'test'
+  ...
+# Subtest: PlanService.lockCurrentOrder: computes an order total and a receipt id
+ok 95 - PlanService.lockCurrentOrder: computes an order total and a receipt id
+  ---
+  duration_ms: 3.550663
+  type: 'test'
+  ...
+# Subtest: PlanService.removeCouponFromOrder: restores the pre-coupon total
+ok 96 - PlanService.removeCouponFromOrder: restores the pre-coupon total
+  ---
+  duration_ms: 4.401991
+  type: 'test'
+  ...
+# Subtest: PlanService.changeDateForAdhoc: updates scheduledDate on a matching included adhoc
+ok 97 - PlanService.changeDateForAdhoc: updates scheduledDate on a matching included adhoc
+  ---
+  duration_ms: 1.533249
+  type: 'test'
+  ...
+# Subtest: PlanService.refreshAdhocs: rewrites prices based on the current car body type
+ok 98 - PlanService.refreshAdhocs: rewrites prices based on the current car body type
+  ---
+  duration_ms: 1.470886
+  type: 'test'
+  ...
+# Subtest: PlanService.includeAddonWithCode: derives price from the feature + current car
+ok 99 - PlanService.includeAddonWithCode: derives price from the feature + current car
+  ---
+  duration_ms: 1.296582
+  type: 'test'
+  ...
+# Subtest: PlanService.includeComplimentaryAdhocWithCode: marks adhoc complimentary
+ok 100 - PlanService.includeComplimentaryAdhocWithCode: marks adhoc complimentary
+  ---
+  duration_ms: 1.337635
+  type: 'test'
+  ...
+# user { phone: '9999999999', name: 'Tester' }
+# user { phone: '8888' }
+# user null
+# user { phone: '7777', name: 'Bob' }
+# user { phone: '1234', name: 'Preloaded' }
+# Error: boom
+#     at TestContext.<anonymous> (file:///mnt/c/da/06-04-2026/2/b/ui/ui/tests/baseline/user.service.spec.ts:69:36)
+#     at Test.runInAsyncScope (node:async_hooks:214:14)
+#     at Test.run (node:internal/test_runner/test:1047:25)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+# Subtest: UserService.isLoggedIn: false by default when no currentUser in storage
+ok 101 - UserService.isLoggedIn: false by default when no currentUser in storage
+  ---
+  duration_ms: 6.579808
+  type: 'test'
+  ...
+# Subtest: UserService.setCurrentUser: stores the user and emits LOGGED_IN
+ok 102 - UserService.setCurrentUser: stores the user and emits LOGGED_IN
+  ---
+  duration_ms: 4.711733
+  type: 'test'
+  ...
+# Subtest: UserService.setCurrentUser(null): stores null and emits LOGGED_OUT
+ok 103 - UserService.setCurrentUser(null): stores null and emits LOGGED_OUT
+  ---
+  duration_ms: 1.213652
+  type: 'test'
+  ...
+# Subtest: UserService.getCurrentUser: reads the user from localStorage
+ok 104 - UserService.getCurrentUser: reads the user from localStorage
+  ---
+  duration_ms: 0.616495
+  type: 'test'
+  ...
+# Subtest: UserService.getCurrentUser: returns null when localStorage holds the sentinel "null"
+ok 105 - UserService.getCurrentUser: returns null when localStorage holds the sentinel "null"
+  ---
+  duration_ms: 0.273616
+  type: 'test'
+  ...
+# Subtest: UserService.setUserToken: persists the token under "userToken"
+ok 106 - UserService.setUserToken: persists the token under "userToken"
+  ---
+  duration_ms: 0.332022
+  type: 'test'
+  ...
+# Subtest: UserService.listner: re-creates a subject once the previous one is closed
+ok 107 - UserService.listner: re-creates a subject once the previous one is closed
+  ---
+  duration_ms: 0.32692
+  type: 'test'
+  ...
+# Subtest: UserService constructor: rehydrates currentUser from localStorage
+ok 108 - UserService constructor: rehydrates currentUser from localStorage
+  ---
+  duration_ms: 0.564961
+  type: 'test'
+  ...
+# Subtest: UserService.handleError: returns an observable-like throwError without crashing
+ok 109 - UserService.handleError: returns an observable-like throwError without crashing
+  ---
+  duration_ms: 2.075811
+  type: 'test'
+  ...
+# Subtest: prettyDate: formats a Date into "Mon DD"
+ok 110 - prettyDate: formats a Date into "Mon DD"
+  ---
+  duration_ms: 7.150682
+  type: 'test'
+  ...
+# Subtest: prettyDate: handles a timestamp number
+ok 111 - prettyDate: handles a timestamp number
+  ---
+  duration_ms: 1.032614
+  type: 'test'
+  ...
+# Subtest: getContainer / scrollToTop / scrollToBottom: do not throw when jQuery stub is in place
+ok 112 - getContainer / scrollToTop / scrollToBottom: do not throw when jQuery stub is in place
+  ---
+  duration_ms: 6.267801
+  type: 'test'
+  ...
+# Subtest: scrollElementToTop: no-op on null element
+ok 113 - scrollElementToTop: no-op on null element
+  ---
+  duration_ms: 0.86238
+  type: 'test'
+  ...
+# Subtest: scrollElementToTop: handles an element with a focus() method
+ok 114 - scrollElementToTop: handles an element with a focus() method
+  ---
+  duration_ms: 0.792618
+  type: 'test'
+  ...
+# Subtest: WindowRefService.nativeWindow: returns the current global window object
+ok 115 - WindowRefService.nativeWindow: returns the current global window object
+  ---
+  duration_ms: 4.720195
+  type: 'test'
+  ...
+# Subtest: WindowRefService.nativeWindow: exposes localStorage/sessionStorage
+ok 116 - WindowRefService.nativeWindow: exposes localStorage/sessionStorage
+  ---
+  duration_ms: 0.886884
+  type: 'test'
+  ...
+1..116
+# tests 116
+# suites 0
+# pass 116
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 63250.108468
+# start of coverage report
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# file                       | line % | branch % | funcs % | uncovered lines
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# src                        |        |          |         | 
+#  app                       |        |          |         | 
+#   cities.service.ts        | 100.00 |    77.42 |  100.00 | 
+#   common                   |        |          |         | 
+#    common.service.ts       |  42.55 |   100.00 |   57.14 | 14-17 20-57 74-79 88 90-94
+#   endpoints.ts             |  96.00 |   100.00 |  100.00 | 25
+#   header.service.ts        |  80.00 |    50.00 |  100.00 | 8-9 17-19 28-30
+#   services                 |        |          |         | 
+#    api.service.ts          | 100.00 |    90.00 |  100.00 | 
+#    car.service.ts          |  89.34 |    76.32 |  100.00 | 6-8 11 62-70
+#    crypto.service.ts       | 100.00 |   100.00 |  100.00 | 
+#    notification.service.ts |  94.40 |    79.41 |  100.00 | 8-12 29-30
+#    plan.service.ts         |  79.64 |    75.38 |   91.86 | 7-8 17-20 63-65 132-137 179 234 244-249 269 310 342-352 367-370 397 404 406-419 442-443 446-452 458-460 469-472 480-559 622-629 631 633 637-645 837 877 882-889
+#    user.service.ts         |  94.95 |    70.83 |   81.82 | 5-7 10 15-16 20 47-50
+#   util                     |        |          |         | 
+#    util.ts                 |  72.58 |    80.00 |  100.00 | 32-34 44-57
+#   window-ref.service.ts    |  61.11 |    83.33 |  100.00 | 6-12
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# all files                  |  83.33 |    76.61 |   92.77 | 
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# end of coverage report

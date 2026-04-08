@@ -1,23 +1,21 @@
 import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
-import { AuthService } from 'angularx-social-login';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Platform, ModalController } from '@ionic/angular';
-import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
-import '@codetrix-studio/capacitor-google-auth';
-import { Plugins } from '@capacitor/core';
+import { FacebookLoginProvider, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { LoginService } from '../login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 
-const { GoogleAuth } = Plugins;
 import { ToastController } from '@ionic/angular';
 import { Initialize } from 'app/common/common.service';
 
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { CarService } from 'app/services/car.service';
 import { VerifyOtpComponent } from 'app/common/verify-otp/verify-otp.component';
 import { TermsComponent } from 'app/common/terms/terms.component';
 
-import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
+import { SmsRetriever } from '@awesome-cordova-plugins/sms-retriever/ngx';
 
 declare var SMSReceive: any;
 @Component({
@@ -108,7 +106,7 @@ export class LoginFormComponent implements OnInit {
   upgradeSelected: boolean;
 
   constructor(
-    private socialAuthService: AuthService,
+    private socialAuthService: SocialAuthService,
     public platform: Platform,
     private activatedRoute: ActivatedRoute,
     private srvcLogin: LoginService,

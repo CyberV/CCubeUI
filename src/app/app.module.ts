@@ -4,26 +4,29 @@ import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { TooltipsModule } from 'ionic4-tooltips';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
-import { File, FileEntry } from '@ionic-native/file/ngx';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { FilePath } from '@ionic-native/file-path/ngx';
-//import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+import { FileChooser } from '@awesome-cordova-plugins/file-chooser/ngx';
+import { File, FileEntry } from '@awesome-cordova-plugins/file/ngx';
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
+import { PreviewAnyFile } from '@awesome-cordova-plugins/preview-any-file/ngx';
 import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from '@abacritt/angularx-social-login';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CommonComponentsModule } from './common/common.module';
 import { HomeComponent } from './home/home.component';
 
 
-import { FCM } from '@ionic-native/fcm/ngx'
+import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
 import { PlanComparisonComponent } from './plan-comparison/plan-comparison.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { MonthlySavingsComponent } from './monthly-savings/monthly-savings.component';
@@ -33,13 +36,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalPageModule } from './modal/modal.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SplashScreen } from '@capacitor/core';
-import { IonicStorageModule } from '@ionic/storage';
-import { SmsRetriever } from '@ionic-native/sms-retriever/ngx';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { SmsRetriever } from '@awesome-cordova-plugins/sms-retriever/ngx';
 
-export function socialConfigs() {
-  const config = new AuthServiceConfig(
-    [
+export function socialConfigs(): SocialAuthServiceConfig {
+  return {
+    autoLogin: false,
+    providers: [
       {
         id: FacebookLoginProvider.PROVIDER_ID,
         provider: new FacebookLoginProvider('174475890475329')
@@ -48,9 +52,9 @@ export function socialConfigs() {
         id: GoogleLoginProvider.PROVIDER_ID,
         provider: new GoogleLoginProvider('455316244979-739mhai4ru3br3l24fpc3jhgre4eqau2.apps.googleusercontent.com')
       }
-    ]
-  );
-  return config;
+    ],
+    onError: (err) => { console.error(err); }
+  };
 }
 
 @NgModule({
@@ -63,24 +67,22 @@ export function socialConfigs() {
     RegisterUserComponent,
     ProfileComponent
   ],
-  entryComponents: [HomeComponent, RegisterUserComponent],
   imports: [
-    BrowserModule, 
-    CommonComponentsModule, 
-    IonicModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    CommonComponentsModule,
+    IonicModule,
+    IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     TooltipsModule.forRoot(),
-    AppRoutingModule, 
-    SocialLoginModule, 
-    HttpClientModule, 
+    AppRoutingModule,
+    SocialLoginModule,
+    HttpClientModule,
     TooltipModule,
     FormsModule,
     ModalPageModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxIonicImageViewerModule 
-
+    NgxIonicImageViewerModule
   ],
   providers: [
     FileChooser,
@@ -92,7 +94,7 @@ export function socialConfigs() {
     SocialSharing,
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: AuthServiceConfig, useFactory: socialConfigs },
+    { provide: 'SocialAuthServiceConfig', useFactory: socialConfigs },
     FCM,
     AppComponent,
     // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

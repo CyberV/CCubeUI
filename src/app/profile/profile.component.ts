@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'app/login/login.service';
 import { UserService } from 'app/services/user.service';
 import { HeaderService } from 'app/header.service';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { ActivatedRoute } from '@angular/router';
 import { DocumentService } from 'app/services/document.service';
 import { getConfigValue } from 'app/common/common.service';

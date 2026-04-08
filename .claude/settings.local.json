@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed 's|/mnt/c/da/06-04-2026/2/b/ui/ui/||')",
+      "Read(//tmp/**)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash([ -d \"node_modules/$pkg\" ])",
+      "Bash([ -d node_modules/@angular/core ])",
+      "Bash(./node_modules/.bin/ng version:*)",
+      "Bash(./node_modules/.bin/ng test:*)",
+      "Bash(tee results/post-upgrade-ng-test-output.txt)"
+    ]
+  }
+}

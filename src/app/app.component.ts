@@ -1,6 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { Plugins } from '@capacitor/core';
-const { SplashScreen } = Plugins;
+import { SplashScreen } from '@capacitor/splash-screen';
 
 import { planData } from './common/common.service';
 
@@ -10,9 +9,6 @@ import { HeaderService } from './header.service';
 import { UserService } from './services/user.service';
 import { CarService } from './services/car.service';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic';
-//import { FCM } from '@ionic-native/fcm/ngx';
-//import {FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic'
-//import { FCM } from '../../plugins/cordova-plugin-fcm-with-dependecy-updated/ionic/ngx/FCM';
 
 import { LoginService } from './login/login.service';
 import { HeadingComponent } from './common/heading/heading.component';
@@ -20,9 +16,7 @@ import { NotifMenuComponent } from './common/notif-menu/notif-menu.component';
 
 import { Initialize } from 'app/common/common.service';
 import { NotificationService } from './services/notification.service';
-import { rebeccapurple } from 'color-name';
 import { DocumentService } from './services/document.service';
-import { runInThisContext } from 'vm';
 import { PlanService } from './services/plan.service';
 
 declare var $;
